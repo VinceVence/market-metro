@@ -1,0 +1,505 @@
+{
+  "schema": "supply-yard-llm-pilot-v2",
+  "status": "PILOT_COMPLETED",
+  "runId": "50ab9565-034e-4bc5-acc4-84faba3f055d",
+  "projectId": "supply-yard-pilot-261021",
+  "model": "gemini-3.1-flash-lite",
+  "startedAt": "2026-10-21T10:11:12.572Z",
+  "completedAt": "2026-10-21T10:36:17.910Z",
+  "plan": {
+    "schema": "supply-yard-llm-pilot-v2",
+    "projectId": "supply-yard-pilot-261021",
+    "model": "gemini-3.1-flash-lite",
+    "region": "global",
+    "view": "raw",
+    "promptHash": "23f1f44eab86f6b64efa60912fc8240f43d52429b7c78b47e2e17cf74eb3b597",
+    "suiteDigest": "0904dd19dc40c6685e51d752164ee6ddba372fa9bb5228f3f3c23fe401a488ca",
+    "caseIds": [
+      "CASE-1ef2a6730c5d",
+      "CASE-20173059c2d8",
+      "CASE-244c00e987f3",
+      "CASE-3d9f8196313c",
+      "CASE-40af39fd3b0e",
+      "CASE-4be47432c694",
+      "CASE-1d4f216624fa",
+      "CASE-2223ad41f795",
+      "CASE-090273a88f0c",
+      "CASE-23c212e89b5b"
+    ],
+    "split": "development",
+    "repeats": 2,
+    "controllers": [
+      "fixed_llm_reader",
+      "adaptive_llm"
+    ],
+    "limits": {
+      "maxCalls": 8,
+      "maxTurns": 10,
+      "maxCostMicros": 300000,
+      "decisionTimeoutMs": 120000
+    },
+    "modelLimits": {
+      "lifetimeMicros": 8000000,
+      "runMicros": 1000000,
+      "reservationMicros": 30000,
+      "maxInputBytes": 32768,
+      "maxOutputTokens": 2048,
+      "maxCallsPerTrial": 14,
+      "minRequestGapMs": 6000
+    },
+    "pricing": {
+      "inputMicrosPerToken": 0.25,
+      "outputMicrosPerToken": 1.5,
+      "verifiedAt": "2026-10-21",
+      "validThrough": "2026-11-12",
+      "url": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+      "basis": "Global standard text list price; includes thinking tokens; ignores cache discounts. Token-based estimate, not a billing invoice."
+    },
+    "semanticControl": "Both arms receive identical cached per-document LLM extractions after retrieving that document. Each arm is costed as if it paid for every reader call. The cache is private and cannot disclose unqueried documents.",
+    "decision": "Do not claim agent benefit unless quality and useful coverage match the fixed-reader arm and equivalent machine cost falls. Human time and production PayPal benefit remain unmeasured.",
+    "limitations": [
+      "Ten known development cases; no independent validation or holdout claim.",
+      "Two trials per case are a pilot, not a reliability estimate.",
+      "Fixed normalized reference uses authored extraction and is not an end-to-end competitor.",
+      "Physical wall times are not fair latency comparisons because the second arm reuses reader outputs.",
+      "V1 infrastructure probe stopped after HTTP429 and exposed format failures and unequal reader failure reuse. V2 adds structured schemas, shared failures and request spacing; no evidence policy or case truth changed."
+    ],
+    "implementationHash": "cc6135809b4e92f715a79fc879ebb026db378549093486a77f575072db0ddb18"
+  },
+  "byController": [
+    {
+      "id": "fixed_llm_reader",
+      "trials": 20,
+      "correctReady": 6,
+      "unsupportedReady": 4,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 10,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 6,
+      "missedMaterialFindings": 14,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 22,
+      "assumedToolCostMicros": 600000,
+      "wallTimeMs": 644478.5889999999,
+      "virtualSourceLatencyMs": 28000,
+      "usefulCompletionRate": 0.3,
+      "modelCalls": 64,
+      "llmTrials": 20,
+      "modelCostMicros": 18216,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "adaptive_llm",
+      "trials": 20,
+      "correctReady": 6,
+      "unsupportedReady": 4,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 10,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 6,
+      "missedMaterialFindings": 14,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 35,
+      "assumedToolCostMicros": 840000,
+      "wallTimeMs": 560356.0279999999,
+      "virtualSourceLatencyMs": 59600,
+      "usefulCompletionRate": 0.3,
+      "modelCalls": 117,
+      "llmTrials": 20,
+      "modelCostMicros": 36876,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    }
+  ],
+  "byFamily": [
+    {
+      "family": "clean_complete",
+      "controllers": [
+        {
+          "id": "fixed_llm_reader",
+          "trials": 6,
+          "correctReady": 6,
+          "unsupportedReady": 0,
+          "correctEscalations": 0,
+          "unnecessaryEscalations": 0,
+          "budgetLimited": 0,
+          "unauthorizedActions": 0,
+          "harnessStops": 0,
+          "missedMaterialFindings": 0,
+          "unsupportedFacts": 0,
+          "unsupportedExposureCents": 0,
+          "toolCalls": 0,
+          "assumedToolCostMicros": 0,
+          "wallTimeMs": 69590.794,
+          "virtualSourceLatencyMs": 0,
+          "usefulCompletionRate": 1,
+          "modelCalls": 12,
+          "llmTrials": 6,
+          "modelCostMicros": 3448,
+          "humanMinutes": null,
+          "totalHandlingCostMicros": null
+        },
+        {
+          "id": "adaptive_llm",
+          "trials": 6,
+          "correctReady": 6,
+          "unsupportedReady": 0,
+          "correctEscalations": 0,
+          "unnecessaryEscalations": 0,
+          "budgetLimited": 0,
+          "unauthorizedActions": 0,
+          "harnessStops": 0,
+          "missedMaterialFindings": 0,
+          "unsupportedFacts": 0,
+          "unsupportedExposureCents": 0,
+          "toolCalls": 8,
+          "assumedToolCostMicros": 200000,
+          "wallTimeMs": 87495.218,
+          "virtualSourceLatencyMs": 16800,
+          "usefulCompletionRate": 1,
+          "modelCalls": 26,
+          "llmTrials": 6,
+          "modelCostMicros": 8130,
+          "humanMinutes": null,
+          "totalHandlingCostMicros": null
+        }
+      ]
+    },
+    {
+      "family": "mixed_pallet_partial_order",
+      "controllers": [
+        {
+          "id": "fixed_llm_reader",
+          "trials": 6,
+          "correctReady": 0,
+          "unsupportedReady": 0,
+          "correctEscalations": 0,
+          "unnecessaryEscalations": 6,
+          "budgetLimited": 0,
+          "unauthorizedActions": 0,
+          "harnessStops": 6,
+          "missedMaterialFindings": 6,
+          "unsupportedFacts": 0,
+          "unsupportedExposureCents": 0,
+          "toolCalls": 6,
+          "assumedToolCostMicros": 240000,
+          "wallTimeMs": 238685.767,
+          "virtualSourceLatencyMs": 10800,
+          "usefulCompletionRate": 0,
+          "modelCalls": 24,
+          "llmTrials": 6,
+          "modelCostMicros": 6828,
+          "humanMinutes": null,
+          "totalHandlingCostMicros": null
+        },
+        {
+          "id": "adaptive_llm",
+          "trials": 6,
+          "correctReady": 0,
+          "unsupportedReady": 0,
+          "correctEscalations": 0,
+          "unnecessaryEscalations": 6,
+          "budgetLimited": 0,
+          "unauthorizedActions": 0,
+          "harnessStops": 6,
+          "missedMaterialFindings": 6,
+          "unsupportedFacts": 0,
+          "unsupportedExposureCents": 0,
+          "toolCalls": 10,
+          "assumedToolCostMicros": 280000,
+          "wallTimeMs": 148796.539,
+          "virtualSourceLatencyMs": 20400,
+          "usefulCompletionRate": 0,
+          "modelCalls": 38,
+          "llmTrials": 6,
+          "modelCostMicros": 11923,
+          "humanMinutes": null,
+          "totalHandlingCostMicros": null
+        }
+      ]
+    },
+    {
+      "family": "stale_or_corrected_source",
+      "controllers": [
+        {
+          "id": "fixed_llm_reader",
+          "trials": 4,
+          "correctReady": 0,
+          "unsupportedReady": 4,
+          "correctEscalations": 0,
+          "unnecessaryEscalations": 0,
+          "budgetLimited": 0,
+          "unauthorizedActions": 0,
+          "harnessStops": 0,
+          "missedMaterialFindings": 4,
+          "unsupportedFacts": 0,
+          "unsupportedExposureCents": 0,
+          "toolCalls": 4,
+          "assumedToolCostMicros": 120000,
+          "wallTimeMs": 144443.392,
+          "virtualSourceLatencyMs": 2800,
+          "usefulCompletionRate": 0,
+          "modelCalls": 12,
+          "llmTrials": 4,
+          "modelCostMicros": 3378,
+          "humanMinutes": null,
+          "totalHandlingCostMicros": null
+        },
+        {
+          "id": "adaptive_llm",
+          "trials": 4,
+          "correctReady": 0,
+          "unsupportedReady": 4,
+          "correctEscalations": 0,
+          "unnecessaryEscalations": 0,
+          "budgetLimited": 0,
+          "unauthorizedActions": 0,
+          "harnessStops": 0,
+          "missedMaterialFindings": 4,
+          "unsupportedFacts": 0,
+          "unsupportedExposureCents": 0,
+          "toolCalls": 4,
+          "assumedToolCostMicros": 80000,
+          "wallTimeMs": 119980.222,
+          "virtualSourceLatencyMs": 6200,
+          "usefulCompletionRate": 0,
+          "modelCalls": 20,
+          "llmTrials": 4,
+          "modelCostMicros": 6009,
+          "humanMinutes": null,
+          "totalHandlingCostMicros": null
+        }
+      ]
+    },
+    {
+      "family": "cancelled_replacement",
+      "controllers": [
+        {
+          "id": "fixed_llm_reader",
+          "trials": 4,
+          "correctReady": 0,
+          "unsupportedReady": 0,
+          "correctEscalations": 0,
+          "unnecessaryEscalations": 4,
+          "budgetLimited": 0,
+          "unauthorizedActions": 0,
+          "harnessStops": 0,
+          "missedMaterialFindings": 4,
+          "unsupportedFacts": 0,
+          "unsupportedExposureCents": 0,
+          "toolCalls": 12,
+          "assumedToolCostMicros": 240000,
+          "wallTimeMs": 191758.636,
+          "virtualSourceLatencyMs": 14400,
+          "usefulCompletionRate": 0,
+          "modelCalls": 16,
+          "llmTrials": 4,
+          "modelCostMicros": 4562,
+          "humanMinutes": null,
+          "totalHandlingCostMicros": null
+        },
+        {
+          "id": "adaptive_llm",
+          "trials": 4,
+          "correctReady": 0,
+          "unsupportedReady": 0,
+          "correctEscalations": 0,
+          "unnecessaryEscalations": 4,
+          "budgetLimited": 0,
+          "unauthorizedActions": 0,
+          "harnessStops": 0,
+          "missedMaterialFindings": 4,
+          "unsupportedFacts": 0,
+          "unsupportedExposureCents": 0,
+          "toolCalls": 13,
+          "assumedToolCostMicros": 280000,
+          "wallTimeMs": 204084.049,
+          "virtualSourceLatencyMs": 16200,
+          "usefulCompletionRate": 0,
+          "modelCalls": 33,
+          "llmTrials": 4,
+          "modelCostMicros": 10814,
+          "humanMinutes": null,
+          "totalHandlingCostMicros": null
+        }
+      ]
+    }
+  ],
+  "pairedAudit": [
+    {
+      "caseId": "CASE-1ef2a6730c5d",
+      "repeat": 0,
+      "inputMatched": true,
+      "sharedDocuments": 2,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-1ef2a6730c5d",
+      "repeat": 1,
+      "inputMatched": true,
+      "sharedDocuments": 2,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-20173059c2d8",
+      "repeat": 0,
+      "inputMatched": true,
+      "sharedDocuments": 2,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-20173059c2d8",
+      "repeat": 1,
+      "inputMatched": true,
+      "sharedDocuments": 2,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-244c00e987f3",
+      "repeat": 0,
+      "inputMatched": true,
+      "sharedDocuments": 2,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-244c00e987f3",
+      "repeat": 1,
+      "inputMatched": true,
+      "sharedDocuments": 2,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-3d9f8196313c",
+      "repeat": 0,
+      "inputMatched": true,
+      "sharedDocuments": 4,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-3d9f8196313c",
+      "repeat": 1,
+      "inputMatched": true,
+      "sharedDocuments": 4,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-40af39fd3b0e",
+      "repeat": 0,
+      "inputMatched": true,
+      "sharedDocuments": 4,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-40af39fd3b0e",
+      "repeat": 1,
+      "inputMatched": true,
+      "sharedDocuments": 4,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-4be47432c694",
+      "repeat": 0,
+      "inputMatched": true,
+      "sharedDocuments": 4,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-4be47432c694",
+      "repeat": 1,
+      "inputMatched": true,
+      "sharedDocuments": 4,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-1d4f216624fa",
+      "repeat": 0,
+      "inputMatched": true,
+      "sharedDocuments": 3,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-1d4f216624fa",
+      "repeat": 1,
+      "inputMatched": true,
+      "sharedDocuments": 3,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-2223ad41f795",
+      "repeat": 0,
+      "inputMatched": true,
+      "sharedDocuments": 2,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-2223ad41f795",
+      "repeat": 1,
+      "inputMatched": true,
+      "sharedDocuments": 2,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-090273a88f0c",
+      "repeat": 0,
+      "inputMatched": true,
+      "sharedDocuments": 4,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-090273a88f0c",
+      "repeat": 1,
+      "inputMatched": true,
+      "sharedDocuments": 4,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-23c212e89b5b",
+      "repeat": 0,
+      "inputMatched": true,
+      "sharedDocuments": 4,
+      "sharedExtractionsMatched": true
+    },
+    {
+      "caseId": "CASE-23c212e89b5b",
+      "repeat": 1,
+      "inputMatched": true,
+      "sharedDocuments": 4,
+      "sharedExtractionsMatched": true
+    }
+  ],
+  "spend": {
+    "totalEstimatedTokenCostUSD": 0.043416,
+    "pilotV2EstimatedTokenCostUSD": 0.037466,
+    "providerAttempts": 144,
+    "definitiveNon200Responses": 2,
+    "modelUsageReceipts": 142,
+    "pendingReservations": 0,
+    "invoiceVerified": false
+  },
+  "recovery": {
+    "at": "2026-10-21T10:19:28.293Z",
+    "scriptHash": "01b230403720fd48d68fe625916faf23732ca55c65051045e418c6a0bb44fc24",
+    "minRequestGapMs": 12000,
+    "reason": "Explicit bounded recovery after HTTP429; same prompts, cases, model, grader and cumulative $1 run allowance. Provider failures remain separately reported; quality metrics are conditional on completed provider execution."
+  },
+  "decision": "NO_AGENT_ADVANTAGE_OBSERVED",
+  "benefit": {
+    "status": "NOT_ESTABLISHED",
+    "humanMinutes": null,
+    "totalHandlingCostMicros": null,
+    "reason": "Small known synthetic sample. Source prices are authored; no measured analyst time, downstream loss or actual reserve outcome."
+  },
+  "limitations": [
+    "Ten known development cases; no independent validation or holdout claim.",
+    "Two trials per case are a pilot, not a reliability estimate.",
+    "Fixed normalized reference uses authored extraction and is not an end-to-end competitor.",
+    "Physical wall times are not fair latency comparisons because the second arm reuses reader outputs.",
+    "V1 infrastructure probe stopped after HTTP429 and exposed format failures and unequal reader failure reuse. V2 adds structured schemas, shared failures and request spacing; no evidence policy or case truth changed."
+  ],
+  "fullTrace": ".local/benchmarks/llm-pilot-50ab9565-034e-4bc5-acc4-84faba3f055d.json"
+}

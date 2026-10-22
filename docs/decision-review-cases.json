@@ -1,0 +1,3258 @@
+[
+  {
+    "id": "D01",
+    "context": "Quarter-end office kits: a courier advertises strong nationwide performance during a local hub disruption.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "F1",
+        "text": "Courier marketing reports 94% on-time nationwide. The accepted route forecast is EARLY 18%, LATE 67%, MISSED 15%."
+      },
+      {
+        "id": "Q1",
+        "text": "One slot. FLEX/MIX $840; ALL $1,200. No guarantee. Controls and recipients verified."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_point_forecast",
+      "vectors": [
+        [
+          0.18,
+          0.67,
+          0.15
+        ]
+      ],
+      "basis": "For this synthetic case, the route-matched forecast has been accepted by the policy owner. It supersedes the nationwide promotional statistic."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 124000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 120000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 320000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "653d1d26442dd0f1f1f4c899372bec400c73beb1fb6176b61f35b8b050d4a75e"
+  },
+  {
+    "id": "D02",
+    "context": "A subsidized booking makes the larger vehicle relatively inexpensive.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 300000,
+      "settledAndSpentCents": 282000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "Q1",
+        "text": "Subsidy is already reflected in the firm prices: $200 for the small van, $300 for the large van. Both remain available."
+      },
+      {
+        "id": "F1",
+        "text": "EARLY 70%, LATE 20%, MISSED 10%; no additional subsidy or guarantee."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 60000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_point_forecast",
+      "vectors": [
+        [
+          0.7,
+          0.2,
+          0.1
+        ]
+      ],
+      "basis": "Accepted synthetic current-route forecast."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 300000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 300000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 300000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 20000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 320000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 20000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 160000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 320000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 30000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 50000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 330000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "5cf586d8dd2dea3ec82167899253686c5382415b3a9a3a004c5a62825ac25f41"
+  },
+  {
+    "id": "D03",
+    "context": "Cancellations rose while the courier held its offer open.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 360000,
+      "settledAndSpentCents": 222000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 32,
+      "early": 8,
+      "late": 20,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "B1",
+        "text": "32 cancellations are final. Their $3,200 refund allocation cannot fund any delivery booking."
+      },
+      {
+        "id": "Q1",
+        "text": "The smaller vehicle costs $500 and the larger one $900. No cheaper or prorated booking exists."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_point_forecast",
+      "vectors": [
+        [
+          0.88,
+          0.1,
+          0.02
+        ]
+      ],
+      "basis": "Accepted synthetic route forecast; delivery prospects are strong."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 240000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 240000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 240000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 50000,
+        "shipEarly": 0,
+        "shipLate": 20,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 20,
+            "refundsCents": 400000,
+            "providerGapCents": 90000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 20,
+            "refundsCents": 400000,
+            "providerGapCents": 90000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 290000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 50000,
+        "shipEarly": 8,
+        "shipLate": 12,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 20,
+            "refundsCents": 400000,
+            "providerGapCents": 90000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 12,
+            "refundsCents": 480000,
+            "providerGapCents": 170000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 290000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 90000,
+        "shipEarly": 8,
+        "shipLate": 20,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 50000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 20,
+            "refundsCents": 400000,
+            "providerGapCents": 130000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 330000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "18a85de20dbb7c4019fd56502cb976c386b1369ed680ebe82189969f8085c246"
+  },
+  {
+    "id": "D04",
+    "context": "The courier accepts payment, but the restricted disbursement mechanism is unavailable.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "CTRL1",
+        "text": "Today the available transfer would enter the merchant unrestricted balance; the reviewer cannot bind it to the invoice or pickup scan."
+      },
+      {
+        "id": "P1",
+        "text": "There is no approved exception to the controlled-payment requirement. A merchant promise is not an enforceable control."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_point_forecast",
+      "vectors": [
+        [
+          0.9,
+          0.08,
+          0.02
+        ]
+      ],
+      "basis": "Accepted synthetic route forecast."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": false,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": false,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 124000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 120000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": false,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 320000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "80e798557640d4bb14ed12d511aa374bf7ab7c21105be3d4bad18ec377a84c62"
+  },
+  {
+    "id": "D05",
+    "context": "An established seller faces a sharply worsening route disruption.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "H1",
+        "text": "Four years trading and 1% historical refunds. Identity and goods are verified."
+      },
+      {
+        "id": "F1",
+        "text": "The current route forecast is EARLY 4%, LATE 8%, MISSED 88%. Merchant history does not change this accepted input."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_point_forecast",
+      "vectors": [
+        [
+          0.04,
+          0.08,
+          0.88
+        ]
+      ],
+      "basis": "Accepted synthetic forecast for the current disruption."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 124000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 120000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 320000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "73a24e19f3b95fc70fd7c8f65dd8024b15871de70d56f9d9de67506e36272dab"
+  },
+  {
+    "id": "D06",
+    "context": "A low-price quote and a current quote are both present in the completed evidence packet.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 330000,
+      "settledAndSpentCents": 252000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "Q1",
+        "text": "The $300 small-van offer has expired. The $900 large-van slot is still bookable before cutoff."
+      },
+      {
+        "id": "W1",
+        "text": "All active kits are ready. No partial-price large-van booking is available."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 120000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_point_forecast",
+      "vectors": [
+        [
+          0.65,
+          0.25,
+          0.1
+        ]
+      ],
+      "basis": "Accepted synthetic forecast for the remaining dispatch slot."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 270000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 270000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 270000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 30000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": false,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Small-van quote expired; no slot remains for either small-van cohort.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 20000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 20000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 300000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 30000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": false,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Small-van quote expired; no slot remains for either small-van cohort.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 20000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 140000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 300000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 90000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 80000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 360000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "1a5ef7d4c7f89ad7b2c2292a6bf6ae62d2f7ed39e63e531dfd10960aee5fcebd"
+  },
+  {
+    "id": "D07",
+    "context": "A funded courier guarantee settles inside the refund horizon.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "G1",
+        "text": "Guarantee funding and enforceability are stipulated verified. $1,100 is credited into restricted refund backing on any failure to meet EARLY, inside this horizon."
+      },
+      {
+        "id": "Q1",
+        "text": "The $700 small-van offer has no guarantee. The guarantee does not make delivery more likely."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_point_forecast",
+      "vectors": [
+        [
+          0.45,
+          0.4,
+          0.15
+        ]
+      ],
+      "basis": "Accepted synthetic arrival forecast, unchanged by the financial guarantee."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 70000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 270000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 70000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 110000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 270000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 110000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          110000,
+          110000
+        ],
+        "terms": "Guaranteed EARLY arrival. An independently funded guarantee returns the entire $1,100 shipping payment within the refund funding horizon whenever arrival is LATE or MISSED.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "4121f395ec40e9e9ec5ecdf4b2536193e9b26d65aa85826629a92caefb10695f"
+  },
+  {
+    "id": "D08",
+    "context": "A similar courier guarantee settles after the refund horizon.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "G1",
+        "text": "The $1,100 reimbursement arrives after 45 days, not before buyer refunds. In-horizon recovery is $0."
+      },
+      {
+        "id": "P1",
+        "text": "The objective is immediate refund funding exposure, not ultimate lifetime recovery."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_point_forecast",
+      "vectors": [
+        [
+          0.45,
+          0.4,
+          0.15
+        ]
+      ],
+      "basis": "Accepted synthetic arrival forecast; future recovery is excluded from this short-horizon mandate."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 70000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 270000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 70000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 110000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 270000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 110000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Late-arrival reimbursement is payable after 45 days. No advance, assignment or credit is available inside this three-day funding horizon.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 30000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 310000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "40f0cc20916dc776b13a628e83813262c217d293a1fbb1732de26e836ff297cb"
+  },
+  {
+    "id": "D09",
+    "context": "A very reliable route still has a strict authorized downside limit.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "P1",
+        "text": "The incremental worst-case funding-gap limit is $700. No risk-cap waiver is authorized."
+      },
+      {
+        "id": "Q1",
+        "text": "The nonrefundable quotes are $800 and $900; recoveries are zero even if the rare failure occurs."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 70000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_point_forecast",
+      "vectors": [
+        [
+          0.98,
+          0.01,
+          0.01
+        ]
+      ],
+      "basis": "Accepted synthetic high-reliability forecast."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 80000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 280000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 80000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 120000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 280000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 90000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 10000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 290000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "75f96efc2cd3798eeb1a323a8aa3196d6c6efda96f5a6054e76adc9716319689"
+  },
+  {
+    "id": "D10",
+    "context": "A well-funded reserve and different vehicle costs change the marginal benefit of shipping more orders.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 550000,
+      "settledAndSpentCents": 32000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "L1",
+        "text": "$5,500 remains held, and $320 was previously settled and spent. Both quote options protect all cancellation refunds."
+      },
+      {
+        "id": "P1",
+        "text": "Report buyer outcomes, but do not add an unapproved dollar value for future loyalty, merchant retention or extra fulfilled orders."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 100000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_point_forecast",
+      "vectors": [
+        [
+          0.75,
+          0.2,
+          0.05
+        ]
+      ],
+      "basis": "Accepted synthetic route forecast."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 50000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 50000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 50000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 30000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 80000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 30000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 80000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 50000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 100000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "3e37f5a89dabc5659909aae11b63b43adae4a6a5aa5f54cede866013d6742f11"
+  },
+  {
+    "id": "D11",
+    "context": "No calibrated forecast exists; the risk owner has specified a worst-case mandate.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "F1",
+        "text": "Six comparable batches: two EARLY, three LATE, one MISSED. These are potentially correlated observations, not an accepted probability model."
+      },
+      {
+        "id": "P1",
+        "text": "Use the explicitly approved worst-case mandate. Do not silently substitute average cost or regret."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "minimax_gap",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize the largest expected funding gap over the accepted uncertainty set, subject to the hard controls. The mandate prioritizes worst-case protection over expected upside.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_uncertainty_set",
+      "vectors": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "basis": "Any arrival distribution is possible. No point forecast has been accepted. Every convex combination of these vertices is admitted; do not invent a frequency distribution over vertices."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 124000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 120000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 320000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "cc4236a123fe0941eb9bb4caf52a139dca5ad1609258096b5d702a5a5c65a0f2"
+  },
+  {
+    "id": "D12",
+    "context": "The same uncertain route is reviewed under a different explicit risk mandate.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "F1",
+        "text": "Six comparable batches: two EARLY, three LATE, one MISSED. Do not treat the counts as calibrated probabilities."
+      },
+      {
+        "id": "P1",
+        "text": "The risk owner explicitly authorizes minimum worst-case regret, including the regret of holding when shipping would have succeeded."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "minimax_regret",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize the maximum expected funding-gap regret across the accepted uncertainty set. At each vertex, regret compares with the best eligible plan for that vertex. This is an explicit authored risk mandate, not an inferred preference.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_uncertainty_set",
+      "vectors": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "basis": "Any arrival distribution is possible. No point forecast has been accepted. Every convex combination of these vertices is admitted; do not invent a frequency distribution over vertices."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 124000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 120000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 320000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "8b6c15250575c373133c0fba33d7b958e91a52d65e69ec5410126c6930c54794"
+  },
+  {
+    "id": "D13",
+    "context": "Two accepted route models disagree near a decision boundary.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "F1",
+        "text": "Model A: 88/10/2 percent; Model B: 97/2/1 percent. Both are accepted as plausible vertices; their mixture is unknown."
+      },
+      {
+        "id": "P1",
+        "text": "Apply the regret mandate across both models, not an invented 50/50 forecast."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "minimax_regret",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize the maximum expected funding-gap regret across the accepted uncertainty set. At each vertex, regret compares with the best eligible plan for that vertex. This is an explicit authored risk mandate, not an inferred preference.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_uncertainty_set",
+      "vectors": [
+        [
+          0.88,
+          0.1,
+          0.02
+        ],
+        [
+          0.97,
+          0.02,
+          0.01
+        ]
+      ],
+      "basis": "The uncertainty set spans both accepted models. Neither model has privileged weight. Every convex combination of these vertices is admitted; do not invent a frequency distribution over vertices."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 124000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 120000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 320000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "78eceb21463797f27660bbaed3dca8c32ddb0afe406be6ff9dde1610aaca5543"
+  },
+  {
+    "id": "D14",
+    "context": "The downside and opportunity cost both matter under a wide forecast disagreement.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "F1",
+        "text": "Disruption model: 3/7/90 percent. Recovery model: 10/65/25 percent."
+      },
+      {
+        "id": "P1",
+        "text": "Use the authored minimax-regret mandate. The uncertainty set is not an observed frequency distribution."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "minimax_regret",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize the maximum expected funding-gap regret across the accepted uncertainty set. At each vertex, regret compares with the best eligible plan for that vertex. This is an explicit authored risk mandate, not an inferred preference.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_uncertainty_set",
+      "vectors": [
+        [
+          0.03,
+          0.07,
+          0.9
+        ],
+        [
+          0.1,
+          0.65,
+          0.25
+        ]
+      ],
+      "basis": "Both forecasts and their convex combinations are plausible; no model weight is supplied. Every convex combination of these vertices is admitted; do not invent a frequency distribution over vertices."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 124000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 120000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 320000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "4a1a419dbce1252d41cb014d607ebf7c86b77cebe75011bec410b889a9706f5f"
+  },
+  {
+    "id": "D15",
+    "context": "The reviewer has observations but no accepted forecast or uncertainty mandate.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "F1",
+        "text": "Courier says 94% nationwide. Six route batches were 2 EARLY, 3 LATE and 1 MISSED. This packet does not establish probabilities."
+      },
+      {
+        "id": "P1",
+        "text": "The standing mandate is expected funding gap. Only the policy owner can accept a forecast or replace that objective with a robust mandate; the reviewer cannot invent either."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": true,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "unresolved",
+      "vectors": [],
+      "basis": "No calibrated forecast or decision uncertainty set has been authorized."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 124000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 120000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 320000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "25b6f9568d8a2763683cb29c12a80a133c866ac83c5998e736cfd730aeb570d8"
+  },
+  {
+    "id": "D16",
+    "context": "Two current policy instructions conflict and authority has not been resolved.",
+    "money": {
+      "grossCents": 600000,
+      "historicalFeeCents": 18000,
+      "heldCents": 400000,
+      "settledAndSpentCents": 182000,
+      "cashCents": 0,
+      "creditCents": 0
+    },
+    "cohorts": {
+      "cancelled": 20,
+      "early": 12,
+      "late": 28,
+      "unitGrossCents": 10000
+    },
+    "sources": [
+      {
+        "id": "P1",
+        "text": "Operations asks for expected-gap minimization. Risk asks for worst possible funding-gap minimization. Both instructions are current and neither has established precedence."
+      },
+      {
+        "id": "P2",
+        "text": "The reviewer lacks authority to resolve that conflict. Existing restrictions remain while the policy owner resolves it."
+      }
+    ],
+    "fixedWorkflowCompleted": true,
+    "policy": {
+      "authorityResolved": false,
+      "objective": "expected_gap",
+      "incrementalWorstGapCapCents": 150000,
+      "protectAlreadyCancelledRefunds": true,
+      "requireControlledPayment": true,
+      "humanExecutionApprovalRequired": true,
+      "objectiveText": "Minimize expected short-horizon provider refund funding gap under the accepted forecast, subject to the hard controls. Historical fees are constant. Customer outcomes are reported but there is no extra service or retention utility in this mandate.",
+      "tieBreak": "After the primary financial objective, prefer lower worst-case gap, then smaller payment, then plan ID. Equal primary objectives are scored as equal-quality decisions."
+    },
+    "forecast": {
+      "kind": "accepted_synthetic_point_forecast",
+      "vectors": [
+        [
+          0.18,
+          0.67,
+          0.15
+        ]
+      ],
+      "basis": "Accepted synthetic route forecast; the remaining ambiguity concerns policy authority."
+    },
+    "plans": [
+      {
+        "id": "HOLD",
+        "controlledPaymentCents": 0,
+        "shipEarly": 0,
+        "shipLate": 0,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 200000
+          }
+        ]
+      },
+      {
+        "id": "FLEX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 0,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "MIX",
+        "controlledPaymentCents": 84000,
+        "shipEarly": 12,
+        "shipLate": 16,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 4000
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 16,
+            "refundsCents": 440000,
+            "providerGapCents": 124000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 284000
+          }
+        ]
+      },
+      {
+        "id": "ALL",
+        "controlledPaymentCents": 120000,
+        "shipEarly": 12,
+        "shipLate": 28,
+        "availableBeforeCutoff": true,
+        "controlEnforceable": true,
+        "beneficiaryVerified": true,
+        "recoveryByStateCents": [
+          0,
+          0,
+          0
+        ],
+        "terms": "Fixed price. Nonrefundable booking; no additional recoveries.",
+        "payoffs": [
+          {
+            "state": "EARLY",
+            "fulfilled": 40,
+            "refundsCents": 200000,
+            "providerGapCents": 0
+          },
+          {
+            "state": "LATE",
+            "fulfilled": 28,
+            "refundsCents": 320000,
+            "providerGapCents": 40000
+          },
+          {
+            "state": "MISSED",
+            "fulfilled": 0,
+            "refundsCents": 600000,
+            "providerGapCents": 320000
+          }
+        ]
+      }
+    ],
+    "assumptions": [
+      "All facts, documents, policies, probabilities and control capabilities are authored synthetic inputs, not real PayPal practices or forecasts.",
+      "All orders are $100. All kits in the selected van share one arrival state. EARLY meets both deadlines; LATE meets only the later deadline; MISSED meets neither.",
+      "Without a booking, no orders ship. Cancelled, unshipped or late orders receive full refunds. There are no other funding sources, liabilities, alternate plans, or recoveries before the assessment horizon.",
+      "The provider funds any refund gap in this model. This is short-horizon funding exposure, not proven ultimate loss or production liability.",
+      "Historical fees are unchanged across plans. Shipping uses held merchant funds, so it reduces backing and is not counted again as a provider expense.",
+      "Only explicitly quantified recoveryByStateCents is available within the funding horizon. No speculative retention, fee growth, inventory liquidation or merchant recovery is included.",
+      "No execution is authorized by a recommendation. All control checks are hypothetical stipulations. Shared payoff tables are calculated by deterministic code for both methods."
+    ],
+    "inputHash": "2bf09c1f87fe0b2df7a439f0983959ab1caeae37c5a86aa45ee6adc94890697c"
+  }
+]

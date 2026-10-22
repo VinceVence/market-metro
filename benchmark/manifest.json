@@ -1,0 +1,78 @@
+{
+  "version": "reserve-evidence-poc-v1",
+  "seed": 773,
+  "digest": "0904dd19dc40c6685e51d752164ee6ddba372fa9bb5228f3f3c23fe401a488ca",
+  "totalCases": 48,
+  "tools": [
+    {
+      "name": "get_dispatch_manifest",
+      "purpose": "Resolve pallet-to-order allocation.",
+      "costMicros": 40000,
+      "latencyMs": 1800
+    },
+    {
+      "name": "refresh_carrier_record",
+      "purpose": "Get current carrier status or direct delivery proof.",
+      "costMicros": 30000,
+      "latencyMs": 700
+    },
+    {
+      "name": "get_office_receiving_log",
+      "purpose": "Get independent order-specific receiving evidence.",
+      "costMicros": 10000,
+      "latencyMs": 2400
+    },
+    {
+      "name": "get_cancellation_refund_history",
+      "purpose": "Establish cancellation and refund settlement status.",
+      "costMicros": 20000,
+      "latencyMs": 500
+    },
+    {
+      "name": "request_missing_document_in_simulator",
+      "purpose": "Get permitted business-history records; never sends a real message.",
+      "costMicros": 50000,
+      "latencyMs": 12000
+    }
+  ],
+  "costProvenance": "Authored query-price and latency assumptions; no tool API is charged.",
+  "splits": {
+    "development": 32,
+    "holdout": 16
+  },
+  "families": [
+    {
+      "family": "clean_complete",
+      "split": "development",
+      "count": 8
+    },
+    {
+      "family": "mixed_pallet_partial_order",
+      "split": "development",
+      "count": 8
+    },
+    {
+      "family": "stale_or_corrected_source",
+      "split": "development",
+      "count": 8
+    },
+    {
+      "family": "cancelled_replacement",
+      "split": "development",
+      "count": 8
+    },
+    {
+      "family": "business_context_scope",
+      "split": "holdout",
+      "count": 8
+    },
+    {
+      "family": "unresolvable_or_untrusted",
+      "split": "holdout",
+      "count": 8
+    }
+  ],
+  "status": "FROZEN_AUTHORED_POC",
+  "normalization": "Authored normalized source claims. Not an LLM or validated document parser.",
+  "holdoutLimit": "Family-disjoint plumbing test; authors saw the fixture design. Not independently blinded validation or production generalization."
+}

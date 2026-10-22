@@ -1,0 +1,172 @@
+{
+  "inputHash": "725deb4663eae4512a90552fd7bca894586110ec09479d23a18b693491c40c99",
+  "scope": "Deterministic arithmetic from explicit hypothetical inputs; no model call or calibrated expected loss.",
+  "baselineGapCents": 200000,
+  "rows": [
+    {
+      "id": "HOLD",
+      "shippingCostCents": 0,
+      "shipFriday": 0,
+      "shipSaturday": 0,
+      "description": "Keep the $4,000 held; refund all 60 orders if no shipping is funded.",
+      "heldAfterBookingCents": 400000,
+      "cancelledRefundsRingFenceCents": 200000,
+      "protectsCancelledRefunds": true,
+      "incrementalWorstCaseGapCents": 0,
+      "within1500DollarIncrementalCap": true,
+      "outcomes": [
+        {
+          "state": "FRIDAY",
+          "acceptedOnTimeOrders": 0,
+          "refundedOrders": 60,
+          "refundsCents": 600000,
+          "providerFundingGapCents": 200000,
+          "remainingHeldAfterRefundsCents": 0
+        },
+        {
+          "state": "SATURDAY",
+          "acceptedOnTimeOrders": 0,
+          "refundedOrders": 60,
+          "refundsCents": 600000,
+          "providerFundingGapCents": 200000,
+          "remainingHeldAfterRefundsCents": 0
+        },
+        {
+          "state": "LATER",
+          "acceptedOnTimeOrders": 0,
+          "refundedOrders": 60,
+          "refundsCents": 600000,
+          "providerFundingGapCents": 200000,
+          "remainingHeldAfterRefundsCents": 0
+        }
+      ]
+    },
+    {
+      "id": "SMALL_FLEX",
+      "shippingCostCents": 84000,
+      "shipFriday": 0,
+      "shipSaturday": 28,
+      "description": "Small van for all 28 buyers who accepted Saturday. Refund the 20 cancelled and 12 unshipped Friday buyers.",
+      "heldAfterBookingCents": 316000,
+      "cancelledRefundsRingFenceCents": 200000,
+      "protectsCancelledRefunds": true,
+      "incrementalWorstCaseGapCents": 84000,
+      "within1500DollarIncrementalCap": true,
+      "outcomes": [
+        {
+          "state": "FRIDAY",
+          "acceptedOnTimeOrders": 28,
+          "refundedOrders": 32,
+          "refundsCents": 320000,
+          "providerFundingGapCents": 4000,
+          "remainingHeldAfterRefundsCents": 0
+        },
+        {
+          "state": "SATURDAY",
+          "acceptedOnTimeOrders": 28,
+          "refundedOrders": 32,
+          "refundsCents": 320000,
+          "providerFundingGapCents": 4000,
+          "remainingHeldAfterRefundsCents": 0
+        },
+        {
+          "state": "LATER",
+          "acceptedOnTimeOrders": 0,
+          "refundedOrders": 60,
+          "refundsCents": 600000,
+          "providerFundingGapCents": 284000,
+          "remainingHeldAfterRefundsCents": 0
+        }
+      ]
+    },
+    {
+      "id": "SMALL_MIXED",
+      "shippingCostCents": 84000,
+      "shipFriday": 12,
+      "shipSaturday": 16,
+      "description": "Same small-van price; include all 12 Friday buyers and 16 Saturday buyers. Refund the 20 cancelled and 12 unshipped Saturday buyers.",
+      "heldAfterBookingCents": 316000,
+      "cancelledRefundsRingFenceCents": 200000,
+      "protectsCancelledRefunds": true,
+      "incrementalWorstCaseGapCents": 84000,
+      "within1500DollarIncrementalCap": true,
+      "outcomes": [
+        {
+          "state": "FRIDAY",
+          "acceptedOnTimeOrders": 28,
+          "refundedOrders": 32,
+          "refundsCents": 320000,
+          "providerFundingGapCents": 4000,
+          "remainingHeldAfterRefundsCents": 0
+        },
+        {
+          "state": "SATURDAY",
+          "acceptedOnTimeOrders": 16,
+          "refundedOrders": 44,
+          "refundsCents": 440000,
+          "providerFundingGapCents": 124000,
+          "remainingHeldAfterRefundsCents": 0
+        },
+        {
+          "state": "LATER",
+          "acceptedOnTimeOrders": 0,
+          "refundedOrders": 60,
+          "refundsCents": 600000,
+          "providerFundingGapCents": 284000,
+          "remainingHeldAfterRefundsCents": 0
+        }
+      ]
+    },
+    {
+      "id": "LARGE_ALL",
+      "shippingCostCents": 120000,
+      "shipFriday": 12,
+      "shipSaturday": 28,
+      "description": "Large van for all 40 active buyers. Refund 20 cancelled buyers; other refunds depend on accepted deadlines.",
+      "heldAfterBookingCents": 280000,
+      "cancelledRefundsRingFenceCents": 200000,
+      "protectsCancelledRefunds": true,
+      "incrementalWorstCaseGapCents": 120000,
+      "within1500DollarIncrementalCap": true,
+      "outcomes": [
+        {
+          "state": "FRIDAY",
+          "acceptedOnTimeOrders": 40,
+          "refundedOrders": 20,
+          "refundsCents": 200000,
+          "providerFundingGapCents": 0,
+          "remainingHeldAfterRefundsCents": 80000
+        },
+        {
+          "state": "SATURDAY",
+          "acceptedOnTimeOrders": 28,
+          "refundedOrders": 32,
+          "refundsCents": 320000,
+          "providerFundingGapCents": 40000,
+          "remainingHeldAfterRefundsCents": 0
+        },
+        {
+          "state": "LATER",
+          "acceptedOnTimeOrders": 0,
+          "refundedOrders": 60,
+          "refundsCents": 600000,
+          "providerFundingGapCents": 320000,
+          "remainingHeldAfterRefundsCents": 0
+        }
+      ]
+    }
+  ],
+  "breakEven": {
+    "smallFlexibleVersusHold": {
+      "formula": "E[funding gap] = 2840 - 2800*p (USD), where p is probability the flexible batch arrives by Saturday.",
+      "threshold": 0.3,
+      "condition": "Only cheaper in expected funding terms than holding if p > 0.30. No value of p is supplied."
+    },
+    "largeAllVersusSmallFlexible": {
+      "formula": "E[large gap] - E[small-flex gap] = 360 - 400*pFriday (USD).",
+      "threshold": 0.9,
+      "condition": "Large is cheaper in expected funding terms only if Friday arrival probability exceeds 90%, under the shared arrival-distribution assumption. This excludes extra value assigned to serving the 12 Friday buyers."
+    }
+  },
+  "fixedWorkflowResult": "All listed plans protect the cancelled refund allocation and pass the authored incremental risk cap. Eligibility and arithmetic do not select a policy winner."
+}

@@ -1,0 +1,257 @@
+{
+  "schema": "supply-yard-investigator-benchmark-proposal-v1",
+  "status": "REPAIRED_READER_PRO_PILOT_COMPLETED_NO_NET_AGENT_ADVANTAGE",
+  "freeze_status": "FROZEN_AUTHORED_POC_V1",
+  "agent_integrated": true,
+  "llm_trials_completed": 80,
+  "purpose": "Determine whether adaptive evidence selection improves reserve-case preparation over a competent fixed workflow. Do not assume an agent is necessary.",
+  "paypal_decision": "Human reviewer decides whether an existing reserve-review recommendation is supported, requires targeted additional evidence, or must be escalated. The benchmark does not estimate an optimal real PayPal reserve.",
+  "scope": [
+    "No new checkout",
+    "No real reserve API",
+    "No merchant/customer messaging",
+    "One investigator before any multi-agent team",
+    "Benchmark lab added; reserve-economy behavior remains separate."
+  ],
+  "hypothesis": "At matched unsupported-clearance risk and useful case-completion coverage, adaptive investigation reduces total handling cost or discovers material evidence the strong baseline misses.",
+  "competitors": [
+    {
+      "id": "rules",
+      "description": "Tuned branch-aware deterministic workflow with available structured evidence and early stopping."
+    },
+    {
+      "id": "fixed_with_parser",
+      "description": "Competent conditional workflow with the same document-extraction model and records as the adaptive investigator."
+    },
+    {
+      "id": "gather_all",
+      "description": "Retrieve all relevant allowed records where the shared budget permits; use the same parser and downstream checks."
+    },
+    {
+      "id": "adaptive_single",
+      "description": "One model chooses the next permitted source, observes the response, revises or stops/escalates; no hidden labels or preset scenario branch."
+    },
+    {
+      "id": "cost_aware_non_llm",
+      "description": "Cost-sensitive heuristic or learned acquisition policy, only if the training evidence supports a fair implementation."
+    }
+  ],
+  "ablations": [
+    "Return identical normalized source observations after requested tools to isolate planning from text extraction.",
+    "Keep the same model, source availability, policies and budgets for fixed-with-parser and adaptive.",
+    "Report multiple budgets rather than selecting a favorable budget after seeing results."
+  ],
+  "proposed_pilot": {
+    "authored_cases_min": 30,
+    "authored_cases_max": 50,
+    "repeated_trials_per_stochastic_method": 3,
+    "max_observation_calls_per_case": 8,
+    "max_decision_turns_per_case": 10,
+    "limits_are": "Proposed debugging limits, not production reliability or cost estimates. Freeze before evaluation.",
+    "splitting": "Hold out whole ambiguity families and document templates. No test case IDs, labels, expected paths, or evaluator files enter prompts or tool results.",
+    "expert_validation": "Ask a reviewer familiar with the process to validate expected material findings and whether the cases resemble actual work; none completed yet."
+  },
+  "tool_contract": {
+    "allowed_observations": [
+      "list_case_documents",
+      "read_document",
+      "get_dispatch_manifest",
+      "refresh_carrier_record",
+      "get_office_receiving_log",
+      "get_cancellation_refund_history",
+      "request_missing_document_in_simulator"
+    ],
+    "allowed_terminal_outputs": [
+      "ready_for_human_review_with_sources",
+      "targeted_evidence_request",
+      "escalate_with_specific_unresolved_questions"
+    ],
+    "forbidden": [
+      "Changing reserves",
+      "Creating/capturing/refunding PayPal payments",
+      "Reading evaluator truth",
+      "Executing instructions inside source documents",
+      "Contacting actual merchants or customers"
+    ],
+    "trace": [
+      "observed source references and versions",
+      "selected action and short decision-relevant reason",
+      "returned observations",
+      "changed findings",
+      "stop/escalation reason",
+      "token/tool/latency accounting"
+    ],
+    "grading": "Grade material evidence and supported conclusions, not a prescribed tool sequence.",
+    "implemented_observations": [
+      "get_dispatch_manifest",
+      "refresh_carrier_record",
+      "get_office_receiving_log",
+      "get_cancellation_refund_history",
+      "request_missing_document_in_simulator"
+    ],
+    "implementation_note": "Starting documents are supplied directly; source-specific getters handle retrieval. Generic listing/reading names in the proposal are not separate tools in v1."
+  },
+  "case_families": [
+    {
+      "family": "clean_complete",
+      "expected_challenge": "Recognize that existing evidence is sufficient; unnecessary queries cost time."
+    },
+    {
+      "family": "mixed_pallet_partial_order",
+      "expected_challenge": "Reconcile pallet/carton/order scope before treating a delivered scan as proof of every paid unit."
+    },
+    {
+      "family": "stale_or_corrected_source",
+      "expected_challenge": "Check timestamps and later corrections; choose refresh instead of repeating an irrelevant request."
+    },
+    {
+      "family": "cancelled_replacement",
+      "expected_challenge": "Change the hypothesis when replacement fulfillment is cancelled; check remaining obligations and refund records."
+    },
+    {
+      "family": "business_context_scope",
+      "expected_challenge": "Distinguish new platform history from established business history, without assuming either proves current safety."
+    },
+    {
+      "family": "unresolvable_or_untrusted",
+      "expected_challenge": "Escalate genuinely unavailable evidence; ignore embedded instructions and avoid invented supporting facts."
+    }
+  ],
+  "mistakes": [
+    "Unsupported readiness/clearance recommendation under the authored fixture rule",
+    "Wrong order, unit, entity, amount, time range or document-version claim",
+    "Missed material contradiction or fabricated evidence",
+    "Unnecessary continued hold/escalation when sufficient permitted evidence was accessible within budget",
+    "Unauthorized action or treating a document instruction as authority"
+  ],
+  "coverage_metrics": [
+    "Correctly completed cases / all cases",
+    "Appropriate escalations / cases requiring escalation",
+    "Unnecessary escalations / resolvable cases",
+    "Per-family outcomes and trial variability",
+    "Unsupported monetary assertions as exposure, never labeled actual PayPal loss"
+  ],
+  "total_cost": {
+    "machine": [
+      "Actual model and extraction usage at recorded provider rates",
+      "Tool charges where real; assumed fixture costs labeled separately",
+      "Retries and failed calls",
+      "Compute and elapsed time"
+    ],
+    "human": [
+      "Blinded measured review time",
+      "Correction/rework time",
+      "Escalation handling time"
+    ],
+    "engineering": "Report workflow engineering and agent prompt/eval maintenance hours separately. Amortize only against an explicitly assumed workload.",
+    "primary_benefit_formula": "At matched decision quality and useful coverage: fixed total handling cost minus adaptive total handling cost.",
+    "missing_data": [
+      "No measured PayPal analyst time",
+      "No actual workload distribution",
+      "No downstream losses or recovery labels",
+      "No verified private PayPal implementation inventory"
+    ]
+  },
+  "decision_gates": {
+    "keep": "Reproducible improvement against the strongest applicable baseline on held-out cases at predeclared quality and coverage levels, including full handling cost.",
+    "drop": [
+      "Same-parser fixed workflow matches quality at lower total cost",
+      "Gains vanish in planning-only ablation",
+      "Benefit only appears on authored training templates",
+      "Lower error is obtained by escalating more cases to humans",
+      "Expensive errors or unsupported recommendations increase"
+    ],
+    "production_limit": "A small synthetic pilot with zero observed critical errors is not proof of production safety or actual ROI."
+  },
+  "example_packets": [
+    {
+      "status": "Authored design card, not a completed eval",
+      "public_initial": {
+        "order": "DEMO-103",
+        "paid_units": 10,
+        "unit_price_usd": 10,
+        "merchant_message": "Our shipment is complete; pallet P7 was signed for yesterday. Please reconsider the hold.",
+        "carrier_snippet": "P7 delivered. Pieces: 10. Signature: receiving desk.",
+        "office_message": "We ordered ten kits but counted only six against PO-103. The slip also mentions PO-104."
+      },
+      "permitted_source_responses": {
+        "get_dispatch_manifest": "Pallet P7: six kits for PO-103, four kits for PO-104. Remaining four for PO-103 not loaded; separate fulfillment status pending.",
+        "get_office_receiving_log": "Receiving entry for PO-103 confirms six kits. Signature applies to the pallet, not every purchase order.",
+        "refresh_carrier_record": "P7 delivered; carrier record has no order-line allocation."
+      },
+      "evaluator_only": {
+        "expected_material_findings": [
+          "Pallet delivery is not proof of all ten kits for this order",
+          "Six units have matching support",
+          "Four paid units lack sufficient delivery evidence"
+        ],
+        "acceptable_output": "Partial support plus targeted request or escalation for the remaining obligation; human retains reserve decision.",
+        "not_allowed_claim": "All ten units delivered, or the merchant account is therefore safe.",
+        "exposure_note": "The four unsupported units represent $40 gross in this authored case, not a measured $40 PayPal loss."
+      }
+    },
+    {
+      "status": "Authored design card, not a completed eval",
+      "public_initial": {
+        "order": "DEMO-204",
+        "merchant_message": "Replacement R2 will close the missing delivery.",
+        "carrier_snippet": "Cached record from Monday: label created for R2.",
+        "office_message": "Still no replacement received."
+      },
+      "permitted_source_responses": {
+        "get_cancellation_refund_history": "Replacement R2 cancelled Tuesday. Refund initiation recorded; completion not confirmed.",
+        "refresh_carrier_record": "Latest R2 record: shipment cancelled; no carrier acceptance.",
+        "get_dispatch_manifest": "Old packing manifest predates cancellation."
+      },
+      "evaluator_only": {
+        "expected_material_findings": [
+          "Replacement is no longer a viable delivery explanation",
+          "Older manifest cannot override a later cancellation",
+          "Pending refund is not completed refund"
+        ],
+        "acceptable_output": "Maintain unresolved status and seek settlement confirmation or escalate; do not fabricate successful delivery."
+      }
+    }
+  ],
+  "implementation_warning": "This authoring contract contains evaluator-only answers. Before any agent experiment, separate them into a harness-private store. Never serve this full file to the tested agent.",
+  "implementation": {
+    "date": "2026-10-21",
+    "case_count": 48,
+    "development_cases": 32,
+    "family_holdout_cases": 16,
+    "manifest": "benchmark/manifest.json",
+    "runner": "benchmark/orchestrator.mjs",
+    "command": "npm run benchmark",
+    "lab": "/benchmark.html",
+    "normalization": "Authored normalized source claims; no trained parser",
+    "controllers": [
+      "fixed_workflow",
+      "gather_all",
+      "cost_aware_script",
+      "abstain_control"
+    ],
+    "not_implemented": [
+      "Learned acquisition policy",
+      "Measured human-cost study",
+      "Independent blind evaluation",
+      "LLM in the visual economy"
+    ],
+    "holdout_limit": "Family-disjoint author-designed cases, not independent external validation.",
+    "validated_tests": 123,
+    "baseline_results": "docs/benchmark-baseline-results.json",
+    "llm_runner": "scripts/llm-pilot.mjs",
+    "llm_controllers": [
+      "fixed_llm_reader",
+      "adaptive_llm"
+    ],
+    "llm_model": "gemini-3.1-pro-preview",
+    "llm_case_count": 10,
+    "llm_repeats": 2,
+    "llm_plan": "docs/llm-pilot-plan-v3.json",
+    "llm_results": "docs/llm-pilot-results-v3.json",
+    "llm_decision": "NO_NET_AGENT_ADVANTAGE_OBSERVED",
+    "reader_contract": "Required nullable fields, per-document and allocation quotes; identical shared extraction; batch receipts counted once."
+  },
+  "economy_llm_integrated": false,
+  "latest_llm_trials": 40
+}

@@ -1,0 +1,814 @@
+{
+  "schema": "supply-yard-benchmark-run-v1",
+  "status": "SCRIPTED_BASELINES_COMPLETED",
+  "suite": {
+    "version": "reserve-evidence-poc-v1",
+    "seed": 773,
+    "digest": "0904dd19dc40c6685e51d752164ee6ddba372fa9bb5228f3f3c23fe401a488ca",
+    "totalCases": 48,
+    "tools": [
+      {
+        "name": "get_dispatch_manifest",
+        "purpose": "Resolve pallet-to-order allocation.",
+        "costMicros": 40000,
+        "latencyMs": 1800
+      },
+      {
+        "name": "refresh_carrier_record",
+        "purpose": "Get current carrier status or direct delivery proof.",
+        "costMicros": 30000,
+        "latencyMs": 700
+      },
+      {
+        "name": "get_office_receiving_log",
+        "purpose": "Get independent order-specific receiving evidence.",
+        "costMicros": 10000,
+        "latencyMs": 2400
+      },
+      {
+        "name": "get_cancellation_refund_history",
+        "purpose": "Establish cancellation and refund settlement status.",
+        "costMicros": 20000,
+        "latencyMs": 500
+      },
+      {
+        "name": "request_missing_document_in_simulator",
+        "purpose": "Get permitted business-history records; never sends a real message.",
+        "costMicros": 50000,
+        "latencyMs": 12000
+      }
+    ],
+    "costProvenance": "Authored query-price and latency assumptions; no tool API is charged.",
+    "splits": {
+      "development": 32,
+      "holdout": 16
+    },
+    "families": [
+      {
+        "family": "clean_complete",
+        "split": "development",
+        "count": 8
+      },
+      {
+        "family": "mixed_pallet_partial_order",
+        "split": "development",
+        "count": 8
+      },
+      {
+        "family": "stale_or_corrected_source",
+        "split": "development",
+        "count": 8
+      },
+      {
+        "family": "cancelled_replacement",
+        "split": "development",
+        "count": 8
+      },
+      {
+        "family": "business_context_scope",
+        "split": "holdout",
+        "count": 8
+      },
+      {
+        "family": "unresolvable_or_untrusted",
+        "split": "holdout",
+        "count": 8
+      }
+    ],
+    "status": "FROZEN_AUTHORED_POC",
+    "normalization": "Authored normalized source claims. Not an LLM or validated document parser.",
+    "holdoutLimit": "Family-disjoint plumbing test; authors saw the fixture design. Not independently blinded validation or production generalization."
+  },
+  "config": {
+    "seed": 773,
+    "split": "all",
+    "controllers": [
+      "fixed_workflow",
+      "gather_all",
+      "cost_aware_script"
+    ],
+    "repeats": 1,
+    "limits": {
+      "maxCalls": 8,
+      "maxTurns": 10,
+      "maxCostMicros": 300000,
+      "decisionTimeoutMs": 1000
+    },
+    "view": "fixture_normalized"
+  },
+  "implementationHash": "80ff6cbcaf9640082115b447378d88894951cf44009a33f50f6fc69f141350f1",
+  "inputAudit": [
+    {
+      "caseId": "CASE-090273a88f0c",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-096e50e7aff0",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-1d4f216624fa",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-1ef2a6730c5d",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-20173059c2d8",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-2223ad41f795",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-23c212e89b5b",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-244c00e987f3",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-2ee4fc364217",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-3142a3a1f895",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-35422f273364",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-3d9f8196313c",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-40af39fd3b0e",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-49327b40591a",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-4be47432c694",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-516beb857773",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-5171324b18ae",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-58e99d14f2af",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-680282d30218",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-6c3cf359317c",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-6f275d21c1e5",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-70a0a1aa63b0",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-721261306a8f",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-7ba617b29f69",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-7c59da25b272",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-80e90b3d1e2c",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-81e4b2934f5d",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-8333677c8a15",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-848ca03e7e2b",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-867f7cbf3e7b",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-88bca841a13d",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-9468fc784293",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-976edead9f0a",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-9a71a6a25c96",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-a71659a5e306",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-b60e42f91c96",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-b739f20d1a3c",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-be6b34047c68",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-c339d3fc9fdd",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-ce5e80715d06",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-d478fe0be293",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-e1531bc94652",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-e1d9c1f1f2fc",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-e23314097593",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-e3f698021e7a",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-f227178809f2",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-f4f52131de33",
+      "matched": true
+    },
+    {
+      "caseId": "CASE-f677a6d2b0ae",
+      "matched": true
+    }
+  ],
+  "runKey": "ea6f88640588a2ddc08451e93b92606170098fd71330dc97608e7d09aa37d6c9",
+  "createdAt": "2026-10-21T06:03:58.303Z",
+  "wallTimeMs": 54,
+  "byController": [
+    {
+      "id": "fixed_workflow",
+      "trials": 48,
+      "correctReady": 41,
+      "unsupportedReady": 0,
+      "correctEscalations": 7,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 60,
+      "assumedToolCostMicros": 1720000,
+      "wallTimeMs": 11.126000000000001,
+      "virtualSourceLatencyMs": 160000,
+      "usefulCompletionRate": 0.8541666666666666,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "gather_all",
+      "trials": 48,
+      "correctReady": 41,
+      "unsupportedReady": 0,
+      "correctEscalations": 7,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 240,
+      "assumedToolCostMicros": 7200000,
+      "wallTimeMs": 21.068999999999992,
+      "virtualSourceLatencyMs": 835200,
+      "usefulCompletionRate": 0.8541666666666666,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "cost_aware_script",
+      "trials": 48,
+      "correctReady": 41,
+      "unsupportedReady": 0,
+      "correctEscalations": 7,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 76,
+      "assumedToolCostMicros": 1800000,
+      "wallTimeMs": 10.366999999999999,
+      "virtualSourceLatencyMs": 205200,
+      "usefulCompletionRate": 0.8541666666666666,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    }
+  ],
+  "byFamily": [
+    {
+      "id": "fixed_workflow",
+      "family": "cancelled_replacement",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 16,
+      "assumedToolCostMicros": 400000,
+      "wallTimeMs": 3.723,
+      "virtualSourceLatencyMs": 9600,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "fixed_workflow",
+      "family": "business_context_scope",
+      "trials": 8,
+      "correctReady": 5,
+      "unsupportedReady": 0,
+      "correctEscalations": 3,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 8,
+      "assumedToolCostMicros": 400000,
+      "wallTimeMs": 1.78,
+      "virtualSourceLatencyMs": 96000,
+      "usefulCompletionRate": 0.625,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "fixed_workflow",
+      "family": "stale_or_corrected_source",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 8,
+      "assumedToolCostMicros": 240000,
+      "wallTimeMs": 1.42,
+      "virtualSourceLatencyMs": 5600,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "fixed_workflow",
+      "family": "clean_complete",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 0,
+      "assumedToolCostMicros": 0,
+      "wallTimeMs": 0.706,
+      "virtualSourceLatencyMs": 0,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "fixed_workflow",
+      "family": "mixed_pallet_partial_order",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 16,
+      "assumedToolCostMicros": 400000,
+      "wallTimeMs": 2.254,
+      "virtualSourceLatencyMs": 33600,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "fixed_workflow",
+      "family": "unresolvable_or_untrusted",
+      "trials": 8,
+      "correctReady": 4,
+      "unsupportedReady": 0,
+      "correctEscalations": 4,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 12,
+      "assumedToolCostMicros": 280000,
+      "wallTimeMs": 1.243,
+      "virtualSourceLatencyMs": 15200,
+      "usefulCompletionRate": 0.5,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "gather_all",
+      "family": "cancelled_replacement",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 40,
+      "assumedToolCostMicros": 1200000,
+      "wallTimeMs": 3.562,
+      "virtualSourceLatencyMs": 139200,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "gather_all",
+      "family": "business_context_scope",
+      "trials": 8,
+      "correctReady": 5,
+      "unsupportedReady": 0,
+      "correctEscalations": 3,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 40,
+      "assumedToolCostMicros": 1200000,
+      "wallTimeMs": 3.8329999999999997,
+      "virtualSourceLatencyMs": 139200,
+      "usefulCompletionRate": 0.625,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "gather_all",
+      "family": "stale_or_corrected_source",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 40,
+      "assumedToolCostMicros": 1200000,
+      "wallTimeMs": 3.5669999999999997,
+      "virtualSourceLatencyMs": 139200,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "gather_all",
+      "family": "clean_complete",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 40,
+      "assumedToolCostMicros": 1200000,
+      "wallTimeMs": 3.3419999999999996,
+      "virtualSourceLatencyMs": 139200,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "gather_all",
+      "family": "mixed_pallet_partial_order",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 40,
+      "assumedToolCostMicros": 1200000,
+      "wallTimeMs": 4.091,
+      "virtualSourceLatencyMs": 139200,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "gather_all",
+      "family": "unresolvable_or_untrusted",
+      "trials": 8,
+      "correctReady": 4,
+      "unsupportedReady": 0,
+      "correctEscalations": 4,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 40,
+      "assumedToolCostMicros": 1200000,
+      "wallTimeMs": 2.674,
+      "virtualSourceLatencyMs": 139200,
+      "usefulCompletionRate": 0.5,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "cost_aware_script",
+      "family": "cancelled_replacement",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 24,
+      "assumedToolCostMicros": 480000,
+      "wallTimeMs": 2.486,
+      "virtualSourceLatencyMs": 28800,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "cost_aware_script",
+      "family": "business_context_scope",
+      "trials": 8,
+      "correctReady": 5,
+      "unsupportedReady": 0,
+      "correctEscalations": 3,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 8,
+      "assumedToolCostMicros": 400000,
+      "wallTimeMs": 1.6660000000000004,
+      "virtualSourceLatencyMs": 96000,
+      "usefulCompletionRate": 0.625,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "cost_aware_script",
+      "family": "stale_or_corrected_source",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 12,
+      "assumedToolCostMicros": 200000,
+      "wallTimeMs": 1.768,
+      "virtualSourceLatencyMs": 22000,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "cost_aware_script",
+      "family": "clean_complete",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 0,
+      "assumedToolCostMicros": 0,
+      "wallTimeMs": 0.632,
+      "virtualSourceLatencyMs": 0,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "cost_aware_script",
+      "family": "mixed_pallet_partial_order",
+      "trials": 8,
+      "correctReady": 8,
+      "unsupportedReady": 0,
+      "correctEscalations": 0,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 16,
+      "assumedToolCostMicros": 400000,
+      "wallTimeMs": 2.375,
+      "virtualSourceLatencyMs": 33600,
+      "usefulCompletionRate": 1,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    },
+    {
+      "id": "cost_aware_script",
+      "family": "unresolvable_or_untrusted",
+      "trials": 8,
+      "correctReady": 4,
+      "unsupportedReady": 0,
+      "correctEscalations": 4,
+      "unnecessaryEscalations": 0,
+      "budgetLimited": 0,
+      "unauthorizedActions": 0,
+      "harnessStops": 0,
+      "missedMaterialFindings": 0,
+      "unsupportedFacts": 0,
+      "unsupportedExposureCents": 0,
+      "toolCalls": 16,
+      "assumedToolCostMicros": 320000,
+      "wallTimeMs": 1.44,
+      "virtualSourceLatencyMs": 24800,
+      "usefulCompletionRate": 0.5,
+      "modelCalls": 0,
+      "llmTrials": 0,
+      "humanMinutes": null,
+      "totalHandlingCostMicros": null
+    }
+  ],
+  "llm": {
+    "status": "NOT_IMPLEMENTED",
+    "trials": 0
+  },
+  "repeatMeaning": "Repeated scripted runs test determinism; they are not independent LLM reliability trials.",
+  "benefit": {
+    "status": "NOT_ESTABLISHED",
+    "totalHandlingCostKnown": false,
+    "reason": "Tool prices are authored assumptions. No LLM cost or human handling-time study exists; readiness is not an actual reserve decision."
+  },
+  "disclosure": "48 authored cases, shared normalized source claims and budgets. These are deterministic controllers, not AI agents or a learned parser. Source documents and evaluator truth stay server-side; controllers see only permitted observations. The in-process adapter is for trusted code, not a sandbox for arbitrary JavaScript. No payment, reserve change, external message or LLM call occurs.",
+  "freezeCheck": "MATCHED_FROZEN_MANIFEST"
+}

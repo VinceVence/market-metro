@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Supply Yard: a visual, local economy game exploring PayPal reserve decisions with Aftershock.">
+  <title>Supply Yard · Aftershock</title><link rel="stylesheet" href="/game/town.css">
+</head>
+<body>
+  <a class="skip" href="#commands">Skip to game controls</a>
+  <header class="topbar">
+    <div class="brand"><span class="town-mark" aria-hidden="true">SY</span><div><h1>Supply Yard</h1><p>AN AFTERSHOCK SUPPLY DEMO</p></div></div>
+    <nav aria-label="Supply Yard tools"><button id="compare-open">PayPal outcomes</button><button id="journal-open">Case journal <span id="journal-count">1</span></button><button id="assumptions-open">Assumptions</button></nav>
+    <span class="local-mode"><i></i>Scripted agents · local payments</span>
+  </header>
+  <div class="case-toolbar"><label for="case-select">SCENARIO</label><select id="case-select"></select><span class="clock" id="world-clock">T+00:00</span><button id="pause" aria-label="Pause operation animation">Pause</button><button id="speed" aria-label="Change town speed">1×</button><button id="reset">Restart</button></div>
+  <main>
+    <div class="impact-strip" aria-label="PayPal case summary">
+      <div><span>Already-paid orders</span><strong>$1,000 <small>2 offices · 4 kits</small></strong></div>
+      <div><span>Merchant funds left</span><strong id="backing-hud">$300 <small>$200 in reserve</small></strong></div>
+      <div class="impact"><span id="impact-label">PayPal exposure if cancelled</span><strong id="impact-value">$700 <small>assumed uncovered refunds</small></strong></div>
+      <button id="impact-explain" aria-label="Explain PayPal exposure">See the money →</button>
+    </div>
+    <div class="game-layout">
+      <section class="world-panel" aria-label="Interactive Supply Yard economy">
+        <div class="world-caption"><span id="world-status">READY TO REQUEST</span><span><span id="flow-status">4 paid kits · 4 backup kits</span></span><button id="focus-town" aria-pressed="false">Expand operation</button></div>
+        <ol id="flow-steps" class="flow-steps" aria-label="Supply flow progress"></ol>
+        <p id="flow-announcement" class="sr-only" role="status" aria-live="polite"></p>
+        <div id="world-frame" class="world-frame"><canvas id="town" width="960" height="600" role="img" aria-label="Supply Yard: warehouse racks, supply merchants, office buyers, investigators and a delivery van. Use the character buttons below for keyboard access."></canvas></div>
+        <div class="resident-bar" id="residents" aria-label="Select a merchant or agent"></div>
+      </section>
+      <aside class="inspector" aria-labelledby="inspector-title"><div class="mission-label"><span id="phase-label">01 / MARKET OPEN</span><span class="simulation-label">SIMULATED</span></div><div id="mission"></div><div id="evidence-strip" class="evidence-strip" hidden></div><div id="selected-person" class="selected-person"></div></aside>
+    </div>
+    <section id="commands" class="command-dock" aria-label="Game controls"><div class="objective"><span class="step-badge" id="step-badge">1</span><div><span class="kicker" id="objective-label">YOUR ROLE: PAYPAL RESERVE REVIEWER</span><p id="objective-text">Find a recovery path without hiding the downside.</p></div></div><div id="actions" class="command-actions"></div></section>
+    <p id="status-message" class="status-message" role="status" aria-live="polite"></p>
+    <div class="bottom-note"><span>Authored scenario · no LLM calls · no real money moves</span><button id="source-open">Why this matters to PayPal</button></div>
+  </main>
+  <dialog id="compare-dialog" class="wide-dialog" aria-labelledby="compare-title">
+    <div class="dialog-heading"><div><span class="kicker">PAYPAL’S FINANCIAL DECISION</span><h2 id="compare-title">Two choices. Different exposure.</h2></div><button class="close-dialog" aria-label="Close comparison">×</button></div>
+    <div id="decision-change" class="decision-change"></div><div class="comparison-options" id="comparison-options"></div><div class="net-benefit" id="net-benefit"></div>
+    <div class="assumption-controls">
+      <div><label for="success-rate">Assumed replacement success <strong id="success-label">85%</strong></label><input type="range" id="success-rate" min="0" max="100" step="1" value="85"><p>This probability is authored. The agents verify feasibility; they do not estimate it.</p></div>
+      <div class="money-input"><label for="future-volume">Future volume if recovery succeeds (USD)</label><input id="future-volume" type="number" min="0" max="10000" step="100" value="500"></div>
+      <div class="money-input"><label for="contribution-rate">Assumed net contribution (%)</label><input id="contribution-rate" type="number" min="0" max="10" step="0.1" value="2"></div>
+    </div>
+    <details class="math-details"><summary>Show the calculation and limits</summary><div id="calculation"></div></details>
+    <p class="dialog-note">All amounts are USD. Expected results are model outputs under these assumptions, not measured savings or PayPal pricing. Historic fees are sunk and excluded. Reserve release moves merchant-owned money; it is not PayPal spending.</p>
+  </dialog>
+  <dialog id="assumptions-dialog" aria-labelledby="assumptions-title">
+    <div class="dialog-heading"><div><span class="kicker">THE RULES OF THIS EXPERIMENT</span><h2 id="assumptions-title">Every material assumption is visible.</h2></div><button class="close-dialog" aria-label="Close assumptions">×</button></div>
+    <ol class="assumption-list">
+      <li><b>Payments already happened.</b> Two offices have four previously paid supply-kit orders of $250 each. The payments are captured and settled. This cohort cannot be cancelled by voiding authorizations.</li>
+      <li><b>Only $300 is recoverable.</b> The merchant already spent $700, which is assumed unrecoverable. $100 available cash and $200 reserve remain. No other assets or later debt recovery are assumed.</li>
+      <li><b>PayPal covers the gap.</b> For this eligible-refund scenario, assume PayPal makes customers whole and bears any amount that cannot be recovered from the merchant. This is a scenario assumption, not a blanket description of PayPal policy.</li>
+      <li><b>The replacement costs $160.</b> Four units, $40 each, one upfront batch. Releasing $60 lets Mara pay it and leaves $140 backing any later refund. No other supplier, credit, or financing is available within the deadline.</li>
+      <li><b>Success is uncertain.</b> The adjustable default is 85%. Failure means all four orders require full refunds and the replacement payment cannot be recovered. Success means all four are delivered with no additional returns during the modeled horizon.</li>
+      <li><b>Future benefit is separate.</b> Conditional on success, assume $500 of new volume over 30 days and a 2% net contribution rate. These are authored inputs, not PayPal prices or booked revenue.</li>
+      <li><b>Authority stays bounded.</b> The authored demo cap is a $60 release and $900 maximum uncovered refund loss in the failure branch. Expected uncovered refunds must also decrease; speculative future contribution cannot override that rule. A simulated reviewer decides. Fresh stock and evidence are checked again before execution.</li>
+      <li><b>The operation is local.</b> Agents, reserve controls, refunds, and receipts are scripted simulations. No public PayPal reserve-override API is connected. Native Sandbox payment integration comes later.</li>
+      <li><b>Basic supply and demand.</b> Each office starts with two kits and uses one every eight simulation seconds after play starts, stopping when a branch executes. Request slips replay existing paid orders. The van moves replacement stock through pickup, packing and office arrivals. Travel time is compressed for the demo; it does not forecast real delivery timing. No extra payments are created.</li>
+    </ol>
+  </dialog>
+  <dialog id="journal-dialog" aria-labelledby="journal-title"><div class="dialog-heading"><div><span class="kicker">OBSERVATIONS → DECISIONS → MONEY</span><h2 id="journal-title">Case journal</h2></div><button class="close-dialog" aria-label="Close journal">×</button></div><div class="journal-actions"><button id="export-run">Export case JSON</button><span>Local receipts are labeled LOCAL-*</span></div><div id="journal"></div></dialog>
+  <dialog id="source-dialog" aria-labelledby="source-title">
+    <div class="dialog-heading"><div><span class="kicker">WHY PAYPAL WOULD USE THIS</span><h2 id="source-title">Protect customers. Investigate the recovery.</h2></div><button class="close-dialog" aria-label="Close explanation">×</button></div>
+    <p class="source-lead">The intended user is a PayPal merchant-reserve reviewer. Aftershock investigates whether changing a reserve could reduce the amount PayPal ultimately has to cover when a merchant cannot fulfill already-paid orders.</p>
+    <div class="source-flow"><b>Unverified supplier</b><span>→</span><b>Agent evidence</b><span>→</span><b>Reviewed reserve choice</b><span>→</span><b>Refund exposure</b></div>
+    <p>The supply operation makes the causal mechanism visible: money releases buying capacity; stock and supplier performance determine whether that capacity becomes fulfilled orders. The comparison includes the extra loss if the attempt fails.</p>
+    <p>The user controls the economic assumptions. Evidence can show that the route exists; it cannot establish the invented success probability or prove real business savings. The current scripted investigation illustrates the intended workflow and does not demonstrate an LLM advantage.</p>
+    <div class="source-links"><a href="/lab.html" target="_blank" rel="noopener">Original decision lab ↗</a><a href="/figures/01-system-architecture.svg" target="_blank" rel="noopener">System architecture ↗</a><a href="https://www.paypal.com/us/brc/article/account-reserves" target="_blank" rel="noopener">PayPal reserve guidance ↗</a></div>
+    <p class="dialog-note">Supply Yard uses new supply-themed artwork: warehouse racks, packing desks, printers, staff and delivery vehicles. No village or city simulation is running.</p>
+  </dialog>
+  <script type="module" src="/game/app.mjs"></script>
+</body>
+</html>

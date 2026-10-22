@@ -1,0 +1,58 @@
+{
+  "schema": "supply-yard-llm-pilot-v1",
+  "projectId": "supply-yard-pilot-261021",
+  "model": "gemini-3.1-flash-lite",
+  "region": "global",
+  "view": "raw",
+  "promptHash": "5cad0e23a203ebeab235974b5ac8eec726ddb45c78ada4cab9bfb2916903a4b2",
+  "suiteDigest": "0904dd19dc40c6685e51d752164ee6ddba372fa9bb5228f3f3c23fe401a488ca",
+  "caseIds": [
+    "CASE-1ef2a6730c5d",
+    "CASE-20173059c2d8",
+    "CASE-244c00e987f3",
+    "CASE-3d9f8196313c",
+    "CASE-40af39fd3b0e",
+    "CASE-4be47432c694",
+    "CASE-1d4f216624fa",
+    "CASE-2223ad41f795",
+    "CASE-090273a88f0c",
+    "CASE-23c212e89b5b"
+  ],
+  "split": "development",
+  "repeats": 2,
+  "controllers": [
+    "fixed_llm_reader",
+    "adaptive_llm"
+  ],
+  "limits": {
+    "maxCalls": 8,
+    "maxTurns": 10,
+    "maxCostMicros": 300000,
+    "decisionTimeoutMs": 120000
+  },
+  "modelLimits": {
+    "lifetimeMicros": 8000000,
+    "runMicros": 1000000,
+    "reservationMicros": 30000,
+    "maxInputBytes": 32768,
+    "maxOutputTokens": 2048,
+    "maxCallsPerTrial": 14
+  },
+  "pricing": {
+    "inputMicrosPerToken": 0.25,
+    "outputMicrosPerToken": 1.5,
+    "verifiedAt": "2026-10-21",
+    "validThrough": "2026-11-12",
+    "url": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+    "basis": "Global standard text list price; includes thinking tokens; ignores cache discounts. Token-based estimate, not a billing invoice."
+  },
+  "semanticControl": "Both arms receive identical cached per-document LLM extractions after retrieving that document. Each arm is costed as if it paid for every reader call. The cache is private and cannot disclose unqueried documents.",
+  "decision": "Do not claim agent benefit unless quality and useful coverage match the fixed-reader arm and equivalent machine cost falls. Human time and production PayPal benefit remain unmeasured.",
+  "limitations": [
+    "Ten known development cases; no independent validation or holdout claim.",
+    "Two trials per case are a pilot, not a reliability estimate.",
+    "Fixed normalized reference uses authored extraction and is not an end-to-end competitor.",
+    "Physical wall times are not fair latency comparisons because the second arm reuses reader outputs."
+  ],
+  "implementationHash": "2613de9c4b31b8274867a5eb6937180f352b703aebf71433fcaa43b7ab4bb1bb"
+}

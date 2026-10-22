@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Supply Yard · PayPal sandbox</title>
+  <meta name="description" content="PayPal sandbox checkout and captured payment evidence for Supply Yard's scripted reserve review.">
+  <link rel="stylesheet" href="/game/sandbox.css">
+</head>
+<body>
+  <a class="skip" href="#checkout">Skip to sandbox checkout</a>
+  <header class="sandbox-header">
+    <a class="sandbox-brand" href="/"><span>SY</span><div><b>Supply Yard</b><small>AFTERSHOCK · PAYMENT EVIDENCE</small></div></a>
+    <nav aria-label="Supply Yard modes"><a href="/">Economy</a><a href="/comparison.html">Fixed vs agents</a><a href="/sandbox.html" aria-current="page">PayPal sandbox</a></nav>
+  </header>
+  <main class="sandbox-main">
+    <div class="page-heading"><span class="eyebrow">FROM CHECKOUT TO A REVIEWABLE RECEIPT</span><h1>Give the simulation a real test payment.</h1><p>Approve a sandbox order, verify its capture, then use the receipt in a scripted reserve review.</p></div>
+    <div class="connection-bar"><div><span id="connection-dot" class="connection-dot"></span><b id="connection-state">Checking configuration…</b><small id="connection-detail">PayPal sandbox only · no real money</small></div><button id="connect" class="secondary" data-action disabled>Test connection</button></div>
+    <details id="setup" class="setup"><summary>Connect your PayPal sandbox app</summary>
+      <ol><li>Open <a href="https://developer.paypal.com/dashboard/" target="_blank" rel="noopener noreferrer">PayPal Developer Dashboard</a>. In <b>Apps &amp; Credentials</b>, select <b>Sandbox</b> and create an app named <b>Supply Yard</b>.</li>
+      <li>Copy <code>.env.example</code> to <code>.env</code> in this project. Set <code>PAYPAL_CLIENT_ID</code> and <code>PAYPAL_CLIENT_SECRET</code> using that sandbox app. Keep the secret in this local file.</li>
+      <li>Restart <code>npm run dev</code>, reload this page, and test the connection.</li>
+      <li>For buyer approval, use a <b>Personal sandbox account</b> from the dashboard’s testing tools. It must be different from the app’s Business sandbox account.</li></ol>
+      <p>The secret and OAuth token stay on the local server. The payment API host is fixed to <code>api-m.sandbox.paypal.com</code>.</p>
+    </details>
+    <p id="notice" role="status" aria-live="polite"></p>
+    <section class="payment-workbench" aria-label="Sandbox checkout and payment receipt">
+      <article class="checkout-sheet" id="checkout">
+        <span class="step-label">01 · BUYER APPROVAL &amp; CAPTURE</span>
+        <h2>An office restock order.</h2>
+        <p class="merchant-name">Paperbridge · fictional scenario merchant<br><small>Payment recipient: your configured sandbox business</small></p>
+        <div class="stock-order"><div class="stock-drawing" aria-hidden="true"><span></span><span></span><span></span></div><div><b>Office restock kit</b><p>Paper, stationery &amp; packing supplies</p><small>$10.00 USD per kit · test funds</small></div></div>
+        <form id="checkout-form">
+          <div class="quantity-row"><label for="quantity">Quantity</label><input id="quantity" type="number" min="1" max="10" step="1" value="10" required><strong id="cart-total">$100.00</strong></div>
+          <button id="create" class="primary" type="submit" data-action disabled>Create sandbox order</button>
+        </form>
+        <div id="approval-actions" hidden><a id="approve-link" class="paypal-approval" href="#" target="_blank" rel="noopener noreferrer">Approve on PayPal sandbox ↗</a><p>Opens a separate tab. Use the Personal test buyer; this page checks approval and captures automatically.</p></div>
+        <dl class="order-meta"><div><dt>PayPal order</dt><dd id="order-id">Not created</dd></div><div><dt>Payment state</dt><dd id="payment-state">Awaiting connection</dd></div></dl>
+        <div class="order-actions"><button id="refresh" class="plain-button" data-action disabled>Verify with PayPal</button><button id="capture" class="secondary" data-action hidden>Capture approved payment</button><button id="new-order" class="plain-button" data-action hidden>New checkout</button></div>
+        <details id="history"><summary>Previous sandbox checkouts</summary><div id="order-history"><p>No checkouts yet.</p></div></details>
+      </article>
+      <article class="receipt-sheet" aria-labelledby="receipt-heading">
+        <div class="receipt-header"><span class="step-label">02 · PAYPAL PAYMENT EVIDENCE</span><span id="receipt-badge" class="receipt-badge">No capture yet</span></div>
+        <h2 id="receipt-heading">The receipt is the source.</h2>
+        <p class="receipt-intro">These values appear only after the server reads them from PayPal sandbox.</p>
+        <dl class="receipt-totals"><div><dt>Captured gross</dt><dd id="gross">—</dd></div><div><dt>PayPal fee</dt><dd id="fee">—</dd></div><div class="net-line"><dt>Net to test merchant</dt><dd id="net">—</dd></div></dl>
+        <dl class="receipt-meta"><div><dt>Capture ID</dt><dd id="capture-id">Waiting for buyer approval</dd></div><div><dt>Provider capture status</dt><dd id="capture-status">—</dd></div><div><dt>Last verified with PayPal</dt><dd id="verified-at">—</dd></div></dl>
+        <p class="source-note">Payment evidence: PayPal sandbox.<br>Delivery evidence and reserve policy: generated locally.</p>
+        <button id="export" class="plain-button" data-action disabled>Export evidence JSON</button>
+      </article>
+    </section>
+    <section id="review" class="review-section" aria-labelledby="review-heading">
+      <div class="review-heading"><div><span class="step-label">03 · SCRIPTED INVESTIGATION</span><h2 id="review-heading">What changes when delivery is verified?</h2></div><span class="simulation-badge">Simulated reserve · no LLM</span></div>
+      <p id="review-gate">Capture a payment and verify it with PayPal to unlock the review.</p>
+      <div class="review-controls"><label for="evidence-scenario">Generated delivery evidence<select id="evidence-scenario"><option value="mixed">60% of kits confirmed delivered</option><option value="unresolved">No delivery confirmations</option></select></label><button id="investigate" class="secondary" data-action disabled>Run scripted investigation</button></div>
+      <div id="review-result" hidden>
+        <ol id="investigation-log" class="investigation-log"></ol>
+        <div class="review-comparison"><div><span>Before evidence review</span><strong id="before-target">—</strong><small>Reserve target: unresolved gross</small></div><div><span>After evidence review</span><strong id="after-target">—</strong><small>100% unresolved + 20% delivered gross</small></div><div><span>Available after simulated approval</span><strong id="available">—</strong><small>Based on PayPal’s reported net proceeds</small></div></div>
+        <div class="review-decision"><p id="decision-text">A reviewer must approve the simulated change.</p><button id="approve-review" class="primary" data-action>Approve simulated review</button></div>
+        <details><summary>Inspect generated evidence</summary><div id="delivery-evidence" class="delivery-evidence"></div></details>
+      </div>
+      <p class="review-boundary">The 20% buffer is an authored demo rule. Reserve targets are capped by net proceeds when calculating the simulated amount held. No reserve is set or released in PayPal, and no savings or agent advantage is claimed.</p>
+    </section>
+  </main>
+  <script type="module" src="/game/sandbox-app.mjs"></script>
+</body>
+</html>

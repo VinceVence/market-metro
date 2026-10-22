@@ -1,0 +1,66 @@
+{
+  "schema": "supply-yard-manual-decision-review-v1",
+  "inputHash": "8f629484318ed84137ed97a05892ba9553fdbe0f153f437c444bd020062d9a88",
+  "reviewer": "Current Codex chat assistant; manual review, not an automated app call",
+  "mode": "ADVISORY_SIMULATION_ONLY",
+  "applied": false,
+  "routineCalculation": {
+    "owner": "Deterministic code; no LLM needed",
+    "verifiedGrossCents": 6000,
+    "unresolvedGrossCents": 4000,
+    "authoredBufferCents": 1200,
+    "heldCents": 5200,
+    "releaseCents": 4430
+  },
+  "recommendation": {
+    "underStatedDemoPolicy": "The completed evidence supports the existing rule calculation: retain 5200 cents and propose releasing 4430 cents, subject to the human reviewer.",
+    "extraLiquidityException": "Not supported by this packet. Do not release additional funds solely because cash would help restocking.",
+    "realPayPalReserveRate": null
+  },
+  "reasoning": [
+    {
+      "point": "Six units have matching delivery proof; four remain unresolved. Do not equate missing proof with a predicted permanent failure.",
+      "evidenceRefs": [
+        "evidenceCounts",
+        "observedEvidence:SIM-S1-M001-U1..U6",
+        "observedEvidence:SIM-S1-M001-U7..U10"
+      ]
+    },
+    {
+      "point": "The rule protects 4000 cents of unresolved gross plus an authored 1200-cent buffer. The 20% buffer is a demo assumption, not a measured reserve requirement.",
+      "evidenceRefs": [
+        "policy"
+      ]
+    },
+    {
+      "point": "Releasing 4430 cents increases spendable merchant cash from 1000 to 5430 cents. Cash plus reserve stays 10630 cents immediately; changing restrictions does not itself create a realized PayPal loss. Subsequent spending and recoverability could change exposure.",
+      "evidenceRefs": [
+        "merchant",
+        "options"
+      ]
+    },
+    {
+      "point": "The 4800-cent reserve-only all-units-refund gap after release is a stress calculation excluding merchant cash and recoveries. It is not expected PayPal loss.",
+      "evidenceRefs": [
+        "options:balanced",
+        "limitations"
+      ]
+    }
+  ],
+  "beforeConsideringAnException": [
+    "Provide the applicable reserve agreement and authority for an exception.",
+    "Resolve the four outstanding units or establish their cancellation/refund obligations.",
+    "Supply evidence of remaining account-level liabilities, accessible backing and a justified risk estimate; do not use cash need as proof of solvency."
+  ],
+  "whatWouldChangeTheView": "New independent fulfillment or refund evidence changes the deterministic calculation. A different documented reserve policy or substantiated risk/obligation context requires a new review; the model should not invent a replacement percentage.",
+  "automationBoundary": {
+    "routineCases": "Keep gathering, validation, arithmetic and policy calculation in code.",
+    "judgmentCases": "Optional manually requested review of contradictions, policy applicability or proposed exceptions after the dossier is assembled.",
+    "approval": "Human approval remains required; no payment or reserve action was executed."
+  },
+  "measurement": {
+    "additionalGeminiCalls": 0,
+    "codexUsage": "Uses this conversation usage; not metered by the GCP ledger.",
+    "qualityClaim": "One manual design example. Not an independent benchmark or proof that an LLM is necessary."
+  }
+}

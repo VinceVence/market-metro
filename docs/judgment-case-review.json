@@ -1,0 +1,89 @@
+{
+  "schema": "supply-yard-manual-judgment-review-v1",
+  "caseId": "JUDGMENT-001",
+  "inputHash": "725deb4663eae4512a90552fd7bca894586110ec09479d23a18b693491c40c99",
+  "provenance": "Manual recommendation by the assistant in the current chat, using the complete authored hypothetical and deterministic calculations. Not an independent benchmark, production underwriting decision, or validated forecast.",
+  "manualReview": true,
+  "externalModelCalls": 0,
+  "applied": false,
+  "decision": {
+    "recommendedOption": "SMALL_FLEX",
+    "status": "CONDITIONAL_RECOMMENDATION_FOR_HUMAN_APPROVAL",
+    "currency": "USD",
+    "maximumControlledPaymentCents": 84000,
+    "beneficiary": "The verified courier in the hypothetical invoice",
+    "dispatchOrderIds": ["S-01", "S-02", "S-03", "S-04", "S-05", "S-06", "S-07", "S-08", "S-09", "S-10", "S-11", "S-12", "S-13", "S-14", "S-15", "S-16", "S-17", "S-18", "S-19", "S-20", "S-21", "S-22", "S-23", "S-24", "S-25", "S-26", "S-27", "S-28"],
+    "cancelledRefundsCents": 200000,
+    "additionalUnshippedFridayRefundsCents": 120000,
+    "totalImmediateRefundsCents": 320000,
+    "heldAfterShippingBeforeRefundsCents": 316000,
+    "immediateProviderFundingGapCents": 4000,
+    "unrestrictedMerchantReleaseCents": 0,
+    "generalReserveRateChange": null,
+    "executionConditions": [
+      "A human with authority accepts the modeled downside and approves the recommendation.",
+      "The hypothetical restricted-payment control is enforceable, and the $2,000 cancellation refund allocation remains protected.",
+      "Pay only against the fresh matching pickup scan for the 28 Saturday orders, unchanged invoice and beneficiary, before Wednesday 14:00 UTC. This is an execution safeguard, not a claim that further investigation resolves the uncertainty.",
+      "Refund the 20 cancelled and 12 deliberately unshipped Friday orders promptly; explicitly fund the $40 gap instead of silently deferring those refunds.",
+      "If an execution condition fails before payment, make no courier payment and follow the hold/refund path. If arrival misses Saturday, refund the remaining 28 orders as modeled."
+    ]
+  },
+  "decisionBasis": [
+    {
+      "finding": "Holding does not avoid funding risk in this case: without funding, the stipulated lack of cash and alternatives causes all 60 refunds and a $2,000 gap.",
+      "sourceIds": ["L1", "B1", "Q1"],
+      "dependsOn": "The explicit no-alternative-funding and short-horizon assumptions."
+    },
+    {
+      "finding": "The route-specific observations support considering a Saturday attempt more strongly than accepting the general Friday promise. Five of six comparable batches met 72 hours, but only two met 48 hours. Those counts do not supply calibrated probabilities.",
+      "sourceIds": ["Q2", "R1", "H1"],
+      "judgment": "I judge Saturday completion credible enough to recommend the limited attempt, subject to human acceptance of the downside. This is a qualitative judgment, not a statistically established success rate."
+    },
+    {
+      "finding": "The small flexible plan beats holding in expected funding-gap terms only if Saturday arrival probability exceeds 30%. The recommendation depends on judging that threshold plausible; there is no supplied probability or guarantee.",
+      "sourceIds": ["L1", "B1", "Q1", "R1"],
+      "calculationArtifact": "judgment-case-calculations.json"
+    },
+    {
+      "finding": "The large van buys a chance to serve 12 time-critical buyers, but costs $360 more. Under the common arrival-distribution assumption, it has a lower expected provider gap than the small flexible plan only if Friday arrival probability exceeds 90%. The 94% statistic covers other routes and does not establish that probability for the disrupted hub.",
+      "sourceIds": ["B1", "Q1", "Q2", "R1"],
+      "limitation": "This comparison does not price the extra utility of serving Friday buyers. A human may explicitly choose different priorities."
+    },
+    {
+      "finding": "Substituting Friday buyers into the same-price small van does not improve the provider funding gap in any arrival state and worsens it on Saturday. The flexible cohort is financially preferable under the stated objective, although this sacrifices the Friday buyers' chance of delivery.",
+      "sourceIds": ["B1", "Q1"],
+      "limitation": "This is a choice of priorities, not an assertion that Friday buyers matter less. They receive full refunds."
+    }
+  ],
+  "exposureDisclosure": {
+    "baselineProviderGapCents": 200000,
+    "recommendedOnTimeProviderGapCents": 4000,
+    "recommendedLateProviderGapCents": 284000,
+    "conditionalGapReductionIfOnTimeCents": 196000,
+    "incrementalGapIfLateCents": 84000,
+    "incrementalPolicyCapCents": 150000,
+    "expectedSavingsCents": null,
+    "historicalFeeBenefitIncrementCents": 0,
+    "claim": "These are conditional short-horizon funding gaps, not measured PayPal losses, profit, or realized savings. Shipping is funded from merchant money and is not charged twice as an additional provider expense."
+  },
+  "counterarguments": [
+    "A reviewer unwilling to rely on six potentially correlated route observations could choose hold. That limits the worst-case gap to $2,000 instead of $2,840.",
+    "A reviewer placing greater value on the Friday buyers' delivery opportunity could choose the large van within the same hard cap. The policy does not specify that value.",
+    "The scenario deliberately assumes there are no timely alternatives and no recoveries in the modeled horizon. Real alternatives or recoveries could change the recommendation."
+  ],
+  "reversalConditions": [
+    "Controlled payment or cancellation-refund protection is unavailable.",
+    "A fresh fact makes Saturday completion insufficiently credible, including a hub closure or an inability to depart before cutoff.",
+    "The human's risk mandate requires minimizing the worst-case funding gap rather than balancing downside against likely fulfillment.",
+    "An enforceable Friday guarantee, meaningful carrier compensation, or credible route-specific forecast materially changes the large-van comparison."
+  ],
+  "roleBoundary": "The fixed workflow gathers, reconciles and calculates. This review weighs relevance of evidence and competing policy aims. An experienced human can do it; an optimizer supplied with agreed probabilities and utilities can also select a plan. This example does not establish that an LLM is necessary or that an autonomous agent outperforms the fixed workflow. The plausible LLM role is reviewable decision support for exceptions, not authoritative policy creation.",
+  "evaluation": {
+    "goldAnswerAvailable": false,
+    "realizedOutcomeAvailable": false,
+    "qualityScore": null,
+    "llmSuperiorityClaim": false,
+    "additionalCloudInference": false,
+    "realPaymentOrReserveMutation": false
+  }
+}

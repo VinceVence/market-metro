@@ -1,0 +1,106 @@
+{
+  "schema": "supply-yard-llm-pilot-v3",
+  "projectId": "supply-yard-pilot-261021",
+  "model": "gemini-3.1-pro-preview",
+  "region": "global",
+  "view": "raw",
+  "promptHash": "3bb9da683ad803a6e4ce890e1eb4b306ce4e67f5f76386e963fead8a05b441a9",
+  "suiteDigest": "0904dd19dc40c6685e51d752164ee6ddba372fa9bb5228f3f3c23fe401a488ca",
+  "caseIds": [
+    "CASE-1ef2a6730c5d",
+    "CASE-20173059c2d8",
+    "CASE-244c00e987f3",
+    "CASE-3d9f8196313c",
+    "CASE-40af39fd3b0e",
+    "CASE-4be47432c694",
+    "CASE-1d4f216624fa",
+    "CASE-2223ad41f795",
+    "CASE-090273a88f0c",
+    "CASE-23c212e89b5b"
+  ],
+  "split": "development",
+  "repeats": 2,
+  "controllers": [
+    "fixed_llm_reader",
+    "adaptive_llm"
+  ],
+  "limits": {
+    "maxCalls": 8,
+    "maxTurns": 10,
+    "maxCostMicros": 300000,
+    "decisionTimeoutMs": 120000
+  },
+  "modelLimits": {
+    "lifetimeMicros": 8000000,
+    "runMicros": 5000000,
+    "reservationMicros": 150000,
+    "maxInputBytes": 32768,
+    "maxOutputTokens": 4096,
+    "maxCallsPerTrial": 14,
+    "minRequestGapMs": 12000
+  },
+  "pricing": {
+    "inputMicrosPerToken": 2,
+    "outputMicrosPerToken": 12,
+    "verifiedAt": "2026-10-21",
+    "validThrough": "2026-11-12",
+    "url": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+    "basis": "Gemini 3.1 Pro global standard text list price below 200k input tokens; includes thinking tokens; ignores cache discounts. Token-based estimate, not a billing invoice."
+  },
+  "readerProbe": {
+    "order": {
+      "id": "PO-PROBE",
+      "merchantId": "M-PROBE",
+      "units": 17,
+      "createdAt": "2026-02-02T12:00:00Z"
+    },
+    "documents": [
+      {
+        "id": "PROBE-ALLOCATION",
+        "actor": "warehouse",
+        "title": "Allocation ledger",
+        "asOf": "2026-02-03T12:00:00Z",
+        "text": "Pallet Z9: 11 kits for PO-PROBE; 6 kits for another order. The remaining order units were not loaded."
+      },
+      {
+        "id": "PROBE-OLD",
+        "actor": "carrier",
+        "title": "Earlier shipment-status record",
+        "asOf": "2026-02-01T12:00:00Z",
+        "text": "This archived shipment-status record predates the current purchase order. No quantity is shown."
+      },
+      {
+        "id": "PROBE-CANCEL",
+        "actor": "carrier",
+        "title": "Final carrier status",
+        "asOf": "2026-02-03T12:00:00Z",
+        "text": "Replacement shipment cancelled before acceptance. No units delivered against PO-PROBE."
+      }
+    ]
+  },
+  "thinking": {
+    "reader": "LOW",
+    "planner": "MEDIUM"
+  },
+  "changes": [
+    "Stronger Gemini 3.1 Pro model for both methods.",
+    "Typed nullable fields, per-document supporting quotes, explicit partial/stale/cancelled records and allocation rows.",
+    "Batch newly observed documents; deduplicate equivalent reader costs by unique provider receipt.",
+    "Common interpreter refuses missing quantities/status/years instead of treating partial records as answers."
+  ],
+  "unchanged": [
+    "Exact V2 case IDs, raw evidence, private oracle, source tools/prices, limits and repetition count.",
+    "Fixed source-routing policy, grader and planner prompt."
+  ],
+  "semanticControl": "Both arms receive identical per-document extractions only after observing that document. New documents may be read in a batch. Each arm is costed once per unique reader receipt, including shared reuse. Cache keys include model and prompt version. Hidden records never enter the cache until queried.",
+  "decision": "Do not claim agent benefit unless quality and useful coverage match the fixed-reader arm and equivalent machine cost falls. Human time and production PayPal benefit remain unmeasured.",
+  "limitations": [
+    "Ten known development cases; no independent validation or holdout claim.",
+    "Two trials per case are a pilot, not a reliability estimate.",
+    "Reader fixes were motivated by the earlier observed development failures; improvement is not independent generalization.",
+    "The reader and model changed together; cross-version improvement cannot be assigned to either alone.",
+    "Fixed normalized reference uses authored extraction and is not an end-to-end competitor.",
+    "Physical wall times are not fair latency comparisons because the second arm reuses reader outputs."
+  ],
+  "implementationHash": "493cf1159df88c009721993268717fc07c2a658ebefbd6c4c3f3e320ee275e2f"
+}

@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "purpose": "Compare current-chat manual LLM reserve recommendations with competent fixed decision software after evidence gathering is complete.",
+  "caseCount": 16,
+  "caseComposition": { "accepted_point_forecast": 10, "explicit_robust_mandate": 4, "unresolved_mandate_or_forecast": 2 },
+  "primaryQuestion": "Does the manual reviewer make fewer policy, arithmetic or decision errors, or achieve lower exposure under the supplied mandate, than fixed rules given identical packets?",
+  "freezeProcedure": "Create and validate all packets; freeze code, cases, contract and tests; read packets and commit one manual review per case; only then emit fixed decisions and grades. No edits to the frozen inputs or recommendations after scoring.",
+  "baseline": {
+    "name": "fixed_policy_optimizer",
+    "method": "Apply identical hard constraints to each supplied plan. For accepted point forecasts minimize expected funding gap; for explicit robust mandates minimize worst expected gap or worst regret across the supplied convex uncertainty set. Escalate unresolved authority, objective or forecast. No per-case ID rules.",
+    "tieBreak": "Lower worst-state gap, then smaller payment, then plan ID. Equal primary objective is not scored as a mistake.",
+    "scope": "This strong baseline is deliberately an exact solver for the formalized part. A tie establishes no added decision value on these inputs; it does not settle the separate question of unstructured interpretation or omitted real-world factors."
+  },
+  "manualMethod": "The current assistant reviews each packet here and writes recommendations directly. No model API, subprocess LLM, subagent, or script copying baseline decisions into the manual submission.",
+  "sharedInputs": "All completed normalized evidence, current policy, controls, buyer cohorts, financial state, accepted forecasts or uncertainty sets, all available plans and deterministic payoff tables. No acquisition tools or hidden evidence.",
+  "scoring": {
+    "critical": ["hard-policy violations", "unsupported authority or forecast assumptions", "incorrect payment amount", "incorrect worst-case funding claim"],
+    "decision": "For determinate mandates compare the recommendation's primary objective with the best eligible plan. Differences of at most 0.01 cents count as equal. Count unnecessary escalation separately.",
+    "uncertainty": "Only explicitly authorized uncertainty objectives are numerically scored. Unresolved cases require escalation and receive no fictional loss estimate. Narrative persuasiveness and agreement with the author's preferred prose are not graded.",
+    "cost": "Report expected funding gaps only for cases with an accepted point forecast and numeric decision. Report robust objectives separately per case. Do not mix unlike objectives into a total dollar benefit. Additional external model API spend must be zero; Codex usage and human time remain unpriced.",
+    "winRequirement": "No increase in critical errors or unnecessary escalations, plus at least one strictly better policy-compliant decision against the strongest baseline. A tie or improvement only in prose is not a decision-quality win."
+  },
+  "limitations": [
+    "Same assistant authors cases and reviews them. This is a frozen self-authored synthetic comparison, not independent blind evidence or a production accuracy estimate.",
+    "Probabilities, mandates, quotes, controls and liability assumptions are invented for evaluation. No real PayPal policy or liability is asserted.",
+    "One manual submission, no independent repeats, no held-out case families, no expert labels and no measured human review time.",
+    "When all relevant facts, outcomes and objectives are formalized, an exact fixed solver cannot be beaten on its stated objective. This is a legitimate strong control for testing whether the proposed LLM role adds anything beyond that solver.",
+    "The case with an unspecified probability tests recognition of the missing premise, not whether an LLM can invent a superior calibrated forecast."
+  ],
+  "executionRestrictions": ["No Gemini or other external model API calls", "No payment or reserve mutations", "No GCP changes", "No APAC reads or edits", "No subagents"]
+}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Matched Supply Yard reserve replay: full hold versus scripted evidence review, with explicit PayPal contribution accounting."><title>Supply Yard · Full hold vs reviewed release</title><link rel="stylesheet" href="/game/comparison.css"></head>
+<body class="evidence-comparison">
+  <a class="skip" href="#replay-controls">Skip to replay controls</a>
+  <header class="compare-header"><a class="compare-brand" href="/"><span>SY</span><div><b>Supply Yard</b><small>AFTERSHOCK · SAME ECONOMY, TWO POLICIES</small></div></a><nav aria-label="Supply Yard modes"><a href="/">Single economy</a><a href="/evidence-comparison.html" aria-current="page">Full hold vs reviewed</a><a href="#agentic">Is this agentic?</a></nav><span class="scripted-badge">Scripted investigation · no LLM</span></header>
+  <main class="paired-main">
+    <section class="paired-intro"><div><span class="eyebrow">SAME ORDERS · SAME SHOCKS · SEPARATE WALLETS</span><h1>Does releasing the right funds pay off?</h1><p>Follow deliveries and PayPal’s modeled net contribution across all three shifts.</p></div><button id="assumptions-open" class="plain-button">Edit cost assumptions ↓</button></section>
+    <p id="receipt-status" class="receipt-notice" role="status">Loading the saved receipt from this project…</p>
+    <div class="shared-strip"><span id="shared-settings"></span><span id="matching-status">Matched inputs · independent ledgers</span></div>
+    <section class="verdict" id="verdict-box" aria-label="Modeled PayPal net benefit"><div><span id="verdict-label">Reviewed release minus full hold</span><strong id="net-benefit">Ready to compare</strong></div><p id="verdict-detail">Fees − processing cost − provider refund shortfall − review cost. Freed merchant money is not PayPal profit.</p></section>
+    <section id="replay-controls" class="replay-controls" aria-label="Shared replay controls"><div><b id="replay-status">36 merchants · 3 shared shifts</b><span>Start commits both simulated policies; the full run requires no checkout or per-shift approval.</span></div><div class="replay-buttons"><button id="pause" class="plain-button" disabled>Pause both</button><button id="speed" class="plain-button">2×</button><button id="step" class="secondary" disabled>Step one shift</button><button id="run" class="primary" disabled>Loading receipt…</button></div></section>
+    <div class="shared-shock" id="shared-shock"></div>
+    <section class="paired-worlds" aria-label="Side-by-side receipt-linked economies">
+      <article class="world-card fixed" aria-labelledby="fixed-title">
+        <header><div><span class="policy-label" id="reference-label">REFERENCE · NO DISCRETIONARY RELEASE</span><h2 id="fixed-title">Full hold</h2></div><span class="world-state" id="fixed-state">Ready</span></header>
+        <p class="policy-definition" id="fixed-definition">Keep net proceeds held at review; use merchant funds for refunds. Cash constrains the next restock.</p>
+        <div class="merchant-grid" id="fixed-merchants" aria-label="Reference merchants"></div><canvas id="fixed-flow" class="flow-canvas" aria-label="Reference deliveries"></canvas>
+        <p class="investigation-caption" id="fixed-investigation"></p>
+        <div class="world-net"><span>Modeled PayPal net contribution</span><strong id="fixed-net">$0.00</strong></div><dl id="fixed-stats" class="world-stats"></dl>
+      </article>
+      <article class="world-card agents" aria-labelledby="agents-title">
+        <header><div><span class="policy-label">SCRIPTED INVESTIGATOR · HUMAN POLICY PRECOMMITTED</span><h2 id="agents-title">Agent-reviewed release</h2></div><span class="world-state" id="agents-state">Ready</span></header>
+        <p class="policy-definition">Retrieve missing proof; retain unverified gross + a 20% verified buffer. Release only the remainder.</p>
+        <div class="merchant-grid" id="agents-merchants" aria-label="Reviewed merchants"></div><canvas id="agents-flow" class="flow-canvas" aria-label="Reviewed deliveries"></canvas>
+        <p class="investigation-caption" id="agents-investigation"></p>
+        <div class="world-net"><span>Modeled PayPal net contribution</span><strong id="agents-net">$0.00</strong></div><dl id="agents-stats" class="world-stats"></dl>
+      </article>
+    </section>
+    <div class="merchant-legend"><span><i class="open-key"></i>Full delivery this shift</span><span><i class="pause-key"></i>Partial or failed delivery</span><span>One sprite = one merchant · select to compare wallets</span></div>
+    <p id="service-result" class="accounting-note"></p><p id="error" role="status"></p><p id="live-result" class="sr-only" aria-live="polite"></p>
+    <section class="round-section" aria-labelledby="round-title"><div class="section-label"><h2 id="round-title">All three shifts, matched</h2><button id="export" class="plain-button" disabled>Export paired evidence</button></div><p class="table-hint">Scroll sideways. Every pair is reference / reviewed.</p><div class="table-scroll"><table><thead><tr><th>Shared shock</th><th>Delivered kits<br>reference / reviewed</th><th>Fees collected<br>reference / reviewed</th><th>Net contribution<br>reference / reviewed</th><th>Benefit this shift</th><th>Cumulative benefit</th></tr></thead><tbody id="round-rows"></tbody></table></div></section>
+    <section class="accounting-section" aria-labelledby="accounting-title"><div class="section-label"><h2 id="accounting-title">What counts as PayPal’s benefit?</h2></div><div class="table-scroll"><table><thead><tr><th>Cumulative accounting</th><th id="reference-column">Full hold</th><th>Reviewed release</th><th>Effect on net benefit</th></tr></thead><tbody id="accounting-rows"></tbody></table></div><p class="accounting-note">Orders are identical, so fees are identical. Fewer merchant-funded refunds are a service/liquidity outcome; only provider-funded shortfalls enter PayPal’s expense. No retention or future-revenue bonus is invented.</p></section>
+    <details class="merchant-inspection" id="merchant-inspection"><summary>Inspect the same merchant in both worlds</summary><label for="merchant-select">Merchant</label><select id="merchant-select"></select><div id="merchant-detail" class="merchant-detail"></div></details>
+    <section id="agentic" class="agentic-explanation" aria-labelledby="agentic-title">
+      <span class="eyebrow">HONEST IMPLEMENTATION BOUNDARY</span><h2 id="agentic-title">Today: a scripted workflow. The agent claim still needs proving.</h2>
+      <p><b>This is neither a trained regression model nor an autonomous AI team.</b> Fixed code chooses carrier lookup → office lookup, validates IDs and applies a reserve formula. A conventional workflow can perform those same steps and match the result. Agentic behavior and ML are different dimensions: a predictive model could be one tool inside an investigator.</p>
+      <div class="agentic-columns">
+        <article><h3>Where ML would fit</h3><p>Predict delivery delay, dispute risk or likely loss from known features. A score can prioritize cases. It does not by itself decide which missing document to request next.</p></article>
+        <article><h3>Where an agent could fit</h3><p>Choose the next useful source, interpret messy carrier and merchant messages, revise an explanation after contradictory evidence, and stop or escalate when further checks are not worth their cost. Those capabilities are proposed, not running here.</p></article>
+        <article><h3>What stays deterministic</h3><p>Order matching, monetary arithmetic, reserve limits and approval permissions. The agent may propose an investigation and recommendation; it cannot invent proof or bypass the reviewer.</p></article>
+      </div>
+      <p><b>A concrete future agent decision:</b> a carrier says “delivered,” the office says “only part arrived,” and the merchant supplies a batch manifest. The investigator chooses to reconcile that manifest before paying for more carrier lookups, splits confirmed and unresolved units, then requests independent proof only for the unresolved part. It revises its plan as evidence changes. Start with one investigator plus deterministic checks; extra agent roles need their own measured benefit.</p>
+      <p><b>The test we still need:</b> compare an adaptive investigator against a fixed retrieval workflow and an ML-prioritized workflow on unfamiliar cases, under equal tool budgets. Measure false releases, unnecessary holds, recovered evidence and total cost. Four role labels or an LLM-written explanation alone would not establish an advantage.</p>
+      <p class="agentic-control">Try <b>Same scripted review</b> in the reference settings. It uses identical retrieval, policy and cost on both sides; the expected benefit is exactly zero.</p>
+    </section>
+    <details class="assumptions" id="assumptions"><summary>Costs, controls and simulation assumptions</summary>
+      <p class="assumption-lead">Hypothetical rates, not PayPal’s pricing or actual model cost. Changing settings resets both worlds. No LLM is called.</p>
+      <form id="settings-form"><div class="setting-grid">
+        <label>Merchants per world<select id="setting-count"><option value="12">12</option><option value="36" selected>36</option><option value="120">120</option></select></label>
+        <label>Shared scenario seed<input id="setting-seed" type="number" min="0" max="2147483647" step="1" value="773" required></label>
+        <label>Processing cost (% of gross)<input id="setting-processing" type="number" min="0" max="100" step="0.1" value="1" required></label>
+        <label>Review cost / merchant / shift ($)<input id="setting-review" type="number" min="0" max="1000" step="0.01" value="0.25" required></label>
+        <label>Reference policy<select id="setting-reference"><option value="hold">Full hold</option><option value="checklist">Initial feed only · same reserve rule</option><option value="balanced">Same scripted review · control</option></select></label>
+      </div><button class="secondary" type="submit">Apply settings & reset both</button></form>
+      <div class="model-rules">
+        <h3>Identical inputs, policy-dependent consequences</h3><p>Both worlds share all orders and gross amounts, the saved receipt reference, $50 starting cash per merchant, supplier opening stock, procurement prices, and outcome/evidence draws keyed by seed, merchant or kit, shift and channel. Separate reserves and cash change procurement and later deliveries. Resulting evidence may differ because deliveries differ; the random availability rules stay matched. No outcome is revealed to investigators before its record is requested.</p>
+        <h3>Fees and contribution</h3><p>Each generated order pays an authored 3% fee; the single saved receipt uses its recorded fee. Fees are retained after refunds in this model. Processing cost is charged on each gross payment; review cost is charged once per merchant per approved investigated shift, even when no funds are released. A static full hold or initial-feed calculation has no incremental investigation cost. The same-review control charges the same cost on both sides.</p>
+        <p><b>Net contribution = retained fees − processing cost − provider-funded refund shortfalls − review cost.</b> The relative benefit is reviewed contribution minus reference contribution. Freed merchant reserves are not revenue. Merchant-funded refunds are not provider losses. Costs are applied to the provider accounting only; merchant funds are never charged twice.</p>
+        <h3>Limits of the result</h3><p>This fixed-demand, three-shift experiment has no churn, retention uplift, later chargebacks, expiring reserves or terminal value. It does not calculate PayPal’s full accounting profit. The 100% net review hold, 20% verified-gross buffer, synthetic source records and provider shortfall coverage are authored assumptions. The cached sandbox receipt proves one earlier test payment, not delivery or production benefit.</p>
+        <p>The previous $50-kit optimization experiment is preserved at <a href="/comparison.html">the earlier policy comparison</a>. Its economics must not be mixed with this $10-kit receipt-linked replay.</p>
+      </div>
+    </details>
+    <p class="page-note">No checkout each run · one cached sandbox reference in both worlds · generated money and evidence · no LLM</p>
+  </main><script type="module" src="/game/evidence-comparison-app.mjs"></script>
+</body></html>

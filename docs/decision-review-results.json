@@ -1,0 +1,1179 @@
+{
+  "status": "COMPLETED_AUTHORED_DECISION_REVIEW_COMPARISON",
+  "generatedAt": "2026-10-21T13:52:48.496Z",
+  "submissionHash": "50289ed2b032efb7c8f5bda74369dd2c78a36e72953dc4fe4f2ddd0ad67f7d16",
+  "freezeVerified": true,
+  "samePacketsAndPayoffTables": true,
+  "manualProvenance": "Sixteen recommendations manually selected and written by the assistant in the current Codex conversation after reading the frozen packets. The writer attaches input hashes only; no baseline decisions, evaluator outputs, external model API or subagent supplied these recommendations. The same assistant authored the cases and baseline, so this is not independently blind.",
+  "fixed": {
+    "cases": 16,
+    "successful": 16,
+    "invalidOutputs": 0,
+    "policyViolationCases": 0,
+    "numericErrorCases": 0,
+    "appropriateEscalations": 2,
+    "unnecessaryEscalations": 0,
+    "suboptimalUnderSpecifiedObjective": 0,
+    "pointForecastExpectedFundingGapCents": 1059500,
+    "pointForecastCasesWithNumericDecision": 10,
+    "additionalExternalModelAPICostUSD": 0,
+    "totalCostUSD": null
+  },
+  "manual": {
+    "cases": 16,
+    "successful": 16,
+    "invalidOutputs": 0,
+    "policyViolationCases": 0,
+    "numericErrorCases": 0,
+    "appropriateEscalations": 2,
+    "unnecessaryEscalations": 0,
+    "suboptimalUnderSpecifiedObjective": 0,
+    "pointForecastExpectedFundingGapCents": 1059500,
+    "pointForecastCasesWithNumericDecision": 10,
+    "additionalExternalModelAPICostUSD": 0,
+    "totalCostUSD": null
+  },
+  "identicalDispositionAndPlan": 16,
+  "baselineTotalMilliseconds": 12.298622999999985,
+  "cloudLedgerUnchanged": true,
+  "cloudLedgerEntries": 233,
+  "rows": [
+    {
+      "caseId": "D01",
+      "context": "Quarter-end office kits: a courier advertises strong nationwide performance during a local hub disruption.",
+      "objective": "expected_gap",
+      "inputHash": "653d1d26442dd0f1f1f4c899372bec400c73beb1fb6176b61f35b8b050d4a75e",
+      "fixed": {
+        "caseId": "D01",
+        "inputHash": "653d1d26442dd0f1f1f4c899372bec400c73beb1fb6176b61f35b8b050d4a75e",
+        "disposition": "recommend",
+        "planId": "FLEX",
+        "paymentCents": 84000,
+        "worstGapCents": 284000,
+        "reason": "Apply expected_gap to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D01",
+        "disposition": "recommend",
+        "planId": "FLEX",
+        "paymentCents": 84000,
+        "worstGapCents": 284000,
+        "sourceIds": [
+          "F1",
+          "Q1"
+        ],
+        "reason": "Use the accepted route forecast. FLEX has a $460 expected gap versus $748 for ALL and $2,000 for HOLD. MIX sacrifices later-deadline fulfillment without reducing price. Recommend the $840 restricted payment, acknowledging the $2,840 failure gap and refunding the unshipped early cohort.",
+        "inputHash": "653d1d26442dd0f1f1f4c899372bec400c73beb1fb6176b61f35b8b050d4a75e"
+      },
+      "fixedGrade": {
+        "caseId": "D01",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "FLEX",
+          "objectiveCents": 46000,
+          "expectedGapRangeCents": [
+            46000,
+            46000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 284000,
+          "paymentCents": 84000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D01",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "FLEX",
+          "objectiveCents": 46000,
+          "expectedGapRangeCents": [
+            46000,
+            46000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 284000,
+          "paymentCents": 84000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.41100000000000136
+    },
+    {
+      "caseId": "D02",
+      "context": "A subsidized booking makes the larger vehicle relatively inexpensive.",
+      "objective": "expected_gap",
+      "inputHash": "5cf586d8dd2dea3ec82167899253686c5382415b3a9a3a004c5a62825ac25f41",
+      "fixed": {
+        "caseId": "D02",
+        "inputHash": "5cf586d8dd2dea3ec82167899253686c5382415b3a9a3a004c5a62825ac25f41",
+        "disposition": "recommend",
+        "planId": "ALL",
+        "paymentCents": 30000,
+        "worstGapCents": 330000,
+        "reason": "Apply expected_gap to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D02",
+        "disposition": "recommend",
+        "planId": "ALL",
+        "paymentCents": 30000,
+        "worstGapCents": 330000,
+        "sourceIds": [
+          "Q1",
+          "F1"
+        ],
+        "reason": "The subsidized large van has a $430 expected gap versus $680 for FLEX and $3,000 for HOLD. The $300 incremental failure exposure is within the $600 cap, and $2,700 remains before refunds to protect the $2,000 cancellation allocation.",
+        "inputHash": "5cf586d8dd2dea3ec82167899253686c5382415b3a9a3a004c5a62825ac25f41"
+      },
+      "fixedGrade": {
+        "caseId": "D02",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "ALL",
+          "objectiveCents": 43000,
+          "expectedGapRangeCents": [
+            43000,
+            43000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 330000,
+          "paymentCents": 30000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D02",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "ALL",
+          "objectiveCents": 43000,
+          "expectedGapRangeCents": [
+            43000,
+            43000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 330000,
+          "paymentCents": 30000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.058875000000000455
+    },
+    {
+      "caseId": "D03",
+      "context": "Cancellations rose while the courier held its offer open.",
+      "objective": "expected_gap",
+      "inputHash": "18a85de20dbb7c4019fd56502cb976c386b1369ed680ebe82189969f8085c246",
+      "fixed": {
+        "caseId": "D03",
+        "inputHash": "18a85de20dbb7c4019fd56502cb976c386b1369ed680ebe82189969f8085c246",
+        "disposition": "recommend",
+        "planId": "HOLD",
+        "paymentCents": 0,
+        "worstGapCents": 240000,
+        "reason": "Apply expected_gap to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D03",
+        "disposition": "recommend",
+        "planId": "HOLD",
+        "paymentCents": 0,
+        "worstGapCents": 240000,
+        "sourceIds": [
+          "B1",
+          "Q1"
+        ],
+        "reason": "Only $400 is available above the $3,200 protected cancellation allocation. The $500 and $900 bookings would both use protected funds. Strong delivery prospects cannot waive that constraint. Hold; the modeled refund gap is $2,400.",
+        "inputHash": "18a85de20dbb7c4019fd56502cb976c386b1369ed680ebe82189969f8085c246"
+      },
+      "fixedGrade": {
+        "caseId": "D03",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "HOLD",
+          "objectiveCents": 240000,
+          "expectedGapRangeCents": [
+            240000,
+            240000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 240000,
+          "paymentCents": 0
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D03",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "HOLD",
+          "objectiveCents": 240000,
+          "expectedGapRangeCents": [
+            240000,
+            240000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 240000,
+          "paymentCents": 0
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.03450000000000131
+    },
+    {
+      "caseId": "D04",
+      "context": "The courier accepts payment, but the restricted disbursement mechanism is unavailable.",
+      "objective": "expected_gap",
+      "inputHash": "80e798557640d4bb14ed12d511aa374bf7ab7c21105be3d4bad18ec377a84c62",
+      "fixed": {
+        "caseId": "D04",
+        "inputHash": "80e798557640d4bb14ed12d511aa374bf7ab7c21105be3d4bad18ec377a84c62",
+        "disposition": "recommend",
+        "planId": "HOLD",
+        "paymentCents": 0,
+        "worstGapCents": 200000,
+        "reason": "Apply expected_gap to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D04",
+        "disposition": "recommend",
+        "planId": "HOLD",
+        "paymentCents": 0,
+        "worstGapCents": 200000,
+        "sourceIds": [
+          "CTRL1",
+          "P1"
+        ],
+        "reason": "Every release would be unrestricted, while the current policy requires an enforceable courier-specific payment. The favorable forecast does not establish control. Hold under the existing policy; no assumed manual workaround.",
+        "inputHash": "80e798557640d4bb14ed12d511aa374bf7ab7c21105be3d4bad18ec377a84c62"
+      },
+      "fixedGrade": {
+        "caseId": "D04",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "HOLD",
+          "objectiveCents": 200000,
+          "expectedGapRangeCents": [
+            200000,
+            200000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 200000,
+          "paymentCents": 0
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D04",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "HOLD",
+          "objectiveCents": 200000,
+          "expectedGapRangeCents": [
+            200000,
+            200000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 200000,
+          "paymentCents": 0
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.02475000000000449
+    },
+    {
+      "caseId": "D05",
+      "context": "An established seller faces a sharply worsening route disruption.",
+      "objective": "expected_gap",
+      "inputHash": "73a24e19f3b95fc70fd7c8f65dd8024b15871de70d56f9d9de67506e36272dab",
+      "fixed": {
+        "caseId": "D05",
+        "inputHash": "73a24e19f3b95fc70fd7c8f65dd8024b15871de70d56f9d9de67506e36272dab",
+        "disposition": "recommend",
+        "planId": "HOLD",
+        "paymentCents": 0,
+        "worstGapCents": 200000,
+        "reason": "Apply expected_gap to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D05",
+        "disposition": "recommend",
+        "planId": "HOLD",
+        "paymentCents": 0,
+        "worstGapCents": 200000,
+        "sourceIds": [
+          "H1",
+          "F1"
+        ],
+        "reason": "The current accepted forecast gives FLEX a $2,504 expected gap and ALL $2,848, above the $2,000 holding gap. Good historical merchant behavior does not offset the accepted route disruption forecast.",
+        "inputHash": "73a24e19f3b95fc70fd7c8f65dd8024b15871de70d56f9d9de67506e36272dab"
+      },
+      "fixedGrade": {
+        "caseId": "D05",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "HOLD",
+          "objectiveCents": 200000,
+          "expectedGapRangeCents": [
+            200000,
+            200000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 200000,
+          "paymentCents": 0
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D05",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "HOLD",
+          "objectiveCents": 200000,
+          "expectedGapRangeCents": [
+            200000,
+            200000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 200000,
+          "paymentCents": 0
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.023665999999998633
+    },
+    {
+      "caseId": "D06",
+      "context": "A low-price quote and a current quote are both present in the completed evidence packet.",
+      "objective": "expected_gap",
+      "inputHash": "1a5ef7d4c7f89ad7b2c2292a6bf6ae62d2f7ed39e63e531dfd10960aee5fcebd",
+      "fixed": {
+        "caseId": "D06",
+        "inputHash": "1a5ef7d4c7f89ad7b2c2292a6bf6ae62d2f7ed39e63e531dfd10960aee5fcebd",
+        "disposition": "recommend",
+        "planId": "ALL",
+        "paymentCents": 90000,
+        "worstGapCents": 360000,
+        "reason": "Apply expected_gap to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D06",
+        "disposition": "recommend",
+        "planId": "ALL",
+        "paymentCents": 90000,
+        "worstGapCents": 360000,
+        "sourceIds": [
+          "Q1",
+          "W1"
+        ],
+        "reason": "FLEX and MIX are expired offers. The current large-van plan has a $560 expected gap versus $2,700 for HOLD, protects cancellation refunds, and adds $900 worst-case exposure within the $1,200 cap. Recommend only the still-available $900 booking.",
+        "inputHash": "1a5ef7d4c7f89ad7b2c2292a6bf6ae62d2f7ed39e63e531dfd10960aee5fcebd"
+      },
+      "fixedGrade": {
+        "caseId": "D06",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "ALL",
+          "objectiveCents": 56000,
+          "expectedGapRangeCents": [
+            56000,
+            56000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 360000,
+          "paymentCents": 90000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D06",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "ALL",
+          "objectiveCents": 56000,
+          "expectedGapRangeCents": [
+            56000,
+            56000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 360000,
+          "paymentCents": 90000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.032083000000000084
+    },
+    {
+      "caseId": "D07",
+      "context": "A funded courier guarantee settles inside the refund horizon.",
+      "objective": "expected_gap",
+      "inputHash": "4121f395ec40e9e9ec5ecdf4b2536193e9b26d65aa85826629a92caefb10695f",
+      "fixed": {
+        "caseId": "D07",
+        "inputHash": "4121f395ec40e9e9ec5ecdf4b2536193e9b26d65aa85826629a92caefb10695f",
+        "disposition": "recommend",
+        "planId": "ALL",
+        "paymentCents": 110000,
+        "worstGapCents": 200000,
+        "reason": "Apply expected_gap to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D07",
+        "disposition": "recommend",
+        "planId": "ALL",
+        "paymentCents": 110000,
+        "worstGapCents": 200000,
+        "sourceIds": [
+          "G1",
+          "Q1"
+        ],
+        "reason": "The stipulated funded guarantee restores $1,100 before refunds whenever EARLY is missed. ALL has gaps of $0/$0/$2,000 and expected gap $300, versus $405 for FLEX. Its advantage depends on the stated timing and enforceability, not a higher delivery probability.",
+        "inputHash": "4121f395ec40e9e9ec5ecdf4b2536193e9b26d65aa85826629a92caefb10695f"
+      },
+      "fixedGrade": {
+        "caseId": "D07",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "ALL",
+          "objectiveCents": 30000,
+          "expectedGapRangeCents": [
+            30000,
+            30000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 200000,
+          "paymentCents": 110000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D07",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "ALL",
+          "objectiveCents": 30000,
+          "expectedGapRangeCents": [
+            30000,
+            30000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 200000,
+          "paymentCents": 110000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.025458000000000425
+    },
+    {
+      "caseId": "D08",
+      "context": "A similar courier guarantee settles after the refund horizon.",
+      "objective": "expected_gap",
+      "inputHash": "40f0cc20916dc776b13a628e83813262c217d293a1fbb1732de26e836ff297cb",
+      "fixed": {
+        "caseId": "D08",
+        "inputHash": "40f0cc20916dc776b13a628e83813262c217d293a1fbb1732de26e836ff297cb",
+        "disposition": "recommend",
+        "planId": "FLEX",
+        "paymentCents": 70000,
+        "worstGapCents": 270000,
+        "reason": "Apply expected_gap to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D08",
+        "disposition": "recommend",
+        "planId": "FLEX",
+        "paymentCents": 70000,
+        "worstGapCents": 270000,
+        "sourceIds": [
+          "G1",
+          "P1"
+        ],
+        "reason": "A reimbursement after 45 days cannot fund refunds in this three-day horizon. With no in-horizon recovery, ALL has expected gap $585 and FLEX $405. Recommend the $700 selective booking; do not deduct the future guarantee from current exposure.",
+        "inputHash": "40f0cc20916dc776b13a628e83813262c217d293a1fbb1732de26e836ff297cb"
+      },
+      "fixedGrade": {
+        "caseId": "D08",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "FLEX",
+          "objectiveCents": 40500,
+          "expectedGapRangeCents": [
+            40500,
+            40500
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 270000,
+          "paymentCents": 70000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D08",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "FLEX",
+          "objectiveCents": 40500,
+          "expectedGapRangeCents": [
+            40500,
+            40500
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 270000,
+          "paymentCents": 70000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.018208000000001334
+    },
+    {
+      "caseId": "D09",
+      "context": "A very reliable route still has a strict authorized downside limit.",
+      "objective": "expected_gap",
+      "inputHash": "75f96efc2cd3798eeb1a323a8aa3196d6c6efda96f5a6054e76adc9716319689",
+      "fixed": {
+        "caseId": "D09",
+        "inputHash": "75f96efc2cd3798eeb1a323a8aa3196d6c6efda96f5a6054e76adc9716319689",
+        "disposition": "recommend",
+        "planId": "HOLD",
+        "paymentCents": 0,
+        "worstGapCents": 200000,
+        "reason": "Apply expected_gap to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D09",
+        "disposition": "recommend",
+        "planId": "HOLD",
+        "paymentCents": 0,
+        "worstGapCents": 200000,
+        "sourceIds": [
+          "P1",
+          "Q1"
+        ],
+        "reason": "The accepted 98% EARLY probability does not eliminate the possible failure state. FLEX/MIX add $800 and ALL $900 in that state, beyond the authorized $700 incremental cap. All shipping plans are disallowed. Hold without inventing a waiver.",
+        "inputHash": "75f96efc2cd3798eeb1a323a8aa3196d6c6efda96f5a6054e76adc9716319689"
+      },
+      "fixedGrade": {
+        "caseId": "D09",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "HOLD",
+          "objectiveCents": 200000,
+          "expectedGapRangeCents": [
+            200000,
+            200000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 200000,
+          "paymentCents": 0
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D09",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "HOLD",
+          "objectiveCents": 200000,
+          "expectedGapRangeCents": [
+            200000,
+            200000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 200000,
+          "paymentCents": 0
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.019292000000000087
+    },
+    {
+      "caseId": "D10",
+      "context": "A well-funded reserve and different vehicle costs change the marginal benefit of shipping more orders.",
+      "objective": "expected_gap",
+      "inputHash": "3e37f5a89dabc5659909aae11b63b43adae4a6a5aa5f54cede866013d6742f11",
+      "fixed": {
+        "caseId": "D10",
+        "inputHash": "3e37f5a89dabc5659909aae11b63b43adae4a6a5aa5f54cede866013d6742f11",
+        "disposition": "recommend",
+        "planId": "FLEX",
+        "paymentCents": 30000,
+        "worstGapCents": 80000,
+        "reason": "Apply expected_gap to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D10",
+        "disposition": "recommend",
+        "planId": "FLEX",
+        "paymentCents": 30000,
+        "worstGapCents": 80000,
+        "sourceIds": [
+          "L1",
+          "P1"
+        ],
+        "reason": "FLEX and MIX both have $40 expected funding gap, versus $50 for ALL and $500 for HOLD. Choose FLEX under the supplied tie break; its worst gap is $800. The larger van can serve more buyers early, but no extra service utility is authorized in this financial objective.",
+        "inputHash": "3e37f5a89dabc5659909aae11b63b43adae4a6a5aa5f54cede866013d6742f11"
+      },
+      "fixedGrade": {
+        "caseId": "D10",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "FLEX",
+          "objectiveCents": 4000,
+          "expectedGapRangeCents": [
+            4000,
+            4000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 80000,
+          "paymentCents": 30000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D10",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "FLEX",
+          "objectiveCents": 4000,
+          "expectedGapRangeCents": [
+            4000,
+            4000
+          ],
+          "maxRegretCents": 0,
+          "worstGapCents": 80000,
+          "paymentCents": 30000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 11.499290999999992
+    },
+    {
+      "caseId": "D11",
+      "context": "No calibrated forecast exists; the risk owner has specified a worst-case mandate.",
+      "objective": "minimax_gap",
+      "inputHash": "cc4236a123fe0941eb9bb4caf52a139dca5ad1609258096b5d702a5a5c65a0f2",
+      "fixed": {
+        "caseId": "D11",
+        "inputHash": "cc4236a123fe0941eb9bb4caf52a139dca5ad1609258096b5d702a5a5c65a0f2",
+        "disposition": "recommend",
+        "planId": "HOLD",
+        "paymentCents": 0,
+        "worstGapCents": 200000,
+        "reason": "Apply minimax_gap to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D11",
+        "disposition": "recommend",
+        "planId": "HOLD",
+        "paymentCents": 0,
+        "worstGapCents": 200000,
+        "sourceIds": [
+          "F1",
+          "P1"
+        ],
+        "reason": "The explicit mandate is worst-case gap. Over all admitted arrival distributions, HOLD caps it at $2,000, below $2,840 for the small van and $3,200 for ALL. Do not replace this mandate with my earlier qualitative willingness to attempt delivery.",
+        "inputHash": "cc4236a123fe0941eb9bb4caf52a139dca5ad1609258096b5d702a5a5c65a0f2"
+      },
+      "fixedGrade": {
+        "caseId": "D11",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "HOLD",
+          "objectiveCents": 200000,
+          "expectedGapRangeCents": [
+            200000,
+            200000
+          ],
+          "maxRegretCents": 200000,
+          "worstGapCents": 200000,
+          "paymentCents": 0
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D11",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "HOLD",
+          "objectiveCents": 200000,
+          "expectedGapRangeCents": [
+            200000,
+            200000
+          ],
+          "maxRegretCents": 200000,
+          "worstGapCents": 200000,
+          "paymentCents": 0
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.04045899999999847
+    },
+    {
+      "caseId": "D12",
+      "context": "The same uncertain route is reviewed under a different explicit risk mandate.",
+      "objective": "minimax_regret",
+      "inputHash": "8b6c15250575c373133c0fba33d7b958e91a52d65e69ec5410126c6930c54794",
+      "fixed": {
+        "caseId": "D12",
+        "inputHash": "8b6c15250575c373133c0fba33d7b958e91a52d65e69ec5410126c6930c54794",
+        "disposition": "recommend",
+        "planId": "FLEX",
+        "paymentCents": 84000,
+        "worstGapCents": 284000,
+        "reason": "Apply minimax_regret to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D12",
+        "disposition": "recommend",
+        "planId": "FLEX",
+        "paymentCents": 84000,
+        "worstGapCents": 284000,
+        "sourceIds": [
+          "F1",
+          "P1"
+        ],
+        "reason": "The explicit mandate instead minimizes worst regret. FLEX has regrets $40/$0/$840 across EARLY/LATE/MISSED, so maximum regret is $840, versus $2,000 for HOLD and $1,200 for ALL. Its $2,840 worst gap still satisfies the separate incremental cap.",
+        "inputHash": "8b6c15250575c373133c0fba33d7b958e91a52d65e69ec5410126c6930c54794"
+      },
+      "fixedGrade": {
+        "caseId": "D12",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "FLEX",
+          "objectiveCents": 84000,
+          "expectedGapRangeCents": [
+            4000,
+            284000
+          ],
+          "maxRegretCents": 84000,
+          "worstGapCents": 284000,
+          "paymentCents": 84000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D12",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "FLEX",
+          "objectiveCents": 84000,
+          "expectedGapRangeCents": [
+            4000,
+            284000
+          ],
+          "maxRegretCents": 84000,
+          "worstGapCents": 284000,
+          "paymentCents": 84000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.026832999999996332
+    },
+    {
+      "caseId": "D13",
+      "context": "Two accepted route models disagree near a decision boundary.",
+      "objective": "minimax_regret",
+      "inputHash": "78eceb21463797f27660bbaed3dca8c32ddb0afe406be6ff9dde1610aaca5543",
+      "fixed": {
+        "caseId": "D13",
+        "inputHash": "78eceb21463797f27660bbaed3dca8c32ddb0afe406be6ff9dde1610aaca5543",
+        "disposition": "recommend",
+        "planId": "ALL",
+        "paymentCents": 120000,
+        "worstGapCents": 320000,
+        "reason": "Apply minimax_regret to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D13",
+        "disposition": "recommend",
+        "planId": "ALL",
+        "paymentCents": 120000,
+        "worstGapCents": 320000,
+        "sourceIds": [
+          "F1",
+          "P1"
+        ],
+        "reason": "At model A, FLEX costs $96 in expected gap and ALL $104; at model B they cost $68 and $40. Thus ALL risks $8 of regret while FLEX risks $28. The authorized regret objective selects ALL without averaging the models or claiming a known $104 or $40 outcome.",
+        "inputHash": "78eceb21463797f27660bbaed3dca8c32ddb0afe406be6ff9dde1610aaca5543"
+      },
+      "fixedGrade": {
+        "caseId": "D13",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "ALL",
+          "objectiveCents": 800,
+          "expectedGapRangeCents": [
+            4000,
+            10400
+          ],
+          "maxRegretCents": 800,
+          "worstGapCents": 320000,
+          "paymentCents": 120000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D13",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "ALL",
+          "objectiveCents": 800,
+          "expectedGapRangeCents": [
+            4000,
+            10400
+          ],
+          "maxRegretCents": 800,
+          "worstGapCents": 320000,
+          "paymentCents": 120000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.025458000000000425
+    },
+    {
+      "caseId": "D14",
+      "context": "The downside and opportunity cost both matter under a wide forecast disagreement.",
+      "objective": "minimax_regret",
+      "inputHash": "4a1a419dbce1252d41cb014d607ebf7c86b77cebe75011bec410b889a9706f5f",
+      "fixed": {
+        "caseId": "D14",
+        "inputHash": "4a1a419dbce1252d41cb014d607ebf7c86b77cebe75011bec410b889a9706f5f",
+        "disposition": "recommend",
+        "planId": "FLEX",
+        "paymentCents": 84000,
+        "worstGapCents": 284000,
+        "reason": "Apply minimax_regret to all eligible plans; require human approval before execution."
+      },
+      "manual": {
+        "caseId": "D14",
+        "disposition": "recommend",
+        "planId": "FLEX",
+        "paymentCents": 84000,
+        "worstGapCents": 284000,
+        "sourceIds": [
+          "F1",
+          "P1"
+        ],
+        "reason": "FLEX has expected gap $2,560 under the disruption model and $740 under the recovery model. Its maximum regret is $560, versus $1,260 for HOLD and $908 for ALL. Recommend FLEX under the specified regret mandate; it does not outperform HOLD under every plausible forecast.",
+        "inputHash": "4a1a419dbce1252d41cb014d607ebf7c86b77cebe75011bec410b889a9706f5f"
+      },
+      "fixedGrade": {
+        "caseId": "D14",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "FLEX",
+          "objectiveCents": 56000,
+          "expectedGapRangeCents": [
+            74000,
+            256000
+          ],
+          "maxRegretCents": 56000,
+          "worstGapCents": 284000,
+          "paymentCents": 84000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D14",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": false,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": 0,
+        "selectedEvaluation": {
+          "id": "FLEX",
+          "objectiveCents": 56000,
+          "expectedGapRangeCents": [
+            74000,
+            256000
+          ],
+          "maxRegretCents": 56000,
+          "worstGapCents": 284000,
+          "paymentCents": 84000
+        },
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.02179200000000492
+    },
+    {
+      "caseId": "D15",
+      "context": "The reviewer has observations but no accepted forecast or uncertainty mandate.",
+      "objective": "expected_gap",
+      "inputHash": "25b6f9568d8a2763683cb29c12a80a133c866ac83c5998e736cfd730aeb570d8",
+      "fixed": {
+        "caseId": "D15",
+        "inputHash": "25b6f9568d8a2763683cb29c12a80a133c866ac83c5998e736cfd730aeb570d8",
+        "disposition": "escalate",
+        "planId": null,
+        "paymentCents": 0,
+        "worstGapCents": null,
+        "reason": "NO_ACCEPTED_PROBABILITY_OR_UNCERTAINTY_SET"
+      },
+      "manual": {
+        "caseId": "D15",
+        "disposition": "escalate",
+        "planId": null,
+        "paymentCents": 0,
+        "worstGapCents": null,
+        "sourceIds": [
+          "F1",
+          "P1"
+        ],
+        "reason": "The expected-gap mandate lacks an accepted forecast. The nationwide claim and six correlated batches do not authorize calibrated probabilities. Escalate to the policy owner to accept a forecast or a different uncertainty mandate; do not issue a supposedly optimal release. Existing protections and due refunds continue.",
+        "inputHash": "25b6f9568d8a2763683cb29c12a80a133c866ac83c5998e736cfd730aeb570d8"
+      },
+      "fixedGrade": {
+        "caseId": "D15",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": true,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": null,
+        "selectedEvaluation": null,
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D15",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": true,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": null,
+        "selectedEvaluation": null,
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.022082999999994968
+    },
+    {
+      "caseId": "D16",
+      "context": "Two current policy instructions conflict and authority has not been resolved.",
+      "objective": "expected_gap",
+      "inputHash": "2bf09c1f87fe0b2df7a439f0983959ab1caeae37c5a86aa45ee6adc94890697c",
+      "fixed": {
+        "caseId": "D16",
+        "inputHash": "2bf09c1f87fe0b2df7a439f0983959ab1caeae37c5a86aa45ee6adc94890697c",
+        "disposition": "escalate",
+        "planId": null,
+        "paymentCents": 0,
+        "worstGapCents": null,
+        "reason": "UNRESOLVED_POLICY_AUTHORITY"
+      },
+      "manual": {
+        "caseId": "D16",
+        "disposition": "escalate",
+        "planId": null,
+        "paymentCents": 0,
+        "worstGapCents": null,
+        "sourceIds": [
+          "P1",
+          "P2"
+        ],
+        "reason": "The evidence supports a conditional financial comparison but not authority to choose between conflicting current mandates. Escalate for policy precedence. Do not quietly select whichever mandate favors a release; existing restrictions remain.",
+        "inputHash": "2bf09c1f87fe0b2df7a439f0983959ab1caeae37c5a86aa45ee6adc94890697c"
+      },
+      "fixedGrade": {
+        "caseId": "D16",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": true,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": null,
+        "selectedEvaluation": null,
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "manualGrade": {
+        "caseId": "D16",
+        "invalid": [],
+        "policyViolations": [],
+        "numericErrors": [],
+        "appropriateEscalation": true,
+        "unnecessaryEscalation": false,
+        "policyRegretCents": null,
+        "selectedEvaluation": null,
+        "successful": true,
+        "explanationQuality": "Not automatically scored; no LLM-as-judge or author preference grade."
+      },
+      "baselineMs": 0.014874999999989313
+    }
+  ],
+  "limitations": [
+    "Synthetic cases, authored and reviewed by the same assistant; no independent blind holdout or domain-expert labels.",
+    "Full payoff tables and explicit objectives make the scored portion a policy-application/optimization test. Fixed software can exactly optimize these cases; this does not test whether an LLM discovers missing real-world factors.",
+    "Point forecasts are assumed inputs, not validated forecasts. Interval objectives are authored risk preferences, not actual PayPal policy.",
+    "Underspecified cases test appropriate escalation. Their ultimate financial merit is not scored or silently treated as zero cost.",
+    "One manual submission, no stochastic repeats or production reliability estimate. Narrative persuasiveness is not graded.",
+    "No external model API calls. Current-chat Codex usage and human approval/engineering time are unpriced, so total-cost superiority is unknown.",
+    "No PayPal reserve changes, real payments, GCP calls or APAC edits. No ROI claim from hypothetical funding gaps."
+  ]
+}

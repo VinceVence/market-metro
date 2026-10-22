@@ -1,0 +1,563 @@
+{
+  "schema": "supply-yard-evidence-pair-v1",
+  "settings": {
+    "count": 36,
+    "seed": 773,
+    "processingCostBps": 100,
+    "reviewCostPerMerchant": 25,
+    "referencePolicy": "hold"
+  },
+  "strategies": [
+    "hold",
+    "balanced"
+  ],
+  "phase": "complete",
+  "receiptReference": {
+    "quantity": 10,
+    "verifiedAt": "2026-10-20T14:51:47.974Z",
+    "provenance": "PAYPAL_SANDBOX",
+    "orderId": "8JN96388HX791412P",
+    "captureId": "7UA38506PR3477149",
+    "status": "COMPLETED",
+    "currency": "USD",
+    "grossCents": 10000,
+    "feeCents": 370,
+    "netCents": 9630,
+    "capturedAt": "2026-10-20T14:32:58Z"
+  },
+  "shocks": [
+    {
+      "name": "Supplier outage",
+      "detail": "Northshore stops dispatching. Everyone competes for two remaining warehouses.",
+      "price": 400,
+      "stock": [
+        0,
+        38,
+        30
+      ],
+      "success": [
+        0,
+        9200,
+        7800
+      ],
+      "demand": 100
+    },
+    {
+      "name": "Freight price shock",
+      "detail": "Northshore returns, but restocking costs 40% more. Yesterday’s payment rules affect cash today.",
+      "price": 560,
+      "stock": [
+        40,
+        30,
+        38
+      ],
+      "success": [
+        8800,
+        9400,
+        8200
+      ],
+      "demand": 110
+    },
+    {
+      "name": "Demand surge",
+      "detail": "Office demand jumps 50%. Supply recovers, but cash and payment restrictions carry over.",
+      "price": 480,
+      "stock": [
+        60,
+        60,
+        60
+      ],
+      "success": [
+        9500,
+        9000,
+        8600
+      ],
+      "demand": 150
+    }
+  ],
+  "audit": [
+    {
+      "shift": 1,
+      "matched": true,
+      "seed": 773,
+      "orders": 36,
+      "paidUnits": 398,
+      "gross": 398000,
+      "fees": 12010,
+      "supply": [
+        {
+          "id": 0,
+          "opening": 0,
+          "successBps": 0
+        },
+        {
+          "id": 1,
+          "opening": 114,
+          "successBps": 9200
+        },
+        {
+          "id": 2,
+          "opening": 90,
+          "successBps": 7800
+        }
+      ],
+      "procurementPrice": 400,
+      "drawKeys": "seed + merchant or unit ID + shift + channel",
+      "strategies": [
+        "hold",
+        "balanced"
+      ]
+    },
+    {
+      "shift": 2,
+      "matched": true,
+      "seed": 773,
+      "orders": 36,
+      "paidUnits": 450,
+      "gross": 450000,
+      "fees": 13500,
+      "supply": [
+        {
+          "id": 0,
+          "opening": 120,
+          "successBps": 8800
+        },
+        {
+          "id": 1,
+          "opening": 90,
+          "successBps": 9400
+        },
+        {
+          "id": 2,
+          "opening": 114,
+          "successBps": 8200
+        }
+      ],
+      "procurementPrice": 560,
+      "drawKeys": "seed + merchant or unit ID + shift + channel",
+      "strategies": [
+        "hold",
+        "balanced"
+      ]
+    },
+    {
+      "shift": 3,
+      "matched": true,
+      "seed": 773,
+      "orders": 36,
+      "paidUnits": 594,
+      "gross": 594000,
+      "fees": 17820,
+      "supply": [
+        {
+          "id": 0,
+          "opening": 180,
+          "successBps": 9500
+        },
+        {
+          "id": 1,
+          "opening": 180,
+          "successBps": 9000
+        },
+        {
+          "id": 2,
+          "opening": 180,
+          "successBps": 8600
+        }
+      ],
+      "procurementPrice": 480,
+      "drawKeys": "seed + merchant or unit ID + shift + channel",
+      "strategies": [
+        "hold",
+        "balanced"
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "shift": 1,
+      "shock": "Supplier outage",
+      "results": [
+        {
+          "shift": 1,
+          "policy": "hold",
+          "paid": 398,
+          "delivered": 164,
+          "released": 0,
+          "reviewHeld": 385990,
+          "reserveAfterRefunds": 158590,
+          "refunds": 234000,
+          "coverage": 160,
+          "evidence": {
+            "units": 398,
+            "initial": 67,
+            "confirmed": 67,
+            "unresolved": 331,
+            "rejected": 0
+          },
+          "queries": 0,
+          "fees": 12010,
+          "nextBuyingPower": 149
+        },
+        {
+          "shift": 1,
+          "policy": "balanced",
+          "paid": 398,
+          "delivered": 164,
+          "released": 112190,
+          "reviewHeld": 273800,
+          "reserveAfterRefunds": 46400,
+          "refunds": 234000,
+          "coverage": 160,
+          "evidence": {
+            "units": 398,
+            "initial": 67,
+            "confirmed": 147,
+            "unresolved": 251,
+            "rejected": 2
+          },
+          "queries": 582,
+          "fees": 12010,
+          "nextBuyingPower": 350
+        }
+      ],
+      "perShift": [
+        {
+          "gross": 398000,
+          "fees": 12010,
+          "processing": 3980,
+          "coverage": 160,
+          "reviewCost": 0,
+          "net": 7870,
+          "delivered": 164,
+          "paid": 398,
+          "refunds": 234000,
+          "released": 0,
+          "queries": 0,
+          "approvedReviews": 0
+        },
+        {
+          "gross": 398000,
+          "fees": 12010,
+          "processing": 3980,
+          "coverage": 160,
+          "reviewCost": 900,
+          "net": 6970,
+          "delivered": 164,
+          "paid": 398,
+          "refunds": 234000,
+          "released": 112190,
+          "queries": 582,
+          "approvedReviews": 36
+        }
+      ],
+      "cumulative": [
+        {
+          "gross": 398000,
+          "fees": 12010,
+          "processing": 3980,
+          "coverage": 160,
+          "reviewCost": 0,
+          "net": 7870,
+          "delivered": 164,
+          "paid": 398,
+          "refunds": 234000,
+          "released": 0,
+          "held": 158590,
+          "cash": 91960,
+          "queries": 0,
+          "approvedReviews": 0
+        },
+        {
+          "gross": 398000,
+          "fees": 12010,
+          "processing": 3980,
+          "coverage": 160,
+          "reviewCost": 900,
+          "net": 6970,
+          "delivered": 164,
+          "paid": 398,
+          "refunds": 234000,
+          "released": 112190,
+          "held": 46400,
+          "cash": 204150,
+          "queries": 582,
+          "approvedReviews": 36
+        }
+      ],
+      "benefit": -900,
+      "shiftBenefit": -900
+    },
+    {
+      "shift": 2,
+      "shock": "Freight price shock",
+      "results": [
+        {
+          "shift": 2,
+          "policy": "hold",
+          "paid": 450,
+          "delivered": 124,
+          "released": 0,
+          "reviewHeld": 436500,
+          "reserveAfterRefunds": 272320,
+          "refunds": 326000,
+          "coverage": 900,
+          "evidence": {
+            "units": 450,
+            "initial": 46,
+            "confirmed": 46,
+            "unresolved": 404,
+            "rejected": 0
+          },
+          "queries": 0,
+          "fees": 13500,
+          "nextBuyingPower": 1
+        },
+        {
+          "shift": 2,
+          "policy": "balanced",
+          "paid": 450,
+          "delivered": 253,
+          "released": 168370,
+          "reviewHeld": 268130,
+          "reserveAfterRefunds": 119780,
+          "refunds": 197000,
+          "coverage": 900,
+          "evidence": {
+            "units": 450,
+            "initial": 85,
+            "confirmed": 224,
+            "unresolved": 226,
+            "rejected": 0
+          },
+          "queries": 591,
+          "fees": 13500,
+          "nextBuyingPower": 391
+        }
+      ],
+      "perShift": [
+        {
+          "gross": 450000,
+          "fees": 13500,
+          "processing": 4500,
+          "coverage": 900,
+          "reviewCost": 0,
+          "net": 8100,
+          "delivered": 124,
+          "paid": 450,
+          "refunds": 326000,
+          "released": 0,
+          "queries": 0,
+          "approvedReviews": 0
+        },
+        {
+          "gross": 450000,
+          "fees": 13500,
+          "processing": 4500,
+          "coverage": 900,
+          "reviewCost": 900,
+          "net": 7200,
+          "delivered": 253,
+          "paid": 450,
+          "refunds": 197000,
+          "released": 168370,
+          "queries": 591,
+          "approvedReviews": 36
+        }
+      ],
+      "cumulative": [
+        {
+          "gross": 848000,
+          "fees": 25510,
+          "processing": 8480,
+          "coverage": 1060,
+          "reviewCost": 0,
+          "net": 15970,
+          "delivered": 288,
+          "paid": 848,
+          "refunds": 560000,
+          "released": 0,
+          "held": 272320,
+          "cash": 6190,
+          "queries": 0,
+          "approvedReviews": 0
+        },
+        {
+          "gross": 848000,
+          "fees": 25510,
+          "processing": 8480,
+          "coverage": 1060,
+          "reviewCost": 1800,
+          "net": 14170,
+          "delivered": 417,
+          "paid": 848,
+          "refunds": 431000,
+          "released": 280560,
+          "held": 119780,
+          "cash": 194210,
+          "queries": 1173,
+          "approvedReviews": 72
+        }
+      ],
+      "benefit": -1800,
+      "shiftBenefit": -900
+    },
+    {
+      "shift": 3,
+      "shock": "Demand surge",
+      "results": [
+        {
+          "shift": 3,
+          "policy": "hold",
+          "paid": 594,
+          "delivered": 1,
+          "released": 0,
+          "reviewHeld": 576180,
+          "reserveAfterRefunds": 263010,
+          "refunds": 593000,
+          "coverage": 1980,
+          "evidence": {
+            "units": 594,
+            "initial": 1,
+            "confirmed": 1,
+            "unresolved": 593,
+            "rejected": 0
+          },
+          "queries": 0,
+          "fees": 17820,
+          "nextBuyingPower": 0
+        },
+        {
+          "shift": 3,
+          "policy": "balanced",
+          "paid": 594,
+          "delivered": 340,
+          "released": 219460,
+          "reviewHeld": 356720,
+          "reserveAfterRefunds": 224840,
+          "refunds": 254000,
+          "coverage": 1980,
+          "evidence": {
+            "units": 594,
+            "initial": 105,
+            "confirmed": 293,
+            "unresolved": 301,
+            "rejected": 0
+          },
+          "queries": 790,
+          "fees": 17820,
+          "nextBuyingPower": 496
+        }
+      ],
+      "perShift": [
+        {
+          "gross": 594000,
+          "fees": 17820,
+          "processing": 5940,
+          "coverage": 1980,
+          "reviewCost": 0,
+          "net": 9900,
+          "delivered": 1,
+          "paid": 594,
+          "refunds": 593000,
+          "released": 0,
+          "queries": 0,
+          "approvedReviews": 0
+        },
+        {
+          "gross": 594000,
+          "fees": 17820,
+          "processing": 5940,
+          "coverage": 1980,
+          "reviewCost": 900,
+          "net": 9000,
+          "delivered": 340,
+          "paid": 594,
+          "refunds": 254000,
+          "released": 219460,
+          "queries": 790,
+          "approvedReviews": 36
+        }
+      ],
+      "cumulative": [
+        {
+          "gross": 1442000,
+          "fees": 43330,
+          "processing": 14420,
+          "coverage": 3040,
+          "reviewCost": 0,
+          "net": 25870,
+          "delivered": 289,
+          "paid": 1442,
+          "refunds": 1153000,
+          "released": 0,
+          "held": 263010,
+          "cash": 180,
+          "queries": 0,
+          "approvedReviews": 0
+        },
+        {
+          "gross": 1442000,
+          "fees": 43330,
+          "processing": 14420,
+          "coverage": 3040,
+          "reviewCost": 2700,
+          "net": 23170,
+          "delivered": 757,
+          "paid": 1442,
+          "refunds": 685000,
+          "released": 500020,
+          "held": 224840,
+          "cash": 244350,
+          "queries": 1963,
+          "approvedReviews": 108
+        }
+      ],
+      "benefit": -2700,
+      "shiftBenefit": -900
+    }
+  ],
+  "metrics": [
+    {
+      "gross": 1442000,
+      "fees": 43330,
+      "processing": 14420,
+      "coverage": 3040,
+      "reviewCost": 0,
+      "net": 25870,
+      "delivered": 289,
+      "paid": 1442,
+      "refunds": 1153000,
+      "released": 0,
+      "held": 263010,
+      "cash": 180,
+      "queries": 0,
+      "approvedReviews": 0
+    },
+    {
+      "gross": 1442000,
+      "fees": 43330,
+      "processing": 14420,
+      "coverage": 3040,
+      "reviewCost": 2700,
+      "net": 23170,
+      "delivered": 757,
+      "paid": 1442,
+      "refunds": 685000,
+      "released": 500020,
+      "held": 224840,
+      "cash": 244350,
+      "queries": 1963,
+      "approvedReviews": 108
+    }
+  ],
+  "benefit": {
+    "fees": 0,
+    "processing": 0,
+    "coverage": 0,
+    "review": -2700,
+    "total": -2700,
+    "extraDeliveries": 468
+  },
+  "disclosure": "Matched three-shift simulated replay using one saved sandbox receipt as a shared reference; no new payment. Exact orders, fees, initial merchant cash, supply shocks and keyed random draws match. Policies may change procurement, deliveries and resulting evidence. Full hold makes no evidence queries. Net contribution = fees retained - assumed processing costs - modeled provider refund shortfall - assumed scripted-review cost. Released reserves and merchant-funded refunds are not provider profits or expenses. Gross demand remains fixed: no churn, retention uplift or future revenue bonus. Current evidence collection is a deterministic workflow; a conventional implementation with the same queries and rule should match it. This does not establish an advantage for LLM agents, production ROI, or PayPal policy validity."
+}

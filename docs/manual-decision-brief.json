@@ -1,0 +1,461 @@
+{
+  "schema": "supply-yard-manual-decision-brief-v1",
+  "source": "Fresh deterministic replay of the main evidence economy, paused before approval. Not the small LLM benchmark and not the browser live session.",
+  "scope": "Simulated order-level review. One saved sandbox capture is a reference only; no new payment, cloud inference or reserve API call.",
+  "merchant": {
+    "id": "M001",
+    "name": "Mara Paper 1",
+    "modeledCashCents": 1000,
+    "modeledReserveCents": 9630
+  },
+  "order": {
+    "id": "SIM-S1-M001",
+    "units": 10,
+    "currency": "USD",
+    "grossCents": 10000,
+    "feeCents": 370,
+    "netCents": 9630,
+    "paymentSource": "SAVED_SANDBOX_REFERENCE"
+  },
+  "sandboxReference": {
+    "captureId": "7UA38506PR3477149",
+    "verifiedAt": "2026-10-20T14:51:47.974Z",
+    "provenance": "CACHED_PAYPAL_SANDBOX_CAPTURE"
+  },
+  "currentShock": {
+    "name": "Supplier outage",
+    "description": "Northshore stops dispatching. Everyone competes for two remaining warehouses."
+  },
+  "evidenceCounts": {
+    "units": 10,
+    "initial": 2,
+    "confirmed": 6,
+    "unresolved": 4,
+    "rejected": 0
+  },
+  "observedEvidence": [
+    {
+      "id": "SIM-S1-M001-U1",
+      "orderId": "SIM-S1-M001",
+      "merchant": "M001",
+      "amount": 1000,
+      "feed": {
+        "id": "POD-SIM-S1-M001-U1",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U1",
+        "status": "DELIVERED",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "confirmed": true,
+      "source": "Initial carrier feed",
+      "carrier": null,
+      "buyer": null,
+      "rejected": false
+    },
+    {
+      "id": "SIM-S1-M001-U2",
+      "orderId": "SIM-S1-M001",
+      "merchant": "M001",
+      "amount": 1000,
+      "feed": {
+        "id": "POD-SIM-S1-M001-U2",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U2",
+        "status": "DELIVERED",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "confirmed": true,
+      "source": "Initial carrier feed",
+      "carrier": null,
+      "buyer": null,
+      "rejected": false
+    },
+    {
+      "id": "SIM-S1-M001-U3",
+      "orderId": "SIM-S1-M001",
+      "merchant": "M001",
+      "amount": 1000,
+      "feed": null,
+      "confirmed": true,
+      "source": "Recovered carrier proof",
+      "carrier": {
+        "id": "POD-SIM-S1-M001-U3",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U3",
+        "status": "DELIVERED",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "buyer": null,
+      "rejected": false
+    },
+    {
+      "id": "SIM-S1-M001-U4",
+      "orderId": "SIM-S1-M001",
+      "merchant": "M001",
+      "amount": 1000,
+      "feed": null,
+      "confirmed": true,
+      "source": "Recovered carrier proof",
+      "carrier": {
+        "id": "POD-SIM-S1-M001-U4",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U4",
+        "status": "DELIVERED",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "buyer": null,
+      "rejected": false
+    },
+    {
+      "id": "SIM-S1-M001-U5",
+      "orderId": "SIM-S1-M001",
+      "merchant": "M001",
+      "amount": 1000,
+      "feed": null,
+      "confirmed": true,
+      "source": "Recovered carrier proof",
+      "carrier": {
+        "id": "POD-SIM-S1-M001-U5",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U5",
+        "status": "DELIVERED",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "buyer": null,
+      "rejected": false
+    },
+    {
+      "id": "SIM-S1-M001-U6",
+      "orderId": "SIM-S1-M001",
+      "merchant": "M001",
+      "amount": 1000,
+      "feed": null,
+      "confirmed": true,
+      "source": "Recovered carrier proof",
+      "carrier": {
+        "id": "POD-SIM-S1-M001-U6",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U6",
+        "status": "DELIVERED",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "buyer": null,
+      "rejected": false
+    },
+    {
+      "id": "SIM-S1-M001-U7",
+      "orderId": "SIM-S1-M001",
+      "merchant": "M001",
+      "amount": 1000,
+      "feed": null,
+      "confirmed": false,
+      "source": null,
+      "carrier": {
+        "id": "TRACE-SIM-S1-M001-U7",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U7",
+        "status": "NO_PROOF",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "buyer": {
+        "id": "OFFICE-SIM-S1-M001-U7",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U7",
+        "status": "NOT_RECEIVED",
+        "provenance": "GENERATED_OFFICE"
+      },
+      "rejected": false
+    },
+    {
+      "id": "SIM-S1-M001-U8",
+      "orderId": "SIM-S1-M001",
+      "merchant": "M001",
+      "amount": 1000,
+      "feed": null,
+      "confirmed": false,
+      "source": null,
+      "carrier": {
+        "id": "TRACE-SIM-S1-M001-U8",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U8",
+        "status": "NO_PROOF",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "buyer": {
+        "id": "OFFICE-SIM-S1-M001-U8",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U8",
+        "status": "NOT_RECEIVED",
+        "provenance": "GENERATED_OFFICE"
+      },
+      "rejected": false
+    },
+    {
+      "id": "SIM-S1-M001-U9",
+      "orderId": "SIM-S1-M001",
+      "merchant": "M001",
+      "amount": 1000,
+      "feed": null,
+      "confirmed": false,
+      "source": null,
+      "carrier": {
+        "id": "TRACE-SIM-S1-M001-U9",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U9",
+        "status": "NO_PROOF",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "buyer": {
+        "id": "OFFICE-SIM-S1-M001-U9",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U9",
+        "status": "NOT_RECEIVED",
+        "provenance": "GENERATED_OFFICE"
+      },
+      "rejected": false
+    },
+    {
+      "id": "SIM-S1-M001-U10",
+      "orderId": "SIM-S1-M001",
+      "merchant": "M001",
+      "amount": 1000,
+      "feed": null,
+      "confirmed": false,
+      "source": null,
+      "carrier": {
+        "id": "TRACE-SIM-S1-M001-U10",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U10",
+        "status": "NO_PROOF",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "buyer": {
+        "id": "OFFICE-SIM-S1-M001-U10",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U10",
+        "status": "NOT_RECEIVED",
+        "provenance": "GENERATED_OFFICE"
+      },
+      "rejected": false
+    }
+  ],
+  "sourceQueryReceipts": [
+    {
+      "unitId": "SIM-S1-M001-U3",
+      "source": "carrier",
+      "reason": "Missing delivery proof: request a source record.",
+      "response": {
+        "id": "POD-SIM-S1-M001-U3",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U3",
+        "status": "DELIVERED",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "accepted": true,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    },
+    {
+      "unitId": "SIM-S1-M001-U4",
+      "source": "carrier",
+      "reason": "Missing delivery proof: request a source record.",
+      "response": {
+        "id": "POD-SIM-S1-M001-U4",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U4",
+        "status": "DELIVERED",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "accepted": true,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    },
+    {
+      "unitId": "SIM-S1-M001-U5",
+      "source": "carrier",
+      "reason": "Missing delivery proof: request a source record.",
+      "response": {
+        "id": "POD-SIM-S1-M001-U5",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U5",
+        "status": "DELIVERED",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "accepted": true,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    },
+    {
+      "unitId": "SIM-S1-M001-U6",
+      "source": "carrier",
+      "reason": "Missing delivery proof: request a source record.",
+      "response": {
+        "id": "POD-SIM-S1-M001-U6",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U6",
+        "status": "DELIVERED",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "accepted": true,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    },
+    {
+      "unitId": "SIM-S1-M001-U7",
+      "source": "carrier",
+      "reason": "Missing delivery proof: request a source record.",
+      "response": {
+        "id": "TRACE-SIM-S1-M001-U7",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U7",
+        "status": "NO_PROOF",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "accepted": false,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    },
+    {
+      "unitId": "SIM-S1-M001-U8",
+      "source": "carrier",
+      "reason": "Missing delivery proof: request a source record.",
+      "response": {
+        "id": "TRACE-SIM-S1-M001-U8",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U8",
+        "status": "NO_PROOF",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "accepted": false,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    },
+    {
+      "unitId": "SIM-S1-M001-U9",
+      "source": "carrier",
+      "reason": "Missing delivery proof: request a source record.",
+      "response": {
+        "id": "TRACE-SIM-S1-M001-U9",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U9",
+        "status": "NO_PROOF",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "accepted": false,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    },
+    {
+      "unitId": "SIM-S1-M001-U10",
+      "source": "carrier",
+      "reason": "Missing delivery proof: request a source record.",
+      "response": {
+        "id": "TRACE-SIM-S1-M001-U10",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U10",
+        "status": "NO_PROOF",
+        "provenance": "GENERATED_CARRIER"
+      },
+      "accepted": false,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    },
+    {
+      "unitId": "SIM-S1-M001-U7",
+      "source": "buyer",
+      "reason": "Carrier proof absent or mismatched: ask the receiving office.",
+      "response": {
+        "id": "OFFICE-SIM-S1-M001-U7",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U7",
+        "status": "NOT_RECEIVED",
+        "provenance": "GENERATED_OFFICE"
+      },
+      "accepted": false,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    },
+    {
+      "unitId": "SIM-S1-M001-U8",
+      "source": "buyer",
+      "reason": "Carrier proof absent or mismatched: ask the receiving office.",
+      "response": {
+        "id": "OFFICE-SIM-S1-M001-U8",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U8",
+        "status": "NOT_RECEIVED",
+        "provenance": "GENERATED_OFFICE"
+      },
+      "accepted": false,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    },
+    {
+      "unitId": "SIM-S1-M001-U9",
+      "source": "buyer",
+      "reason": "Carrier proof absent or mismatched: ask the receiving office.",
+      "response": {
+        "id": "OFFICE-SIM-S1-M001-U9",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U9",
+        "status": "NOT_RECEIVED",
+        "provenance": "GENERATED_OFFICE"
+      },
+      "accepted": false,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    },
+    {
+      "unitId": "SIM-S1-M001-U10",
+      "source": "buyer",
+      "reason": "Carrier proof absent or mismatched: ask the receiving office.",
+      "response": {
+        "id": "OFFICE-SIM-S1-M001-U10",
+        "orderId": "SIM-S1-M001",
+        "unitId": "SIM-S1-M001-U10",
+        "status": "NOT_RECEIVED",
+        "provenance": "GENERATED_OFFICE"
+      },
+      "accepted": false,
+      "provenance": "SCRIPTED_INVESTIGATION"
+    }
+  ],
+  "policy": {
+    "provenance": "AUTHORED_DEMO_POLICY_NOT_PAYPAL_RULE",
+    "formula": "Hold unresolved gross plus 20% of independently verified gross, capped at net proceeds.",
+    "verifiedGrossCents": 6000,
+    "unresolvedGrossCents": 4000,
+    "bufferCents": 1200,
+    "authority": "A human must approve even a simulated change."
+  },
+  "options": [
+    {
+      "id": "hold",
+      "label": "Keep full hold",
+      "heldCents": 9630,
+      "releaseCents": 0,
+      "merchantCashAfterCents": 1000,
+      "allUnitsRefundReserveOnlyGapCents": 370
+    },
+    {
+      "id": "balanced",
+      "label": "Apply authored evidence rule",
+      "heldCents": 5200,
+      "releaseCents": 4430,
+      "merchantCashAfterCents": 5430,
+      "allUnitsRefundReserveOnlyGapCents": 4800
+    }
+  ],
+  "limitations": [
+    "No private physical outcome counters, future refund realizations or random draws supplied.",
+    "Reserve-only gap assumes every unit is refunded and only this order reserve is available; excludes merchant cash/recovery and is not expected PayPal loss.",
+    "No calibrated refund/default probability, real reserve agreement or complete merchant account history is supplied.",
+    "Merchant cash released is not PayPal profit. Fees are the same under both options."
+  ],
+  "reviewQuestion": {
+    "source": "Hypothetical exception question authored for this manual prototype; not a merchant statement.",
+    "text": "After collecting this evidence, is there support for releasing more than the authored rule allows to improve merchant liquidity? Explain the trade-off, supported action and missing information; do not invent probabilities or a new reserve percentage."
+  },
+  "requestedOutput": [
+    "Recommendation and scope",
+    "Evidence supporting or contradicting the recommendation",
+    "Policy assumptions and missing context",
+    "Conditions that would change the recommendation"
+  ],
+  "mode": {
+    "automaticInference": false,
+    "reviewer": "Current chat assistant, manually requested",
+    "executionAllowed": false,
+    "productionApproval": false
+  },
+  "inputHash": "8f629484318ed84137ed97a05892ba9553fdbe0f153f437c444bd020062d9a88"
+}

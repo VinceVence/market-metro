@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Supply Yard: saved PayPal payment evidence, generated deliveries and scripted reserve investigations.">
+  <title>Supply Yard · Evidence economy</title><link rel="stylesheet" href="/game/network.css">
+</head>
+<body class="network-demo evidence-demo">
+  <a class="skip" href="#commands">Skip to economy controls</a>
+  <header class="topbar">
+    <div class="brand"><span class="town-mark" aria-hidden="true">SY</span><div><h1>Supply Yard</h1><p>AN AFTERSHOCK AGENT ECONOMY</p></div></div>
+    <nav aria-label="Economy tools"><a class="paired-link" href="/benchmark.html">Benchmark lab</a><a class="paired-link" href="/evidence-comparison.html">Full hold vs reviewed</a><button id="evidence-open" disabled>Evidence trail</button><button id="debate-open" disabled>Agent investigation</button><button id="compare-open" disabled>Compare holds</button><button id="rules-open">Money & rules</button></nav>
+    <span class="local-mode"><i></i>Scripted agents · simulated reserves</span>
+  </header>
+  <div class="case-toolbar">
+    <label for="population">ECONOMY SIZE</label><select id="population" aria-label="Economy size (restarts the simulation)"><option value="12">12 merchants · 48 offices</option><option value="36" selected>36 merchants · 144 offices</option><option value="120">120 merchants · 480 offices</option></select>
+    <span class="toolbar-hint">3 shifts · missing scans · conflicting claims</span>
+    <button id="pause" aria-label="Pause economy">Pause</button><button id="speed" aria-label="Change economy speed">1×</button><button id="reset">Restart</button>
+  </div>
+  <main>
+    <div class="receipt-bridge"><span class="receipt-symbol" aria-hidden="true">P</span><div><b id="receipt-status">Loading saved payment evidence…</b><span id="receipt-note">Reading this project’s local store.</span></div><button id="receipt-open">View receipt</button></div>
+    <div class="impact-strip" aria-label="Simulated economy ledger">
+      <div><span>Payment volume · simulated replay</span><strong id="captured">$0</strong><small id="captured-note"></small></div>
+      <div><span>Merchant funds held · simulated</span><strong id="reserves">$0</strong><small>Separate wallets · releases require your approval</small></div>
+      <div class="impact"><span>Merchant cash released · simulated</span><strong id="released">$0</strong><small id="release-note"></small></div>
+    </div>
+    <div class="game-layout">
+      <section class="world-panel" aria-label="Merchant network simulation">
+        <div class="world-caption"><b id="world-status"></b><span id="population-label"></span></div>
+        <div id="shift-strip" class="shift-strip" aria-label="The evidence economy flow"></div>
+        <div id="world-frame" class="world-frame"><canvas id="economy" role="img" aria-label="Supply operation. Use the merchant inspector for individual evidence and balances."></canvas></div>
+        <div class="world-footnote"><span id="world-detail"></span><small>12 loading bays · individual merchant wallets</small></div>
+        <div id="agent-roster" class="agent-roster" aria-label="Inspect scripted agent roles"></div>
+        <p id="live-flow" class="sr-only" role="status" aria-live="polite"></p>
+      </section>
+      <aside class="inspector" aria-label="Evidence investigation and simulated PayPal decision">
+        <div id="mission"></div>
+        <details class="merchant-inspector"><summary>Inspect another merchant</summary><label for="merchant-select">Merchant</label><select id="merchant-select"></select><div id="merchant-detail"></div></details>
+      </aside>
+    </div>
+    <section class="command-dock" id="commands" aria-label="Economy controls"><div class="objective"><span class="step-badge">P</span><div><span class="kicker">AGENTS INVESTIGATE · YOU APPROVE SIMULATED PAYPAL RESERVES</span><p id="objective-text"></p></div></div><div id="actions" class="command-actions"></div></section>
+    <p id="error" class="status-message" role="status"></p>
+    <div class="bottom-note"><span>Saved sandbox proof + generated economy · no new checkout · no LLM</span><a href="/evidence-comparison.html#agentic">Is this actually agentic? ↗</a></div>
+  </main>
+  <dialog id="receipt-dialog" aria-labelledby="receipt-title"><div class="dialog-heading"><div><span class="kicker">PAYMENT PROVENANCE</span><h2 id="receipt-title">The receipt, once.</h2></div><button class="close-dialog" aria-label="Close receipt">×</button></div><div id="receipt-detail" class="rules-body"></div></dialog>
+  <dialog id="evidence-dialog" class="wide-dialog" aria-labelledby="evidence-title"><div class="dialog-heading"><div><span class="kicker">GENERATED EVIDENCE · OBSERVABLE TO AGENTS</span><h2 id="evidence-title">Evidence trail</h2></div><button class="close-dialog" aria-label="Close evidence trail">×</button></div><div id="evidence-trail" class="rules-body"></div></dialog>
+  <dialog id="debate-dialog" aria-labelledby="debate-title"><div class="dialog-heading"><div><span class="kicker">RETRIEVE · CHECK · CHALLENGE · RECOMMEND</span><h2 id="debate-title">The investigation.</h2></div><button class="close-dialog" aria-label="Close agent investigation">×</button></div><div class="transcript-actions"><span>Scripted source lookups · no LLM</span><button id="export">Export economy JSON</button></div><div id="debate-transcript"></div></dialog>
+  <dialog id="compare-dialog" class="wide-dialog" aria-labelledby="compare-title"><div class="dialog-heading"><div><span class="kicker">SAME ORDERS · SAME RESERVE RULE</span><h2 id="compare-title">What changed after investigation?</h2></div><button class="close-dialog" aria-label="Close hold comparison">×</button></div><div id="policy-comparison"></div></dialog>
+  <dialog id="rules-dialog" aria-labelledby="rules-title"><div class="dialog-heading"><div><span class="kicker">ASSUMPTIONS AND AUTHORITY</span><h2 id="rules-title">What PayPal does here.</h2></div><button class="close-dialog" aria-label="Close money rules">×</button></div>
+    <div class="rules-body">
+      <p><b>The simulated PayPal decision is a merchant reserve review.</b> The team finds delivery evidence, challenges mismatched claims, and recommends how much merchant money can be released. You authorize that local decision. Released cash changes the next shift’s purchasing power.</p>
+      <p>The saved receipt supplies a previously verified payment amount, fee, net and capture reference. It is replayed once in the first shift’s Mara Paper order. Subsequent orders are generated. There is no new checkout, capture, refund or reserve call to PayPal on this page. The proof is cached at the displayed verification time, not re-verified each run.</p>
+      <h3>Authored demo rules</h3>
+      <ul>
+        <li>Each merchant starts with $50 of synthetic working capital. Kits sell for $10; procurement costs $4, $5.60 and $4.80 across three shifts. Supplier stocks and delivery draws are generated. Suppliers allocate stock in a fixed queue.</li>
+        <li>100% of each new order’s net proceeds enters a simulated review hold. This is a teaching assumption, not PayPal’s default reserve policy. Generated payments use an assumed 3% fee. Only the linked receipt uses its recorded PayPal sandbox fee.</li>
+        <li>Reserve target = 100% of unverified gross + 20% of verified gross, capped at that order’s net. The initial-feed and investigated options use the same formula. Prior-shift reserves remain held; there is no modeled timed expiry.</li>
+        <li>A matching carrier record needs both the order ID and the individual kit ID. A record for another order is rejected. An office claim without matching carrier proof remains unresolved for human review.</li>
+        <li>The scripted investigators receive source records, not hidden delivery outcomes. The environment generates missing scans as deliveries occur. Mara Paper’s first order is an authored partial-delivery case; Jun Print’s first order has an actual failure and wrong-order proof.</li>
+        <li>After review, the synthetic refund window closes. All actually undelivered units receive $10 refunds from current held proceeds first, then merchant cash, then prior reserves. Any remaining shortfall is assumed to be covered by PayPal. This is not a statement of actual PayPal coverage policy.</li>
+        <li>Only the selected policy is executed. Proposals are not measured alternative outcomes. No merchant churn, legal decision, calibrated fraud model, operating costs, production ROI or LLM advantage is claimed.</li>
+      </ul>
+      <p>The original optimization experiment with editable fees and churn remains available at <a href="/comparison.html">Fixed vs agents</a>. Optional new-payment testing is separate at <a href="/sandbox.html">PayPal sandbox</a>.</p>
+    </div>
+  </dialog>
+  <script type="module" src="/game/network-app.mjs"></script>
+</body>
+</html>

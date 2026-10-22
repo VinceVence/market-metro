@@ -1,0 +1,510 @@
+{
+  "schema": "supply-yard-judgment-case-v1",
+  "caseId": "JUDGMENT-001",
+  "asOf": "2026-10-21T12:00:00Z",
+  "currency": "USD",
+  "provenance": "Entirely authored hypothetical for manual review. No real merchant, PayPal policy, provider quote or verified external document. Separate from the running economy and previous scored benchmarks.",
+  "task": "Choose hold, a small-van controlled release, or a large-van controlled release after the fixed workflow has completed the available checks. Explain the uncertainty and trade-off. Do not invent a calibrated success probability.",
+  "decisionDeadline": "2026-10-21T14:00:00Z",
+  "money": {
+    "capturedGrossCents": 600000,
+    "historicalFeeCents": 18000,
+    "originalNetCents": 582000,
+    "currentlyHeldCents": 400000,
+    "previouslySettledAndSpentCents": 182000,
+    "merchantAvailableCashCents": 0,
+    "additionalCreditAvailableCents": 0,
+    "otherLiabilitiesInHorizonCents": 0,
+    "feeTreatment": "The 3% fee is an assumption. Past fees are unchanged and not refunded in this example; do not count them as a new benefit."
+  },
+  "cohorts": [
+    {
+      "id": "CANCELLED",
+      "count": 20,
+      "unitGrossCents": 10000,
+      "orderPrefix": "C",
+      "consent": "Cancelled; full refunds are due immediately. Never ship or use their ring-fenced refund allocation to finance fulfillment.",
+      "deadline": null
+    },
+    {
+      "id": "FRIDAY",
+      "count": 12,
+      "unitGrossCents": 10000,
+      "orderPrefix": "F",
+      "consent": "Need the kits by Friday 14:00 UTC. They have not accepted later delivery. Full refund if cancelled or delivered late.",
+      "deadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "SATURDAY",
+      "count": 28,
+      "unitGrossCents": 10000,
+      "orderPrefix": "S",
+      "consent": "Explicitly accepted revised delivery by Saturday 14:00 UTC. Full refund if cancelled or delivered late.",
+      "deadline": "2026-10-24T14:00:00Z"
+    }
+  ],
+  "sources": [
+    {
+      "id": "P1",
+      "type": "policy",
+      "text": "Demo policy: normally preserve reserves for buyer obligations. A human reviewer may authorize a controlled fulfillment payment when the plan is credible and balances avoidable buyer harm against funding risk. Ring-fence all already-cancelled refunds. Incremental worst-case provider refund funding gap may not exceed $1,500 relative to holding. The policy does not specify a success probability or weights for customer-service outcomes versus financial exposure."
+    },
+    {
+      "id": "L1",
+      "type": "payment_and_balance_reconciliation",
+      "text": "60 paid orders at $100: $6,000 gross, $180 historical fees, $5,820 net. $4,000 remains held. $1,820 was previously settled and spent on the batch materials. Merchant cash and approved additional credit are zero."
+    },
+    {
+      "id": "B1",
+      "type": "buyer_consents",
+      "text": "20 buyers have cancelled and must receive $2,000. 12 require Friday 14:00 delivery. 28 explicitly accept Saturday 14:00. Late delivery does not remove a refund obligation."
+    },
+    {
+      "id": "W1",
+      "type": "warehouse_report",
+      "text": "An independent warehouse count and order-label reconciliation identify 40 finished kits allocated to the active buyers. The 20 cancelled orders are excluded. Partial dispatch is feasible. Warehouse verification establishes goods availability, not on-time delivery."
+    },
+    {
+      "id": "Q1",
+      "type": "courier_quote",
+      "text": "One dispatch slot is available before Wednesday 14:00. Choose a small van carrying up to 28 kits for a fixed $840, or a large van carrying up to 40 kits for a fixed $1,200. Prices include all modeled shipping costs and do not scale down per kit. Both use the same disrupted hub; no additional vehicle or alternate carrier is available before cutoff. Capacity for either option is confirmed. No credit terms are available. Payment is nonrefundable after pickup. Payment may occur after the matched warehouse pickup scan, before departure."
+    },
+    {
+      "id": "Q2",
+      "type": "courier_estimate",
+      "text": "The courier estimates delivery by Friday and cites 94% on-time performance across 500 recent shipments on all routes. There is no deadline guarantee or late-delivery compensation."
+    },
+    {
+      "id": "R1",
+      "type": "route_specific_delivery_records",
+      "text": "Six recent comparable batches through this hub during the disruption: two arrived within 48 hours of pickup, three more arrived between 48 and 72 hours, one arrived later. These are a small, potentially correlated sample, not a calibrated forecast of this batch. All kits in our booked van share the same delivery-time outcome."
+    },
+    {
+      "id": "H1",
+      "type": "merchant_history",
+      "text": "The merchant has traded for four years. In the preceding 12 months it completed 2,400 orders and refunded 24 (1%). No identity mismatch or fraud flag is present. This history does not measure performance under the current hub disruption."
+    },
+    {
+      "id": "CTRL1",
+      "type": "explicit_simulation_control_assumption",
+      "text": "For this hypothetical, the reviewer can keep funds restricted, ring-fence $2,000 for cancelled buyers, and authorize one courier-specific payment only after a fresh matching pickup scan and invoice. No unrestricted merchant withdrawal is permitted. This is a simulated internal control, not an asserted public PayPal reserve API capability."
+    }
+  ],
+  "fixedWorkflowChecks": {
+    "provenance": "Stipulated checks on the hypothetical documents; only arithmetic and consistency are mechanically verified here.",
+    "identityAndBeneficiaryMatch": true,
+    "noDuplicateOrders": true,
+    "cohortConsentsMatched": true,
+    "inventoryMatchedToActiveOrders": true,
+    "bothVehicleBookingsAvailable": true,
+    "invoicePricesConfirmed": true,
+    "merchantCashAndCreditReconciled": true,
+    "refundsAndReserveReconciled": true,
+    "controlledPaymentAvailableByAssumption": true,
+    "additionalUsefulEvidenceAvailableBeforeCutoff": false
+  },
+  "horizonAssumptions": [
+    "Without a paid booking none of the 40 active orders ships by its accepted deadline; all 60 orders then require full refunds.",
+    "No new funding, carrier slot or buyer extension arrives before cutoff. No speculative future sales or retention benefit is counted.",
+    "A van leaves by Wednesday 14:00 and all kits in that van arrive together: by Friday, on Saturday, or after Saturday. Unshipped or late kits are fully refunded; on-time accepted kits incur no further claim within this short horizon.",
+    "Inventory resale, further merchant recoveries, additional fees, and post-delivery claims are excluded from the short-horizon funding calculation. This does not imply permanent zero recovery or permanent zero returns.",
+    "The provider is assumed to fund any refund amount exceeding remaining held funds in this example. This is not a statement of actual PayPal liability.",
+    "The controlled booking is a use of merchant funds. It reduces refund backing once spent; it is not a provider expense to be counted again.",
+    "There is no supplied probability of Friday, Saturday or later arrival. No hidden realized outcome or preferred-answer label is provided."
+  ],
+  "alternatives": [
+    {
+      "id": "HOLD",
+      "shippingCostCents": 0,
+      "shipFriday": 0,
+      "shipSaturday": 0,
+      "description": "Keep the $4,000 held; refund all 60 orders if no shipping is funded."
+    },
+    {
+      "id": "SMALL_FLEX",
+      "shippingCostCents": 84000,
+      "shipFriday": 0,
+      "shipSaturday": 28,
+      "description": "Small van for all 28 buyers who accepted Saturday. Refund the 20 cancelled and 12 unshipped Friday buyers."
+    },
+    {
+      "id": "SMALL_MIXED",
+      "shippingCostCents": 84000,
+      "shipFriday": 12,
+      "shipSaturday": 16,
+      "description": "Same small-van price; include all 12 Friday buyers and 16 Saturday buyers. Refund the 20 cancelled and 12 unshipped Saturday buyers."
+    },
+    {
+      "id": "LARGE_ALL",
+      "shippingCostCents": 120000,
+      "shipFriday": 12,
+      "shipSaturday": 28,
+      "description": "Large van for all 40 active buyers. Refund 20 cancelled buyers; other refunds depend on accepted deadlines."
+    }
+  ],
+  "broaderChoiceSpace": "A small van can carry any subset of up to 28 active buyers at the same fixed price. Choosing fewer adds no financial saving. Replacing flexible buyers with Friday buyers cannot improve the refund funding gap in any arrival state, though a reviewer may value serving time-critical buyers differently. Both extremes are shown explicitly; all other small-van mixes interpolate between them.",
+  "sourceScope": "All facts and policy above are inputs. Shipment success, the correct probability weights and a correct policy choice are not supplied.",
+  "orders": [
+    {
+      "id": "C-01",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-02",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-03",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-04",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-05",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-06",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-07",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-08",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-09",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-10",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-11",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-12",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-13",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-14",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-15",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-16",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-17",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-18",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-19",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "C-20",
+      "cohort": "CANCELLED",
+      "grossCents": 10000,
+      "acceptedDeadline": null
+    },
+    {
+      "id": "F-01",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "F-02",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "F-03",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "F-04",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "F-05",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "F-06",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "F-07",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "F-08",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "F-09",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "F-10",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "F-11",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "F-12",
+      "cohort": "FRIDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "S-01",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-02",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-03",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-04",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-05",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-06",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-07",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-08",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-09",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-10",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-11",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-12",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-13",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-14",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-15",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-16",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-17",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-18",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-19",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-20",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-21",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-22",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-23",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-24",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-25",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-26",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-27",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    },
+    {
+      "id": "S-28",
+      "cohort": "SATURDAY",
+      "grossCents": 10000,
+      "acceptedDeadline": "2026-10-24T14:00:00Z"
+    }
+  ],
+  "inputHash": "725deb4663eae4512a90552fd7bca894586110ec09479d23a18b693491c40c99"
+}

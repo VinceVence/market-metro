@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aftershock: an interactive, local merchant reserve decision experiment.">
+  <title>Aftershock · Decision lab</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a href="#main" class="skip">Skip to experiment</a>
+  <header class="topbar">
+    <a href="/" class="wordmark">aftershock<span>DECISION LAB</span></a>
+    <nav aria-label="Main views">
+      <button data-view="experiment" aria-pressed="true">Experiment</button>
+      <button data-view="architecture" aria-pressed="false">Architecture</button>
+      <button data-view="scope" aria-pressed="false">Evidence & scope</button>
+    </nav>
+    <span class="mode"><span class="mode-dot"></span>LOCAL SIMULATION</span>
+  </header>
+  <main id="main">
+    <section id="experiment-view">
+      <div class="intro">
+        <div><p class="eyebrow">A PAYPAL RESERVE REVIEW EXPERIMENT</p><h1>When protection changes<br>the outcome it protects.</h1><p class="lead">A supplier fails. Four orders are at risk. Can releasing $60 of a merchant’s reserve make recovery possible while preserving protection?</p></div>
+        <div class="disclosure"><strong>Interactive mechanics. Illustrative decisions.</strong><p>Synthetic economy · scripted agent roles · local payment states. Real model calls and PayPal Sandbox are the next integration layer.</p></div>
+      </div>
+      <div class="scenario-bar">
+        <label for="scenario">CASE STUDY<select id="scenario"></select></label>
+        <p id="scenario-detail"></p>
+        <button id="reset" class="quiet">Reset case</button>
+      </div>
+      <ol class="steps" id="steps" aria-label="Demo progression"></ol>
+      <div class="workspace">
+        <section class="economy panel" aria-labelledby="economy-title">
+          <div class="panel-heading"><div><p class="eyebrow">01 / THE OBSERVED ECONOMY</p><h2 id="economy-title">One shock. Connected consequences.</h2></div><span id="world-label" class="tag">Before disruption</span></div>
+          <div id="economy-map" class="map"></div>
+          <div class="legend"><span><i class="swatch agent"></i>Agent role</span><span><i class="swatch code"></i>Deterministic state</span><span><i class="swatch human"></i>Human authority</span><span><i class="swatch paypal"></i>Payment authority</span></div>
+          <div class="balance-strip" id="balances"></div>
+          <p class="small-note">Opening balances come from prior simulated sales. The new $320 in authorizations is not available cash. All amounts are USD.</p>
+        </section>
+        <section class="case-panel panel" aria-labelledby="case-title">
+          <div class="panel-heading"><div><p class="eyebrow" id="role-label">02 / THE DECISION</p><h2 id="case-title">Can this merchant recover?</h2></div></div>
+          <div id="stage-content"></div>
+          <div id="actions" class="actions"></div>
+          <p id="message" role="status" aria-live="polite" class="message"></p>
+        </section>
+      </div>
+      <section id="comparison" class="comparison panel" hidden></section>
+      <section id="payment-section" class="panel payments" hidden></section>
+      <section class="audit panel">
+        <div class="panel-heading"><div><p class="eyebrow">03 / TRACEABLE ACTIONS</p><h2>What changed, and who was allowed to change it.</h2></div><button id="export" class="quiet">Export run JSON</button></div>
+        <div id="event-log" class="event-log"></div>
+      </section>
+    </section>
+    <section id="architecture-view" hidden>
+      <div class="intro compact"><div><p class="eyebrow">SYSTEM DESIGN / PROPOSED INTEGRATION</p><h1>Agents investigate.<br>Authority stays explicit.</h1><p class="lead">The economic team proposes a decision. The policy engine checks it. A reviewer authorizes the simulated reserve action. PayPal remains the source of truth for native payments.</p></div></div>
+      <div class="architecture-principles"><p><b>Observed world</b><span>Evidence is versioned. Hidden future outcomes stay with the evaluator.</span></p><p><b>Agent reasoning</b><span>Choose questions, tools, comparisons, and when to abstain.</span></p><p><b>Action authority</b><span>Models cannot grant permission or invent completed transactions.</span></p></div>
+      <div class="figures">
+        <figure><figcaption><b>Figure 1.</b> Proposed architecture and authority boundaries <a href="/figures/01-system-architecture.svg" target="_blank" rel="noopener">Open SVG ↗</a></figcaption><img src="/figures/01-system-architecture.svg" alt="Architecture separating synthetic economy, agent investigation, deterministic policy engine, human review, simulated reserves and future PayPal Sandbox integration."></figure>
+        <figure><figcaption><b>Figure 2.</b> A decision from disruption to reconciled payment <a href="/figures/02-decision-sequence.svg" target="_blank" rel="noopener">Open SVG ↗</a></figcaption><img src="/figures/02-decision-sequence.svg" alt="Sequence diagram of evidence gathering, controlled experiments, human approval, execution checks and payment reconciliation."></figure>
+        <figure><figcaption><b>Figure 3.</b> The economic feedback hypothesis <a href="/figures/03-economic-feedback.svg" target="_blank" rel="noopener">Open SVG ↗</a></figcaption><img src="/figures/03-economic-feedback.svg" alt="Causal feedback: release changes available cash and retained protection, which can change fulfillment and refund exposure. Capacity and delivery can block the effect."></figure>
+        <figure><figcaption><b>Figure 4.</b> The authored cash and protection tradeoff <a href="/figures/04-scenario-tradeoff.svg" target="_blank" rel="noopener">Open SVG ↗</a></figcaption><img src="/figures/04-scenario-tradeoff.svg" alt="Illustrative comparison: retaining the reserve leaves 100 dollars available and 200 reserved; releasing 60 leaves 160 available and 140 reserved. Neither is a measured business result."></figure>
+      </div>
+    </section>
+    <section id="scope-view" hidden>
+      <div class="intro compact"><div><p class="eyebrow">RESEARCH BOUNDARY</p><h1>A testable hypothesis,<br>with visible limits.</h1><p class="lead">The candidate contribution is investigating how a reserve decision changes merchant recovery behavior—and how that behavior changes payment-provider exposure.</p></div></div>
+      <div class="scope-grid">
+        <article class="panel"><p class="eyebrow">WORKING IN THIS VERSION</p><h2>Explore the decision</h2><ul><li>Seven cases with different constraints.</li><li>Deterministic accounting, stock, and payment transitions.</li><li>Paired keep/release outcomes and failure stresses.</li><li>Simulated reviewer approval, evidence invalidation, and idempotent local receipts.</li><li>Exportable case, observations, actions, and unresolved obligations.</li></ul></article>
+        <article class="panel"><p class="eyebrow">PROPOSED NEXT LAYER</p><h2>Connect and evaluate</h2><ul><li>Real model tool use for the three investigator roles.</li><li>Server-side permissions, reviewer identity, and durable audit records.</li><li>Owned PayPal Sandbox accounts: approve, authorize, capture, void, refund, reconcile.</li><li>Held-out scenarios against a fixed rule, optimizer, and single agent.</li><li>Owner interviews and authorized operational data before business claims.</li></ul></article>
+      </div>
+      <article class="scope-text panel"><h2>PayPal’s role</h2><p>The proposed user is a PayPal merchant-reserve reviewer. Their decision is whether to reduce an existing minimum reserve, retain it, or request more evidence. The reserve adjustment is simulated here; no public reserve-override endpoint was identified. The future Sandbox adapter demonstrates the payment consequences, not reserve authority.</p><h2>What the agents contribute</h2><p>They decide which incomplete or conflicting evidence to investigate, which counterfactual distinguishes cash from capacity, and whether the recommendation survives adverse assumptions. In this first walkthrough those roles are scripted. A structured optimizer remains a required baseline.</p><h2>What would count as value</h2><p>Better reviewer decisions or less review effort without weakening predefined financial constraints. Evaluate unrecovered losses, payment contribution margin, and reviewer time using representative data. Merchant sales and reserve releases are not PayPal revenue or savings.</p><h2>Novelty claim</h2><p>The completed public research did not identify this exact reserve-and-recovery investigation loop. PayPal already has agent, simulation, and policy research; internal absence and competitive advantage are unverified.</p><h2>Source anchors</h2><ul><li><a href="https://www.paypal.com/us/brc/article/account-reserves" target="_blank" rel="noopener">PayPal: account reserves and review</a></li><li><a href="https://developer.paypal.com/api/payments/v2/" target="_blank" rel="noopener">PayPal: Payments API</a></li><li><a href="https://arxiv.org/abs/2608.17220" target="_blank" rel="noopener">PACE: policy-attested contract execution</a></li><li><a href="https://arxiv.org/abs/2512.21578" target="_blank" rel="noopener">NEMO-4-PAYPAL: agent framework</a></li></ul><p class="small-note">Source basis: completed Aftershock research, October 19, 2026. All demonstration policy thresholds and economic values are authored examples.</p></article>
+    </section>
+  </main>
+  <footer><span>AFTERSHOCK / RESEARCH PROTOTYPE 0.1</span><span>Local simulation · not an official PayPal product</span></footer>
+  <script type="module" src="/app.mjs"></script>
+</body>
+</html>
