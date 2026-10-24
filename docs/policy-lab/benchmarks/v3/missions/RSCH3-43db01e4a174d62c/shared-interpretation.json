@@ -1,0 +1,82 @@
+{
+  "id": "shared-interpretation",
+  "stage": "research_shared_reader",
+  "inputHash": "0911b0f94fab463dab53103647c78500f4600b4c2347665ef59d2757fd8ad6ab",
+  "system": "Extract explicit constraints from the user-authored simulated merchant brief. Budget is cents, discounts are integer percentages. Indices:Willow Goods0,Oak & Ink1,Corner Supply2. Lapsed means previous buyers inactive for7 days. Do not add fields or choose policy parameters not specified.",
+  "packet": {
+    "brief": "Design a very small recommendation experiment for Willow Goods and Corner Supply, open to all shoppers. No coupons. The campaign must end within3 days and may spend at most$10 in simulated funding. Account for refunds and fees. Query the warehouse, compare a local model and run a development pilot; observe if there is insufficient support for outreach."
+  },
+  "functions": [
+    {
+      "name": "interpret_brief",
+      "description": "Extract the explicit campaign constraints. Do not choose a campaign or infer permission beyond the brief.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "budgetCents": {
+            "type": "INTEGER"
+          },
+          "maxCouponPct": {
+            "type": "INTEGER"
+          },
+          "maxDurationDays": {
+            "type": "INTEGER"
+          },
+          "audience": {
+            "type": "STRING",
+            "enum": [
+              "all",
+              "lapsed"
+            ]
+          },
+          "allowedMerchantIndices": {
+            "type": "ARRAY",
+            "items": {
+              "type": "INTEGER"
+            }
+          }
+        },
+        "required": [
+          "budgetCents",
+          "maxCouponPct",
+          "maxDurationDays",
+          "audience",
+          "allowedMerchantIndices"
+        ]
+      }
+    }
+  ],
+  "status": "COMPLETED",
+  "startedAt": "2026-10-24T16:44:27.965Z",
+  "response": {
+    "name": "interpret_brief",
+    "args": {
+      "maxCouponPct": 0,
+      "allowedMerchantIndices": [
+        0,
+        2
+      ],
+      "audience": "all",
+      "budgetCents": 1000,
+      "maxDurationDays": 3
+    },
+    "id": "call_987176"
+  },
+  "provider": {
+    "reservationId": "1edc267d-0a72-427a-871f-e2d0fbaa4fa7",
+    "caseId": "shared-interpretation",
+    "trialId": "RSCH3-43db01e4a174d62c",
+    "stage": "research_shared_reader",
+    "status": "settled",
+    "modelCostMicros": 119,
+    "reservedMicros": 30000,
+    "inputTokens": 204,
+    "outputTokens": 45,
+    "thinkingTokens": 0,
+    "cachedInputTokens": 0,
+    "responseId": "beDcasL0GOyDs8IP9azT-Q4",
+    "modelVersion": "gemini-3.1-flash-lite",
+    "latencyMs": 940
+  },
+  "finishedAt": "2026-10-24T16:44:30.130Z"
+}

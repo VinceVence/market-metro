@@ -1,0 +1,131 @@
+{
+  "workflowId": "WF-933b5a62eaf3f188",
+  "runId": "GARDEN-WF-933b5a62eaf3f188",
+  "planner": "SCRIPTED_DEMO",
+  "evaluation": {
+    "window": {
+      "startDay": 28,
+      "endDayExclusive": 42,
+      "followupThroughDay": 43
+    },
+    "customers": 300,
+    "decisions": 4800,
+    "orders": 222,
+    "buyingCustomers": 147,
+    "offeredCustomers": 58,
+    "coupons": 74,
+    "redemptions": 17,
+    "economics": {
+      "salesCents": 1731915,
+      "discountsCents": 6830,
+      "refundsCents": 28197,
+      "cogsCents": 873445,
+      "deliveryCents": 77700,
+      "modeledFeesCents": 71376,
+      "outreachCents": 148,
+      "contributionCents": 681049
+    },
+    "baselineActiveExperiment": {
+      "groups": [
+        {
+          "arm": "TARGETABLE",
+          "customers": 125,
+          "purchasers": 79
+        },
+        {
+          "arm": "HOLDOUT",
+          "customers": 50,
+          "purchasers": 24
+        }
+      ],
+      "difference": 0.15200000000000002,
+      "ciLow": -0.010249742350488783,
+      "ciHigh": 0.31424974235048886,
+      "status": "MATURE",
+      "interpretation": "Randomized eligibility comparison among baseline-active shoppers. A purchase does not prove that a particular shopper was caused to buy by the coupon."
+    },
+    "nativePayments": [
+      {
+        "run_id": "GARDEN-WF-933b5a62eaf3f188",
+        "order_id": "GARDEN-WF-933b5a62eaf3f188-O41777",
+        "simulation_event_ts": "2026-12-03T01:00:00.000Z",
+        "simulation_event_date": "2026-12-03",
+        "merchant_id": "GARDEN-WF-933b5a62eaf3f188-M001",
+        "merchant_name": "Willow Goods",
+        "customer_id": "GARDEN-WF-933b5a62eaf3f188-U0272",
+        "campaign_id": "GARDEN-WF-933b5a62eaf3f188-LIVE-0",
+        "coupon_id": "GARDEN-WF-933b5a62eaf3f188-CP41770",
+        "discount_pct": 10,
+        "currency": "USD",
+        "simulated_gross_cents": 2879,
+        "modeled_fee_cents": 149,
+        "modeled_net_cents": 2730,
+        "receipt_id": "847a5522-4e16-425e-8fcd-88d821592a4a",
+        "funding_method": "PAYPAL_WALLET_VAULT",
+        "paypal_status": "COMPLETED",
+        "paypal_order_id": "4Y936445VH165191S",
+        "capture_id": "2RF288859F952982L",
+        "payee_merchant_id": "FD8RHLW6Y8GZG",
+        "paypal_gross_cents": 2879,
+        "paypal_fee_cents": 128,
+        "paypal_net_cents": 2751,
+        "provider_captured_at": "2026-10-23T02:38:45Z",
+        "provider_verified_at": "2026-10-23T02:38:47.422Z",
+        "provider_event_date": "2026-10-23",
+        "error_code": null,
+        "payment_source": "PAYPAL_SANDBOX",
+        "amount_verified": 1,
+        "channel3_product_ids": "w7qtfaR",
+        "product_titles": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)"
+      }
+    ],
+    "paidModelCalls": 0
+  },
+  "model": {
+    "type": "logistic",
+    "loss": 0.22240669494006324,
+    "baseline": 0.2635139199296714,
+    "trainingRows": 6300,
+    "validationRows": 2100,
+    "candidates": [
+      {
+        "type": "logistic",
+        "log_loss": 0.22240669494006324,
+        "brier": 0.06416833010142765
+      },
+      {
+        "type": "tree",
+        "log_loss": 0.26959223798739257,
+        "brier": 0.06353973624194564
+      }
+    ]
+  },
+  "checks": {
+    "holdoutCoupons": 0,
+    "traceRows": 4800,
+    "budgetSpentCents": 6978,
+    "budgetLimitCents": 30000,
+    "modelFits": 1
+  },
+  "replay": {
+    "revisionUnchanged": true,
+    "tableCountsUnchanged": true,
+    "evaluationUnchanged": true,
+    "nativeCaptureCount": 1
+  },
+  "catalog": {
+    "configured": false,
+    "mode": "CHANNEL3_CACHE",
+    "productCount": 22,
+    "syncedAt": "2026-10-21T15:29:48.258Z",
+    "freeCreditCallsEnabled": false,
+    "message": "Cached Channel3 API products; simulations make no catalog calls."
+  },
+  "tests": {
+    "fullPassed": 158,
+    "affectedAfterCapFixPassed": 12
+  },
+  "paidLlmApiCalls": 0,
+  "newChannel3SearchCalls": 0,
+  "realMoneyCharged": 0
+}

@@ -1,8 +1,12 @@
 // Public, observed inputs only. Latent simulator traits must never enter training.
 export const FEATURES = ['recency_days','purchases_7d','organic_14d','visits_7d','spend_7d','offers_7d','redemptions_14d','price_cents','stock_available','rival_sale','payday'];
-export const LEARNING_TABLES = ['business_goals','campaign_assignments','coupons','coupon_redemptions','customer_days','model_runs','model_scores','team_decisions','retention_results','policy_comparisons'];
-export const LEARNING_VIEWS = ['v_coupon_journey','v_learning_daily','v_model_history','v_retention_experiments'];
+export const LEARNING_TABLES = ['business_goals','campaign_assignments','coupons','coupon_redemptions','customer_days','model_runs','model_scores','team_decisions','retention_results','policy_comparisons','recommendation_models','recommendations','marketing_planner_calls'];
+export const LEARNING_VIEWS = ['v_coupon_journey','v_learning_daily','v_model_history','v_retention_experiments','v_recommendation_journey'];
 export const LEARNING_DICTIONARY = {
+  marketing_planner_calls:'Actual continuous-planner LLM attempts: dated evidence, function output, public rationale, validation status, provider token receipt and estimated cost. Local workers and simulated shoppers are not counted as LLM decisions.',
+  recommendation_models:'Fitted local affinity/popularity counts, frozen cutoff, chronological Recall@3 comparison, dataset hash and model artifact. Scores are rankings, not purchase probabilities.',
+  recommendations:'One customer/product exposure with its ranked alternatives, model, decision checkpoint, click and optional same-day order. Full-price recommendations cost an assumed 2 cents each. Association is not causal lift.',
+  v_recommendation_journey:'Recommendation → simulated click → optional same-day order → modeled transaction → optional native PayPal receipt. Provider and simulated amounts must not be added.',
   business_goals:'Operator objective and simulated budget. Discounts reduce sale proceeds; only outreach is additionally subtracted from contribution.',
   campaign_assignments:'Persistent randomized treatment eligibility versus holdout. Assignment precedes outcomes; non-targeted treatment customers remain in the denominator.',
   coupons:'Merchant-funded, one-day, single-customer and single-product offers. No real retailer coupons are issued.',
@@ -10,7 +14,7 @@ export const LEARNING_DICTIONARY = {
   customer_days:'Pre-action observed features followed by that day’s offer and purchase outcome. Hidden preferences are excluded.',
   model_runs:'Real CPU training runs, chronological validation, dataset hash, candidate metrics and portable fitted artifacts.',
   model_scores:'Model-versioned purchase probabilities under 0%, 5% and 10% offers. These are our predictions, not Channel3 customer scores.',
-  team_decisions:'Scripted team decisions with measured evidence, selected actions and explicit reasons. No LLM is used.',
+  team_decisions:'Recorded decisions with evidence and reasons. Source distinguishes scripted seasons from assistant-in-chat workflow planning; no app-hosted LLM is invoked.',
   retention_results:'Mature 14-day randomized intent-to-treat outcomes among customers active at assignment; includes uncertainty and signed lift.',
   policy_comparisons:'Matched-world comparisons under the same seed, catalog and shocks. Simulation evidence only.',
   v_coupon_journey:'Coupon → customer → merchant → Channel3 product → redemption → order → simulated payment.',
@@ -19,6 +23,12 @@ export const LEARNING_DICTIONARY = {
   v_retention_experiments:'Randomized treatment/control retention rates. An estimate of aggregate prevented inactivity, never an individual saved-customer claim.'
 };
 export const LEARNING_SCHEMA = [
+  'CREATE TABLE IF NOT EXISTS marketing_planner_calls (call_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),budget_id TEXT,review_id TEXT,stage TEXT,attempt INTEGER,evidence_day INTEGER,decision_day INTEGER,decision_hour INTEGER,model TEXT,status TEXT,input_json TEXT,choice_json TEXT,provider_json TEXT,error_json TEXT,started_at TEXT,finished_at TEXT);',
+  'CREATE INDEX IF NOT EXISTS marketing_planner_calls_run ON marketing_planner_calls(run_id,started_at);',
+  'CREATE TABLE IF NOT EXISTS recommendation_models (model_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),day INTEGER,model_type TEXT,training_rows INTEGER,validation_purchases INTEGER,validation_from_day INTEGER,candidate_recall REAL,baseline_recall REAL,refit_rows INTEGER,dataset_hash TEXT,runtime_ms INTEGER,reason TEXT,artifact_json TEXT,source TEXT);',
+  'CREATE TABLE IF NOT EXISTS recommendations (recommendation_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),customer_id TEXT REFERENCES customers(customer_id),product_id TEXT REFERENCES products(product_id),merchant_id TEXT REFERENCES merchants(merchant_id),campaign_id TEXT REFERENCES campaigns(campaign_id),day INTEGER,event_date TEXT,model_id TEXT REFERENCES recommendation_models(model_id),decision_id TEXT,rank_score REAL,alternatives_json TEXT,reason TEXT,clicked INTEGER,order_id TEXT REFERENCES orders(order_id),outreach_cents INTEGER,source TEXT);',
+  'CREATE INDEX IF NOT EXISTS recommendations_run_customer ON recommendations(run_id,customer_id,day);',
+  'CREATE VIEW IF NOT EXISTS v_recommendation_journey AS SELECT r.run_id,r.recommendation_id,r.day,r.event_date,r.customer_id,r.merchant_id,r.product_id,p.title,p.channel3_product_id,r.model_id,r.decision_id,r.rank_score,r.reason,r.clicked,r.order_id,r.outreach_cents,o.total_cents,o.discount_cents,t.transaction_id,t.fee_cents AS modeled_fee_cents,t.net_cents AS modeled_net_cents,pr.paypal_order_id,pr.capture_id,pr.status AS sandbox_status,pr.gross_cents AS sandbox_gross_cents FROM recommendations r JOIN products p USING(product_id) LEFT JOIN orders o USING(order_id) LEFT JOIN transactions t ON t.order_id=r.order_id LEFT JOIN paypal_receipts pr ON pr.order_id=r.order_id;',
   'CREATE TABLE IF NOT EXISTS business_goals (goal_id TEXT PRIMARY KEY,run_id TEXT UNIQUE REFERENCES simulation_runs(run_id),objective TEXT,question TEXT,budget_cents INTEGER,min_margin_pct REAL,contact_gap_days INTEGER,history_days INTEGER,followup_days INTEGER,policy TEXT,scenario TEXT,source TEXT);',
   'CREATE TABLE IF NOT EXISTS campaign_assignments (assignment_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),campaign_id TEXT REFERENCES campaigns(campaign_id),customer_id TEXT REFERENCES customers(customer_id),assigned_day INTEGER,arm TEXT,propensity REAL,eligible INTEGER,source TEXT);',
   'CREATE TABLE IF NOT EXISTS coupons (coupon_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),campaign_id TEXT REFERENCES campaigns(campaign_id),assignment_id TEXT REFERENCES campaign_assignments(assignment_id),customer_id TEXT REFERENCES customers(customer_id),merchant_id TEXT REFERENCES merchants(merchant_id),product_id TEXT REFERENCES products(product_id),issued_day INTEGER,expires_day INTEGER,discount_pct INTEGER,max_discount_cents INTEGER,model_id TEXT,reason TEXT,source TEXT);',

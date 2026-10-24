@@ -1,0 +1,2178 @@
+{
+  "schema": "MARKETING_EVIDENCE_PACKETS_V1",
+  "packets": [
+    {
+      "caseId": "MD-01",
+      "runId": "DECISION-MD-01",
+      "merchantId": "DECISION-MD-01-M001",
+      "merchantName": "Willow Goods",
+      "day": 42,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 39542,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "USE_RECENT_MODEL",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 41,
+          "completeLabelsThroughDay": 41,
+          "labelLagDays": 0,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 0,
+          "note": "Payment and outcome records are current through the latest closed day."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 56,
+            "discountedSalesCents": 206250,
+            "discountsCents": 3450
+          },
+          "previous7": {
+            "orders": 51,
+            "discountedSalesCents": 159060,
+            "discountsCents": 240
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 332,
+            "visits": 139,
+            "purchases": 56,
+            "offers": 8,
+            "redemptions": 5,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "previous7CompleteDays": {
+            "observations": 361,
+            "visits": 136,
+            "purchases": 51,
+            "offers": 8,
+            "redemptions": 1,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 110,
+              "purchases": 21,
+              "conversion": 0.19090909090909092
+            },
+            {
+              "offerPct": 5,
+              "observations": 142,
+              "purchases": 39,
+              "conversion": 0.2746478873239437
+            },
+            {
+              "offerPct": 10,
+              "observations": 123,
+              "purchases": 49,
+              "conversion": 0.3983739837398374
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-01-P1",
+              "title": "Grid notebook set",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 1800,
+              "costCents": 791,
+              "stock": 56,
+              "margin5": 0.26900584795321636,
+              "margin10": 0.2302469135802469
+            },
+            {
+              "id": "DECISION-MD-01-P2",
+              "title": "Desk organizer",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2400,
+              "costCents": 1219,
+              "stock": 40,
+              "margin5": 0.25526315789473686,
+              "margin10": 0.2162037037037037
+            },
+            {
+              "id": "DECISION-MD-01-P3",
+              "title": "Wireless headphones",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 6900,
+              "costCents": 3793,
+              "stock": 24,
+              "margin5": 0.32555301296720063,
+              "margin10": 0.2900161030595813
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "DECISION-MD-01-MODEL-1",
+          "candidateStatus": "PROMOTED",
+          "candidateType": "logistic",
+          "candidateLogLoss": 0.4065158757331093,
+          "championLogLoss": 0.4113978334718326,
+          "offerRateLogLoss": 0.40941605333688375,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 34,
+          "validationThroughDay": 41,
+          "candidateArtifactHash": "4381397a2a2aa37ae978cc9ea2d6028a67164121467fe63d5644a1896bdea3f6",
+          "reason": "Candidate improves later-day log loss by at least 0.001."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 194,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 53968,
+              "proposedContacts": 193,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 27966,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": -26002
+            },
+            {
+              "action": "USE_RECENT_MODEL",
+              "estimatedContributionCents": 54144,
+              "proposedContacts": 194,
+              "estimatedGainVsKeepCents": 176
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 40817,
+              "proposedContacts": 194,
+              "estimatedGainVsKeepCents": -13151
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 54144,
+              "proposedContacts": 194,
+              "estimatedGainVsKeepCents": 176
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 53968,
+              "proposedContacts": 193,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 5164,
+      "evidenceHash": "c71da7cc22c6644d12f9682038b24cdd1ed5e47f93b80a6b055bbdc5a760334c"
+    },
+    {
+      "caseId": "MD-02",
+      "runId": "DECISION-MD-02",
+      "merchantId": "DECISION-MD-02-M004",
+      "merchantName": "Sunroom Market",
+      "day": 42,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 40788,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "USE_RECENT_MODEL",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 41,
+          "completeLabelsThroughDay": 41,
+          "labelLagDays": 0,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 0,
+          "note": "Payment and outcome records are current through the latest closed day."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 33,
+            "discountedSalesCents": 124420,
+            "discountsCents": 1380
+          },
+          "previous7": {
+            "orders": 46,
+            "discountedSalesCents": 173200,
+            "discountsCents": 0
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 353,
+            "visits": 122,
+            "purchases": 33,
+            "offers": 11,
+            "redemptions": 3,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 1
+          },
+          "previous7CompleteDays": {
+            "observations": 325,
+            "visits": 153,
+            "purchases": 46,
+            "offers": 5,
+            "redemptions": 0,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 130,
+              "purchases": 14,
+              "conversion": 0.1076923076923077
+            },
+            {
+              "offerPct": 5,
+              "observations": 138,
+              "purchases": 25,
+              "conversion": 0.18115942028985507
+            },
+            {
+              "offerPct": 10,
+              "observations": 127,
+              "purchases": 52,
+              "conversion": 0.4094488188976378
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-02-P10",
+              "title": "Reading lamp",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 5400,
+              "costCents": 2564,
+              "stock": 51,
+              "margin5": 0.3875243664717349,
+              "margin10": 0.3553497942386831
+            },
+            {
+              "id": "DECISION-MD-02-P11",
+              "title": "Hand care set",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 3100,
+              "costCents": 1448,
+              "stock": 32,
+              "margin5": 0.3378607809847199,
+              "margin10": 0.3032258064516129
+            },
+            {
+              "id": "DECISION-MD-02-P12",
+              "title": "Daily essentials kit",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 4200,
+              "costCents": 1796,
+              "stock": 34,
+              "margin5": 0.4150375939849624,
+              "margin10": 0.3843915343915344
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "DECISION-MD-02-MODEL-1",
+          "candidateStatus": "PROMOTED",
+          "candidateType": "tree",
+          "candidateLogLoss": 0.3104412538916006,
+          "championLogLoss": 0.3166361486008292,
+          "offerRateLogLoss": 0.31611666693039153,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 34,
+          "validationThroughDay": 41,
+          "candidateArtifactHash": "aab3059d44e646cfcb9890916a019655e765c18e933a45b0af54df32bb73c9b9",
+          "reason": "Candidate improves later-day log loss by at least 0.001."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 241,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 63726,
+              "proposedContacts": 238,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 32260,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": -31466
+            },
+            {
+              "action": "USE_RECENT_MODEL",
+              "estimatedContributionCents": 69565,
+              "proposedContacts": 230,
+              "estimatedGainVsKeepCents": 5839
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 50953,
+              "proposedContacts": 241,
+              "estimatedGainVsKeepCents": -12773
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 63989,
+              "proposedContacts": 241,
+              "estimatedGainVsKeepCents": 263
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 63726,
+              "proposedContacts": 238,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 4903,
+      "evidenceHash": "15f036286f331bd289fc919012af56c8606380a492a7b8a1569ea129dede69f1"
+    },
+    {
+      "caseId": "MD-03",
+      "runId": "DECISION-MD-03",
+      "merchantId": "DECISION-MD-03-M007",
+      "merchantName": "The Desk Shop",
+      "day": 42,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 37400,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 41,
+          "completeLabelsThroughDay": 41,
+          "labelLagDays": 0,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 0,
+          "note": "Payment and outcome records are current through the latest closed day."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 63,
+            "discountedSalesCents": 148600,
+            "discountsCents": 0
+          },
+          "previous7": {
+            "orders": 72,
+            "discountedSalesCents": 180700,
+            "discountsCents": 0
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 323,
+            "visits": 147,
+            "purchases": 63,
+            "offers": 0,
+            "redemptions": 0,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "previous7CompleteDays": {
+            "observations": 328,
+            "visits": 142,
+            "purchases": 72,
+            "offers": 2,
+            "redemptions": 0,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 180,
+              "purchases": 24,
+              "conversion": 0.13333333333333333
+            },
+            {
+              "offerPct": 5,
+              "observations": 133,
+              "purchases": 37,
+              "conversion": 0.2781954887218045
+            },
+            {
+              "offerPct": 10,
+              "observations": 64,
+              "purchases": 23,
+              "conversion": 0.359375
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-03-P19",
+              "title": "Everyday cotton tee",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2900,
+              "costCents": 1565,
+              "stock": 29,
+              "margin5": 0.25226860254083483,
+              "margin10": 0.21264367816091953
+            },
+            {
+              "id": "DECISION-MD-03-P20",
+              "title": "Canvas tote",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 1900,
+              "costCents": 962,
+              "stock": 67,
+              "margin5": 0.2110803324099723,
+              "margin10": 0.16900584795321638
+            },
+            {
+              "id": "DECISION-MD-03-P21",
+              "title": "Ceramic mug pair",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2600,
+              "costCents": 1380,
+              "stock": 42,
+              "margin5": 0.24493927125506074,
+              "margin10": 0.2047008547008547
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "DECISION-MD-03-MODEL-1",
+          "candidateStatus": "REJECTED",
+          "candidateType": "logistic",
+          "candidateLogLoss": 0.41678661183110144,
+          "championLogLoss": 0.4174475439970148,
+          "offerRateLogLoss": 0.42754846669902885,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 34,
+          "validationThroughDay": 41,
+          "candidateArtifactHash": "290ea43075e5bf59db5a4ba77e09a0638b92b67f041d22c07a0a61364697da26",
+          "reason": "Candidate did not beat the champion/offer-rate baseline by 0.001; keep the current policy."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 230,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 33530,
+              "proposedContacts": 209,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 26317,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": -7213
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 30748,
+              "proposedContacts": 230,
+              "estimatedGainVsKeepCents": -2782
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 31960,
+              "proposedContacts": 139,
+              "estimatedGainVsKeepCents": -1570
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 33530,
+              "proposedContacts": 209,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 4867,
+      "evidenceHash": "27497f287a3a5316453a145acc58ee1ebd5624fa333eb687dd11e5d8985ae5bb"
+    },
+    {
+      "caseId": "MD-04",
+      "runId": "DECISION-MD-04",
+      "merchantId": "DECISION-MD-04-M002",
+      "merchantName": "Oak & Ink",
+      "day": 38,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 43316,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 37,
+          "completeLabelsThroughDay": 37,
+          "labelLagDays": 0,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 0,
+          "note": "Payment and outcome records are current through the latest closed day."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 46,
+            "discountedSalesCents": 158800,
+            "discountsCents": 0
+          },
+          "previous7": {
+            "orders": 67,
+            "discountedSalesCents": 234520,
+            "discountsCents": 4880
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 398,
+            "visits": 144,
+            "purchases": 46,
+            "offers": 1,
+            "redemptions": 0,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "previous7CompleteDays": {
+            "observations": 403,
+            "visits": 166,
+            "purchases": 67,
+            "offers": 65,
+            "redemptions": 15,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 153,
+              "purchases": 29,
+              "conversion": 0.1895424836601307
+            },
+            {
+              "offerPct": 5,
+              "observations": 160,
+              "purchases": 39,
+              "conversion": 0.24375
+            },
+            {
+              "offerPct": 10,
+              "observations": 163,
+              "purchases": 58,
+              "conversion": 0.3558282208588957
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-04-P4",
+              "title": "USB-C desk hub",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 3900,
+              "costCents": 1771,
+              "stock": 79,
+              "margin5": 0.37948717948717947,
+              "margin10": 0.347008547008547
+            },
+            {
+              "id": "DECISION-MD-04-P5",
+              "title": "Everyday backpack",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 4800,
+              "costCents": 2477,
+              "stock": 74,
+              "margin5": 0.3344298245614035,
+              "margin10": 0.29930555555555555
+            },
+            {
+              "id": "DECISION-MD-04-P6",
+              "title": "Insulated bottle",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2200,
+              "costCents": 927,
+              "stock": 67,
+              "margin5": 0.330622009569378,
+              "margin10": 0.29545454545454547
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "DECISION-MD-04-MODEL-1",
+          "candidateStatus": "REJECTED",
+          "candidateType": "logistic",
+          "candidateLogLoss": 0.41779029776941456,
+          "championLogLoss": 0.4181906395341697,
+          "offerRateLogLoss": 0.4253299233863888,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 30,
+          "validationThroughDay": 37,
+          "candidateArtifactHash": "8f1b467d251e0a0a68c4fd29ab35929e8264f8f45d2d51690408274deef2957d",
+          "reason": "Candidate did not beat the champion/offer-rate baseline by 0.001; keep the current policy."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 177,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 60451,
+              "proposedContacts": 169,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 40862,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": -19589
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 50876,
+              "proposedContacts": 177,
+              "estimatedGainVsKeepCents": -9575
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 60237,
+              "proposedContacts": 177,
+              "estimatedGainVsKeepCents": -214
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 60451,
+              "proposedContacts": 169,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 4854,
+      "evidenceHash": "98cc22bdf4dc96da5298d7a0c0cc8851b2420f3e9803795fac279682d41558cd"
+    },
+    {
+      "caseId": "MD-05",
+      "runId": "DECISION-MD-05",
+      "merchantId": "DECISION-MD-05-M005",
+      "merchantName": "River General",
+      "day": 42,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 38284,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 41,
+          "completeLabelsThroughDay": 39,
+          "labelLagDays": 2,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 14,
+          "note": "Outcome labels are delayed; missing labels were excluded, never converted to failures. The independent simulated payment ledger is current."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 62,
+            "discountedSalesCents": 217170,
+            "discountsCents": 4230
+          },
+          "previous7": {
+            "orders": 51,
+            "discountedSalesCents": 163590,
+            "discountsCents": 810
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 360,
+            "visits": 139,
+            "purchases": 62,
+            "offers": 16,
+            "redemptions": 6,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "previous7CompleteDays": {
+            "observations": 353,
+            "visits": 146,
+            "purchases": 57,
+            "offers": 25,
+            "redemptions": 5,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 262,
+              "purchases": 48,
+              "conversion": 0.183206106870229
+            },
+            {
+              "offerPct": 5,
+              "observations": 142,
+              "purchases": 42,
+              "conversion": 0.29577464788732394
+            },
+            {
+              "offerPct": 10,
+              "observations": 51,
+              "purchases": 15,
+              "conversion": 0.29411764705882354
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-05-P13",
+              "title": "Grid notebook set",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 1800,
+              "costCents": 906,
+              "stock": 54,
+              "margin5": 0.20175438596491227,
+              "margin10": 0.15925925925925927
+            },
+            {
+              "id": "DECISION-MD-05-P14",
+              "title": "Desk organizer",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2400,
+              "costCents": 1331,
+              "stock": 83,
+              "margin5": 0.20614035087719298,
+              "margin10": 0.16435185185185186
+            },
+            {
+              "id": "DECISION-MD-05-P15",
+              "title": "Wireless headphones",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 6900,
+              "costCents": 3396,
+              "stock": 29,
+              "margin5": 0.3861174675819985,
+              "margin10": 0.3539452495974235
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "DECISION-MD-05-MODEL-1",
+          "candidateStatus": "REJECTED",
+          "candidateType": "logistic",
+          "candidateLogLoss": 0.4607806457954874,
+          "championLogLoss": 0.46053021534638366,
+          "offerRateLogLoss": 0.4671951068792883,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 32,
+          "validationThroughDay": 39,
+          "candidateArtifactHash": "acf59a1268640c2756802cd59fcbd84df0fc2d048d8a1a244d3cac0765024107",
+          "reason": "Candidate did not beat the champion/offer-rate baseline by 0.001; keep the current policy."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 199,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 47756,
+              "proposedContacts": 181,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 35788,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": -11968
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 42304,
+              "proposedContacts": 199,
+              "estimatedGainVsKeepCents": -5452
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 46422,
+              "proposedContacts": 48,
+              "estimatedGainVsKeepCents": -1334
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 47756,
+              "proposedContacts": 181,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 4872,
+      "evidenceHash": "999abd5bd4965bc3a978b127f3725f7d30d6b62eb532eb22b0205c392bbb0971"
+    },
+    {
+      "caseId": "MD-06",
+      "runId": "DECISION-MD-06",
+      "merchantId": "DECISION-MD-06-M008",
+      "merchantName": "Clover Trading",
+      "day": 42,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 40561,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "USE_RECENT_MODEL",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 41,
+          "completeLabelsThroughDay": 41,
+          "labelLagDays": 0,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 0,
+          "note": "Payment and outcome records are current through the latest closed day."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 45,
+            "discountedSalesCents": 184600,
+            "discountsCents": 0
+          },
+          "previous7": {
+            "orders": 69,
+            "discountedSalesCents": 279280,
+            "discountsCents": 420
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 402,
+            "visits": 154,
+            "purchases": 45,
+            "offers": 0,
+            "redemptions": 0,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "previous7CompleteDays": {
+            "observations": 407,
+            "visits": 169,
+            "purchases": 69,
+            "offers": 7,
+            "redemptions": 1,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 135,
+              "purchases": 22,
+              "conversion": 0.16296296296296298
+            },
+            {
+              "offerPct": 5,
+              "observations": 162,
+              "purchases": 43,
+              "conversion": 0.2654320987654321
+            },
+            {
+              "offerPct": 10,
+              "observations": 122,
+              "purchases": 44,
+              "conversion": 0.36065573770491804
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-06-P22",
+              "title": "Reading lamp",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 5400,
+              "costCents": 4266,
+              "stock": 28,
+              "margin5": 0.055750487329434696,
+              "margin10": 0.0051440329218107
+            },
+            {
+              "id": "DECISION-MD-06-P23",
+              "title": "Hand care set",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 3100,
+              "costCents": 2449,
+              "stock": 71,
+              "margin5": -0.0020373514431239388,
+              "margin10": -0.05555555555555555
+            },
+            {
+              "id": "DECISION-MD-06-P24",
+              "title": "Daily essentials kit",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 4200,
+              "costCents": 3318,
+              "stock": 78,
+              "margin5": 0.033583959899749376,
+              "margin10": -0.018253968253968255
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "FIXED_RULE_FALLBACK",
+          "candidateStatus": "PROMOTED",
+          "candidateType": "logistic",
+          "candidateLogLoss": 0.4294344439004485,
+          "championLogLoss": null,
+          "offerRateLogLoss": 0.43581817338998396,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 34,
+          "validationThroughDay": 41,
+          "candidateArtifactHash": "4abe20eba2dc0bd94a9700f0be4ca5933148ae938af559e4c1e4f341e519ff65",
+          "reason": "Candidate improves later-day log loss by at least 0.001."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 235,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 6972,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 6972,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "USE_RECENT_MODEL",
+              "estimatedContributionCents": 6972,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 6972,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 6972,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 6972,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 4882,
+      "evidenceHash": "50975064678e65b85ca1781d2159eae70fbc54150344f259289ffdbf572426e9"
+    },
+    {
+      "caseId": "MD-07",
+      "runId": "DECISION-MD-07",
+      "merchantId": "DECISION-MD-07-M003",
+      "merchantName": "Corner Supply",
+      "day": 42,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 40178,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 41,
+          "completeLabelsThroughDay": 41,
+          "labelLagDays": 0,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 0,
+          "note": "Payment and outcome records are current through the latest closed day."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 58,
+            "discountedSalesCents": 139200,
+            "discountsCents": 0
+          },
+          "previous7": {
+            "orders": 57,
+            "discountedSalesCents": 140300,
+            "discountsCents": 0
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 368,
+            "visits": 159,
+            "purchases": 58,
+            "offers": 1,
+            "redemptions": 0,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "previous7CompleteDays": {
+            "observations": 379,
+            "visits": 162,
+            "purchases": 57,
+            "offers": 3,
+            "redemptions": 0,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 398,
+              "purchases": 74,
+              "conversion": 0.18592964824120603
+            },
+            {
+              "offerPct": 5,
+              "observations": 97,
+              "purchases": 25,
+              "conversion": 0.25773195876288657
+            },
+            {
+              "offerPct": 10,
+              "observations": 32,
+              "purchases": 13,
+              "conversion": 0.40625
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-07-P7",
+              "title": "Everyday cotton tee",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2900,
+              "costCents": 1322,
+              "stock": 88,
+              "margin5": 0.34047186932849366,
+              "margin10": 0.3057471264367816
+            },
+            {
+              "id": "DECISION-MD-07-P8",
+              "title": "Canvas tote",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 1900,
+              "costCents": 975,
+              "stock": 60,
+              "margin5": 0.20387811634349032,
+              "margin10": 0.16140350877192983
+            },
+            {
+              "id": "DECISION-MD-07-P9",
+              "title": "Ceramic mug pair",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2600,
+              "costCents": 1503,
+              "stock": 68,
+              "margin5": 0.1951417004048583,
+              "margin10": 0.15213675213675212
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "DECISION-MD-07-MODEL-1",
+          "candidateStatus": "REJECTED",
+          "candidateType": "logistic",
+          "candidateLogLoss": 0.44218201982041305,
+          "championLogLoss": 0.4414826028024267,
+          "offerRateLogLoss": 0.4462127508750377,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 34,
+          "validationThroughDay": 41,
+          "candidateArtifactHash": "3972b2e8cba43b1d2d32e811ed8fb870f525455ab0e69753c14df5b8fbf69e37",
+          "reason": "Candidate did not beat the champion/offer-rate baseline by 0.001; keep the current policy."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 206,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 30789,
+              "proposedContacts": 102,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 25439,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": -5350
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 28028,
+              "proposedContacts": 134,
+              "estimatedGainVsKeepCents": -2761
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 30232,
+              "proposedContacts": 63,
+              "estimatedGainVsKeepCents": -557
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 30789,
+              "proposedContacts": 102,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 4941,
+      "evidenceHash": "ee4370ca147aed7eaaa05b3d6125ab328edaa76b0749cb2e2ccfab63ab2d9349"
+    },
+    {
+      "caseId": "MD-08",
+      "runId": "DECISION-MD-08",
+      "merchantId": "DECISION-MD-08-M006",
+      "merchantName": "Juniper House",
+      "day": 42,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 41176,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "USE_RECENT_MODEL",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 41,
+          "completeLabelsThroughDay": 41,
+          "labelLagDays": 0,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 0,
+          "note": "Payment and outcome records are current through the latest closed day."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 26,
+            "discountedSalesCents": 96310,
+            "discountsCents": 390
+          },
+          "previous7": {
+            "orders": 51,
+            "discountedSalesCents": 182440,
+            "discountsCents": 960
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 395,
+            "visits": 125,
+            "purchases": 26,
+            "offers": 1,
+            "redemptions": 1,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 1
+          },
+          "previous7CompleteDays": {
+            "observations": 393,
+            "visits": 159,
+            "purchases": 51,
+            "offers": 5,
+            "redemptions": 2,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 202,
+              "purchases": 31,
+              "conversion": 0.15346534653465346
+            },
+            {
+              "offerPct": 5,
+              "observations": 154,
+              "purchases": 33,
+              "conversion": 0.21428571428571427
+            },
+            {
+              "offerPct": 10,
+              "observations": 103,
+              "purchases": 48,
+              "conversion": 0.46601941747572817
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-08-P16",
+              "title": "USB-C desk hub",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 3900,
+              "costCents": 1988,
+              "stock": 39,
+              "margin5": 0.3209176788124157,
+              "margin10": 0.2851851851851852
+            },
+            {
+              "id": "DECISION-MD-08-P17",
+              "title": "Everyday backpack",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 4800,
+              "costCents": 2691,
+              "stock": 83,
+              "margin5": 0.2875,
+              "margin10": 0.24976851851851853
+            },
+            {
+              "id": "DECISION-MD-08-P18",
+              "title": "Insulated bottle",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2200,
+              "costCents": 1136,
+              "stock": 82,
+              "margin5": 0.23062200956937798,
+              "margin10": 0.1898989898989899
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "DECISION-MD-08-MODEL-1",
+          "candidateStatus": "PROMOTED",
+          "candidateType": "logistic",
+          "candidateLogLoss": 0.3340077707598589,
+          "championLogLoss": 0.33647522476379427,
+          "offerRateLogLoss": 0.33718905492693524,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 34,
+          "validationThroughDay": 41,
+          "candidateArtifactHash": "dee0be601dd37b3fe195e4813886205439ed3f2178a620caacd0431667b01469",
+          "reason": "Candidate improves later-day log loss by at least 0.001."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 228,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 54000,
+              "proposedContacts": 228,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 22287,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": -31713
+            },
+            {
+              "action": "USE_RECENT_MODEL",
+              "estimatedContributionCents": 54000,
+              "proposedContacts": 228,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 37047,
+              "proposedContacts": 228,
+              "estimatedGainVsKeepCents": -16953
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 52496,
+              "proposedContacts": 170,
+              "estimatedGainVsKeepCents": -1504
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 54000,
+              "proposedContacts": 228,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 4915,
+      "evidenceHash": "efb3924dc3d38d0c8f30a956d5551398207b23dbec05d216b340740a77d8883e"
+    },
+    {
+      "caseId": "MD-09",
+      "runId": "DECISION-MD-09",
+      "merchantId": "DECISION-MD-09-M001",
+      "merchantName": "Willow Goods",
+      "day": 42,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 39519,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "USE_RECENT_MODEL",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 41,
+          "completeLabelsThroughDay": 41,
+          "labelLagDays": 0,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 0,
+          "note": "Payment and outcome records are current through the latest closed day."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 70,
+            "discountedSalesCents": 210270,
+            "discountsCents": 930
+          },
+          "previous7": {
+            "orders": 50,
+            "discountedSalesCents": 168480,
+            "discountsCents": 120
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 349,
+            "visits": 164,
+            "purchases": 70,
+            "offers": 5,
+            "redemptions": 3,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "previous7CompleteDays": {
+            "observations": 361,
+            "visits": 141,
+            "purchases": 50,
+            "offers": 2,
+            "redemptions": 1,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 384,
+              "purchases": 64,
+              "conversion": 0.16666666666666666
+            },
+            {
+              "offerPct": 5,
+              "observations": 90,
+              "purchases": 22,
+              "conversion": 0.24444444444444444
+            },
+            {
+              "offerPct": 10,
+              "observations": 31,
+              "purchases": 7,
+              "conversion": 0.22580645161290322
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-09-P1",
+              "title": "Grid notebook set",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 1800,
+              "costCents": 911,
+              "stock": 39,
+              "margin5": 0.19883040935672514,
+              "margin10": 0.15617283950617283
+            },
+            {
+              "id": "DECISION-MD-09-P2",
+              "title": "Desk organizer",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2400,
+              "costCents": 1282,
+              "stock": 84,
+              "margin5": 0.22763157894736843,
+              "margin10": 0.18703703703703703
+            },
+            {
+              "id": "DECISION-MD-09-P3",
+              "title": "Wireless headphones",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 6900,
+              "costCents": 3293,
+              "stock": 34,
+              "margin5": 0.40183066361556063,
+              "margin10": 0.3705314009661836
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "DECISION-MD-09-MODEL-1",
+          "candidateStatus": "PROMOTED",
+          "candidateType": "logistic",
+          "candidateLogLoss": 0.4232740710459913,
+          "championLogLoss": 0.4257721154580515,
+          "offerRateLogLoss": 0.4296089666975418,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 34,
+          "validationThroughDay": 41,
+          "candidateArtifactHash": "01c394f656cd1218f7fc3d48e738d37e45a71a855b4291ebeb843628e9482c0f",
+          "reason": "Candidate improves later-day log loss by at least 0.001."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 220,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 37295,
+              "proposedContacts": 98,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 33841,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": -3454
+            },
+            {
+              "action": "USE_RECENT_MODEL",
+              "estimatedContributionCents": 37635,
+              "proposedContacts": 95,
+              "estimatedGainVsKeepCents": 340
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 34778,
+              "proposedContacts": 142,
+              "estimatedGainVsKeepCents": -2517
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 34056,
+              "proposedContacts": 71,
+              "estimatedGainVsKeepCents": -3239
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 37295,
+              "proposedContacts": 98,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 4900,
+      "evidenceHash": "0594a021b2d052d48d63092063766ef04bc6d31118a9c8bae27d4a3f184f4d65"
+    },
+    {
+      "caseId": "MD-10",
+      "runId": "DECISION-MD-10",
+      "merchantId": "DECISION-MD-10-M004",
+      "merchantName": "Sunroom Market",
+      "day": 38,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 45734,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 37,
+          "completeLabelsThroughDay": 37,
+          "labelLagDays": 0,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 0,
+          "note": "Payment and outcome records are current through the latest closed day."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 53,
+            "discountedSalesCents": 217420,
+            "discountsCents": 1080
+          },
+          "previous7": {
+            "orders": 65,
+            "discountedSalesCents": 258115,
+            "discountsCents": 4185
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 316,
+            "visits": 127,
+            "purchases": 53,
+            "offers": 9,
+            "redemptions": 2,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "previous7CompleteDays": {
+            "observations": 323,
+            "visits": 156,
+            "purchases": 65,
+            "offers": 46,
+            "redemptions": 11,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 133,
+              "purchases": 24,
+              "conversion": 0.18045112781954886
+            },
+            {
+              "offerPct": 5,
+              "observations": 115,
+              "purchases": 25,
+              "conversion": 0.21739130434782608
+            },
+            {
+              "offerPct": 10,
+              "observations": 129,
+              "purchases": 61,
+              "conversion": 0.4728682170542636
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-10-P10",
+              "title": "Reading lamp",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 5400,
+              "costCents": 2696,
+              "stock": 36,
+              "margin5": 0.3617933723196881,
+              "margin10": 0.3281893004115226
+            },
+            {
+              "id": "DECISION-MD-10-P11",
+              "title": "Hand care set",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 3100,
+              "costCents": 1522,
+              "stock": 75,
+              "margin5": 0.3127334465195246,
+              "margin10": 0.27670250896057347
+            },
+            {
+              "id": "DECISION-MD-10-P12",
+              "title": "Daily essentials kit",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 4200,
+              "costCents": 1864,
+              "stock": 77,
+              "margin5": 0.3979949874686717,
+              "margin10": 0.3664021164021164
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "DECISION-MD-10-MODEL-1",
+          "candidateStatus": "REJECTED",
+          "candidateType": "logistic",
+          "candidateLogLoss": 0.43753370555575066,
+          "championLogLoss": 0.44046186097829915,
+          "offerRateLogLoss": 0.4383149381381559,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 30,
+          "validationThroughDay": 37,
+          "candidateArtifactHash": "3a61de5618825f2f9729104f5b5f7d1842d8083d4c38ef682c3afd230993bb5d",
+          "reason": "Candidate did not beat the champion/offer-rate baseline by 0.001; keep the current policy."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 138,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 50332,
+              "proposedContacts": 117,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 38605,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": -11727
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 43985,
+              "proposedContacts": 138,
+              "estimatedGainVsKeepCents": -6347
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 48865,
+              "proposedContacts": 138,
+              "estimatedGainVsKeepCents": -1467
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 50332,
+              "proposedContacts": 117,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 4887,
+      "evidenceHash": "d14ee506c2fe062681fcc90f931c28fd1959e49ad4832d1ab3c3cbbc9aea1e02"
+    },
+    {
+      "caseId": "MD-11",
+      "runId": "DECISION-MD-11",
+      "merchantId": "DECISION-MD-11-M007",
+      "merchantName": "The Desk Shop",
+      "day": 42,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 41408,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "USE_RECENT_MODEL",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 41,
+          "completeLabelsThroughDay": 39,
+          "labelLagDays": 2,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 18,
+          "note": "Outcome labels are delayed; missing labels were excluded, never converted to failures. The independent simulated payment ledger is current."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 65,
+            "discountedSalesCents": 163800,
+            "discountsCents": 0
+          },
+          "previous7": {
+            "orders": 58,
+            "discountedSalesCents": 141900,
+            "discountsCents": 0
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 351,
+            "visits": 138,
+            "purchases": 68,
+            "offers": 0,
+            "redemptions": 0,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "previous7CompleteDays": {
+            "observations": 363,
+            "visits": 133,
+            "purchases": 54,
+            "offers": 25,
+            "redemptions": 4,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 141,
+              "purchases": 31,
+              "conversion": 0.2198581560283688
+            },
+            {
+              "offerPct": 5,
+              "observations": 132,
+              "purchases": 38,
+              "conversion": 0.2878787878787879
+            },
+            {
+              "offerPct": 10,
+              "observations": 131,
+              "purchases": 54,
+              "conversion": 0.4122137404580153
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-11-P19",
+              "title": "Everyday cotton tee",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2900,
+              "costCents": 1528,
+              "stock": 68,
+              "margin5": 0.2656987295825771,
+              "margin10": 0.2268199233716475
+            },
+            {
+              "id": "DECISION-MD-11-P20",
+              "title": "Canvas tote",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 1900,
+              "costCents": 896,
+              "stock": 49,
+              "margin5": 0.2476454293628809,
+              "margin10": 0.20760233918128654
+            },
+            {
+              "id": "DECISION-MD-11-P21",
+              "title": "Ceramic mug pair",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2600,
+              "costCents": 1206,
+              "stock": 78,
+              "margin5": 0.3153846153846154,
+              "margin10": 0.27905982905982907
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "DECISION-MD-11-MODEL-1",
+          "candidateStatus": "PROMOTED",
+          "candidateType": "logistic",
+          "candidateLogLoss": 0.4456470538686259,
+          "championLogLoss": 0.4476862217149907,
+          "offerRateLogLoss": 0.4515417864856134,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 32,
+          "validationThroughDay": 39,
+          "candidateArtifactHash": "39631da793c606de38cc4db775ccf7d7a64a7bc2d30693aa2bce3c52d9f4ffce",
+          "reason": "Candidate improves later-day log loss by at least 0.001."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 233,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 38437,
+              "proposedContacts": 159,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 31250,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": -7187
+            },
+            {
+              "action": "USE_RECENT_MODEL",
+              "estimatedContributionCents": 38568,
+              "proposedContacts": 167,
+              "estimatedGainVsKeepCents": 131
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 33943,
+              "proposedContacts": 233,
+              "estimatedGainVsKeepCents": -4494
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 35754,
+              "proposedContacts": 233,
+              "estimatedGainVsKeepCents": -2683
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 38437,
+              "proposedContacts": 159,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 4878,
+      "evidenceHash": "2e703dace700dfc2675f18d2d74d368ffc5b6cf99edae27475de67ecadb2133d"
+    },
+    {
+      "caseId": "MD-12",
+      "runId": "DECISION-MD-12",
+      "merchantId": "DECISION-MD-12-M002",
+      "merchantName": "Oak & Ink",
+      "day": 42,
+      "horizonDays": 7,
+      "objective": "profit",
+      "provenance": "Generated Market Metro observations and real local scikit-learn artifacts. No provider data fetched for this case.",
+      "constraints": {
+        "minMargin": 0.2,
+        "contactGapDays": 7,
+        "persistentHoldoutPct": 25,
+        "budgetRemainingCents": 40643,
+        "sharedBudget": true
+      },
+      "allowedActions": [
+        "KEEP_CURRENT",
+        "PAUSE_OFFERS",
+        "USE_RECENT_MODEL",
+        "OFFER_5",
+        "OFFER_10",
+        "ESCALATE"
+      ],
+      "evidence": {
+        "quality": {
+          "latestClosedDay": 41,
+          "completeLabelsThroughDay": 41,
+          "labelLagDays": 0,
+          "paymentReconciled": true,
+          "capturesAwaitingOutcomeLabels": 0,
+          "note": "Payment and outcome records are current through the latest closed day."
+        },
+        "payments": {
+          "source": "SIMULATED_PAYMENT_LEDGER",
+          "recent7": {
+            "orders": 39,
+            "discountedSalesCents": 139200,
+            "discountsCents": 0
+          },
+          "previous7": {
+            "orders": 64,
+            "discountedSalesCents": 224880,
+            "discountsCents": 2220
+          }
+        },
+        "outcomes": {
+          "recent7CompleteDays": {
+            "observations": 305,
+            "visits": 116,
+            "purchases": 39,
+            "offers": 0,
+            "redemptions": 0,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "previous7CompleteDays": {
+            "observations": 334,
+            "visits": 141,
+            "purchases": 64,
+            "offers": 12,
+            "redemptions": 5,
+            "stockAvailableRate": 1,
+            "observableRivalPromotionRate": 0
+          },
+          "randomizedHistory": [
+            {
+              "offerPct": 0,
+              "observations": 113,
+              "purchases": 21,
+              "conversion": 0.18584070796460178
+            },
+            {
+              "offerPct": 5,
+              "observations": 103,
+              "purchases": 20,
+              "conversion": 0.1941747572815534
+            },
+            {
+              "offerPct": 10,
+              "observations": 137,
+              "purchases": 58,
+              "conversion": 0.4233576642335766
+            }
+          ],
+          "caution": "Recent targeted conversion and redemption rates are not randomized estimates of coupon benefit."
+        },
+        "economics": {
+          "products": [
+            {
+              "id": "DECISION-MD-12-P4",
+              "title": "USB-C desk hub",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 3900,
+              "costCents": 3081,
+              "stock": 29,
+              "margin5": 0.025910931174089068,
+              "margin10": -0.02621082621082621
+            },
+            {
+              "id": "DECISION-MD-12-P5",
+              "title": "Everyday backpack",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 4800,
+              "costCents": 3792,
+              "stock": 75,
+              "margin5": 0.046052631578947366,
+              "margin10": -0.005092592592592593
+            },
+            {
+              "id": "DECISION-MD-12-P6",
+              "title": "Insulated bottle",
+              "source": "AUTHORED_SAMPLE",
+              "priceCents": 2200,
+              "costCents": 1738,
+              "stock": 54,
+              "margin5": -0.05741626794258373,
+              "margin10": -0.11414141414141414
+            }
+          ],
+          "feeAssumption": "3.49% + $0.49, not a quoted PayPal rate",
+          "deliveryCents": 350,
+          "returnRateAssumption": 0.025
+        },
+        "models": {
+          "currentModel": "DECISION-MD-12-MODEL-1",
+          "candidateStatus": "PROMOTED",
+          "candidateType": "logistic",
+          "candidateLogLoss": 0.4291660312264677,
+          "championLogLoss": 0.4314310003766665,
+          "offerRateLogLoss": 0.43602793051799144,
+          "trainingRows": 8400,
+          "validationRows": 2800,
+          "trainingThroughDay": 34,
+          "validationThroughDay": 41,
+          "candidateArtifactHash": "13580cf9706c7e223cccbe560a5d194225ba3de7f68048cc0884e855c3f32700",
+          "reason": "Candidate improves later-day log loss by at least 0.001."
+        },
+        "forecasts": {
+          "basis": "Static replay of eligible observed rows from the latest seven complete label days. Latest validated model, otherwise the champion, otherwise smoothed randomized arm rates. Assumes 2.5% returns. Does not model future depletion, contact changes or shared-budget spillovers. Not a calibrated causal effect.",
+          "observedEligibleRows": 207,
+          "options": [
+            {
+              "action": "KEEP_CURRENT",
+              "estimatedContributionCents": 3283,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "PAUSE_OFFERS",
+              "estimatedContributionCents": 3283,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "USE_RECENT_MODEL",
+              "estimatedContributionCents": 3283,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "OFFER_5",
+              "estimatedContributionCents": 3283,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "OFFER_10",
+              "estimatedContributionCents": 3283,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            },
+            {
+              "action": "ESCALATE",
+              "estimatedContributionCents": 3283,
+              "proposedContacts": 0,
+              "estimatedGainVsKeepCents": 0
+            }
+          ]
+        }
+      },
+      "sharedFitRuntimeMs": 4892,
+      "evidenceHash": "d2827bec35424269747dbd416e5f7bc0e6912f479d12de9107179ab9e4fcb065"
+    }
+  ]
+}

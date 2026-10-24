@@ -1,0 +1,427 @@
+{
+  "id": "RSCH3-43db01e4a174d62c-research-REVIEW",
+  "stage": "research_review",
+  "inputHash": "de419a3c0e6ff6cfabf0d11229c421fc89e68d792663a89fb3b6c738f56201d5",
+  "system": "Independently review this completed research proposal against its actual query/model/pilot evidence. Permit a bounded probe only when the cited pilot has positive mean value and valid constraints; uncertainty remains explicit. You may veto a probe to observe, but may never turn observe into a probe, change the contract or claim production profit. Keep the public rationale grounded in exact evidence. No final evaluation results are visible.",
+  "packet": {
+    "workspaceId": "RSCH3-43db01e4a174d62c-research",
+    "brief": "Design a very small recommendation experiment for Willow Goods and Corner Supply, open to all shoppers. No coupons. The campaign must end within3 days and may spend at most$10 in simulated funding. Account for refunds and fees. Query the warehouse, compare a local model and run a development pilot; observe if there is insufficient support for outreach.",
+    "contract": {
+      "maxCouponPct": 0,
+      "allowedMerchantIndices": [
+        0,
+        2
+      ],
+      "audience": "all",
+      "budgetCents": 1000,
+      "maxDurationDays": 3
+    },
+    "cutoffDay": 45,
+    "objective": "Additional modeled PayPal contribution after retained-order fees, processing, subsidy, outreach and actual model cost. Do not edit the reward.",
+    "availableActions": [],
+    "knownEvidenceIds": [
+      "RSCH3-43db01e4a174d62c-research-STEP-01",
+      "RSCH3-43db01e4a174d62c-research-STEP-02",
+      "RSCH3-43db01e4a174d62c-research-STEP-03",
+      "RSCH3-43db01e4a174d62c-research-STEP-04",
+      "RSCH3-43db01e4a174d62c-research-STEP-05",
+      "RSCH3-43db01e4a174d62c-research-STEP-06",
+      "RSCH3-43db01e4a174d62c-research-STEP-07",
+      "RSCH3-43db01e4a174d62c-research-STEP-08",
+      "RSCH3-43db01e4a174d62c-research-STEP-09",
+      "RSCH3-43db01e4a174d62c-research-STEP-10",
+      "RSCH3-43db01e4a174d62c-research-STEP-08-MODEL",
+      "RSCH3-43db01e4a174d62c-research-STEP-09-PILOT"
+    ],
+    "remaining": {
+      "steps": 6,
+      "queries": 0,
+      "models": 3,
+      "pilots": 1
+    },
+    "knownSchema": [
+      {
+        "name": "catalog",
+        "sql": "CREATE TABLE catalog(product_id TEXT PRIMARY KEY,merchant_index INTEGER,title TEXT,price_cents INTEGER,channel3_id TEXT,source TEXT)"
+      },
+      {
+        "name": "customers",
+        "sql": "CREATE TABLE customers(customer_id TEXT PRIMARY KEY,segment TEXT,purchases INTEGER,last_purchase_day INTEGER)"
+      },
+      {
+        "name": "merchants",
+        "sql": "CREATE TABLE merchants(merchant_index INTEGER PRIMARY KEY,name TEXT,stock INTEGER,max_offer_pct INTEGER)"
+      },
+      {
+        "name": "metadata",
+        "sql": "CREATE TABLE metadata(key TEXT PRIMARY KEY,value TEXT)"
+      },
+      {
+        "name": "observations",
+        "sql": "CREATE TABLE observations(action_id TEXT PRIMARY KEY,day INTEGER,customer_id TEXT,selected_action TEXT,propensity REAL,matures_day INTEGER,reward_cents INTEGER,bias REAL,recency_30d REAL,purchases_7d REAL,offers_7d REAL,price_scale REAL,observed_merchant_affinity REAL,recent_refunds REAL)"
+      },
+      {
+        "name": "orders",
+        "sql": "CREATE TABLE orders(order_id TEXT PRIMARY KEY,day INTEGER,merchant_index INTEGER,customer_id TEXT,gross_cents INTEGER,observed_refund_cents INTEGER,modeled_fee_cents INTEGER,processing_cents INTEGER)"
+      }
+    ],
+    "financialDefinitions": "Warehouse *_cents columns are cents. Pilot estimate.mean, low and high are USD DOLLARS. gross_cents is merchant payment volume, NOT PayPal revenue. Never subtract fees from gross and call that platform contribution. The authoritative platform target is mature observations.reward_cents: retained fees minus processing, platform incentive reimbursement and outreach. It may be negative. SQL results are exploratory, not the immutable evaluator.",
+    "safeFeatures": [
+      "recency_30d",
+      "purchases_7d",
+      "offers_7d",
+      "price_scale",
+      "observed_merchant_affinity",
+      "recent_refunds"
+    ],
+    "featureGrammar": "Up to6 non-intercept linear expressions. Bias/intercept is automatically included. Linear arithmetic only: + - * / and parentheses. Multiplication/division need a constant operand. No reward, future outcomes or post-purchase fields. Example: recency_30d - purchases_7d. All models compile to the unchanged engine interface.",
+    "models": [
+      {
+        "id": "RSCH3-43db01e4a174d62c-research-STEP-08-MODEL",
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "recency_30d",
+          "purchases_7d",
+          "offers_7d",
+          "price_scale",
+          "observed_merchant_affinity",
+          "recent_refunds"
+        ],
+        "windowDays": 28,
+        "datasetHash": "683f28a731d1f6fb17e41cf48e5ce401f3d5a84db888b1b499728e29ae1ff19e",
+        "trainingRows": 1500,
+        "validationRows": 300,
+        "mse": 0.29785620424206255,
+        "baselineMse": 0.2953518266666676,
+        "runtimeMs": 15.582250000035856,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      }
+    ],
+    "pilots": [
+      {
+        "id": "RSCH3-43db01e4a174d62c-research-STEP-09-PILOT",
+        "modelId": "RSCH3-43db01e4a174d62c-research-STEP-08-MODEL",
+        "campaign": {
+          "audience": "all",
+          "penaltyUSD": 0.1,
+          "title": "Willow Goods and Corner Supply Pilot",
+          "maxOfferPct": 0,
+          "merchantIndices": [
+            0,
+            2
+          ],
+          "durationDays": 3
+        },
+        "plan": {
+          "id": "SPEC-2f73c0af730f",
+          "strategy": "recommendations",
+          "audience": "all",
+          "merchantIndices": [
+            0,
+            2
+          ],
+          "maxOfferPct": 0,
+          "duration": 3,
+          "penalty": 0.1,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "estimate": {
+          "mean": -0.18666666666666668,
+          "low": -2.57,
+          "high": 3.23,
+          "seeds": 3,
+          "cases": 3,
+          "winRate": 0.3333333333333333,
+          "worst": -2.57,
+          "worstDecileMean": -2.57,
+          "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+          "unit": "USD"
+        },
+        "validity": true,
+        "interpretation": "Three independent development-seed paired rollouts, fully matured. Selection-biased when used to choose a campaign. Not final evidence, not real customers, not a mathematical causal guarantee outside this simulator."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "RSCH3-43db01e4a174d62c-research-STEP-04",
+        "action": "query_warehouse",
+        "status": "FAILED",
+        "rationale": "I need to see the actual column names in the observations table to correctly filter by merchant or product, as the previous attempt failed due to incorrect column assumptions.",
+        "output": {
+          "error": "READ_ONLY_SELECT_REQUIRED"
+        }
+      },
+      {
+        "id": "RSCH3-43db01e4a174d62c-research-STEP-05",
+        "action": "query_warehouse",
+        "status": "FAILED",
+        "rationale": "I need to see the actual column names in the observations table to correctly filter by merchant or product, as the previous attempt failed due to incorrect column assumptions. I will query the schema of the observations table.",
+        "output": {
+          "error": "READ_ONLY_SELECT_REQUIRED"
+        }
+      },
+      {
+        "id": "RSCH3-43db01e4a174d62c-research-STEP-06",
+        "action": "query_warehouse",
+        "status": "FAILED",
+        "rationale": "I need to see the column names in the observations table to understand how to link them to merchants or products, as the previous attempts failed. I will use PRAGMA table_info to inspect the schema.",
+        "output": {
+          "error": "READ_ONLY_SELECT_REQUIRED"
+        }
+      },
+      {
+        "id": "RSCH3-43db01e4a174d62c-research-STEP-07",
+        "action": "query_warehouse",
+        "status": "COMPLETED",
+        "rationale": "I need to see the column names in the observations table to understand how to link them to merchants or products. I will select a single row to inspect the structure.",
+        "output": {
+          "columns": [
+            "action_id",
+            "day",
+            "customer_id",
+            "selected_action",
+            "propensity",
+            "matures_day",
+            "reward_cents",
+            "bias",
+            "recency_30d",
+            "purchases_7d",
+            "offers_7d",
+            "price_scale",
+            "observed_merchant_affinity",
+            "recent_refunds"
+          ],
+          "rows": [
+            {
+              "action_id": "RSCH3-43db01e4a174d62c-research-ACTION-0-0",
+              "day": 0,
+              "customer_id": "RSCH3-43db01e4a174d62c-research-U0001",
+              "selected_action": "coupon5:1",
+              "propensity": 0.1111111111111111,
+              "matures_day": 14,
+              "reward_cents": -2,
+              "bias": 1,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            }
+          ],
+          "truncated": false,
+          "modelPreviewTruncated": false
+        }
+      },
+      {
+        "id": "RSCH3-43db01e4a174d62c-research-STEP-08",
+        "action": "fit_model",
+        "status": "COMPLETED",
+        "rationale": "Fitting a ridge model using all available safe features to predict reward_cents, aiming to identify high-contribution segments for Willow Goods and Corner Supply.",
+        "output": {
+          "modelId": "RSCH3-43db01e4a174d62c-research-STEP-08-MODEL",
+          "type": "compiled_linear_feature_ridge",
+          "features": [
+            "recency_30d",
+            "purchases_7d",
+            "offers_7d",
+            "price_scale",
+            "observed_merchant_affinity",
+            "recent_refunds"
+          ],
+          "windowDays": 28,
+          "datasetHash": "683f28a731d1f6fb17e41cf48e5ce401f3d5a84db888b1b499728e29ae1ff19e",
+          "trainingRows": 1500,
+          "validationRows": 300,
+          "mse": 0.29785620424206255,
+          "baselineMse": 0.2953518266666676,
+          "runtimeMs": 15.582250000035856,
+          "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+        }
+      },
+      {
+        "id": "RSCH3-43db01e4a174d62c-research-STEP-09",
+        "action": "run_pilot",
+        "status": "COMPLETED",
+        "rationale": "Running a pilot to evaluate the model's ability to identify high-contribution shoppers for Willow Goods (0) and Corner Supply (2) without coupons, within the 3-day constraint and $10 budget.",
+        "output": {
+          "id": "RSCH3-43db01e4a174d62c-research-STEP-09-PILOT",
+          "modelId": "RSCH3-43db01e4a174d62c-research-STEP-08-MODEL",
+          "campaign": {
+            "audience": "all",
+            "penaltyUSD": 0.1,
+            "title": "Willow Goods and Corner Supply Pilot",
+            "maxOfferPct": 0,
+            "merchantIndices": [
+              0,
+              2
+            ],
+            "durationDays": 3
+          },
+          "plan": {
+            "id": "SPEC-2f73c0af730f",
+            "strategy": "recommendations",
+            "audience": "all",
+            "merchantIndices": [
+              0,
+              2
+            ],
+            "maxOfferPct": 0,
+            "duration": 3,
+            "penalty": 0.1,
+            "epsilon": 0,
+            "windowDays": 42
+          },
+          "estimate": {
+            "mean": -0.18666666666666668,
+            "low": -2.57,
+            "high": 3.23,
+            "seeds": 3,
+            "cases": 3,
+            "winRate": 0.3333333333333333,
+            "worst": -2.57,
+            "worstDecileMean": -2.57,
+            "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+            "unit": "USD"
+          },
+          "validity": true,
+          "interpretation": "Three independent development-seed paired rollouts, fully matured. Selection-biased when used to choose a campaign. Not final evidence, not real customers, not a mathematical causal guarantee outside this simulator."
+        }
+      },
+      {
+        "id": "RSCH3-43db01e4a174d62c-research-STEP-10",
+        "action": "commit_campaign",
+        "status": "COMPLETED",
+        "rationale": "The pilot simulation for Willow Goods and Corner Supply resulted in a negative expected mean contribution (-$0.19) with high variance. Given the objective is to maximize PayPal contribution and the pilot does not demonstrate a clear positive financial impact, I have decided to observe rather than deploy the campaign.",
+        "output": {
+          "decision": "observe",
+          "pilotId": "RSCH3-43db01e4a174d62c-research-STEP-09-PILOT",
+          "modelId": "RSCH3-43db01e4a174d62c-research-STEP-08-MODEL",
+          "plan": {
+            "id": "observe",
+            "strategy": "observe",
+            "audience": "all",
+            "merchantIndices": [],
+            "maxOfferPct": 0,
+            "duration": 0,
+            "penalty": 0,
+            "epsilon": 0,
+            "windowDays": 42
+          },
+          "rationale": "The pilot simulation for Willow Goods and Corner Supply resulted in a negative expected mean contribution (-$0.19) with high variance. Given the objective is to maximize PayPal contribution and the pilot does not demonstrate a clear positive financial impact, I have decided to observe rather than deploy the campaign.",
+          "pilotEstimate": {
+            "mean": -0.18666666666666668,
+            "low": -2.57,
+            "high": 3.23,
+            "seeds": 3,
+            "cases": 3,
+            "winRate": 0.3333333333333333,
+            "worst": -2.57,
+            "worstDecileMean": -2.57,
+            "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+            "unit": "USD"
+          },
+          "currency": "USD",
+          "expectedMeanUSD": -0.18666666666666668,
+          "scope": "BOUNDED_SIMULATION_EXPERIMENT_NOT_PRODUCTION_PROMOTION"
+        }
+      }
+    ],
+    "boundaries": "This is a simulation research workspace. Pilot controls are allowed development feedback, distinct from hidden final evaluation controls. No filesystem, network, arbitrary Python, payment or reward-editing tool is available.",
+    "proposal": {
+      "decision": "observe",
+      "pilotId": "RSCH3-43db01e4a174d62c-research-STEP-09-PILOT",
+      "modelId": "RSCH3-43db01e4a174d62c-research-STEP-08-MODEL",
+      "plan": {
+        "id": "observe",
+        "strategy": "observe",
+        "audience": "all",
+        "merchantIndices": [],
+        "maxOfferPct": 0,
+        "duration": 0,
+        "penalty": 0,
+        "epsilon": 0,
+        "windowDays": 42
+      },
+      "rationale": "The pilot simulation for Willow Goods and Corner Supply resulted in a negative expected mean contribution (-$0.19) with high variance. Given the objective is to maximize PayPal contribution and the pilot does not demonstrate a clear positive financial impact, I have decided to observe rather than deploy the campaign.",
+      "pilotEstimate": {
+        "mean": -0.18666666666666668,
+        "low": -2.57,
+        "high": 3.23,
+        "seeds": 3,
+        "cases": 3,
+        "winRate": 0.3333333333333333,
+        "worst": -2.57,
+        "worstDecileMean": -2.57,
+        "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+        "unit": "USD"
+      },
+      "currency": "USD",
+      "expectedMeanUSD": -0.18666666666666668,
+      "scope": "BOUNDED_SIMULATION_EXPERIMENT_NOT_PRODUCTION_PROMOTION"
+    }
+  },
+  "functions": [
+    {
+      "name": "review_commit",
+      "description": "Review the proposed experimental deployment without expanding its authority.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "verdict": {
+            "type": "STRING",
+            "enum": [
+              "approve",
+              "observe"
+            ]
+          },
+          "rationale": {
+            "type": "STRING"
+          },
+          "evidenceIds": {
+            "type": "ARRAY",
+            "items": {
+              "type": "STRING"
+            }
+          }
+        },
+        "required": [
+          "verdict",
+          "rationale",
+          "evidenceIds"
+        ]
+      }
+    }
+  ],
+  "status": "COMPLETED",
+  "startedAt": "2026-10-24T16:45:31.506Z",
+  "response": {
+    "name": "review_commit",
+    "args": {
+      "evidenceIds": [
+        "RSCH3-43db01e4a174d62c-research-STEP-09-PILOT"
+      ],
+      "verdict": "approve",
+      "rationale": "The pilot simulation for the proposed recommendation campaign (Willow Goods and Corner Supply) yielded a negative expected mean contribution (-$0.19) with significant variance (low: -$2.57, high: $3.23). Given the objective to maximize PayPal contribution and the lack of evidence for a positive financial impact, the decision to observe rather than deploy is sound and supported by the pilot data."
+    },
+    "id": "call_6603114"
+  },
+  "provider": {
+    "reservationId": "545f129a-d2fa-49ea-a15a-5f782871a04a",
+    "caseId": "RSCH3-43db01e4a174d62c-research-REVIEW",
+    "trialId": "RSCH3-43db01e4a174d62c",
+    "stage": "research_review",
+    "status": "settled",
+    "modelCostMicros": 1184,
+    "reservedMicros": 30000,
+    "inputTokens": 3893,
+    "outputTokens": 140,
+    "thinkingTokens": 0,
+    "cachedInputTokens": 0,
+    "responseId": "r-Dcau3hIKK12roPkrejgQI",
+    "modelVersion": "gemini-3.1-flash-lite",
+    "latencyMs": 1482
+  },
+  "finishedAt": "2026-10-24T16:45:36.753Z"
+}

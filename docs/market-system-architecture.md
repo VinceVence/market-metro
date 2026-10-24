@@ -1,6 +1,10 @@
 # Market Metro: four-plane architecture
 
-Updated on **22 October 2026** after real PayPal Sandbox captures and receipt readback. Four native captures were verified across two emulator seasons, using the same saved test buyer. No live-money payment, new catalog search or cloud model call was made.
+The newest addition is the [v3 research workspace](policy-lab/benchmarks/v3/README.md): a checkpointed Gemini lead chooses SQL investigations, bounded feature recipes, local fits and development pilots; an independent reviewer checks the proposed deployment before sealed evaluation. It shares the cached Channel3 catalog and frozen emulator with matched code comparators. It does not issue new PayPal payments or replace the live planner. [Current research architecture](figures/research-workflow-v3/research-architecture.png) shows the implemented tools and authority boundaries.
+
+The diagram and detailed snapshot below describe the **22 October 2026 checkout bridge**. The current build also has a Gemini planner, hourly simulation, 35 public base tables and 13 views. The [PayPal commerce team extension](paypal-services.md) has six service workflows verified in sandbox, with provider-state feedback and explicit payout/reporting limitations. The [100-day campaign report](continuous-market/reports/GARDEN-LIVE-37967f0f51de0529/summary.md) preserves the separately verified marketing run.
+
+Historical checkout evidence: four native captures were verified across two emulator seasons using the same saved test buyer. No live-money payment was made. Older figures and scripted-only descriptions below are retained as historical evidence, not the current capability inventory.
 
 ![Current four-plane architecture](figures/market-system-planes.png)
 

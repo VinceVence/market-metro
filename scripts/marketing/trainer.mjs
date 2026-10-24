@@ -9,13 +9,14 @@ export function localTrainerStatus(){
   const path=resolve(root,'.local/marketing-venv/bin/python');
   return {ready:existsSync(path),runtime:'Local Python / scikit-learn CPU',llmCalls:0,cloudCalls:0};
 }
-export async function trainLocal(store,world){
+export async function trainLocal(store,world,{windowDays=28,modelTypes=['logistic','tree']}={}){
+  if(![14,21,28].includes(windowDays)||!Array.isArray(modelTypes)||!modelTypes.length||new Set(modelTypes).size!==modelTypes.length||modelTypes.some(x=>!['logistic','tree'].includes(x)))throw new Error('Unsupported local training plan.');
   const python=resolve(root,'.local/marketing-venv/bin/python');
   if(!existsSync(python))return {status:'UNAVAILABLE',reason:'Install the local marketing Python environment using the README setup commands.'};
   const columns=['day',...FEATURES,'offered_pct','purchased'];
-  const rows=store.db.prepare('SELECT '+columns.join(',')+' FROM customer_days WHERE run_id=? AND day<? AND day>=? ORDER BY day,customer_id').all(world.runId,world.tick,Math.max(0,world.tick-28));
+  const rows=store.db.prepare('SELECT '+columns.join(',')+' FROM customer_days WHERE run_id=? AND day<? AND day>=? ORDER BY day,customer_id').all(world.runId,world.tick,Math.max(0,world.tick-windowDays));
   if(rows.length>120000)throw new Error('Local training dataset exceeds its row limit.');
-  const input={features:FEATURES,rows,cutoff:world.tick,seed:world.seed,champion:world.champion?.artifact||null};
+  const input={features:FEATURES,rows,cutoff:world.tick,seed:world.seed,champion:world.champion?.artifact||null,model_types:modelTypes};
   const started=performance.now();
   const result=await new Promise((accept,reject)=>{
     const process=execFile(python,[resolve(root,'scripts/marketing/train.py')],{

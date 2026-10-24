@@ -34,7 +34,7 @@ test('a full seeded market produces coherent normalized tables, views, stocks an
   while(a.status!=='COMPLETED'){const first=advanceMarket(a),second=advanceMarket(b);assert.deepEqual(first,second);store.commit(a,first);}
   assert(a.stats.orders>500);assert.equal(a.pending.length,0);assert.equal(a.stats.deliveries,a.stats.orders);
   assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
-  assert.equal(TABLES.length,24);assert.equal(VIEWS.length,11);
+  assert.equal(TABLES.length,41);assert.equal(VIEWS.length,14);
   const tx=store.db.prepare('SELECT SUM(gross_cents) gross,SUM(net_cents) net,SUM(fee_cents) fee,COUNT(*) n FROM transactions').get();
   assert.equal(tx.gross,a.stats.revenueCents);assert.equal(tx.gross,tx.net+tx.fee);assert.equal(tx.n,a.stats.orders);
   assert.equal(store.db.prepare('SELECT COUNT(*) n FROM v_marketing_transactions').get().n,tx.n);
@@ -74,7 +74,7 @@ test('SQLite export preserves one selected run and real SQL views without intern
   const store=createMarketStore();const a=createMarket(config);store.create(a);store.commit(a,advanceMarket(a));store.create(createMarket({...config,runId:'OTHER'}));
   store.insert('policy_comparisons',[{comparison_id:'C',run_id:'TEST',policy:'fixed_rules',compared_run_id:'OTHER',seed:773,source:'MATCHED_SEED_SIMULATION'}]);
   const dir=await mkdtemp(join(tmpdir(),'metro-test-'));
-  try{const bytes=await store.snapshot('TEST');assert.equal(bytes.subarray(0,15).toString(),'SQLite format 3');const file=join(dir,'data.sqlite');await writeFile(file,bytes);const exported=new DatabaseSync(file);assert.equal(exported.prepare('SELECT COUNT(*) n FROM simulation_runs').get().n,1);assert.equal(exported.prepare('SELECT compared_run_id FROM policy_comparisons').get().compared_run_id,'OTHER');assert.equal(exported.prepare('SELECT COUNT(*) n FROM sqlite_master WHERE type=\'view\'').get().n,11);assert.deepEqual(exported.prepare('PRAGMA foreign_key_check').all(),[]);exported.close();}
+  try{const bytes=await store.snapshot('TEST');assert.equal(bytes.subarray(0,15).toString(),'SQLite format 3');const file=join(dir,'data.sqlite');await writeFile(file,bytes);const exported=new DatabaseSync(file);assert.equal(exported.prepare('SELECT COUNT(*) n FROM simulation_runs').get().n,1);assert.equal(exported.prepare('SELECT compared_run_id FROM policy_comparisons').get().compared_run_id,'OTHER');assert.equal(exported.prepare('SELECT COUNT(*) n FROM sqlite_master WHERE type=\'view\'').get().n,VIEWS.length);assert.deepEqual(exported.prepare('PRAGMA foreign_key_check').all(),[]);exported.close();}
   finally{store.close();await rm(dir,{recursive:true,force:true});}
   assert(csv({columns:['label'],rows:[{label:'=HYPERLINK("bad")'}]}).includes("'=HYPERLINK"));
 });

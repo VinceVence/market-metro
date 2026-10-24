@@ -1,0 +1,26 @@
+[
+  {
+    "name": "catalog",
+    "sql": "CREATE TABLE catalog(product_id TEXT PRIMARY KEY,merchant_index INTEGER,title TEXT,price_cents INTEGER,channel3_id TEXT,source TEXT)"
+  },
+  {
+    "name": "customers",
+    "sql": "CREATE TABLE customers(customer_id TEXT PRIMARY KEY,segment TEXT,purchases INTEGER,last_purchase_day INTEGER)"
+  },
+  {
+    "name": "merchants",
+    "sql": "CREATE TABLE merchants(merchant_index INTEGER PRIMARY KEY,name TEXT,stock INTEGER,max_offer_pct INTEGER)"
+  },
+  {
+    "name": "metadata",
+    "sql": "CREATE TABLE metadata(key TEXT PRIMARY KEY,value TEXT)"
+  },
+  {
+    "name": "observations",
+    "sql": "CREATE TABLE observations(action_id TEXT PRIMARY KEY,day INTEGER,customer_id TEXT,selected_action TEXT,propensity REAL,matures_day INTEGER,reward_cents INTEGER,bias REAL,recency_30d REAL,purchases_7d REAL,offers_7d REAL,price_scale REAL,observed_merchant_affinity REAL,recent_refunds REAL)"
+  },
+  {
+    "name": "orders",
+    "sql": "CREATE TABLE orders(order_id TEXT PRIMARY KEY,day INTEGER,merchant_index INTEGER,customer_id TEXT,gross_cents INTEGER,observed_refund_cents INTEGER,modeled_fee_cents INTEGER,processing_cents INTEGER)"
+  }
+]

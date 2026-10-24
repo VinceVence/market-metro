@@ -1,0 +1,56 @@
+{
+  "status": "POC_VERIFIED_WITH_LIMITATIONS",
+  "verifiedAt": "2026-10-24T12:11:41.654110+00:00",
+  "runId": "GARDEN-LAB-df43cd08499c0c0a",
+  "checks": {
+    "testsPassed": 204,
+    "deterministicReplayBranches": 3,
+    "foreignKeyViolations": 0,
+    "invalidMoneyRows": 0,
+    "invalidPropensities": 0,
+    "allPostHistoryOutcomesMature": true,
+    "desktopVerified": true,
+    "mobileVerified": true,
+    "mobileDialogWidth": 380,
+    "mobileDialogScrollWidth": 380,
+    "browserErrors": 0
+  },
+  "cost": {
+    "attempts": 12,
+    "accountedUSD": 0.008447,
+    "lifetimeAccountedUSD": 0.869186,
+    "perRunCapUSD": 0.25,
+    "wholeHackathonCeilingUSD": 50,
+    "localTrainingMs": 29.853208000015,
+    "unsettled": 0,
+    "basis": "Provider-reported tokens at recorded prices; not a billing invoice."
+  },
+  "nativeSample": {
+    "captureId": "4H546903J1724721F",
+    "sourceRunId": "GARDEN-LAB-aa0790339ca3cc4a",
+    "grossCents": 3039,
+    "feeCents": 133,
+    "mode": "SANDBOX",
+    "currentRunReceipts": 0,
+    "currentRunUsesReferenceOnly": true
+  },
+  "approvalBoundary": "Automatic approval review rejected a second sandbox payment because the earlier authorization covered one sample; corrected trial disabled new payments.",
+  "outcome": "The team completed but did not beat either control on modeled platform contribution. Final reviewer recommended stop_outreach.",
+  "screenshots": [
+    "docs/screenshots/policy-lab-team-desktop.png",
+    "docs/screenshots/policy-lab-comparison.png",
+    "docs/screenshots/policy-lab-mobile.png"
+  ],
+  "scopeDocument": "docs/policy-lab/poc-scope.md",
+  "architecture": "docs/policy-lab/architecture.md",
+  "noSubagents": true,
+  "apacUnchanged": true,
+  "limitations": [
+    "One seed; no claim of generalized lift or real merchant ROI.",
+    "Merchant and shopper behavior is authored. Three reasoning roles use real Gemini; merchant actors are numerical policies.",
+    "The learner is a contextual bandit, not sequential or multi-agent RL.",
+    "The native reference belongs to the first trial. No payment was made in the corrected trial.",
+    "Raw LLM rationales are retained, including mistakes. Output validation is not proof of semantic correctness.",
+    "LLM latency affects activation days. Replay uses saved activation times and model artifacts."
+  ]
+}

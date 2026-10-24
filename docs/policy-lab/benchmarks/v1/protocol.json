@@ -1,0 +1,151 @@
+{
+  "id": "policy-lab-transfer-v1",
+  "version": "v1",
+  "createdAt": "2026-10-24T13:18:30.848Z",
+  "sourceRunId": "GARDEN-LAB-df43cd08499c0c0a",
+  "question": "Do previously selected campaign plans generalize economically when their local learner is refitted on new synthetic markets?",
+  "evidenceClass": "SAVED_PLAN_TRANSFER",
+  "settings": {
+    "customerCount": 100,
+    "days": 100,
+    "budgetCents": 30000
+  },
+  "startedAt": "2026-10-24T01:00:00.000Z",
+  "warmupDays": 30,
+  "returnWindowDays": 14,
+  "scenarios": [
+    "steady",
+    "rival_sale",
+    "budget_squeeze",
+    "supply_delay",
+    "returns_wave"
+  ],
+  "developmentSeeds": [
+    314,
+    2718,
+    1618
+  ],
+  "evaluationSeeds": [
+    9001,
+    9002,
+    9003,
+    9004,
+    9005,
+    9006,
+    9007,
+    9008,
+    9009,
+    9010,
+    9011,
+    9012,
+    9013,
+    9014,
+    9015,
+    9016,
+    9017,
+    9018,
+    9019,
+    9020
+  ],
+  "scenarioWeights": "Equal weight, then average within seed; bootstrap whole seed clusters.",
+  "policies": [
+    "organic",
+    "rules_matched",
+    "rules_fast",
+    "recorded_v1"
+  ],
+  "sourceModelCostUSD": 0.008447,
+  "costSchedule": [
+    {
+      "day": 30,
+      "micros": 440
+    },
+    {
+      "day": 32,
+      "micros": 681
+    },
+    {
+      "day": 36,
+      "micros": 632
+    },
+    {
+      "day": 55,
+      "micros": 434
+    },
+    {
+      "day": 57,
+      "micros": 695
+    },
+    {
+      "day": 60,
+      "micros": 723
+    },
+    {
+      "day": 80,
+      "micros": 452
+    },
+    {
+      "day": 82,
+      "micros": 634
+    },
+    {
+      "day": 86,
+      "micros": 672
+    },
+    {
+      "day": 89,
+      "micros": 641
+    },
+    {
+      "day": 114,
+      "micros": 1168
+    },
+    {
+      "day": 114,
+      "micros": 1275
+    }
+  ],
+  "costAccounting": "Every saved-plan world is charged the full source-run token estimate, including rejected attempts and final review. This is an allocation sensitivity, not a new bill. Rules use no model API. Local CPU seconds are measured; electricity/hardware/labor are unpriced, not assumed free.",
+  "primaryMetric": "Paired modeled platform contribution after allocated model cost versus no campaign and matched rules, USD per 100 shoppers over days31–100, matured through day114.",
+  "secondaryMetrics": [
+    "Merchant contribution",
+    "Retained payment volume",
+    "Reactivation of fixed day30 lapsed cohort",
+    "Worst observed and worst-decile loss",
+    "Post-shock cumulative loss",
+    "Model MSE versus constant"
+  ],
+  "gates": {
+    "minimumGainUSD": 0,
+    "maxMerchantLossUSD": 0,
+    "maxWorstCaseLossUSD": 50
+  },
+  "gateDisclosure": "Engineering starting targets, not PayPal requirements or a power calculation. Strict lower bound above $0 establishes statistical direction only; business materiality remains to be agreed.",
+  "resamples": 2000,
+  "confidenceLevel": 0.95,
+  "exclusions": "No failed case may be silently omitted. No native payments, cloud calls or scenario-specific policy tuning.",
+  "reuse": "Seeds are held out from source-policy selection at v1. Once results are inspected they become a regression suite; later confirmatory claims need a fresh preregistered split.",
+  "assumptions": {
+    "returnWindowDays": 14,
+    "merchantDiscountShare": 0.8,
+    "platformDiscountShare": 0.2,
+    "feeRate": 0.0349,
+    "feeFixedCents": 49,
+    "processingRate": 0.012,
+    "processingFixedCents": 20,
+    "deliveryCents": 350,
+    "outreachCents": 2,
+    "contactGapDays": 7,
+    "minMerchantMargin": 0.2,
+    "refundFees": "Full modeled fee credited; not an assertion about PayPal refund policy",
+    "subsidyReturns": "Incentive reimbursement is not clawed back in this conservative POC"
+  },
+  "notEstablished": [
+    "Fresh multi-agent adaptation",
+    "Advantage over a single planner",
+    "Real-world ROI",
+    "Behavioral calibration",
+    "Global regret optimality"
+  ],
+  "recoveryDefinition": "For shocked scenarios, find a negative trailing 7-day paired contribution-increment window after day35. Recovery requires that trailing mean to be nonnegative for14 consecutive days. Report days to confirmation, censored cases at day100 and cases without an initial shortfall separately. Retrospective sale-cohort measure, not shock-detection accuracy."
+}

@@ -1,0 +1,52 @@
+{
+  "status": "COMPLETED",
+  "cutoff": 30,
+  "publishedDay": 40,
+  "pending": {
+    "plan": {
+      "id": "observe",
+      "strategy": "observe",
+      "audience": "all",
+      "maxOfferPct": 0,
+      "duration": 25,
+      "penalty": 0,
+      "epsilon": 0,
+      "merchantIndices": [],
+      "windowDays": 42
+    },
+    "model": null,
+    "cutoff": 30,
+    "analyst": {
+      "recentPurchases": 113,
+      "evidenceId": "FRESH2-a04dcff4f2fde223-evidence-30",
+      "previousPurchases": 122,
+      "trend": "down",
+      "focus": "demand",
+      "rationale": "The recent purchase trend is down (113 vs 122). Targeting demand with a discount for merchants with sufficient stock (Oak & Ink and Corner Supply) is appropriate to reverse this trend while respecting margin floors."
+    },
+    "science": {
+      "merchantIndices": [
+        1,
+        2
+      ],
+      "rationale": "The recent purchase trend is down (113 vs 122). A coupon probe targeting lapsed customers for Oak & Ink and Corner Supply is appropriate to test demand recovery while respecting margin floors and minimizing risk.",
+      "trend": "down",
+      "modelAction": "retrain",
+      "recentPurchases": 113,
+      "policyId": "coupon_probe",
+      "windowDays": 28,
+      "evidenceId": "FRESH2-a04dcff4f2fde223-evidence-30",
+      "previousPurchases": 122
+    },
+    "review": {
+      "trend": "down",
+      "evidenceId": "FRESH2-a04dcff4f2fde223-evidence-30",
+      "rationale": "The proposed coupon_probe strategy shows a negative deltaPlatformUSD (-5.928) in development evidence, indicating it is likely to decrease platform contribution. Additionally, the model MSE (0.2607) is higher than the baseline (0.2512), suggesting poor predictive performance.",
+      "recentPurchases": 113,
+      "previousPurchases": 122,
+      "decision": "reject"
+    }
+  },
+  "error": null,
+  "latencySeconds": 15.611217959000031
+}

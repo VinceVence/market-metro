@@ -1,10 +1,14 @@
 # Market Metro: the learning market
 
-A local 3D commerce tycoon with an orbitable camera, hover inspection and DM Sans throughout the interface. A seeded population browses cached Channel3 products, receives merchant coupons, buys, returns and becomes inactive. A six-role **scripted** marketing workflow defines a business brief, validates observed data, trains real CPU models, launches controlled offers, and measures results. No LLM, paid cloud or catalog search is invoked during a season. Optional native PayPal Sandbox samples use a saved test wallet: up to three selected field-test orders per season, with fictitious funds and no repeated checkout.
+**Current POC: [Commerce Policy Lab](docs/policy-lab/README.md).** Click **Run demo** for three Gemini reasoning roles, competing merchant policies, a real local contextual bandit, paired controls, delayed financial outcomes and customer traces. The first completed trial and its limitations are recorded in the [measured report](docs/policy-lab/runs/GARDEN-LAB-df43cd08499c0c0a/summary.md). New trials default to no additional sandbox payment and retain the $0.25 model cap beneath the $50 hackathon ceiling.
+
+The earlier simulation modes remain available:
+
+A local 3D commerce tycoon with an orbitable camera, hover inspection and DM Sans throughout the interface. A seeded population browses cached Channel3 products, receives product recommendations or merchant coupons, buys, returns and becomes inactive. A six-role **scripted** marketing workflow defines a business brief, validates observed data, trains real CPU models, launches controlled offers, and measures results. Ordinary scripted seasons invoke no LLM or catalog search. The optional **Gemini 3.1 Flash-Lite** workflow runs an autonomous planner with a $0.25 application cap per campaign; tools and model fitting stay local. Optional native PayPal Sandbox samples use a saved test wallet: up to three selected field-test orders per season, with fictitious funds and no repeated checkout.
 
 ![Market Metro commerce district](docs/screenshots/commerce-district-overview.jpg)
 
-The [current four-plane architecture](docs/market-system-architecture.md) shows the emulator, Channel3, PayPal and agent boundaries, including the saved-wallet bridge between selected learning-season purchases and native PayPal captures.
+The [four-plane architecture](docs/market-system-architecture.md) shows the emulator, Channel3, PayPal and agent boundaries. The [PayPal commerce team](docs/paypal-services.md) has six service workflows verified in sandbox, with agent decisions, provider states and financial events in the warehouse. Cashback remains unfunded and Transaction Search lacks permission; these limits are shown in the demo.
 
 ## Run
 
@@ -29,9 +33,37 @@ Open http://127.0.0.1:4173/. The server binds to loopback only. `npm test` runs 
 
 Your credentials, wallet consent and generated database remain under ignored local paths. The repository includes source and validation reports, not a reusable copy of the developer's accounts.
 
+## Configurable continuous market
+
+The current **Run demo** preset uses **Gemini 3.1 Flash-Lite for 100 days**, with the existing $0.25 application cap. The LLM chooses research and publication actions; local workers fit/validate models and execute guarded campaigns. Offline scripted mode is an explicit testing option. A new clone without GCP credentials should select that offline mode.
+
+The verified [100-day result and decision log](docs/continuous-market/reports/GARDEN-LIVE-37967f0f51de0529/summary.md) records 20 valid Gemini decisions, 9 published campaigns, 8 locally fitted recommender versions, 2,213 recommendations and 230 associated purchases. Gemini chose zero live coupons. The clean run's metered-token estimate was $0.035081; diagnostic plus clean runs used $0.063577 of one shared $0.25 budget. See **Run report** in the demo for statistics and saved public justifications.
+
+Every provider attempt is stored in `marketing_planner_calls`, including the dated input, validated/rejected output and provider receipt. Publication actions are limited to campaign types with a ready model; publication cannot request training. A rejected model is fed back as a rejection, never represented as a deployed campaign. Linked retries share the original dollar cap; each actual trial retains its 32-call limit. Unknown provider outcomes still stop spending.
+
+Use **Run simulation** to open the settings popup before a run. Choose 4–12 merchants, 50–1,200 customers, seed, business goal, virtual marketing budget, scenario, 42–365 total days, 0.1–5 seconds per simulated hour, and a 4–14 day review interval. New runs begin empty at Day 1, 00:00. The first 28 days collect learning observations; the first automatic review follows day 30. Changes create a new run; previous data stays saved. A representative sample of shoppers is drawn in the city, while every configured shopper generates warehouse observations.
+
+Enable the actions the team may choose:
+
+- **Recommendations:** full-price product discovery, using a locally fitted affinity/popularity ranker. Personalization must beat popularity on later purchases; otherwise the model serves popularity. No offer-response model is needed for this action.
+- **Reactivation:** 5% or 10% offers for previous buyers inactive for at least seven days, subject to model-estimated contribution and execution controls.
+- **Trend promotions:** 5% or 10% offers scoped to products selected from observed demand.
+
+The planner can also wait. The local mode uses disclosed, goal-sensitive priority rules; it does **not** invent new strategies. Gemini uses the same validated action menu and spending limits; the 100-day run above verifies the real provider path. All shoppers and responses remain seeded simulations. Reading the team log or shopper story never pauses commerce.
+
+**Agents → Open team view** shows the playbook, active campaign, worker decisions and fitted model evidence. **Run demo** opens a new Day 1 run with the office beside the market (default seed 314, 100 days, Gemini planner, 0.25 seconds per hour). Nothing is pre-generated or skipped. The **Shopper story** inside that view follows one recorded campaign journey (prefers Iris 10 when she has a campaign purchase, otherwise another completed example). It shows catalog → model → campaign checkpoint → exposure → shopper response → warehouse/payment. It does not force that shopper to purchase. The wider market keeps trading. The local fitted ranker costs $0 in model APIs; recommendations have an assumed 2¢ virtual outreach cost.
+
+Continuous runs start with native payment actions disabled. The sample button can mirror one selected order using the existing saved sandbox wallet and fictitious funds. Enabling **PayPal team** for a run also allows the planner to select bounded payment actions during publication; see its [consent, limits and validation state](docs/paypal-services.md). The story labels a modeled ledger entry separately from a native receipt for that **same** order.
+
+## Checkpointed campaign workflow
+
+Open **/workflow.html** for the campaign room and individual shopper traces. The first complete campaign was planned by the assistant in this chat, using observed analysis, real local model fitting, a validated campaign plan and saved tool checkpoints. The app now also runs an unattended Gemini 3.1 Flash-Lite planner using the same validated tool interface, SQLite checkpoints and shared spending ledger. Choose it in **Run simulation → Timing & experiment settings → Earlier coupon workflow → Workflow**, or inspect a saved run in the campaign room. Existing ordinary seasons remain scripted. See [autonomous setup and recovery](docs/campaign-workflow/autonomous-gemini.md).
+
+The [workflow guide](docs/campaign-workflow/README.md) documents the API and first-run evidence. The run recorded 300 shoppers, 4,800 daily decisions, 74 coupons, 17 redemptions and 222 campaign-window purchases. Three redeemed orders have verified native PayPal sandbox captures totaling $139.28. No paid model calls or new Channel3 searches were made. Training, advancing, receipt and completion checkpoints were replayed after restart without repeating their effects.
+
 ## Walkthrough
 
-1. **New season:** choose the objective, population, seed, virtual budget, shock and workflow.
+1. **Earlier coupon-only seasons:** choose the objective, population, seed, virtual budget, shock and workflow.
 2. **Days 1–28:** observe history and randomized exploratory offers. History spending is separate from the live budget.
 3. **Day 29:** fit logistic regression and a small decision tree, reserving the latest seven days for temporal validation.
 4. **Field test:** a persistent 25% customer holdout receives no live coupons. Eligible treatment customers receive model-selected offers or a disclosed rule fallback.
@@ -57,13 +89,13 @@ Switch **District → Agent network** to locate the team. Lines show workflow de
 | Campaign Studio | Campaign manager | Issues eligible coupons under budget, contact, stock and margin constraints. |
 | PayPal ledger | Payment connection | Captures selected orders using a saved sandbox wallet and joins real provider IDs, fees and verification timestamps to those emulator orders. |
 
-The feedback path is **city events → observed warehouse → models → review → offers → purchases → payment ledger → warehouse**. All six team roles are scripted today. Their local model training is real, but there is no LLM planner and the diagram does not establish autonomous-agent superiority.
+The feedback path is **city events → observed warehouse → models → review → offers → purchases → payment ledger → warehouse**. In ordinary seasons these responsibilities are scripted. In autonomous campaigns, one Gemini planner selects tools and plans while deterministic workers fit models and execute offers. The trail distinguishes Gemini decisions from scripted worker events. Autonomy does not establish superior campaign outcomes.
 
 ## Data and capability boundaries
 
 - **Real catalog:** 22 Channel3 products imported on October 21, 2026, preserving IDs, prices and source URLs. New seasons reuse the cached snapshot. Without a cache, explicitly labeled authored products are used.
 - **Real local ML:** scikit-learn fits each season's observed rows. Saved JSON artifacts contain actual coefficients/scales or tree thresholds/probabilities. JavaScript predictions must match Python predictions before use.
-- **Scripted coordination:** task choices and messages follow code and measured conditions. There is no LLM planner and no demonstrated LLM-agent advantage.
+- **Coordinator source:** ordinary seasons use scripts, earlier workflow runs use the assistant in chat, and Gemini campaigns use a metered app-owned planner. Attribution and token receipts are saved; no general LLM-agent advantage is claimed.
 - **Simulated economy:** customers, merchants, inventory, coupons, payments, delivery, returns and market changes are fictional.
 - **PayPal:** selected orders now use a saved sandbox PayPal wallet. Native captures, fees, net amounts and IDs are read back from PayPal and stored in `paypal_receipts`; `v_paypal_order_lineage` joins them to orders, merchants, products and coupons. The earlier standalone $100 receipt remains separate. The blocked legacy card path is not used by this wallet flow.
 
@@ -73,7 +105,7 @@ For a fresh Channel3 import on another machine, follow the existing .env setup i
 
 ## Native sandbox payment samples
 
-The reusable sandbox buyer is already configured on this machine. **New season** defaults to three native samples when the saved buyer is ready; zero or one can also be selected. Automatic samples begin after the 28-day learning history and never exceed the selected count. Matched-policy comparisons always run without provider calls.
+The reusable sandbox buyer is already configured on this machine. The **legacy coupon-season form** defaults to three native samples when the saved buyer is ready; zero or one can also be selected. Automatic samples begin after the 28-day learning history and never exceed the selected count. Matched-policy comparisons always run without provider calls.
 
 For another machine, open `/sandbox-buyer.html` and approve a generated Personal sandbox account once. The server verifies approval through Payment Method Tokens v3 and stores the resulting wallet token in the ignored, owner-readable `.local/paypal-vault-setup.json`. Use the sandbox account credentials from the Developer Dashboard. Do not enter real card details. A sandbox app's Client ID and Client Secret are server credentials, not the buyer login.
 
@@ -84,6 +116,8 @@ One consenting sandbox buyer represents the selected synthetic customers; all fi
 The saved consent was verified across a server restart and two seasons: three main-season captures ($192.59 total) and one automatic second-season capture ($31.99), without another checkout. See [native integration validation](docs/paypal-wallet-integration-validation.json).
 
 ## Experiment contract
+
+The [marketing decision benchmark](docs/marketing-decisions/README.md) compares sealed recommendations from the assistant in this chat with strong rules and the same local models on identical evidence. It executes bounded campaign actions in isolated economy forks, records costs and mistakes, and makes no provider calls. This tests decision review before adding an LLM planner.
 
 Private customer traits include preferences, coupon response, loyalty, spending capacity and affinity. Training sees only observed pre-offer history, price, stock, payday and market conditions. Hidden traits are excluded from model inputs, public frames and exports.
 
@@ -101,9 +135,11 @@ Retention uses the baseline-active randomized cohort, including eligible treatme
 
 ## Warehouse
 
-`.local/market-metro.sqlite` contains **24 public base tables and 11 SQL views**. Private `run_state` is excluded from exports.
+`.local/market-metro.sqlite` contains **33 public base tables and 12 SQL views**. Private `run_state` is excluded from exports.
 
-New tables: `business_goals`, `campaign_assignments`, `coupons`, `coupon_redemptions`, `customer_days`, `model_runs`, `model_scores`, `team_decisions`, `retention_results` and `policy_comparisons`.
+Recommendation and audit additions: `marketing_planner_calls`, `recommendation_models`, `recommendations`, and `v_recommendation_journey` join fitted rankings and exposures to clicks, orders and optional same-order sandbox receipts.
+
+Learning tables: `business_goals`, `campaign_assignments`, `coupons`, `coupon_redemptions`, `customer_days`, `model_runs`, `model_scores`, `team_decisions`, `retention_results` and `policy_comparisons`.
 
 Views include `v_coupon_journey`, `v_learning_daily`, `v_model_history`, `v_retention_experiments` and `v_paypal_order_lineage`. Customer-day records pair a pre-action feature snapshot with the subsequently observed label. Model records preserve cutoffs, dataset hashes, candidate losses and fitted artifacts.
 
@@ -131,3 +167,17 @@ The previous metropolis remains at /metropolis.html and the reserve lab at /supp
 ## License
 
 Original project code is [MIT licensed](LICENSE). Fonts, dependencies, trademarks and provider data retain their respective terms; see [third-party notices](THIRD_PARTY_NOTICES.md).
+
+### Recorded campaign demo
+
+The main market uses the Market Metro city view. Checkpointed campaigns, cached Channel3 products and PayPal Sandbox receipts remain available through **Campaign run** and **PayPal records**.
+
+See [the recorded demo results](docs/campaign-workflow/playful-demo.md) for the measured run, receipt lineage and limitations. Its former toy-village UI has been reverted.
+
+### Side-by-side judge demo
+
+**Run simulation** starts continuous commerce; **Run demo** creates a fresh Day 1 presentation; **Open team view** inspects the current run. Customers trade on an independent server clock while the marketing team analyzes snapshots, trains local models and chooses full-price recommendations, reactivation offers or trend promotions. Inspecting the work log or a shopper never pauses trading. Local mode costs $0 in model API calls and is explicitly scripted; the optional Gemini analyst retains the $0.25 cap. **Recorded campaign** keeps the older checkpoint replay available. See [the Microsoft Magentic Marketplace source audit and implementation notes](docs/continuous-market/magentic-source-audit.md).
+
+Use **Run demo** in the main header to view the market and campaign office together. A fresh seed-314 campaign uses the existing Gemini planner with a $0.25 model-cost cap and up to one saved-wallet PayPal Sandbox capture. **Replay current campaign · free** reads saved checkpoints and warehouse rows without model calls or payment effects.
+
+The day scrubber shows recorded visits, coupon issues, purchases and deliveries. Gold money sprites are simulated sales; coupon tickets come from issued coupon rows; blue PayPal effects require a verified receipt from that same campaign. The office contains one Gemini planner and local tool workers, not six separate LLMs. See [the judge demo guide](docs/campaign-workflow/judge-demo.md) for controls, provenance and the verified run.

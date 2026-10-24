@@ -199,7 +199,7 @@ export function buildDistrict(layout, merchants) {
   box(pay,0,3.6,0,10,.4,7,0x1466a1);box(pay,0,4.4,-.5,7.4,1.3,2.8,0x123874);
   for(const x of [-4,4])box(pay,x,1.7,-3.2,.16,3.4,.25,0x1466a1);
   merge(pay);sign(pay,'PayPal',0,4.5,1,5,'#123874','#ffffff',1.05);const ps=sign(pay,'PayPal',0,4.5,-2,5,'#123874','#ffffff',1.05);ps.rotation.y=Math.PI;
-  register(pay,{type:'payments',id:'payments',name:'PayPal ledger',detail:'Selected native sandbox captures · linked warehouse receipts',x:0,z:28,width:10,depth:7,height:5.6,number:'P',color:'#1466a1'});
+  register(pay,{type:'payments',id:'payments',name:'PayPal team',detail:'Payments · invoices · subscriptions · fulfillment · rewards',x:0,z:28,width:10,depth:7,height:5.6,number:'P',color:'#1466a1'});
 
   // A quieter outer neighborhood creates a city horizon without competing with the playable shops.
   const context=new THREE.Group();

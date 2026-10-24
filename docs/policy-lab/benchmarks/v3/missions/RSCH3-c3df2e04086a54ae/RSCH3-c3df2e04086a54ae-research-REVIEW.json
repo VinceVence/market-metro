@@ -1,0 +1,549 @@
+{
+  "id": "RSCH3-c3df2e04086a54ae-research-REVIEW",
+  "stage": "research_review",
+  "inputHash": "73f41786aeca39ebcf03460fba985587baf60e06419dc7875a97fe1eeeb1491f",
+  "system": "Independently review this completed research proposal against its actual query/model/pilot evidence. Permit a bounded probe only when the cited pilot has positive mean value and valid constraints; uncertainty remains explicit. You may veto a probe to observe, but may never turn observe into a probe, change the contract or claim production profit. Keep the public rationale grounded in exact evidence. No final evaluation results are visible.",
+  "packet": {
+    "workspaceId": "RSCH3-c3df2e04086a54ae-research",
+    "brief": "Investigate whether recommendations can add retained PayPal contribution. Use all three merchants and any shoppers. Do not issue discount coupons. Limit this single campaign to7 days and a simulated outreach budget of$30. Inspect the data, fit a local candidate, and test at least one development pilot before choosing a bounded campaign or observe.",
+    "contract": {
+      "allowedMerchantIndices": [
+        0,
+        1,
+        2
+      ],
+      "audience": "all",
+      "maxCouponPct": 0,
+      "budgetCents": 3000,
+      "maxDurationDays": 7
+    },
+    "cutoffDay": 45,
+    "objective": "Additional modeled PayPal contribution after retained-order fees, processing, subsidy, outreach and actual model cost. Do not edit the reward.",
+    "availableActions": [],
+    "knownEvidenceIds": [
+      "RSCH3-c3df2e04086a54ae-research-STEP-01",
+      "RSCH3-c3df2e04086a54ae-research-STEP-02",
+      "RSCH3-c3df2e04086a54ae-research-STEP-03",
+      "RSCH3-c3df2e04086a54ae-research-STEP-04",
+      "RSCH3-c3df2e04086a54ae-research-STEP-05",
+      "RSCH3-c3df2e04086a54ae-research-STEP-06",
+      "RSCH3-c3df2e04086a54ae-research-STEP-07",
+      "RSCH3-c3df2e04086a54ae-research-STEP-08",
+      "RSCH3-c3df2e04086a54ae-research-STEP-09",
+      "RSCH3-c3df2e04086a54ae-research-STEP-10",
+      "RSCH3-c3df2e04086a54ae-research-STEP-11",
+      "RSCH3-c3df2e04086a54ae-research-STEP-12",
+      "RSCH3-c3df2e04086a54ae-research-STEP-08-MODEL",
+      "RSCH3-c3df2e04086a54ae-research-STEP-09-PILOT"
+    ],
+    "remaining": {
+      "steps": 4,
+      "queries": 0,
+      "models": 3,
+      "pilots": 1
+    },
+    "knownSchema": [
+      {
+        "name": "catalog",
+        "sql": "CREATE TABLE catalog(product_id TEXT PRIMARY KEY,merchant_index INTEGER,title TEXT,price_cents INTEGER,channel3_id TEXT,source TEXT)"
+      },
+      {
+        "name": "customers",
+        "sql": "CREATE TABLE customers(customer_id TEXT PRIMARY KEY,segment TEXT,purchases INTEGER,last_purchase_day INTEGER)"
+      },
+      {
+        "name": "merchants",
+        "sql": "CREATE TABLE merchants(merchant_index INTEGER PRIMARY KEY,name TEXT,stock INTEGER,max_offer_pct INTEGER)"
+      },
+      {
+        "name": "metadata",
+        "sql": "CREATE TABLE metadata(key TEXT PRIMARY KEY,value TEXT)"
+      },
+      {
+        "name": "observations",
+        "sql": "CREATE TABLE observations(action_id TEXT PRIMARY KEY,day INTEGER,customer_id TEXT,selected_action TEXT,propensity REAL,matures_day INTEGER,reward_cents INTEGER,bias REAL,recency_30d REAL,purchases_7d REAL,offers_7d REAL,price_scale REAL,observed_merchant_affinity REAL,recent_refunds REAL)"
+      },
+      {
+        "name": "orders",
+        "sql": "CREATE TABLE orders(order_id TEXT PRIMARY KEY,day INTEGER,merchant_index INTEGER,customer_id TEXT,gross_cents INTEGER,observed_refund_cents INTEGER,modeled_fee_cents INTEGER,processing_cents INTEGER)"
+      }
+    ],
+    "financialDefinitions": "Warehouse *_cents columns are cents. Pilot estimate.mean, low and high are USD DOLLARS. gross_cents is merchant payment volume, NOT PayPal revenue. Never subtract fees from gross and call that platform contribution. The authoritative platform target is mature observations.reward_cents: retained fees minus processing, platform incentive reimbursement and outreach. It may be negative. SQL results are exploratory, not the immutable evaluator.",
+    "safeFeatures": [
+      "recency_30d",
+      "purchases_7d",
+      "offers_7d",
+      "price_scale",
+      "observed_merchant_affinity",
+      "recent_refunds"
+    ],
+    "featureGrammar": "Up to6 non-intercept linear expressions. Bias/intercept is automatically included. Linear arithmetic only: + - * / and parentheses. Multiplication/division need a constant operand. No reward, future outcomes or post-purchase fields. Example: recency_30d - purchases_7d. All models compile to the unchanged engine interface.",
+    "models": [
+      {
+        "id": "RSCH3-c3df2e04086a54ae-research-STEP-08-MODEL",
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "observed_merchant_affinity",
+          "recency_30d",
+          "purchases_7d",
+          "price_scale",
+          "recent_refunds"
+        ],
+        "windowDays": 56,
+        "datasetHash": "0b4be72e20d877975384a319d2327f9c48c5b7e0cfef175bdb189bf80b4d28d5",
+        "trainingRows": 3200,
+        "validationRows": 700,
+        "mse": 0.28627834863062745,
+        "baselineMse": 0.28395090000686113,
+        "runtimeMs": 13.641666999996232,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      }
+    ],
+    "pilots": [
+      {
+        "id": "RSCH3-c3df2e04086a54ae-research-STEP-09-PILOT",
+        "modelId": "RSCH3-c3df2e04086a54ae-research-STEP-08-MODEL",
+        "campaign": {
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ],
+          "penaltyUSD": 0.1,
+          "durationDays": 7,
+          "maxOfferPct": 0,
+          "audience": "all",
+          "title": "Recommendation Pilot Test"
+        },
+        "plan": {
+          "id": "SPEC-ff85c5cd0767",
+          "strategy": "recommendations",
+          "audience": "all",
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ],
+          "maxOfferPct": 0,
+          "duration": 7,
+          "penalty": 0.1,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "estimate": {
+          "mean": -0.6033333333333332,
+          "low": -1.66,
+          "high": 0.79,
+          "seeds": 3,
+          "cases": 3,
+          "winRate": 0.3333333333333333,
+          "worst": -1.66,
+          "worstDecileMean": -1.66,
+          "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+          "unit": "USD"
+        },
+        "validity": true,
+        "interpretation": "Three independent development-seed paired rollouts, fully matured. Selection-biased when used to choose a campaign. Not final evidence, not real customers, not a mathematical causal guarantee outside this simulator."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "RSCH3-c3df2e04086a54ae-research-STEP-06",
+        "action": "query_warehouse",
+        "status": "COMPLETED",
+        "rationale": "I need to inspect the observations table to understand the distribution of reward_cents and the available features. I will select a small sample to see the data.",
+        "output": {
+          "columns": [
+            "action_id",
+            "day",
+            "customer_id",
+            "selected_action",
+            "propensity",
+            "matures_day",
+            "reward_cents",
+            "bias",
+            "recency_30d",
+            "purchases_7d",
+            "offers_7d",
+            "price_scale",
+            "observed_merchant_affinity",
+            "recent_refunds"
+          ],
+          "rows": [
+            {
+              "action_id": "RSCH3-c3df2e04086a54ae-research-ACTION-0-0",
+              "day": 0,
+              "customer_id": "RSCH3-c3df2e04086a54ae-research-U0001",
+              "selected_action": "recommend:0",
+              "propensity": 0.1111111111111111,
+              "matures_day": 14,
+              "reward_cents": -2,
+              "bias": 1,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "action_id": "RSCH3-c3df2e04086a54ae-research-ACTION-0-1",
+              "day": 0,
+              "customer_id": "RSCH3-c3df2e04086a54ae-research-U0002",
+              "selected_action": "recommend:2",
+              "propensity": 0.1111111111111111,
+              "matures_day": 14,
+              "reward_cents": -2,
+              "bias": 1,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.89,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "action_id": "RSCH3-c3df2e04086a54ae-research-ACTION-0-2",
+              "day": 0,
+              "customer_id": "RSCH3-c3df2e04086a54ae-research-U0003",
+              "selected_action": "coupon10:2",
+              "propensity": 0.1111111111111111,
+              "matures_day": 14,
+              "reward_cents": -2,
+              "bias": 1,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "action_id": "RSCH3-c3df2e04086a54ae-research-ACTION-0-3",
+              "day": 0,
+              "customer_id": "RSCH3-c3df2e04086a54ae-research-U0004",
+              "selected_action": "coupon10:1",
+              "propensity": 0.1111111111111111,
+              "matures_day": 14,
+              "reward_cents": 101,
+              "bias": 1,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "action_id": "RSCH3-c3df2e04086a54ae-research-ACTION-0-4",
+              "day": 0,
+              "customer_id": "RSCH3-c3df2e04086a54ae-research-U0005",
+              "selected_action": "coupon10:2",
+              "propensity": 0.1111111111111111,
+              "matures_day": 14,
+              "reward_cents": -2,
+              "bias": 1,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            }
+          ],
+          "truncated": false,
+          "modelPreviewTruncated": false
+        }
+      },
+      {
+        "id": "RSCH3-c3df2e04086a54ae-research-STEP-07",
+        "action": "query_warehouse",
+        "status": "COMPLETED",
+        "rationale": "I need to understand the relationship between features and reward_cents to build a predictive model. I will aggregate the average reward_cents by selected_action to see if recommendations are performing better than coupons.",
+        "output": {
+          "columns": [
+            "selected_action",
+            "avg_reward",
+            "count"
+          ],
+          "rows": [
+            {
+              "selected_action": "coupon10:1",
+              "avg_reward": 13.50943396226415,
+              "count": 53
+            },
+            {
+              "selected_action": "coupon10:2",
+              "avg_reward": 23.07017543859649,
+              "count": 57
+            },
+            {
+              "selected_action": "coupon5:0",
+              "avg_reward": 36.68181818181818,
+              "count": 66
+            },
+            {
+              "selected_action": "coupon5:1",
+              "avg_reward": 25.70149253731343,
+              "count": 67
+            },
+            {
+              "selected_action": "coupon5:2",
+              "avg_reward": 15.238805970149254,
+              "count": 67
+            },
+            {
+              "selected_action": "none",
+              "avg_reward": 20.810491318803102,
+              "count": 2707
+            },
+            {
+              "selected_action": "recommend:0",
+              "avg_reward": 21.516666666666666,
+              "count": 60
+            },
+            {
+              "selected_action": "recommend:1",
+              "avg_reward": 24.238095238095237,
+              "count": 63
+            },
+            {
+              "selected_action": "recommend:2",
+              "avg_reward": 25.916666666666668,
+              "count": 60
+            }
+          ],
+          "truncated": false,
+          "modelPreviewTruncated": false
+        }
+      },
+      {
+        "id": "RSCH3-c3df2e04086a54ae-research-STEP-08",
+        "action": "fit_model",
+        "status": "COMPLETED",
+        "rationale": "I will fit a ridge model to predict reward_cents using the available features to identify which shoppers are most likely to yield positive contribution from recommendations. I am focusing on the features that capture shopper behavior and merchant affinity.",
+        "output": {
+          "modelId": "RSCH3-c3df2e04086a54ae-research-STEP-08-MODEL",
+          "type": "compiled_linear_feature_ridge",
+          "features": [
+            "observed_merchant_affinity",
+            "recency_30d",
+            "purchases_7d",
+            "price_scale",
+            "recent_refunds"
+          ],
+          "windowDays": 56,
+          "datasetHash": "0b4be72e20d877975384a319d2327f9c48c5b7e0cfef175bdb189bf80b4d28d5",
+          "trainingRows": 3200,
+          "validationRows": 700,
+          "mse": 0.28627834863062745,
+          "baselineMse": 0.28395090000686113,
+          "runtimeMs": 13.641666999996232,
+          "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+        }
+      },
+      {
+        "id": "RSCH3-c3df2e04086a54ae-research-STEP-09",
+        "action": "run_pilot",
+        "status": "COMPLETED",
+        "rationale": "I will run a pilot using the fitted model to evaluate if recommendations can generate positive PayPal contribution compared to no action, without using coupons.",
+        "output": {
+          "id": "RSCH3-c3df2e04086a54ae-research-STEP-09-PILOT",
+          "modelId": "RSCH3-c3df2e04086a54ae-research-STEP-08-MODEL",
+          "campaign": {
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "penaltyUSD": 0.1,
+            "durationDays": 7,
+            "maxOfferPct": 0,
+            "audience": "all",
+            "title": "Recommendation Pilot Test"
+          },
+          "plan": {
+            "id": "SPEC-ff85c5cd0767",
+            "strategy": "recommendations",
+            "audience": "all",
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "maxOfferPct": 0,
+            "duration": 7,
+            "penalty": 0.1,
+            "epsilon": 0,
+            "windowDays": 42
+          },
+          "estimate": {
+            "mean": -0.6033333333333332,
+            "low": -1.66,
+            "high": 0.79,
+            "seeds": 3,
+            "cases": 3,
+            "winRate": 0.3333333333333333,
+            "worst": -1.66,
+            "worstDecileMean": -1.66,
+            "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+            "unit": "USD"
+          },
+          "validity": true,
+          "interpretation": "Three independent development-seed paired rollouts, fully matured. Selection-biased when used to choose a campaign. Not final evidence, not real customers, not a mathematical causal guarantee outside this simulator."
+        }
+      },
+      {
+        "id": "RSCH3-c3df2e04086a54ae-research-STEP-10",
+        "action": "commit_campaign",
+        "status": "FAILED",
+        "rationale": "The pilot results for the recommendation campaign showed a negative mean contribution (-$0.60) with a low win rate (33%). Given the objective is to add retained PayPal contribution and the pilot did not demonstrate a clear positive impact, observing is the most prudent financial decision.",
+        "output": {
+          "error": "CITE_PILOT_MEAN_IN_USD_WITHIN_HALF_A_CENT"
+        }
+      },
+      {
+        "id": "RSCH3-c3df2e04086a54ae-research-STEP-11",
+        "action": "commit_campaign",
+        "status": "FAILED",
+        "rationale": "The pilot for the recommendation campaign resulted in a negative mean contribution (-$0.60) and a low win rate (33%). Given the objective is to increase retained PayPal contribution and the pilot failed to demonstrate a positive impact, observing is the most prudent financial decision.",
+        "output": {
+          "error": "CITE_PILOT_MEAN_IN_USD_WITHIN_HALF_A_CENT"
+        }
+      },
+      {
+        "id": "RSCH3-c3df2e04086a54ae-research-STEP-12",
+        "action": "commit_campaign",
+        "status": "COMPLETED",
+        "rationale": "The pilot for the recommendation campaign resulted in a negative mean contribution (-$0.60) and a low win rate (33%). Given the objective is to increase retained PayPal contribution and the pilot failed to demonstrate a positive impact, observing is the most prudent financial decision.",
+        "output": {
+          "decision": "observe",
+          "pilotId": "RSCH3-c3df2e04086a54ae-research-STEP-09-PILOT",
+          "modelId": "RSCH3-c3df2e04086a54ae-research-STEP-08-MODEL",
+          "plan": {
+            "id": "observe",
+            "strategy": "observe",
+            "audience": "all",
+            "merchantIndices": [],
+            "maxOfferPct": 0,
+            "duration": 0,
+            "penalty": 0,
+            "epsilon": 0,
+            "windowDays": 42
+          },
+          "rationale": "The pilot for the recommendation campaign resulted in a negative mean contribution (-$0.60) and a low win rate (33%). Given the objective is to increase retained PayPal contribution and the pilot failed to demonstrate a positive impact, observing is the most prudent financial decision.",
+          "pilotEstimate": {
+            "mean": -0.6033333333333332,
+            "low": -1.66,
+            "high": 0.79,
+            "seeds": 3,
+            "cases": 3,
+            "winRate": 0.3333333333333333,
+            "worst": -1.66,
+            "worstDecileMean": -1.66,
+            "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+            "unit": "USD"
+          },
+          "currency": "USD",
+          "expectedMeanUSD": -0.6033333333333332,
+          "scope": "BOUNDED_SIMULATION_EXPERIMENT_NOT_PRODUCTION_PROMOTION"
+        }
+      }
+    ],
+    "boundaries": "This is a simulation research workspace. Pilot controls are allowed development feedback, distinct from hidden final evaluation controls. No filesystem, network, arbitrary Python, payment or reward-editing tool is available.",
+    "proposal": {
+      "decision": "observe",
+      "pilotId": "RSCH3-c3df2e04086a54ae-research-STEP-09-PILOT",
+      "modelId": "RSCH3-c3df2e04086a54ae-research-STEP-08-MODEL",
+      "plan": {
+        "id": "observe",
+        "strategy": "observe",
+        "audience": "all",
+        "merchantIndices": [],
+        "maxOfferPct": 0,
+        "duration": 0,
+        "penalty": 0,
+        "epsilon": 0,
+        "windowDays": 42
+      },
+      "rationale": "The pilot for the recommendation campaign resulted in a negative mean contribution (-$0.60) and a low win rate (33%). Given the objective is to increase retained PayPal contribution and the pilot failed to demonstrate a positive impact, observing is the most prudent financial decision.",
+      "pilotEstimate": {
+        "mean": -0.6033333333333332,
+        "low": -1.66,
+        "high": 0.79,
+        "seeds": 3,
+        "cases": 3,
+        "winRate": 0.3333333333333333,
+        "worst": -1.66,
+        "worstDecileMean": -1.66,
+        "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+        "unit": "USD"
+      },
+      "currency": "USD",
+      "expectedMeanUSD": -0.6033333333333332,
+      "scope": "BOUNDED_SIMULATION_EXPERIMENT_NOT_PRODUCTION_PROMOTION"
+    }
+  },
+  "functions": [
+    {
+      "name": "review_commit",
+      "description": "Review the proposed experimental deployment without expanding its authority.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "verdict": {
+            "type": "STRING",
+            "enum": [
+              "approve",
+              "observe"
+            ]
+          },
+          "rationale": {
+            "type": "STRING"
+          },
+          "evidenceIds": {
+            "type": "ARRAY",
+            "items": {
+              "type": "STRING"
+            }
+          }
+        },
+        "required": [
+          "verdict",
+          "rationale",
+          "evidenceIds"
+        ]
+      }
+    }
+  ],
+  "status": "COMPLETED",
+  "startedAt": "2026-10-24T16:40:01.785Z",
+  "response": {
+    "name": "review_commit",
+    "args": {
+      "verdict": "approve",
+      "evidenceIds": [
+        "RSCH3-c3df2e04086a54ae-research-STEP-09-PILOT"
+      ],
+      "rationale": "The pilot (RSCH3-c3df2e04086a54ae-research-STEP-09-PILOT) resulted in a negative mean contribution of -$0.6033333333333332 USD. Given the objective is to add retained PayPal contribution, and the pilot failed to demonstrate a positive impact, the decision to observe is appropriate."
+    },
+    "id": "call_965642"
+  },
+  "provider": {
+    "reservationId": "2cd67525-e2e6-4428-8420-6d1555f41b86",
+    "caseId": "RSCH3-c3df2e04086a54ae-research-REVIEW",
+    "trialId": "RSCH3-c3df2e04086a54ae",
+    "stage": "research_review",
+    "status": "settled",
+    "modelCostMicros": 1455,
+    "reservedMicros": 30000,
+    "inputTokens": 4955,
+    "outputTokens": 144,
+    "thinkingTokens": 0,
+    "cachedInputTokens": 0,
+    "responseId": "Zt_carHsJOyDs8IP9azT-Q4",
+    "modelVersion": "gemini-3.1-flash-lite",
+    "latencyMs": 1726
+  },
+  "finishedAt": "2026-10-24T16:40:07.736Z"
+}

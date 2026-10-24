@@ -12,7 +12,23 @@ export function createMarketService({store,catalog,paypal,trainImpl,funding=null
   const reject=(code,message)=>{throw new SandboxError(400,code,message);};
   const lookup=id=>{const w=store.state(id);if(!w)throw new SandboxError(404,'RUN_NOT_FOUND','Market run not found.');return w;};
   function receiptRows(id){return store.table('paypal_receipts',id,{limit:100}).rows;}
-  function frame(id,activities=[]){const w=lookup(id);const recentActivity=store.db.prepare("SELECT o.order_id AS orderId,o.merchant_id AS merchantId,m.name AS merchant,o.total_cents AS amount,p.title AS product,'purchase' AS type FROM orders o JOIN merchants m USING(merchant_id) JOIN order_items i USING(order_id) JOIN products p USING(product_id) WHERE o.run_id=? ORDER BY o.event_ts DESC,o.rowid DESC LIMIT 4").all(id).reverse();return {...(w.kind==='LEARNING_MARKET_V2'?learningFrame(w):marketFrame(w)),activities,recentActivity,catalog:catalog.status(),receipts:receiptRows(id),sandboxSampleLimit:w.sandboxSampleLimit||0,tables:store.catalog(id)};}
+  function nativeLimit(w){
+    if(w.policyLab)return w.policyLab.branch==='mesh'?1:0;
+    if(w.continuous)return 1;
+    if(!w.workflowId)return NATIVE_SAMPLE_LIMIT;
+    const f=store.db.prepare('SELECT state_json FROM agent_workflows WHERE workflow_id=?').get(w.workflowId);
+    return f?Math.min(NATIVE_SAMPLE_LIMIT,JSON.parse(f.state_json).goal.nativeSamples):0;
+  }
+  function frame(id,activities=[]){
+    const w=lookup(id),base=w.kind==='LEARNING_MARKET_V2'?learningFrame(w):marketFrame(w);
+    const recentActivity=store.db.prepare("SELECT o.order_id AS orderId,o.merchant_id AS merchantId,m.name AS merchant,o.total_cents AS amount,p.title AS product,'purchase' AS type FROM orders o JOIN merchants m USING(merchant_id) JOIN order_items i USING(order_id) JOIN products p USING(product_id) WHERE o.run_id=? ORDER BY o.event_ts DESC,o.rowid DESC LIMIT 4").all(id).reverse();
+    if(w.policyLab){
+      base.phase=w.tick<30?'LEARNING_HISTORY':'FIELD_TEST';
+      for(const phase of ['history','live'])base[phase].contributionCents=w[phase].revenueCents-w[phase].refundsCents-w[phase].feesCents-w[phase].costCents-w[phase].deliveryCostCents+(w[phase].platformSupportCents||0)+(w[phase].feeCreditsCents||0);
+      base.stats.contributionCents=base.history.contributionCents+base.live.contributionCents;
+    }
+    return {...base,policyLab:w.policyLab?{branch:w.policyLab.branch,clock:w.policyLab.clock,teamStatus:w.policyLab.teamStatus,settings:w.policyLab.settings,plan:w.policyLab.plan,modelCalls:w.policyLab.modelCalls,modelCostMicros:w.policyLab.modelCostMicros}:null,activities:w.policyLab?.lastActivities||w.continuous?.lastActivities||activities,recentActivity,catalog:catalog.status(),receipts:receiptRows(id),sandboxSampleLimit:w.sandboxSampleLimit||0,tables:store.catalog(id,{viewCounts:false})};
+  }
   function updateReceipt(id,values){const keys=Object.keys(values);store.db.prepare(`UPDATE paypal_receipts SET ${keys.map(k=>k+'=?').join(',')} WHERE receipt_id=?`).run(...keys.map(k=>values[k]),id);}
   function inspect(order,row){
     const units=order.purchase_units,unit=units?.[0];
@@ -112,7 +128,7 @@ export function createMarketService({store,catalog,paypal,trainImpl,funding=null
         if(existing){if(existing.profile_key!==paypal.profileKey())reject('ACCOUNT_CHANGED','An existing sample belongs to a different sandbox app.');continue;}
         fresh.push(order);
       }
-      if(prior.length+fresh.length>NATIVE_SAMPLE_LIMIT||[...prior.map(p=>p.gross_cents),...fresh.map(o=>o.total_cents)].reduce((a,b)=>a+b,0)>NATIVE_SAMPLE_MAX_CENTS)reject('SAMPLE_CAP','Each season is limited to three selected orders and $1,000 in sandbox test funds.');
+      if(prior.length+fresh.length>nativeLimit(w)||[...prior.map(p=>p.gross_cents),...fresh.map(o=>o.total_cents)].reduce((a,b)=>a+b,0)>NATIVE_SAMPLE_MAX_CENTS)reject('SAMPLE_CAP','This run has reached its delegated sandbox sample or test-funds limit.');
       for(const order of fresh){
         const at=new Date().toISOString();
         store.insert('paypal_receipts',[{receipt_id:randomUUID(),run_id:id,order_id:order.order_id,merchant_id:order.merchant_id,profile_key:paypal.profileKey(),status:'QUEUED',currency:'USD',gross_cents:order.total_cents,created_at:at,event_date:eventDate(at),create_request_id:randomUUID(),capture_request_id:randomUUID(),funding_method:VAULT_METHOD,funding_key:funding.fingerprint(),source:'PAYPAL_SANDBOX'}]);
@@ -129,10 +145,10 @@ export function createMarketService({store,catalog,paypal,trainImpl,funding=null
     if(chosen.length)enqueueSelected(w.runId,chosen);
   }
   return {
-    paymentSample(id){const w=lookup(id),receipts=receiptRows(id);return {runId:id,funding:funding?.status()||{ready:false,mode:'SANDBOX'},automaticLimit:w.sandboxSampleLimit||0,maxOrders:NATIVE_SAMPLE_LIMIT,maxCents:NATIVE_SAMPLE_MAX_CENTS,remaining:Math.max(0,NATIVE_SAMPLE_LIMIT-receipts.length),reservedCents:receipts.reduce((a,r)=>a+r.gross_cents,0),completed:receipts.filter(r=>r.status==='COMPLETED').length,running:draining,candidates:candidates(id),receipts,lineage:store.table('v_paypal_order_lineage',id,{limit:10}).rows};},
+    paymentSample(id){const w=lookup(id),receipts=receiptRows(id),limit=nativeLimit(w);return {runId:id,funding:funding?.status()||{ready:false,mode:'SANDBOX'},automaticLimit:w.sandboxSampleLimit||0,maxOrders:limit,maxCents:NATIVE_SAMPLE_MAX_CENTS,remaining:Math.max(0,limit-receipts.length),reservedCents:receipts.reduce((a,r)=>a+r.gross_cents,0),completed:receipts.filter(r=>r.status==='COMPLETED').length,running:draining,candidates:candidates(id),receipts,lineage:store.table('v_paypal_order_lineage',id,{limit:10}).rows};},
     async mirror(id,ids){enqueueSelected(id,ids);await drain();return frame(id);},
     status(){const blocked=store.db.prepare("SELECT 1 FROM paypal_receipts WHERE profile_key=? AND error_code='PAYEE_NOT_ENABLED_FOR_CARD_PROCESSING' LIMIT 1").get(paypal.profileKey());return {trainer:learning.status(),comparisonRunning,catalog:catalog.status(),paypal:paypal.status(),funding:funding?.status()||{ready:false,mode:'SANDBOX'},cardProcessingBlocked:Boolean(blocked),sandboxBatchRunning:draining,latest:store.latest(),runs:store.runs()};},
-    frame,store,
+    frame,store,catalogProducts:()=>catalog.products(),catalogStatus:()=>catalog.status(),
     async create(input={}){
       if(input.kind==='learning'){
         const seed=Number(input.seed??42),customerCount=Number(input.customerCount??600),merchantCount=Number(input.merchantCount??8),budgetCents=Number(input.budgetCents??120000);
@@ -156,6 +172,9 @@ export function createMarketService({store,catalog,paypal,trainImpl,funding=null
     async advance(id,count=1){
       if(running.has(id))return running.get(id);
       const work=(async()=>{let w=lookup(id),activities=[];
+        if(w.continuous)throw new SandboxError(409,'LIVE_CLOCK_OWNS_RUN','Use the independent market clock. Analysis does not advance it.');
+        if(w.policyLab)throw new SandboxError(409,'POLICY_CLOCK_OWNS_RUN','Use Policy Lab controls; paired worlds share a clock.');
+        if(w.workflowId)throw new SandboxError(409,'WORKFLOW_OWNS_RUN','Use the campaign workflow checkpoints to advance this market.');
         const steps=Math.min(24,Math.max(1,Math.trunc(Number(count)||1)));
         if(w.kind==='LEARNING_MARKET_V2'){const result=await learning.advance(w,steps);autoSample(result.world);if(result.world.sandboxSampleLimit)void drain();return frame(id,result.activities);}
         for(let i=0;i<steps&&w.status!=='COMPLETED';i++){
@@ -172,13 +191,20 @@ export function createMarketService({store,catalog,paypal,trainImpl,funding=null
       const stamp=new Date(Date.parse(w.startedAt)+w.tick*3600000).toISOString();
       store.transaction(()=>{store.insert('events',[{event_id:`${id}-CTRL-${randomUUID()}`,run_id:id,event_ts:stamp,event_date:eventDate(stamp),channel:'system',event_type:'market_control',detail_json:JSON.stringify({promotion:w.promotion,shock:w.shock}),source:'USER_SIMULATION_CONTROL'}]);store.saveState(w);});return frame(id);
     },
-    async refreshReceipt(receiptId){const row=store.db.prepare('SELECT * FROM paypal_receipts WHERE receipt_id=?').get(receiptId);if(!row)throw new SandboxError(404,'RECEIPT_NOT_FOUND','Sandbox receipt not found.');
+    async refreshReceipt(receiptId,{readOnly=false}={}){const row=store.db.prepare('SELECT * FROM paypal_receipts WHERE receipt_id=?').get(receiptId);if(!row)throw new SandboxError(404,'RECEIPT_NOT_FOUND','Sandbox receipt not found.');
+      if(readOnly){
+        if(row.profile_key!==paypal.profileKey())throw new SandboxError(409,'ACCOUNT_CHANGED','Use the sandbox app that created this receipt.');
+        if(!row.paypal_order_id)throw new SandboxError(409,'NO_PROVIDER_ORDER','No provider order exists to read back.');
+        const verified=inspect(await paypal.requestSandbox('/v2/checkout/orders/'+row.paypal_order_id),row);
+        if(!verified)throw new SandboxError(409,'CAPTURE_NOT_CONFIRMED','Readback found no capture. It will not initiate a payment.');
+        updateReceipt(row.receipt_id,verified);return frame(row.run_id);
+      }
       if(draining)throw new SandboxError(409,'BATCH_RUNNING','Wait for the current sandbox batch.');
       if(!row.paypal_order_id&&row.funding_method!==VAULT_METHOD)throw new SandboxError(409,'NO_PROVIDER_ORDER','No confirmed PayPal order ID exists. Check the displayed error before trying another run.');
       try{await settle(row);}catch(e){updateReceipt(row.receipt_id,{status:'ERROR',error_code:e.code||'SANDBOX_UNCONFIRMED'});throw e;}return frame(row.run_id);
     },
     async compare(id){
-      const parent=lookup(id);if(parent.kind!=='LEARNING_MARKET_V2')reject('LEARNING_REQUIRED','Choose a learning-market season.');
+      const parent=lookup(id);if(parent.workflowId)throw new SandboxError(409,'WORKFLOW_OWNS_RUN','This campaign is controlled by its checkpointed workflow.');if(parent.kind!=='LEARNING_MARKET_V2')reject('LEARNING_REQUIRED','Choose a learning-market season.');
       if(comparisonRunning)throw new SandboxError(409,'COMPARISON_RUNNING','A local policy comparison is already running.');
       if(running.has(id))throw new SandboxError(409,'RUN_BUSY','Pause the season and wait for its current step.');
       comparisonRunning=true;

@@ -13,6 +13,14 @@ import { buildReserveReview } from '../demo/game/sandbox-review.mjs';
 const env = { PAYPAL_CLIENT_ID: 'sandbox-client-only-for-tests', PAYPAL_CLIENT_SECRET: 'fake-secret-only-for-tests', PAYPAL_ENVIRONMENT: 'SANDBOX' };
 const origin = 'http://127.0.0.1:4173';
 const answer = (body, status = 200) => new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
+test('native 204 success is valid for invoice and subscription lifecycle actions',async()=>{
+  const paypal=await createPayPalSandbox({env,fetchImpl:async url=>url.endsWith('/v1/oauth2/token')?answer({access_token:'test-only-token',expires_in:7200}):new Response(null,{status:204})});
+  assert.deepEqual(await paypal.requestSandbox('/v2/invoicing/invoices/INV2-TEST/send',{method:'POST',body:{send_to_recipient:false}}),{});
+});
+test('an empty 403 preserves a permission-denied error',async()=>{
+  const paypal=await createPayPalSandbox({env,fetchImpl:async url=>url.endsWith('/v1/oauth2/token')?answer({access_token:'test-only-token',expires_in:7200}):answer({},403)});
+  await assert.rejects(()=>paypal.requestSandbox('/v1/shipping/trackers/test'),e=>e.code==='PAYPAL_PERMISSION_DENIED');
+});
 function provider() {
   const state = { calls: [], orders: new Map(), requests: new Map(), captureCount: 0, createCount: 0 };
   state.fetch = async (url, options) => {

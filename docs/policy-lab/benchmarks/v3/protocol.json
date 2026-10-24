@@ -1,0 +1,163 @@
+{
+  "id": "research-workflow-v3",
+  "createdAt": "2026-10-24T16:38:45.904Z",
+  "code": {
+    "scripts/research-lab/data.mjs": "648a34431592e7638a397c4e455ba0ff7d4076b8a21c77996e1937db10460de9",
+    "scripts/research-lab/workspace.mjs": "3ddd5a166f9adcb969188c3965704055778caf356a8037be36d8e5f47f42d345",
+    "scripts/research-lab/agent.mjs": "916593ae648e4872205ef3d5e59e5db8e1fa42423c3e3330a537bac68c3221be",
+    "scripts/research-lab/run.mjs": "c69fca8ec28b83e1da1fa994ef3170454b100bba3417051a0a9edb96158217da"
+  },
+  "originalBenchmarkHash": "a414246ce78e0fec05ece95b711d46532bf384c1026fa54cb27ac45446602b27",
+  "v2ProtocolHash": "95b9ba4510130f66b25b78c817f02c93c241a70e1cdd7c4995153088bf2f6a26",
+  "tasks": [
+    {
+      "seed": 52001,
+      "scenario": "steady",
+      "briefIndex": 0,
+      "brief": "Investigate whether recommendations can add retained PayPal contribution. Use all three merchants and any shoppers. Do not issue discount coupons. Limit this single campaign to7 days and a simulated outreach budget of$30. Inspect the data, fit a local candidate, and test at least one development pilot before choosing a bounded campaign or observe.",
+      "contract": {
+        "budgetCents": 3000,
+        "maxCouponPct": 0,
+        "maxDurationDays": 7,
+        "audience": "all",
+        "allowedMerchantIndices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "taskId": "mission-1"
+    },
+    {
+      "seed": 52002,
+      "scenario": "rival_sale",
+      "briefIndex": 1,
+      "brief": "Research reactivation for previous buyers who have not purchased for7 days. Only Oak & Ink and Corner Supply may participate. A campaign can last up to14 days, spend at most$50 of simulated joint funding, and offer no more than5% off. Optimize mature retained PayPal contribution, not redemptions. Inspect the data, fit and test a candidate before committing or observing.",
+      "contract": {
+        "budgetCents": 5000,
+        "maxCouponPct": 5,
+        "maxDurationDays": 14,
+        "audience": "lapsed",
+        "allowedMerchantIndices": [
+          1,
+          2
+        ]
+      },
+      "taskId": "mission-2"
+    },
+    {
+      "seed": 52003,
+      "scenario": "budget_squeeze",
+      "briefIndex": 2,
+      "brief": "Design a very small recommendation experiment for Willow Goods and Corner Supply, open to all shoppers. No coupons. The campaign must end within3 days and may spend at most$10 in simulated funding. Account for refunds and fees. Query the warehouse, compare a local model and run a development pilot; observe if there is insufficient support for outreach.",
+      "contract": {
+        "budgetCents": 1000,
+        "maxCouponPct": 0,
+        "maxDurationDays": 3,
+        "audience": "all",
+        "allowedMerchantIndices": [
+          0,
+          2
+        ]
+      },
+      "taskId": "mission-3"
+    },
+    {
+      "seed": 52004,
+      "scenario": "supply_delay",
+      "briefIndex": 0,
+      "brief": "Investigate whether recommendations can add retained PayPal contribution. Use all three merchants and any shoppers. Do not issue discount coupons. Limit this single campaign to7 days and a simulated outreach budget of$30. Inspect the data, fit a local candidate, and test at least one development pilot before choosing a bounded campaign or observe.",
+      "contract": {
+        "budgetCents": 3000,
+        "maxCouponPct": 0,
+        "maxDurationDays": 7,
+        "audience": "all",
+        "allowedMerchantIndices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "taskId": "mission-4"
+    },
+    {
+      "seed": 52005,
+      "scenario": "returns_wave",
+      "briefIndex": 1,
+      "brief": "Research reactivation for previous buyers who have not purchased for7 days. Only Oak & Ink and Corner Supply may participate. A campaign can last up to14 days, spend at most$50 of simulated joint funding, and offer no more than5% off. Optimize mature retained PayPal contribution, not redemptions. Inspect the data, fit and test a candidate before committing or observing.",
+      "contract": {
+        "budgetCents": 5000,
+        "maxCouponPct": 5,
+        "maxDurationDays": 14,
+        "audience": "lapsed",
+        "allowedMerchantIndices": [
+          1,
+          2
+        ]
+      },
+      "taskId": "mission-5"
+    },
+    {
+      "seed": 52006,
+      "scenario": "steady",
+      "briefIndex": 2,
+      "brief": "Design a very small recommendation experiment for Willow Goods and Corner Supply, open to all shoppers. No coupons. The campaign must end within3 days and may spend at most$10 in simulated funding. Account for refunds and fees. Query the warehouse, compare a local model and run a development pilot; observe if there is insufficient support for outreach.",
+      "contract": {
+        "budgetCents": 1000,
+        "maxCouponPct": 0,
+        "maxDurationDays": 3,
+        "audience": "all",
+        "allowedMerchantIndices": [
+          0,
+          2
+        ]
+      },
+      "taskId": "mission-6"
+    }
+  ],
+  "methods": [
+    "fixed",
+    "automl",
+    "research"
+  ],
+  "limits": {
+    "queries": 6,
+    "models": 4,
+    "pilots": 2,
+    "steps": 16,
+    "maxSQLBytes": 5000
+  },
+  "model": "gemini-3.1-flash-lite",
+  "suiteCapUSD": 1,
+  "perCaseCapUSD": 0.25,
+  "wholeHackathonCeilingUSD": 50,
+  "snapshotDay": 45,
+  "shoppingDays": 100,
+  "returnTailDays": 14,
+  "pilotSeeds": [
+    [
+      61001,
+      61002,
+      61003
+    ],
+    [
+      61011,
+      61012,
+      61013
+    ]
+  ],
+  "experiment": "One bounded campaign per research mission. All branches use identical frozen market dynamics, the same observed snapshot and a shared Gemini interpretation. Final outcomes remain unavailable until the research decision and independent review are committed.",
+  "pilots": "Replicated paired development simulations, not real-customer randomized trials. They expose permitted training feedback, not final test seeds. Their small, adaptively selected estimates are not confirmatory evidence.",
+  "baselines": "Fixed workflow and bounded automated model comparison use the same parser result, schema, query API, model fitter, pilot API, authority constraints and tool ceilings. They make deterministic planning decisions; the adaptive planner has model-call costs on top.",
+  "modelScope": "Generated linear feature expressions over the existing seven observable inputs, compiled to the frozen policy interface. Two local model families: action means and ridge. No arbitrary Python or nonlinear model deployment.",
+  "metric": "Additional modeled platform contribution versus no campaign after all allocated parser/planner/reviewer costs. Baselines each receive the same full shared-reader cost allocation; actual provider billing is counted only once.",
+  "uncertainty": "Six different seed/brief/scenario combinations; paired bootstrap intervals are exploratory. Not a powered or representative production ROI study.",
+  "opportunityAuditHash": "973a6b81ec18612890ccf879d7352183aaeea8fdd5a6f79f9f22c555137a254f",
+  "budgetAtFreeze": {
+    "suiteUSD": 0.03364,
+    "lifetimeUSD": 1.03883,
+    "circuit": null,
+    "unsettled": 0
+  },
+  "hash": "29d2e1393d65d2b14847f693508951e7b4980019218c4cbf7c3aa22cad82bd6f"
+}

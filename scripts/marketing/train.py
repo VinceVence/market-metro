@@ -64,6 +64,9 @@ models=[
     ("logistic",make_pipeline(StandardScaler(),LogisticRegression(C=.25,max_iter=350,random_state=seed))),
     ("tree",DecisionTreeClassifier(max_depth=5,min_samples_leaf=max(25,int(train.sum()*.012)),random_state=seed))
 ]
+requested = payload.get("model_types", ["logistic", "tree"])
+assert isinstance(requested, list) and requested and set(requested).issubset({"logistic", "tree"})
+models = [(name, model) for name, model in models if name in requested]
 for name, model in models:
     model.fit(X[train], y[train])
     probability=model.predict_proba(X[valid])[:,1]

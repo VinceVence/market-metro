@@ -1,0 +1,646 @@
+{
+  "schema": "market-metro-policy-lab-poc-v1",
+  "generatedAt": "2026-10-24T11:44:40.359Z",
+  "runId": "GARDEN-LAB-df43cd08499c0c0a",
+  "counts": {
+    "orders": 1667,
+    "actions": 10000,
+    "coupons": 547,
+    "redemptions": 50
+  },
+  "publications": [
+    {
+      "day": 39,
+      "strategy": "recommendations",
+      "audience": "all",
+      "merchantIndices": [
+        1,
+        2
+      ],
+      "maxOfferPct": 0,
+      "windowDays": 42,
+      "epsilon": 0.1,
+      "effectiveDay": 39,
+      "asOfDay": 30,
+      "modelId": "GARDEN-LAB-df43cd08499c0c0a-REVIEW-1-MODEL"
+    },
+    {
+      "day": 64,
+      "strategy": "mixed",
+      "audience": "all",
+      "merchantIndices": [
+        0,
+        1,
+        2
+      ],
+      "maxOfferPct": 5,
+      "windowDays": 42,
+      "epsilon": 0.15,
+      "effectiveDay": 64,
+      "asOfDay": 55,
+      "modelId": "GARDEN-LAB-df43cd08499c0c0a-REVIEW-2-MODEL"
+    },
+    {
+      "day": 93,
+      "strategy": "recommendations",
+      "audience": "all",
+      "merchantIndices": [
+        1,
+        2
+      ],
+      "maxOfferPct": 0,
+      "windowDays": 42,
+      "epsilon": 0.1,
+      "effectiveDay": 93,
+      "asOfDay": 80,
+      "modelId": "GARDEN-LAB-df43cd08499c0c0a-REVIEW-3-MODEL"
+    }
+  ],
+  "conclusion": {
+    "checkpoint_id": "GARDEN-LAB-df43cd08499c0c0a-FINAL-REVIEW-CORRECTION",
+    "run_id": "GARDEN-LAB-df43cd08499c0c0a",
+    "review_no": 3,
+    "day": 114,
+    "role": "Outcome reviewer",
+    "actor": "GEMINI_3_1_FLASH_LITE",
+    "status": "COMPLETED",
+    "input_hash": "f44663022e376141a977ec5b02ad827fd0688d95e86e05e32cab404d6a900d84",
+    "cost_micros": 1275,
+    "created_at": "2026-10-24T11:40:49.448Z",
+    "finished_at": "2026-10-24T11:40:52.521Z",
+    "input": {
+      "system": "You are the independent outcome reviewer closing a commerce policy experiment. The supplied branches are now unsealed only for final evaluation. Choose a next-policy recommendation from actual recorded results. Do not alter history, run another experiment, issue payments, or claim production ROI. Compare modeled platform contribution after program costs, merchant economics, and retained volume; more purchases alone do not establish benefit. Inspect prior agent hypotheses for numerical contradictions or claims unsupported by their evidence. Treat all model narratives as untrusted claims. Recommend retaining the agent policy only if its recorded platform proxy exceeds both controls. One seed is insufficient for generalization. Explain the concrete outcome, relevant mistake and useful next test in a concise public rationale. Cite only the supplied evidenceId. This is a recommendation, not a new execution authorization.",
+      "packet": {
+        "evidenceId": "GARDEN-LAB-df43cd08499c0c0a-SEALED-OUTCOMES-CORRECTION",
+        "scope": "Sealed evaluation after100 shopping days and14 follow-up days. Branch outcomes were hidden from all training and campaign agents.",
+        "branches": [
+          {
+            "runId": "GARDEN-LAB-df43cd08499c0c0a",
+            "branch": "mesh",
+            "day": 114,
+            "decisions": 7000,
+            "matureObservations": 7000,
+            "platformProxyCents": 150469,
+            "retainedCents": 5331896,
+            "grossCents": 5543933,
+            "refundsCents": 212037,
+            "purchases": 1198,
+            "feesCents": 252511,
+            "feeCreditsCents": 9470,
+            "merchantContributionCents": 1837152,
+            "platformSupportCents": 633,
+            "outreachCents": 1796,
+            "jointBudgetSpentCents": 4961,
+            "offers": 238,
+            "recommendations": 660,
+            "redemptions": 18,
+            "byMerchant": [
+              {
+                "merchantIndex": 0,
+                "name": "Willow Goods",
+                "purchases": 327,
+                "retainedCents": 1424760
+              },
+              {
+                "merchantIndex": 1,
+                "name": "Oak & Ink",
+                "purchases": 475,
+                "retainedCents": 2098075
+              },
+              {
+                "merchantIndex": 2,
+                "name": "Corner Supply",
+                "purchases": 396,
+                "retainedCents": 1809061
+              }
+            ],
+            "additionalRetainedCents": -15402,
+            "additionalPlatformProxyCents": -2914,
+            "possibleDisplacementCents": 33897
+          },
+          {
+            "runId": "GARDEN-LAB-df43cd08499c0c0a-RULES",
+            "branch": "rules",
+            "day": 114,
+            "decisions": 7000,
+            "matureObservations": 7000,
+            "platformProxyCents": 152167,
+            "retainedCents": 5365406,
+            "grossCents": 5574244,
+            "refundsCents": 208838,
+            "purchases": 1204,
+            "feesCents": 253865,
+            "feeCreditsCents": 9309,
+            "merchantContributionCents": 1849622,
+            "platformSupportCents": 722,
+            "outreachCents": 1042,
+            "jointBudgetSpentCents": 4652,
+            "offers": 139,
+            "recommendations": 382,
+            "redemptions": 19,
+            "byMerchant": [
+              {
+                "merchantIndex": 0,
+                "name": "Willow Goods",
+                "purchases": 325,
+                "retainedCents": 1427902
+              },
+              {
+                "merchantIndex": 1,
+                "name": "Oak & Ink",
+                "purchases": 471,
+                "retainedCents": 2092317
+              },
+              {
+                "merchantIndex": 2,
+                "name": "Corner Supply",
+                "purchases": 408,
+                "retainedCents": 1845187
+              }
+            ],
+            "additionalRetainedCents": 18108,
+            "additionalPlatformProxyCents": -1216,
+            "possibleDisplacementCents": 46157
+          },
+          {
+            "runId": "GARDEN-LAB-df43cd08499c0c0a-ORGANIC",
+            "branch": "organic",
+            "day": 114,
+            "decisions": 7000,
+            "matureObservations": 7000,
+            "platformProxyCents": 153383,
+            "retainedCents": 5347298,
+            "grossCents": 5550595,
+            "refundsCents": 203297,
+            "purchases": 1197,
+            "feesCents": 252705,
+            "feeCreditsCents": 9116,
+            "merchantContributionCents": 1844476,
+            "platformSupportCents": 0,
+            "outreachCents": 0,
+            "jointBudgetSpentCents": 0,
+            "offers": 0,
+            "recommendations": 0,
+            "redemptions": 0,
+            "byMerchant": [
+              {
+                "merchantIndex": 0,
+                "name": "Willow Goods",
+                "purchases": 333,
+                "retainedCents": 1474059
+              },
+              {
+                "merchantIndex": 1,
+                "name": "Oak & Ink",
+                "purchases": 464,
+                "retainedCents": 2088627
+              },
+              {
+                "merchantIndex": 2,
+                "name": "Corner Supply",
+                "purchases": 400,
+                "retainedCents": 1784612
+              }
+            ],
+            "additionalRetainedCents": 0,
+            "additionalPlatformProxyCents": 0,
+            "possibleDisplacementCents": 0
+          }
+        ],
+        "assumptions": {
+          "returnWindowDays": 14,
+          "merchantDiscountShare": 0.8,
+          "platformDiscountShare": 0.2,
+          "feeRate": 0.0349,
+          "feeFixedCents": 49,
+          "processingRate": 0.012,
+          "processingFixedCents": 20,
+          "deliveryCents": 350,
+          "outreachCents": 2,
+          "contactGapDays": 7,
+          "minMerchantMargin": 0.2,
+          "refundFees": "Full modeled fee credited; not an assertion about PayPal refund policy",
+          "subsidyReturns": "Incentive reimbursement is not clawed back in this conservative POC"
+        },
+        "modelCostMicros": 7172,
+        "referenceReceipt": {
+          "sourceRunId": "GARDEN-LAB-aa0790339ca3cc4a",
+          "capture_id": "4H546903J1724721F",
+          "status": "COMPLETED",
+          "gross_cents": 3039,
+          "fee_cents": 133,
+          "net_cents": 2906,
+          "verified_at": "2026-10-24T11:14:55.864Z",
+          "source": "PRIOR_RUN_NATIVE_INTEGRATION_REFERENCE",
+          "countsAsCurrentPurchase": false
+        },
+        "reviewHistory": [
+          {
+            "role": "Growth investigator",
+            "day": 30,
+            "status": "COMPLETED",
+            "evidenceDay": 30,
+            "recentPurchases": 116,
+            "previousPurchases": 116,
+            "output": {
+              "cut": "offer_response",
+              "rationale": "Purchase volume has remained flat despite the availability of stock across three merchants. Willow Goods has a significantly lower max offer percentage (5%) compared to the others (10%), potentially creating a bottleneck in offer effectiveness for that segment of the portfolio.",
+              "evidenceIds": [
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-1-EVIDENCE"
+              ],
+              "hypothesis": "The stagnation in recent purchase volume (116 vs 116) is driven by the restrictive offer caps on Willow Goods, which limits the platform's ability to incentivize conversions for that specific merchant's inventory.",
+              "asOfDay": 30
+            }
+          },
+          {
+            "role": "Experiment scientist",
+            "day": 32,
+            "status": "COMPLETED",
+            "evidenceDay": 30,
+            "recentPurchases": 116,
+            "previousPurchases": 116,
+            "output": {
+              "rationale": "Purchase volume is stagnant. Investigation shows 'recommend' actions for merchants 1 and 2 (Oak & Ink, Corner Supply) yield higher mean mature proxy values compared to coupon actions. Willow Goods (index 0) is excluded due to restrictive offer caps and lower performance. Retraining model to establish baseline.",
+              "audience": "all",
+              "epsilon": 0.1,
+              "asOfDay": 30,
+              "retrain": true,
+              "windowDays": 42,
+              "maxOfferPct": 0,
+              "strategy": "recommendations",
+              "merchantIndices": [
+                1,
+                2
+              ],
+              "evidenceIds": [
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-1-EVIDENCE",
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-1-INVESTIGATION"
+              ]
+            }
+          },
+          {
+            "role": "Outcome reviewer",
+            "day": 36,
+            "status": "COMPLETED",
+            "evidenceDay": 30,
+            "recentPurchases": 116,
+            "previousPurchases": 116,
+            "output": {
+              "maxOfferPct": 0,
+              "decision": "approve",
+              "asOfDay": 30,
+              "rationale": "The proposal aligns with the merchant margin constraints and utilizes the mature observation cohort (1700) for strategy refinement. The model performance (MSE 0.282) is comparable to the baseline, supporting the recommendation strategy for the selected merchants.",
+              "evidenceIds": [
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-1-EVIDENCE",
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-1-MODEL-RESULT",
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-1-FINANCIAL"
+              ],
+              "merchantIndices": [
+                1,
+                2
+              ],
+              "epsilon": 0.1
+            }
+          },
+          {
+            "role": "Growth investigator",
+            "day": 55,
+            "status": "COMPLETED",
+            "evidenceDay": 55,
+            "recentPurchases": 114,
+            "previousPurchases": 144,
+            "output": {
+              "evidenceIds": [
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-2-EVIDENCE"
+              ],
+              "cut": "offer_response",
+              "hypothesis": "The decline in recent purchases is driven by the current recommendation strategy excluding Willow Goods (merchant 0) and setting maxOfferPct to 0, which reduces conversion compared to periods where offers were active.",
+              "rationale": "Recent purchases (114) are lower than previous purchases (144), and the active plan has a 0% offer cap, suggesting that the lack of incentives is negatively impacting purchase volume.",
+              "asOfDay": 55
+            }
+          },
+          {
+            "role": "Experiment scientist",
+            "day": 57,
+            "status": "COMPLETED",
+            "evidenceDay": 55,
+            "recentPurchases": 114,
+            "previousPurchases": 144,
+            "output": {
+              "evidenceIds": [
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-2-EVIDENCE",
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-2-INVESTIGATION"
+              ],
+              "windowDays": 42,
+              "merchantIndices": [
+                0,
+                1,
+                2
+              ],
+              "epsilon": 0.15,
+              "rationale": "The current recommendation-only strategy (maxOfferPct=0) correlates with a decline in purchase volume. Reintroducing coupons (maxOfferPct=5) across all merchants, including Willow Goods, aims to reverse this trend by leveraging the higher mean mature proxy cents observed in coupon-based actions.",
+              "strategy": "mixed",
+              "audience": "all",
+              "retrain": true,
+              "maxOfferPct": 5,
+              "asOfDay": 55
+            }
+          },
+          {
+            "role": "Outcome reviewer",
+            "day": 60,
+            "status": "COMPLETED",
+            "evidenceDay": 55,
+            "recentPurchases": 114,
+            "previousPurchases": 144,
+            "output": {
+              "evidenceIds": [
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-2-EVIDENCE",
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-2-MODEL-RESULT",
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-2-FINANCIAL"
+              ],
+              "epsilon": 0.15,
+              "merchantIndices": [
+                0,
+                1,
+                2
+              ],
+              "rationale": "The proposal to include all three merchants with a 5% discount ceiling is supported by the merchant-specific margin constraints. Willow Goods (M001) is now included at its maximum allowable 5% discount, while Oak & Ink (M002) and Corner Supply (M003) remain within their 10% capacity. The model shows sufficient maturity (4200 observations) and the proposed epsilon of 0.15 is appropriate for the mixed strategy.",
+              "decision": "approve",
+              "maxOfferPct": 5,
+              "asOfDay": 55
+            }
+          },
+          {
+            "role": "Growth investigator",
+            "day": 80,
+            "status": "COMPLETED",
+            "evidenceDay": 80,
+            "recentPurchases": 119,
+            "previousPurchases": 111,
+            "output": {
+              "asOfDay": 80,
+              "hypothesis": "The recent decline in purchase volume is driven by the restrictive 5% offer cap imposed by Willow Goods, which limits the overall effectiveness of the mixed strategy across the portfolio.",
+              "cut": "offer_response",
+              "rationale": "The portfolio performance shows a slight increase in recent purchases (119) compared to previous (111), but the strategy is constrained by Willow Goods' 5% margin-based cap, which may be insufficient to drive conversion compared to the 10% capacity of other merchants.",
+              "evidenceIds": [
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-3-EVIDENCE"
+              ]
+            }
+          },
+          {
+            "role": "Experiment scientist",
+            "day": 82,
+            "status": "FAILED",
+            "evidenceDay": 80,
+            "recentPurchases": 119,
+            "previousPurchases": 111,
+            "output": {
+              "error": "INVALID_POLICY_PLAN",
+              "rawDecision": {
+                "audience": "all",
+                "merchantIndices": [
+                  1,
+                  2
+                ],
+                "strategy": "recommendations",
+                "evidenceIds": [
+                  "GARDEN-LAB-df43cd08499c0c0a-REVIEW-3-EVIDENCE",
+                  "GARDEN-LAB-df43cd08499c0c0a-REVIEW-3-INVESTIGATION"
+                ],
+                "windowDays": 42,
+                "epsilon": 0.1,
+                "retrain": true,
+                "asOfDay": 80,
+                "maxOfferPct": 10,
+                "rationale": "To address the recent purchase volume decline, the strategy is updated to focus on merchants (Oak & Ink, Corner Supply) capable of supporting a 10% offer, while excluding Willow Goods to respect its 5% margin-based constraint. The strategy shifts to recommendations to optimize conversion within these constraints."
+              }
+            }
+          },
+          {
+            "role": "Experiment scientist",
+            "day": 86,
+            "status": "COMPLETED",
+            "evidenceDay": 80,
+            "recentPurchases": 119,
+            "previousPurchases": 111,
+            "output": {
+              "merchantIndices": [
+                1,
+                2
+              ],
+              "windowDays": 42,
+              "strategy": "recommendations",
+              "maxOfferPct": 0,
+              "evidenceIds": [
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-3-EVIDENCE",
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-3-INVESTIGATION"
+              ],
+              "epsilon": 0.1,
+              "audience": "all",
+              "asOfDay": 80,
+              "rationale": "Shifting to recommendations (maxOfferPct=0) for merchants 1 and 2 to optimize conversion while respecting margin constraints and addressing the recent purchase volume decline. Willow Goods is excluded due to its restrictive 5% cap.",
+              "retrain": true
+            }
+          },
+          {
+            "role": "Outcome reviewer",
+            "day": 89,
+            "status": "COMPLETED",
+            "evidenceDay": 80,
+            "recentPurchases": 119,
+            "previousPurchases": 111,
+            "output": {
+              "merchantIndices": [
+                1,
+                2
+              ],
+              "rationale": "The proposal shifts to a recommendation-based strategy with a 0% discount ceiling, which is consistent with the merchant margin constraints and the model's performance. The mature observation count (6700) is sufficient to support this transition.",
+              "evidenceIds": [
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-3-EVIDENCE",
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-3-MODEL-RESULT",
+                "GARDEN-LAB-df43cd08499c0c0a-REVIEW-3-FINANCIAL"
+              ],
+              "decision": "approve",
+              "asOfDay": 80,
+              "maxOfferPct": 0,
+              "epsilon": 0.1
+            }
+          },
+          {
+            "role": "Outcome reviewer",
+            "day": 114,
+            "status": "FAILED",
+            "output": {
+              "error": "INVALID_FINAL_REVIEW",
+              "rawDecision": {
+                "evidenceIds": [
+                  "GARDEN-LAB-df43cd08499c0c0a"
+                ],
+                "rationale": "The experiment results demonstrate that the 'mesh' and 'rules' branches failed to outperform the 'organic' control. The 'organic' branch achieved the highest platform proxy (153,383 cents) and the highest merchant contribution (1,844,476 cents) without incurring any support or outreach costs. The agent-driven branches ('mesh' and 'rules') incurred additional costs and failed to generate sufficient incremental volume to justify the intervention. The frequent strategy shifts during the experiment (as documented in the review history) indicate an inability to stabilize performance, and the final metrics confirm that the intervention was net-negative for the platform.",
+                "decision": "stop_outreach"
+              }
+            }
+          }
+        ],
+        "metricWinners": {
+          "platformProxyCents": "organic",
+          "merchantContributionCents": "rules",
+          "retainedCents": "rules"
+        },
+        "correction": {
+          "error": "Use the exact evidenceId supplied in the tool schema. Use metricWinners to avoid incorrectly claiming one branch wins every metric.",
+          "previousDecision": {
+            "evidenceIds": [
+              "GARDEN-LAB-df43cd08499c0c0a"
+            ],
+            "rationale": "The experiment results demonstrate that the 'mesh' and 'rules' branches failed to outperform the 'organic' control. The 'organic' branch achieved the highest platform proxy (153,383 cents) and the highest merchant contribution (1,844,476 cents) without incurring any support or outreach costs. The agent-driven branches ('mesh' and 'rules') incurred additional costs and failed to generate sufficient incremental volume to justify the intervention. The frequent strategy shifts during the experiment (as documented in the review history) indicate an inability to stabilize performance, and the final metrics confirm that the intervention was net-negative for the platform.",
+            "decision": "stop_outreach"
+          }
+        }
+      },
+      "functions": [
+        {
+          "name": "close_experiment",
+          "description": "Choose a next-policy recommendation after complete observed results. Never starts another run or payment.",
+          "parameters": {
+            "type": "OBJECT",
+            "properties": {
+              "decision": {
+                "type": "STRING",
+                "enum": [
+                  "stop_outreach",
+                  "retain_rules",
+                  "collect_more_evidence",
+                  "retain_agent_policy"
+                ]
+              },
+              "rationale": {
+                "type": "STRING"
+              },
+              "evidenceIds": {
+                "type": "ARRAY",
+                "items": {
+                  "type": "STRING",
+                  "enum": [
+                    "GARDEN-LAB-df43cd08499c0c0a-SEALED-OUTCOMES-CORRECTION"
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 1
+              }
+            },
+            "required": [
+              "decision",
+              "rationale",
+              "evidenceIds"
+            ]
+          }
+        }
+      ]
+    },
+    "output": {
+      "decision": "stop_outreach",
+      "rationale": "The 'organic' control branch outperformed both the 'mesh' and 'rules' branches in platform proxy cents (153,383 vs 150,469 and 152,167, respectively) while incurring zero support or outreach costs. The agent-driven interventions failed to generate sufficient incremental volume to offset their associated costs, and the frequent strategy shifts throughout the experiment prevented performance stabilization. The 'rules' branch showed higher merchant contribution and retained cents, but this did not translate into superior platform proxy performance compared to the organic baseline.",
+      "evidenceIds": [
+        "GARDEN-LAB-df43cd08499c0c0a-SEALED-OUTCOMES-CORRECTION"
+      ],
+      "scope": "ONE_SEED_SIMULATION",
+      "executedNewCampaign": false,
+      "executedPayment": false
+    },
+    "provider": {
+      "reservationId": "7142b5e8-7cd9-472e-be29-f99cf745812b",
+      "caseId": "GARDEN-LAB-df43cd08499c0c0a-FINAL-REVIEW-CORRECTION",
+      "trialId": "GARDEN-LAB-df43cd08499c0c0a",
+      "stage": "policy_lab_final",
+      "status": "settled",
+      "modelCostMicros": 1275,
+      "reservedMicros": 30000,
+      "inputTokens": 4031,
+      "outputTokens": 178,
+      "thinkingTokens": 0,
+      "cachedInputTokens": 0,
+      "responseId": "QpncaqTNO42y2roP1P_zUA",
+      "modelVersion": "gemini-3.1-flash-lite",
+      "latencyMs": 1916
+    }
+  },
+  "providerCost": {
+    "attempts": 12,
+    "accountedUSD": 0.008447,
+    "lifetimeAccountedUSD": 0.869186,
+    "perRunCapUSD": 0.25,
+    "wholeHackathonCeilingUSD": 50,
+    "localTrainingMs": 29.853208000015,
+    "unsettled": 0,
+    "basis": "Provider-reported tokens at recorded prices; not a billing invoice."
+  },
+  "validation": {
+    "foreignKeyViolations": 0,
+    "invalidMoney": 0,
+    "invalidPropensities": 0,
+    "budgetsWithinLimits": true,
+    "allPostHistoryOutcomesMature": true,
+    "allReplaysMatched": true
+  },
+  "replay": [
+    {
+      "runId": "GARDEN-LAB-df43cd08499c0c0a",
+      "matched": true,
+      "days": 114,
+      "actions": 10000,
+      "orders": 1667,
+      "publications": 3,
+      "differences": [],
+      "modelCalls": 0,
+      "paymentCalls": 0,
+      "method": "Saved policy activation times, coefficients and keyed exogenous randomness. The seed alone does not reproduce LLM latency or decisions."
+    },
+    {
+      "runId": "GARDEN-LAB-df43cd08499c0c0a-RULES",
+      "matched": true,
+      "days": 114,
+      "actions": 10000,
+      "orders": 1673,
+      "publications": 3,
+      "differences": [],
+      "modelCalls": 0,
+      "paymentCalls": 0,
+      "method": "Saved policy activation times, coefficients and keyed exogenous randomness. The seed alone does not reproduce LLM latency or decisions."
+    },
+    {
+      "runId": "GARDEN-LAB-df43cd08499c0c0a-ORGANIC",
+      "matched": true,
+      "days": 114,
+      "actions": 10000,
+      "orders": 1666,
+      "publications": 0,
+      "differences": [],
+      "modelCalls": 0,
+      "paymentCalls": 0,
+      "method": "Saved policy activation times, coefficients and keyed exogenous randomness. The seed alone does not reproduce LLM latency or decisions."
+    }
+  ],
+  "nativeReference": {
+    "run_id": "GARDEN-LAB-aa0790339ca3cc4a",
+    "order_id": "GARDEN-LAB-aa0790339ca3cc4a-O5790",
+    "capture_id": "4H546903J1724721F",
+    "status": "COMPLETED",
+    "gross_cents": 3039,
+    "fee_cents": 133,
+    "net_cents": 2906,
+    "verified_at": "2026-10-24T11:14:55.864Z",
+    "channel3_product_id": "w7qtfaR",
+    "title": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)"
+  },
+  "simulationCodeHash": "d5cce01320a701520c8013a2e1fc9e885b02499da2fc4cf166442fb58ea2c2d9",
+  "limitations": [
+    "One seed; no claim of generalized lift or real merchant ROI.",
+    "Merchant and shopper behavior is authored. Three reasoning roles use real Gemini; merchant actors are numerical policies.",
+    "The learner is a contextual bandit, not sequential or multi-agent RL.",
+    "The native reference belongs to the first trial. No payment was made in the corrected trial.",
+    "Raw LLM rationales are retained, including mistakes. Output validation is not proof of semantic correctness.",
+    "LLM latency affects activation days. Replay uses saved activation times and model artifacts."
+  ]
+}

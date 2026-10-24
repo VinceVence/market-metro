@@ -6,11 +6,12 @@ import {createLayout,createWalker,requestDestination,updateWalker,homePoint,shop
 const shirtColors=[0xc67f5b,0x648ca5,0xc6a855,0x8679a8,0x6e9572,0xb17b91];
 const skins=[0xe0b38e,0xc59068,0x9b6a4d,0xedc19b,0xb8835c,0xd1a47d];
 
-export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments}={}){
+export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,autoFit=false}={}){
   let frame=null,layout=createLayout(8),lastRun=null,lastTick=-1,scene,renderer,camera,controls,world,raf=0;
   let hovered=null,selected=null,pointerInside=false,dragging=false,down=null,lastTime=0,statsTime=0,rotationTarget=null;
   const pointer=new THREE.Vector2(),ray=new THREE.Raycaster(),actors=new Map(),pickables=[],labels=[],materials=new Map();
   let mode='city',city=null,labelClock=0;
+  let paused=false,playbackRate=1,namesVisible=true;
   const svgNS='http://www.w3.org/2000/svg',connections=document.createElementNS(svgNS,'svg');connections.classList.add('city-connections');connections.setAttribute('aria-hidden','true');parent.append(connections);
   const labelLayer=document.createElement('div');labelLayer.className='city-labels';labelLayer.setAttribute('aria-label','Places in the district');parent.append(labelLayer);
   const tooltip=document.createElement('div');tooltip.className='world-tooltip';tooltip.hidden=true;tooltip.setAttribute('role','status');
@@ -55,7 +56,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments}={}
     }).sort((a,b)=>(a.entity===selected?-1:b.entity===selected?1:0)||a.depth-b.depth);
     const leaders=[];let visible=0;
     for(const {entity,button,x,y,depth}of projected){
-      const allowed=mode==='agents'?entity.type!=='merchant'||entity===selected:['merchant','payments'].includes(entity.type)||entity===selected;
+      const allowed=(entity.type!=='merchant'||namesVisible)&&(mode==='agents'?entity.type!=='merchant'||entity===selected:['merchant','payments'].includes(entity.type)||entity===selected);
       button.hidden=!allowed;button.classList.toggle('is-selected',selected===entity);
       if(!allowed)continue;
       button.classList.toggle('network-label',mode==='agents'&&entity.type!=='merchant');
@@ -130,7 +131,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments}={}
   }
   function resize(fit=false){
     if(!renderer)return;const width=parent.clientWidth,height=parent.clientHeight;if(width<1||height<1)return;
-    renderer.setSize(width,height,false);const aspect=width/height,vertical=fit?Math.max(35,(layout.width+8)/(aspect*2.0)):camera.userData.vertical||38;
+    renderer.setSize(width,height,false);const aspect=width/height,vertical=fit||autoFit?Math.max(35,(layout.width+8)/(aspect*2.0)):camera.userData.vertical||38;
     camera.userData.vertical=vertical;camera.left=-vertical*aspect;camera.right=vertical*aspect;camera.top=vertical;camera.bottom=-vertical;camera.updateProjectionMatrix();
   }
   function ring(color){const g=new THREE.PlaneGeometry(1,1),m=new THREE.MeshBasicMaterial({color,transparent:true,opacity:.30,side:THREE.DoubleSide,depthWrite:false});const mesh=new THREE.Mesh(g,m);mesh.rotation.x=-Math.PI/2;mesh.visible=false;scene.add(mesh);return mesh;}
@@ -157,12 +158,14 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments}={}
     tooltip.style.transform='translate('+x+'px,'+y+'px)';parent.dataset.hoverType=hovered.type;
   }
   function setFrame(next){
-    const changed=lastRun!==next.runId,newDay=lastTick!==next.tick;frame=next;
+    const visualTick=next.simTime?.elapsedHours??next.tick;
+    const changed=lastRun!==next.runId,newDay=lastTick!==visualTick;frame=next;
     if(!renderer||parent.dataset.renderState!=='ready')return;
     if(changed){clearWorld();layout=createLayout(next.merchantCount);environment();cameraHome();lastRun=next.runId;}
     // A fixed representative population prevents same-day polling or new events from popping people in/out.
     const sampleCount=Math.min(32,next.customers.length);
     const ids=new Set(Array.from({length:sampleCount},(_,i)=>next.customers[Math.floor(i*next.customers.length/sampleCount)].id));
+    for(const id of (next.featuredIds||[]).slice(0,8))ids.add(id);
     if(selected?.type==='customer')ids.add(selected.id);
     // Stable actors keep their positions and routes when a frame is polled again.
     for(const [id,a]of actors)if(!ids.has(id)){
@@ -175,18 +178,19 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments}={}
       a.data=u;a.entity.data=u;a.bag.visible=['purchase','redeem'].includes(u.lastAction);
       if(changed||newDay){
         const mi=next.merchants.findIndex(m=>m.merchant_id===u.lastMerchant);
-        const visiting=mi>=0&&['browse','purchase','redeem','coupon'].includes(u.lastAction);
+        const fresh=!next.simTime||u.lastHour>=visualTick-2;
+        const visiting=fresh&&mi>=0&&['browse','purchase','redeem','coupon'].includes(u.lastAction);
         const slot=shopCounts.get(mi)||0;if(visiting)shopCounts.set(mi,slot+1);
         const destination=visiting?shopPoint(layout,mi,slot):a.home;
         if(reduced()){a.walker.position={...destination};a.walker.path=[];a.walker.pending=null;}
-        else requestDestination(a.walker,destination,next.runId+':'+next.tick+':'+u.lastAction,visiting?'visit':'home');
+        else requestDestination(a.walker,destination,next.runId+':'+visualTick+':'+u.lastAction,visiting?'visit':'home');
       }
     }
     if(newDay&&next.activities?.some(a=>a.type==='delivery')&&van?.state==='parked'){
       const event=next.activities.find(a=>a.type==='delivery'),merchant=next.merchants.find(m=>m.merchant_id===event.merchantId);
       van.target=layout.merchants[merchant?.position||0].x;van.state='outbound';
     }
-    lastTick=next.tick;parent.dataset.actorCount=String(actors.size);
+    lastTick=visualTick;parent.dataset.actorCount=String(actors.size);
   }
   try{
     scene=new THREE.Scene();scene.background=new THREE.Color(0xdfe8ed);scene.fog=new THREE.Fog(0xdfe8ed,160,255);
@@ -223,7 +227,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments}={}
     renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();parent.dataset.renderState='context-lost';tooltip.hidden=false;tooltip.querySelector('strong').textContent='3D view paused';tooltip.querySelector('span').textContent='Graphics context interrupted. Reload to restore the view; saved data is safe.';});
     renderer.domElement.addEventListener('webglcontextrestored',()=>{parent.dataset.renderState='ready';tooltip.hidden=true;if(frame)setFrame(frame);});
     function loop(){
-      raf=requestAnimationFrame(loop);const now=performance.now(),dt=Math.min(.05,(now-lastTime)/1000||.016);lastTime=now;
+      raf=requestAnimationFrame(loop);const now=performance.now(),dt=Math.min(.05,(now-lastTime)/1000||.016)*playbackRate;lastTime=now;if(paused)return;
       const walkers=[...actors.values()].map(a=>a.walker);
       for(const a of actors.values()){
         updateWalker(a.walker,layout,reduced()?0:dt,walkers);
@@ -254,5 +258,6 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments}={}
   }
   function zoom(factor){if(!camera)return;camera.zoom=THREE.MathUtils.clamp(camera.zoom*factor,.65,3.5);camera.updateProjectionMatrix();}
   function rotate(){if(!camera)return;const s=new THREE.Spherical().setFromVector3(camera.position.clone().sub(controls.target));rotationTarget=s.theta+Math.PI/4;}
-  return {setFrame,setMode,focusStation,zoomIn(){zoom(1.15);},zoomOut(){zoom(1/1.15);},rotate,home:cameraHome,destroy(){parent._dispose3D?.();clearWorld();}};
+  function project({customerId,merchantId}={}){if(!camera)return null;const actor=actors.get(customerId),entity=city?.entities.find(e=>e.id===merchantId);const point=actor?.group.visible?new THREE.Vector3(actor.group.position.x,2.8,actor.group.position.z):entity?new THREE.Vector3(entity.x,entity.height+1,entity.z):null;if(!point)return null;point.project(camera);return {x:(point.x+1)*parent.clientWidth/2,y:(1-point.y)*parent.clientHeight/2,visible:point.z>-1&&point.z<1&&Math.abs(point.x)<1&&Math.abs(point.y)<1};}
+  return {setFrame,setMode,focusStation,project,setNamesVisible(value){namesVisible=Boolean(value);parent.dataset.storeNames=String(namesVisible);if(camera)updateLabels();},setPaused(value){paused=Boolean(value);},setPlaybackRate(value){playbackRate=Math.max(.5,Math.min(3,Number(value)||1));},zoomIn(){zoom(1.15);},zoomOut(){zoom(1/1.15);},rotate,home:cameraHome,destroy(){parent._dispose3D?.();clearWorld();}};
 }

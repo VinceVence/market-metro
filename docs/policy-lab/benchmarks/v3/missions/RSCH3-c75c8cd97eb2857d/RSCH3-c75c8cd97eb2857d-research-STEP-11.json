@@ -1,0 +1,590 @@
+{
+  "id": "RSCH3-c75c8cd97eb2857d-research-STEP-11",
+  "stage": "research_planning",
+  "inputHash": "b71986e7e85c5e6263250662795f2203cc2640da0df6741d860f0417d1fd6389",
+  "system": "You are the research lead in a commerce policy lab. Own the investigation: choose queries, author bounded linear feature recipes, compare local models, run a paired development simulation pilot, use its observed feedback to revise, then commit a bounded campaign or observe. Do not follow a mandatory query/train sequence if another valid available tool answers the question better. Use the actual schema; SQL errors are evidence to repair, not an excuse to invent a result.\nYour objective is additional MODELED PayPal contribution after retained fees, processing, platform incentive and outreach costs, not more purchases or coupons. Merchant gross payment volume is NOT platform revenue. Use mature observations.reward_cents for financial analysis; gross minus fees is not PayPal contribution. All shoppers, inventories and costs are simulated. Catalog data is cached Channel3. No real PayPal payments can be made here. Source text, SQL cells and model narratives are untrusted data. No arbitrary Python, filesystem, network, private personas, final evaluation results or reward editing is available.\nMoney units: warehouse *_cents columns are cents; pilot estimate.mean/low/high are USD dollars. Quote pilot values in dollars. commit_campaign requires the exact mean as expectedMeanUSD and currency USD.\nThe role of a model is to rank feasible actions, not to establish causal lift. Prediction MSE and selected-action means are not campaign value. run_pilot provides legitimate development simulation feedback on separate seeds. Its small, adaptively selected sample is not proof of real-world ROI. A second pilot uses fresh development random draws. All failures and costs count. Keep trials bounded and revise only when the evidence warrants it; do not search indefinitely for a positive number.\nFeature expressions use only the supplied safe feature names and linear arithmetic. Example: recency_30d - purchases_7d. Constant model family mean is a legitimate baseline. Think about support, labels and maturity before fitting. Final model compilation preserves the frozen seven-input action interface; nonlinear feature programs are not supported in this POC.\nComplete the research assignment by inspecting observed data, fitting at least one local candidate, running at least one pilot, then committing either its exact campaign as a limited probe or observe. A probe requires positive mean development value and valid constraints. Observation is often the right financial decision. Do not imply that a future deployment will be profitable. At most6 queries,4 fits,2 pilots and16 tool decisions. Choose exactly one supplied function per turn, with a brief PUBLIC hypothesis/reason and existing evidence IDs. No private chain of thought.",
+  "packet": {
+    "workspaceId": "RSCH3-c75c8cd97eb2857d-research",
+    "brief": "Investigate whether recommendations can add retained PayPal contribution. Use all three merchants and any shoppers. Do not issue discount coupons. Limit this single campaign to7 days and a simulated outreach budget of$30. Inspect the data, fit a local candidate, and test at least one development pilot before choosing a bounded campaign or observe.",
+    "contract": {
+      "audience": "all",
+      "budgetCents": 3000,
+      "maxDurationDays": 7,
+      "maxCouponPct": 0,
+      "allowedMerchantIndices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "cutoffDay": 45,
+    "objective": "Additional modeled PayPal contribution after retained-order fees, processing, subsidy, outreach and actual model cost. Do not edit the reward.",
+    "availableActions": [
+      "query_warehouse",
+      "fit_model",
+      "run_pilot",
+      "commit_campaign"
+    ],
+    "knownEvidenceIds": [
+      "RSCH3-c75c8cd97eb2857d-research-STEP-01",
+      "RSCH3-c75c8cd97eb2857d-research-STEP-02",
+      "RSCH3-c75c8cd97eb2857d-research-STEP-03",
+      "RSCH3-c75c8cd97eb2857d-research-STEP-04",
+      "RSCH3-c75c8cd97eb2857d-research-STEP-05",
+      "RSCH3-c75c8cd97eb2857d-research-STEP-06",
+      "RSCH3-c75c8cd97eb2857d-research-STEP-07",
+      "RSCH3-c75c8cd97eb2857d-research-STEP-08",
+      "RSCH3-c75c8cd97eb2857d-research-STEP-09",
+      "RSCH3-c75c8cd97eb2857d-research-STEP-10",
+      "RSCH3-c75c8cd97eb2857d-research-STEP-07-MODEL",
+      "RSCH3-c75c8cd97eb2857d-research-STEP-08-PILOT"
+    ],
+    "remaining": {
+      "steps": 6,
+      "queries": 1,
+      "models": 3,
+      "pilots": 1
+    },
+    "knownSchema": [
+      {
+        "name": "catalog",
+        "sql": "CREATE TABLE catalog(product_id TEXT PRIMARY KEY,merchant_index INTEGER,title TEXT,price_cents INTEGER,channel3_id TEXT,source TEXT)"
+      },
+      {
+        "name": "customers",
+        "sql": "CREATE TABLE customers(customer_id TEXT PRIMARY KEY,segment TEXT,purchases INTEGER,last_purchase_day INTEGER)"
+      },
+      {
+        "name": "merchants",
+        "sql": "CREATE TABLE merchants(merchant_index INTEGER PRIMARY KEY,name TEXT,stock INTEGER,max_offer_pct INTEGER)"
+      },
+      {
+        "name": "metadata",
+        "sql": "CREATE TABLE metadata(key TEXT PRIMARY KEY,value TEXT)"
+      },
+      {
+        "name": "observations",
+        "sql": "CREATE TABLE observations(action_id TEXT PRIMARY KEY,day INTEGER,customer_id TEXT,selected_action TEXT,propensity REAL,matures_day INTEGER,reward_cents INTEGER,bias REAL,recency_30d REAL,purchases_7d REAL,offers_7d REAL,price_scale REAL,observed_merchant_affinity REAL,recent_refunds REAL)"
+      },
+      {
+        "name": "orders",
+        "sql": "CREATE TABLE orders(order_id TEXT PRIMARY KEY,day INTEGER,merchant_index INTEGER,customer_id TEXT,gross_cents INTEGER,observed_refund_cents INTEGER,modeled_fee_cents INTEGER,processing_cents INTEGER)"
+      }
+    ],
+    "financialDefinitions": "Warehouse *_cents columns are cents. Pilot estimate.mean, low and high are USD DOLLARS. gross_cents is merchant payment volume, NOT PayPal revenue. Never subtract fees from gross and call that platform contribution. The authoritative platform target is mature observations.reward_cents: retained fees minus processing, platform incentive reimbursement and outreach. It may be negative. SQL results are exploratory, not the immutable evaluator.",
+    "safeFeatures": [
+      "recency_30d",
+      "purchases_7d",
+      "offers_7d",
+      "price_scale",
+      "observed_merchant_affinity",
+      "recent_refunds"
+    ],
+    "featureGrammar": "Up to6 non-intercept linear expressions. Bias/intercept is automatically included. Linear arithmetic only: + - * / and parentheses. Multiplication/division need a constant operand. No reward, future outcomes or post-purchase fields. Example: recency_30d - purchases_7d. All models compile to the unchanged engine interface.",
+    "models": [
+      {
+        "id": "RSCH3-c75c8cd97eb2857d-research-STEP-07-MODEL",
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "observed_merchant_affinity",
+          "recency_30d",
+          "purchases_7d",
+          "price_scale"
+        ],
+        "windowDays": 56,
+        "datasetHash": "470661965d676b68b95ec026dc7a740b8eaecb1a412bd43c2b92109c8f247c25",
+        "trainingRows": 3200,
+        "validationRows": 700,
+        "mse": 0.2916923635961113,
+        "baselineMse": 0.29168599459886096,
+        "runtimeMs": 13.306458000006387,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      }
+    ],
+    "pilots": [
+      {
+        "id": "RSCH3-c75c8cd97eb2857d-research-STEP-08-PILOT",
+        "modelId": "RSCH3-c75c8cd97eb2857d-research-STEP-07-MODEL",
+        "campaign": {
+          "audience": "all",
+          "penaltyUSD": 0.1,
+          "maxOfferPct": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ],
+          "durationDays": 7,
+          "title": "Pilot: Recommendation Model Evaluation"
+        },
+        "plan": {
+          "id": "SPEC-ede29873f34d",
+          "strategy": "recommendations",
+          "audience": "all",
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ],
+          "maxOfferPct": 0,
+          "duration": 7,
+          "penalty": 0.1,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "estimate": {
+          "mean": -1.43,
+          "low": -2.8699999999999997,
+          "high": 0.43,
+          "seeds": 3,
+          "cases": 3,
+          "winRate": 0.3333333333333333,
+          "worst": -2.87,
+          "worstDecileMean": -2.87,
+          "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+          "unit": "USD"
+        },
+        "validity": true,
+        "interpretation": "Three independent development-seed paired rollouts, fully matured. Selection-biased when used to choose a campaign. Not final evidence, not real customers, not a mathematical causal guarantee outside this simulator."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "RSCH3-c75c8cd97eb2857d-research-STEP-04",
+        "action": "query_warehouse",
+        "status": "COMPLETED",
+        "rationale": "I need to inspect the observations table to understand the distribution of reward_cents and the available features. The previous query failed because I assumed a merchant_index column existed in the observations table, which it does not.",
+        "output": {
+          "columns": [
+            "avg_reward",
+            "count"
+          ],
+          "rows": [
+            {
+              "avg_reward": 19.35375,
+              "count": 3200
+            }
+          ],
+          "truncated": false,
+          "modelPreviewTruncated": false
+        }
+      },
+      {
+        "id": "RSCH3-c75c8cd97eb2857d-research-STEP-05",
+        "action": "query_warehouse",
+        "status": "COMPLETED",
+        "rationale": "I need to see if there is variation in reward_cents based on the available features in the observations table to inform my model. I'll check the correlation between reward_cents and some key features.",
+        "output": {
+          "columns": [
+            "AVG(reward_cents)",
+            "SUM(reward_cents)",
+            "COUNT(*)"
+          ],
+          "rows": [
+            {
+              "AVG(reward_cents)": 19.35375,
+              "SUM(reward_cents)": 61932,
+              "COUNT(*)": 3200
+            }
+          ],
+          "truncated": false,
+          "modelPreviewTruncated": false
+        }
+      },
+      {
+        "id": "RSCH3-c75c8cd97eb2857d-research-STEP-06",
+        "action": "query_warehouse",
+        "status": "COMPLETED",
+        "rationale": "I need to understand the relationship between features and reward_cents to build a predictive model. I will check the average reward_cents grouped by deciles of observed_merchant_affinity to see if it's a useful predictor.",
+        "output": {
+          "columns": [
+            "affinity_bin",
+            "avg_reward",
+            "count"
+          ],
+          "rows": [
+            {
+              "affinity_bin": 0,
+              "avg_reward": 19.16763942931258,
+              "count": 4384
+            },
+            {
+              "affinity_bin": 1,
+              "avg_reward": 24.301724137931036,
+              "count": 116
+            }
+          ],
+          "truncated": false,
+          "modelPreviewTruncated": false
+        }
+      },
+      {
+        "id": "RSCH3-c75c8cd97eb2857d-research-STEP-07",
+        "action": "fit_model",
+        "status": "COMPLETED",
+        "rationale": "I will fit a ridge model using observed_merchant_affinity, recency_30d, purchases_7d, and price_scale to predict reward_cents, as these features are likely to influence shopper behavior and contribution.",
+        "output": {
+          "modelId": "RSCH3-c75c8cd97eb2857d-research-STEP-07-MODEL",
+          "type": "compiled_linear_feature_ridge",
+          "features": [
+            "observed_merchant_affinity",
+            "recency_30d",
+            "purchases_7d",
+            "price_scale"
+          ],
+          "windowDays": 56,
+          "datasetHash": "470661965d676b68b95ec026dc7a740b8eaecb1a412bd43c2b92109c8f247c25",
+          "trainingRows": 3200,
+          "validationRows": 700,
+          "mse": 0.2916923635961113,
+          "baselineMse": 0.29168599459886096,
+          "runtimeMs": 13.306458000006387,
+          "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+        }
+      },
+      {
+        "id": "RSCH3-c75c8cd97eb2857d-research-STEP-08",
+        "action": "run_pilot",
+        "status": "COMPLETED",
+        "rationale": "I am running a pilot to evaluate the performance of the fitted model in a simulated environment. The model uses observed_merchant_affinity, recency_30d, purchases_7d, and price_scale to predict reward_cents. I've set a penalty of $0.10 to account for potential outreach costs.",
+        "output": {
+          "id": "RSCH3-c75c8cd97eb2857d-research-STEP-08-PILOT",
+          "modelId": "RSCH3-c75c8cd97eb2857d-research-STEP-07-MODEL",
+          "campaign": {
+            "audience": "all",
+            "penaltyUSD": 0.1,
+            "maxOfferPct": 0,
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "durationDays": 7,
+            "title": "Pilot: Recommendation Model Evaluation"
+          },
+          "plan": {
+            "id": "SPEC-ede29873f34d",
+            "strategy": "recommendations",
+            "audience": "all",
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "maxOfferPct": 0,
+            "duration": 7,
+            "penalty": 0.1,
+            "epsilon": 0,
+            "windowDays": 42
+          },
+          "estimate": {
+            "mean": -1.43,
+            "low": -2.8699999999999997,
+            "high": 0.43,
+            "seeds": 3,
+            "cases": 3,
+            "winRate": 0.3333333333333333,
+            "worst": -2.87,
+            "worstDecileMean": -2.87,
+            "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+            "unit": "USD"
+          },
+          "validity": true,
+          "interpretation": "Three independent development-seed paired rollouts, fully matured. Selection-biased when used to choose a campaign. Not final evidence, not real customers, not a mathematical causal guarantee outside this simulator."
+        }
+      },
+      {
+        "id": "RSCH3-c75c8cd97eb2857d-research-STEP-09",
+        "action": "commit_campaign",
+        "status": "FAILED",
+        "rationale": "The pilot evaluation for the recommendation model resulted in a negative mean contribution of -$1.43 per shopper, with a low win rate and high uncertainty. Given the objective is to add retained PayPal contribution and the pilot results do not demonstrate a clear positive impact, the most prudent financial decision is to observe rather than deploy the campaign.",
+        "output": {
+          "error": "CITE_PILOT_MEAN_IN_USD_WITHIN_HALF_A_CENT"
+        }
+      },
+      {
+        "id": "RSCH3-c75c8cd97eb2857d-research-STEP-10",
+        "action": "commit_campaign",
+        "status": "FAILED",
+        "rationale": "The pilot evaluation for the recommendation model resulted in a negative mean contribution of -$1.43 per shopper, with a low win rate and high uncertainty. Given the objective is to add retained PayPal contribution and the pilot results do not demonstrate a clear positive impact, the most prudent financial decision is to observe rather than deploy the campaign.",
+        "output": {
+          "error": "CITE_PILOT_MEAN_IN_USD_WITHIN_HALF_A_CENT"
+        }
+      }
+    ],
+    "boundaries": "This is a simulation research workspace. Pilot controls are allowed development feedback, distinct from hidden final evaluation controls. No filesystem, network, arbitrary Python, payment or reward-editing tool is available."
+  },
+  "functions": [
+    {
+      "name": "query_warehouse",
+      "description": "Execute one read-only SELECT or WITH query on the observed snapshot. Up to100 output rows and2 seconds. Use real column names; queries do not reveal future rows.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "sql": {
+            "type": "STRING"
+          },
+          "rationale": {
+            "type": "STRING",
+            "description": "Brief public hypothesis, decisive evidence and reason for this next step."
+          },
+          "evidenceIds": {
+            "type": "ARRAY",
+            "items": {
+              "type": "STRING",
+              "enum": [
+                "RSCH3-c75c8cd97eb2857d-research-STEP-01",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-02",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-03",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-04",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-05",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-06",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-07",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-08",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-09",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-10",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-07-MODEL",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-08-PILOT"
+              ]
+            },
+            "description": "Use knownEvidenceIds: recorded results, models or pilots. Failed results may explain repair but do not establish financial benefit."
+          }
+        },
+        "required": [
+          "sql",
+          "rationale",
+          "evidenceIds"
+        ]
+      }
+    },
+    {
+      "name": "fit_model",
+      "description": "Train a local candidate from mature past rows. Author up to6 non-intercept LINEAR expressions; the bias/intercept is already included automatically. No target/label columns. Compare chronological MSE to the constant baseline. MSE is not causal lift.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "family": {
+            "type": "STRING",
+            "enum": [
+              "ridge",
+              "mean"
+            ]
+          },
+          "features": {
+            "type": "ARRAY",
+            "items": {
+              "type": "STRING"
+            },
+            "maxItems": 7
+          },
+          "windowDays": {
+            "type": "INTEGER",
+            "description": "Exactly28,42 or56."
+          },
+          "rationale": {
+            "type": "STRING",
+            "description": "Brief public hypothesis, decisive evidence and reason for this next step."
+          },
+          "evidenceIds": {
+            "type": "ARRAY",
+            "items": {
+              "type": "STRING",
+              "enum": [
+                "RSCH3-c75c8cd97eb2857d-research-STEP-01",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-02",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-03",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-04",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-05",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-06",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-07",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-08",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-09",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-10",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-07-MODEL",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-08-PILOT"
+              ]
+            },
+            "description": "Use knownEvidenceIds: recorded results, models or pilots. Failed results may explain repair but do not establish financial benefit."
+          }
+        },
+        "required": [
+          "family",
+          "features",
+          "windowDays",
+          "rationale",
+          "evidenceIds"
+        ]
+      }
+    },
+    {
+      "name": "run_pilot",
+      "description": "Evaluate one candidate campaign against no campaign on3 separate development simulation seeds. These are simulated paired experiments, not real-customer RCTs. Final evaluation seeds are unavailable. All returns mature. A second pilot uses a disjoint seed group.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "modelId": {
+            "type": "STRING"
+          },
+          "title": {
+            "type": "STRING"
+          },
+          "audience": {
+            "type": "STRING",
+            "enum": [
+              "all",
+              "lapsed"
+            ]
+          },
+          "merchantIndices": {
+            "type": "ARRAY",
+            "items": {
+              "type": "INTEGER"
+            }
+          },
+          "maxOfferPct": {
+            "type": "INTEGER",
+            "description": "0,5 or10, within the interpreted contract."
+          },
+          "durationDays": {
+            "type": "INTEGER",
+            "description": "1–14 and within the contract."
+          },
+          "penaltyUSD": {
+            "type": "NUMBER",
+            "description": "0–1 conservative reward penalty; not a calibrated confidence bound."
+          },
+          "rationale": {
+            "type": "STRING",
+            "description": "Brief public hypothesis, decisive evidence and reason for this next step."
+          },
+          "evidenceIds": {
+            "type": "ARRAY",
+            "items": {
+              "type": "STRING",
+              "enum": [
+                "RSCH3-c75c8cd97eb2857d-research-STEP-01",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-02",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-03",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-04",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-05",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-06",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-07",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-08",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-09",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-10",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-07-MODEL",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-08-PILOT"
+              ]
+            },
+            "description": "Use knownEvidenceIds: recorded results, models or pilots. Failed results may explain repair but do not establish financial benefit."
+          }
+        },
+        "required": [
+          "modelId",
+          "title",
+          "audience",
+          "merchantIndices",
+          "maxOfferPct",
+          "durationDays",
+          "penaltyUSD",
+          "rationale",
+          "evidenceIds"
+        ]
+      }
+    },
+    {
+      "name": "commit_campaign",
+      "description": "Commit an exact tested pilot proposal for independent review, or observe. Cite its mean in USD, not cents; rounding to the nearest cent is allowed. A probe requires positive mean development value and valid constraints; it is not proven uplift. Final evaluation remains hidden. No native payments.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "pilotId": {
+            "type": "STRING"
+          },
+          "decision": {
+            "type": "STRING",
+            "enum": [
+              "probe",
+              "observe"
+            ]
+          },
+          "expectedMeanUSD": {
+            "type": "NUMBER"
+          },
+          "currency": {
+            "type": "STRING",
+            "enum": [
+              "USD"
+            ]
+          },
+          "rationale": {
+            "type": "STRING",
+            "description": "Brief public hypothesis, decisive evidence and reason for this next step."
+          },
+          "evidenceIds": {
+            "type": "ARRAY",
+            "items": {
+              "type": "STRING",
+              "enum": [
+                "RSCH3-c75c8cd97eb2857d-research-STEP-01",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-02",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-03",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-04",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-05",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-06",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-07",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-08",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-09",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-10",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-07-MODEL",
+                "RSCH3-c75c8cd97eb2857d-research-STEP-08-PILOT"
+              ]
+            },
+            "description": "Use knownEvidenceIds: recorded results, models or pilots. Failed results may explain repair but do not establish financial benefit."
+          }
+        },
+        "required": [
+          "pilotId",
+          "decision",
+          "expectedMeanUSD",
+          "currency",
+          "rationale",
+          "evidenceIds"
+        ]
+      }
+    }
+  ],
+  "status": "COMPLETED",
+  "startedAt": "2026-10-24T16:43:11.857Z",
+  "response": {
+    "name": "commit_campaign",
+    "args": {
+      "expectedMeanUSD": 0,
+      "rationale": "The pilot evaluation for the recommendation model resulted in a negative mean contribution of -$1.43 per shopper. Given the objective is to add retained PayPal contribution and the pilot results do not demonstrate a positive impact, the most prudent financial decision is to observe rather than deploy the campaign.",
+      "pilotId": "RSCH3-c75c8cd97eb2857d-research-STEP-08-PILOT",
+      "currency": "USD",
+      "decision": "observe",
+      "evidenceIds": [
+        "RSCH3-c75c8cd97eb2857d-research-STEP-08-PILOT"
+      ]
+    },
+    "id": "call_1075431"
+  },
+  "provider": {
+    "reservationId": "10e42e83-df18-4a79-bf42-d46bcaeb2ed5",
+    "caseId": "RSCH3-c75c8cd97eb2857d-research-STEP-11",
+    "trialId": "RSCH3-c75c8cd97eb2857d",
+    "stage": "research_planning",
+    "status": "settled",
+    "modelCostMicros": 1609,
+    "reservedMicros": 30000,
+    "inputTokens": 5485,
+    "outputTokens": 158,
+    "thinkingTokens": 0,
+    "cachedInputTokens": 0,
+    "responseId": "JODcatP2OZ3CweoPzpq4-Qo",
+    "modelVersion": "gemini-3.1-flash-lite",
+    "latencyMs": 1984
+  },
+  "finishedAt": "2026-10-24T16:43:18.143Z"
+}

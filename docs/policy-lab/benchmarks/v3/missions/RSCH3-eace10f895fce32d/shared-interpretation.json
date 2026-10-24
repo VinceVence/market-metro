@@ -1,0 +1,82 @@
+{
+  "id": "shared-interpretation",
+  "stage": "research_shared_reader",
+  "inputHash": "3b522491636e81111d7385c3a652844ef1e7dd637b5a95a6dd194c594d4d4c04",
+  "system": "Extract explicit constraints from the user-authored simulated merchant brief. Budget is cents, discounts are integer percentages. Indices:Willow Goods0,Oak & Ink1,Corner Supply2. Lapsed means previous buyers inactive for7 days. Do not add fields or choose policy parameters not specified.",
+  "packet": {
+    "brief": "Research reactivation for previous buyers who have not purchased for7 days. Only Oak & Ink and Corner Supply may participate. A campaign can last up to14 days, spend at most$50 of simulated joint funding, and offer no more than5% off. Optimize mature retained PayPal contribution, not redemptions. Inspect the data, fit and test a candidate before committing or observing."
+  },
+  "functions": [
+    {
+      "name": "interpret_brief",
+      "description": "Extract the explicit campaign constraints. Do not choose a campaign or infer permission beyond the brief.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "budgetCents": {
+            "type": "INTEGER"
+          },
+          "maxCouponPct": {
+            "type": "INTEGER"
+          },
+          "maxDurationDays": {
+            "type": "INTEGER"
+          },
+          "audience": {
+            "type": "STRING",
+            "enum": [
+              "all",
+              "lapsed"
+            ]
+          },
+          "allowedMerchantIndices": {
+            "type": "ARRAY",
+            "items": {
+              "type": "INTEGER"
+            }
+          }
+        },
+        "required": [
+          "budgetCents",
+          "maxCouponPct",
+          "maxDurationDays",
+          "audience",
+          "allowedMerchantIndices"
+        ]
+      }
+    }
+  ],
+  "status": "COMPLETED",
+  "startedAt": "2026-10-24T16:43:30.014Z",
+  "response": {
+    "name": "interpret_brief",
+    "args": {
+      "budgetCents": 5000,
+      "allowedMerchantIndices": [
+        1,
+        2
+      ],
+      "maxDurationDays": 14,
+      "maxCouponPct": 5,
+      "audience": "lapsed"
+    },
+    "id": "call_98861"
+  },
+  "provider": {
+    "reservationId": "894003c9-0023-44b3-bf29-46e9b439b114",
+    "caseId": "shared-interpretation",
+    "trialId": "RSCH3-eace10f895fce32d",
+    "stage": "research_shared_reader",
+    "status": "settled",
+    "modelCostMicros": 124,
+    "reservedMicros": 30000,
+    "inputTokens": 213,
+    "outputTokens": 47,
+    "thinkingTokens": 0,
+    "cachedInputTokens": 0,
+    "responseId": "NODcatDsEprCweoPvIS74Ao",
+    "modelVersion": "gemini-3.1-flash-lite",
+    "latencyMs": 658
+  },
+  "finishedAt": "2026-10-24T16:43:32.765Z"
+}

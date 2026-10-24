@@ -1,0 +1,2464 @@
+{
+  "protocol": {
+    "version": "marketing-decision-pilot-v1",
+    "caseCount": 12,
+    "customers": 400,
+    "merchants": 8,
+    "horizonDays": 7,
+    "futureReplicates": 16,
+    "objective": "Maximize the reviewed merchant contribution after modeled operating costs; report effects on other merchants separately.",
+    "trial": "EXPLORATORY_DEVELOPER_ASSISTED_CHAT_REVIEW_NOT_BLINDED",
+    "identicalInputs": "Exactly the same frozen packet, forecasts, model candidates, action menu and execution guards.",
+    "policyChanges": "Only the reviewed merchant changes its coupon policy. No further model fitting during the seven-day replay.",
+    "economicMistake": "Action loses more than $5 mean merchant contribution versus KEEP_CURRENT and the paired replay 95% interval is entirely below zero. This is an outcome diagnostic, not a ground-truth reasoning label.",
+    "hindsightRegret": "Difference from the best allowed action averaged over these same future tapes. Optimistic post-hoc diagnostic; never an achievable-agent claim.",
+    "goGate": {
+      "minimumNetImprovementPct": 5,
+      "pairedCaseBootstrapLowMustExceedZero": true,
+      "executedGuardViolations": 0,
+      "portfolioMeanMustNotDecline": true
+    },
+    "assumedCosts": {
+      "computeUsdPerHour": 0.1,
+      "chatReviewUsdPerCase": 0.1,
+      "humanReviewMinutesPerEscalation": 5,
+      "humanUsdPerHour": 30
+    },
+    "costCaveat": "No new paid API calls. Current-chat token usage/account charge and electricity are unmetered. Cost totals are explicitly modeled, with a chat-price sensitivity table. Benchmark replay time is evaluation overhead, not deployment cost.",
+    "accounting": "Sales already reflect redeemed discounts. Deduct refunds, COGS, delivery, modeled fees and outreach once. Final pending refunds for evaluation orders are settled. No 14-day retention benefit is claimed.",
+    "paypal": "All replay payments and fees are synthetic. Existing native sandbox samples prove integration only. No PayPal or Channel3 requests in this benchmark.",
+    "exclusions": "No novelty claim, production ROI, live traffic experiment, adaptive tool selection, independent agent team, or blinded generalization proof."
+  },
+  "generatedAt": "2026-10-22T11:37:02.506Z",
+  "status": "FIRST_CHAT_TRIAL_COMPLETED",
+  "newPaidApiCalls": 0,
+  "newPaidApiSpendUsd": 0,
+  "chatAccountCost": "UNKNOWN_UNMETERED",
+  "totalCaseFuturePairs": 192,
+  "totals": {
+    "chat": {
+      "cases": 12,
+      "mistakesVsKeep": 1,
+      "guardViolations": 0,
+      "escalations": 0,
+      "merchantContributionCents": 532994.75,
+      "operatingCostCents": 120.1637638888889,
+      "netMerchantCents": 532874.5862361111,
+      "portfolioContributionCents": 5006792.5625,
+      "modeledFeeCents": 100217.375,
+      "couponDiscountCents": 10596.25,
+      "outreachCents": 129.5,
+      "totalEconomicCostCents": 1473679.1637638889,
+      "discountedSalesCents": 2006553.75,
+      "hindsightGapCents": 6738.1875
+    },
+    "rules": {
+      "cases": 12,
+      "mistakesVsKeep": 1,
+      "guardViolations": 0,
+      "escalations": 0,
+      "merchantContributionCents": 533040.25,
+      "operatingCostCents": 0.1637950544,
+      "netMerchantCents": 533040.0862049456,
+      "portfolioContributionCents": 5006310.3125,
+      "modeledFeeCents": 100227.9375,
+      "couponDiscountCents": 10620,
+      "outreachCents": 131.5,
+      "totalEconomicCostCents": 1473727.4137950544,
+      "discountedSalesCents": 2006767.5,
+      "hindsightGapCents": 6692.6875
+    },
+    "netDifferenceCents": -165.4999688344542,
+    "improvementPct": -0.03104831571162962,
+    "pairedCaseMeanIntervalCents": {
+      "mean": -13.791664069540579,
+      "low": -20.927080748997167,
+      "high": -9.999999631287968,
+      "unit": "independent authored case means; future tapes are not additional cases",
+      "caveat": "Descriptive pilot interval; known simulator and authored cases do not establish real-world generalization."
+    },
+    "goGatePassed": false
+  },
+  "sensitivity": [
+    {
+      "assumedChatUsdPerCase": 0,
+      "chatNetCents": 532994.5862361111,
+      "netDifferenceVsRulesCents": -45.49996883445418
+    },
+    {
+      "assumedChatUsdPerCase": 0.01,
+      "chatNetCents": 532982.5862361111,
+      "netDifferenceVsRulesCents": -57.499968834454194
+    },
+    {
+      "assumedChatUsdPerCase": 0.1,
+      "chatNetCents": 532874.5862361111,
+      "netDifferenceVsRulesCents": -165.4999688344542
+    },
+    {
+      "assumedChatUsdPerCase": 1,
+      "chatNetCents": 531794.5862361111,
+      "netDifferenceVsRulesCents": -1245.4999688344542
+    },
+    {
+      "assumedChatUsdPerCase": 5,
+      "chatNetCents": 526994.5862361111,
+      "netDifferenceVsRulesCents": -6045.499968834454
+    }
+  ],
+  "records": [
+    {
+      "caseId": "MD-01",
+      "merchantName": "Willow Goods",
+      "family": "steady",
+      "evidenceHash": "c71da7cc22c6644d12f9682038b24cdd1ed5e47f93b80a6b055bbdc5a760334c",
+      "chat": {
+        "action": "KEEP_CURRENT",
+        "rationale": "Orders rose from 51 to 56 and payment records reconcile. The qualified recent model only adds $1.76 in the static forecast, which omits contact dynamics and shared-budget effects. With no evidence of campaign deterioration, retain the current policy for this seven-day window rather than force 10% offers or make a marginal model change. This is a conservative judgment, not proof that the new model would lose.",
+        "evidenceIds": [
+          "payments",
+          "models",
+          "forecasts"
+        ],
+        "merchant": {
+          "orders": 52.9375,
+          "discountedSalesCents": 188403.75,
+          "discountCents": 3390,
+          "refundCents": 5488.125,
+          "cogsCents": 100101.4375,
+          "deliveryCents": 18528.125,
+          "feeCents": 9180.4375,
+          "outreachCents": 27.875,
+          "contributionCents": 55077.75,
+          "coupons": 13.9375
+        },
+        "portfolio": {
+          "orders": 446.8125,
+          "discountedSalesCents": 1531651.25,
+          "discountCents": 14867.5,
+          "refundCents": 40133.75,
+          "cogsCents": 794770.25,
+          "deliveryCents": 156384.375,
+          "feeCents": 75375.375,
+          "outreachCents": 151.625,
+          "contributionCents": 464835.875,
+          "coupons": 75.8125
+        },
+        "operatingCostCents": 10.014344444444445,
+        "netMerchantCents": 55067.73565555555,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-01-CP72238",
+            "customerId": "DECISION-MD-01-U0277",
+            "merchantId": "DECISION-MD-01-M001",
+            "day": 42,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-01-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          },
+          {
+            "couponId": "DECISION-MD-01-CP72305",
+            "customerId": "DECISION-MD-01-U0041",
+            "merchantId": "DECISION-MD-01-M001",
+            "day": 42,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-01-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          },
+          {
+            "couponId": "DECISION-MD-01-CP74044",
+            "customerId": "DECISION-MD-01-U0089",
+            "merchantId": "DECISION-MD-01-M001",
+            "day": 43,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-01-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 2804
+      },
+      "rules": {
+        "action": "OFFER_10",
+        "rationale": "Shared model forecast estimates 176 cents improvement over keep; it clears the $1 inertia threshold. Execution retains stock, contact, holdout, margin and budget checks.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 52.9375,
+          "discountedSalesCents": 188403.75,
+          "discountCents": 3390,
+          "refundCents": 5488.125,
+          "cogsCents": 100101.4375,
+          "deliveryCents": 18528.125,
+          "feeCents": 9180.4375,
+          "outreachCents": 27.625,
+          "contributionCents": 55078,
+          "coupons": 13.8125
+        },
+        "portfolio": {
+          "orders": 446.875,
+          "discountedSalesCents": 1531805.625,
+          "discountCents": 14875.625,
+          "refundCents": 40133.75,
+          "cogsCents": 794863.3125,
+          "deliveryCents": 156406.25,
+          "feeCents": 75383.8125,
+          "outreachCents": 151.375,
+          "contributionCents": 464867.125,
+          "coupons": 75.6875
+        },
+        "operatingCostCents": 0.014371515625,
+        "netMerchantCents": 55077.98562848438,
+        "deltaVsKeep": {
+          "mean": 0.25,
+          "low": -0.08473372502134685,
+          "high": 0.5847337250213469
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-01-CP72238",
+            "customerId": "DECISION-MD-01-U0277",
+            "merchantId": "DECISION-MD-01-M001",
+            "day": 42,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-01-MODEL-1",
+            "reason": "Decision MD-01: OFFER_10"
+          },
+          {
+            "couponId": "DECISION-MD-01-CP72305",
+            "customerId": "DECISION-MD-01-U0041",
+            "merchantId": "DECISION-MD-01-M001",
+            "day": 42,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-01-MODEL-1",
+            "reason": "Decision MD-01: OFFER_10"
+          },
+          {
+            "couponId": "DECISION-MD-01-CP74044",
+            "customerId": "DECISION-MD-01-U0089",
+            "merchantId": "DECISION-MD-01-M001",
+            "day": 43,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-01-MODEL-1",
+            "reason": "Decision MD-01: OFFER_10"
+          }
+        ],
+        "hindsightGapCents": 2803.75
+      },
+      "merchantNetDifferenceCents": -10.249972928824718,
+      "portfolioDifferenceCents": -31.25,
+      "hindsightBest": {
+        "action": "USE_RECENT_MODEL",
+        "meanMerchantCents": 57881.75
+      },
+      "alternatives": [
+        {
+          "action": "USE_RECENT_MODEL",
+          "meanMerchantCents": 57881.75
+        },
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 55078
+        },
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 55077.75
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 55077.75
+        },
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 54284.375
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 51022.25
+        }
+      ],
+      "keep": [
+        65135,
+        50931,
+        57982,
+        59596,
+        40239,
+        63180,
+        47814,
+        53638,
+        64377,
+        59116,
+        52923,
+        53785,
+        44129,
+        51445,
+        47155,
+        69799
+      ],
+      "pairedMerchantDifferences": [
+        0,
+        0,
+        -2,
+        -2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "caseId": "MD-02",
+      "merchantName": "Sunroom Market",
+      "family": "rival_sale",
+      "evidenceHash": "15f036286f331bd289fc919012af56c8606380a492a7b8a1569ea129dede69f1",
+      "chat": {
+        "action": "USE_RECENT_MODEL",
+        "rationale": "The observed rival-promotion feature appears throughout the latest complete week and purchases fell from 46 to 33. The tree passed temporal validation and its shared forecast improves contribution by $58.39, more than blanket 10% offers. Use the qualified candidate while retaining all contact, margin and budget guards. Its prediction improvement is supporting evidence, not a guarantee of campaign lift.",
+        "evidenceIds": [
+          "quality",
+          "outcomes",
+          "models",
+          "forecasts",
+          "economics"
+        ],
+        "merchant": {
+          "orders": 27.5,
+          "discountedSalesCents": 109878.4375,
+          "discountCents": 1259.0625,
+          "refundCents": 2168.75,
+          "cogsCents": 50825.5,
+          "deliveryCents": 9625,
+          "feeCents": 5181.0625,
+          "outreachCents": 22.375,
+          "contributionCents": 42055.75,
+          "coupons": 11.1875
+        },
+        "portfolio": {
+          "orders": 232.75,
+          "discountedSalesCents": 813756.25,
+          "discountCents": 12462.5,
+          "refundCents": 18092.5,
+          "cogsCents": 408545.25,
+          "deliveryCents": 81462.5,
+          "feeCents": 39821.75,
+          "outreachCents": 160.25,
+          "contributionCents": 265674,
+          "coupons": 80.125
+        },
+        "operatingCostCents": 10.013619444444444,
+        "netMerchantCents": 42045.73638055556,
+        "deltaVsKeep": {
+          "mean": -2675.3125,
+          "low": -4216.7133719201665,
+          "high": -1133.9116280798335
+        },
+        "harmfulVsKeep": true,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-02-CP69815",
+            "customerId": "DECISION-MD-02-U0293",
+            "merchantId": "DECISION-MD-02-M004",
+            "day": 42,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-02-RECENT",
+            "reason": "Decision MD-02: USE_RECENT_MODEL"
+          },
+          {
+            "couponId": "DECISION-MD-02-CP69932",
+            "customerId": "DECISION-MD-02-U0215",
+            "merchantId": "DECISION-MD-02-M004",
+            "day": 42,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-02-RECENT",
+            "reason": "Decision MD-02: USE_RECENT_MODEL"
+          },
+          {
+            "couponId": "DECISION-MD-02-CP71010",
+            "customerId": "DECISION-MD-02-U0328",
+            "merchantId": "DECISION-MD-02-M004",
+            "day": 43,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-02-RECENT",
+            "reason": "Decision MD-02: USE_RECENT_MODEL"
+          }
+        ],
+        "hindsightGapCents": 2675.3125
+      },
+      "rules": {
+        "action": "USE_RECENT_MODEL",
+        "rationale": "Shared model forecast estimates 5839 cents improvement over keep; it clears the $1 inertia threshold. Execution retains stock, contact, holdout, margin and budget checks.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 27.5,
+          "discountedSalesCents": 109878.4375,
+          "discountCents": 1259.0625,
+          "refundCents": 2168.75,
+          "cogsCents": 50825.5,
+          "deliveryCents": 9625,
+          "feeCents": 5181.0625,
+          "outreachCents": 22.375,
+          "contributionCents": 42055.75,
+          "coupons": 11.1875
+        },
+        "portfolio": {
+          "orders": 232.75,
+          "discountedSalesCents": 813756.25,
+          "discountCents": 12462.5,
+          "refundCents": 18092.5,
+          "cogsCents": 408545.25,
+          "deliveryCents": 81462.5,
+          "feeCents": 39821.75,
+          "outreachCents": 160.25,
+          "contributionCents": 265674,
+          "coupons": 80.125
+        },
+        "operatingCostCents": 0.013619848844444445,
+        "netMerchantCents": 42055.73638015115,
+        "deltaVsKeep": {
+          "mean": -2675.3125,
+          "low": -4216.7133719201665,
+          "high": -1133.9116280798335
+        },
+        "harmfulVsKeep": true,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-02-CP69815",
+            "customerId": "DECISION-MD-02-U0293",
+            "merchantId": "DECISION-MD-02-M004",
+            "day": 42,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-02-RECENT",
+            "reason": "Decision MD-02: USE_RECENT_MODEL"
+          },
+          {
+            "couponId": "DECISION-MD-02-CP69932",
+            "customerId": "DECISION-MD-02-U0215",
+            "merchantId": "DECISION-MD-02-M004",
+            "day": 42,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-02-RECENT",
+            "reason": "Decision MD-02: USE_RECENT_MODEL"
+          },
+          {
+            "couponId": "DECISION-MD-02-CP71010",
+            "customerId": "DECISION-MD-02-U0328",
+            "merchantId": "DECISION-MD-02-M004",
+            "day": 43,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-02-RECENT",
+            "reason": "Decision MD-02: USE_RECENT_MODEL"
+          }
+        ],
+        "hindsightGapCents": 2675.3125
+      },
+      "merchantNetDifferenceCents": -9.999999595595,
+      "portfolioDifferenceCents": 0,
+      "hindsightBest": {
+        "action": "KEEP_CURRENT",
+        "meanMerchantCents": 44731.0625
+      },
+      "alternatives": [
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 44731.0625
+        },
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 44731.0625
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 44731.0625
+        },
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 42966.5
+        },
+        {
+          "action": "USE_RECENT_MODEL",
+          "meanMerchantCents": 42055.75
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 38214.8125
+        }
+      ],
+      "keep": [
+        40480,
+        42261,
+        36551,
+        42125,
+        32189,
+        46797,
+        56339,
+        40169,
+        44164,
+        51348,
+        42657,
+        43592,
+        50866,
+        63642,
+        41610,
+        40907
+      ],
+      "pairedMerchantDifferences": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "caseId": "MD-03",
+      "merchantName": "The Desk Shop",
+      "family": "budget_squeeze",
+      "evidenceHash": "27497f287a3a5316453a145acc58ee1ebd5624fa333eb687dd11e5d8985ae5bb",
+      "chat": {
+        "action": "KEEP_CURRENT",
+        "rationale": "The recent candidate did not pass the shared validation threshold. Keep has the highest permitted forecast. A 10% offer fails the tote margin floor and the other blanket-offer choices also reduce estimated contribution. The sales decline alone does not justify a broader coupon policy.",
+        "evidenceIds": [
+          "models",
+          "economics",
+          "forecasts",
+          "payments"
+        ],
+        "merchant": {
+          "orders": 50,
+          "discountedSalesCents": 121806.875,
+          "discountCents": 11.875,
+          "refundCents": 2312.5,
+          "cogsCents": 64229.9375,
+          "deliveryCents": 17500,
+          "feeCents": 6693.375,
+          "outreachCents": 1,
+          "contributionCents": 31070.0625,
+          "coupons": 0.5
+        },
+        "portfolio": {
+          "orders": 384,
+          "discountedSalesCents": 1250158.4375,
+          "discountCents": 10866.5625,
+          "refundCents": 27943.125,
+          "cogsCents": 624069.5,
+          "deliveryCents": 134400,
+          "feeCents": 62466.0625,
+          "outreachCents": 159.75,
+          "contributionCents": 401120,
+          "coupons": 79.875
+        },
+        "operatingCostCents": 10.013519444444444,
+        "netMerchantCents": 31060.048980555555,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-03-CP78139",
+            "customerId": "DECISION-MD-03-U0231",
+            "merchantId": "DECISION-MD-03-M007",
+            "day": 44,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-03-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 64.5
+      },
+      "rules": {
+        "action": "KEEP_CURRENT",
+        "rationale": "Keep the current campaign unless an allowed alternative has positive modeled incremental contribution.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 50,
+          "discountedSalesCents": 121806.875,
+          "discountCents": 11.875,
+          "refundCents": 2312.5,
+          "cogsCents": 64229.9375,
+          "deliveryCents": 17500,
+          "feeCents": 6693.375,
+          "outreachCents": 1,
+          "contributionCents": 31070.0625,
+          "coupons": 0.5
+        },
+        "portfolio": {
+          "orders": 384,
+          "discountedSalesCents": 1250158.4375,
+          "discountCents": 10866.5625,
+          "refundCents": 27943.125,
+          "cogsCents": 624069.5,
+          "deliveryCents": 134400,
+          "feeCents": 62466.0625,
+          "outreachCents": 159.75,
+          "contributionCents": 401120,
+          "coupons": 79.875
+        },
+        "operatingCostCents": 0.013519826155555551,
+        "netMerchantCents": 31070.048980173844,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-03-CP78139",
+            "customerId": "DECISION-MD-03-U0231",
+            "merchantId": "DECISION-MD-03-M007",
+            "day": 44,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-03-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 64.5
+      },
+      "merchantNetDifferenceCents": -9.999999618288712,
+      "portfolioDifferenceCents": 0,
+      "hindsightBest": {
+        "action": "OFFER_5",
+        "meanMerchantCents": 31134.5625
+      },
+      "alternatives": [
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 31134.5625
+        },
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 31070.0625
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 31070.0625
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 31053
+        },
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 31053
+        }
+      ],
+      "keep": [
+        26312,
+        23921,
+        32772,
+        26546,
+        34651,
+        33699,
+        34157,
+        44781,
+        29736,
+        34149,
+        31609,
+        30093,
+        23284,
+        31597,
+        28068,
+        31746
+      ],
+      "pairedMerchantDifferences": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "caseId": "MD-04",
+      "merchantName": "Oak & Ink",
+      "family": "supply_delay",
+      "evidenceHash": "98cc22bdf4dc96da5298d7a0c0cc8851b2420f3e9803795fac279682d41558cd",
+      "chat": {
+        "action": "KEEP_CURRENT",
+        "rationale": "Payment records are complete, current stock is positive, and the candidate failed the promotion gate. Keep leads the available contribution estimates; a blanket 10% offer adds contacts and slightly reduces estimated value. The recent sales fall is insufficient evidence to override the model or pause organic demand.",
+        "evidenceIds": [
+          "quality",
+          "models",
+          "economics",
+          "forecasts"
+        ],
+        "merchant": {
+          "orders": 70.5,
+          "discountedSalesCents": 247481.25,
+          "discountCents": 506.25,
+          "refundCents": 3956.25,
+          "cogsCents": 116831.125,
+          "deliveryCents": 24675,
+          "feeCents": 12104.5,
+          "outreachCents": 7,
+          "contributionCents": 89907.375,
+          "coupons": 3.5
+        },
+        "portfolio": {
+          "orders": 435.25,
+          "discountedSalesCents": 1467829.0625,
+          "discountCents": 11720.9375,
+          "refundCents": 34446.25,
+          "cogsCents": 749725.625,
+          "deliveryCents": 152337.5,
+          "feeCents": 72589.0625,
+          "outreachCents": 124.625,
+          "contributionCents": 458606,
+          "coupons": 62.3125
+        },
+        "operatingCostCents": 10.013483333333333,
+        "netMerchantCents": 89897.36151666667,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-04-CP70341",
+            "customerId": "DECISION-MD-04-U0080",
+            "merchantId": "DECISION-MD-04-M002",
+            "day": 41,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-04-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 335
+      },
+      "rules": {
+        "action": "KEEP_CURRENT",
+        "rationale": "Keep the current campaign unless an allowed alternative has positive modeled incremental contribution.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 70.5,
+          "discountedSalesCents": 247481.25,
+          "discountCents": 506.25,
+          "refundCents": 3956.25,
+          "cogsCents": 116831.125,
+          "deliveryCents": 24675,
+          "feeCents": 12104.5,
+          "outreachCents": 7,
+          "contributionCents": 89907.375,
+          "coupons": 3.5
+        },
+        "portfolio": {
+          "orders": 435.25,
+          "discountedSalesCents": 1467829.0625,
+          "discountCents": 11720.9375,
+          "refundCents": 34446.25,
+          "cogsCents": 749725.625,
+          "deliveryCents": 152337.5,
+          "feeCents": 72589.0625,
+          "outreachCents": 124.625,
+          "contributionCents": 458606,
+          "coupons": 62.3125
+        },
+        "operatingCostCents": 0.013483738774999995,
+        "netMerchantCents": 89907.36151626123,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-04-CP70341",
+            "customerId": "DECISION-MD-04-U0080",
+            "merchantId": "DECISION-MD-04-M002",
+            "day": 41,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-04-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 335
+      },
+      "merchantNetDifferenceCents": -9.999999594554538,
+      "portfolioDifferenceCents": 0,
+      "hindsightBest": {
+        "action": "OFFER_5",
+        "meanMerchantCents": 90242.375
+      },
+      "alternatives": [
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 90242.375
+        },
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 89907.375
+        },
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 89907.375
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 89907.375
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 89086.375
+        }
+      ],
+      "keep": [
+        72917,
+        96750,
+        104910,
+        93283,
+        102131,
+        95748,
+        85609,
+        84700,
+        70773,
+        105064,
+        69731,
+        94249,
+        87249,
+        95630,
+        95375,
+        84399
+      ],
+      "pairedMerchantDifferences": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "caseId": "MD-05",
+      "merchantName": "River General",
+      "family": "delayed_outcomes",
+      "evidenceHash": "999abd5bd4965bc3a978b127f3725f7d30d6b62eb532eb22b0205c392bbb0971",
+      "chat": {
+        "action": "KEEP_CURRENT",
+        "rationale": "Fourteen captures await delayed labels, but payment totals reconcile and completed sales increased. Do not treat the missing labels as failed purchases. The recent model was rejected and no permitted alternative beats keep in the shared forecast. Preserve the product-specific margin safeguards instead of expanding coupons while labels catch up.",
+        "evidenceIds": [
+          "quality",
+          "payments",
+          "models",
+          "economics",
+          "forecasts"
+        ],
+        "merchant": {
+          "orders": 59.125,
+          "discountedSalesCents": 198511.875,
+          "discountCents": 3275.625,
+          "refundCents": 5970,
+          "cogsCents": 102734.75,
+          "deliveryCents": 20693.75,
+          "feeCents": 9837.625,
+          "outreachCents": 32.125,
+          "contributionCents": 59243.625,
+          "coupons": 16.0625
+        },
+        "portfolio": {
+          "orders": 486.6875,
+          "discountedSalesCents": 1620026.5625,
+          "discountCents": 13667.1875,
+          "refundCents": 42000,
+          "cogsCents": 805821.5,
+          "deliveryCents": 170340.625,
+          "feeCents": 80414.6875,
+          "outreachCents": 143.625,
+          "contributionCents": 521306.125,
+          "coupons": 71.8125
+        },
+        "operatingCostCents": 10.013533333333333,
+        "netMerchantCents": 59233.61146666667,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-05-CP73796",
+            "customerId": "DECISION-MD-05-U0077",
+            "merchantId": "DECISION-MD-05-M005",
+            "day": 42,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-05-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          },
+          {
+            "couponId": "DECISION-MD-05-CP73804",
+            "customerId": "DECISION-MD-05-U0286",
+            "merchantId": "DECISION-MD-05-M005",
+            "day": 42,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-05-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          },
+          {
+            "couponId": "DECISION-MD-05-CP73877",
+            "customerId": "DECISION-MD-05-U0192",
+            "merchantId": "DECISION-MD-05-M005",
+            "day": 42,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-05-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 0
+      },
+      "rules": {
+        "action": "KEEP_CURRENT",
+        "rationale": "Keep the current campaign unless an allowed alternative has positive modeled incremental contribution.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 59.125,
+          "discountedSalesCents": 198511.875,
+          "discountCents": 3275.625,
+          "refundCents": 5970,
+          "cogsCents": 102734.75,
+          "deliveryCents": 20693.75,
+          "feeCents": 9837.625,
+          "outreachCents": 32.125,
+          "contributionCents": 59243.625,
+          "coupons": 16.0625
+        },
+        "portfolio": {
+          "orders": 486.6875,
+          "discountedSalesCents": 1620026.5625,
+          "discountCents": 13667.1875,
+          "refundCents": 42000,
+          "cogsCents": 805821.5,
+          "deliveryCents": 170340.625,
+          "feeCents": 80414.6875,
+          "outreachCents": 143.625,
+          "contributionCents": 521306.125,
+          "coupons": 71.8125
+        },
+        "operatingCostCents": 0.013533704861111114,
+        "netMerchantCents": 59243.61146629514,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-05-CP73796",
+            "customerId": "DECISION-MD-05-U0077",
+            "merchantId": "DECISION-MD-05-M005",
+            "day": 42,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-05-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          },
+          {
+            "couponId": "DECISION-MD-05-CP73804",
+            "customerId": "DECISION-MD-05-U0286",
+            "merchantId": "DECISION-MD-05-M005",
+            "day": 42,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-05-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          },
+          {
+            "couponId": "DECISION-MD-05-CP73877",
+            "customerId": "DECISION-MD-05-U0192",
+            "merchantId": "DECISION-MD-05-M005",
+            "day": 42,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-05-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 0
+      },
+      "merchantNetDifferenceCents": -9.999999628467776,
+      "portfolioDifferenceCents": 0,
+      "hindsightBest": {
+        "action": "KEEP_CURRENT",
+        "meanMerchantCents": 59243.625
+      },
+      "alternatives": [
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 59243.625
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 59243.625
+        },
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 59148.25
+        },
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 58285.75
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 54053.625
+        }
+      ],
+      "keep": [
+        70536,
+        63342,
+        56300,
+        61916,
+        71228,
+        81507,
+        57290,
+        61073,
+        53334,
+        73314,
+        53672,
+        46020,
+        45490,
+        35310,
+        66278,
+        51288
+      ],
+      "pairedMerchantDifferences": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "caseId": "MD-06",
+      "merchantName": "Clover Trading",
+      "family": "margin_compression",
+      "evidenceHash": "50975064678e65b85ca1781d2159eae70fbc54150344f259289ffdbf572426e9",
+      "chat": {
+        "action": "PAUSE_OFFERS",
+        "rationale": "Every product falls below the 20% margin floor even at a 5% discount. Pause coupon proposals and preserve organic purchases. A better predictive model cannot repair these unit economics. The executor already blocks these offers, so I expect little or no financial advantage over simply keeping the guarded policy.",
+        "evidenceIds": [
+          "economics",
+          "models",
+          "forecasts"
+        ],
+        "merchant": {
+          "orders": 51.875,
+          "discountedSalesCents": 208862.5,
+          "discountCents": 0,
+          "refundCents": 5600,
+          "cogsCents": 165001.375,
+          "deliveryCents": 18156.25,
+          "feeCents": 9827.875,
+          "outreachCents": 0,
+          "contributionCents": 10277,
+          "coupons": 0
+        },
+        "portfolio": {
+          "orders": 429.4375,
+          "discountedSalesCents": 1377222.5,
+          "discountCents": 14302.5,
+          "refundCents": 36111.875,
+          "cogsCents": 762658.625,
+          "deliveryCents": 150303.125,
+          "feeCents": 69122.4375,
+          "outreachCents": 257,
+          "contributionCents": 358769.4375,
+          "coupons": 128.5
+        },
+        "operatingCostCents": 10.01356111111111,
+        "netMerchantCents": 10266.98643888889,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [],
+        "hindsightGapCents": 0
+      },
+      "rules": {
+        "action": "PAUSE_OFFERS",
+        "rationale": "Every product is below the coupon margin floor; preserve organic purchases and stop proposing discounts.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 51.875,
+          "discountedSalesCents": 208862.5,
+          "discountCents": 0,
+          "refundCents": 5600,
+          "cogsCents": 165001.375,
+          "deliveryCents": 18156.25,
+          "feeCents": 9827.875,
+          "outreachCents": 0,
+          "contributionCents": 10277,
+          "coupons": 0
+        },
+        "portfolio": {
+          "orders": 429.4375,
+          "discountedSalesCents": 1377222.5,
+          "discountCents": 14302.5,
+          "refundCents": 36111.875,
+          "cogsCents": 762658.625,
+          "deliveryCents": 150303.125,
+          "feeCents": 69122.4375,
+          "outreachCents": 257,
+          "contributionCents": 358769.4375,
+          "coupons": 128.5
+        },
+        "operatingCostCents": 0.01356136446944444,
+        "netMerchantCents": 10276.986438635531,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [],
+        "hindsightGapCents": 0
+      },
+      "merchantNetDifferenceCents": -9.999999746642061,
+      "portfolioDifferenceCents": 0,
+      "hindsightBest": {
+        "action": "KEEP_CURRENT",
+        "meanMerchantCents": 10277
+      },
+      "alternatives": [
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 10277
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 10277
+        },
+        {
+          "action": "USE_RECENT_MODEL",
+          "meanMerchantCents": 10277
+        },
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 10277
+        },
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 10277
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 10277
+        }
+      ],
+      "keep": [
+        8633,
+        8048,
+        693,
+        14305,
+        7424,
+        14648,
+        8879,
+        2836,
+        10025,
+        21011,
+        -2508,
+        13375,
+        14331,
+        15127,
+        13841,
+        13764
+      ],
+      "pairedMerchantDifferences": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "caseId": "MD-07",
+      "merchantName": "Corner Supply",
+      "family": "steady",
+      "evidenceHash": "ee4370ca147aed7eaaa05b3d6125ab328edaa76b0749cb2e2ccfab63ab2d9349",
+      "chat": {
+        "action": "KEEP_CURRENT",
+        "rationale": "Sales are stable, the candidate is worse than the champion, and keep leads every permitted forecast. Two products cannot support 10% offers; only 32 randomized-history observations received 10%, so that conversion rate is weak evidence for a broader campaign. Retain the targeted policy.",
+        "evidenceIds": [
+          "payments",
+          "models",
+          "outcomes",
+          "economics",
+          "forecasts"
+        ],
+        "merchant": {
+          "orders": 56.8125,
+          "discountedSalesCents": 136522.8125,
+          "discountCents": 108.4375,
+          "refundCents": 3119.375,
+          "cogsCents": 71583.3125,
+          "deliveryCents": 19884.375,
+          "feeCents": 7544.75,
+          "outreachCents": 2.625,
+          "contributionCents": 34388.375,
+          "coupons": 1.3125
+        },
+        "portfolio": {
+          "orders": 441.6875,
+          "discountedSalesCents": 1474089.0625,
+          "discountCents": 16723.4375,
+          "refundCents": 35665.625,
+          "cogsCents": 759440.5,
+          "deliveryCents": 154590.625,
+          "feeCents": 73120.375,
+          "outreachCents": 155.25,
+          "contributionCents": 451116.6875,
+          "coupons": 77.625
+        },
+        "operatingCostCents": 10.013725,
+        "netMerchantCents": 34378.361275,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-07-CP78325",
+            "customerId": "DECISION-MD-07-U0202",
+            "merchantId": "DECISION-MD-07-M003",
+            "day": 45,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-07-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 360.5625
+      },
+      "rules": {
+        "action": "KEEP_CURRENT",
+        "rationale": "Keep the current campaign unless an allowed alternative has positive modeled incremental contribution.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 56.8125,
+          "discountedSalesCents": 136522.8125,
+          "discountCents": 108.4375,
+          "refundCents": 3119.375,
+          "cogsCents": 71583.3125,
+          "deliveryCents": 19884.375,
+          "feeCents": 7544.75,
+          "outreachCents": 2.625,
+          "contributionCents": 34388.375,
+          "coupons": 1.3125
+        },
+        "portfolio": {
+          "orders": 441.6875,
+          "discountedSalesCents": 1474089.0625,
+          "discountCents": 16723.4375,
+          "refundCents": 35665.625,
+          "cogsCents": 759440.5,
+          "deliveryCents": 154590.625,
+          "feeCents": 73120.375,
+          "outreachCents": 155.25,
+          "contributionCents": 451116.6875,
+          "coupons": 77.625
+        },
+        "operatingCostCents": 0.01372541122777778,
+        "netMerchantCents": 34388.36127458877,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-07-CP78325",
+            "customerId": "DECISION-MD-07-U0202",
+            "merchantId": "DECISION-MD-07-M003",
+            "day": 45,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-07-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 360.5625
+      },
+      "merchantNetDifferenceCents": -9.999999588770152,
+      "portfolioDifferenceCents": 0,
+      "hindsightBest": {
+        "action": "OFFER_5",
+        "meanMerchantCents": 34748.9375
+      },
+      "alternatives": [
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 34748.9375
+        },
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 34388.375
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 34388.375
+        },
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 34328.875
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 34246.75
+        }
+      ],
+      "keep": [
+        29480,
+        22274,
+        30223,
+        27226,
+        39060,
+        27770,
+        39276,
+        43743,
+        34844,
+        43673,
+        38655,
+        35512,
+        33595,
+        39592,
+        29163,
+        36128
+      ],
+      "pairedMerchantDifferences": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "caseId": "MD-08",
+      "merchantName": "Juniper House",
+      "family": "rival_sale",
+      "evidenceHash": "efb3924dc3d38d0c8f30a956d5551398207b23dbec05d216b340740a77d8883e",
+      "chat": {
+        "action": "USE_RECENT_MODEL",
+        "rationale": "Sales fell from 51 to 26 with an observed rival promotion and complete labels. The recent model passed validation. Its retrospective coupon choices tie the current forecast, but updated response scores can change priority under the shared budget as future customer states change. Adopt it for the bounded window rather than offer 10% indiscriminately. This is an uncertain judgment about ranking; the packet does not demonstrate incremental profit.",
+        "evidenceIds": [
+          "quality",
+          "payments",
+          "outcomes",
+          "models",
+          "forecasts"
+        ],
+        "merchant": {
+          "orders": 36.0625,
+          "discountedSalesCents": 129674.375,
+          "discountCents": 38.125,
+          "refundCents": 3468.75,
+          "cogsCents": 69489,
+          "deliveryCents": 12621.875,
+          "feeCents": 6300.75,
+          "outreachCents": 1.375,
+          "contributionCents": 37792.625,
+          "coupons": 0.6875
+        },
+        "portfolio": {
+          "orders": 288.25,
+          "discountedSalesCents": 976080,
+          "discountCents": 12757.5,
+          "refundCents": 23942.8125,
+          "cogsCents": 507368.25,
+          "deliveryCents": 100887.5,
+          "feeCents": 48215.6875,
+          "outreachCents": 160.625,
+          "contributionCents": 295505.125,
+          "coupons": 80.3125
+        },
+        "operatingCostCents": 10.013652777777779,
+        "netMerchantCents": 37782.61134722222,
+        "deltaVsKeep": {
+          "mean": -42.8125,
+          "low": -275.19832346946924,
+          "high": 189.57332346946924
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [],
+        "hindsightGapCents": 154.4375
+      },
+      "rules": {
+        "action": "KEEP_CURRENT",
+        "rationale": "Keep the current campaign unless an allowed alternative has positive modeled incremental contribution.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 36.0625,
+          "discountedSalesCents": 129820.625,
+          "discountCents": 54.375,
+          "refundCents": 3468.75,
+          "cogsCents": 69586.1875,
+          "deliveryCents": 12621.875,
+          "feeCents": 6305.875,
+          "outreachCents": 2.5,
+          "contributionCents": 37835.4375,
+          "coupons": 1.25
+        },
+        "portfolio": {
+          "orders": 288.1875,
+          "discountedSalesCents": 975399.6875,
+          "discountCents": 12756.5625,
+          "refundCents": 23942.8125,
+          "cogsCents": 507027.125,
+          "deliveryCents": 100865.625,
+          "feeCents": 48188.875,
+          "outreachCents": 160.75,
+          "contributionCents": 295214.5,
+          "coupons": 80.375
+        },
+        "operatingCostCents": 0.013653155438888887,
+        "netMerchantCents": 37835.42384684456,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-08-CP78026",
+            "customerId": "DECISION-MD-08-U0260",
+            "merchantId": "DECISION-MD-08-M006",
+            "day": 46,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-08-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 111.625
+      },
+      "merchantNetDifferenceCents": -52.81249962234142,
+      "portfolioDifferenceCents": 290.625,
+      "hindsightBest": {
+        "action": "OFFER_5",
+        "meanMerchantCents": 37947.0625
+      },
+      "alternatives": [
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 37947.0625
+        },
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 37836.9375
+        },
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 37835.4375
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 37835.4375
+        },
+        {
+          "action": "USE_RECENT_MODEL",
+          "meanMerchantCents": 37792.625
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 37707.9375
+        }
+      ],
+      "keep": [
+        40826,
+        45857,
+        33199,
+        31948,
+        33862,
+        48893,
+        30372,
+        39774,
+        30516,
+        36356,
+        36432,
+        38960,
+        32642,
+        40041,
+        44934,
+        40755
+      ],
+      "pairedMerchantDifferences": [
+        -999,
+        2,
+        4,
+        1001,
+        0,
+        -104,
+        0,
+        2,
+        0,
+        2,
+        482,
+        4,
+        0,
+        -2,
+        -1077,
+        0
+      ]
+    },
+    {
+      "caseId": "MD-09",
+      "merchantName": "Willow Goods",
+      "family": "budget_squeeze",
+      "evidenceHash": "0594a021b2d052d48d63092063766ef04bc6d31118a9c8bae27d4a3f184f4d65",
+      "chat": {
+        "action": "USE_RECENT_MODEL",
+        "rationale": "The validated candidate modestly improves forecast contribution by $3.40 while reducing proposed contacts from 98 to 95. Its more selective allocation fits the uneven product margins; neither blanket 5% nor 10% performs as well in the shared estimates. Use the qualified candidate, acknowledging that the forecast gain is small and not causal proof.",
+        "evidenceIds": [
+          "models",
+          "forecasts",
+          "economics",
+          "outcomes"
+        ],
+        "merchant": {
+          "orders": 53.375,
+          "discountedSalesCents": 163338.75,
+          "discountCents": 742.5,
+          "refundCents": 5700,
+          "cogsCents": 81947.5625,
+          "deliveryCents": 18681.25,
+          "feeCents": 8326.8125,
+          "outreachCents": 13.125,
+          "contributionCents": 48670,
+          "coupons": 6.5625
+        },
+        "portfolio": {
+          "orders": 417.1875,
+          "discountedSalesCents": 1361217.8125,
+          "discountCents": 14025.9375,
+          "refundCents": 40075,
+          "cogsCents": 664614.625,
+          "deliveryCents": 146015.625,
+          "feeCents": 67976.625,
+          "outreachCents": 195.625,
+          "contributionCents": 442340.3125,
+          "coupons": 97.8125
+        },
+        "operatingCostCents": 10.01361111111111,
+        "netMerchantCents": 48659.98638888889,
+        "deltaVsKeep": {
+          "mean": -207.8125,
+          "low": -1099.8576138309,
+          "high": 684.2326138308999
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-09-CP74115",
+            "customerId": "DECISION-MD-09-U0146",
+            "merchantId": "DECISION-MD-09-M001",
+            "day": 42,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-09-RECENT",
+            "reason": "Decision MD-09: USE_RECENT_MODEL"
+          },
+          {
+            "couponId": "DECISION-MD-09-CP75061",
+            "customerId": "DECISION-MD-09-U0085",
+            "merchantId": "DECISION-MD-09-M001",
+            "day": 43,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-09-RECENT",
+            "reason": "Decision MD-09: USE_RECENT_MODEL"
+          },
+          {
+            "couponId": "DECISION-MD-09-CP75467",
+            "customerId": "DECISION-MD-09-U0121",
+            "merchantId": "DECISION-MD-09-M001",
+            "day": 43,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-09-RECENT",
+            "reason": "Decision MD-09: USE_RECENT_MODEL"
+          }
+        ],
+        "hindsightGapCents": 286
+      },
+      "rules": {
+        "action": "USE_RECENT_MODEL",
+        "rationale": "Shared model forecast estimates 340 cents improvement over keep; it clears the $1 inertia threshold. Execution retains stock, contact, holdout, margin and budget checks.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 53.375,
+          "discountedSalesCents": 163338.75,
+          "discountCents": 742.5,
+          "refundCents": 5700,
+          "cogsCents": 81947.5625,
+          "deliveryCents": 18681.25,
+          "feeCents": 8326.8125,
+          "outreachCents": 13.125,
+          "contributionCents": 48670,
+          "coupons": 6.5625
+        },
+        "portfolio": {
+          "orders": 417.1875,
+          "discountedSalesCents": 1361217.8125,
+          "discountCents": 14025.9375,
+          "refundCents": 40075,
+          "cogsCents": 664614.625,
+          "deliveryCents": 146015.625,
+          "feeCents": 67976.625,
+          "outreachCents": 195.625,
+          "contributionCents": 442340.3125,
+          "coupons": 97.8125
+        },
+        "operatingCostCents": 0.013611497569444448,
+        "netMerchantCents": 48669.98638850243,
+        "deltaVsKeep": {
+          "mean": -207.8125,
+          "low": -1099.8576138309,
+          "high": 684.2326138308999
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-09-CP74115",
+            "customerId": "DECISION-MD-09-U0146",
+            "merchantId": "DECISION-MD-09-M001",
+            "day": 42,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-09-RECENT",
+            "reason": "Decision MD-09: USE_RECENT_MODEL"
+          },
+          {
+            "couponId": "DECISION-MD-09-CP75061",
+            "customerId": "DECISION-MD-09-U0085",
+            "merchantId": "DECISION-MD-09-M001",
+            "day": 43,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-09-RECENT",
+            "reason": "Decision MD-09: USE_RECENT_MODEL"
+          },
+          {
+            "couponId": "DECISION-MD-09-CP75467",
+            "customerId": "DECISION-MD-09-U0121",
+            "merchantId": "DECISION-MD-09-M001",
+            "day": 43,
+            "discountPct": 5,
+            "modelId": "DECISION-MD-09-RECENT",
+            "reason": "Decision MD-09: USE_RECENT_MODEL"
+          }
+        ],
+        "hindsightGapCents": 286
+      },
+      "merchantNetDifferenceCents": -9.999999613544787,
+      "portfolioDifferenceCents": 0,
+      "hindsightBest": {
+        "action": "OFFER_10",
+        "meanMerchantCents": 48956
+      },
+      "alternatives": [
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 48956
+        },
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 48877.8125
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 48877.8125
+        },
+        {
+          "action": "USE_RECENT_MODEL",
+          "meanMerchantCents": 48670
+        },
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 48175
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 46870.125
+        }
+      ],
+      "keep": [
+        42236,
+        30865,
+        58785,
+        42292,
+        53895,
+        50208,
+        57725,
+        68075,
+        50718,
+        40998,
+        43317,
+        59961,
+        51868,
+        36946,
+        58802,
+        35354
+      ],
+      "pairedMerchantDifferences": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "caseId": "MD-10",
+      "merchantName": "Sunroom Market",
+      "family": "supply_delay",
+      "evidenceHash": "d14ee506c2fe062681fcc90f931c28fd1959e49ad4832d1ab3c3cbbc9aea1e02",
+      "chat": {
+        "action": "KEEP_CURRENT",
+        "rationale": "The candidate failed the common promotion gate. Keep has the highest available estimated contribution; blanket 10% increases contacts while reducing forecast contribution by $14.67. Historical 10% response is encouraging but does not establish that expanding the current targeted campaign helps under current shared-budget conditions.",
+        "evidenceIds": [
+          "models",
+          "forecasts",
+          "outcomes",
+          "economics"
+        ],
+        "merchant": {
+          "orders": 49.875,
+          "discountedSalesCents": 200121.875,
+          "discountCents": 1215.625,
+          "refundCents": 4687.5,
+          "cogsCents": 95370.25,
+          "deliveryCents": 17456.25,
+          "feeCents": 9428.25,
+          "outreachCents": 20.875,
+          "contributionCents": 73158.75,
+          "coupons": 10.4375
+        },
+        "portfolio": {
+          "orders": 460.625,
+          "discountedSalesCents": 1529689.6875,
+          "discountCents": 11785.3125,
+          "refundCents": 32951.875,
+          "cogsCents": 747241.625,
+          "deliveryCents": 161218.75,
+          "feeCents": 75982.25,
+          "outreachCents": 150,
+          "contributionCents": 512145.1875,
+          "coupons": 75
+        },
+        "operatingCostCents": 10.013575,
+        "netMerchantCents": 73148.736425,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-10-CP67952",
+            "customerId": "DECISION-MD-10-U0036",
+            "merchantId": "DECISION-MD-10-M004",
+            "day": 39,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-10-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          },
+          {
+            "couponId": "DECISION-MD-10-CP67990",
+            "customerId": "DECISION-MD-10-U0279",
+            "merchantId": "DECISION-MD-10-M004",
+            "day": 39,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-10-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          },
+          {
+            "couponId": "DECISION-MD-10-CP68049",
+            "customerId": "DECISION-MD-10-U0138",
+            "merchantId": "DECISION-MD-10-M004",
+            "day": 39,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-10-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 0
+      },
+      "rules": {
+        "action": "KEEP_CURRENT",
+        "rationale": "Keep the current campaign unless an allowed alternative has positive modeled incremental contribution.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 49.875,
+          "discountedSalesCents": 200121.875,
+          "discountCents": 1215.625,
+          "refundCents": 4687.5,
+          "cogsCents": 95370.25,
+          "deliveryCents": 17456.25,
+          "feeCents": 9428.25,
+          "outreachCents": 20.875,
+          "contributionCents": 73158.75,
+          "coupons": 10.4375
+        },
+        "portfolio": {
+          "orders": 460.625,
+          "discountedSalesCents": 1529689.6875,
+          "discountCents": 11785.3125,
+          "refundCents": 32951.875,
+          "cogsCents": 747241.625,
+          "deliveryCents": 161218.75,
+          "feeCents": 75982.25,
+          "outreachCents": 150,
+          "contributionCents": 512145.1875,
+          "coupons": 75
+        },
+        "operatingCostCents": 0.013575404513888884,
+        "netMerchantCents": 73158.73642459548,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-10-CP67952",
+            "customerId": "DECISION-MD-10-U0036",
+            "merchantId": "DECISION-MD-10-M004",
+            "day": 39,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-10-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          },
+          {
+            "couponId": "DECISION-MD-10-CP67990",
+            "customerId": "DECISION-MD-10-U0279",
+            "merchantId": "DECISION-MD-10-M004",
+            "day": 39,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-10-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          },
+          {
+            "couponId": "DECISION-MD-10-CP68049",
+            "customerId": "DECISION-MD-10-U0138",
+            "merchantId": "DECISION-MD-10-M004",
+            "day": 39,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-10-MODEL-1",
+            "reason": "Model selects the offer against its no-offer prediction"
+          }
+        ],
+        "hindsightGapCents": 0
+      },
+      "merchantNetDifferenceCents": -9.99999959548586,
+      "portfolioDifferenceCents": 0,
+      "hindsightBest": {
+        "action": "KEEP_CURRENT",
+        "meanMerchantCents": 73158.75
+      },
+      "alternatives": [
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 73158.75
+        },
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 73158.75
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 73158.75
+        },
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 72753.5625
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 71443.3125
+        }
+      ],
+      "keep": [
+        73492,
+        87968,
+        68031,
+        74488,
+        74882,
+        63974,
+        70655,
+        73954,
+        60874,
+        80970,
+        75427,
+        79388,
+        69128,
+        71113,
+        69422,
+        76774
+      ],
+      "pairedMerchantDifferences": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "caseId": "MD-11",
+      "merchantName": "The Desk Shop",
+      "family": "delayed_outcomes",
+      "evidenceHash": "2e703dace700dfc2675f18d2d74d368ffc5b6cf99edae27475de67ecadb2133d",
+      "chat": {
+        "action": "KEEP_CURRENT",
+        "rationale": "Eighteen captures await labels, while the independent payment ledger shows sales rising. The recent model is valid on the completed window, but its $1.31 forecast gain comes with more proposed contacts and incomplete latest outcomes. Retain the current policy for this bounded window; delay is not a payment failure and does not warrant paid human escalation.",
+        "evidenceIds": [
+          "quality",
+          "payments",
+          "models",
+          "forecasts"
+        ],
+        "merchant": {
+          "orders": 67.125,
+          "discountedSalesCents": 165576.25,
+          "discountCents": 48.75,
+          "refundCents": 5143.75,
+          "cogsCents": 80806,
+          "deliveryCents": 23493.75,
+          "feeCents": 9063.625,
+          "outreachCents": 1.125,
+          "contributionCents": 47068,
+          "coupons": 0.5625
+        },
+        "portfolio": {
+          "orders": 470.125,
+          "discountedSalesCents": 1583258.125,
+          "discountCents": 14410.625,
+          "refundCents": 38223.75,
+          "cogsCents": 815053.1875,
+          "deliveryCents": 164543.75,
+          "feeCents": 78323.75,
+          "outreachCents": 166.625,
+          "contributionCents": 486947.0625,
+          "coupons": 83.3125
+        },
+        "operatingCostCents": 10.01355,
+        "netMerchantCents": 47057.98645,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [],
+        "hindsightGapCents": 58.375
+      },
+      "rules": {
+        "action": "USE_RECENT_MODEL",
+        "rationale": "Shared model forecast estimates 131 cents improvement over keep; it clears the $1 inertia threshold. Execution retains stock, contact, holdout, margin and budget checks.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 67.1875,
+          "discountedSalesCents": 165643.75,
+          "discountCents": 56.25,
+          "refundCents": 5143.75,
+          "cogsCents": 80842.625,
+          "deliveryCents": 23515.625,
+          "feeCents": 9069.0625,
+          "outreachCents": 2.25,
+          "contributionCents": 47070.4375,
+          "coupons": 1.125
+        },
+        "portfolio": {
+          "orders": 470.0625,
+          "discountedSalesCents": 1583010.625,
+          "discountCents": 14408.125,
+          "refundCents": 38354.375,
+          "cogsCents": 814930.875,
+          "deliveryCents": 164521.875,
+          "feeCents": 78312.0625,
+          "outreachCents": 167.25,
+          "contributionCents": 486724.1875,
+          "coupons": 83.625
+        },
+        "operatingCostCents": 0.01355036273055557,
+        "netMerchantCents": 47070.42394963727,
+        "deltaVsKeep": {
+          "mean": 2.4375,
+          "low": -122.97365415404644,
+          "high": 127.84865415404644
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [
+          {
+            "couponId": "DECISION-MD-11-CP84046",
+            "customerId": "DECISION-MD-11-U0278",
+            "merchantId": "DECISION-MD-11-M007",
+            "day": 48,
+            "discountPct": 10,
+            "modelId": "DECISION-MD-11-RECENT",
+            "reason": "Decision MD-11: USE_RECENT_MODEL"
+          }
+        ],
+        "hindsightGapCents": 55.9375
+      },
+      "merchantNetDifferenceCents": -12.437499637271685,
+      "portfolioDifferenceCents": 222.875,
+      "hindsightBest": {
+        "action": "OFFER_5",
+        "meanMerchantCents": 47126.375
+      },
+      "alternatives": [
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 47126.375
+        },
+        {
+          "action": "USE_RECENT_MODEL",
+          "meanMerchantCents": 47070.4375
+        },
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 47068
+        },
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 47068
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 47068
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 47003.1875
+        }
+      ],
+      "keep": [
+        41100,
+        48653,
+        47862,
+        44814,
+        47011,
+        60999,
+        41680,
+        42432,
+        48001,
+        49190,
+        46735,
+        49522,
+        44683,
+        47083,
+        48512,
+        44811
+      ],
+      "pairedMerchantDifferences": [
+        2,
+        657,
+        0,
+        0,
+        0,
+        -604,
+        0,
+        0,
+        -351,
+        2,
+        0,
+        2,
+        0,
+        2,
+        0,
+        251
+      ]
+    },
+    {
+      "caseId": "MD-12",
+      "merchantName": "Oak & Ink",
+      "family": "margin_compression",
+      "evidenceHash": "d2827bec35424269747dbd416e5f7bc0e6912f479d12de9107179ab9e4fcb065",
+      "chat": {
+        "action": "PAUSE_OFFERS",
+        "rationale": "All three products fail the 20% coupon margin floor, including at 5%; some discounted orders have negative unit contribution. Pause offers and leave organic purchases possible. Model validation cannot fix the cost problem. The existing execution guard already prevents these discounts, so no material uplift from this decision is assumed.",
+        "evidenceIds": [
+          "economics",
+          "models",
+          "forecasts"
+        ],
+        "merchant": {
+          "orders": 40,
+          "discountedSalesCents": 136375,
+          "discountCents": 0,
+          "refundCents": 3625,
+          "cogsCents": 107736.25,
+          "deliveryCents": 14000,
+          "feeCents": 6728.3125,
+          "outreachCents": 0,
+          "contributionCents": 4285.4375,
+          "coupons": 0
+        },
+        "portfolio": {
+          "orders": 396.0625,
+          "discountedSalesCents": 1300745,
+          "discountCents": 12473.75,
+          "refundCents": 31569.0625,
+          "cogsCents": 717134.375,
+          "deliveryCents": 138621.875,
+          "feeCents": 64832.5625,
+          "outreachCents": 160.375,
+          "contributionCents": 348426.75,
+          "coupons": 80.1875
+        },
+        "operatingCostCents": 10.013588888888888,
+        "netMerchantCents": 4275.423911111111,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [],
+        "hindsightGapCents": 0
+      },
+      "rules": {
+        "action": "PAUSE_OFFERS",
+        "rationale": "Every product is below the coupon margin floor; preserve organic purchases and stop proposing discounts.",
+        "evidenceIds": [
+          "quality",
+          "economics",
+          "forecasts",
+          "models"
+        ],
+        "merchant": {
+          "orders": 40,
+          "discountedSalesCents": 136375,
+          "discountCents": 0,
+          "refundCents": 3625,
+          "cogsCents": 107736.25,
+          "deliveryCents": 14000,
+          "feeCents": 6728.3125,
+          "outreachCents": 0,
+          "contributionCents": 4285.4375,
+          "coupons": 0
+        },
+        "portfolio": {
+          "orders": 396.0625,
+          "discountedSalesCents": 1300745,
+          "discountCents": 12473.75,
+          "refundCents": 31569.0625,
+          "cogsCents": 717134.375,
+          "deliveryCents": 138621.875,
+          "feeCents": 64832.5625,
+          "outreachCents": 160.375,
+          "contributionCents": 348426.75,
+          "coupons": 80.1875
+        },
+        "operatingCostCents": 0.013589224188888896,
+        "netMerchantCents": 4285.423910775811,
+        "deltaVsKeep": {
+          "mean": 0,
+          "low": 0,
+          "high": 0
+        },
+        "harmfulVsKeep": false,
+        "guardViolations": 0,
+        "escalations": 0,
+        "trace": [],
+        "hindsightGapCents": 0
+      },
+      "merchantNetDifferenceCents": -9.999999664700226,
+      "portfolioDifferenceCents": 0,
+      "hindsightBest": {
+        "action": "KEEP_CURRENT",
+        "meanMerchantCents": 4285.4375
+      },
+      "alternatives": [
+        {
+          "action": "KEEP_CURRENT",
+          "meanMerchantCents": 4285.4375
+        },
+        {
+          "action": "PAUSE_OFFERS",
+          "meanMerchantCents": 4285.4375
+        },
+        {
+          "action": "USE_RECENT_MODEL",
+          "meanMerchantCents": 4285.4375
+        },
+        {
+          "action": "OFFER_5",
+          "meanMerchantCents": 4285.4375
+        },
+        {
+          "action": "OFFER_10",
+          "meanMerchantCents": 4285.4375
+        },
+        {
+          "action": "ESCALATE",
+          "meanMerchantCents": 4285.4375
+        }
+      ],
+      "keep": [
+        -5258,
+        5283,
+        6499,
+        1966,
+        8164,
+        -153,
+        5442,
+        4278,
+        3946,
+        841,
+        6437,
+        6026,
+        6630,
+        4863,
+        5198,
+        8405
+      ],
+      "pairedMerchantDifferences": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "run": "trial-v1",
+  "frozenPacketSetHash": "3edc1513d7ec8a4177f4c4144810be463a4c677a3c036774de82cb848bb1570c",
+  "submissionSha256": "60092081924dab4703d6d02fdac6dca0547876485882ac0d672244df2f1ee08e",
+  "submissionSealedAt": "2026-10-22T11:36:37.121Z",
+  "rejectedSubmissionAttempts": 1,
+  "evaluationRuntimeMs": 24916,
+  "preparationRuntimeMs": 71849,
+  "sourceFiles": [
+    "scripts/marketing/decision-actions.mjs",
+    "scripts/marketing/decision-rules.mjs",
+    "scripts/marketing/decision-benchmark.mjs",
+    "scripts/marketing-decision-benchmark.mjs",
+    "scripts/marketing/economy.mjs",
+    "scripts/marketing/contract.mjs",
+    "scripts/marketing/train.py",
+    "scripts/marketing/trainer.mjs",
+    "scripts/marketing/orchestrator.mjs",
+    "scripts/market-store.mjs",
+    "demo/market/engine.mjs"
+  ]
+}

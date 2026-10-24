@@ -7,7 +7,18 @@
     "test": "node --test tests/*.test.mjs",
     "benchmark": "node scripts/benchmark.mjs",
     "benchmark:freeze": "node scripts/benchmark.mjs --freeze",
-    "test:marketing": "node --test tests/marketing-learning.test.mjs"
+    "test:marketing": "node --test tests/marketing-learning.test.mjs",
+    "benchmark:marketing": "node scripts/marketing-decision-benchmark.mjs",
+    "benchmark:policy": "node scripts/policy-lab/benchmark.mjs --run",
+    "test:policy-benchmark": "node --test tests/policy-benchmark.test.mjs",
+    "plot:policy": ".local/research-venv/bin/python scripts/plot-policy-benchmark.py",
+    "benchmark:policy:fresh": "node scripts/policy-lab/fresh-benchmark.mjs --run",
+    "plot:policy:fresh": ".local/research-venv/bin/python scripts/plot-fresh-policy.py",
+    "verify:policy:fresh": "node scripts/policy-lab/verify-fresh.mjs",
+    "research:opportunity": "node scripts/research-lab/opportunity.mjs",
+    "research:run": "node scripts/research-lab/run.mjs --run",
+    "research:verify": "node scripts/research-lab/verify.mjs",
+    "research:plot": ".local/research-venv/bin/python scripts/plot-research-lab.py"
   },
   "engines": {
     "node": ">=22.16"

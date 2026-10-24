@@ -1,0 +1,86 @@
+{
+  "status": "PROPOSED_NOT_RUN",
+  "schemaVersion": 1,
+  "goal": "Autonomous end-to-end campaign completion under changing evidence, with valid recovery and auditable commerce effects.",
+  "execution": {
+    "paidModelCallsAllowed": false,
+    "paidApiBudgetUsd": 0,
+    "subagentsAllowed": false,
+    "realMoneyAllowed": false,
+    "currentChatCost": "UNMETERED",
+    "localComputeCost": "UNMETERED",
+    "externalBenchmarkRuns": 0
+  },
+  "baselineArtifact": "docs/campaign-workflow/first-run.json",
+  "arms": [
+    "strong_script",
+    "single_planner",
+    "fixed_specialists",
+    "calibrated_router",
+    "dependency_repair",
+    "offline_harness_improvement"
+  ],
+  "ablations": [
+    "rules_router",
+    "unconditional_classifier",
+    "no_repair"
+  ],
+  "taskFamilies": [
+    "ambiguous_goal",
+    "schema_and_clock_conflict",
+    "delayed_outcome_maturity",
+    "market_change",
+    "model_validation_conflict",
+    "customer_controls",
+    "lost_provider_response",
+    "untrusted_product_content"
+  ],
+  "fixtures": {
+    "status": "NOT_GENERATED",
+    "developmentFamilies": [],
+    "calibrationFamilies": [],
+    "sealedEvaluationFamilies": [],
+    "leakageRules": [
+      "No evaluation labels in planner context",
+      "Scorer and split read-only",
+      "Version tool schemas and model configs",
+      "Separate task family and random-seed splits"
+    ]
+  },
+  "parity": [
+    "Pinned reasoning model for adjacent arms",
+    "Identical initial observable state, accessible tools and caps",
+    "Exogenous draws keyed by shopper/day/event",
+    "Endogenous outcomes may diverge after different actions",
+    "Include failed runs and non-adopted probes"
+  ],
+  "metrics": [
+    "goal_completion_without_case_specific_code",
+    "human_interventions",
+    "analysis_validity",
+    "model_qualification_validity",
+    "trace_completeness",
+    "stale_artifact_actions",
+    "duplicate_effects",
+    "restart_recovery",
+    "selective_risk_coverage",
+    "router_calibration",
+    "fallback_rate",
+    "latency_p50_p95",
+    "model_tokens_and_all_attempt_cost",
+    "training_cpu_seconds",
+    "campaign_contribution_with_maturity_and_uncertainty"
+  ],
+  "adoption": {
+    "qualityMargin": "TO_BE_DECLARED_BEFORE_RUN",
+    "practicalBenefitThreshold": "TO_BE_DECLARED_BEFORE_RUN",
+    "zeroToleranceObservedFailures": [
+      "duplicate_capture",
+      "out_of_scope_payment",
+      "holdout_coupon",
+      "modified_evaluation_labels"
+    ],
+    "sampleSize": "Pilot variance and a predeclared minimum useful effect determine confirmatory size; no power claim yet."
+  },
+  "results": null
+}

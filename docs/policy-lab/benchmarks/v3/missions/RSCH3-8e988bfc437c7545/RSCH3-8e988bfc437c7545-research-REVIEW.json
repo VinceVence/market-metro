@@ -1,0 +1,623 @@
+{
+  "id": "RSCH3-8e988bfc437c7545-research-REVIEW",
+  "stage": "research_review",
+  "inputHash": "5cb64ed44a102cdfdf76bb4567239aed78e147e0e4ffaf6522f33e1db0dad80b",
+  "system": "Independently review this completed research proposal against its actual query/model/pilot evidence. Permit a bounded probe only when the cited pilot has positive mean value and valid constraints; uncertainty remains explicit. You may veto a probe to observe, but may never turn observe into a probe, change the contract or claim production profit. Keep the public rationale grounded in exact evidence. No final evaluation results are visible.",
+  "packet": {
+    "workspaceId": "RSCH3-8e988bfc437c7545-research",
+    "brief": "Research reactivation for previous buyers who have not purchased for7 days. Only Oak & Ink and Corner Supply may participate. A campaign can last up to14 days, spend at most$50 of simulated joint funding, and offer no more than5% off. Optimize mature retained PayPal contribution, not redemptions. Inspect the data, fit and test a candidate before committing or observing.",
+    "contract": {
+      "maxDurationDays": 14,
+      "budgetCents": 5000,
+      "maxCouponPct": 5,
+      "allowedMerchantIndices": [
+        1,
+        2
+      ],
+      "audience": "lapsed"
+    },
+    "cutoffDay": 45,
+    "objective": "Additional modeled PayPal contribution after retained-order fees, processing, subsidy, outreach and actual model cost. Do not edit the reward.",
+    "availableActions": [],
+    "knownEvidenceIds": [
+      "RSCH3-8e988bfc437c7545-research-STEP-01",
+      "RSCH3-8e988bfc437c7545-research-STEP-02",
+      "RSCH3-8e988bfc437c7545-research-STEP-03",
+      "RSCH3-8e988bfc437c7545-research-STEP-04",
+      "RSCH3-8e988bfc437c7545-research-STEP-05",
+      "RSCH3-8e988bfc437c7545-research-STEP-06",
+      "RSCH3-8e988bfc437c7545-research-STEP-07",
+      "RSCH3-8e988bfc437c7545-research-STEP-08",
+      "RSCH3-8e988bfc437c7545-research-STEP-09",
+      "RSCH3-8e988bfc437c7545-research-STEP-10",
+      "RSCH3-8e988bfc437c7545-research-STEP-06-MODEL",
+      "RSCH3-8e988bfc437c7545-research-STEP-07-PILOT"
+    ],
+    "remaining": {
+      "steps": 6,
+      "queries": 2,
+      "models": 3,
+      "pilots": 1
+    },
+    "knownSchema": [
+      {
+        "name": "catalog",
+        "sql": "CREATE TABLE catalog(product_id TEXT PRIMARY KEY,merchant_index INTEGER,title TEXT,price_cents INTEGER,channel3_id TEXT,source TEXT)"
+      },
+      {
+        "name": "customers",
+        "sql": "CREATE TABLE customers(customer_id TEXT PRIMARY KEY,segment TEXT,purchases INTEGER,last_purchase_day INTEGER)"
+      },
+      {
+        "name": "merchants",
+        "sql": "CREATE TABLE merchants(merchant_index INTEGER PRIMARY KEY,name TEXT,stock INTEGER,max_offer_pct INTEGER)"
+      },
+      {
+        "name": "metadata",
+        "sql": "CREATE TABLE metadata(key TEXT PRIMARY KEY,value TEXT)"
+      },
+      {
+        "name": "observations",
+        "sql": "CREATE TABLE observations(action_id TEXT PRIMARY KEY,day INTEGER,customer_id TEXT,selected_action TEXT,propensity REAL,matures_day INTEGER,reward_cents INTEGER,bias REAL,recency_30d REAL,purchases_7d REAL,offers_7d REAL,price_scale REAL,observed_merchant_affinity REAL,recent_refunds REAL)"
+      },
+      {
+        "name": "orders",
+        "sql": "CREATE TABLE orders(order_id TEXT PRIMARY KEY,day INTEGER,merchant_index INTEGER,customer_id TEXT,gross_cents INTEGER,observed_refund_cents INTEGER,modeled_fee_cents INTEGER,processing_cents INTEGER)"
+      }
+    ],
+    "financialDefinitions": "Warehouse *_cents columns are cents. Pilot estimate.mean, low and high are USD DOLLARS. gross_cents is merchant payment volume, NOT PayPal revenue. Never subtract fees from gross and call that platform contribution. The authoritative platform target is mature observations.reward_cents: retained fees minus processing, platform incentive reimbursement and outreach. It may be negative. SQL results are exploratory, not the immutable evaluator.",
+    "safeFeatures": [
+      "recency_30d",
+      "purchases_7d",
+      "offers_7d",
+      "price_scale",
+      "observed_merchant_affinity",
+      "recent_refunds"
+    ],
+    "featureGrammar": "Up to6 non-intercept linear expressions. Bias/intercept is automatically included. Linear arithmetic only: + - * / and parentheses. Multiplication/division need a constant operand. No reward, future outcomes or post-purchase fields. Example: recency_30d - purchases_7d. All models compile to the unchanged engine interface.",
+    "models": [
+      {
+        "id": "RSCH3-8e988bfc437c7545-research-STEP-06-MODEL",
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "recency_30d",
+          "purchases_7d",
+          "offers_7d",
+          "price_scale",
+          "observed_merchant_affinity",
+          "recent_refunds"
+        ],
+        "windowDays": 56,
+        "datasetHash": "ff61bac873965df77fd2f9da35c4ba5f97398184d135596201c2a056a3cf834f",
+        "trainingRows": 3200,
+        "validationRows": 700,
+        "mse": 0.2768459486198129,
+        "baselineMse": 0.27531048845714673,
+        "runtimeMs": 13.054540999990422,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      }
+    ],
+    "pilots": [
+      {
+        "id": "RSCH3-8e988bfc437c7545-research-STEP-07-PILOT",
+        "modelId": "RSCH3-8e988bfc437c7545-research-STEP-06-MODEL",
+        "campaign": {
+          "audience": "lapsed",
+          "maxOfferPct": 5,
+          "merchantIndices": [
+            1,
+            2
+          ],
+          "durationDays": 14,
+          "penaltyUSD": 0.1,
+          "title": "Reactivation Pilot for Oak & Ink and Corner Supply"
+        },
+        "plan": {
+          "id": "SPEC-f3c062b4bf4e",
+          "strategy": "mixed",
+          "audience": "lapsed",
+          "merchantIndices": [
+            1,
+            2
+          ],
+          "maxOfferPct": 5,
+          "duration": 14,
+          "penalty": 0.1,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "estimate": {
+          "mean": -5.97,
+          "low": -8.98,
+          "high": -4.43,
+          "seeds": 3,
+          "cases": 3,
+          "winRate": 0,
+          "worst": -8.98,
+          "worstDecileMean": -8.98,
+          "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+          "unit": "USD"
+        },
+        "validity": true,
+        "interpretation": "Three independent development-seed paired rollouts, fully matured. Selection-biased when used to choose a campaign. Not final evidence, not real customers, not a mathematical causal guarantee outside this simulator."
+      }
+    ],
+    "evidence": [
+      {
+        "id": "RSCH3-8e988bfc437c7545-research-STEP-04",
+        "action": "query_warehouse",
+        "status": "COMPLETED",
+        "rationale": "I need to join observations with orders or filter observations by merchant_index to understand the relationship between customer features and reward_cents. Since observations doesn't have merchant_index, I will query the observations table directly to see if I can infer merchant affinity or if I need to join with another table. Wait, the observations table has observed_merchant_affinity. Let me check the distribution of reward_cents against observed_merchant_affinity.",
+        "output": {
+          "columns": [
+            "observed_merchant_affinity",
+            "avg_reward",
+            "count"
+          ],
+          "rows": [
+            {
+              "observed_merchant_affinity": 0,
+              "avg_reward": 18.28104786545925,
+              "count": 3092
+            },
+            {
+              "observed_merchant_affinity": 1,
+              "avg_reward": 17.72222222222222,
+              "count": 108
+            }
+          ],
+          "truncated": false,
+          "modelPreviewTruncated": false
+        }
+      },
+      {
+        "id": "RSCH3-8e988bfc437c7545-research-STEP-05",
+        "action": "query_warehouse",
+        "status": "COMPLETED",
+        "rationale": "I need to see if I can correlate observations with specific merchants to build a better model. I will check if I can join observations with orders using customer_id to get the merchant_index.",
+        "output": {
+          "columns": [
+            "merchant_index",
+            "reward_cents",
+            "recency_30d",
+            "purchases_7d",
+            "offers_7d",
+            "price_scale",
+            "observed_merchant_affinity",
+            "recent_refunds"
+          ],
+          "rows": [
+            {
+              "merchant_index": 1,
+              "reward_cents": -2,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 1,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 1,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 1,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 2,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 2,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 2,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 2,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 2,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 2,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 2,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 2,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 2,
+              "reward_cents": 101,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 1,
+              "reward_cents": -2,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.89,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 1,
+              "reward_cents": -2,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.89,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 1,
+              "reward_cents": -2,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.89,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 2,
+              "reward_cents": -2,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.89,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 1,
+              "reward_cents": -2,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 1,
+              "reward_cents": -2,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            },
+            {
+              "merchant_index": 1,
+              "reward_cents": -2,
+              "recency_30d": 1,
+              "purchases_7d": 0,
+              "offers_7d": 0,
+              "price_scale": 0.3199,
+              "observed_merchant_affinity": 0,
+              "recent_refunds": 0
+            }
+          ],
+          "truncated": false,
+          "modelPreviewTruncated": true
+        }
+      },
+      {
+        "id": "RSCH3-8e988bfc437c7545-research-STEP-06",
+        "action": "fit_model",
+        "status": "COMPLETED",
+        "rationale": "Fitting a ridge model to predict reward_cents based on available customer features to identify high-value segments for reactivation.",
+        "output": {
+          "modelId": "RSCH3-8e988bfc437c7545-research-STEP-06-MODEL",
+          "type": "compiled_linear_feature_ridge",
+          "features": [
+            "recency_30d",
+            "purchases_7d",
+            "offers_7d",
+            "price_scale",
+            "observed_merchant_affinity",
+            "recent_refunds"
+          ],
+          "windowDays": 56,
+          "datasetHash": "ff61bac873965df77fd2f9da35c4ba5f97398184d135596201c2a056a3cf834f",
+          "trainingRows": 3200,
+          "validationRows": 700,
+          "mse": 0.2768459486198129,
+          "baselineMse": 0.27531048845714673,
+          "runtimeMs": 13.054540999990422,
+          "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+        }
+      },
+      {
+        "id": "RSCH3-8e988bfc437c7545-research-STEP-07",
+        "action": "run_pilot",
+        "status": "COMPLETED",
+        "rationale": "Running a pilot to evaluate the reactivation campaign for Oak & Ink and Corner Supply using the fitted model.",
+        "output": {
+          "id": "RSCH3-8e988bfc437c7545-research-STEP-07-PILOT",
+          "modelId": "RSCH3-8e988bfc437c7545-research-STEP-06-MODEL",
+          "campaign": {
+            "audience": "lapsed",
+            "maxOfferPct": 5,
+            "merchantIndices": [
+              1,
+              2
+            ],
+            "durationDays": 14,
+            "penaltyUSD": 0.1,
+            "title": "Reactivation Pilot for Oak & Ink and Corner Supply"
+          },
+          "plan": {
+            "id": "SPEC-f3c062b4bf4e",
+            "strategy": "mixed",
+            "audience": "lapsed",
+            "merchantIndices": [
+              1,
+              2
+            ],
+            "maxOfferPct": 5,
+            "duration": 14,
+            "penalty": 0.1,
+            "epsilon": 0,
+            "windowDays": 42
+          },
+          "estimate": {
+            "mean": -5.97,
+            "low": -8.98,
+            "high": -4.43,
+            "seeds": 3,
+            "cases": 3,
+            "winRate": 0,
+            "worst": -8.98,
+            "worstDecileMean": -8.98,
+            "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+            "unit": "USD"
+          },
+          "validity": true,
+          "interpretation": "Three independent development-seed paired rollouts, fully matured. Selection-biased when used to choose a campaign. Not final evidence, not real customers, not a mathematical causal guarantee outside this simulator."
+        }
+      },
+      {
+        "id": "RSCH3-8e988bfc437c7545-research-STEP-08",
+        "action": "commit_campaign",
+        "status": "FAILED",
+        "rationale": "The pilot simulation for the reactivation campaign resulted in a negative expected mean contribution (-$5.97). Given the objective is to optimize PayPal contribution, and the pilot indicates a likely loss, I have decided to observe rather than deploy the campaign.",
+        "output": {
+          "error": "CITE_PILOT_MEAN_IN_USD_WITHIN_HALF_A_CENT"
+        }
+      },
+      {
+        "id": "RSCH3-8e988bfc437c7545-research-STEP-09",
+        "action": "commit_campaign",
+        "status": "FAILED",
+        "rationale": "The pilot simulation for the reactivation campaign for Oak & Ink and Corner Supply resulted in a negative expected mean contribution (-$5.97). As the objective is to optimize PayPal contribution and the pilot indicates a likely loss, I have decided to observe rather than deploy the campaign.",
+        "output": {
+          "error": "CITE_PILOT_MEAN_IN_USD_WITHIN_HALF_A_CENT"
+        }
+      },
+      {
+        "id": "RSCH3-8e988bfc437c7545-research-STEP-10",
+        "action": "commit_campaign",
+        "status": "COMPLETED",
+        "rationale": "The pilot simulation for the reactivation campaign for Oak & Ink and Corner Supply resulted in a negative expected mean contribution (-$5.97). As the objective is to optimize PayPal contribution and the pilot indicates a likely loss, I have decided to observe rather than deploy the campaign.",
+        "output": {
+          "decision": "observe",
+          "pilotId": "RSCH3-8e988bfc437c7545-research-STEP-07-PILOT",
+          "modelId": "RSCH3-8e988bfc437c7545-research-STEP-06-MODEL",
+          "plan": {
+            "id": "observe",
+            "strategy": "observe",
+            "audience": "all",
+            "merchantIndices": [],
+            "maxOfferPct": 0,
+            "duration": 0,
+            "penalty": 0,
+            "epsilon": 0,
+            "windowDays": 42
+          },
+          "rationale": "The pilot simulation for the reactivation campaign for Oak & Ink and Corner Supply resulted in a negative expected mean contribution (-$5.97). As the objective is to optimize PayPal contribution and the pilot indicates a likely loss, I have decided to observe rather than deploy the campaign.",
+          "pilotEstimate": {
+            "mean": -5.97,
+            "low": -8.98,
+            "high": -4.43,
+            "seeds": 3,
+            "cases": 3,
+            "winRate": 0,
+            "worst": -8.98,
+            "worstDecileMean": -8.98,
+            "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+            "unit": "USD"
+          },
+          "currency": "USD",
+          "expectedMeanUSD": -5.97,
+          "scope": "BOUNDED_SIMULATION_EXPERIMENT_NOT_PRODUCTION_PROMOTION"
+        }
+      }
+    ],
+    "boundaries": "This is a simulation research workspace. Pilot controls are allowed development feedback, distinct from hidden final evaluation controls. No filesystem, network, arbitrary Python, payment or reward-editing tool is available.",
+    "proposal": {
+      "decision": "observe",
+      "pilotId": "RSCH3-8e988bfc437c7545-research-STEP-07-PILOT",
+      "modelId": "RSCH3-8e988bfc437c7545-research-STEP-06-MODEL",
+      "plan": {
+        "id": "observe",
+        "strategy": "observe",
+        "audience": "all",
+        "merchantIndices": [],
+        "maxOfferPct": 0,
+        "duration": 0,
+        "penalty": 0,
+        "epsilon": 0,
+        "windowDays": 42
+      },
+      "rationale": "The pilot simulation for the reactivation campaign for Oak & Ink and Corner Supply resulted in a negative expected mean contribution (-$5.97). As the objective is to optimize PayPal contribution and the pilot indicates a likely loss, I have decided to observe rather than deploy the campaign.",
+      "pilotEstimate": {
+        "mean": -5.97,
+        "low": -8.98,
+        "high": -4.43,
+        "seeds": 3,
+        "cases": 3,
+        "winRate": 0,
+        "worst": -8.98,
+        "worstDecileMean": -8.98,
+        "interval": "95% percentile bootstrap over3 paired development simulation seeds in this scenario; exploratory, not confirmatory",
+        "unit": "USD"
+      },
+      "currency": "USD",
+      "expectedMeanUSD": -5.97,
+      "scope": "BOUNDED_SIMULATION_EXPERIMENT_NOT_PRODUCTION_PROMOTION"
+    }
+  },
+  "functions": [
+    {
+      "name": "review_commit",
+      "description": "Review the proposed experimental deployment without expanding its authority.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "verdict": {
+            "type": "STRING",
+            "enum": [
+              "approve",
+              "observe"
+            ]
+          },
+          "rationale": {
+            "type": "STRING"
+          },
+          "evidenceIds": {
+            "type": "ARRAY",
+            "items": {
+              "type": "STRING"
+            }
+          }
+        },
+        "required": [
+          "verdict",
+          "rationale",
+          "evidenceIds"
+        ]
+      }
+    }
+  ],
+  "status": "COMPLETED",
+  "startedAt": "2026-10-24T16:41:11.860Z",
+  "response": {
+    "name": "review_commit",
+    "args": {
+      "rationale": "The pilot simulation for the proposed reactivation campaign for Oak & Ink and Corner Supply yielded a negative expected mean contribution of -$5.97 (95% CI: -$8.98 to -$4.43). Given the objective is to optimize PayPal contribution, deploying this campaign would likely result in a net loss. Therefore, observing the current state rather than committing to the campaign is the appropriate decision.",
+      "evidenceIds": [
+        "RSCH3-8e988bfc437c7545-research-STEP-07-PILOT"
+      ],
+      "verdict": "observe"
+    },
+    "id": "call_3677682"
+  },
+  "provider": {
+    "reservationId": "dfb9fe4a-68bf-44ec-b7bb-54ac7c61e5b5",
+    "caseId": "RSCH3-8e988bfc437c7545-research-REVIEW",
+    "trialId": "RSCH3-8e988bfc437c7545",
+    "stage": "research_review",
+    "status": "settled",
+    "modelCostMicros": 1452,
+    "reservedMicros": 30000,
+    "inputTokens": 4972,
+    "outputTokens": 139,
+    "thinkingTokens": 0,
+    "cachedInputTokens": 0,
+    "responseId": "rN_catGnH5ePs8IPiPzC-A8",
+    "modelVersion": "gemini-3.1-flash-lite",
+    "latencyMs": 1606
+  },
+  "finishedAt": "2026-10-24T16:41:17.677Z"
+}

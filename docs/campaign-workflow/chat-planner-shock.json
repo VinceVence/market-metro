@@ -1,0 +1,1380 @@
+{
+  "workflowId": "WF-c1b681f9d804c0ec",
+  "runId": "GARDEN-WF-c1b681f9d804c0ec",
+  "planner": "ASSISTANT_IN_CURRENT_CHAT",
+  "startingPoint": "Setup deliberately reproduced from WF-933b5a62eaf3f188; chat-selected investigation starts at shock-diagnosis. Not a blinded planner benchmark.",
+  "actions": [
+    {
+      "checkpointId": "WF-c1b681f9d804c0ec-CP-observe-rival-shock",
+      "action": "advance",
+      "request": {
+        "requestId": "observe-rival-shock",
+        "action": "advance",
+        "parameters": {
+          "days": 7
+        },
+        "rationale": "Continue the reproduced plan until an observed market signal stops the worker. The checkpoint gate will return control here before any further days run after that signal. This request does not authorize the scripted demo coordinator to resolve the review.",
+        "evidenceIds": [
+          "WF-c1b681f9d804c0ec-CP-prefix-week-one"
+        ],
+        "expectedRevision": 6,
+        "contextHash": "5b01f64dd7d804b97bd00cbe29f63f255bbe12a912cb16b42d117fd80940b2e3",
+        "actor": "assistant_in_current_chat"
+      },
+      "status": "COMPLETED",
+      "output": {
+        "requestedDays": 7,
+        "completedDays": 1,
+        "attention": {
+          "kind": "OBSERVED_MARKET_CHANGE",
+          "indicator": "rival_promotion_exposure",
+          "previous": 0,
+          "current": 1,
+          "observedDay": 35
+        },
+        "throughDay": 35,
+        "days": [
+          {
+            "day": 35,
+            "phase": "LIVE",
+            "visits": 91,
+            "orders": 13,
+            "offers": 7,
+            "seen": 5,
+            "redemptions": 0,
+            "discountCents": 0,
+            "conversion": 0.14285714285714285
+          }
+        ],
+        "shopperDecisions": 300
+      }
+    },
+    {
+      "checkpointId": "WF-c1b681f9d804c0ec-CP-shock-diagnosis",
+      "action": "analyze",
+      "request": {
+        "requestId": "shock-diagnosis",
+        "action": "analyze",
+        "parameters": {
+          "windowDays": 14,
+          "cuts": [
+            "daily",
+            "model_health",
+            "market",
+            "offers"
+          ]
+        },
+        "rationale": "I am taking the planning decision now. The first rival-exposed day has 13 purchases, 91 visits and zero redemptions from seven offers. Before increasing discounts or retraining, inspect day-level outcomes, stock availability and the saved model's pre-action calibration by rival exposure. Check whether the existing seven-day validation split leaves any rival-exposed rows in training. A one-day drop or zero redemptions alone is not evidence that larger coupons will help.",
+        "evidenceIds": [
+          "WF-c1b681f9d804c0ec-CP-observe-rival-shock",
+          "WF-c1b681f9d804c0ec-CP-prefix-week-one",
+          "WF-c1b681f9d804c0ec-CP-prefix-training"
+        ],
+        "expectedRevision": 7,
+        "contextHash": "0dbcbf726c7472c84a1d44b9a2fcf057e3abfb72dedc604fd89839e069f5e36c",
+        "actor": "assistant_in_current_chat"
+      },
+      "status": "COMPLETED",
+      "output": {
+        "daily": [
+          {
+            "day": 22,
+            "observations": 300,
+            "visits": 125,
+            "purchases": 25,
+            "offers": 47,
+            "redemptions": 5,
+            "salesCents": 302953,
+            "discountsCents": 2805,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 23,
+            "observations": 300,
+            "visits": 116,
+            "purchases": 28,
+            "offers": 59,
+            "redemptions": 8,
+            "salesCents": 302004,
+            "discountsCents": 9750,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 24,
+            "observations": 300,
+            "visits": 122,
+            "purchases": 27,
+            "offers": 71,
+            "redemptions": 10,
+            "salesCents": 177845,
+            "discountsCents": 9430,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 25,
+            "observations": 300,
+            "visits": 122,
+            "purchases": 19,
+            "offers": 64,
+            "redemptions": 3,
+            "salesCents": 124653,
+            "discountsCents": 2980,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 26,
+            "observations": 300,
+            "visits": 115,
+            "purchases": 22,
+            "offers": 60,
+            "redemptions": 7,
+            "salesCents": 121817,
+            "discountsCents": 2440,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 27,
+            "observations": 300,
+            "visits": 124,
+            "purchases": 16,
+            "offers": 59,
+            "redemptions": 6,
+            "salesCents": 109677,
+            "discountsCents": 5010,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 28,
+            "observations": 300,
+            "visits": 114,
+            "purchases": 18,
+            "offers": 2,
+            "redemptions": 1,
+            "salesCents": 88265,
+            "discountsCents": 320,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 1
+          },
+          {
+            "day": 29,
+            "observations": 300,
+            "visits": 110,
+            "purchases": 19,
+            "offers": 1,
+            "redemptions": 0,
+            "salesCents": 80761,
+            "discountsCents": 0,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 30,
+            "observations": 300,
+            "visits": 113,
+            "purchases": 14,
+            "offers": 5,
+            "redemptions": 1,
+            "salesCents": 82129,
+            "discountsCents": 160,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 31,
+            "observations": 300,
+            "visits": 103,
+            "purchases": 17,
+            "offers": 7,
+            "redemptions": 2,
+            "salesCents": 98893,
+            "discountsCents": 640,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 32,
+            "observations": 300,
+            "visits": 118,
+            "purchases": 20,
+            "offers": 7,
+            "redemptions": 3,
+            "salesCents": 160776,
+            "discountsCents": 1530,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 33,
+            "observations": 300,
+            "visits": 117,
+            "purchases": 13,
+            "offers": 5,
+            "redemptions": 2,
+            "salesCents": 118950,
+            "discountsCents": 640,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 34,
+            "observations": 300,
+            "visits": 117,
+            "purchases": 24,
+            "offers": 6,
+            "redemptions": 3,
+            "salesCents": 166495,
+            "discountsCents": 960,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 0,
+            "paydayRate": 0
+          },
+          {
+            "day": 35,
+            "observations": 300,
+            "visits": 91,
+            "purchases": 13,
+            "offers": 7,
+            "redemptions": 0,
+            "salesCents": 148890,
+            "discountsCents": 0,
+            "stockAvailableRate": 1,
+            "rivalPromotionRate": 1,
+            "paydayRate": 1
+          }
+        ],
+        "modelHealth": {
+          "scoreSource": "Saved pre-action probabilities for the actually issued offer; repeated shoppers, descriptive diagnostics only.",
+          "missingOrInvalidScores": 0,
+          "byRivalExposure": [
+            {
+              "value": 0,
+              "observations": 2100,
+              "days": 7,
+              "purchases": 125,
+              "expectedPurchases": 129.3580250051884,
+              "meanPrediction": 0.0615990595262802,
+              "purchaseRate": 0.05952380952380952,
+              "brier": 0.05092616851765418,
+              "logLoss": 0.18122587946682323
+            },
+            {
+              "value": 1,
+              "observations": 300,
+              "days": 1,
+              "purchases": 13,
+              "expectedPurchases": 20.934982976119958,
+              "meanPrediction": 0.06978327658706653,
+              "purchaseRate": 0.043333333333333335,
+              "brier": 0.04461522872622828,
+              "logLoss": 0.17412488542346685
+            }
+          ],
+          "byDay": [
+            {
+              "value": 28,
+              "observations": 300,
+              "days": 1,
+              "purchases": 18,
+              "expectedPurchases": 20.27630925130934,
+              "meanPrediction": 0.06758769750436447,
+              "purchaseRate": 0.06,
+              "brier": 0.05194659359899668,
+              "logLoss": 0.17876183314893923
+            },
+            {
+              "value": 29,
+              "observations": 300,
+              "days": 1,
+              "purchases": 19,
+              "expectedPurchases": 16.571615602587315,
+              "meanPrediction": 0.05523871867529105,
+              "purchaseRate": 0.06333333333333334,
+              "brier": 0.05289231749884079,
+              "logLoss": 0.1798345267320254
+            },
+            {
+              "value": 30,
+              "observations": 300,
+              "days": 1,
+              "purchases": 14,
+              "expectedPurchases": 16.367322404388492,
+              "meanPrediction": 0.05455774134796164,
+              "purchaseRate": 0.04666666666666667,
+              "brier": 0.04183657641283908,
+              "logLoss": 0.15213026778144437
+            },
+            {
+              "value": 31,
+              "observations": 300,
+              "days": 1,
+              "purchases": 17,
+              "expectedPurchases": 19.56519980944029,
+              "meanPrediction": 0.0652173326981343,
+              "purchaseRate": 0.056666666666666664,
+              "brier": 0.05075456596684661,
+              "logLoss": 0.18368637261071064
+            },
+            {
+              "value": 32,
+              "observations": 300,
+              "days": 1,
+              "purchases": 20,
+              "expectedPurchases": 19.26220681738229,
+              "meanPrediction": 0.06420735605794096,
+              "purchaseRate": 0.06666666666666667,
+              "brier": 0.055883328990138474,
+              "logLoss": 0.20063874399373335
+            },
+            {
+              "value": 33,
+              "observations": 300,
+              "days": 1,
+              "purchases": 13,
+              "expectedPurchases": 17.52614370739802,
+              "meanPrediction": 0.05842047902466007,
+              "purchaseRate": 0.043333333333333335,
+              "brier": 0.03887240581705548,
+              "logLoss": 0.152449339489927
+            },
+            {
+              "value": 34,
+              "observations": 300,
+              "days": 1,
+              "purchases": 24,
+              "expectedPurchases": 19.789227412682873,
+              "meanPrediction": 0.06596409137560957,
+              "purchaseRate": 0.08,
+              "brier": 0.0642973913388619,
+              "logLoss": 0.22108007251098458
+            },
+            {
+              "value": 35,
+              "observations": 300,
+              "days": 1,
+              "purchases": 13,
+              "expectedPurchases": 20.934982976119958,
+              "meanPrediction": 0.06978327658706653,
+              "purchaseRate": 0.043333333333333335,
+              "brier": 0.04461522872622828,
+              "logLoss": 0.17412488542346685
+            }
+          ],
+          "byModel": [
+            {
+              "value": "WF-c1b681f9d804c0ec-CP-prefix-training-MODEL",
+              "observations": 2400,
+              "days": 8,
+              "purchases": 138,
+              "expectedPurchases": 150.29300798130845,
+              "meanPrediction": 0.06262208665887851,
+              "purchaseRate": 0.0575,
+              "brier": 0.05013730104372589,
+              "logLoss": 0.18033825521140381
+            }
+          ],
+          "candidateTrainingSplit": {
+            "windowDays": 14,
+            "trainingThroughDay": 28,
+            "validationFromDay": 29,
+            "validationThroughDay": 35,
+            "trainingRows": 2100,
+            "validationRows": 2100,
+            "rivalTrainingRows": 0,
+            "rivalValidationRows": 300,
+            "caveat": "Existing trainer reserves the final seven days for validation, then refits the selected family on all observed rows. A refit is not independently validated on its own new outcomes."
+          }
+        },
+        "cutoffExclusive": 36,
+        "windowDays": 14,
+        "observations": 4200,
+        "customers": 300,
+        "quality": {
+          "futureRows": 0,
+          "invalidFeatures": 0,
+          "foreignKeyErrors": 0
+        },
+        "features": [
+          "recency_days",
+          "purchases_7d",
+          "organic_14d",
+          "visits_7d",
+          "spend_7d",
+          "offers_7d",
+          "redemptions_14d",
+          "price_cents",
+          "stock_available",
+          "rival_sale",
+          "payday"
+        ],
+        "market": [
+          {
+            "label": "latest7",
+            "from": 29,
+            "to": 36,
+            "observations": 2100,
+            "purchases": 120,
+            "salesCents": 856894,
+            "stockAvailableRate": 1,
+            "observedRivalPromotionRate": 0.14285714285714285
+          },
+          {
+            "label": "previous7",
+            "from": 22,
+            "to": 29,
+            "observations": 2100,
+            "purchases": 155,
+            "salesCents": 1227214,
+            "stockAvailableRate": 1,
+            "observedRivalPromotionRate": 0
+          }
+        ],
+        "offers": [
+          {
+            "value": 0,
+            "observations": 3800,
+            "visits": 1387,
+            "purchases": 220,
+            "offers": 0,
+            "redemptions": 0,
+            "salesCents": 1658913
+          },
+          {
+            "value": 5,
+            "observations": 201,
+            "visits": 96,
+            "purchases": 24,
+            "offers": 201,
+            "redemptions": 23,
+            "salesCents": 143519
+          },
+          {
+            "value": 10,
+            "observations": 199,
+            "visits": 124,
+            "purchases": 31,
+            "offers": 199,
+            "redemptions": 28,
+            "salesCents": 281676
+          }
+        ],
+        "caveat": "Delivered-offer groups are descriptive, not causal estimates. Market indicators come from observed completed days; private customer traits and future shocks are excluded."
+      }
+    },
+    {
+      "checkpointId": "WF-c1b681f9d804c0ec-CP-review-first-shock-day",
+      "action": "review",
+      "request": {
+        "requestId": "review-first-shock-day",
+        "action": "review",
+        "parameters": {
+          "decision": "continue"
+        },
+        "rationale": "Decision: do not retrain or widen coupons on one changed day. The pre-action model expected 20.93 purchases versus 13 observed, but shock log loss 0.1741 is not worse than the prior-week 0.1812, all stock is available, and only seven offers were issued. Zero redemptions is too small a sample for a coupon conclusion. The unchanged seven-day validation split has zero rival-exposed training rows. Keep the qualified model, 5/10% choices, 25-cent gain floor, contact gap and budget. Advance only two days, then recheck persistent calibration before choosing retraining or a narrower coupon policy. This is my current-chat decision, not the demo's hard-coded continue branch.",
+        "evidenceIds": [
+          "WF-c1b681f9d804c0ec-CP-shock-diagnosis",
+          "WF-c1b681f9d804c0ec-CP-observe-rival-shock"
+        ],
+        "expectedRevision": 8,
+        "contextHash": "ad1ca5ae1a942d0dce1623d53f8b22f1f979bc15352de7910e994a3c1ec951d2",
+        "actor": "assistant_in_current_chat"
+      },
+      "status": "COMPLETED",
+      "output": {
+        "decision": "continue",
+        "day": 36,
+        "activePlanId": "WF-c1b681f9d804c0ec-PLAN-1"
+      }
+    },
+    {
+      "checkpointId": "WF-c1b681f9d804c0ec-CP-observe-two-more-days",
+      "action": "advance",
+      "request": {
+        "requestId": "observe-two-more-days",
+        "action": "advance",
+        "parameters": {
+          "days": 2
+        },
+        "rationale": "Execute the explicitly bounded two-day observation chosen in the previous review. Keep the same model and coupon limits; return control to this chat after two days so I can reassess with three shock days rather than assuming a full-week response.",
+        "evidenceIds": [
+          "WF-c1b681f9d804c0ec-CP-review-first-shock-day"
+        ],
+        "expectedRevision": 9,
+        "contextHash": "e5a49ae145afb2cae18491a30152bbabbf012565a48b9a61fd51f07fa1c30f34",
+        "actor": "assistant_in_current_chat"
+      },
+      "status": "COMPLETED",
+      "output": {
+        "requestedDays": 2,
+        "completedDays": 2,
+        "attention": null,
+        "throughDay": 37,
+        "days": [
+          {
+            "day": 36,
+            "phase": "LIVE",
+            "visits": 88,
+            "orders": 15,
+            "offers": 4,
+            "seen": 3,
+            "redemptions": 1,
+            "discountCents": 890,
+            "conversion": 0.17045454545454544
+          },
+          {
+            "day": 37,
+            "phase": "LIVE",
+            "visits": 84,
+            "orders": 13,
+            "offers": 5,
+            "seen": 5,
+            "redemptions": 1,
+            "discountCents": 160,
+            "conversion": 0.15476190476190477
+          }
+        ],
+        "shopperDecisions": 600
+      }
+    },
+    {
+      "checkpointId": "WF-c1b681f9d804c0ec-CP-three-day-reassessment",
+      "action": "analyze",
+      "request": {
+        "requestId": "three-day-reassessment",
+        "action": "analyze",
+        "parameters": {
+          "windowDays": 14,
+          "cuts": [
+            "model_health",
+            "market",
+            "segments"
+          ]
+        },
+        "rationale": "Reassess after the two days I requested. Compare saved pre-action accuracy for the now-three rival-exposed days against pre-shock days; inspect whether the shortfall persists and whether it is concentrated in a customer segment. Keep the validation split unchanged. This evidence will decide whether a bounded local challenger fit is worthwhile; it does not establish causal coupon lift.",
+        "evidenceIds": [
+          "WF-c1b681f9d804c0ec-CP-observe-two-more-days",
+          "WF-c1b681f9d804c0ec-CP-shock-diagnosis",
+          "WF-c1b681f9d804c0ec-CP-review-first-shock-day"
+        ],
+        "expectedRevision": 10,
+        "contextHash": "884e761dbf1ca6fbe9a2eae244fa87a4c50b3b99afe153191f8323e13cb79f2b",
+        "actor": "assistant_in_current_chat"
+      },
+      "status": "COMPLETED",
+      "output": {
+        "modelHealth": {
+          "scoreSource": "Saved pre-action probabilities for the actually issued offer; repeated shoppers, descriptive diagnostics only.",
+          "missingOrInvalidScores": 0,
+          "byRivalExposure": [
+            {
+              "value": 0,
+              "observations": 2100,
+              "days": 7,
+              "purchases": 125,
+              "expectedPurchases": 129.3580250051884,
+              "meanPrediction": 0.0615990595262802,
+              "purchaseRate": 0.05952380952380952,
+              "brier": 0.05092616851765418,
+              "logLoss": 0.18122587946682323
+            },
+            {
+              "value": 1,
+              "observations": 900,
+              "days": 3,
+              "purchases": 41,
+              "expectedPurchases": 56.75535545033565,
+              "meanPrediction": 0.0630615060559285,
+              "purchaseRate": 0.04555555555555556,
+              "brier": 0.044910308845968756,
+              "logLoss": 0.1720554963480014
+            }
+          ],
+          "byDay": [
+            {
+              "value": 28,
+              "observations": 300,
+              "days": 1,
+              "purchases": 18,
+              "expectedPurchases": 20.27630925130934,
+              "meanPrediction": 0.06758769750436447,
+              "purchaseRate": 0.06,
+              "brier": 0.05194659359899668,
+              "logLoss": 0.17876183314893923
+            },
+            {
+              "value": 29,
+              "observations": 300,
+              "days": 1,
+              "purchases": 19,
+              "expectedPurchases": 16.571615602587315,
+              "meanPrediction": 0.05523871867529105,
+              "purchaseRate": 0.06333333333333334,
+              "brier": 0.05289231749884079,
+              "logLoss": 0.1798345267320254
+            },
+            {
+              "value": 30,
+              "observations": 300,
+              "days": 1,
+              "purchases": 14,
+              "expectedPurchases": 16.367322404388492,
+              "meanPrediction": 0.05455774134796164,
+              "purchaseRate": 0.04666666666666667,
+              "brier": 0.04183657641283908,
+              "logLoss": 0.15213026778144437
+            },
+            {
+              "value": 31,
+              "observations": 300,
+              "days": 1,
+              "purchases": 17,
+              "expectedPurchases": 19.56519980944029,
+              "meanPrediction": 0.0652173326981343,
+              "purchaseRate": 0.056666666666666664,
+              "brier": 0.05075456596684661,
+              "logLoss": 0.18368637261071064
+            },
+            {
+              "value": 32,
+              "observations": 300,
+              "days": 1,
+              "purchases": 20,
+              "expectedPurchases": 19.26220681738229,
+              "meanPrediction": 0.06420735605794096,
+              "purchaseRate": 0.06666666666666667,
+              "brier": 0.055883328990138474,
+              "logLoss": 0.20063874399373335
+            },
+            {
+              "value": 33,
+              "observations": 300,
+              "days": 1,
+              "purchases": 13,
+              "expectedPurchases": 17.52614370739802,
+              "meanPrediction": 0.05842047902466007,
+              "purchaseRate": 0.043333333333333335,
+              "brier": 0.03887240581705548,
+              "logLoss": 0.152449339489927
+            },
+            {
+              "value": 34,
+              "observations": 300,
+              "days": 1,
+              "purchases": 24,
+              "expectedPurchases": 19.789227412682873,
+              "meanPrediction": 0.06596409137560957,
+              "purchaseRate": 0.08,
+              "brier": 0.0642973913388619,
+              "logLoss": 0.22108007251098458
+            },
+            {
+              "value": 35,
+              "observations": 300,
+              "days": 1,
+              "purchases": 13,
+              "expectedPurchases": 20.934982976119958,
+              "meanPrediction": 0.06978327658706653,
+              "purchaseRate": 0.043333333333333335,
+              "brier": 0.04461522872622828,
+              "logLoss": 0.17412488542346685
+            },
+            {
+              "value": 36,
+              "observations": 300,
+              "days": 1,
+              "purchases": 15,
+              "expectedPurchases": 18.67948456915627,
+              "meanPrediction": 0.06226494856385423,
+              "purchaseRate": 0.05,
+              "brier": 0.04826886873882,
+              "logLoss": 0.18659000064608858
+            },
+            {
+              "value": 37,
+              "observations": 300,
+              "days": 1,
+              "purchases": 13,
+              "expectedPurchases": 17.14088790505943,
+              "meanPrediction": 0.057136293016864764,
+              "purchaseRate": 0.043333333333333335,
+              "brier": 0.041846829072857965,
+              "logLoss": 0.1554516029744485
+            }
+          ],
+          "byModel": [
+            {
+              "value": "WF-c1b681f9d804c0ec-CP-prefix-training-MODEL",
+              "observations": 3000,
+              "days": 10,
+              "purchases": 166,
+              "expectedPurchases": 186.11338045552404,
+              "meanPrediction": 0.06203779348517468,
+              "purchaseRate": 0.05533333333333333,
+              "brier": 0.04912141061614837,
+              "logLoss": 0.17847476453117697
+            }
+          ],
+          "candidateTrainingSplit": {
+            "windowDays": 14,
+            "trainingThroughDay": 30,
+            "validationFromDay": 31,
+            "validationThroughDay": 37,
+            "trainingRows": 2100,
+            "validationRows": 2100,
+            "rivalTrainingRows": 0,
+            "rivalValidationRows": 900,
+            "caveat": "Existing trainer reserves the final seven days for validation, then refits the selected family on all observed rows. A refit is not independently validated on its own new outcomes."
+          }
+        },
+        "cutoffExclusive": 38,
+        "windowDays": 14,
+        "observations": 4200,
+        "customers": 300,
+        "quality": {
+          "futureRows": 0,
+          "invalidFeatures": 0,
+          "foreignKeyErrors": 0
+        },
+        "features": [
+          "recency_days",
+          "purchases_7d",
+          "organic_14d",
+          "visits_7d",
+          "spend_7d",
+          "offers_7d",
+          "redemptions_14d",
+          "price_cents",
+          "stock_available",
+          "rival_sale",
+          "payday"
+        ],
+        "market": [
+          {
+            "label": "latest7",
+            "from": 31,
+            "to": 38,
+            "observations": 2100,
+            "purchases": 115,
+            "salesCents": 942609,
+            "stockAvailableRate": 1,
+            "observedRivalPromotionRate": 0.42857142857142855
+          },
+          {
+            "label": "previous7",
+            "from": 24,
+            "to": 31,
+            "observations": 2100,
+            "purchases": 135,
+            "salesCents": 785147,
+            "stockAvailableRate": 1,
+            "observedRivalPromotionRate": 0
+          }
+        ],
+        "segments": [
+          {
+            "value": "Willow neighbors",
+            "observations": 1050,
+            "visits": 390,
+            "purchases": 53,
+            "offers": 77,
+            "redemptions": 8,
+            "salesCents": 346142
+          },
+          {
+            "value": "Hill neighbors",
+            "observations": 1050,
+            "visits": 381,
+            "purchases": 59,
+            "offers": 74,
+            "redemptions": 10,
+            "salesCents": 477822
+          },
+          {
+            "value": "Square neighbors",
+            "observations": 1050,
+            "visits": 355,
+            "purchases": 62,
+            "offers": 69,
+            "redemptions": 6,
+            "salesCents": 411794
+          },
+          {
+            "value": "Riverside neighbors",
+            "observations": 1050,
+            "visits": 412,
+            "purchases": 76,
+            "offers": 83,
+            "redemptions": 16,
+            "salesCents": 491998
+          }
+        ],
+        "caveat": "Delivered-offer groups are descriptive, not causal estimates. Market indicators come from observed completed days; private customer traits and future shocks are excluded."
+      }
+    },
+    {
+      "checkpointId": "WF-c1b681f9d804c0ec-CP-fit-one-recent-challenger",
+      "action": "train",
+      "request": {
+        "requestId": "fit-one-recent-challenger",
+        "action": "train",
+        "parameters": {
+          "windowDays": 21,
+          "modelTypes": [
+            "logistic"
+          ]
+        },
+        "rationale": "After three shock days, the old model expected 56.76 purchases but observed 41; the overprediction persists on each day and stock remains available. I choose one local logistic challenger on a 21-day window, retaining randomized offer examples while dropping the oldest week. Logistic previously beat the tree; I will not search multiple windows until one passes. Preserve the existing seven-day validation and 0.001 promotion margin. This fit tests recent calibration, not a proven causal response to the rival: the training partition still has zero rival rows, and refitting on three changed days is not independent validation. Do not activate the challenger or increase discounts unless the existing qualification gate passes.",
+        "evidenceIds": [
+          "WF-c1b681f9d804c0ec-CP-three-day-reassessment",
+          "WF-c1b681f9d804c0ec-CP-prefix-training",
+          "WF-c1b681f9d804c0ec-CP-review-first-shock-day"
+        ],
+        "expectedRevision": 11,
+        "contextHash": "5b177b8a7ff856362a39fa7182fc1b3162658e0742f6b1926fde8f11240333d7",
+        "actor": "assistant_in_current_chat"
+      },
+      "status": "COMPLETED",
+      "output": {
+        "status": "REJECTED",
+        "reason": "Candidate did not beat the champion/offer-rate baseline by 0.001; keep the current policy.",
+        "model_type": "logistic",
+        "dataset_hash": "a09d96297d3af565b8792f5a67e08e93c7f119c4625cae28f710a5f80ca7b294",
+        "training_rows": 4200,
+        "validation_rows": 2100,
+        "train_through_day": 30,
+        "validation_from_day": 31,
+        "validation_through_day": 37,
+        "validation_log_loss": 0.18167075502785254,
+        "baseline_log_loss": 0.20966890777193498,
+        "champion_log_loss": 0.18200300252133708,
+        "brier_score": 0.04918079665690074,
+        "candidates": [
+          {
+            "type": "logistic",
+            "log_loss": 0.18167075502785254,
+            "brier": 0.04918079665690074
+          }
+        ],
+        "runtime_ms": 2695,
+        "fit_runtime_ms": 55,
+        "modelId": "WF-c1b681f9d804c0ec-CP-fit-one-recent-challenger-MODEL",
+        "qualified": false,
+        "trainingPlan": {
+          "windowDays": 21,
+          "modelTypes": [
+            "logistic"
+          ]
+        },
+        "features": [
+          "recency_days",
+          "purchases_7d",
+          "organic_14d",
+          "visits_7d",
+          "spend_7d",
+          "offers_7d",
+          "redemptions_14d",
+          "price_cents",
+          "stock_available",
+          "rival_sale",
+          "payday"
+        ]
+      }
+    },
+    {
+      "checkpointId": "WF-c1b681f9d804c0ec-CP-reject-challenger-keep-offers",
+      "action": "review",
+      "request": {
+        "requestId": "reject-challenger-keep-offers",
+        "action": "review",
+        "parameters": {
+          "decision": "continue"
+        },
+        "rationale": "Decision after the bounded challenger fit: retain the original champion and existing 5%/10% coupon policy for the four remaining days. Challenger loss 0.1816708 versus champion 0.1820030 improves only 0.0003322, below the unchanged 0.001 gate; the candidate is REJECTED and must not be launched. Do not try additional windows until one happens to pass. I also reject widening the audience, lowering the gain floor, or cutting all offers to 5%: three days of aggregate overprediction and sparse, selected offer outcomes do not establish which coupon change helps retention. Existing stock, 20% margin, seven-day contact and budget guards remain. The measured outcome may equal the scripted policy; this trial demonstrates evidence-dependent planning, not superiority.",
+        "evidenceIds": [
+          "WF-c1b681f9d804c0ec-CP-fit-one-recent-challenger",
+          "WF-c1b681f9d804c0ec-CP-three-day-reassessment",
+          "WF-c1b681f9d804c0ec-CP-prefix-plan"
+        ],
+        "expectedRevision": 12,
+        "contextHash": "ac4f8b6a87b07215694d95b0371018e3bb0be965a3d990602ce53c07715d5223",
+        "actor": "assistant_in_current_chat"
+      },
+      "status": "COMPLETED",
+      "output": {
+        "decision": "continue",
+        "day": 38,
+        "activePlanId": "WF-c1b681f9d804c0ec-PLAN-1"
+      }
+    },
+    {
+      "checkpointId": "WF-c1b681f9d804c0ec-CP-finish-remaining-four-days",
+      "action": "advance",
+      "request": {
+        "requestId": "finish-remaining-four-days",
+        "action": "advance",
+        "parameters": {
+          "days": 4
+        },
+        "rationale": "Execute the remaining four campaign days after my explicit review, with the original qualified model and unchanged guarded offers. The rejected challenger must remain inactive. End new coupons at the existing campaign deadline; stop early if a new observed signal requires review.",
+        "evidenceIds": [
+          "WF-c1b681f9d804c0ec-CP-reject-challenger-keep-offers"
+        ],
+        "expectedRevision": 13,
+        "contextHash": "98fda19ee6fda36b3e4aee1134af2634bc1bdebb28569ae227774d8562f1e498",
+        "actor": "assistant_in_current_chat"
+      },
+      "status": "COMPLETED",
+      "output": {
+        "requestedDays": 4,
+        "completedDays": 4,
+        "attention": null,
+        "throughDay": 41,
+        "days": [
+          {
+            "day": 38,
+            "phase": "LIVE",
+            "visits": 95,
+            "orders": 19,
+            "offers": 7,
+            "seen": 5,
+            "redemptions": 1,
+            "discountCents": 320,
+            "conversion": 0.2
+          },
+          {
+            "day": 39,
+            "phase": "LIVE",
+            "visits": 98,
+            "orders": 16,
+            "offers": 7,
+            "seen": 6,
+            "redemptions": 1,
+            "discountCents": 890,
+            "conversion": 0.16326530612244897
+          },
+          {
+            "day": 40,
+            "phase": "LIVE",
+            "visits": 97,
+            "orders": 14,
+            "offers": 5,
+            "seen": 5,
+            "redemptions": 0,
+            "discountCents": 0,
+            "conversion": 0.14432989690721648
+          },
+          {
+            "day": 41,
+            "phase": "LIVE",
+            "visits": 95,
+            "orders": 7,
+            "offers": 6,
+            "seen": 3,
+            "redemptions": 1,
+            "discountCents": 320,
+            "conversion": 0.07368421052631578
+          }
+        ],
+        "shopperDecisions": 1200
+      }
+    },
+    {
+      "checkpointId": "WF-c1b681f9d804c0ec-CP-settle-followup",
+      "action": "settle",
+      "request": {
+        "requestId": "settle-followup",
+        "action": "settle",
+        "parameters": {},
+        "rationale": "The original fourteen-day campaign has ended. Run the existing two delivery/refund follow-up days without new coupons, so the saved purchase-cohort economics include the scheduled outcomes. No PayPal sample or external payment is requested in this planner trial.",
+        "evidenceIds": [
+          "WF-c1b681f9d804c0ec-CP-finish-remaining-four-days",
+          "WF-c1b681f9d804c0ec-GOAL"
+        ],
+        "expectedRevision": 14,
+        "contextHash": "4674e4b3d36480dca6a46097f1da22c441fb7fa3a8baa24862a8876bc287acbf",
+        "actor": "assistant_in_current_chat"
+      },
+      "status": "COMPLETED",
+      "output": {
+        "requestedDays": 2,
+        "completedDays": 2,
+        "attention": null,
+        "throughDay": 43,
+        "days": [
+          {
+            "day": 42,
+            "phase": "LIVE",
+            "visits": 101,
+            "orders": 13,
+            "offers": 0,
+            "seen": 0,
+            "redemptions": 0,
+            "discountCents": 0,
+            "conversion": 0.12871287128712872
+          },
+          {
+            "day": 43,
+            "phase": "LIVE",
+            "visits": 104,
+            "orders": 20,
+            "offers": 0,
+            "seen": 0,
+            "redemptions": 0,
+            "discountCents": 0,
+            "conversion": 0.19230769230769232
+          }
+        ],
+        "shopperDecisions": 600
+      }
+    },
+    {
+      "checkpointId": "WF-c1b681f9d804c0ec-CP-evaluate-planner-trial",
+      "action": "evaluate",
+      "request": {
+        "requestId": "evaluate-planner-trial",
+        "action": "evaluate",
+        "parameters": {},
+        "rationale": "Evaluate the completed purchase cohort and holdout with the same accounting as the scripted reference. Report coupons, purchases, budget, modeled merchant contribution and uncertainty. Keeping the champion after rejecting retraining can yield the same outcome as the original script; do not convert that into an agent-performance claim or add any mirrored payment to revenue.",
+        "evidenceIds": [
+          "WF-c1b681f9d804c0ec-CP-settle-followup",
+          "WF-c1b681f9d804c0ec-CP-reject-challenger-keep-offers"
+        ],
+        "expectedRevision": 15,
+        "contextHash": "2c2b7a5738cf300e4c82ac772ffbb336b8e4a1b2be6ca74391ed55a13eb42ec9",
+        "actor": "assistant_in_current_chat"
+      },
+      "status": "COMPLETED",
+      "output": {
+        "window": {
+          "startDay": 28,
+          "endDayExclusive": 42,
+          "followupThroughDay": 43
+        },
+        "customers": 300,
+        "decisions": 4800,
+        "orders": 222,
+        "buyingCustomers": 147,
+        "offeredCustomers": 58,
+        "coupons": 74,
+        "redemptions": 17,
+        "economics": {
+          "salesCents": 1731915,
+          "discountsCents": 6830,
+          "refundsCents": 28197,
+          "cogsCents": 873445,
+          "deliveryCents": 77700,
+          "modeledFeesCents": 71376,
+          "outreachCents": 148,
+          "contributionCents": 681049
+        },
+        "baselineActiveExperiment": {
+          "groups": [
+            {
+              "arm": "TARGETABLE",
+              "customers": 125,
+              "purchasers": 79
+            },
+            {
+              "arm": "HOLDOUT",
+              "customers": 50,
+              "purchasers": 24
+            }
+          ],
+          "difference": 0.15200000000000002,
+          "ciLow": -0.010249742350488783,
+          "ciHigh": 0.31424974235048886,
+          "status": "MATURE",
+          "interpretation": "Randomized eligibility comparison among baseline-active shoppers. A purchase does not prove that a particular shopper was caused to buy by the coupon."
+        },
+        "nativePayments": [],
+        "paidModelCalls": 0
+      }
+    },
+    {
+      "checkpointId": "WF-c1b681f9d804c0ec-CP-complete-planner-trial",
+      "action": "complete",
+      "request": {
+        "requestId": "complete-planner-trial",
+        "action": "complete",
+        "parameters": {},
+        "rationale": "Close this current-chat planning trial with 222 campaign purchases, 74 coupons, 17 redemptions, 69.78 dollars of virtual spend and 6810.49 dollars modeled contribution. These outcomes match the scripted reference because I retained its original qualified model and guarded coupon policy. The additional local challenger failed the unchanged promotion gate; no benefit over the script is claimed. The repeat-purchase interval still crosses zero. Save every investigation and decision checkpoint with this chat as actor. Native sample delegation is zero, so the earlier PayPal receipt remains only in the original run. No hosted or paid model API calls were used.",
+        "evidenceIds": [
+          "WF-c1b681f9d804c0ec-CP-evaluate-planner-trial",
+          "WF-c1b681f9d804c0ec-CP-reject-challenger-keep-offers",
+          "WF-c1b681f9d804c0ec-GOAL"
+        ],
+        "expectedRevision": 16,
+        "contextHash": "f41d14d579f1601ba29b697dd78c50a30d8bc30cb5c2fa514d1a89f3d14d67de",
+        "actor": "assistant_in_current_chat"
+      },
+      "status": "COMPLETED",
+      "output": {
+        "completed": true,
+        "evaluation": {
+          "window": {
+            "startDay": 28,
+            "endDayExclusive": 42,
+            "followupThroughDay": 43
+          },
+          "customers": 300,
+          "decisions": 4800,
+          "orders": 222,
+          "buyingCustomers": 147,
+          "offeredCustomers": 58,
+          "coupons": 74,
+          "redemptions": 17,
+          "economics": {
+            "salesCents": 1731915,
+            "discountsCents": 6830,
+            "refundsCents": 28197,
+            "cogsCents": 873445,
+            "deliveryCents": 77700,
+            "modeledFeesCents": 71376,
+            "outreachCents": 148,
+            "contributionCents": 681049
+          },
+          "baselineActiveExperiment": {
+            "groups": [
+              {
+                "arm": "TARGETABLE",
+                "customers": 125,
+                "purchasers": 79
+              },
+              {
+                "arm": "HOLDOUT",
+                "customers": 50,
+                "purchasers": 24
+              }
+            ],
+            "difference": 0.15200000000000002,
+            "ciLow": -0.010249742350488783,
+            "ciHigh": 0.31424974235048886,
+            "status": "MATURE",
+            "interpretation": "Randomized eligibility comparison among baseline-active shoppers. A purchase does not prove that a particular shopper was caused to buy by the coupon."
+          },
+          "nativePayments": [],
+          "paidModelCalls": 0
+        }
+      }
+    }
+  ],
+  "modelSummaries": [
+    {
+      "model_id": "WF-c1b681f9d804c0ec-CP-prefix-training-MODEL",
+      "run_id": "GARDEN-WF-c1b681f9d804c0ec",
+      "day": 28,
+      "version": 1,
+      "status": "PROMOTED",
+      "reason": "Candidate improves later-day log loss by at least 0.001.",
+      "model_type": "logistic",
+      "features_json": "[\"recency_days\",\"purchases_7d\",\"organic_14d\",\"visits_7d\",\"spend_7d\",\"offers_7d\",\"redemptions_14d\",\"price_cents\",\"stock_available\",\"rival_sale\",\"payday\"]",
+      "dataset_hash": "6dfb5a4c104bb6527abb4b055d55e0936e0c6b0383b78c1e22c434d436b219ed",
+      "training_rows": 6300,
+      "validation_rows": 2100,
+      "train_through_day": 20,
+      "validation_from_day": 21,
+      "validation_through_day": 27,
+      "validation_log_loss": 0.22240669494006324,
+      "baseline_log_loss": 0.2635139199296714,
+      "champion_log_loss": null,
+      "brier_score": 0.06416833010142765,
+      "candidates_json": "[{\"type\":\"logistic\",\"log_loss\":0.22240669494006324,\"brier\":0.06416833010142765},{\"type\":\"tree\",\"log_loss\":0.26959223798739257,\"brier\":0.06353973624194564}]",
+      "runtime_ms": 3486,
+      "source": "CHAT_PLANNED_LOCAL_SCIKIT_LEARN"
+    },
+    {
+      "model_id": "WF-c1b681f9d804c0ec-CP-fit-one-recent-challenger-MODEL",
+      "run_id": "GARDEN-WF-c1b681f9d804c0ec",
+      "day": 38,
+      "version": 2,
+      "status": "REJECTED",
+      "reason": "Candidate did not beat the champion/offer-rate baseline by 0.001; keep the current policy.",
+      "model_type": "logistic",
+      "features_json": "[\"recency_days\",\"purchases_7d\",\"organic_14d\",\"visits_7d\",\"spend_7d\",\"offers_7d\",\"redemptions_14d\",\"price_cents\",\"stock_available\",\"rival_sale\",\"payday\"]",
+      "dataset_hash": "a09d96297d3af565b8792f5a67e08e93c7f119c4625cae28f710a5f80ca7b294",
+      "training_rows": 4200,
+      "validation_rows": 2100,
+      "train_through_day": 30,
+      "validation_from_day": 31,
+      "validation_through_day": 37,
+      "validation_log_loss": 0.18167075502785254,
+      "baseline_log_loss": 0.20966890777193498,
+      "champion_log_loss": 0.18200300252133708,
+      "brier_score": 0.04918079665690074,
+      "candidates_json": "[{\"type\":\"logistic\",\"log_loss\":0.18167075502785254,\"brier\":0.04918079665690074}]",
+      "runtime_ms": 2695,
+      "source": "CHAT_PLANNED_LOCAL_SCIKIT_LEARN"
+    }
+  ],
+  "evaluation": {
+    "window": {
+      "startDay": 28,
+      "endDayExclusive": 42,
+      "followupThroughDay": 43
+    },
+    "customers": 300,
+    "decisions": 4800,
+    "orders": 222,
+    "buyingCustomers": 147,
+    "offeredCustomers": 58,
+    "coupons": 74,
+    "redemptions": 17,
+    "economics": {
+      "salesCents": 1731915,
+      "discountsCents": 6830,
+      "refundsCents": 28197,
+      "cogsCents": 873445,
+      "deliveryCents": 77700,
+      "modeledFeesCents": 71376,
+      "outreachCents": 148,
+      "contributionCents": 681049
+    },
+    "baselineActiveExperiment": {
+      "groups": [
+        {
+          "arm": "TARGETABLE",
+          "customers": 125,
+          "purchasers": 79
+        },
+        {
+          "arm": "HOLDOUT",
+          "customers": 50,
+          "purchasers": 24
+        }
+      ],
+      "difference": 0.15200000000000002,
+      "ciLow": -0.010249742350488783,
+      "ciHigh": 0.31424974235048886,
+      "status": "MATURE",
+      "interpretation": "Randomized eligibility comparison among baseline-active shoppers. A purchase does not prove that a particular shopper was caused to buy by the coupon."
+    },
+    "nativePayments": [],
+    "paidModelCalls": 0
+  },
+  "scriptedReference": {
+    "workflowId": "WF-933b5a62eaf3f188",
+    "evaluation": {
+      "window": {
+        "startDay": 28,
+        "endDayExclusive": 42,
+        "followupThroughDay": 43
+      },
+      "customers": 300,
+      "decisions": 4800,
+      "orders": 222,
+      "buyingCustomers": 147,
+      "offeredCustomers": 58,
+      "coupons": 74,
+      "redemptions": 17,
+      "economics": {
+        "salesCents": 1731915,
+        "discountsCents": 6830,
+        "refundsCents": 28197,
+        "cogsCents": 873445,
+        "deliveryCents": 77700,
+        "modeledFeesCents": 71376,
+        "outreachCents": 148,
+        "contributionCents": 681049
+      },
+      "baselineActiveExperiment": {
+        "groups": [
+          {
+            "arm": "TARGETABLE",
+            "customers": 125,
+            "purchasers": 79
+          },
+          {
+            "arm": "HOLDOUT",
+            "customers": 50,
+            "purchasers": 24
+          }
+        ],
+        "difference": 0.15200000000000002,
+        "ciLow": -0.010249742350488783,
+        "ciHigh": 0.31424974235048886,
+        "status": "MATURE",
+        "interpretation": "Randomized eligibility comparison among baseline-active shoppers. A purchase does not prove that a particular shopper was caused to buy by the coupon."
+      },
+      "nativePayments": [
+        {
+          "run_id": "GARDEN-WF-933b5a62eaf3f188",
+          "order_id": "GARDEN-WF-933b5a62eaf3f188-O41777",
+          "simulation_event_ts": "2026-12-03T01:00:00.000Z",
+          "simulation_event_date": "2026-12-03",
+          "merchant_id": "GARDEN-WF-933b5a62eaf3f188-M001",
+          "merchant_name": "Willow Goods",
+          "customer_id": "GARDEN-WF-933b5a62eaf3f188-U0272",
+          "campaign_id": "GARDEN-WF-933b5a62eaf3f188-LIVE-0",
+          "coupon_id": "GARDEN-WF-933b5a62eaf3f188-CP41770",
+          "discount_pct": 10,
+          "currency": "USD",
+          "simulated_gross_cents": 2879,
+          "modeled_fee_cents": 149,
+          "modeled_net_cents": 2730,
+          "receipt_id": "847a5522-4e16-425e-8fcd-88d821592a4a",
+          "funding_method": "PAYPAL_WALLET_VAULT",
+          "paypal_status": "COMPLETED",
+          "paypal_order_id": "4Y936445VH165191S",
+          "capture_id": "2RF288859F952982L",
+          "payee_merchant_id": "FD8RHLW6Y8GZG",
+          "paypal_gross_cents": 2879,
+          "paypal_fee_cents": 128,
+          "paypal_net_cents": 2751,
+          "provider_captured_at": "2026-10-23T02:38:45Z",
+          "provider_verified_at": "2026-10-23T02:38:47.422Z",
+          "provider_event_date": "2026-10-23",
+          "error_code": null,
+          "payment_source": "PAYPAL_SANDBOX",
+          "amount_verified": 1,
+          "channel3_product_ids": "w7qtfaR",
+          "product_titles": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)"
+        }
+      ],
+      "paidModelCalls": 0
+    },
+    "models": 1
+  },
+  "verification": {
+    "sameHistoryAndFirstShockRows": 10800,
+    "prefixHash": "7084083c98de41d6cd4b628f397cf117cc03c6e40eb2499ae35d8fc3faaf1301",
+    "trainingDatasetHashMatches": true,
+    "replayedRejectedFitWithoutNewModel": true,
+    "scriptedCoordinatorRejected": "NOT_A_DEMO",
+    "activeModelVersion": 1,
+    "holdoutCoupons": 0,
+    "nativeCapturesThisTrial": 0,
+    "originalCapturePreserved": true,
+    "checkpointCount": 18,
+    "testsPassed": 7
+  },
+  "incrementalChallenger": {
+    "localRuntimeMs": 2695,
+    "apiChargeUsd": 0,
+    "localHardwareCostNotPriced": true,
+    "retained": false
+  },
+  "limitations": [
+    "Planner ran in this chat; no app-hosted unattended LLM loop.",
+    "Simulator workers and coupon guards remain deterministic.",
+    "Three post-shock days are not independent causal uplift evidence.",
+    "One local challenger failed the unchanged promotion gate; final outcomes equal the scripted reference.",
+    "No additional PayPal capture; do not attach the original receipt to this separate run."
+  ]
+}

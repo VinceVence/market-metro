@@ -1,3 +1,6 @@
+import {WORKFLOW_SCHEMA,WORKFLOW_TABLES,WORKFLOW_DICTIONARY} from './marketing/workflow-schema.mjs';
+import {POLICY_SCHEMA,POLICY_TABLES,POLICY_VIEWS,POLICY_DICTIONARY} from './policy-lab/schema.mjs';
+import {COMMERCE_SCHEMA,COMMERCE_TABLES,COMMERCE_VIEWS,COMMERCE_DICTIONARY} from './paypal-commerce-schema.mjs';
 import {LEARNING_SCHEMA,LEARNING_TABLES,LEARNING_VIEWS,LEARNING_DICTIONARY} from './marketing/contract.mjs';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
@@ -5,6 +8,20 @@ import { dirname } from 'node:path';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+
+// Approval links belong in the local consent UI, not downloadable datasets or model evidence.
+export function redactApprovalLinks(value){
+  if(Array.isArray(value))return value.map(redactApprovalLinks);
+  if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([key,item])=>[key,['approvalUrl','paymentUrl'].includes(key)?'[redacted consent link]':redactApprovalLinks(item)]));
+  return value;
+}
+function publicRow(row){
+  const {profile_key,create_request_id,capture_request_id,funding_key,request_id,...visible}=row;
+  for(const [key,value] of Object.entries(visible))if(key.endsWith('_json')&&typeof value==='string'&&/approvalUrl|paymentUrl/.test(value)){
+    try{visible[key]=JSON.stringify(redactApprovalLinks(JSON.parse(value)));}catch{}
+  }
+  return visible;
+}
 
 export const SCHEMA = `
 PRAGMA foreign_keys=ON;
@@ -33,16 +50,25 @@ CREATE VIEW IF NOT EXISTS v_campaign_performance AS WITH traffic AS (SELECT run_
 CREATE VIEW IF NOT EXISTS v_marketing_funnel AS SELECT run_id,event_date,merchant_id,channel,COUNT(CASE WHEN event_type='impression' THEN 1 END) AS impressions,COUNT(CASE WHEN event_type='product_view' THEN 1 END) AS product_views,COUNT(CASE WHEN event_type='add_to_cart' THEN 1 END) AS carts,COUNT(CASE WHEN event_type='purchase' THEN 1 END) AS purchases,COUNT(CASE WHEN event_type='cart_abandoned' THEN 1 END) AS abandoned_carts,COUNT(CASE WHEN event_type='stockout' THEN 1 END) AS stockouts FROM events GROUP BY run_id,event_date,merchant_id,channel;
 CREATE VIEW IF NOT EXISTS v_inventory AS SELECT p.run_id,p.product_id,p.merchant_id,p.title,p.initial_stock,COALESCE(SUM(i.quantity),0) AS net_movement,p.initial_stock+COALESCE(SUM(i.quantity),0) AS on_hand FROM products p LEFT JOIN inventory_movements i USING(product_id) GROUP BY p.product_id;
 CREATE VIEW IF NOT EXISTS v_customer_segments AS SELECT u.run_id,u.segment,COUNT(DISTINCT u.customer_id) AS customers,COUNT(DISTINCT t.order_id) AS purchases,COALESCE(SUM(t.gross_cents-t.refunded_cents),0) AS retained_revenue_cents FROM customers u LEFT JOIN v_marketing_transactions t USING(customer_id) GROUP BY u.run_id,u.segment;
-` + LEARNING_SCHEMA + `
-CREATE VIEW IF NOT EXISTS v_paypal_order_lineage AS SELECT o.run_id,o.order_id,o.event_ts AS simulation_event_ts,o.event_date AS simulation_event_date,o.merchant_id,m.name AS merchant_name,o.customer_id,o.campaign_id,c.coupon_id,c.discount_pct,o.currency,o.total_cents AS simulated_gross_cents,t.fee_cents AS modeled_fee_cents,t.net_cents AS modeled_net_cents,p.receipt_id,p.funding_method,p.status AS paypal_status,p.paypal_order_id,p.capture_id,p.payee_merchant_id,p.gross_cents AS paypal_gross_cents,p.fee_cents AS paypal_fee_cents,p.net_cents AS paypal_net_cents,p.captured_at AS provider_captured_at,p.verified_at AS provider_verified_at,p.event_date AS provider_event_date,p.error_code,p.source AS payment_source,CASE WHEN p.status='COMPLETED' AND p.gross_cents=o.total_cents AND p.currency=o.currency THEN 1 ELSE 0 END AS amount_verified,(SELECT group_concat(pr.channel3_product_id,', ') FROM order_items oi JOIN products pr USING(product_id) WHERE oi.order_id=o.order_id) AS channel3_product_ids,(SELECT group_concat(pr.title,' | ') FROM order_items oi JOIN products pr USING(product_id) WHERE oi.order_id=o.order_id) AS product_titles FROM paypal_receipts p JOIN orders o ON o.order_id=p.order_id JOIN merchants m ON m.merchant_id=o.merchant_id JOIN transactions t ON t.order_id=o.order_id LEFT JOIN coupon_redemptions cr ON cr.order_id=o.order_id LEFT JOIN coupons c ON c.coupon_id=cr.coupon_id;
+` + LEARNING_SCHEMA + WORKFLOW_SCHEMA + COMMERCE_SCHEMA + POLICY_SCHEMA + `
+CREATE INDEX IF NOT EXISTS order_items_run ON order_items(run_id);
+CREATE INDEX IF NOT EXISTS order_items_order ON order_items(order_id);
+CREATE INDEX IF NOT EXISTS deliveries_run ON deliveries(run_id);
+CREATE INDEX IF NOT EXISTS inventory_movements_run ON inventory_movements(run_id);
+CREATE INDEX IF NOT EXISTS refunds_run ON refunds(run_id);
+CREATE INDEX IF NOT EXISTS coupon_redemptions_run ON coupon_redemptions(run_id);
+CREATE INDEX IF NOT EXISTS coupon_redemptions_order ON coupon_redemptions(order_id);
+CREATE INDEX IF NOT EXISTS campaign_assignments_run ON campaign_assignments(run_id);
+CREATE VIEW IF NOT EXISTS v_paypal_order_lineage AS SELECT o.run_id,o.order_id,o.event_ts AS simulation_event_ts,o.event_date AS simulation_event_date,o.merchant_id,m.name AS merchant_name,o.customer_id,o.campaign_id,c.coupon_id,c.discount_pct,o.currency,o.total_cents AS simulated_gross_cents,t.fee_cents AS modeled_fee_cents,t.net_cents AS modeled_net_cents,p.receipt_id,p.funding_method,p.status AS paypal_status,p.paypal_order_id,p.capture_id,p.payee_merchant_id,p.gross_cents AS paypal_gross_cents,p.fee_cents AS paypal_fee_cents,p.net_cents AS paypal_net_cents,p.captured_at AS provider_captured_at,p.verified_at AS provider_verified_at,p.event_date AS provider_event_date,p.error_code,p.source AS payment_source,CASE WHEN p.status IN ('COMPLETED','PARTIALLY_REFUNDED','REFUNDED') AND p.gross_cents=o.total_cents AND p.currency=o.currency THEN 1 ELSE 0 END AS amount_verified,(SELECT group_concat(pr.channel3_product_id,', ') FROM order_items oi JOIN products pr USING(product_id) WHERE oi.order_id=o.order_id) AS channel3_product_ids,(SELECT group_concat(pr.title,' | ') FROM order_items oi JOIN products pr USING(product_id) WHERE oi.order_id=o.order_id) AS product_titles FROM paypal_receipts p JOIN orders o ON o.order_id=p.order_id JOIN merchants m ON m.merchant_id=o.merchant_id JOIN transactions t ON t.order_id=o.order_id LEFT JOIN coupon_redemptions cr ON cr.order_id=o.order_id LEFT JOIN coupons c ON c.coupon_id=cr.coupon_id;
 `;
-export const TABLES = ['simulation_runs','merchants','products','customers','campaigns','events','orders','order_items','transactions','refunds','deliveries','inventory_movements','campaign_spend','paypal_receipts',...LEARNING_TABLES];
-export const VIEWS = ['v_marketing_transactions','v_daily_merchant_sales','v_campaign_performance','v_marketing_funnel','v_inventory','v_customer_segments',...LEARNING_VIEWS,'v_paypal_order_lineage'];
+export const TABLES = ['simulation_runs','merchants','products','customers','campaigns','events','orders','order_items','transactions','refunds','deliveries','inventory_movements','campaign_spend','paypal_receipts',...LEARNING_TABLES,...WORKFLOW_TABLES,...COMMERCE_TABLES,...POLICY_TABLES];
+export const VIEWS = ['v_marketing_transactions','v_daily_merchant_sales','v_campaign_performance','v_marketing_funnel','v_inventory','v_customer_segments',...LEARNING_VIEWS,'v_paypal_order_lineage',...COMMERCE_VIEWS,...POLICY_VIEWS];
 export const DATA_DICTIONARY = {
-  ...LEARNING_DICTIONARY,
+  ...LEARNING_DICTIONARY,...WORKFLOW_DICTIONARY,...COMMERCE_DICTIONARY,...POLICY_DICTIONARY,
+  coupons:'One-day, single-shopper simulated offers. Ordinary seasons use merchant-funded coupons; Policy Lab explicitly models80% merchant/20% platform funding. No real retailer coupons are issued.',
   v_paypal_order_lineage:'One row per selected emulator order: Channel3 product IDs, coupon, synthetic merchant/customer, and verified native PayPal sandbox order/capture/fees. Provider timestamps and modeled amounts remain separate. Never add mirrored provider gross to simulated revenue.',
   simulation_runs:'One reproducible simulation and its clock. All dates use Asia/Manila business dates.', merchants:'Fictional merchants. All sandbox receipts settle to the one connected test store.',
-  products:'Catalog snapshot. Sample or Channel3 provenance, provider ID, observed price and assumed unit cost.',customers:'Synthetic shoppers and segments; no personal data.',campaigns:'Scripted marketing campaigns; no AI or real ad spend.',events:'Impressions, views, carts, purchases, deliveries and refunds, with event timestamps and foreign keys.',
+  products:'Catalog snapshot. Sample or Channel3 provenance, provider ID, observed price and assumed unit cost.',customers:'Synthetic shoppers and segments; no personal data.',campaigns:'Campaign definitions and planner-authored copy in workflows. Merchant coupons and marketing spend are simulated.',events:'Impressions, views, carts, purchases, deliveries and refunds, with event timestamps and foreign keys.',
   orders:'Generated purchase records; currency and all monetary fields reconcile in integer cents.',order_items:'Product and quantity lines joined to each order.',transactions:'Simulated payment ledger. Never sum these with the mirrored sandbox receipts.',refunds:'Simulated buyer returns. These do not issue PayPal refunds.',deliveries:'Simulated completed deliveries.',inventory_movements:'Signed stock movements: sale negative, restock positive.',campaign_spend:'Simulated ad cost, never charged to an ad platform.',paypal_receipts:'Actual sandbox API receipts for a bounded sample of orders. Fictitious funds; actual provider IDs and fees.',
   v_marketing_transactions:'Orders + merchant + customer + campaign + simulated payment/refund + optional native sandbox receipt.',v_daily_merchant_sales:'Sales-cohort date totals with ad spend. Refunds are attributed back to the original sale date.',v_campaign_performance:'Campaign funnel, retained revenue, spend and ROAS; no causal incrementality claim.',v_marketing_funnel:'Date × merchant × channel funnel counts.',v_inventory:'Opening stock + signed movements = on-hand stock.',v_customer_segments:'Segment-level purchases and retained revenue.'};
 
@@ -51,6 +77,8 @@ export function createMarketStore(path=':memory:') {
   const db=new DatabaseSync(path);
   const receiptColumns=db.prepare('PRAGMA table_info(paypal_receipts)').all().map(c=>c.name);
   if(receiptColumns.length)for(const column of ['funding_method','funding_key'])if(!receiptColumns.includes(column))db.exec('ALTER TABLE paypal_receipts ADD COLUMN '+column+' TEXT');
+  const plannerColumns=db.prepare('PRAGMA table_info(marketing_planner_calls)').all().map(c=>c.name);
+  if(plannerColumns.length&&!plannerColumns.includes('budget_id')){db.exec('ALTER TABLE marketing_planner_calls ADD COLUMN budget_id TEXT');db.exec('UPDATE marketing_planner_calls SET budget_id=run_id WHERE budget_id IS NULL');}
   db.exec(SCHEMA.replace(/CREATE VIEW IF NOT EXISTS (\w+)/g,'DROP VIEW IF EXISTS $1; CREATE VIEW $1'));
   const cols=new Map([...TABLES,'run_state'].map(t=>[t,db.prepare(`PRAGMA table_info(${t})`).all().map(c=>c.name)]));
   function insert(table,rows){
@@ -66,8 +94,8 @@ export function createMarketStore(path=':memory:') {
     const count=db.prepare(`SELECT COUNT(*) AS n FROM ${name} WHERE run_id=?`).get(runId).n;
     const rows=db.prepare(`SELECT * FROM ${name} WHERE run_id=? LIMIT ? OFFSET ?`).all(runId,Math.min(500,Math.max(1,Math.trunc(Number(limit)||100))),Math.max(0,Math.trunc(Number(offset)||0)));
     // Idempotency keys and application fingerprints are server internals, not marketing columns.
-    const visible=columns.filter(k=>!['profile_key','create_request_id','capture_request_id','funding_key'].includes(k));
-    return {name,kind:VIEWS.includes(name)?'view':'table',description:DATA_DICTIONARY[name],columns:visible,count,rows:rows.map(r=>Object.fromEntries(visible.map(k=>[k,r[k]])))};
+    const visible=columns.filter(k=>!['profile_key','create_request_id','capture_request_id','funding_key','request_id'].includes(k));
+    return {name,kind:VIEWS.includes(name)?'view':'table',description:DATA_DICTIONARY[name],columns:visible,count,rows:rows.map(publicRow)};
   }
   return {db,path,insert,transaction,saveState,table,
     create(world){transaction(()=>{insert('simulation_runs',[{run_id:world.runId,seed:world.seed,started_at:world.startedAt,timezone:'Asia/Manila',status:world.status,total_ticks:world.totalTicks,current_tick:0,merchant_count:world.merchants.length,customer_count:world.customers.length,catalog_source:[...new Set(world.products.map(p=>p.source))].join(','),created_at:new Date().toISOString()}]);for(const [t,rows] of Object.entries({merchants:world.merchants,products:world.products,customers:world.customers,campaigns:world.campaigns}))insert(t,rows);saveState(world);});},
@@ -75,8 +103,8 @@ export function createMarketStore(path=':memory:') {
     state(id){const row=db.prepare('SELECT state_json FROM run_state WHERE run_id=?').get(id);return row?JSON.parse(row.state_json):null;},
     latest(){return db.prepare('SELECT * FROM simulation_runs ORDER BY created_at DESC LIMIT 1').get()||null;},
     runs(){return db.prepare('SELECT * FROM simulation_runs ORDER BY created_at DESC LIMIT 30').all();},
-    catalog(runId){return [...TABLES,...VIEWS].map(name=>({name,kind:VIEWS.includes(name)?'view':'table',count:db.prepare(`SELECT COUNT(*) AS n FROM ${name} WHERE run_id=?`).get(runId).n,description:DATA_DICTIONARY[name]}));},
-    export(runId){return {schema:'market-metro-v2',generated_at:new Date().toISOString(),timezone:'Asia/Manila',money_unit:'integer cents',tables:Object.fromEntries(TABLES.map(t=>[t,db.prepare(`SELECT * FROM ${t} WHERE run_id=?`).all(runId).map(r=>{const {profile_key,create_request_id,capture_request_id,funding_key,...rest}=r;return rest;})])),views:Object.fromEntries(VIEWS.map(t=>[t,db.prepare(`SELECT * FROM ${t} WHERE run_id=?`).all(runId)]))};},
+    catalog(runId,{viewCounts=true}={}){return [...TABLES,...VIEWS].map(name=>({name,kind:VIEWS.includes(name)?'view':'table',count:!viewCounts&&VIEWS.includes(name)?null:db.prepare(`SELECT COUNT(*) AS n FROM ${name} WHERE run_id=?`).get(runId).n,description:DATA_DICTIONARY[name]}));},
+    export(runId){return {schema:'market-metro-v2',generated_at:new Date().toISOString(),timezone:'Asia/Manila',money_unit:'integer cents',tables:Object.fromEntries(TABLES.map(t=>[t,db.prepare(`SELECT * FROM ${t} WHERE run_id=?`).all(runId).map(publicRow)])),views:Object.fromEntries(VIEWS.map(t=>[t,db.prepare(`SELECT * FROM ${t} WHERE run_id=?`).all(runId)]))};},
     async snapshot(runId){const dir=await mkdtemp(join(tmpdir(),'market-metro-export-'));let copy;
       try{const data=this.export(runId);copy=createMarketStore(join(dir,'market.sqlite'));copy.transaction(()=>{for(const t of TABLES)copy.insert(t,data.tables[t]);});copy.close();copy=null;return await readFile(join(dir,'market.sqlite'));}
       finally{copy?.close();await rm(dir,{recursive:true,force:true});}

@@ -1,0 +1,78 @@
+{
+  "schema": "MARKETING_DECISION_FREEZE_V1",
+  "createdAt": "2026-10-22T11:32:51.063Z",
+  "protocol": {
+    "version": "marketing-decision-pilot-v1",
+    "caseCount": 12,
+    "customers": 400,
+    "merchants": 8,
+    "horizonDays": 7,
+    "futureReplicates": 16,
+    "objective": "Maximize the reviewed merchant contribution after modeled operating costs; report effects on other merchants separately.",
+    "trial": "EXPLORATORY_DEVELOPER_ASSISTED_CHAT_REVIEW_NOT_BLINDED",
+    "identicalInputs": "Exactly the same frozen packet, forecasts, model candidates, action menu and execution guards.",
+    "policyChanges": "Only the reviewed merchant changes its coupon policy. No further model fitting during the seven-day replay.",
+    "economicMistake": "Action loses more than $5 mean merchant contribution versus KEEP_CURRENT and the paired replay 95% interval is entirely below zero. This is an outcome diagnostic, not a ground-truth reasoning label.",
+    "hindsightRegret": "Difference from the best allowed action averaged over these same future tapes. Optimistic post-hoc diagnostic; never an achievable-agent claim.",
+    "goGate": {
+      "minimumNetImprovementPct": 5,
+      "pairedCaseBootstrapLowMustExceedZero": true,
+      "executedGuardViolations": 0,
+      "portfolioMeanMustNotDecline": true
+    },
+    "assumedCosts": {
+      "computeUsdPerHour": 0.1,
+      "chatReviewUsdPerCase": 0.1,
+      "humanReviewMinutesPerEscalation": 5,
+      "humanUsdPerHour": 30
+    },
+    "costCaveat": "No new paid API calls. Current-chat token usage/account charge and electricity are unmetered. Cost totals are explicitly modeled, with a chat-price sensitivity table. Benchmark replay time is evaluation overhead, not deployment cost.",
+    "accounting": "Sales already reflect redeemed discounts. Deduct refunds, COGS, delivery, modeled fees and outreach once. Final pending refunds for evaluation orders are settled. No 14-day retention benefit is claimed.",
+    "paypal": "All replay payments and fees are synthetic. Existing native sandbox samples prove integration only. No PayPal or Channel3 requests in this benchmark.",
+    "exclusions": "No novelty claim, production ROI, live traffic experiment, adaptive tool selection, independent agent team, or blinded generalization proof."
+  },
+  "actionContract": {
+    "schema": "MARKETING_DECISION_V1",
+    "scope": "One named merchant, seven simulated days, profit objective. All other merchants keep their existing policy.",
+    "actions": {
+      "KEEP_CURRENT": "Continue the existing model or fixed-rule fallback.",
+      "PAUSE_OFFERS": "Issue no coupons; organic purchases remain possible.",
+      "USE_RECENT_MODEL": "Use the shared, locally fitted recent model only if it passed the common validation gate.",
+      "OFFER_5": "Propose 5% coupons to eligible customers, subject to all execution guards.",
+      "OFFER_10": "Propose 10% coupons to eligible customers, subject to all execution guards.",
+      "ESCALATE": "Keep the current policy and request human review; modeled handling cost is charged."
+    },
+    "guards": [
+      "frozen evidence hash",
+      "merchant and time scope",
+      "persistent holdout",
+      "seven-day contact gap",
+      "20% margin floor",
+      "stock availability",
+      "remaining shared campaign budget"
+    ],
+    "providerCalls": 0,
+    "limits": "A decision review, not adaptive evidence gathering or an autonomous multi-agent system."
+  },
+  "sourceHashes": {
+    "scripts/marketing/decision-actions.mjs": "df9565f2e90cc6681c7fca6a6909411aef65183c8e1acbc10c3655c5f93b3d86",
+    "scripts/marketing/decision-rules.mjs": "677deea59d32f9144b6d5f43c9d7b8d687e3524acb8b3198c8f3c73fbf4d372f",
+    "scripts/marketing/decision-benchmark.mjs": "6553542355b6a7ad2eba6d9ed74ab4839f5393c149e18c44b6393ea1633d67e8",
+    "scripts/marketing-decision-benchmark.mjs": "2fb1bcbc0b028294a01177ec0f94f75924ad3167b1641915085302b56ee2883a",
+    "scripts/marketing/economy.mjs": "9c1885ca8f4b8587fec5e314b458eae4d8f0c1c328624e317afc41cf60d7d87f",
+    "scripts/marketing/contract.mjs": "51fd37efc81fd33f0475341621c66bc020f770e0bc5b6691f6c65a72e8af9487",
+    "scripts/marketing/train.py": "5a6a8b0da88d5397d6f2eb121ded1d5c5703625a2679060144541c08e570f7c7",
+    "scripts/marketing/trainer.mjs": "02afe914e0f40fff819d450d67f51d0fa81523ff79c96a7b860b204dc0b14377",
+    "scripts/marketing/orchestrator.mjs": "6d340c8ff36aa4cc98673406af56f2e941c05b2e5c9f06342a928197a551a430",
+    "scripts/market-store.mjs": "754be657bdb3021cfcb537b4b678ff03b4748c66437eb6d46e4eb287ca20b538",
+    "demo/market/engine.mjs": "ac7d1e12ceae0920e5725f3d7eb9526ee00ca3fbd9d165178109ed97d78777fc"
+  },
+  "frozenFiles": {
+    "packets": "3edc1513d7ec8a4177f4c4144810be463a4c677a3c036774de82cb848bb1570c",
+    "states": "6c9b5230e3ccd69af7a0e6c898bf63f0adfe230efe4dd4c4c2c58d35ee857f9d",
+    "rules": "b7131cb974cef7f0fc8b86d2e1b226e032f1311d673432ca5a33a787300377c7"
+  },
+  "preparationRuntimeMs": 71849,
+  "evaluatorStateLocation": ".local/marketing-decisions/trial-v1/states.json",
+  "limitations": "The assistant authored the engine and rules. Sealing prevents post-outcome edits but does not make this blinded."
+}

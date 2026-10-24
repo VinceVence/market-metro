@@ -1,0 +1,35 @@
+{
+  "scope": "Post-run manual inspection of successful SQL outputs and reviewer text. These annotations do not change the frozen policies, raw decisions or scores. This is not an exhaustive semantic correctness benchmark.",
+  "findings": [
+    {
+      "id": "customer_join_fanout",
+      "taskIds": ["mission-2", "mission-5"],
+      "stepIds": ["RSCH3-8e988bfc437c7545-research-STEP-02", "RSCH3-8e988bfc437c7545-research-STEP-05", "RSCH3-eace10f895fce32d-research-STEP-04"],
+      "message": "This query joins every observation to every order for the same customer. It repeats observations and attributes a customer's overall rewards to merchants they bought from. The returned counts and averages cannot be treated as merchant-level campaign effects. The bounded fitter uses its own original rows, so this exploratory query did not duplicate training rows."
+    },
+    {
+      "id": "invalid_join_key",
+      "taskIds": ["mission-4"],
+      "stepIds": ["RSCH3-c75c8cd97eb2857d-research-STEP-02"],
+      "message": "An action category was joined to a product identifier. The query executes but returns zero rows. This is a key mismatch, not evidence of an empty market."
+    },
+    {
+      "id": "wrong_recency_filter",
+      "taskIds": ["mission-5"],
+      "stepIds": ["RSCH3-eace10f895fce32d-research-STEP-02"],
+      "message": "last_purchase_day > 7 means a purchase happened after simulation day 7. It does not identify customers inactive for seven days. Reactivation analysis must compare the last purchase day with the snapshot cutoff and require a prior purchase. Campaign audience enforcement still uses the independent code constraint."
+    },
+    {
+      "id": "mixed_maturity_denominator",
+      "taskIds": ["mission-4"],
+      "stepIds": ["RSCH3-c75c8cd97eb2857d-research-STEP-06"],
+      "message": "AVG(reward_cents) ignores immature NULL rewards, but COUNT(*) includes their rows. The displayed count is not the sample size behind that average. Use COUNT(reward_cents) or the same maturity filter for both."
+    },
+    {
+      "id": "reviewer_wrong_denominator",
+      "taskIds": ["mission-4"],
+      "stepIds": ["review"],
+      "message": "The reviewer calls the -$1.43 pilot mean 'per shopper'. It is the total paired difference for a 100-shopper simulated market, averaged across three replicas. The numerical score uses the correct market-level amount; this wording error was not caught by the numeric commit guard."
+    }
+  ]
+}

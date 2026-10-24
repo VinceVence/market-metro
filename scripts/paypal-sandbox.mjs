@@ -110,6 +110,7 @@ export async function createPayPalSandbox({ env = process.env, fetchImpl = fetch
     if (!configured) fail(503, 'NOT_CONFIGURED', 'Add sandbox credentials to the project .env file, then restart npm run dev.');
   }
   async function responseJson(response) {
+    if(response.status===204)return {};
     try { return await response.json(); }
     catch { fail(502, 'INVALID_PAYPAL_RESPONSE', 'PayPal returned an unreadable response. Refresh the payment before retrying.'); }
   }
@@ -158,7 +159,7 @@ export async function createPayPalSandbox({ env = process.env, fetchImpl = fetch
     const data = await responseJson(response);
     if (!response.ok) {
       const issue = data.details?.[0]?.issue ?? data.name;
-      const code = /^[A-Z0-9_]{1,90}$/.test(issue ?? '') ? issue : 'PAYPAL_REQUEST_FAILED';
+      const code = /^[A-Z0-9_]{1,90}$/.test(issue ?? '') ? issue : response.status === 403 ? 'PAYPAL_PERMISSION_DENIED' : 'PAYPAL_REQUEST_FAILED';
       const debugId = /^[a-zA-Z0-9-]{1,80}$/.test(data.debug_id ?? '') ? data.debug_id : undefined;
       throw new SandboxError(response.status === 422 ? 409 : 502, code, `PayPal sandbox returned ${code}. Refresh the order to check its current state.`, debugId);
     }

@@ -1,0 +1,3434 @@
+{
+  "workflowId": "WF-26c901ed73bed8b1",
+  "runId": "GARDEN-WF-26c901ed73bed8b1",
+  "phase": "COMPLETED",
+  "planner": "Assistant in the current chat; no app-hosted LLM",
+  "mission": "Bring established simulated shoppers back with individually scored offers over fourteen days. Investigate market conditions, fit local models, preserve a 20% margin floor and a $300 virtual campaign budget, and link three redeemed coupon orders to verified PayPal sandbox receipts.",
+  "checkpoints": [
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-GOAL",
+      "action": "set_goal",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "mission": "Bring established simulated shoppers back with individually scored offers over fourteen days. Investigate market conditions, fit local models, preserve a 20% margin floor and a $300 virtual campaign budget, and link three redeemed coupon orders to verified PayPal sandbox receipts.",
+        "goal": {
+          "objective": "retention",
+          "budgetCents": 30000,
+          "nativeSamples": 3,
+          "maxCampaignDays": 14
+        }
+      },
+      "output": {
+        "mission": "Bring established simulated shoppers back with individually scored offers over fourteen days. Investigate market conditions, fit local models, preserve a 20% margin floor and a $300 virtual campaign budget, and link three redeemed coupon orders to verified PayPal sandbox receipts.",
+        "goal": {
+          "objective": "retention",
+          "budgetCents": 30000,
+          "nativeSamples": 3,
+          "maxCampaignDays": 14
+        }
+      },
+      "started_at": "2026-10-22T14:08:19.866Z",
+      "finished_at": "2026-10-22T14:08:19.866Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-history-01",
+      "action": "prepare_history",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "history-01",
+        "expectedRevision": 0,
+        "contextHash": "9a3722ef52c23329faba856e6144d1366cfca9d36d63359b84896237e8580ca0",
+        "action": "prepare_history",
+        "parameters": {},
+        "rationale": "Collect twenty-eight completed simulated days before making a campaign plan. Preserve the randomized history and do not train or capture payments yet.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-GOAL"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "completedDays": 28,
+        "observations": 8400
+      },
+      "started_at": "2026-10-22T14:08:39.944Z",
+      "finished_at": "2026-10-22T14:08:40.258Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-analysis-01",
+      "action": "analyze",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "analysis-01",
+        "expectedRevision": 1,
+        "contextHash": "d928b00b4766bf55ee9b2ba2f39ebbe69598ea88a7179c054449347158132e79",
+        "action": "analyze",
+        "parameters": {
+          "windowDays": 14,
+          "cuts": [
+            "merchants",
+            "segments",
+            "market",
+            "offers"
+          ]
+        },
+        "rationale": "Compare the latest and previous week, merchant and neighborhood activity, available stock, and delivered offer response. Use this evidence to choose the training window and audience.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-GOAL",
+          "WF-26c901ed73bed8b1-CP-history-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "cutoffExclusive": 28,
+        "windowDays": 14,
+        "observations": 4200,
+        "customers": 300,
+        "quality": {
+          "futureRows": 0,
+          "invalidFeatures": 0,
+          "foreignKeyErrors": 0
+        },
+        "features": [
+          "recency_days",
+          "purchases_7d",
+          "organic_14d",
+          "visits_7d",
+          "spend_7d",
+          "offers_7d",
+          "redemptions_14d",
+          "price_cents",
+          "stock_available",
+          "rival_sale",
+          "payday"
+        ],
+        "market": [
+          {
+            "label": "latest7",
+            "from": 21,
+            "to": 28,
+            "observations": 2100,
+            "purchases": 156,
+            "salesCents": 1256724,
+            "stockAvailableRate": 1,
+            "observedRivalPromotionRate": 0
+          },
+          {
+            "label": "previous7",
+            "from": 14,
+            "to": 21,
+            "observations": 2100,
+            "purchases": 141,
+            "salesCents": 969014,
+            "stockAvailableRate": 1,
+            "observedRivalPromotionRate": 0
+          }
+        ],
+        "merchants": [
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M005",
+            "observations": 527,
+            "visits": 207,
+            "purchases": 19,
+            "offers": 110,
+            "redemptions": 6,
+            "salesCents": 431149,
+            "name": "River General"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M004",
+            "observations": 608,
+            "visits": 246,
+            "purchases": 25,
+            "offers": 107,
+            "redemptions": 0,
+            "salesCents": 21850,
+            "name": "Sunroom Market"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "observations": 447,
+            "visits": 195,
+            "purchases": 82,
+            "offers": 106,
+            "redemptions": 23,
+            "salesCents": 427498,
+            "name": "Willow Goods"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "observations": 652,
+            "visits": 263,
+            "purchases": 76,
+            "offers": 127,
+            "redemptions": 24,
+            "salesCents": 419064,
+            "name": "Clover Trading"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "observations": 509,
+            "visits": 225,
+            "purchases": 39,
+            "offers": 119,
+            "redemptions": 14,
+            "salesCents": 562686,
+            "name": "Oak & Ink"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M007",
+            "observations": 452,
+            "visits": 190,
+            "purchases": 0,
+            "offers": 117,
+            "redemptions": 0,
+            "salesCents": 0,
+            "name": "The Desk Shop"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "observations": 490,
+            "visits": 196,
+            "purchases": 29,
+            "offers": 111,
+            "redemptions": 9,
+            "salesCents": 336518,
+            "name": "Juniper House"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M003",
+            "observations": 515,
+            "visits": 208,
+            "purchases": 27,
+            "offers": 67,
+            "redemptions": 0,
+            "salesCents": 26973,
+            "name": "Corner Supply"
+          }
+        ],
+        "segments": [
+          {
+            "value": "Willow neighbors",
+            "observations": 1050,
+            "visits": 453,
+            "purchases": 66,
+            "offers": 218,
+            "redemptions": 16,
+            "salesCents": 460881
+          },
+          {
+            "value": "Hill neighbors",
+            "observations": 1050,
+            "visits": 429,
+            "purchases": 83,
+            "offers": 213,
+            "redemptions": 24,
+            "salesCents": 712956
+          },
+          {
+            "value": "Square neighbors",
+            "observations": 1050,
+            "visits": 424,
+            "purchases": 67,
+            "offers": 211,
+            "redemptions": 14,
+            "salesCents": 497769
+          },
+          {
+            "value": "Riverside neighbors",
+            "observations": 1050,
+            "visits": 424,
+            "purchases": 81,
+            "offers": 222,
+            "redemptions": 22,
+            "salesCents": 554132
+          }
+        ],
+        "offers": [
+          {
+            "value": 0,
+            "observations": 3336,
+            "visits": 1269,
+            "purchases": 212,
+            "offers": 0,
+            "redemptions": 0,
+            "salesCents": 1465669
+          },
+          {
+            "value": 5,
+            "observations": 469,
+            "visits": 225,
+            "purchases": 45,
+            "offers": 469,
+            "redemptions": 39,
+            "salesCents": 358428
+          },
+          {
+            "value": 10,
+            "observations": 395,
+            "visits": 236,
+            "purchases": 40,
+            "offers": 395,
+            "redemptions": 37,
+            "salesCents": 401641
+          }
+        ],
+        "caveat": "Delivered-offer groups are descriptive, not causal estimates. Market indicators come from observed completed days; private customer traits and future shocks are excluded."
+      },
+      "started_at": "2026-10-22T14:08:40.326Z",
+      "finished_at": "2026-10-22T14:08:41.968Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-analysis-products-01",
+      "action": "analyze",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "analysis-products-01",
+        "expectedRevision": 2,
+        "contextHash": "2309783266a42fd63ec39d37413a122de748246c77c720c4ecb31ae6d08573f3",
+        "action": "analyze",
+        "parameters": {
+          "windowDays": 14,
+          "cuts": [
+            "products"
+          ]
+        },
+        "rationale": "The Desk Shop had no purchases despite 190 visits, while Sunroom and Corner Supply had no redemptions. Inspect observed catalog prices, modeled costs, stock and discount margins before selecting campaign merchants; do not infer hidden customer income.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-GOAL"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "cutoffExclusive": 28,
+        "windowDays": 14,
+        "observations": 4200,
+        "customers": 300,
+        "quality": {
+          "futureRows": 0,
+          "invalidFeatures": 0,
+          "foreignKeyErrors": 0
+        },
+        "features": [
+          "recency_days",
+          "purchases_7d",
+          "organic_14d",
+          "visits_7d",
+          "spend_7d",
+          "offers_7d",
+          "redemptions_14d",
+          "price_cents",
+          "stock_available",
+          "rival_sale",
+          "payday"
+        ],
+        "products": [
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P1",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "title": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "priceCents": 3199,
+            "assumedCostCents": 1431,
+            "stock": 55,
+            "margin5": 0.3629483382691675,
+            "margin10": 0.32962834317471346,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P2",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "title": "JAM Paper Desk Essentials Office Supply Kit",
+            "priceCents": 3199,
+            "assumedCostCents": 1624,
+            "stock": 46,
+            "margin5": 0.29944060546232315,
+            "margin10": 0.2625911774921848,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P3",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "title": "Pop-Up Desk Keyboard and Touchpad Foldaway Kit",
+            "priceCents": 17999,
+            "assumedCostCents": 9760,
+            "stock": 26,
+            "margin5": 0.370957365927832,
+            "margin10": 0.33798382616210876,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P4",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "title": "Logitech Casa Pop-Up Desk Wireless Keyboard and Stand Kit",
+            "priceCents": 18899,
+            "assumedCostCents": 8866,
+            "stock": 28,
+            "margin5": 0.4490364264230812,
+            "margin10": 0.4203656887530131,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P5",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "title": "Starter Bundles",
+            "priceCents": 8900,
+            "assumedCostCents": 4300,
+            "stock": 73,
+            "margin5": 0.4093435836782969,
+            "margin10": 0.3784019975031211,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P6",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "title": "Computer Desk and Ergonomic Mesh Office Chair Bundle",
+            "priceCents": 24999,
+            "assumedCostCents": 13601,
+            "stock": 34,
+            "margin5": 0.3755947618847109,
+            "margin10": 0.34285968265256234,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P7",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M003",
+            "title": "Modern Office Kit - Pkg of 43",
+            "priceCents": 999,
+            "assumedCostCents": 456,
+            "stock": 68,
+            "margin5": 0.0642781875658588,
+            "margin10": 0.014460511679644048,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P8",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M003",
+            "title": "Amara Natural Rattan Home Office Set",
+            "priceCents": 86200,
+            "assumedCostCents": 45444,
+            "stock": 45,
+            "margin5": 0.4052875809012089,
+            "margin10": 0.37418149007476154,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P9",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M003",
+            "title": "Casual Bundle",
+            "priceCents": 61600,
+            "assumedCostCents": 32532,
+            "stock": 45,
+            "margin5": 0.4023752563226247,
+            "margin10": 0.3711038961038961,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P10",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M004",
+            "title": "Beatrix Home Office Set",
+            "priceCents": 117800,
+            "assumedCostCents": 58768,
+            "stock": 45,
+            "margin5": 0.4363953176659816,
+            "margin10": 0.4070269760422562,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P11",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M004",
+            "title": "U Brands Stationery Kit, Pkg of 173",
+            "priceCents": 874,
+            "assumedCostCents": 453,
+            "stock": 69,
+            "margin5": -0.06144578313253012,
+            "margin10": -0.11689961880559085,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P12",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M004",
+            "title": "Home Office Set",
+            "priceCents": 84512,
+            "assumedCostCents": 45803,
+            "stock": 45,
+            "margin5": 0.38963206536631545,
+            "margin10": 0.3576602989705631,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P13",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M005",
+            "title": "Tennos Home Office Set (White)",
+            "priceCents": 22200,
+            "assumedCostCents": 9492,
+            "stock": 32,
+            "margin5": 0.4961119013750593,
+            "margin10": 0.47007007007007007,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P14",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M005",
+            "title": "Home Office Desk and Storage Cabinet Bundle",
+            "priceCents": 23999,
+            "assumedCostCents": 11506,
+            "stock": 31,
+            "margin5": 0.4429141629018817,
+            "margin10": 0.41390805129867125,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P15",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M005",
+            "title": "Tennos Home Office Set",
+            "priceCents": 53400,
+            "assumedCostCents": 30151,
+            "stock": 45,
+            "margin5": 0.3629016361127538,
+            "margin10": 0.3294423637120266,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P16",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "title": "Desk Essentials Gift Set",
+            "priceCents": 31500,
+            "assumedCostCents": 14004,
+            "stock": 43,
+            "margin5": 0.4838095238095238,
+            "margin10": 0.4570723104056437,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P17",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "title": "Wendral Home Office Set w/ Giolla Office Chair",
+            "priceCents": 38873,
+            "assumedCostCents": 19769,
+            "stock": 44,
+            "margin5": 0.41896612418424545,
+            "margin10": 0.3886411707540159,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P18",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "title": "Home Office Desk",
+            "priceCents": 9300,
+            "assumedCostCents": 5192,
+            "stock": 69,
+            "margin5": 0.33231465761177137,
+            "margin10": 0.2971326164874552,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P19",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M007",
+            "title": "Daily Duo Bundle",
+            "priceCents": 76800,
+            "assumedCostCents": 40137,
+            "stock": 45,
+            "margin5": 0.40951206140350876,
+            "margin10": 0.37864583333333335,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P20",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M007",
+            "title": "Office Desk and Chair Bundle",
+            "priceCents": 72000,
+            "assumedCostCents": 33028,
+            "stock": 45,
+            "margin5": 0.47640350877192983,
+            "margin10": 0.4492438271604938,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P21",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M007",
+            "title": "Mesh Back Home Office Chair",
+            "priceCents": 59845,
+            "assumedCostCents": 33369,
+            "stock": 45,
+            "margin5": 0.371150159182453,
+            "margin10": 0.33813590790939474,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P22",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "title": "Jenny Black 2 Drawer Desk",
+            "priceCents": 29999,
+            "assumedCostCents": 15247,
+            "stock": 36,
+            "margin5": 0.4160847749043826,
+            "margin10": 0.38560687432867885,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P23",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "title": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "priceCents": 3199,
+            "assumedCostCents": 1826,
+            "stock": 30,
+            "margin5": 0.23297137216189537,
+            "margin10": 0.1924279263633206,
+            "source": "CHANNEL3_API"
+          },
+          {
+            "productId": "GARDEN-WF-26c901ed73bed8b1-P24",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "title": "JAM Paper Desk Essentials Office Supply Kit",
+            "priceCents": 3199,
+            "assumedCostCents": 1444,
+            "stock": 49,
+            "margin5": 0.35867061533399147,
+            "margin10": 0.32511288641889546,
+            "source": "CHANNEL3_API"
+          }
+        ],
+        "caveat": "Delivered-offer groups are descriptive, not causal estimates. Market indicators come from observed completed days; private customer traits and future shocks are excluded."
+      },
+      "started_at": "2026-10-22T14:11:07.497Z",
+      "finished_at": "2026-10-22T14:11:08.951Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-train-01",
+      "action": "train",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "train-01",
+        "expectedRevision": 3,
+        "contextHash": "abadf49f06fda17bd8855ea69a1a519f019583272bdee0f6252ce410fc9d2eb0",
+        "action": "train",
+        "parameters": {
+          "windowDays": 28,
+          "modelTypes": [
+            "logistic",
+            "tree"
+          ]
+        },
+        "rationale": "Data checks found no invalid features, future rows or broken keys, and both recent weeks have full stock availability with no observed rival promotion. Use all twenty-eight completed days for sample size, compare logistic regression and a bounded tree, and reserve the latest seven days for validation. Fit response to zero, five and ten percent offers from observed behavior only.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-GOAL",
+          "WF-26c901ed73bed8b1-CP-history-01",
+          "WF-26c901ed73bed8b1-CP-analysis-01",
+          "WF-26c901ed73bed8b1-CP-analysis-products-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "status": "PROMOTED",
+        "reason": "Candidate improves later-day log loss by at least 0.001.",
+        "model_type": "logistic",
+        "dataset_hash": "6dfb5a4c104bb6527abb4b055d55e0936e0c6b0383b78c1e22c434d436b219ed",
+        "training_rows": 6300,
+        "validation_rows": 2100,
+        "train_through_day": 20,
+        "validation_from_day": 21,
+        "validation_through_day": 27,
+        "validation_log_loss": 0.22240669494006324,
+        "baseline_log_loss": 0.2635139199296714,
+        "champion_log_loss": null,
+        "brier_score": 0.06416833010142765,
+        "candidates": [
+          {
+            "type": "logistic",
+            "log_loss": 0.22240669494006324,
+            "brier": 0.06416833010142765
+          },
+          {
+            "type": "tree",
+            "log_loss": 0.26959223798739257,
+            "brier": 0.06353973624194564
+          }
+        ],
+        "runtime_ms": 4752,
+        "fit_runtime_ms": 124,
+        "modelId": "WF-26c901ed73bed8b1-CP-train-01-MODEL",
+        "qualified": true,
+        "trainingPlan": {
+          "windowDays": 28,
+          "modelTypes": [
+            "logistic",
+            "tree"
+          ]
+        },
+        "features": [
+          "recency_days",
+          "purchases_7d",
+          "organic_14d",
+          "visits_7d",
+          "spend_7d",
+          "offers_7d",
+          "redemptions_14d",
+          "price_cents",
+          "stock_available",
+          "rival_sale",
+          "payday"
+        ]
+      },
+      "started_at": "2026-10-22T14:11:25.309Z",
+      "finished_at": "2026-10-22T14:11:30.097Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-campaign-plan-01",
+      "action": "draft_campaign",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "campaign-plan-01",
+        "expectedRevision": 4,
+        "contextHash": "f70f8997f1e4fbec81beb5134f77dff595b6e8a47940f80c2fdba98e06317256",
+        "action": "draft_campaign",
+        "parameters": {
+          "title": "Back to your desk",
+          "message": "A personal offer for your next desk refresh. Use the coupon shown on your selected product before it expires.",
+          "modelId": "WF-26c901ed73bed8b1-CP-train-01-MODEL",
+          "merchantIds": [
+            "GARDEN-WF-26c901ed73bed8b1-M001",
+            "GARDEN-WF-26c901ed73bed8b1-M002",
+            "GARDEN-WF-26c901ed73bed8b1-M005",
+            "GARDEN-WF-26c901ed73bed8b1-M006",
+            "GARDEN-WF-26c901ed73bed8b1-M008"
+          ],
+          "offerOptions": [
+            5,
+            10
+          ],
+          "minRecencyDays": 3,
+          "minExpectedGainCents": 25,
+          "ranking": "incremental_purchase_probability",
+          "durationDays": 14
+        },
+        "rationale": "Use the validated logistic model, which beat the offer-rate baseline and tree on later observations. Focus on Willow Goods, Oak & Ink, River General, Juniper House and Clover Trading because they had recorded redemptions and viable product margins. Exclude the other three merchants from offers in this pilot: two mix below-floor small items with expensive items lacking redemptions, and The Desk Shop had no observed purchases. Among baseline-active eligible shoppers, wait three days after a purchase, rank predicted incremental buying, and require at least 25 cents modeled incremental contribution. Preserve the existing twenty-percent margin floor, holdout, contact gap and total budget.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-GOAL",
+          "WF-26c901ed73bed8b1-CP-analysis-01",
+          "WF-26c901ed73bed8b1-CP-analysis-products-01",
+          "WF-26c901ed73bed8b1-CP-train-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "planId": "WF-26c901ed73bed8b1-PLAN-1",
+        "version": 1,
+        "plan": {
+          "title": "Back to your desk",
+          "message": "A personal offer for your next desk refresh. Use the coupon shown on your selected product before it expires.",
+          "modelId": "WF-26c901ed73bed8b1-CP-train-01-MODEL",
+          "merchantIds": [
+            "GARDEN-WF-26c901ed73bed8b1-M001",
+            "GARDEN-WF-26c901ed73bed8b1-M002",
+            "GARDEN-WF-26c901ed73bed8b1-M005",
+            "GARDEN-WF-26c901ed73bed8b1-M006",
+            "GARDEN-WF-26c901ed73bed8b1-M008"
+          ],
+          "offerOptions": [
+            5,
+            10
+          ],
+          "minRecencyDays": 3,
+          "minExpectedGainCents": 25,
+          "ranking": "incremental_purchase_probability",
+          "durationDays": 14
+        },
+        "guards": {
+          "budgetCents": 30000,
+          "minMargin": 0.2,
+          "contactGapDays": 7,
+          "holdout": "Persistent randomized assignment",
+          "nativeSampleLimit": 3
+        }
+      },
+      "started_at": "2026-10-22T14:14:11.636Z",
+      "finished_at": "2026-10-22T14:14:11.648Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-launch-01",
+      "action": "launch",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "launch-01",
+        "expectedRevision": 5,
+        "contextHash": "d5a2362e0f5cc3359583d1a6a81dcaf75c9abb54072bd43978ac447bbd4b7aff",
+        "action": "launch",
+        "parameters": {
+          "planId": "WF-26c901ed73bed8b1-PLAN-1"
+        },
+        "rationale": "Launch the validated fourteen-day campaign within the delegated $300 simulated budget. The accepted model, merchant scope and offer constraints are saved. Record each shopper decision and inspect outcomes after the first week before continuing.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-GOAL",
+          "WF-26c901ed73bed8b1-CP-analysis-01",
+          "WF-26c901ed73bed8b1-CP-analysis-products-01",
+          "WF-26c901ed73bed8b1-CP-train-01",
+          "WF-26c901ed73bed8b1-CP-campaign-plan-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "planId": "WF-26c901ed73bed8b1-PLAN-1",
+        "startsDay": 28,
+        "endsDayExclusive": 42,
+        "modelId": "WF-26c901ed73bed8b1-CP-train-01-MODEL",
+        "message": "A personal offer for your next desk refresh. Use the coupon shown on your selected product before it expires."
+      },
+      "started_at": "2026-10-22T14:14:11.695Z",
+      "finished_at": "2026-10-22T14:14:11.707Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-advance-week-01",
+      "action": "advance",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "advance-week-01",
+        "expectedRevision": 6,
+        "contextHash": "47f8051fd94489e5a8beeaa6c644b49aff59ed93f49a578aac92e02c794a4a7b",
+        "action": "advance",
+        "parameters": {
+          "days": 7
+        },
+        "rationale": "Execute the first seven campaign days using the accepted plan. Let the customer simulator determine visits and purchases independently, and save both offered and excluded shopper traces before reviewing new evidence.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-CP-launch-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "throughDay": 34,
+        "days": [
+          {
+            "day": 28,
+            "phase": "LIVE",
+            "visits": 114,
+            "orders": 18,
+            "offers": 2,
+            "seen": 2,
+            "redemptions": 1,
+            "discountCents": 320,
+            "conversion": 0.15789473684210525
+          },
+          {
+            "day": 29,
+            "phase": "LIVE",
+            "visits": 110,
+            "orders": 19,
+            "offers": 1,
+            "seen": 0,
+            "redemptions": 0,
+            "discountCents": 0,
+            "conversion": 0.17272727272727273
+          },
+          {
+            "day": 30,
+            "phase": "LIVE",
+            "visits": 113,
+            "orders": 14,
+            "offers": 5,
+            "seen": 4,
+            "redemptions": 1,
+            "discountCents": 160,
+            "conversion": 0.12389380530973451
+          },
+          {
+            "day": 31,
+            "phase": "LIVE",
+            "visits": 103,
+            "orders": 17,
+            "offers": 7,
+            "seen": 6,
+            "redemptions": 2,
+            "discountCents": 640,
+            "conversion": 0.1650485436893204
+          },
+          {
+            "day": 32,
+            "phase": "LIVE",
+            "visits": 118,
+            "orders": 20,
+            "offers": 7,
+            "seen": 4,
+            "redemptions": 3,
+            "discountCents": 1530,
+            "conversion": 0.1694915254237288
+          },
+          {
+            "day": 33,
+            "phase": "LIVE",
+            "visits": 117,
+            "orders": 13,
+            "offers": 5,
+            "seen": 5,
+            "redemptions": 2,
+            "discountCents": 640,
+            "conversion": 0.1111111111111111
+          },
+          {
+            "day": 34,
+            "phase": "LIVE",
+            "visits": 117,
+            "orders": 24,
+            "offers": 6,
+            "seen": 5,
+            "redemptions": 3,
+            "discountCents": 960,
+            "conversion": 0.20512820512820512
+          }
+        ],
+        "shopperDecisions": 2100,
+        "activities": [
+          {
+            "type": "redemption",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0136",
+            "customer": "Bea 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 2879,
+            "pct": 10,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34587"
+          },
+          {
+            "type": "redemption",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0226",
+            "customer": "Iris 10",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 2879,
+            "pct": 10,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34603"
+          },
+          {
+            "type": "redemption",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0186",
+            "customer": "Eli 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 2879,
+            "pct": 10,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34629"
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0246",
+            "customer": "Emi 11",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0125",
+            "customer": "Luca 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0136",
+            "customer": "Bea 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0226",
+            "customer": "Iris 10",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0186",
+            "customer": "Eli 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0188",
+            "customer": "Finn 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "pct": 5
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0010",
+            "customer": "Iris 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34486"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0060",
+            "customer": "Rae 03",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34498"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0162",
+            "customer": "Eli 07",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34646"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0278",
+            "customer": "Remy 12",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "product": "Home Office Desk",
+            "amount": 9300,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34684"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0300",
+            "customer": "Rae 13",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34694"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0217",
+            "customer": "Mika 10",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34730"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0006",
+            "customer": "Emi 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "product": "Home Office Desk",
+            "amount": 9300,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34763"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0096",
+            "customer": "Owen 04",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "merchant": "Oak & Ink",
+            "product": "Computer Desk and Ergonomic Mesh Office Chair Bundle",
+            "amount": 24999,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34791"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0022",
+            "customer": "Max 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M005",
+            "merchant": "River General",
+            "product": "Home Office Desk and Storage Cabinet Bundle",
+            "amount": 23999,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34811"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0081",
+            "customer": "Kai 04",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "Pop-Up Desk Keyboard and Touchpad Foldaway Kit",
+            "amount": 17999,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O34821"
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0265",
+            "customer": "Mika 12",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0252",
+            "customer": "Rae 11",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 3199
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0121",
+            "customer": "Mika 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "Pop-Up Desk Keyboard and Touchpad Foldaway Kit",
+            "amount": 17999
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0045",
+            "customer": "Yuna 02",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 2879
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0118",
+            "customer": "Max 05",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 3199
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0010",
+            "customer": "Iris 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0060",
+            "customer": "Rae 03",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0185",
+            "customer": "Sam 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0252",
+            "customer": "Rae 11",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0246",
+            "customer": "Emi 11",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0166",
+            "customer": "Max 07",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0249",
+            "customer": "Kai 11",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "merchant": "Oak & Ink"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0125",
+            "customer": "Luca 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0021",
+            "customer": "Yuna 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0135",
+            "customer": "Tala 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading"
+          }
+        ]
+      },
+      "started_at": "2026-10-22T14:14:11.749Z",
+      "finished_at": "2026-10-22T14:14:11.878Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-analysis-week-01",
+      "action": "analyze",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "analysis-week-01",
+        "expectedRevision": 7,
+        "contextHash": "5ae5f121f763aed4d1915e5ccf295a38e3ed5ced6855ad30e998d4c8e9501b54",
+        "action": "analyze",
+        "parameters": {
+          "windowDays": 14,
+          "cuts": [
+            "market",
+            "merchants",
+            "segments",
+            "offers"
+          ]
+        },
+        "rationale": "Review the first seven completed campaign days. Compare sales, offer delivery and redemptions with the prior period, and inspect new observed market signals before continuing. Do not interpret descriptive offer groups as causal lift.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-CP-launch-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "cutoffExclusive": 35,
+        "windowDays": 14,
+        "observations": 4200,
+        "customers": 300,
+        "quality": {
+          "futureRows": 0,
+          "invalidFeatures": 0,
+          "foreignKeyErrors": 0
+        },
+        "features": [
+          "recency_days",
+          "purchases_7d",
+          "organic_14d",
+          "visits_7d",
+          "spend_7d",
+          "offers_7d",
+          "redemptions_14d",
+          "price_cents",
+          "stock_available",
+          "rival_sale",
+          "payday"
+        ],
+        "market": [
+          {
+            "label": "latest7",
+            "from": 28,
+            "to": 35,
+            "observations": 2100,
+            "purchases": 125,
+            "salesCents": 796269,
+            "stockAvailableRate": 1,
+            "observedRivalPromotionRate": 0
+          },
+          {
+            "label": "previous7",
+            "from": 21,
+            "to": 28,
+            "observations": 2100,
+            "purchases": 156,
+            "salesCents": 1256724,
+            "stockAvailableRate": 1,
+            "observedRivalPromotionRate": 0
+          }
+        ],
+        "merchants": [
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M005",
+            "observations": 519,
+            "visits": 194,
+            "purchases": 18,
+            "offers": 56,
+            "redemptions": 5,
+            "salesCents": 404752,
+            "name": "River General"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M004",
+            "observations": 621,
+            "visits": 224,
+            "purchases": 20,
+            "offers": 46,
+            "redemptions": 0,
+            "salesCents": 17480,
+            "name": "Sunroom Market"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "observations": 473,
+            "visits": 206,
+            "purchases": 79,
+            "offers": 72,
+            "redemptions": 19,
+            "salesCents": 394121,
+            "name": "Willow Goods"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "observations": 635,
+            "visits": 242,
+            "purchases": 74,
+            "offers": 72,
+            "redemptions": 18,
+            "salesCents": 415126,
+            "name": "Clover Trading"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M007",
+            "observations": 454,
+            "visits": 175,
+            "purchases": 0,
+            "offers": 54,
+            "redemptions": 0,
+            "salesCents": 0,
+            "name": "The Desk Shop"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M003",
+            "observations": 508,
+            "visits": 208,
+            "purchases": 33,
+            "offers": 34,
+            "redemptions": 0,
+            "salesCents": 32967,
+            "name": "Corner Supply"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "observations": 507,
+            "visits": 195,
+            "purchases": 25,
+            "offers": 61,
+            "redemptions": 5,
+            "salesCents": 332791,
+            "name": "Juniper House"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "observations": 483,
+            "visits": 186,
+            "purchases": 32,
+            "offers": 70,
+            "redemptions": 9,
+            "salesCents": 455756,
+            "name": "Oak & Ink"
+          }
+        ],
+        "segments": [
+          {
+            "value": "Willow neighbors",
+            "observations": 1050,
+            "visits": 420,
+            "purchases": 57,
+            "offers": 119,
+            "redemptions": 11,
+            "salesCents": 408963
+          },
+          {
+            "value": "Hill neighbors",
+            "observations": 1050,
+            "visits": 396,
+            "purchases": 71,
+            "offers": 112,
+            "redemptions": 14,
+            "salesCents": 598925
+          },
+          {
+            "value": "Square neighbors",
+            "observations": 1050,
+            "visits": 374,
+            "purchases": 65,
+            "offers": 106,
+            "redemptions": 9,
+            "salesCents": 451559
+          },
+          {
+            "value": "Riverside neighbors",
+            "observations": 1050,
+            "visits": 440,
+            "purchases": 88,
+            "offers": 128,
+            "redemptions": 22,
+            "salesCents": 593546
+          }
+        ],
+        "offers": [
+          {
+            "value": 0,
+            "observations": 3735,
+            "visits": 1380,
+            "purchases": 220,
+            "offers": 0,
+            "redemptions": 0,
+            "salesCents": 1585463
+          },
+          {
+            "value": 10,
+            "observations": 228,
+            "visits": 137,
+            "purchases": 34,
+            "offers": 228,
+            "redemptions": 31,
+            "salesCents": 309033
+          },
+          {
+            "value": 5,
+            "observations": 237,
+            "visits": 113,
+            "purchases": 27,
+            "offers": 237,
+            "redemptions": 25,
+            "salesCents": 158497
+          }
+        ],
+        "caveat": "Delivered-offer groups are descriptive, not causal estimates. Market indicators come from observed completed days; private customer traits and future shocks are excluded."
+      },
+      "started_at": "2026-10-22T14:19:50.674Z",
+      "finished_at": "2026-10-22T14:19:51.899Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-review-week-01",
+      "action": "review",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "review-week-01",
+        "expectedRevision": 8,
+        "contextHash": "5fdfa706b9b5fe14d6850b4012783f856926a87ee9443c3859106074fa71495a",
+        "action": "review",
+        "parameters": {
+          "decision": "continue"
+        },
+        "rationale": "The first campaign week recorded 33 offers, twelve redemptions and 125 purchases, with no missing data or new rival-promotion exposure. The prior week used randomized exploration, so its 156 purchases are not a like-for-like causal control. Continue the qualified model and bounded plan, retain the randomized customer holdout, and wait for the full outcome window instead of retraining solely because the aggregate count fell.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-CP-analysis-01",
+          "WF-26c901ed73bed8b1-CP-analysis-products-01",
+          "WF-26c901ed73bed8b1-CP-train-01",
+          "WF-26c901ed73bed8b1-CP-launch-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-01",
+          "WF-26c901ed73bed8b1-CP-analysis-week-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "decision": "continue",
+        "day": 35,
+        "activePlanId": "WF-26c901ed73bed8b1-PLAN-1"
+      },
+      "started_at": "2026-10-22T14:20:49.464Z",
+      "finished_at": "2026-10-22T14:20:49.476Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-advance-week-02",
+      "action": "advance",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "advance-week-02",
+        "expectedRevision": 9,
+        "contextHash": "5a4d7a5e9f03efe32084c6952a3c2ec973a75064fcad3ba109ecb4e53ef63af6",
+        "action": "advance",
+        "parameters": {
+          "days": 7
+        },
+        "rationale": "Continue toward the end of the accepted campaign. Stop at any newly observed market-change checkpoint so the planner can inspect evidence before further execution.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-CP-launch-01",
+          "WF-26c901ed73bed8b1-CP-review-week-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "requestedDays": 7,
+        "completedDays": 1,
+        "attention": {
+          "kind": "OBSERVED_MARKET_CHANGE",
+          "indicator": "rival_promotion_exposure",
+          "previous": 0,
+          "current": 1,
+          "observedDay": 35
+        },
+        "throughDay": 35,
+        "days": [
+          {
+            "day": 35,
+            "phase": "LIVE",
+            "visits": 91,
+            "orders": 13,
+            "offers": 7,
+            "seen": 5,
+            "redemptions": 0,
+            "discountCents": 0,
+            "conversion": 0.14285714285714285
+          }
+        ],
+        "shopperDecisions": 300,
+        "activities": [
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0120",
+            "customer": "Owen 05",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0053",
+            "customer": "Luca 03",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0082",
+            "customer": "Iris 04",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0020",
+            "customer": "Finn 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0016",
+            "customer": "Bea 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0037",
+            "customer": "Ari 02",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "pct": 5
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0042",
+            "customer": "Eli 02",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "pct": 5
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0186",
+            "customer": "Eli 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O35633"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0007",
+            "customer": "Sage 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O35677"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0244",
+            "customer": "Noah 11",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "product": "Home Office Desk",
+            "amount": 9300,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O35721"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0018",
+            "customer": "Eli 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O35751"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0084",
+            "customer": "Rae 04",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M005",
+            "merchant": "River General",
+            "product": "Home Office Desk and Storage Cabinet Bundle",
+            "amount": 23999,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O35875"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0141",
+            "customer": "Yuna 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "Pop-Up Desk Keyboard and Touchpad Foldaway Kit",
+            "amount": 17999,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O35885"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0207",
+            "customer": "Tala 09",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "product": "Home Office Desk",
+            "amount": 9300,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O35939"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0072",
+            "customer": "Owen 03",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "Pop-Up Desk Keyboard and Touchpad Foldaway Kit",
+            "amount": 17999,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O35957"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0215",
+            "customer": "June 09",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M005",
+            "merchant": "River General",
+            "product": "Home Office Desk and Storage Cabinet Bundle",
+            "amount": 23999,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O36043"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0118",
+            "customer": "Max 05",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O36059"
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0150",
+            "customer": "Emi 07",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 3199
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0211",
+            "customer": "Lia 09",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 3199
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0239",
+            "customer": "June 10",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0066",
+            "customer": "Eli 03",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M003",
+            "merchant": "Corner Supply",
+            "product": "Modern Office Kit - Pkg of 43",
+            "amount": 999
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0060",
+            "customer": "Rae 03",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0186",
+            "customer": "Eli 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0095",
+            "customer": "June 04",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "merchant": "Oak & Ink"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0120",
+            "customer": "Owen 05",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0239",
+            "customer": "June 10",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0007",
+            "customer": "Sage 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0293",
+            "customer": "Luca 13",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0053",
+            "customer": "Luca 03",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0002",
+            "customer": "Theo 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0085",
+            "customer": "Ari 04",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "merchant": "Oak & Ink"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0244",
+            "customer": "Noah 11",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House"
+          }
+        ]
+      },
+      "started_at": "2026-10-22T14:20:49.805Z",
+      "finished_at": "2026-10-22T14:20:49.841Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-analysis-change-01",
+      "action": "analyze",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "analysis-change-01",
+        "expectedRevision": 10,
+        "contextHash": "86471c4adcc74e0d0c2d931b592bf101e5372fcb805ac34387c2df3cdab7e97e",
+        "action": "analyze",
+        "parameters": {
+          "windowDays": 7,
+          "cuts": [
+            "market",
+            "segments",
+            "offers"
+          ]
+        },
+        "rationale": "Inspect the new observed market-change checkpoint and the available completed outcome window. Determine whether enough post-change evidence exists to justify changing the campaign or fitting another model.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-CP-train-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-02"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "cutoffExclusive": 36,
+        "windowDays": 7,
+        "observations": 2100,
+        "customers": 300,
+        "quality": {
+          "futureRows": 0,
+          "invalidFeatures": 0,
+          "foreignKeyErrors": 0
+        },
+        "features": [
+          "recency_days",
+          "purchases_7d",
+          "organic_14d",
+          "visits_7d",
+          "spend_7d",
+          "offers_7d",
+          "redemptions_14d",
+          "price_cents",
+          "stock_available",
+          "rival_sale",
+          "payday"
+        ],
+        "market": [
+          {
+            "label": "latest7",
+            "from": 29,
+            "to": 36,
+            "observations": 2100,
+            "purchases": 120,
+            "salesCents": 856894,
+            "stockAvailableRate": 1,
+            "observedRivalPromotionRate": 0.14285714285714285
+          },
+          {
+            "label": "previous7",
+            "from": 22,
+            "to": 29,
+            "observations": 0,
+            "purchases": 0,
+            "salesCents": 0,
+            "stockAvailableRate": null,
+            "observedRivalPromotionRate": null
+          }
+        ],
+        "segments": [
+          {
+            "value": "Willow neighbors",
+            "observations": 525,
+            "visits": 193,
+            "purchases": 23,
+            "offers": 11,
+            "redemptions": 3,
+            "salesCents": 151124
+          },
+          {
+            "value": "Square neighbors",
+            "observations": 525,
+            "visits": 181,
+            "purchases": 29,
+            "offers": 3,
+            "redemptions": 1,
+            "salesCents": 197508
+          },
+          {
+            "value": "Riverside neighbors",
+            "observations": 525,
+            "visits": 202,
+            "purchases": 37,
+            "offers": 15,
+            "redemptions": 5,
+            "salesCents": 255929
+          },
+          {
+            "value": "Hill neighbors",
+            "observations": 525,
+            "visits": 193,
+            "purchases": 31,
+            "offers": 9,
+            "redemptions": 2,
+            "salesCents": 252333
+          }
+        ],
+        "offers": [
+          {
+            "value": 0,
+            "observations": 2062,
+            "visits": 748,
+            "purchases": 108,
+            "offers": 0,
+            "redemptions": 0,
+            "salesCents": 816735
+          },
+          {
+            "value": 10,
+            "observations": 29,
+            "visits": 19,
+            "purchases": 11,
+            "offers": 29,
+            "redemptions": 10,
+            "salesCents": 37120
+          },
+          {
+            "value": 5,
+            "observations": 9,
+            "visits": 2,
+            "purchases": 1,
+            "offers": 9,
+            "redemptions": 1,
+            "salesCents": 3039
+          }
+        ],
+        "caveat": "Delivered-offer groups are descriptive, not causal estimates. Market indicators come from observed completed days; private customer traits and future shocks are excluded."
+      },
+      "started_at": "2026-10-22T14:20:50.457Z",
+      "finished_at": "2026-10-22T14:20:51.662Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-analysis-change-02",
+      "action": "analyze",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "analysis-change-02",
+        "expectedRevision": 11,
+        "contextHash": "4d0eda82ffb5d414c59275effd1cd8305e36c37815e74cc91bc2a245fc8f16cf",
+        "action": "analyze",
+        "parameters": {
+          "windowDays": 14,
+          "cuts": [
+            "market",
+            "merchants"
+          ]
+        },
+        "rationale": "The seven-day query excluded the preceding week: its zero comparison observations are missing coverage, not zero customer demand. Expand to fourteen days to obtain an actual comparison before judging the newly observed rival-promotion signal.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-CP-analysis-01",
+          "WF-26c901ed73bed8b1-CP-analysis-products-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-01",
+          "WF-26c901ed73bed8b1-CP-analysis-week-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-02",
+          "WF-26c901ed73bed8b1-CP-analysis-change-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "cutoffExclusive": 36,
+        "windowDays": 14,
+        "observations": 4200,
+        "customers": 300,
+        "quality": {
+          "futureRows": 0,
+          "invalidFeatures": 0,
+          "foreignKeyErrors": 0
+        },
+        "features": [
+          "recency_days",
+          "purchases_7d",
+          "organic_14d",
+          "visits_7d",
+          "spend_7d",
+          "offers_7d",
+          "redemptions_14d",
+          "price_cents",
+          "stock_available",
+          "rival_sale",
+          "payday"
+        ],
+        "market": [
+          {
+            "label": "latest7",
+            "from": 29,
+            "to": 36,
+            "observations": 2100,
+            "purchases": 120,
+            "salesCents": 856894,
+            "stockAvailableRate": 1,
+            "observedRivalPromotionRate": 0.14285714285714285
+          },
+          {
+            "label": "previous7",
+            "from": 22,
+            "to": 29,
+            "observations": 2100,
+            "purchases": 155,
+            "salesCents": 1227214,
+            "stockAvailableRate": 1,
+            "observedRivalPromotionRate": 0
+          }
+        ],
+        "merchants": [
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M003",
+            "observations": 508,
+            "visits": 199,
+            "purchases": 32,
+            "offers": 26,
+            "redemptions": 0,
+            "salesCents": 31968,
+            "name": "Corner Supply"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M004",
+            "observations": 619,
+            "visits": 220,
+            "purchases": 18,
+            "offers": 41,
+            "redemptions": 0,
+            "salesCents": 15732,
+            "name": "Sunroom Market"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "observations": 479,
+            "visits": 211,
+            "purchases": 81,
+            "offers": 67,
+            "redemptions": 18,
+            "salesCents": 430439,
+            "name": "Willow Goods"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "observations": 505,
+            "visits": 197,
+            "purchases": 25,
+            "offers": 51,
+            "redemptions": 5,
+            "salesCents": 354991,
+            "name": "Juniper House"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M007",
+            "observations": 454,
+            "visits": 172,
+            "purchases": 0,
+            "offers": 41,
+            "redemptions": 0,
+            "salesCents": 0,
+            "name": "The Desk Shop"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "observations": 631,
+            "visits": 236,
+            "purchases": 69,
+            "offers": 64,
+            "redemptions": 15,
+            "salesCents": 372971,
+            "name": "Clover Trading"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M005",
+            "observations": 515,
+            "visits": 187,
+            "purchases": 19,
+            "offers": 48,
+            "redemptions": 4,
+            "salesCents": 431151,
+            "name": "River General"
+          },
+          {
+            "value": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "observations": 489,
+            "visits": 185,
+            "purchases": 31,
+            "offers": 62,
+            "redemptions": 9,
+            "salesCents": 446856,
+            "name": "Oak & Ink"
+          }
+        ],
+        "caveat": "Delivered-offer groups are descriptive, not causal estimates. Market indicators come from observed completed days; private customer traits and future shocks are excluded."
+      },
+      "started_at": "2026-10-22T14:24:03.831Z",
+      "finished_at": "2026-10-22T14:24:05.034Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-review-change-01",
+      "action": "review",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "review-change-01",
+        "expectedRevision": 12,
+        "contextHash": "f57af245472d5d1cadaa19b941f5ed2e623f46072e830216c70b6d0ad53a6454",
+        "action": "review",
+        "parameters": {
+          "decision": "continue"
+        },
+        "rationale": "The observed rival-promotion exposure changed from zero to one, but only one completed post-change day exists. The expanded analysis has a valid comparison week; the earlier zero-observation period was query coverage, not zero demand. Keep the validated model and existing coupon limits for the remaining six days rather than fit an unstable replacement or increase the budget on one day of evidence. Preserve the holdout and evaluate the full fourteen-day cohort.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-CP-analysis-01",
+          "WF-26c901ed73bed8b1-CP-analysis-products-01",
+          "WF-26c901ed73bed8b1-CP-train-01",
+          "WF-26c901ed73bed8b1-CP-launch-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-01",
+          "WF-26c901ed73bed8b1-CP-analysis-week-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-02",
+          "WF-26c901ed73bed8b1-CP-analysis-change-01",
+          "WF-26c901ed73bed8b1-CP-analysis-change-02"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "decision": "continue",
+        "day": 36,
+        "activePlanId": "WF-26c901ed73bed8b1-PLAN-1"
+      },
+      "started_at": "2026-10-22T14:26:24.949Z",
+      "finished_at": "2026-10-22T14:26:24.961Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-advance-final-01",
+      "action": "advance",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "advance-final-01",
+        "expectedRevision": 13,
+        "contextHash": "f1faf4454d92d6b545c8c0bd8c10a6bd8f45abea5787cc5ea3a2865002446e98",
+        "action": "advance",
+        "parameters": {
+          "days": 6
+        },
+        "rationale": "Execute the remaining six campaign days after the saved market-change review. Re-score each shopper with the accepted model and retain all execution guards and customer-level lineage.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-CP-launch-01",
+          "WF-26c901ed73bed8b1-CP-review-week-01",
+          "WF-26c901ed73bed8b1-CP-review-change-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "requestedDays": 6,
+        "completedDays": 6,
+        "attention": null,
+        "throughDay": 41,
+        "days": [
+          {
+            "day": 36,
+            "phase": "LIVE",
+            "visits": 88,
+            "orders": 15,
+            "offers": 4,
+            "seen": 3,
+            "redemptions": 1,
+            "discountCents": 890,
+            "conversion": 0.17045454545454544
+          },
+          {
+            "day": 37,
+            "phase": "LIVE",
+            "visits": 84,
+            "orders": 13,
+            "offers": 5,
+            "seen": 5,
+            "redemptions": 1,
+            "discountCents": 160,
+            "conversion": 0.15476190476190477
+          },
+          {
+            "day": 38,
+            "phase": "LIVE",
+            "visits": 95,
+            "orders": 19,
+            "offers": 7,
+            "seen": 5,
+            "redemptions": 1,
+            "discountCents": 320,
+            "conversion": 0.2
+          },
+          {
+            "day": 39,
+            "phase": "LIVE",
+            "visits": 98,
+            "orders": 16,
+            "offers": 7,
+            "seen": 6,
+            "redemptions": 1,
+            "discountCents": 890,
+            "conversion": 0.16326530612244897
+          },
+          {
+            "day": 40,
+            "phase": "LIVE",
+            "visits": 97,
+            "orders": 14,
+            "offers": 5,
+            "seen": 5,
+            "redemptions": 0,
+            "discountCents": 0,
+            "conversion": 0.14432989690721648
+          },
+          {
+            "day": 41,
+            "phase": "LIVE",
+            "visits": 95,
+            "orders": 7,
+            "offers": 6,
+            "seen": 3,
+            "redemptions": 1,
+            "discountCents": 320,
+            "conversion": 0.07368421052631578
+          }
+        ],
+        "shopperDecisions": 1800,
+        "activities": [
+          {
+            "type": "redemption",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0272",
+            "customer": "Nico 12",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 2879,
+            "pct": 10,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O41777"
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0186",
+            "customer": "Eli 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0046",
+            "customer": "Max 02",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0125",
+            "customer": "Luca 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0280",
+            "customer": "Bea 12",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0272",
+            "customer": "Nico 12",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "pct": 10
+          },
+          {
+            "type": "coupon",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0228",
+            "customer": "Rae 10",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "pct": 5
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0166",
+            "customer": "Max 07",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O41801"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0162",
+            "customer": "Eli 07",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "product": "Home Office Desk",
+            "amount": 9300,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O41856"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0057",
+            "customer": "Kai 03",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "Jenny Black 2 Drawer Desk",
+            "amount": 29999,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O42107"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0267",
+            "customer": "Aya 12",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "Jenny Black 2 Drawer Desk",
+            "amount": 29999,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O42124"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0136",
+            "customer": "Bea 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M004",
+            "merchant": "Sunroom Market",
+            "product": "U Brands Stationery Kit, Pkg of 173",
+            "amount": 874,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O42404"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0222",
+            "customer": "Emi 10",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O42513"
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0180",
+            "customer": "Rae 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "merchant": "Oak & Ink",
+            "product": "Starter Bundles",
+            "amount": 8010
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0051",
+            "customer": "Aya 03",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "product": "Home Office Desk",
+            "amount": 9300
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0056",
+            "customer": "Nico 03",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "product": "Wendral Home Office Set w/ Giolla Office Chair",
+            "amount": 38873
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0075",
+            "customer": "Aya 04",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M003",
+            "merchant": "Corner Supply",
+            "product": "Modern Office Kit - Pkg of 43",
+            "amount": 999
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0181",
+            "customer": "Ari 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "product": "Home Office Desk",
+            "amount": 9300
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0186",
+            "customer": "Eli 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0017",
+            "customer": "Sam 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0044",
+            "customer": "Finn 02",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0138",
+            "customer": "Eli 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0185",
+            "customer": "Sam 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0016",
+            "customer": "Bea 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0046",
+            "customer": "Max 02",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0125",
+            "customer": "Luca 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0280",
+            "customer": "Bea 12",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0272",
+            "customer": "Nico 12",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          }
+        ]
+      },
+      "started_at": "2026-10-22T14:26:25.306Z",
+      "finished_at": "2026-10-22T14:26:25.408Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-settle-01",
+      "action": "settle",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "settle-01",
+        "expectedRevision": 14,
+        "contextHash": "03f14de4d173aaf689019371476d118960cc2054b17d0b8e69f3cc2608e3c4fa",
+        "action": "settle",
+        "parameters": {},
+        "rationale": "Stop new coupons at the accepted end date and advance the two-day follow-up so deliveries and returns for campaign orders can mature before evaluation and native receipt sampling.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-CP-launch-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-02",
+          "WF-26c901ed73bed8b1-CP-advance-final-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "requestedDays": 2,
+        "completedDays": 2,
+        "attention": null,
+        "throughDay": 43,
+        "days": [
+          {
+            "day": 42,
+            "phase": "LIVE",
+            "visits": 101,
+            "orders": 13,
+            "offers": 0,
+            "seen": 0,
+            "redemptions": 0,
+            "discountCents": 0,
+            "conversion": 0.12871287128712872
+          },
+          {
+            "day": 43,
+            "phase": "LIVE",
+            "visits": 104,
+            "orders": 20,
+            "offers": 0,
+            "seen": 0,
+            "redemptions": 0,
+            "discountCents": 0,
+            "conversion": 0.19230769230769232
+          }
+        ],
+        "shopperDecisions": 600,
+        "activities": [
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0101",
+            "customer": "Luca 05",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O43631"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0117",
+            "customer": "Yuna 05",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O43647"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0009",
+            "customer": "Kai 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O43662"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0207",
+            "customer": "Tala 09",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O43710"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0106",
+            "customer": "Iris 05",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O43729"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0053",
+            "customer": "Luca 03",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O43744"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0203",
+            "customer": "Jules 09",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "product": "Home Office Desk",
+            "amount": 9300,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O43754"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0088",
+            "customer": "Bea 04",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O43764"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0150",
+            "customer": "Emi 07",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O43785"
+          },
+          {
+            "type": "purchase",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0293",
+            "customer": "Luca 13",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House",
+            "product": "Home Office Desk",
+            "amount": 9300,
+            "pct": 0,
+            "orderId": "GARDEN-WF-26c901ed73bed8b1-O43808"
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0272",
+            "customer": "Nico 12",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 2879
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0166",
+            "customer": "Max 07",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading",
+            "product": "JAM Paper Desk Essentials Office Supply Kit",
+            "amount": 3199
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0136",
+            "customer": "Bea 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M004",
+            "merchant": "Sunroom Market",
+            "product": "U Brands Stationery Kit, Pkg of 173",
+            "amount": 874
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0124",
+            "customer": "Noah 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "merchant": "Oak & Ink",
+            "product": "Starter Bundles",
+            "amount": 8900
+          },
+          {
+            "type": "delivery",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0271",
+            "customer": "Sage 12",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods",
+            "product": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+            "amount": 3199
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0101",
+            "customer": "Luca 05",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0117",
+            "customer": "Yuna 05",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0248",
+            "customer": "Nico 11",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0009",
+            "customer": "Kai 01",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0091",
+            "customer": "Lia 04",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant": "Clover Trading"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0174",
+            "customer": "Emi 08",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "merchant": "Oak & Ink"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0224",
+            "customer": "Nico 10",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0125",
+            "customer": "Luca 06",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0207",
+            "customer": "Tala 09",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant": "Willow Goods"
+          },
+          {
+            "type": "visit",
+            "customerId": "GARDEN-WF-26c901ed73bed8b1-U0230",
+            "customer": "Remy 10",
+            "merchantId": "GARDEN-WF-26c901ed73bed8b1-M006",
+            "merchant": "Juniper House"
+          }
+        ]
+      },
+      "started_at": "2026-10-22T14:26:25.918Z",
+      "finished_at": "2026-10-22T14:26:25.958Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-paypal-samples-01",
+      "action": "capture_samples",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "paypal-samples-01",
+        "expectedRevision": 15,
+        "contextHash": "35742b0613bedc59c8b5da46416a3d70e23e60e9c27d797a0d06fb733674eede",
+        "action": "capture_samples",
+        "parameters": {
+          "orderIds": [
+            "GARDEN-WF-26c901ed73bed8b1-O41777",
+            "GARDEN-WF-26c901ed73bed8b1-O39758",
+            "GARDEN-WF-26c901ed73bed8b1-O37872"
+          ]
+        },
+        "rationale": "Mirror three non-refunded coupon orders after the campaign follow-up: Willow Goods at $28.79 with a 10% coupon, Oak & Ink at $80.10 with a 10% coupon, and Clover Trading at $30.39 with a 5% coupon. The $139.28 total is sandbox test funds, below the existing $1,000 sample cap. Reuse saved wallet consent, persist request identities and verify provider receipts against the authoritative warehouse order amounts.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-GOAL",
+          "WF-26c901ed73bed8b1-CP-launch-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-02",
+          "WF-26c901ed73bed8b1-CP-advance-final-01",
+          "WF-26c901ed73bed8b1-CP-settle-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "lineage": [
+          {
+            "run_id": "GARDEN-WF-26c901ed73bed8b1",
+            "order_id": "GARDEN-WF-26c901ed73bed8b1-O37872",
+            "simulation_event_ts": "2026-11-28T01:00:00.000Z",
+            "simulation_event_date": "2026-11-28",
+            "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant_name": "Clover Trading",
+            "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0211",
+            "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-7",
+            "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP37865",
+            "discount_pct": 5,
+            "currency": "USD",
+            "simulated_gross_cents": 3039,
+            "modeled_fee_cents": 155,
+            "modeled_net_cents": 2884,
+            "receipt_id": "54d90266-cb95-4067-883c-bb6a5f0f1a74",
+            "funding_method": "PAYPAL_WALLET_VAULT",
+            "paypal_status": "COMPLETED",
+            "paypal_order_id": "0N852102T5977041S",
+            "capture_id": "1AH15798W1028232R",
+            "payee_merchant_id": "FD8RHLW6Y8GZG",
+            "paypal_gross_cents": 3039,
+            "paypal_fee_cents": 133,
+            "paypal_net_cents": 2906,
+            "provider_captured_at": "2026-10-22T14:28:32Z",
+            "provider_verified_at": "2026-10-22T14:28:34.646Z",
+            "provider_event_date": "2026-10-22",
+            "error_code": null,
+            "payment_source": "PAYPAL_SANDBOX",
+            "amount_verified": 1,
+            "channel3_product_ids": "w7qtfaR",
+            "product_titles": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)"
+          },
+          {
+            "run_id": "GARDEN-WF-26c901ed73bed8b1",
+            "order_id": "GARDEN-WF-26c901ed73bed8b1-O39758",
+            "simulation_event_ts": "2026-11-30T01:00:00.000Z",
+            "simulation_event_date": "2026-11-30",
+            "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "merchant_name": "Oak & Ink",
+            "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0180",
+            "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-1",
+            "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP39751",
+            "discount_pct": 10,
+            "currency": "USD",
+            "simulated_gross_cents": 8010,
+            "modeled_fee_cents": 329,
+            "modeled_net_cents": 7681,
+            "receipt_id": "39429842-b342-438f-909e-318c22e72dbe",
+            "funding_method": "PAYPAL_WALLET_VAULT",
+            "paypal_status": "COMPLETED",
+            "paypal_order_id": "3AM23711BK448034V",
+            "capture_id": "2FY281915R348414Y",
+            "payee_merchant_id": "FD8RHLW6Y8GZG",
+            "paypal_gross_cents": 8010,
+            "paypal_fee_cents": 302,
+            "paypal_net_cents": 7708,
+            "provider_captured_at": "2026-10-22T14:28:30Z",
+            "provider_verified_at": "2026-10-22T14:28:32.120Z",
+            "provider_event_date": "2026-10-22",
+            "error_code": null,
+            "payment_source": "PAYPAL_SANDBOX",
+            "amount_verified": 1,
+            "channel3_product_ids": "8IbOPfD",
+            "product_titles": "Starter Bundles"
+          },
+          {
+            "run_id": "GARDEN-WF-26c901ed73bed8b1",
+            "order_id": "GARDEN-WF-26c901ed73bed8b1-O41777",
+            "simulation_event_ts": "2026-12-02T01:00:00.000Z",
+            "simulation_event_date": "2026-12-02",
+            "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant_name": "Willow Goods",
+            "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0272",
+            "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-0",
+            "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP41770",
+            "discount_pct": 10,
+            "currency": "USD",
+            "simulated_gross_cents": 2879,
+            "modeled_fee_cents": 149,
+            "modeled_net_cents": 2730,
+            "receipt_id": "907c18a8-5bd9-4ffd-b7cb-68845b527a95",
+            "funding_method": "PAYPAL_WALLET_VAULT",
+            "paypal_status": "COMPLETED",
+            "paypal_order_id": "2FC58617V83214801",
+            "capture_id": "0KB27406HS078933K",
+            "payee_merchant_id": "FD8RHLW6Y8GZG",
+            "paypal_gross_cents": 2879,
+            "paypal_fee_cents": 128,
+            "paypal_net_cents": 2751,
+            "provider_captured_at": "2026-10-22T14:28:27Z",
+            "provider_verified_at": "2026-10-22T14:28:29.547Z",
+            "provider_event_date": "2026-10-22",
+            "error_code": null,
+            "payment_source": "PAYPAL_SANDBOX",
+            "amount_verified": 1,
+            "channel3_product_ids": "w7qtfaR",
+            "product_titles": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)"
+          }
+        ]
+      },
+      "started_at": "2026-10-22T14:28:24.989Z",
+      "finished_at": "2026-10-22T14:28:36.332Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-evaluate-01",
+      "action": "evaluate",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "evaluate-01",
+        "expectedRevision": 16,
+        "contextHash": "d302ea280f9514c53d32e8850a1b8f736cc95c0bdd40c12d291e3b095ddad777",
+        "action": "evaluate",
+        "parameters": {},
+        "rationale": "Evaluate the complete campaign sale cohort after two follow-up days. Report issued coupons, actual redemptions and purchases, cost-aware merchant contribution and randomized baseline-active cohort outcomes. Keep the three verified PayPal sandbox samples separate from simulated revenue, and do not label any individual purchase as caused by the coupon.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-GOAL",
+          "WF-26c901ed73bed8b1-CP-launch-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-01",
+          "WF-26c901ed73bed8b1-CP-review-week-01",
+          "WF-26c901ed73bed8b1-CP-advance-week-02",
+          "WF-26c901ed73bed8b1-CP-review-change-01",
+          "WF-26c901ed73bed8b1-CP-advance-final-01",
+          "WF-26c901ed73bed8b1-CP-settle-01",
+          "WF-26c901ed73bed8b1-CP-paypal-samples-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "window": {
+          "startDay": 28,
+          "endDayExclusive": 42,
+          "followupThroughDay": 43
+        },
+        "customers": 300,
+        "decisions": 4800,
+        "orders": 222,
+        "buyingCustomers": 147,
+        "offeredCustomers": 58,
+        "coupons": 74,
+        "redemptions": 17,
+        "economics": {
+          "salesCents": 1731915,
+          "discountsCents": 6830,
+          "refundsCents": 28197,
+          "cogsCents": 873445,
+          "deliveryCents": 77700,
+          "modeledFeesCents": 71376,
+          "outreachCents": 148,
+          "contributionCents": 681049
+        },
+        "baselineActiveExperiment": {
+          "groups": [
+            {
+              "arm": "TARGETABLE",
+              "customers": 125,
+              "purchasers": 79
+            },
+            {
+              "arm": "HOLDOUT",
+              "customers": 50,
+              "purchasers": 24
+            }
+          ],
+          "difference": 0.15200000000000002,
+          "ciLow": -0.010249742350488783,
+          "ciHigh": 0.31424974235048886,
+          "status": "MATURE",
+          "interpretation": "Randomized eligibility comparison among baseline-active shoppers. A purchase does not prove that a particular shopper was caused to buy by the coupon."
+        },
+        "nativePayments": [
+          {
+            "run_id": "GARDEN-WF-26c901ed73bed8b1",
+            "order_id": "GARDEN-WF-26c901ed73bed8b1-O37872",
+            "simulation_event_ts": "2026-11-28T01:00:00.000Z",
+            "simulation_event_date": "2026-11-28",
+            "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M008",
+            "merchant_name": "Clover Trading",
+            "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0211",
+            "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-7",
+            "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP37865",
+            "discount_pct": 5,
+            "currency": "USD",
+            "simulated_gross_cents": 3039,
+            "modeled_fee_cents": 155,
+            "modeled_net_cents": 2884,
+            "receipt_id": "54d90266-cb95-4067-883c-bb6a5f0f1a74",
+            "funding_method": "PAYPAL_WALLET_VAULT",
+            "paypal_status": "COMPLETED",
+            "paypal_order_id": "0N852102T5977041S",
+            "capture_id": "1AH15798W1028232R",
+            "payee_merchant_id": "FD8RHLW6Y8GZG",
+            "paypal_gross_cents": 3039,
+            "paypal_fee_cents": 133,
+            "paypal_net_cents": 2906,
+            "provider_captured_at": "2026-10-22T14:28:32Z",
+            "provider_verified_at": "2026-10-22T14:28:34.646Z",
+            "provider_event_date": "2026-10-22",
+            "error_code": null,
+            "payment_source": "PAYPAL_SANDBOX",
+            "amount_verified": 1,
+            "channel3_product_ids": "w7qtfaR",
+            "product_titles": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)"
+          },
+          {
+            "run_id": "GARDEN-WF-26c901ed73bed8b1",
+            "order_id": "GARDEN-WF-26c901ed73bed8b1-O39758",
+            "simulation_event_ts": "2026-11-30T01:00:00.000Z",
+            "simulation_event_date": "2026-11-30",
+            "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M002",
+            "merchant_name": "Oak & Ink",
+            "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0180",
+            "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-1",
+            "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP39751",
+            "discount_pct": 10,
+            "currency": "USD",
+            "simulated_gross_cents": 8010,
+            "modeled_fee_cents": 329,
+            "modeled_net_cents": 7681,
+            "receipt_id": "39429842-b342-438f-909e-318c22e72dbe",
+            "funding_method": "PAYPAL_WALLET_VAULT",
+            "paypal_status": "COMPLETED",
+            "paypal_order_id": "3AM23711BK448034V",
+            "capture_id": "2FY281915R348414Y",
+            "payee_merchant_id": "FD8RHLW6Y8GZG",
+            "paypal_gross_cents": 8010,
+            "paypal_fee_cents": 302,
+            "paypal_net_cents": 7708,
+            "provider_captured_at": "2026-10-22T14:28:30Z",
+            "provider_verified_at": "2026-10-22T14:28:32.120Z",
+            "provider_event_date": "2026-10-22",
+            "error_code": null,
+            "payment_source": "PAYPAL_SANDBOX",
+            "amount_verified": 1,
+            "channel3_product_ids": "8IbOPfD",
+            "product_titles": "Starter Bundles"
+          },
+          {
+            "run_id": "GARDEN-WF-26c901ed73bed8b1",
+            "order_id": "GARDEN-WF-26c901ed73bed8b1-O41777",
+            "simulation_event_ts": "2026-12-02T01:00:00.000Z",
+            "simulation_event_date": "2026-12-02",
+            "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M001",
+            "merchant_name": "Willow Goods",
+            "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0272",
+            "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-0",
+            "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP41770",
+            "discount_pct": 10,
+            "currency": "USD",
+            "simulated_gross_cents": 2879,
+            "modeled_fee_cents": 149,
+            "modeled_net_cents": 2730,
+            "receipt_id": "907c18a8-5bd9-4ffd-b7cb-68845b527a95",
+            "funding_method": "PAYPAL_WALLET_VAULT",
+            "paypal_status": "COMPLETED",
+            "paypal_order_id": "2FC58617V83214801",
+            "capture_id": "0KB27406HS078933K",
+            "payee_merchant_id": "FD8RHLW6Y8GZG",
+            "paypal_gross_cents": 2879,
+            "paypal_fee_cents": 128,
+            "paypal_net_cents": 2751,
+            "provider_captured_at": "2026-10-22T14:28:27Z",
+            "provider_verified_at": "2026-10-22T14:28:29.547Z",
+            "provider_event_date": "2026-10-22",
+            "error_code": null,
+            "payment_source": "PAYPAL_SANDBOX",
+            "amount_verified": 1,
+            "channel3_product_ids": "w7qtfaR",
+            "product_titles": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)"
+          }
+        ],
+        "paidModelCalls": 0
+      },
+      "started_at": "2026-10-22T14:32:59.701Z",
+      "finished_at": "2026-10-22T14:33:00.023Z"
+    },
+    {
+      "checkpoint_id": "WF-26c901ed73bed8b1-CP-complete-01",
+      "action": "complete",
+      "actor": "assistant_in_current_chat",
+      "status": "COMPLETED",
+      "attempts": 1,
+      "input": {
+        "requestId": "complete-01",
+        "expectedRevision": 17,
+        "contextHash": "34a7af5e340bfb65bb786986a1fbbc032708904679c0d8d7cbfe897dc8d19241",
+        "action": "complete",
+        "parameters": {},
+        "rationale": "Close the completed workflow: 300 shopper traces, 4,800 daily decision records including follow-up, 74 coupons delivered to 58 shoppers, 17 redemptions and 222 campaign-window purchases. Modeled discounts plus outreach cost $69.78 of the $300 budget. Three redeemed orders have verified native sandbox receipts totaling $139.28. The baseline-active repeat-purchase difference is +15.2 percentage points, but its interval crosses zero, so record an inconclusive lift estimate rather than claiming the campaign caused the purchases.",
+        "evidenceIds": [
+          "WF-26c901ed73bed8b1-GOAL",
+          "WF-26c901ed73bed8b1-CP-train-01",
+          "WF-26c901ed73bed8b1-CP-campaign-plan-01",
+          "WF-26c901ed73bed8b1-CP-review-week-01",
+          "WF-26c901ed73bed8b1-CP-review-change-01",
+          "WF-26c901ed73bed8b1-CP-settle-01",
+          "WF-26c901ed73bed8b1-CP-paypal-samples-01",
+          "WF-26c901ed73bed8b1-CP-evaluate-01"
+        ],
+        "actor": "assistant_in_current_chat"
+      },
+      "output": {
+        "completed": true,
+        "evaluation": {
+          "window": {
+            "startDay": 28,
+            "endDayExclusive": 42,
+            "followupThroughDay": 43
+          },
+          "customers": 300,
+          "decisions": 4800,
+          "orders": 222,
+          "buyingCustomers": 147,
+          "offeredCustomers": 58,
+          "coupons": 74,
+          "redemptions": 17,
+          "economics": {
+            "salesCents": 1731915,
+            "discountsCents": 6830,
+            "refundsCents": 28197,
+            "cogsCents": 873445,
+            "deliveryCents": 77700,
+            "modeledFeesCents": 71376,
+            "outreachCents": 148,
+            "contributionCents": 681049
+          },
+          "baselineActiveExperiment": {
+            "groups": [
+              {
+                "arm": "TARGETABLE",
+                "customers": 125,
+                "purchasers": 79
+              },
+              {
+                "arm": "HOLDOUT",
+                "customers": 50,
+                "purchasers": 24
+              }
+            ],
+            "difference": 0.15200000000000002,
+            "ciLow": -0.010249742350488783,
+            "ciHigh": 0.31424974235048886,
+            "status": "MATURE",
+            "interpretation": "Randomized eligibility comparison among baseline-active shoppers. A purchase does not prove that a particular shopper was caused to buy by the coupon."
+          },
+          "nativePayments": [
+            {
+              "run_id": "GARDEN-WF-26c901ed73bed8b1",
+              "order_id": "GARDEN-WF-26c901ed73bed8b1-O37872",
+              "simulation_event_ts": "2026-11-28T01:00:00.000Z",
+              "simulation_event_date": "2026-11-28",
+              "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M008",
+              "merchant_name": "Clover Trading",
+              "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0211",
+              "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-7",
+              "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP37865",
+              "discount_pct": 5,
+              "currency": "USD",
+              "simulated_gross_cents": 3039,
+              "modeled_fee_cents": 155,
+              "modeled_net_cents": 2884,
+              "receipt_id": "54d90266-cb95-4067-883c-bb6a5f0f1a74",
+              "funding_method": "PAYPAL_WALLET_VAULT",
+              "paypal_status": "COMPLETED",
+              "paypal_order_id": "0N852102T5977041S",
+              "capture_id": "1AH15798W1028232R",
+              "payee_merchant_id": "FD8RHLW6Y8GZG",
+              "paypal_gross_cents": 3039,
+              "paypal_fee_cents": 133,
+              "paypal_net_cents": 2906,
+              "provider_captured_at": "2026-10-22T14:28:32Z",
+              "provider_verified_at": "2026-10-22T14:28:34.646Z",
+              "provider_event_date": "2026-10-22",
+              "error_code": null,
+              "payment_source": "PAYPAL_SANDBOX",
+              "amount_verified": 1,
+              "channel3_product_ids": "w7qtfaR",
+              "product_titles": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)"
+            },
+            {
+              "run_id": "GARDEN-WF-26c901ed73bed8b1",
+              "order_id": "GARDEN-WF-26c901ed73bed8b1-O39758",
+              "simulation_event_ts": "2026-11-30T01:00:00.000Z",
+              "simulation_event_date": "2026-11-30",
+              "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M002",
+              "merchant_name": "Oak & Ink",
+              "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0180",
+              "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-1",
+              "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP39751",
+              "discount_pct": 10,
+              "currency": "USD",
+              "simulated_gross_cents": 8010,
+              "modeled_fee_cents": 329,
+              "modeled_net_cents": 7681,
+              "receipt_id": "39429842-b342-438f-909e-318c22e72dbe",
+              "funding_method": "PAYPAL_WALLET_VAULT",
+              "paypal_status": "COMPLETED",
+              "paypal_order_id": "3AM23711BK448034V",
+              "capture_id": "2FY281915R348414Y",
+              "payee_merchant_id": "FD8RHLW6Y8GZG",
+              "paypal_gross_cents": 8010,
+              "paypal_fee_cents": 302,
+              "paypal_net_cents": 7708,
+              "provider_captured_at": "2026-10-22T14:28:30Z",
+              "provider_verified_at": "2026-10-22T14:28:32.120Z",
+              "provider_event_date": "2026-10-22",
+              "error_code": null,
+              "payment_source": "PAYPAL_SANDBOX",
+              "amount_verified": 1,
+              "channel3_product_ids": "8IbOPfD",
+              "product_titles": "Starter Bundles"
+            },
+            {
+              "run_id": "GARDEN-WF-26c901ed73bed8b1",
+              "order_id": "GARDEN-WF-26c901ed73bed8b1-O41777",
+              "simulation_event_ts": "2026-12-02T01:00:00.000Z",
+              "simulation_event_date": "2026-12-02",
+              "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M001",
+              "merchant_name": "Willow Goods",
+              "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0272",
+              "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-0",
+              "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP41770",
+              "discount_pct": 10,
+              "currency": "USD",
+              "simulated_gross_cents": 2879,
+              "modeled_fee_cents": 149,
+              "modeled_net_cents": 2730,
+              "receipt_id": "907c18a8-5bd9-4ffd-b7cb-68845b527a95",
+              "funding_method": "PAYPAL_WALLET_VAULT",
+              "paypal_status": "COMPLETED",
+              "paypal_order_id": "2FC58617V83214801",
+              "capture_id": "0KB27406HS078933K",
+              "payee_merchant_id": "FD8RHLW6Y8GZG",
+              "paypal_gross_cents": 2879,
+              "paypal_fee_cents": 128,
+              "paypal_net_cents": 2751,
+              "provider_captured_at": "2026-10-22T14:28:27Z",
+              "provider_verified_at": "2026-10-22T14:28:29.547Z",
+              "provider_event_date": "2026-10-22",
+              "error_code": null,
+              "payment_source": "PAYPAL_SANDBOX",
+              "amount_verified": 1,
+              "channel3_product_ids": "w7qtfaR",
+              "product_titles": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)"
+            }
+          ],
+          "paidModelCalls": 0
+        }
+      },
+      "started_at": "2026-10-22T14:36:55.675Z",
+      "finished_at": "2026-10-22T14:36:56.271Z"
+    }
+  ],
+  "evaluation": {
+    "window": {
+      "startDay": 28,
+      "endDayExclusive": 42,
+      "followupThroughDay": 43
+    },
+    "customers": 300,
+    "decisions": 4800,
+    "orders": 222,
+    "buyingCustomers": 147,
+    "offeredCustomers": 58,
+    "coupons": 74,
+    "redemptions": 17,
+    "economics": {
+      "salesCents": 1731915,
+      "discountsCents": 6830,
+      "refundsCents": 28197,
+      "cogsCents": 873445,
+      "deliveryCents": 77700,
+      "modeledFeesCents": 71376,
+      "outreachCents": 148,
+      "contributionCents": 681049
+    },
+    "baselineActiveExperiment": {
+      "groups": [
+        {
+          "arm": "TARGETABLE",
+          "customers": 125,
+          "purchasers": 79
+        },
+        {
+          "arm": "HOLDOUT",
+          "customers": 50,
+          "purchasers": 24
+        }
+      ],
+      "difference": 0.15200000000000002,
+      "ciLow": -0.010249742350488783,
+      "ciHigh": 0.31424974235048886,
+      "status": "MATURE",
+      "interpretation": "Randomized eligibility comparison among baseline-active shoppers. A purchase does not prove that a particular shopper was caused to buy by the coupon."
+    },
+    "nativePayments": [
+      {
+        "run_id": "GARDEN-WF-26c901ed73bed8b1",
+        "order_id": "GARDEN-WF-26c901ed73bed8b1-O37872",
+        "simulation_event_ts": "2026-11-28T01:00:00.000Z",
+        "simulation_event_date": "2026-11-28",
+        "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M008",
+        "merchant_name": "Clover Trading",
+        "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0211",
+        "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-7",
+        "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP37865",
+        "discount_pct": 5,
+        "currency": "USD",
+        "simulated_gross_cents": 3039,
+        "modeled_fee_cents": 155,
+        "modeled_net_cents": 2884,
+        "receipt_id": "54d90266-cb95-4067-883c-bb6a5f0f1a74",
+        "funding_method": "PAYPAL_WALLET_VAULT",
+        "paypal_status": "COMPLETED",
+        "paypal_order_id": "0N852102T5977041S",
+        "capture_id": "1AH15798W1028232R",
+        "payee_merchant_id": "FD8RHLW6Y8GZG",
+        "paypal_gross_cents": 3039,
+        "paypal_fee_cents": 133,
+        "paypal_net_cents": 2906,
+        "provider_captured_at": "2026-10-22T14:28:32Z",
+        "provider_verified_at": "2026-10-22T14:28:34.646Z",
+        "provider_event_date": "2026-10-22",
+        "error_code": null,
+        "payment_source": "PAYPAL_SANDBOX",
+        "amount_verified": 1,
+        "channel3_product_ids": "w7qtfaR",
+        "product_titles": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)"
+      },
+      {
+        "run_id": "GARDEN-WF-26c901ed73bed8b1",
+        "order_id": "GARDEN-WF-26c901ed73bed8b1-O39758",
+        "simulation_event_ts": "2026-11-30T01:00:00.000Z",
+        "simulation_event_date": "2026-11-30",
+        "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M002",
+        "merchant_name": "Oak & Ink",
+        "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0180",
+        "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-1",
+        "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP39751",
+        "discount_pct": 10,
+        "currency": "USD",
+        "simulated_gross_cents": 8010,
+        "modeled_fee_cents": 329,
+        "modeled_net_cents": 7681,
+        "receipt_id": "39429842-b342-438f-909e-318c22e72dbe",
+        "funding_method": "PAYPAL_WALLET_VAULT",
+        "paypal_status": "COMPLETED",
+        "paypal_order_id": "3AM23711BK448034V",
+        "capture_id": "2FY281915R348414Y",
+        "payee_merchant_id": "FD8RHLW6Y8GZG",
+        "paypal_gross_cents": 8010,
+        "paypal_fee_cents": 302,
+        "paypal_net_cents": 7708,
+        "provider_captured_at": "2026-10-22T14:28:30Z",
+        "provider_verified_at": "2026-10-22T14:28:32.120Z",
+        "provider_event_date": "2026-10-22",
+        "error_code": null,
+        "payment_source": "PAYPAL_SANDBOX",
+        "amount_verified": 1,
+        "channel3_product_ids": "8IbOPfD",
+        "product_titles": "Starter Bundles"
+      },
+      {
+        "run_id": "GARDEN-WF-26c901ed73bed8b1",
+        "order_id": "GARDEN-WF-26c901ed73bed8b1-O41777",
+        "simulation_event_ts": "2026-12-02T01:00:00.000Z",
+        "simulation_event_date": "2026-12-02",
+        "merchant_id": "GARDEN-WF-26c901ed73bed8b1-M001",
+        "merchant_name": "Willow Goods",
+        "customer_id": "GARDEN-WF-26c901ed73bed8b1-U0272",
+        "campaign_id": "GARDEN-WF-26c901ed73bed8b1-LIVE-0",
+        "coupon_id": "GARDEN-WF-26c901ed73bed8b1-CP41770",
+        "discount_pct": 10,
+        "currency": "USD",
+        "simulated_gross_cents": 2879,
+        "modeled_fee_cents": 149,
+        "modeled_net_cents": 2730,
+        "receipt_id": "907c18a8-5bd9-4ffd-b7cb-68845b527a95",
+        "funding_method": "PAYPAL_WALLET_VAULT",
+        "paypal_status": "COMPLETED",
+        "paypal_order_id": "2FC58617V83214801",
+        "capture_id": "0KB27406HS078933K",
+        "payee_merchant_id": "FD8RHLW6Y8GZG",
+        "paypal_gross_cents": 2879,
+        "paypal_fee_cents": 128,
+        "paypal_net_cents": 2751,
+        "provider_captured_at": "2026-10-22T14:28:27Z",
+        "provider_verified_at": "2026-10-22T14:28:29.547Z",
+        "provider_event_date": "2026-10-22",
+        "error_code": null,
+        "payment_source": "PAYPAL_SANDBOX",
+        "amount_verified": 1,
+        "channel3_product_ids": "w7qtfaR",
+        "product_titles": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)"
+      }
+    ],
+    "paidModelCalls": 0
+  },
+  "resumeVerification": {
+    "replayed": [
+      {
+        "request": "train-01",
+        "replayed": true
+      },
+      {
+        "request": "advance-week-01",
+        "replayed": true
+      },
+      {
+        "request": "paypal-samples-01",
+        "replayed": true
+      },
+      {
+        "request": "complete-01",
+        "replayed": true
+      }
+    ],
+    "revisionUnchanged": true,
+    "customers": 300,
+    "day": 44,
+    "modelRuns": 1,
+    "receiptIds": [
+      "0KB27406HS078933K",
+      "2FY281915R348414Y",
+      "1AH15798W1028232R"
+    ]
+  },
+  "testsPassed": 157,
+  "newPaidLlmApiCalls": 0,
+  "newChannel3Searches": 0,
+  "realMoneyCharged": 0,
+  "customerCoverage": {
+    "total": 300,
+    "withSixteenDailyRecords": 300,
+    "holdouts": 77,
+    "holdoutCoupons": 0,
+    "offeredWithoutPurchase": 17
+  }
+}
