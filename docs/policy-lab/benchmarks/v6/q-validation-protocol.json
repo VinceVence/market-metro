@@ -1,0 +1,59 @@
+{
+  "phase": "SEQUENTIAL_DEVELOPMENT_VALIDATION_ONLY",
+  "sequenceProtocolHash": "423a94572ed524a121766d75604c31b7438e1e2ba7f49046ecb2bf03cda7c6a4",
+  "qModelHash": "ee8b42ea077eec4d49957aa525275cec973d88e1705e93130c84cdea6839a5f6",
+  "valueModelHash": "76e2cad259863df8da69e432d6618546b3348d6139ffb11632a9c9f2a15ea209",
+  "qPolicyCodeHash": "9675ccb6d16001064606e636115ba96d64959cb3f8d080d7ae4fc875140a1539",
+  "evaluationCodeHash": "532c4344e20ae02f48f3468272c9d525ffe69de26c59ed4e6782a1958427a489",
+  "seeds": [
+    102001,
+    102002,
+    102003,
+    102004,
+    102005,
+    102006,
+    102007,
+    102008,
+    102009,
+    102010,
+    102011,
+    102012,
+    102013,
+    102014,
+    102015,
+    102016
+  ],
+  "scenarios": [
+    "steady",
+    "rival_sale",
+    "budget_squeeze",
+    "supply_delay",
+    "returns_wave"
+  ],
+  "methods": [
+    "organic",
+    "static",
+    "contextual",
+    "original",
+    "constant",
+    "ridge_1",
+    "ridge_10",
+    "ridge_100",
+    "trees_leaf8",
+    "trees_leaf20",
+    "myopic_trees64",
+    "fqi_trees64",
+    "fqi_trees128",
+    "fqi_ridge100",
+    "fqi_no_history"
+  ],
+  "primarySequentialContrast": "fqi_trees64 minus myopic_trees64: same sequence training data, model class, constraints and observed-history interface; only the Bellman continuation differs.",
+  "fairness": "Identical no-outreach observation stream at days 30/55/80, same initial seeds, shocks, authority and publication delay. Q policies may remember their own past choices. Treatment-branch outcomes remain sealed. Legacy/single-intervention learners remain reference controls; myopic Q shares the new training data.",
+  "limits": [
+    "All seeds here are development. Selecting a winner does not establish final economic or LLM superiority.",
+    "No LLM, PayPal API, paid cloud compute or fresh Channel3 query in this experiment.",
+    "Partial-observation policy history is not a fully observed economic state.",
+    "All gains are finite-horizon modeled contribution, not actual PayPal profit."
+  ],
+  "hash": "f28677f9ad4b3980372605dea083960e351cb2da2fc3ce521bc646c3427918a2"
+}

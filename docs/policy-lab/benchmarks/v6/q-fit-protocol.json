@@ -1,0 +1,85 @@
+{
+  "phase": "OFFLINE_RL_DEVELOPMENT_ONLY",
+  "sequenceProtocolHash": "423a94572ed524a121766d75604c31b7438e1e2ba7f49046ecb2bf03cda7c6a4",
+  "sourceHash": "e1d890dec520ccadf4fb3c41c6258b52e7b5e10c12e178d9ba6678b2f8200c61",
+  "dataHashes": {
+    "100001": "80af849fc4b8a9639592d87a7aa6251f787157c141d611bb944a715f34bb2f77",
+    "100002": "cae6a37d07923674f41321f1d9c01f8792d10702af35ea08c69d32ca0386847d",
+    "100003": "802b4d226cbdf6f72312dec348d644728c47821c5e758cb78289aaf093bf9919",
+    "100004": "15853b69f64d4af214897c80e49b5b2ef79f972fafdeabdf8b2431b017805dd8",
+    "100005": "926746db0ff515a52c1d4dedd5b93151eba0b3469e1078a6bfa32f4dc82c0d3b",
+    "100006": "127b876259c6e70580116d0a3ea77b4782c583ab09920f884477322bfb586d5e",
+    "100007": "c94e8798b26233fc8ce514ade6a786be66a721477f1a8c9608ba126b1379b7b0",
+    "100008": "817a8faff25764762e9caeee75a6ef009addf18fadbe1a66cafff36caaffc337",
+    "100009": "a305cf1632af94cf8e957235b150195588d41cd1879b74c1980b32f7a6e4d80e",
+    "100010": "37eb478a1e45973266d9c34b1644d66a0e41c467c8465e78ea46e28ba5e4be73",
+    "100011": "81486aca2a0cabda56f60cae1c46d22f535d0a1be2575b592fa720acac7b6ee6",
+    "100012": "a1ec8f36bcf4c8fdca4ebf727ac13736db734d4ec1caeb6d3e8bf7f942ef2655",
+    "100013": "c6569a022c9702c1b183564f42238efdb2a12b97cdc020cbe017abe653840e01",
+    "100014": "21b39c28209d0628dd47d453546ee2c116fb4f638a106c11cafb4048e3eb4337",
+    "100015": "68f0ec41cf5f56f26a1f1e78aca3c9acd098bad4e5c362ceaee0e83cb5638de5",
+    "100016": "d191daab1749d1e35cb58b049becc8557d1a3c99dfae0366cd7d97c35db574d1",
+    "100017": "1f101ea1de96bcb69327c6d03c0308132514fa0382b33f591db0fd60de28763a",
+    "100018": "5c467c1f4d29cdf26dd6f78e4e9e6454c13c6f1145614db8f89c75905f3b1131",
+    "100019": "610f0c59d27f31880e96d2e5e967be77baf3ad9e7cbc3faa1bb408c923e4714c",
+    "100020": "09b60d2cd4f6c62048a26c524f82c803c4bbb5443528281a4ab6aff607457919",
+    "100021": "11481668fc5114e88f9b947f0065b0a02a984a1ca20cf5fd4b381fcb1221d970",
+    "100022": "d87a86b2e3e7cee3aca9c7be995b6758a86f3abbdd94c81fa81db7d0f16d8140",
+    "100023": "8bc859b2a40b00705f6aaa658843dd571b4cf11242ef010031e90f0f721e73f0",
+    "100024": "81841b0b6dc59a3f12b7febe89d3afb07a5bd504ccd59a3c8736f21ad13d0467",
+    "100025": "770559fe861aacf1b27e917b4d923157b378903c38550f9d539565e249d58997",
+    "100026": "634ee200f40cab9d297283f5baba5e8e7fc519baee92fc98c80a7c2ff8876a7b",
+    "100027": "89a85369fcc57ebffe99dbbf438dee3c7c4281a2951a338e36466049211566be",
+    "100028": "b4a865422ee890e8760d6d4132ecb306b1f89567a1e44233c14f7922900d9bb1",
+    "100029": "b8a5594e41413bbcbbe419dd2139d0e84580fdfc37c11c3a6ac9154cc51ec910",
+    "100030": "c755bb1f5b11dd8d093a266fb2bffb5c7dd972de44cadaebd96dfb6cbe579c4b",
+    "100031": "fa986e90fa3755aede3f2e9f66fd163864881707414e5748b097a709ee40f892",
+    "100032": "7179b9742649b0a2679a51f53354ca16b78fc5de5b92615f40f97edc2b7ead17"
+  },
+  "variants": [
+    {
+      "id": "myopic_trees64",
+      "family": "trees",
+      "leaf": 64,
+      "history": true,
+      "gamma": 0
+    },
+    {
+      "id": "fqi_trees64",
+      "family": "trees",
+      "leaf": 64,
+      "history": true,
+      "gamma": 1
+    },
+    {
+      "id": "fqi_trees128",
+      "family": "trees",
+      "leaf": 128,
+      "history": true,
+      "gamma": 1
+    },
+    {
+      "id": "fqi_ridge100",
+      "family": "ridge",
+      "alpha": 100,
+      "history": true,
+      "gamma": 1
+    },
+    {
+      "id": "fqi_no_history",
+      "family": "trees",
+      "leaf": 64,
+      "history": false,
+      "gamma": 1
+    }
+  ],
+  "uniqueTransitionsPerStage": [
+    2240,
+    4480,
+    4480
+  ],
+  "targets": "Mature incremental platform and merchant contribution. Independent regressors; no implicit cross-objective MSE weighting.",
+  "method": "Backward fitted Q for three decision stages; gamma=1 is the undiscounted finite-horizon total. Gamma=0 is the myopic control.",
+  "constraints": "Each action must have predicted merchant continuation at least as high as the wait action. Frozen executor retains its hard limits.",
+  "hash": "a8b6a4407cfaa08fa63629273592feec6975b925c0936afca2d08b3f3a38cde4"
+}
