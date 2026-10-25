@@ -47,6 +47,19 @@ test('provider is pinned to new project, reserves first and meters thinking toke
   }finally{await ledger.close();}
 }));
 
+test('bounded Flash-Lite reasoning override preserves defaults, output limits and spend accounting',async()=>temporary(async path=>{
+  const ledger=await openSpendLedger(path,{initialize:true,profile:'flash_lite',runId:'thinking-check'}),levels=[];
+  try{
+    const client=createVertexClient({token:'test-only',ledger,profile:'flash_lite',requestGapMs:0,fetchFn:async(_url,options)=>{
+      const request=JSON.parse(options.body);levels.push(request.generationConfig.thinkingConfig.thinkingLevel);assert.equal(request.generationConfig.maxOutputTokens,2048);assert.equal(request.generationConfig.thinkingConfig.includeThoughts,false);
+      return response({candidates:[{finishReason:'STOP',content:{parts:[{text:'{"ok":true}'}]}}],usageMetadata:{promptTokenCount:1000,candidatesTokenCount:100,thoughtsTokenCount:10},modelVersion:'gemini-3.1-flash-lite'});
+    }});
+    await client.json('test',{}, {trialId:'one'});await client.json('test',{}, {trialId:'two',thinkingLevel:'MEDIUM'});
+    assert.deepEqual(levels,['MINIMAL','MEDIUM']);assert.equal(ledger.snapshot().runChargedMicros,830);
+    await assert.rejects(()=>client.json('test',{}, {thinkingLevel:'UNBOUNDED'}),/INVALID_THINKING_LEVEL/);assert.equal(levels.length,2);
+  }finally{await ledger.close();}
+}));
+
 test('unknown provider outcomes retain full reservation, open circuit and never retry',async()=>temporary(async path=>{
   const ledger=await openSpendLedger(path,{initialize:true});let calls=0;
   try{

@@ -87,13 +87,14 @@ export function createVertexClient({token,ledger,fetchFn=fetch,now=()=>new Date(
   const events=[];let lastRequestAt=0;
   return {
     events,
-    async json(system,payload,{signal,caseId,trialId,stage,schema,functions}={}){
+    async json(system,payload,{signal,caseId,trialId,stage,schema,functions,thinkingLevel}={}){
       if(now().toISOString().slice(0,10)>pricing.validThrough)throw new Error('REVERIFY_MODEL_PRICE_BEFORE_SPENDING');
       const text=JSON.stringify(payload),bytes=Buffer.byteLength(system)+Buffer.byteLength(text);
       if(bytes>limits.maxInputBytes)throw new Error('MODEL_INPUT_LIMIT');
       if(events.filter(e=>e.trialId===trialId).length>=limits.maxCallsPerTrial)throw new Error('MODEL_CALL_LIMIT');
       if(signal?.aborted)throw new Error('MODEL_ABORTED');
-      const request={systemInstruction:{parts:[{text:system}]},contents:[{role:'user',parts:[{text}]}],generationConfig:{temperature:0,candidateCount:1,maxOutputTokens:limits.maxOutputTokens,responseMimeType:'application/json',thinkingConfig:{thinkingLevel:profile==='flash_lite'?'MINIMAL':stage==='planner'?'MEDIUM':'LOW',includeThoughts:false}}};
+      if(thinkingLevel!==undefined&&(profile!=='flash_lite'||!['MINIMAL','LOW','MEDIUM','HIGH'].includes(thinkingLevel)))throw new Error('INVALID_THINKING_LEVEL');
+      const request={systemInstruction:{parts:[{text:system}]},contents:[{role:'user',parts:[{text}]}],generationConfig:{temperature:0,candidateCount:1,maxOutputTokens:limits.maxOutputTokens,responseMimeType:'application/json',thinkingConfig:{thinkingLevel:thinkingLevel??(profile==='flash_lite'?'MINIMAL':stage==='planner'?'MEDIUM':'LOW'),includeThoughts:false}}};
       if(schema)request.generationConfig.responseSchema=schema;
       if(functions){
         if(!Array.isArray(functions)||!functions.length)throw new Error('INVALID_MODEL_TOOLS');

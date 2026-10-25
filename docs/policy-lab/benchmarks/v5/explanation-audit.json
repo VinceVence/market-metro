@@ -1,0 +1,128 @@
+{
+  "status": "QUALITATIVE_SAMPLE_AUDIT",
+  "reviewer": "Assistant review of saved public decision records",
+  "sampleRule": "First predeclared validation seed (96001), all five conditions and three reviews; no success-based sampling.",
+  "reviewCount": 15,
+  "findings": [
+    {
+      "scenario": "budget_squeeze",
+      "day": 80,
+      "issue": "EXECUTION_SCOPE_OVERSTATED",
+      "finding": "The explanation says the recipe covers all three merchants. The executor breaks equal scores by action ID, so the eligible-store list is not diversified delivery.",
+      "quote": "more comprehensive approach across all three merchants",
+      "caseId": "CAMP5-validation-1c0cb11ff614d0ab",
+      "evidenceId": "E-af8fed2d621c8453fe21",
+      "decision": {
+        "reason": "The market shows stable demand and inventory levels across merchants. Candidate 898a2b58efaf52 (recent_value) is selected for its balanced performance profile and potential to leverage recent purchase activity, which aligns with the current stable market conditions. I considered 331960fbf3c19b as an alternative, but 898a2b58efaf52 offers a more comprehensive approach across all three merchants.",
+        "observationIds": [
+          "demand",
+          "premium_mix",
+          "merchant_returns",
+          "inventory"
+        ],
+        "alternativeId": "331960fbf3c19b",
+        "evidenceId": "E-af8fed2d621c8453fe21",
+        "observedCondition": "stable",
+        "reasonCode": "product_value",
+        "candidateId": "898a2b58efaf52"
+      },
+      "source": "validation/CAMP5-validation-1c0cb11ff614d0ab/review-80.json"
+    },
+    {
+      "scenario": "rival_sale",
+      "day": 55,
+      "issue": "EXECUTION_SCOPE_OVERSTATED",
+      "finding": "The explanation treats a broader eligible-store list as broader recommendation delivery. The recipe has equal cross-store scores and ties favor the lowest eligible index.",
+      "quote": "broader coverage of recent_value",
+      "caseId": "CAMP5-validation-28c8505e89a355c7",
+      "evidenceId": "E-601541e03d4293e0ce90",
+      "decision": {
+        "evidenceId": "E-601541e03d4293e0ce90",
+        "candidateId": "898a2b58efaf52",
+        "reason": "Demand is slightly down, but inventory levels are healthy across all merchants. The recent_value campaign provides a balanced approach to support discovery across all merchants, showing positive potential in steady conditions. I considered the premium_alternative (331960fbf3c19b) but opted for the broader coverage of recent_value given the stable return rates.",
+        "observationIds": [
+          "demand",
+          "inventory",
+          "merchant_returns"
+        ],
+        "observedCondition": "stable",
+        "alternativeId": "331960fbf3c19b",
+        "reasonCode": "demand_change"
+      },
+      "source": "validation/CAMP5-validation-28c8505e89a355c7/review-55.json"
+    },
+    {
+      "scenario": "returns_wave",
+      "day": 55,
+      "issue": "EXECUTION_SCOPE_OVERSTATED",
+      "finding": "The explanation says discovery occurs across all three merchants. The trusted recipe only permits all three; execution can concentrate at one.",
+      "quote": "leverage discovery across all three merchants",
+      "caseId": "CAMP5-validation-9a63c60bc121a996",
+      "evidenceId": "E-220efebb8bde77337b15",
+      "decision": {
+        "alternativeId": "f61cf007354269",
+        "candidateId": "898a2b58efaf52",
+        "reason": "Demand and premium mix are showing slight growth, and inventory levels remain stable across all merchants. The recent_value candidate (898a2b58efaf52) is selected for its positive overall mean in development profiles and its ability to leverage discovery across all three merchants, which is well-supported by the current stable inventory and return patterns.",
+        "observedCondition": "stable",
+        "observationIds": [
+          "demand",
+          "premium_mix",
+          "inventory",
+          "merchant_returns"
+        ],
+        "reasonCode": "demand_change",
+        "evidenceId": "E-220efebb8bde77337b15"
+      },
+      "source": "validation/CAMP5-validation-9a63c60bc121a996/review-55.json"
+    },
+    {
+      "scenario": "rival_sale",
+      "day": 80,
+      "issue": "ALTERNATIVE_IS_SELECTED_CHOICE",
+      "finding": "The same candidate ID appears as both the selected choice and the claimed alternative. The seven-field contract accepts it, but it does not document a competing option.",
+      "quote": null,
+      "caseId": "CAMP5-validation-28c8505e89a355c7",
+      "evidenceId": "E-a6e0252c28c2ce8118c5",
+      "decision": {
+        "observedCondition": "stable",
+        "alternativeId": "898a2b58efaf52",
+        "candidateId": "898a2b58efaf52",
+        "evidenceId": "E-a6e0252c28c2ce8118c5",
+        "reasonCode": "model_evidence",
+        "reason": "The market shows stable demand and inventory levels across all merchants. The 'recent_value' candidate (898a2b58efaf52) remains the most robust choice, as it aligns with the observed recent purchase patterns and has shown positive performance in similar stable conditions in the development profiles.",
+        "observationIds": [
+          "demand",
+          "premium_mix",
+          "merchant_returns",
+          "inventory"
+        ]
+      },
+      "source": "validation/CAMP5-validation-28c8505e89a355c7/review-80.json"
+    },
+    {
+      "scenario": "supply_delay",
+      "day": 55,
+      "issue": "UNSUPPORTED_RISK_COMPARISON",
+      "finding": "The explanation calls the pooled model more conservative and stable than the premium rule, without a supplied current-market risk estimate. Development prediction MSE and regularization do not establish that claim.",
+      "quote": "provides a more conservative, stable approach",
+      "caseId": "CAMP5-validation-b3b61deb6d47852c",
+      "evidenceId": "E-8a176b6343a05ea31ed5",
+      "decision": {
+        "observationIds": [
+          "demand",
+          "premium_mix",
+          "merchant_returns",
+          "inventory"
+        ],
+        "reasonCode": "model_evidence",
+        "reason": "The market shows stable return rates and healthy inventory levels across all merchants, with a notable increase in demand (1.52x). Candidate 9bc2536ec34feb (pooled_support, stores 1, 2) provides a more conservative, stable approach compared to the higher-risk premium discovery models, fitting the current stable market conditions while managing potential downside. I considered 8e36c2482a3e4e but opted for the ridge-regularized model to better balance the observed demand growth against the inherent uncertainty in the development profiles.",
+        "observedCondition": "stable",
+        "candidateId": "9bc2536ec34feb",
+        "evidenceId": "E-8a176b6343a05ea31ed5",
+        "alternativeId": "8e36c2482a3e4e"
+      },
+      "source": "validation/CAMP5-validation-b3b61deb6d47852c/review-55.json"
+    }
+  ],
+  "limits": "These findings concern public explanations and do not change the frozen decisions or financial results. This is not a measured explanation-accuracy rate for the complete set."
+}

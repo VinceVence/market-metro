@@ -1,0 +1,4060 @@
+{
+  "id": "CAMP5-validation-eb84f2ef9c41fe08",
+  "phase": "validation",
+  "seed": 96010,
+  "scenario": "budget_squeeze",
+  "protocolHash": "233ef74e7ccaea0b52c6c4f52bf4f1ea96ed97ba134ccb8bc41452c4aec267c1",
+  "primaryComparator": "riskContextual",
+  "reviews": [
+    {
+      "cutoff": 30,
+      "publishedDay": 31,
+      "packetHash": "d3268462276cf0009232bcdfe7109cfa88f694301569a61d990e1093139aa242",
+      "evidence": {
+        "evidenceId": "E-e0d17e384e87dd39855e",
+        "asOfDay": 30,
+        "customers": 100,
+        "recentPurchases": 111,
+        "previousPurchases": 120,
+        "recentPremiumPurchases": 27,
+        "previousPremiumPurchases": 40,
+        "activeBuyers": 65,
+        "lapsedBuyers": 35,
+        "matureRows": 1700,
+        "immatureRows": 1300,
+        "merchants": [
+          {
+            "index": 0,
+            "name": "Willow Goods",
+            "stock": 94,
+            "maxOfferPct": 5,
+            "matureOrders": 65,
+            "matureReturns": 3,
+            "returnRate": 0.046153846153846156,
+            "retainedCents": 260444,
+            "recentOrders": 35,
+            "directMarkdownOrders": 0,
+            "directMarkdownPct": 0,
+            "minStockLast14": 57
+          },
+          {
+            "index": 1,
+            "name": "Oak & Ink",
+            "stock": 75,
+            "maxOfferPct": 10,
+            "matureOrders": 77,
+            "matureReturns": 0,
+            "returnRate": 0,
+            "retainedCents": 353432,
+            "recentOrders": 39,
+            "directMarkdownOrders": 0,
+            "directMarkdownPct": 0,
+            "minStockLast14": 52
+          },
+          {
+            "index": 2,
+            "name": "Corner Supply",
+            "stock": 67,
+            "maxOfferPct": 10,
+            "matureOrders": 79,
+            "matureReturns": 0,
+            "returnRate": 0,
+            "retainedCents": 375083,
+            "recentOrders": 37,
+            "directMarkdownOrders": 0,
+            "directMarkdownPct": 0,
+            "minStockLast14": 48
+          }
+        ],
+        "productBands": [
+          {
+            "priceCents": 3199,
+            "currency": "USD",
+            "catalogSource": "CACHED_CHANNEL3"
+          },
+          {
+            "priceCents": 8900,
+            "currency": "USD",
+            "catalogSource": "CACHED_CHANNEL3"
+          }
+        ],
+        "definitions": {
+          "returns": "Mature returned orders divided by the SAME mature order population; recent windows exclude unresolved outcomes.",
+          "units": "All amounts ending Cents are USD cents. Return rates are fractions. Markdown percentages are percentage points.",
+          "feedback": "Shared no-outreach observation stream, identical for all evaluated controllers. No candidate-policy or final comparison outcomes are included."
+        }
+      },
+      "decision": {
+        "observationIds": [
+          "demand",
+          "premium_mix",
+          "merchant_returns",
+          "inventory"
+        ],
+        "reason": "The market shows stable inventory and low return rates, despite a slight decline in demand and premium mix. The recent_value rule (898a2b58efaf52) is selected for its positive performance profile in steady and return-wave conditions, which aligns with the current stable market state. The premium_alternative (331960fbf3c19b) was considered as an alternative to address the premium mix decline, but the broader reach of the recent_value rule is better suited for the current inventory levels.",
+        "evidenceId": "E-e0d17e384e87dd39855e",
+        "candidateId": "898a2b58efaf52",
+        "observedCondition": "stable",
+        "reasonCode": "demand_change",
+        "alternativeId": "331960fbf3c19b"
+      },
+      "error": null,
+      "selections": {
+        "organic": "observe",
+        "static": "898a2b58efaf52",
+        "riskStatic": "observe",
+        "contextual": "observe",
+        "riskContextual": "observe",
+        "llm": "898a2b58efaf52",
+        "firstChoice": "898a2b58efaf52"
+      },
+      "codeInferredRegime": "budget_squeeze"
+    },
+    {
+      "cutoff": 55,
+      "publishedDay": 56,
+      "packetHash": "63b97cf64cc2d61b8527494a8379d00f9cc5b68a06ec1fdcf04816b2f46715a1",
+      "evidence": {
+        "evidenceId": "E-b18220a25f3c30723cb3",
+        "asOfDay": 55,
+        "customers": 100,
+        "recentPurchases": 91,
+        "previousPurchases": 100,
+        "recentPremiumPurchases": 27,
+        "previousPremiumPurchases": 24,
+        "activeBuyers": 56,
+        "lapsedBuyers": 44,
+        "matureRows": 4200,
+        "immatureRows": 1300,
+        "merchants": [
+          {
+            "index": 0,
+            "name": "Willow Goods",
+            "stock": 83,
+            "maxOfferPct": 5,
+            "matureOrders": 60,
+            "matureReturns": 2,
+            "returnRate": 0.03333333333333333,
+            "retainedCents": 270612,
+            "recentOrders": 26,
+            "directMarkdownOrders": 0,
+            "directMarkdownPct": 0,
+            "minStockLast14": 41
+          },
+          {
+            "index": 1,
+            "name": "Oak & Ink",
+            "stock": 75,
+            "maxOfferPct": 10,
+            "matureOrders": 81,
+            "matureReturns": 3,
+            "returnRate": 0.037037037037037035,
+            "retainedCents": 356311,
+            "recentOrders": 26,
+            "directMarkdownOrders": 0,
+            "directMarkdownPct": 0,
+            "minStockLast14": 58
+          },
+          {
+            "index": 2,
+            "name": "Corner Supply",
+            "stock": 70,
+            "maxOfferPct": 10,
+            "matureOrders": 68,
+            "matureReturns": 7,
+            "returnRate": 0.10294117647058823,
+            "retainedCents": 296797,
+            "recentOrders": 39,
+            "directMarkdownOrders": 0,
+            "directMarkdownPct": 0,
+            "minStockLast14": 62
+          }
+        ],
+        "productBands": [
+          {
+            "priceCents": 3199,
+            "currency": "USD",
+            "catalogSource": "CACHED_CHANNEL3"
+          },
+          {
+            "priceCents": 8900,
+            "currency": "USD",
+            "catalogSource": "CACHED_CHANNEL3"
+          }
+        ],
+        "definitions": {
+          "returns": "Mature returned orders divided by the SAME mature order population; recent windows exclude unresolved outcomes.",
+          "units": "All amounts ending Cents are USD cents. Return rates are fractions. Markdown percentages are percentage points.",
+          "feedback": "Shared no-outreach observation stream, identical for all evaluated controllers. No candidate-policy or final comparison outcomes are included."
+        }
+      },
+      "decision": {
+        "reasonCode": "return_concentration",
+        "reason": "The recent_value campaign (898a2b58efaf52) continues to show the most robust performance across profiles, particularly in return-heavy scenarios, which is relevant given the high return rate observed at Corner Supply. Despite slight demand softening and inventory pressure at Corner Supply, the current strategy remains the best-supported choice.",
+        "alternativeId": "f61cf007354269",
+        "observationIds": [
+          "demand",
+          "merchant_returns",
+          "inventory"
+        ],
+        "candidateId": "898a2b58efaf52",
+        "evidenceId": "E-b18220a25f3c30723cb3",
+        "observedCondition": "return_pressure"
+      },
+      "error": null,
+      "selections": {
+        "organic": "observe",
+        "static": "898a2b58efaf52",
+        "riskStatic": "observe",
+        "contextual": "898a2b58efaf52",
+        "riskContextual": "observe",
+        "llm": "898a2b58efaf52",
+        "firstChoice": "898a2b58efaf52"
+      },
+      "codeInferredRegime": "returns_wave"
+    },
+    {
+      "cutoff": 80,
+      "publishedDay": 81,
+      "packetHash": "d9b54ce2e0981a999858952b147605b1ce11c88448b761b54602f006695f352a",
+      "evidence": {
+        "evidenceId": "E-1d4debd69a48ef125445",
+        "asOfDay": 80,
+        "customers": 100,
+        "recentPurchases": 97,
+        "previousPurchases": 100,
+        "recentPremiumPurchases": 24,
+        "previousPremiumPurchases": 21,
+        "activeBuyers": 63,
+        "lapsedBuyers": 37,
+        "matureRows": 6700,
+        "immatureRows": 1300,
+        "merchants": [
+          {
+            "index": 0,
+            "name": "Willow Goods",
+            "stock": 58,
+            "maxOfferPct": 5,
+            "matureOrders": 67,
+            "matureReturns": 3,
+            "returnRate": 0.04477611940298507,
+            "retainedCents": 295952,
+            "recentOrders": 31,
+            "directMarkdownOrders": 0,
+            "directMarkdownPct": 0,
+            "minStockLast14": 37
+          },
+          {
+            "index": 1,
+            "name": "Oak & Ink",
+            "stock": 70,
+            "maxOfferPct": 10,
+            "matureOrders": 69,
+            "matureReturns": 4,
+            "returnRate": 0.057971014492753624,
+            "retainedCents": 282048,
+            "recentOrders": 42,
+            "directMarkdownOrders": 0,
+            "directMarkdownPct": 0,
+            "minStockLast14": 52
+          },
+          {
+            "index": 2,
+            "name": "Corner Supply",
+            "stock": 102,
+            "maxOfferPct": 10,
+            "matureOrders": 74,
+            "matureReturns": 3,
+            "returnRate": 0.04054054054054054,
+            "retainedCents": 324046,
+            "recentOrders": 24,
+            "directMarkdownOrders": 0,
+            "directMarkdownPct": 0,
+            "minStockLast14": 48
+          }
+        ],
+        "productBands": [
+          {
+            "priceCents": 3199,
+            "currency": "USD",
+            "catalogSource": "CACHED_CHANNEL3"
+          },
+          {
+            "priceCents": 8900,
+            "currency": "USD",
+            "catalogSource": "CACHED_CHANNEL3"
+          }
+        ],
+        "definitions": {
+          "returns": "Mature returned orders divided by the SAME mature order population; recent windows exclude unresolved outcomes.",
+          "units": "All amounts ending Cents are USD cents. Return rates are fractions. Markdown percentages are percentage points.",
+          "feedback": "Shared no-outreach observation stream, identical for all evaluated controllers. No candidate-policy or final comparison outcomes are included."
+        }
+      },
+      "decision": {
+        "observationIds": [
+          "demand",
+          "premium_mix",
+          "merchant_returns",
+          "inventory"
+        ],
+        "alternativeId": "331960fbf3c19b",
+        "candidateId": "898a2b58efaf52",
+        "evidenceId": "E-1d4debd69a48ef125445",
+        "reasonCode": "model_evidence",
+        "observedCondition": "stable",
+        "reason": "The recent_value campaign continues to show the most robust potential across multiple development profiles, particularly in steady and returns-wave conditions, which aligns with the current stable inventory and moderate return rates."
+      },
+      "error": null,
+      "selections": {
+        "organic": "observe",
+        "static": "898a2b58efaf52",
+        "riskStatic": "observe",
+        "contextual": "898a2b58efaf52",
+        "riskContextual": "observe",
+        "llm": "898a2b58efaf52",
+        "firstChoice": "898a2b58efaf52"
+      },
+      "codeInferredRegime": "steady"
+    }
+  ],
+  "branches": [
+    {
+      "method": "organic",
+      "policy": "organic",
+      "seed": 96010,
+      "scenario": "budget_squeeze",
+      "purchases": 963,
+      "platformProxyCents": 120401,
+      "retainedCents": 4174085,
+      "merchantContributionCents": 1415660,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "daily": [
+        {
+          "day": 31,
+          "platformProxyCents": 2110,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 32,
+          "platformProxyCents": 4144,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 33,
+          "platformProxyCents": 6263,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 34,
+          "platformProxyCents": 8297,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 35,
+          "platformProxyCents": 9299,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 36,
+          "platformProxyCents": 10795,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 37,
+          "platformProxyCents": 12394,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 38,
+          "platformProxyCents": 14329,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 39,
+          "platformProxyCents": 16264,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 40,
+          "platformProxyCents": 17760,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 41,
+          "platformProxyCents": 18786,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 42,
+          "platformProxyCents": 20309,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 43,
+          "platformProxyCents": 22014,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 44,
+          "platformProxyCents": 24460,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 45,
+          "platformProxyCents": 25538,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 46,
+          "platformProxyCents": 28302,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 47,
+          "platformProxyCents": 29359,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 48,
+          "platformProxyCents": 30804,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 49,
+          "platformProxyCents": 32287,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 50,
+          "platformProxyCents": 34845,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 51,
+          "platformProxyCents": 35916,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 52,
+          "platformProxyCents": 37851,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 53,
+          "platformProxyCents": 39213,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 54,
+          "platformProxyCents": 41126,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 55,
+          "platformProxyCents": 42882,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 56,
+          "platformProxyCents": 44965,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 57,
+          "platformProxyCents": 47648,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 58,
+          "platformProxyCents": 49350,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 59,
+          "platformProxyCents": 51357,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 60,
+          "platformProxyCents": 52853,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 61,
+          "platformProxyCents": 54103,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 62,
+          "platformProxyCents": 55232,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 63,
+          "platformProxyCents": 55620,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 64,
+          "platformProxyCents": 57482,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 65,
+          "platformProxyCents": 59359,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 66,
+          "platformProxyCents": 61679,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 67,
+          "platformProxyCents": 63713,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 68,
+          "platformProxyCents": 65312,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 69,
+          "platformProxyCents": 66808,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 70,
+          "platformProxyCents": 69133,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 71,
+          "platformProxyCents": 70965,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 72,
+          "platformProxyCents": 72407,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 73,
+          "platformProxyCents": 74387,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 74,
+          "platformProxyCents": 76322,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 75,
+          "platformProxyCents": 77872,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 76,
+          "platformProxyCents": 79001,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 77,
+          "platformProxyCents": 80161,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 78,
+          "platformProxyCents": 82226,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 79,
+          "platformProxyCents": 84963,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 80,
+          "platformProxyCents": 86977,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 81,
+          "platformProxyCents": 88240,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 82,
+          "platformProxyCents": 90327,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 83,
+          "platformProxyCents": 91644,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 84,
+          "platformProxyCents": 92773,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 85,
+          "platformProxyCents": 94578,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 86,
+          "platformProxyCents": 95913,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 87,
+          "platformProxyCents": 97154,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 88,
+          "platformProxyCents": 98928,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 89,
+          "platformProxyCents": 100890,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 90,
+          "platformProxyCents": 102492,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 91,
+          "platformProxyCents": 104297,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 92,
+          "platformProxyCents": 106129,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 93,
+          "platformProxyCents": 107827,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 94,
+          "platformProxyCents": 109605,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 95,
+          "platformProxyCents": 111464,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 96,
+          "platformProxyCents": 112566,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 97,
+          "platformProxyCents": 113798,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 98,
+          "platformProxyCents": 115142,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 99,
+          "platformProxyCents": 117440,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 100,
+          "platformProxyCents": 120401,
+          "allocatedModelUSD": 0
+        }
+      ],
+      "fits": [],
+      "publications": [
+        {
+          "asOfDay": 30,
+          "effectiveDay": 31,
+          "expiresDay": 34,
+          "trainingCutoffDay": null,
+          "policy": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": []
+        },
+        {
+          "asOfDay": 55,
+          "effectiveDay": 56,
+          "expiresDay": 59,
+          "trainingCutoffDay": null,
+          "policy": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": []
+        },
+        {
+          "asOfDay": 80,
+          "effectiveDay": 81,
+          "expiresDay": 84,
+          "trainingCutoffDay": null,
+          "policy": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": []
+        }
+      ],
+      "matureOutcomes": 7000,
+      "deltaPlatformUSD": 0,
+      "deltaVsCodeUSD": 0,
+      "deltaVsFirstUSD": 0.9938859999999999,
+      "deltaMerchantUSD": 0
+    },
+    {
+      "method": "static",
+      "policy": "static",
+      "seed": 96010,
+      "scenario": "budget_squeeze",
+      "purchases": 958,
+      "platformProxyCents": 120302,
+      "retainedCents": 4209399,
+      "merchantContributionCents": 1425781,
+      "outreachCents": 754,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 754,
+      "offers": 0,
+      "recommendations": 377,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "daily": [
+        {
+          "day": 31,
+          "platformProxyCents": 2110,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 32,
+          "platformProxyCents": 4371,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 33,
+          "platformProxyCents": 6490,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 34,
+          "platformProxyCents": 8524,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 35,
+          "platformProxyCents": 9524,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 36,
+          "platformProxyCents": 11205,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 37,
+          "platformProxyCents": 13013,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 38,
+          "platformProxyCents": 14924,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 39,
+          "platformProxyCents": 17307,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 40,
+          "platformProxyCents": 18554,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 41,
+          "platformProxyCents": 19793,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 42,
+          "platformProxyCents": 21310,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 43,
+          "platformProxyCents": 23001,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 44,
+          "platformProxyCents": 25658,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 45,
+          "platformProxyCents": 26941,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 46,
+          "platformProxyCents": 29602,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 47,
+          "platformProxyCents": 30556,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 48,
+          "platformProxyCents": 31898,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 49,
+          "platformProxyCents": 33381,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 50,
+          "platformProxyCents": 35939,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 51,
+          "platformProxyCents": 37010,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 52,
+          "platformProxyCents": 38945,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 53,
+          "platformProxyCents": 40074,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 54,
+          "platformProxyCents": 41884,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 55,
+          "platformProxyCents": 43640,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 56,
+          "platformProxyCents": 45956,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 57,
+          "platformProxyCents": 48725,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 58,
+          "platformProxyCents": 50395,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 59,
+          "platformProxyCents": 52380,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 60,
+          "platformProxyCents": 53961,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 61,
+          "platformProxyCents": 54966,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 62,
+          "platformProxyCents": 56316,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 63,
+          "platformProxyCents": 56694,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 64,
+          "platformProxyCents": 58538,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 65,
+          "platformProxyCents": 60298,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 66,
+          "platformProxyCents": 62604,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 67,
+          "platformProxyCents": 64620,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 68,
+          "platformProxyCents": 66201,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 69,
+          "platformProxyCents": 67580,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 70,
+          "platformProxyCents": 69885,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 71,
+          "platformProxyCents": 71717,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 72,
+          "platformProxyCents": 73159,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 73,
+          "platformProxyCents": 74700,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 74,
+          "platformProxyCents": 76635,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 75,
+          "platformProxyCents": 78185,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 76,
+          "platformProxyCents": 79314,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 77,
+          "platformProxyCents": 80474,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 78,
+          "platformProxyCents": 82539,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 79,
+          "platformProxyCents": 85276,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 80,
+          "platformProxyCents": 87290,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 81,
+          "platformProxyCents": 88553,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 82,
+          "platformProxyCents": 90835,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 83,
+          "platformProxyCents": 92128,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 84,
+          "platformProxyCents": 93456,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 85,
+          "platformProxyCents": 95140,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 86,
+          "platformProxyCents": 96362,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 87,
+          "platformProxyCents": 97362,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 88,
+          "platformProxyCents": 99132,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 89,
+          "platformProxyCents": 101309,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 90,
+          "platformProxyCents": 102899,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 91,
+          "platformProxyCents": 104678,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 92,
+          "platformProxyCents": 106494,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 93,
+          "platformProxyCents": 108405,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 94,
+          "platformProxyCents": 109967,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 95,
+          "platformProxyCents": 111701,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 96,
+          "platformProxyCents": 112803,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 97,
+          "platformProxyCents": 114035,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 98,
+          "platformProxyCents": 115379,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 99,
+          "platformProxyCents": 117677,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 100,
+          "platformProxyCents": 120302,
+          "allocatedModelUSD": 0
+        }
+      ],
+      "fits": [],
+      "publications": [
+        {
+          "asOfDay": 30,
+          "effectiveDay": 31,
+          "expiresDay": 45,
+          "trainingCutoffDay": null,
+          "policy": "recent_value",
+          "strategy": "recommendations",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "asOfDay": 55,
+          "effectiveDay": 56,
+          "expiresDay": 70,
+          "trainingCutoffDay": null,
+          "policy": "recent_value",
+          "strategy": "recommendations",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "asOfDay": 80,
+          "effectiveDay": 81,
+          "expiresDay": 95,
+          "trainingCutoffDay": null,
+          "policy": "recent_value",
+          "strategy": "recommendations",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "matureOutcomes": 7000,
+      "deltaPlatformUSD": -0.99,
+      "deltaVsCodeUSD": -0.99,
+      "deltaVsFirstUSD": 0.003886,
+      "deltaMerchantUSD": 101.21
+    },
+    {
+      "method": "riskStatic",
+      "policy": "riskStatic",
+      "seed": 96010,
+      "scenario": "budget_squeeze",
+      "purchases": 963,
+      "platformProxyCents": 120401,
+      "retainedCents": 4174085,
+      "merchantContributionCents": 1415660,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "daily": [
+        {
+          "day": 31,
+          "platformProxyCents": 2110,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 32,
+          "platformProxyCents": 4144,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 33,
+          "platformProxyCents": 6263,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 34,
+          "platformProxyCents": 8297,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 35,
+          "platformProxyCents": 9299,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 36,
+          "platformProxyCents": 10795,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 37,
+          "platformProxyCents": 12394,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 38,
+          "platformProxyCents": 14329,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 39,
+          "platformProxyCents": 16264,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 40,
+          "platformProxyCents": 17760,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 41,
+          "platformProxyCents": 18786,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 42,
+          "platformProxyCents": 20309,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 43,
+          "platformProxyCents": 22014,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 44,
+          "platformProxyCents": 24460,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 45,
+          "platformProxyCents": 25538,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 46,
+          "platformProxyCents": 28302,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 47,
+          "platformProxyCents": 29359,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 48,
+          "platformProxyCents": 30804,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 49,
+          "platformProxyCents": 32287,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 50,
+          "platformProxyCents": 34845,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 51,
+          "platformProxyCents": 35916,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 52,
+          "platformProxyCents": 37851,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 53,
+          "platformProxyCents": 39213,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 54,
+          "platformProxyCents": 41126,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 55,
+          "platformProxyCents": 42882,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 56,
+          "platformProxyCents": 44965,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 57,
+          "platformProxyCents": 47648,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 58,
+          "platformProxyCents": 49350,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 59,
+          "platformProxyCents": 51357,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 60,
+          "platformProxyCents": 52853,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 61,
+          "platformProxyCents": 54103,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 62,
+          "platformProxyCents": 55232,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 63,
+          "platformProxyCents": 55620,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 64,
+          "platformProxyCents": 57482,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 65,
+          "platformProxyCents": 59359,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 66,
+          "platformProxyCents": 61679,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 67,
+          "platformProxyCents": 63713,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 68,
+          "platformProxyCents": 65312,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 69,
+          "platformProxyCents": 66808,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 70,
+          "platformProxyCents": 69133,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 71,
+          "platformProxyCents": 70965,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 72,
+          "platformProxyCents": 72407,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 73,
+          "platformProxyCents": 74387,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 74,
+          "platformProxyCents": 76322,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 75,
+          "platformProxyCents": 77872,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 76,
+          "platformProxyCents": 79001,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 77,
+          "platformProxyCents": 80161,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 78,
+          "platformProxyCents": 82226,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 79,
+          "platformProxyCents": 84963,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 80,
+          "platformProxyCents": 86977,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 81,
+          "platformProxyCents": 88240,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 82,
+          "platformProxyCents": 90327,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 83,
+          "platformProxyCents": 91644,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 84,
+          "platformProxyCents": 92773,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 85,
+          "platformProxyCents": 94578,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 86,
+          "platformProxyCents": 95913,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 87,
+          "platformProxyCents": 97154,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 88,
+          "platformProxyCents": 98928,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 89,
+          "platformProxyCents": 100890,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 90,
+          "platformProxyCents": 102492,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 91,
+          "platformProxyCents": 104297,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 92,
+          "platformProxyCents": 106129,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 93,
+          "platformProxyCents": 107827,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 94,
+          "platformProxyCents": 109605,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 95,
+          "platformProxyCents": 111464,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 96,
+          "platformProxyCents": 112566,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 97,
+          "platformProxyCents": 113798,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 98,
+          "platformProxyCents": 115142,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 99,
+          "platformProxyCents": 117440,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 100,
+          "platformProxyCents": 120401,
+          "allocatedModelUSD": 0
+        }
+      ],
+      "fits": [],
+      "publications": [
+        {
+          "asOfDay": 30,
+          "effectiveDay": 31,
+          "expiresDay": 34,
+          "trainingCutoffDay": null,
+          "policy": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": []
+        },
+        {
+          "asOfDay": 55,
+          "effectiveDay": 56,
+          "expiresDay": 59,
+          "trainingCutoffDay": null,
+          "policy": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": []
+        },
+        {
+          "asOfDay": 80,
+          "effectiveDay": 81,
+          "expiresDay": 84,
+          "trainingCutoffDay": null,
+          "policy": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": []
+        }
+      ],
+      "matureOutcomes": 7000,
+      "deltaPlatformUSD": 0,
+      "deltaVsCodeUSD": 0,
+      "deltaVsFirstUSD": 0.9938859999999999,
+      "deltaMerchantUSD": 0
+    },
+    {
+      "method": "contextual",
+      "policy": "contextual",
+      "seed": 96010,
+      "scenario": "budget_squeeze",
+      "purchases": 956,
+      "platformProxyCents": 119934,
+      "retainedCents": 4185898,
+      "merchantContributionCents": 1418681,
+      "outreachCents": 526,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 526,
+      "offers": 0,
+      "recommendations": 263,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "daily": [
+        {
+          "day": 31,
+          "platformProxyCents": 2110,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 32,
+          "platformProxyCents": 4144,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 33,
+          "platformProxyCents": 6263,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 34,
+          "platformProxyCents": 8297,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 35,
+          "platformProxyCents": 9299,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 36,
+          "platformProxyCents": 10795,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 37,
+          "platformProxyCents": 12394,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 38,
+          "platformProxyCents": 14329,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 39,
+          "platformProxyCents": 16264,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 40,
+          "platformProxyCents": 17760,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 41,
+          "platformProxyCents": 18786,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 42,
+          "platformProxyCents": 20309,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 43,
+          "platformProxyCents": 22014,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 44,
+          "platformProxyCents": 24460,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 45,
+          "platformProxyCents": 25538,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 46,
+          "platformProxyCents": 28302,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 47,
+          "platformProxyCents": 29359,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 48,
+          "platformProxyCents": 30804,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 49,
+          "platformProxyCents": 32287,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 50,
+          "platformProxyCents": 34845,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 51,
+          "platformProxyCents": 35916,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 52,
+          "platformProxyCents": 37851,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 53,
+          "platformProxyCents": 39213,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 54,
+          "platformProxyCents": 41126,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 55,
+          "platformProxyCents": 42882,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 56,
+          "platformProxyCents": 44965,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 57,
+          "platformProxyCents": 47837,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 58,
+          "platformProxyCents": 49507,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 59,
+          "platformProxyCents": 51490,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 60,
+          "platformProxyCents": 52970,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 61,
+          "platformProxyCents": 54208,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 62,
+          "platformProxyCents": 55560,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 63,
+          "platformProxyCents": 55938,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 64,
+          "platformProxyCents": 57782,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 65,
+          "platformProxyCents": 59542,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 66,
+          "platformProxyCents": 61846,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 67,
+          "platformProxyCents": 63862,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 68,
+          "platformProxyCents": 65445,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 69,
+          "platformProxyCents": 66824,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 70,
+          "platformProxyCents": 69129,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 71,
+          "platformProxyCents": 70961,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 72,
+          "platformProxyCents": 72403,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 73,
+          "platformProxyCents": 74177,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 74,
+          "platformProxyCents": 76009,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 75,
+          "platformProxyCents": 77559,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 76,
+          "platformProxyCents": 78585,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 77,
+          "platformProxyCents": 79745,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 78,
+          "platformProxyCents": 81810,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 79,
+          "platformProxyCents": 84547,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 80,
+          "platformProxyCents": 86561,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 81,
+          "platformProxyCents": 87824,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 82,
+          "platformProxyCents": 90572,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 83,
+          "platformProxyCents": 91863,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 84,
+          "platformProxyCents": 93088,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 85,
+          "platformProxyCents": 94772,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 86,
+          "platformProxyCents": 95994,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 87,
+          "platformProxyCents": 96994,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 88,
+          "platformProxyCents": 98766,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 89,
+          "platformProxyCents": 100943,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 90,
+          "platformProxyCents": 102533,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 91,
+          "platformProxyCents": 104312,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 92,
+          "platformProxyCents": 106126,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 93,
+          "platformProxyCents": 108037,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 94,
+          "platformProxyCents": 109599,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 95,
+          "platformProxyCents": 111333,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 96,
+          "platformProxyCents": 112435,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 97,
+          "platformProxyCents": 113667,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 98,
+          "platformProxyCents": 115011,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 99,
+          "platformProxyCents": 117309,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 100,
+          "platformProxyCents": 119934,
+          "allocatedModelUSD": 0
+        }
+      ],
+      "fits": [],
+      "publications": [
+        {
+          "asOfDay": 30,
+          "effectiveDay": 31,
+          "expiresDay": 34,
+          "trainingCutoffDay": null,
+          "policy": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": []
+        },
+        {
+          "asOfDay": 55,
+          "effectiveDay": 56,
+          "expiresDay": 70,
+          "trainingCutoffDay": null,
+          "policy": "recent_value",
+          "strategy": "recommendations",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "asOfDay": 80,
+          "effectiveDay": 81,
+          "expiresDay": 95,
+          "trainingCutoffDay": null,
+          "policy": "recent_value",
+          "strategy": "recommendations",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "matureOutcomes": 7000,
+      "deltaPlatformUSD": -4.67,
+      "deltaVsCodeUSD": -4.67,
+      "deltaVsFirstUSD": -3.676114,
+      "deltaMerchantUSD": 30.21
+    },
+    {
+      "method": "riskContextual",
+      "policy": "riskContextual",
+      "seed": 96010,
+      "scenario": "budget_squeeze",
+      "purchases": 963,
+      "platformProxyCents": 120401,
+      "retainedCents": 4174085,
+      "merchantContributionCents": 1415660,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "daily": [
+        {
+          "day": 31,
+          "platformProxyCents": 2110,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 32,
+          "platformProxyCents": 4144,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 33,
+          "platformProxyCents": 6263,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 34,
+          "platformProxyCents": 8297,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 35,
+          "platformProxyCents": 9299,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 36,
+          "platformProxyCents": 10795,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 37,
+          "platformProxyCents": 12394,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 38,
+          "platformProxyCents": 14329,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 39,
+          "platformProxyCents": 16264,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 40,
+          "platformProxyCents": 17760,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 41,
+          "platformProxyCents": 18786,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 42,
+          "platformProxyCents": 20309,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 43,
+          "platformProxyCents": 22014,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 44,
+          "platformProxyCents": 24460,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 45,
+          "platformProxyCents": 25538,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 46,
+          "platformProxyCents": 28302,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 47,
+          "platformProxyCents": 29359,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 48,
+          "platformProxyCents": 30804,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 49,
+          "platformProxyCents": 32287,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 50,
+          "platformProxyCents": 34845,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 51,
+          "platformProxyCents": 35916,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 52,
+          "platformProxyCents": 37851,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 53,
+          "platformProxyCents": 39213,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 54,
+          "platformProxyCents": 41126,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 55,
+          "platformProxyCents": 42882,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 56,
+          "platformProxyCents": 44965,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 57,
+          "platformProxyCents": 47648,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 58,
+          "platformProxyCents": 49350,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 59,
+          "platformProxyCents": 51357,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 60,
+          "platformProxyCents": 52853,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 61,
+          "platformProxyCents": 54103,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 62,
+          "platformProxyCents": 55232,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 63,
+          "platformProxyCents": 55620,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 64,
+          "platformProxyCents": 57482,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 65,
+          "platformProxyCents": 59359,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 66,
+          "platformProxyCents": 61679,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 67,
+          "platformProxyCents": 63713,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 68,
+          "platformProxyCents": 65312,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 69,
+          "platformProxyCents": 66808,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 70,
+          "platformProxyCents": 69133,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 71,
+          "platformProxyCents": 70965,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 72,
+          "platformProxyCents": 72407,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 73,
+          "platformProxyCents": 74387,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 74,
+          "platformProxyCents": 76322,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 75,
+          "platformProxyCents": 77872,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 76,
+          "platformProxyCents": 79001,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 77,
+          "platformProxyCents": 80161,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 78,
+          "platformProxyCents": 82226,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 79,
+          "platformProxyCents": 84963,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 80,
+          "platformProxyCents": 86977,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 81,
+          "platformProxyCents": 88240,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 82,
+          "platformProxyCents": 90327,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 83,
+          "platformProxyCents": 91644,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 84,
+          "platformProxyCents": 92773,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 85,
+          "platformProxyCents": 94578,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 86,
+          "platformProxyCents": 95913,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 87,
+          "platformProxyCents": 97154,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 88,
+          "platformProxyCents": 98928,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 89,
+          "platformProxyCents": 100890,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 90,
+          "platformProxyCents": 102492,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 91,
+          "platformProxyCents": 104297,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 92,
+          "platformProxyCents": 106129,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 93,
+          "platformProxyCents": 107827,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 94,
+          "platformProxyCents": 109605,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 95,
+          "platformProxyCents": 111464,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 96,
+          "platformProxyCents": 112566,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 97,
+          "platformProxyCents": 113798,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 98,
+          "platformProxyCents": 115142,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 99,
+          "platformProxyCents": 117440,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 100,
+          "platformProxyCents": 120401,
+          "allocatedModelUSD": 0
+        }
+      ],
+      "fits": [],
+      "publications": [
+        {
+          "asOfDay": 30,
+          "effectiveDay": 31,
+          "expiresDay": 34,
+          "trainingCutoffDay": null,
+          "policy": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": []
+        },
+        {
+          "asOfDay": 55,
+          "effectiveDay": 56,
+          "expiresDay": 59,
+          "trainingCutoffDay": null,
+          "policy": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": []
+        },
+        {
+          "asOfDay": 80,
+          "effectiveDay": 81,
+          "expiresDay": 84,
+          "trainingCutoffDay": null,
+          "policy": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": []
+        }
+      ],
+      "matureOutcomes": 7000,
+      "deltaPlatformUSD": 0,
+      "deltaVsCodeUSD": 0,
+      "deltaVsFirstUSD": 0.9938859999999999,
+      "deltaMerchantUSD": 0
+    },
+    {
+      "method": "original",
+      "policy": "original",
+      "seed": 96010,
+      "scenario": "budget_squeeze",
+      "purchases": 974,
+      "platformProxyCents": 119773,
+      "retainedCents": 4221285,
+      "merchantContributionCents": 1426494,
+      "outreachCents": 948,
+      "platformSupportCents": 911,
+      "jointBudgetSpentCents": 5503,
+      "offers": 175,
+      "recommendations": 299,
+      "redemptions": 16,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "daily": [
+        {
+          "day": 31,
+          "platformProxyCents": 2110,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 32,
+          "platformProxyCents": 4140,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 33,
+          "platformProxyCents": 6257,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 34,
+          "platformProxyCents": 8289,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 35,
+          "platformProxyCents": 9289,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 36,
+          "platformProxyCents": 11213,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 37,
+          "platformProxyCents": 13050,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 38,
+          "platformProxyCents": 14973,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 39,
+          "platformProxyCents": 16888,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 40,
+          "platformProxyCents": 18441,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 41,
+          "platformProxyCents": 19415,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 42,
+          "platformProxyCents": 20888,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 43,
+          "platformProxyCents": 22705,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 44,
+          "platformProxyCents": 25093,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 45,
+          "platformProxyCents": 26153,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 46,
+          "platformProxyCents": 29071,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 47,
+          "platformProxyCents": 30173,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 48,
+          "platformProxyCents": 31463,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 49,
+          "platformProxyCents": 32930,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 50,
+          "platformProxyCents": 35472,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 51,
+          "platformProxyCents": 36147,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 52,
+          "platformProxyCents": 37978,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 53,
+          "platformProxyCents": 39186,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 54,
+          "platformProxyCents": 41081,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 55,
+          "platformProxyCents": 42825,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 56,
+          "platformProxyCents": 44923,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 57,
+          "platformProxyCents": 47792,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 58,
+          "platformProxyCents": 49377,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 59,
+          "platformProxyCents": 51372,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 60,
+          "platformProxyCents": 52792,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 61,
+          "platformProxyCents": 54024,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 62,
+          "platformProxyCents": 55139,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 63,
+          "platformProxyCents": 55948,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 64,
+          "platformProxyCents": 57679,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 65,
+          "platformProxyCents": 59769,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 66,
+          "platformProxyCents": 62083,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 67,
+          "platformProxyCents": 64202,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 68,
+          "platformProxyCents": 65554,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 69,
+          "platformProxyCents": 67036,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 70,
+          "platformProxyCents": 69454,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 71,
+          "platformProxyCents": 71262,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 72,
+          "platformProxyCents": 72684,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 73,
+          "platformProxyCents": 74640,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 74,
+          "platformProxyCents": 76351,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 75,
+          "platformProxyCents": 77891,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 76,
+          "platformProxyCents": 79235,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 77,
+          "platformProxyCents": 80484,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 78,
+          "platformProxyCents": 82630,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 79,
+          "platformProxyCents": 84982,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 80,
+          "platformProxyCents": 86737,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 81,
+          "platformProxyCents": 88219,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 82,
+          "platformProxyCents": 90432,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 83,
+          "platformProxyCents": 91749,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 84,
+          "platformProxyCents": 92775,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 85,
+          "platformProxyCents": 94475,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 86,
+          "platformProxyCents": 95800,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 87,
+          "platformProxyCents": 96808,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 88,
+          "platformProxyCents": 98473,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 89,
+          "platformProxyCents": 100423,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 90,
+          "platformProxyCents": 101889,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 91,
+          "platformProxyCents": 103688,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 92,
+          "platformProxyCents": 105306,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 93,
+          "platformProxyCents": 107000,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 94,
+          "platformProxyCents": 108772,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 95,
+          "platformProxyCents": 110757,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 96,
+          "platformProxyCents": 111960,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 97,
+          "platformProxyCents": 113184,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 98,
+          "platformProxyCents": 114524,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 99,
+          "platformProxyCents": 116818,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 100,
+          "platformProxyCents": 119773,
+          "allocatedModelUSD": 0
+        }
+      ],
+      "fits": [],
+      "publications": [
+        {
+          "asOfDay": 30,
+          "effectiveDay": 31,
+          "expiresDay": 56,
+          "trainingCutoffDay": 30,
+          "policy": "unchanged_original_rules",
+          "strategy": "mixed",
+          "audience": "lapsed",
+          "maxOfferPct": 5,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "asOfDay": 55,
+          "effectiveDay": 56,
+          "expiresDay": 81,
+          "trainingCutoffDay": 55,
+          "policy": "unchanged_original_rules",
+          "strategy": "mixed",
+          "audience": "lapsed",
+          "maxOfferPct": 5,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "asOfDay": 80,
+          "effectiveDay": 81,
+          "expiresDay": 106,
+          "trainingCutoffDay": 80,
+          "policy": "unchanged_original_rules",
+          "strategy": "mixed",
+          "audience": "lapsed",
+          "maxOfferPct": 5,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "matureOutcomes": 7000,
+      "deltaPlatformUSD": -6.28,
+      "deltaVsCodeUSD": -6.28,
+      "deltaVsFirstUSD": -5.286114,
+      "deltaMerchantUSD": 108.34
+    },
+    {
+      "method": "llm",
+      "policy": "llm",
+      "seed": 96010,
+      "scenario": "budget_squeeze",
+      "purchases": 958,
+      "platformProxyCents": 120302,
+      "retainedCents": 4209399,
+      "merchantContributionCents": 1425781,
+      "outreachCents": 754,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 754,
+      "offers": 0,
+      "recommendations": 377,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0.010869,
+      "daily": [
+        {
+          "day": 31,
+          "platformProxyCents": 2110,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 32,
+          "platformProxyCents": 4371,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 33,
+          "platformProxyCents": 6490,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 34,
+          "platformProxyCents": 8524,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 35,
+          "platformProxyCents": 9524,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 36,
+          "platformProxyCents": 11205,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 37,
+          "platformProxyCents": 13013,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 38,
+          "platformProxyCents": 14924,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 39,
+          "platformProxyCents": 17307,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 40,
+          "platformProxyCents": 18554,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 41,
+          "platformProxyCents": 19793,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 42,
+          "platformProxyCents": 21310,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 43,
+          "platformProxyCents": 23001,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 44,
+          "platformProxyCents": 25658,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 45,
+          "platformProxyCents": 26941,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 46,
+          "platformProxyCents": 29602,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 47,
+          "platformProxyCents": 30556,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 48,
+          "platformProxyCents": 31898,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 49,
+          "platformProxyCents": 33381,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 50,
+          "platformProxyCents": 35939,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 51,
+          "platformProxyCents": 37010,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 52,
+          "platformProxyCents": 38945,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 53,
+          "platformProxyCents": 40074,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 54,
+          "platformProxyCents": 41884,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 55,
+          "platformProxyCents": 43640,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 56,
+          "platformProxyCents": 45956,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 57,
+          "platformProxyCents": 48725,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 58,
+          "platformProxyCents": 50395,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 59,
+          "platformProxyCents": 52380,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 60,
+          "platformProxyCents": 53961,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 61,
+          "platformProxyCents": 54966,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 62,
+          "platformProxyCents": 56316,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 63,
+          "platformProxyCents": 56694,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 64,
+          "platformProxyCents": 58538,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 65,
+          "platformProxyCents": 60298,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 66,
+          "platformProxyCents": 62604,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 67,
+          "platformProxyCents": 64620,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 68,
+          "platformProxyCents": 66201,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 69,
+          "platformProxyCents": 67580,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 70,
+          "platformProxyCents": 69885,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 71,
+          "platformProxyCents": 71717,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 72,
+          "platformProxyCents": 73159,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 73,
+          "platformProxyCents": 74700,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 74,
+          "platformProxyCents": 76635,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 75,
+          "platformProxyCents": 78185,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 76,
+          "platformProxyCents": 79314,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 77,
+          "platformProxyCents": 80474,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 78,
+          "platformProxyCents": 82539,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 79,
+          "platformProxyCents": 85276,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 80,
+          "platformProxyCents": 87290,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 81,
+          "platformProxyCents": 88553,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 82,
+          "platformProxyCents": 90835,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 83,
+          "platformProxyCents": 92128,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 84,
+          "platformProxyCents": 93456,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 85,
+          "platformProxyCents": 95140,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 86,
+          "platformProxyCents": 96362,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 87,
+          "platformProxyCents": 97362,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 88,
+          "platformProxyCents": 99132,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 89,
+          "platformProxyCents": 101309,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 90,
+          "platformProxyCents": 102899,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 91,
+          "platformProxyCents": 104678,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 92,
+          "platformProxyCents": 106494,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 93,
+          "platformProxyCents": 108405,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 94,
+          "platformProxyCents": 109967,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 95,
+          "platformProxyCents": 111701,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 96,
+          "platformProxyCents": 112803,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 97,
+          "platformProxyCents": 114035,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 98,
+          "platformProxyCents": 115379,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 99,
+          "platformProxyCents": 117677,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 100,
+          "platformProxyCents": 120302,
+          "allocatedModelUSD": 0
+        }
+      ],
+      "fits": [],
+      "publications": [
+        {
+          "asOfDay": 30,
+          "effectiveDay": 31,
+          "expiresDay": 45,
+          "trainingCutoffDay": null,
+          "policy": "recent_value",
+          "strategy": "recommendations",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "asOfDay": 55,
+          "effectiveDay": 56,
+          "expiresDay": 70,
+          "trainingCutoffDay": null,
+          "policy": "recent_value",
+          "strategy": "recommendations",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "asOfDay": 80,
+          "effectiveDay": 81,
+          "expiresDay": 95,
+          "trainingCutoffDay": null,
+          "policy": "recent_value",
+          "strategy": "recommendations",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "matureOutcomes": 7000,
+      "deltaPlatformUSD": -1.000869,
+      "deltaVsCodeUSD": -1.000869,
+      "deltaVsFirstUSD": -0.006983,
+      "deltaMerchantUSD": 101.21
+    },
+    {
+      "method": "firstChoice",
+      "policy": "firstChoice",
+      "seed": 96010,
+      "scenario": "budget_squeeze",
+      "purchases": 958,
+      "platformProxyCents": 120302,
+      "retainedCents": 4209399,
+      "merchantContributionCents": 1425781,
+      "outreachCents": 754,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 754,
+      "offers": 0,
+      "recommendations": 377,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0.003886,
+      "daily": [
+        {
+          "day": 31,
+          "platformProxyCents": 2110,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 32,
+          "platformProxyCents": 4371,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 33,
+          "platformProxyCents": 6490,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 34,
+          "platformProxyCents": 8524,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 35,
+          "platformProxyCents": 9524,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 36,
+          "platformProxyCents": 11205,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 37,
+          "platformProxyCents": 13013,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 38,
+          "platformProxyCents": 14924,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 39,
+          "platformProxyCents": 17307,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 40,
+          "platformProxyCents": 18554,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 41,
+          "platformProxyCents": 19793,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 42,
+          "platformProxyCents": 21310,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 43,
+          "platformProxyCents": 23001,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 44,
+          "platformProxyCents": 25658,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 45,
+          "platformProxyCents": 26941,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 46,
+          "platformProxyCents": 29602,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 47,
+          "platformProxyCents": 30556,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 48,
+          "platformProxyCents": 31898,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 49,
+          "platformProxyCents": 33381,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 50,
+          "platformProxyCents": 35939,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 51,
+          "platformProxyCents": 37010,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 52,
+          "platformProxyCents": 38945,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 53,
+          "platformProxyCents": 40074,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 54,
+          "platformProxyCents": 41884,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 55,
+          "platformProxyCents": 43640,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 56,
+          "platformProxyCents": 45956,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 57,
+          "platformProxyCents": 48725,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 58,
+          "platformProxyCents": 50395,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 59,
+          "platformProxyCents": 52380,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 60,
+          "platformProxyCents": 53961,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 61,
+          "platformProxyCents": 54966,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 62,
+          "platformProxyCents": 56316,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 63,
+          "platformProxyCents": 56694,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 64,
+          "platformProxyCents": 58538,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 65,
+          "platformProxyCents": 60298,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 66,
+          "platformProxyCents": 62604,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 67,
+          "platformProxyCents": 64620,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 68,
+          "platformProxyCents": 66201,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 69,
+          "platformProxyCents": 67580,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 70,
+          "platformProxyCents": 69885,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 71,
+          "platformProxyCents": 71717,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 72,
+          "platformProxyCents": 73159,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 73,
+          "platformProxyCents": 74700,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 74,
+          "platformProxyCents": 76635,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 75,
+          "platformProxyCents": 78185,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 76,
+          "platformProxyCents": 79314,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 77,
+          "platformProxyCents": 80474,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 78,
+          "platformProxyCents": 82539,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 79,
+          "platformProxyCents": 85276,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 80,
+          "platformProxyCents": 87290,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 81,
+          "platformProxyCents": 88553,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 82,
+          "platformProxyCents": 90835,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 83,
+          "platformProxyCents": 92128,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 84,
+          "platformProxyCents": 93456,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 85,
+          "platformProxyCents": 95140,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 86,
+          "platformProxyCents": 96362,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 87,
+          "platformProxyCents": 97362,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 88,
+          "platformProxyCents": 99132,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 89,
+          "platformProxyCents": 101309,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 90,
+          "platformProxyCents": 102899,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 91,
+          "platformProxyCents": 104678,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 92,
+          "platformProxyCents": 106494,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 93,
+          "platformProxyCents": 108405,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 94,
+          "platformProxyCents": 109967,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 95,
+          "platformProxyCents": 111701,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 96,
+          "platformProxyCents": 112803,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 97,
+          "platformProxyCents": 114035,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 98,
+          "platformProxyCents": 115379,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 99,
+          "platformProxyCents": 117677,
+          "allocatedModelUSD": 0
+        },
+        {
+          "day": 100,
+          "platformProxyCents": 120302,
+          "allocatedModelUSD": 0
+        }
+      ],
+      "fits": [],
+      "publications": [
+        {
+          "asOfDay": 30,
+          "effectiveDay": 31,
+          "expiresDay": 45,
+          "trainingCutoffDay": null,
+          "policy": "recent_value",
+          "strategy": "recommendations",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "asOfDay": 55,
+          "effectiveDay": 56,
+          "expiresDay": 70,
+          "trainingCutoffDay": null,
+          "policy": "recent_value",
+          "strategy": "recommendations",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "asOfDay": 80,
+          "effectiveDay": 81,
+          "expiresDay": 95,
+          "trainingCutoffDay": null,
+          "policy": "recent_value",
+          "strategy": "recommendations",
+          "audience": "all",
+          "maxOfferPct": 0,
+          "penaltyUSD": 0,
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "matureOutcomes": 7000,
+      "deltaPlatformUSD": -0.9938859999999999,
+      "deltaVsCodeUSD": -0.9938859999999999,
+      "deltaVsFirstUSD": 0,
+      "deltaMerchantUSD": 101.21
+    }
+  ],
+  "trace": [
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0037",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6170",
+      "rewardCents": 103
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0041",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6176",
+      "rewardCents": 233
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0042",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6182",
+      "rewardCents": 233
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0049",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6192",
+      "rewardCents": -58
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0062",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6204",
+      "rewardCents": 233
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0068",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6212",
+      "rewardCents": 103
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0069",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6218",
+      "rewardCents": 103
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0073",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6224",
+      "rewardCents": 103
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0077",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6233",
+      "rewardCents": 103
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0078",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6239",
+      "rewardCents": 103
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0088",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6246",
+      "rewardCents": 103
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0092",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6252",
+      "rewardCents": 103
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0007",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6265",
+      "rewardCents": 103
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0011",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6271",
+      "rewardCents": 103
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0015",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6277",
+      "rewardCents": 233
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0023",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6285",
+      "rewardCents": 103
+    },
+    {
+      "day": 30,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0025",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6291",
+      "rewardCents": 103
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0033",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6338",
+      "rewardCents": 233
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0037",
+      "action": "recommend:0",
+      "orderId": null,
+      "rewardCents": -2
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0050",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6347",
+      "rewardCents": 103
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0055",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6354",
+      "rewardCents": 103
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0065",
+      "action": "recommend:0",
+      "orderId": null,
+      "rewardCents": -2
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0068",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6364",
+      "rewardCents": 233
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0073",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6373",
+      "rewardCents": 103
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0075",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6380",
+      "rewardCents": 103
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0076",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6386",
+      "rewardCents": 103
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0079",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6393",
+      "rewardCents": 103
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0086",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6402",
+      "rewardCents": 103
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0087",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6408",
+      "rewardCents": 233
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0088",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6414",
+      "rewardCents": 233
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0004",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6430",
+      "rewardCents": -58
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0021",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6438",
+      "rewardCents": 103
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0022",
+      "action": "recommend:0",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6446",
+      "rewardCents": 231
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0026",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6453",
+      "rewardCents": 233
+    },
+    {
+      "day": 31,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0030",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6461",
+      "rewardCents": 103
+    },
+    {
+      "day": 32,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0037",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6505",
+      "rewardCents": 103
+    },
+    {
+      "day": 32,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0038",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6511",
+      "rewardCents": 103
+    },
+    {
+      "day": 32,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0040",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6517",
+      "rewardCents": 233
+    },
+    {
+      "day": 32,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0048",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6526",
+      "rewardCents": 233
+    },
+    {
+      "day": 32,
+      "customerId": "CAMP5-validation-eb84f2ef9c41fe08-llm-U0059",
+      "action": "none",
+      "orderId": "CAMP5-validation-eb84f2ef9c41fe08-llm-O6536",
+      "rewardCents": 103
+    }
+  ],
+  "costs": {
+    "modelUSD": 0.010869,
+    "calls": 3,
+    "firstCallUSD": 0.003886
+  },
+  "errors": [],
+  "revisionCount": 0
+}

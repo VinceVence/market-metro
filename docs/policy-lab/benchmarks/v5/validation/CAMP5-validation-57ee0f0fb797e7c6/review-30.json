@@ -1,0 +1,104 @@
+{
+  "cutoff": 30,
+  "publishedDay": 31,
+  "packetHash": "22db983427492f3846691d291fa2228eec3c6ccfe45d3218942a17e9143fda7a",
+  "evidence": {
+    "evidenceId": "E-bd168ea3d8de7767ee76",
+    "asOfDay": 30,
+    "customers": 100,
+    "recentPurchases": 98,
+    "previousPurchases": 115,
+    "recentPremiumPurchases": 23,
+    "previousPremiumPurchases": 33,
+    "activeBuyers": 61,
+    "lapsedBuyers": 38,
+    "matureRows": 1700,
+    "immatureRows": 1300,
+    "merchants": [
+      {
+        "index": 0,
+        "name": "Willow Goods",
+        "stock": 80,
+        "maxOfferPct": 5,
+        "matureOrders": 60,
+        "matureReturns": 4,
+        "returnRate": 0.06666666666666667,
+        "retainedCents": 235834,
+        "recentOrders": 32,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 40
+      },
+      {
+        "index": 1,
+        "name": "Oak & Ink",
+        "stock": 81,
+        "maxOfferPct": 10,
+        "matureOrders": 72,
+        "matureReturns": 3,
+        "returnRate": 0.041666666666666664,
+        "retainedCents": 320414,
+        "recentOrders": 35,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 50
+      },
+      {
+        "index": 2,
+        "name": "Corner Supply",
+        "stock": 67,
+        "maxOfferPct": 10,
+        "matureOrders": 90,
+        "matureReturns": 4,
+        "returnRate": 0.044444444444444446,
+        "retainedCents": 380018,
+        "recentOrders": 31,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 57
+      }
+    ],
+    "productBands": [
+      {
+        "priceCents": 3199,
+        "currency": "USD",
+        "catalogSource": "CACHED_CHANNEL3"
+      },
+      {
+        "priceCents": 8900,
+        "currency": "USD",
+        "catalogSource": "CACHED_CHANNEL3"
+      }
+    ],
+    "definitions": {
+      "returns": "Mature returned orders divided by the SAME mature order population; recent windows exclude unresolved outcomes.",
+      "units": "All amounts ending Cents are USD cents. Return rates are fractions. Markdown percentages are percentage points.",
+      "feedback": "Shared no-outreach observation stream, identical for all evaluated controllers. No candidate-policy or final comparison outcomes are included."
+    }
+  },
+  "decision": {
+    "reasonCode": "demand_change",
+    "reason": "Demand and premium mix have declined, and while return rates are stable, inventory levels are sufficient. The 'recent_value' candidate (898a2b58efaf52) shows the most neutral-to-positive potential across profiles compared to the negative expected values of the pooled support models. I considered 'premium_alternative' (331960fbf3c19b) but 'recent_value' better aligns with the current market state.",
+    "candidateId": "898a2b58efaf52",
+    "observedCondition": "mixed_or_uncertain",
+    "alternativeId": "331960fbf3c19b",
+    "evidenceId": "E-bd168ea3d8de7767ee76",
+    "observationIds": [
+      "demand",
+      "premium_mix",
+      "merchant_returns",
+      "inventory"
+    ]
+  },
+  "error": null,
+  "selections": {
+    "organic": "observe",
+    "static": "898a2b58efaf52",
+    "riskStatic": "observe",
+    "contextual": "observe",
+    "riskContextual": "observe",
+    "llm": "898a2b58efaf52",
+    "firstChoice": "898a2b58efaf52"
+  },
+  "codeInferredRegime": "budget_squeeze"
+}

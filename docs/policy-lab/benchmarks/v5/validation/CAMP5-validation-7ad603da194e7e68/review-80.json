@@ -1,0 +1,104 @@
+{
+  "cutoff": 80,
+  "publishedDay": 81,
+  "packetHash": "b677094dcf55315088b89a6897c129768a040effa6d53e7b9edd2a20f0873108",
+  "evidence": {
+    "evidenceId": "E-5a8cf3777b6dbb994752",
+    "asOfDay": 80,
+    "customers": 100,
+    "recentPurchases": 92,
+    "previousPurchases": 125,
+    "recentPremiumPurchases": 22,
+    "previousPremiumPurchases": 36,
+    "activeBuyers": 56,
+    "lapsedBuyers": 44,
+    "matureRows": 6700,
+    "immatureRows": 1300,
+    "merchants": [
+      {
+        "index": 0,
+        "name": "Willow Goods",
+        "stock": 62,
+        "maxOfferPct": 5,
+        "matureOrders": 90,
+        "matureReturns": 3,
+        "returnRate": 0.03333333333333333,
+        "retainedCents": 363828,
+        "recentOrders": 35,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 58
+      },
+      {
+        "index": 1,
+        "name": "Oak & Ink",
+        "stock": 85,
+        "maxOfferPct": 10,
+        "matureOrders": 111,
+        "matureReturns": 6,
+        "returnRate": 0.05405405405405406,
+        "retainedCents": 474632,
+        "recentOrders": 29,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 35
+      },
+      {
+        "index": 2,
+        "name": "Corner Supply",
+        "stock": 64,
+        "maxOfferPct": 10,
+        "matureOrders": 73,
+        "matureReturns": 2,
+        "returnRate": 0.0273972602739726,
+        "retainedCents": 335448,
+        "recentOrders": 28,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 47
+      }
+    ],
+    "productBands": [
+      {
+        "priceCents": 3199,
+        "currency": "USD",
+        "catalogSource": "CACHED_CHANNEL3"
+      },
+      {
+        "priceCents": 8900,
+        "currency": "USD",
+        "catalogSource": "CACHED_CHANNEL3"
+      }
+    ],
+    "definitions": {
+      "returns": "Mature returned orders divided by the SAME mature order population; recent windows exclude unresolved outcomes.",
+      "units": "All amounts ending Cents are USD cents. Return rates are fractions. Markdown percentages are percentage points.",
+      "feedback": "Shared no-outreach observation stream, identical for all evaluated controllers. No candidate-policy or final comparison outcomes are included."
+    }
+  },
+  "decision": {
+    "observationIds": [
+      "demand",
+      "premium_mix",
+      "merchant_returns",
+      "inventory"
+    ],
+    "reasonCode": "demand_change",
+    "alternativeId": "8e36c2482a3e4e",
+    "evidenceId": "E-5a8cf3777b6dbb994752",
+    "observedCondition": "demand_pressure",
+    "reason": "Demand and premium mix have declined significantly. The recent_value rule (898a2b58efaf52) shows the most robust performance across profiles, particularly in the returns_wave scenario, and is better suited to address the recent cooling in purchase activity compared to the pooled support models.",
+    "candidateId": "898a2b58efaf52"
+  },
+  "error": null,
+  "selections": {
+    "organic": "observe",
+    "static": "898a2b58efaf52",
+    "riskStatic": "observe",
+    "contextual": "observe",
+    "riskContextual": "observe",
+    "llm": "898a2b58efaf52",
+    "firstChoice": "331960fbf3c19b"
+  },
+  "codeInferredRegime": "budget_squeeze"
+}

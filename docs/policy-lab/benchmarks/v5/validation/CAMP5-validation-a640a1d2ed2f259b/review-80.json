@@ -1,0 +1,102 @@
+{
+  "cutoff": 80,
+  "publishedDay": 81,
+  "packetHash": "cba9648e0f3093720594cd0e9bb537d47aa807a1e0b25ecb68cca605d245c998",
+  "evidence": {
+    "evidenceId": "E-4cb045e6db0b3bb17bb2",
+    "asOfDay": 80,
+    "customers": 100,
+    "recentPurchases": 128,
+    "previousPurchases": 104,
+    "recentPremiumPurchases": 31,
+    "previousPremiumPurchases": 29,
+    "activeBuyers": 69,
+    "lapsedBuyers": 31,
+    "matureRows": 6700,
+    "immatureRows": 1300,
+    "merchants": [
+      {
+        "index": 0,
+        "name": "Willow Goods",
+        "stock": 68,
+        "maxOfferPct": 5,
+        "matureOrders": 86,
+        "matureReturns": 3,
+        "returnRate": 0.03488372093023256,
+        "retainedCents": 356733,
+        "recentOrders": 40,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 61
+      },
+      {
+        "index": 1,
+        "name": "Oak & Ink",
+        "stock": 97,
+        "maxOfferPct": 10,
+        "matureOrders": 72,
+        "matureReturns": 21,
+        "returnRate": 0.2916666666666667,
+        "retainedCents": 242963,
+        "recentOrders": 35,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 46
+      },
+      {
+        "index": 2,
+        "name": "Corner Supply",
+        "stock": 85,
+        "maxOfferPct": 10,
+        "matureOrders": 92,
+        "matureReturns": 4,
+        "returnRate": 0.043478260869565216,
+        "retainedCents": 378429,
+        "recentOrders": 53,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 44
+      }
+    ],
+    "productBands": [
+      {
+        "priceCents": 3199,
+        "currency": "USD",
+        "catalogSource": "CACHED_CHANNEL3"
+      },
+      {
+        "priceCents": 8900,
+        "currency": "USD",
+        "catalogSource": "CACHED_CHANNEL3"
+      }
+    ],
+    "definitions": {
+      "returns": "Mature returned orders divided by the SAME mature order population; recent windows exclude unresolved outcomes.",
+      "units": "All amounts ending Cents are USD cents. Return rates are fractions. Markdown percentages are percentage points.",
+      "feedback": "Shared no-outreach observation stream, identical for all evaluated controllers. No candidate-policy or final comparison outcomes are included."
+    }
+  },
+  "decision": {
+    "alternativeId": "898a2b58efaf52",
+    "observationIds": [
+      "merchant_returns",
+      "demand"
+    ],
+    "observedCondition": "return_pressure",
+    "candidateId": "8e36c2482a3e4e",
+    "reason": "The active_premium candidate (8e36c2482a3e4e) is selected to address the current demand growth while mitigating risk from the high return rate observed at Oak & Ink (29.2%). While the recent_value candidate (898a2b58efaf52) shows potential, the active_premium model's shorter duration and focus on high-value discovery provide a more controlled approach given the significant return pressure.",
+    "evidenceId": "E-4cb045e6db0b3bb17bb2",
+    "reasonCode": "return_concentration"
+  },
+  "error": null,
+  "selections": {
+    "organic": "observe",
+    "static": "898a2b58efaf52",
+    "riskStatic": "observe",
+    "contextual": "898a2b58efaf52",
+    "riskContextual": "observe",
+    "llm": "8e36c2482a3e4e",
+    "firstChoice": "331960fbf3c19b"
+  },
+  "codeInferredRegime": "returns_wave"
+}

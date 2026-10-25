@@ -1,0 +1,103 @@
+{
+  "cutoff": 55,
+  "publishedDay": 56,
+  "packetHash": "25d13ad46878df70fcd1c90ea17c86911c41bb0d9c48d579c7b432af660dcf2d",
+  "evidence": {
+    "evidenceId": "E-c2e461f669276868a4f6",
+    "asOfDay": 55,
+    "customers": 100,
+    "recentPurchases": 105,
+    "previousPurchases": 95,
+    "recentPremiumPurchases": 30,
+    "previousPremiumPurchases": 35,
+    "activeBuyers": 63,
+    "lapsedBuyers": 37,
+    "matureRows": 4200,
+    "immatureRows": 1300,
+    "merchants": [
+      {
+        "index": 0,
+        "name": "Willow Goods",
+        "stock": 57,
+        "maxOfferPct": 5,
+        "matureOrders": 71,
+        "matureReturns": 3,
+        "returnRate": 0.04225352112676056,
+        "retainedCents": 325851,
+        "recentOrders": 35,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 54
+      },
+      {
+        "index": 1,
+        "name": "Oak & Ink",
+        "stock": 65,
+        "maxOfferPct": 10,
+        "matureOrders": 78,
+        "matureReturns": 8,
+        "returnRate": 0.10256410256410256,
+        "retainedCents": 342441,
+        "recentOrders": 40,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 56
+      },
+      {
+        "index": 2,
+        "name": "Corner Supply",
+        "stock": 93,
+        "maxOfferPct": 10,
+        "matureOrders": 67,
+        "matureReturns": 5,
+        "returnRate": 0.07462686567164178,
+        "retainedCents": 299836,
+        "recentOrders": 30,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 48
+      }
+    ],
+    "productBands": [
+      {
+        "priceCents": 3199,
+        "currency": "USD",
+        "catalogSource": "CACHED_CHANNEL3"
+      },
+      {
+        "priceCents": 8900,
+        "currency": "USD",
+        "catalogSource": "CACHED_CHANNEL3"
+      }
+    ],
+    "definitions": {
+      "returns": "Mature returned orders divided by the SAME mature order population; recent windows exclude unresolved outcomes.",
+      "units": "All amounts ending Cents are USD cents. Return rates are fractions. Markdown percentages are percentage points.",
+      "feedback": "Shared no-outreach observation stream, identical for all evaluated controllers. No candidate-policy or final comparison outcomes are included."
+    }
+  },
+  "decision": {
+    "candidateId": "9bc2536ec34feb",
+    "reasonCode": "demand_change",
+    "evidenceId": "E-c2e461f669276868a4f6",
+    "alternativeId": "8e36c2482a3e4e",
+    "reason": "Demand has increased (1.10x) while premium mix has declined. The selected model (9bc2536ec34feb) provides a balanced approach for stores 1 and 2, which have higher return rates than store 0, by applying a penalty to mitigate potential losses while addressing the current demand pressure. I considered 8e36c2482a3e4e as an alternative but preferred the fitted ridge model for its explicit penalty mechanism given the observed return rates.",
+    "observationIds": [
+      "demand",
+      "merchant_returns",
+      "inventory"
+    ],
+    "observedCondition": "demand_pressure"
+  },
+  "error": null,
+  "selections": {
+    "organic": "observe",
+    "static": "898a2b58efaf52",
+    "riskStatic": "observe",
+    "contextual": "898a2b58efaf52",
+    "riskContextual": "observe",
+    "llm": "9bc2536ec34feb",
+    "firstChoice": "898a2b58efaf52"
+  },
+  "codeInferredRegime": "returns_wave"
+}

@@ -1,0 +1,103 @@
+{
+  "cutoff": 80,
+  "publishedDay": 81,
+  "packetHash": "510c70fde8af71df713dd286bf048b5d53f3e7f3d398c43dffca23977c2f91c7",
+  "evidence": {
+    "evidenceId": "E-eb3aaa81389085e33f1e",
+    "asOfDay": 80,
+    "customers": 100,
+    "recentPurchases": 122,
+    "previousPurchases": 120,
+    "recentPremiumPurchases": 36,
+    "previousPremiumPurchases": 34,
+    "activeBuyers": 69,
+    "lapsedBuyers": 31,
+    "matureRows": 6700,
+    "immatureRows": 1300,
+    "merchants": [
+      {
+        "index": 0,
+        "name": "Willow Goods",
+        "stock": 79,
+        "maxOfferPct": 5,
+        "matureOrders": 84,
+        "matureReturns": 4,
+        "returnRate": 0.047619047619047616,
+        "retainedCents": 392744,
+        "recentOrders": 41,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 54
+      },
+      {
+        "index": 1,
+        "name": "Oak & Ink",
+        "stock": 86,
+        "maxOfferPct": 10,
+        "matureOrders": 85,
+        "matureReturns": 18,
+        "returnRate": 0.21176470588235294,
+        "retainedCents": 299848,
+        "recentOrders": 53,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 53
+      },
+      {
+        "index": 2,
+        "name": "Corner Supply",
+        "stock": 72,
+        "maxOfferPct": 10,
+        "matureOrders": 84,
+        "matureReturns": 3,
+        "returnRate": 0.03571428571428571,
+        "retainedCents": 384541,
+        "recentOrders": 28,
+        "directMarkdownOrders": 0,
+        "directMarkdownPct": 0,
+        "minStockLast14": 48
+      }
+    ],
+    "productBands": [
+      {
+        "priceCents": 3199,
+        "currency": "USD",
+        "catalogSource": "CACHED_CHANNEL3"
+      },
+      {
+        "priceCents": 8900,
+        "currency": "USD",
+        "catalogSource": "CACHED_CHANNEL3"
+      }
+    ],
+    "definitions": {
+      "returns": "Mature returned orders divided by the SAME mature order population; recent windows exclude unresolved outcomes.",
+      "units": "All amounts ending Cents are USD cents. Return rates are fractions. Markdown percentages are percentage points.",
+      "feedback": "Shared no-outreach observation stream, identical for all evaluated controllers. No candidate-policy or final comparison outcomes are included."
+    }
+  },
+  "decision": {
+    "reason": "The return rate at Oak & Ink (21.18%) is significantly higher than at Willow Goods and Corner Supply. Focusing the campaign on merchants 0 and 2 (Willow Goods and Corner Supply) mitigates this return risk while maintaining support for stable demand. Candidate d138a1d0342fbf applies a 0.05 penalty to further manage risk compared to the zero-penalty alternative cecc1ff5f9a482.",
+    "evidenceId": "E-eb3aaa81389085e33f1e",
+    "candidateId": "d138a1d0342fbf",
+    "alternativeId": "cecc1ff5f9a482",
+    "observedCondition": "return_pressure",
+    "observationIds": [
+      "merchant_returns",
+      "inventory",
+      "demand"
+    ],
+    "reasonCode": "return_concentration"
+  },
+  "error": null,
+  "selections": {
+    "organic": "observe",
+    "static": "898a2b58efaf52",
+    "riskStatic": "observe",
+    "contextual": "898a2b58efaf52",
+    "riskContextual": "observe",
+    "llm": "d138a1d0342fbf",
+    "firstChoice": "898a2b58efaf52"
+  },
+  "codeInferredRegime": "returns_wave"
+}

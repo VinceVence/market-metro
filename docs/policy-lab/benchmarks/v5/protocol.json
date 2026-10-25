@@ -1,0 +1,118 @@
+{
+  "version": 5,
+  "createdAt": "2026-10-25T06:57:17.311Z",
+  "code": {
+    "scripts/campaign-controller/policies.mjs": "9be208b1956a85d667d1d7082c7c3a13e8730ea52a7245d48833a352213cf8e4",
+    "scripts/campaign-controller/evidence.mjs": "2cfb708d6a75b2271683dff68b658011f9ba316e20f4ec5c9fbb68cd5ac3bce2",
+    "scripts/campaign-controller/agent.mjs": "5aaa8ea4a792cb0325736c33b14b0f882227f553469a7b701f56f6c665bd630f",
+    "scripts/campaign-controller/priors.mjs": "7f367e9409b70f74bec1a67719276721e291716d21c6a7074e9c8da3bb9e6e5e",
+    "scripts/campaign-controller/pooled.mjs": "e6dfc30ed4ae9f38d0b606dd20595756c1c9e48391846c816a06dac198bd0154",
+    "scripts/campaign-controller/runtime.mjs": "a91c60898c9c5925ad042fe7684587a000809bd81cb1a85f5d3579dcbfddbec2",
+    "scripts/campaign-controller/benchmark.mjs": "41b7332997b271368d2a8e03a3df875e3131257d6132b24eba250b130a8e92fb",
+    "scripts/campaign-controller/development.mjs": "332591b67c70d0eb7aa48f70ae71889ef6849e5c27e54afc94be3b90a74f65b6",
+    "benchmark/vertex.mjs": "f2837cdf2aacef1a50cb6cb662f9cd7b5f97809e0308d20c8b3c942b23634a6d",
+    "scripts/policy-lab/benchmark-stats.mjs": "7b2766c3298545cfbe716db7b4a3eae39710ab81c4ad609993d15fbfc6eb578a",
+    "scripts/research-lab/data.mjs": "648a34431592e7638a397c4e455ba0ff7d4076b8a21c77996e1937db10460de9",
+    "scripts/marketing/autonomous-planner.mjs": "1ff82f402c86ca7971e648d6d7549414eea8947bea8c2358962d22893736e5bc",
+    "scripts/vertex-token.py": "7149a30a5c3cdda3099703c34948a48c7bbc515fedd19d327607569c20a01c26"
+  },
+  "priorEngineHash": "a414246ce78e0fec05ece95b711d46532bf384c1026fa54cb27ac45446602b27",
+  "priorV2Hash": "95b9ba4510130f66b25b78c817f02c93c241a70e1cdd7c4995153088bf2f6a26",
+  "priorsHash": "5b4daf78d8dbc59ef4de123b0b376b10b0bcae265fbef98334c953cb0bc16a5e",
+  "pooledHash": "167d9d18b5f5294415eef2cd1517e4769a6f093cb5cadf404dd420893b2b4f99",
+  "comparatorSelectionHash": "fb3f9590610d052500b93ff26e5e7565f15828620468228ac437d2dd08bda2b9",
+  "primaryComparator": "riskContextual",
+  "validationSeeds": [
+    96001,
+    96002,
+    96003,
+    96004,
+    96005,
+    96006,
+    96007,
+    96008,
+    96009,
+    96010,
+    96011,
+    96012,
+    96013,
+    96014,
+    96015,
+    96016
+  ],
+  "confirmationSeeds": [
+    97001,
+    97002,
+    97003,
+    97004,
+    97005,
+    97006,
+    97007,
+    97008,
+    97009,
+    97010,
+    97011,
+    97012,
+    97013,
+    97014,
+    97015,
+    97016
+  ],
+  "scenarios": [
+    "steady",
+    "rival_sale",
+    "budget_squeeze",
+    "supply_delay",
+    "returns_wave"
+  ],
+  "reviewDays": [
+    30,
+    55,
+    80
+  ],
+  "methods": [
+    "organic",
+    "static",
+    "riskStatic",
+    "contextual",
+    "riskContextual",
+    "original",
+    "llm",
+    "firstChoice"
+  ],
+  "objective": "Paired incremental modeled platform contribution after all inferred model costs, outreach and delayed refund outcomes. This is not actual PayPal profit.",
+  "fairness": "Same initial seed, catalog, world dynamics, exogenous draws, authority and shared observed monitor packet. All publication occurs one virtual day after each review. Own evaluated-branch and final control outcomes are sealed from every controller. This isolates policy routing on identical evidence; it is not a production closed-loop deployment.",
+  "baselines": "Best development-selected static and contextual rules, risk-sensitive variants, unchanged original rules, no outreach, and the first LLM choice repeated with only its first model-call cost. Every candidate available to Gemini is available to code.",
+  "phases": "One fixed 16-seed validation batch followed by one independent 16-seed confirmation only if validation passes. No policy or prompt tuning on these outcomes. A failed version remains failed; a new version needs a new protocol and seeds.",
+  "gates": {
+    "meanGainVsOrganicUSD": 0.5,
+    "lower95VsOrganicUSD": 0,
+    "meanGainVsPrimaryCodeUSD": 0.5,
+    "lower95VsPrimaryCodeUSD": 0,
+    "lower95VsEveryCodeUSD": 0,
+    "lower95RevisionGainUSD": 0,
+    "meanMerchantGainVsOrganicUSD": 0,
+    "hardViolations": 0
+  },
+  "cost": {
+    "suiteCapUSD": 2,
+    "perCaseCapUSD": 0.25,
+    "existingLifetimeCapUSD": 8,
+    "userTotalCeilingUSD": 50,
+    "localCompute": "Measured but unpriced; not assumed economically free.",
+    "before": {
+      "suiteUSD": 0.112404,
+      "lifetimeUSD": 1.262681,
+      "pending": 0,
+      "circuit": null
+    }
+  },
+  "limits": [
+    "A positive average does not mean every seed is positive. All losses and failed decisions remain in results.",
+    "The objective is the frozen finite-horizon economic proxy, not calibrated PayPal margins.",
+    "Shared observations come from an independent no-outreach monitor, not from each treatment branch.",
+    "Conditional on the five authored scenarios and the defined policy class.",
+    "Authored rules remain labeled rules; fitted local models remain labeled ML."
+  ],
+  "hash": "233ef74e7ccaea0b52c6c4f52bf4f1ea96ed97ba134ccb8bc41452c4aec267c1"
+}
