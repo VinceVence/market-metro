@@ -1,0 +1,183 @@
+{
+  "id": "TW4-CONF-60339d12d4ca91-rules",
+  "version": 1,
+  "binding": "02de37429720e297bac349ccd4511f1fc743b3ac8ae989852c2c0b20f319aa51",
+  "spec": {
+    "status": "ready",
+    "goal": "reduce_return_exposure",
+    "merchantIndices": [
+      1
+    ],
+    "budgetCents": 0,
+    "maxCouponPct": 0,
+    "durationDays": 0,
+    "inactiveDays": 0,
+    "reason": "Recognized a diagnostic request without deployment authority."
+  },
+  "nodes": [
+    {
+      "name": "interpretation_bound",
+      "inputHash": "bffa6865e218accb3573d3d606fe0870dcb984bca1e05d639bba7e5b804b931d",
+      "input": {
+        "spec": {
+          "status": "ready",
+          "goal": "reduce_return_exposure",
+          "merchantIndices": [
+            1
+          ],
+          "budgetCents": 0,
+          "maxCouponPct": 0,
+          "durationDays": 0,
+          "inactiveDays": 0,
+          "reason": "Recognized a diagnostic request without deployment authority."
+        }
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:05:54.519Z",
+      "output": {
+        "spec": {
+          "status": "ready",
+          "goal": "reduce_return_exposure",
+          "merchantIndices": [
+            1
+          ],
+          "budgetCents": 0,
+          "maxCouponPct": 0,
+          "durationDays": 0,
+          "inactiveDays": 0,
+          "reason": "Recognized a diagnostic request without deployment authority."
+        },
+        "validation": "TYPED_AUTHORITY_PASSED",
+        "note": "Semantic correctness is graded independently, not compared with hidden expected answers here."
+      },
+      "finishedAt": "2026-10-25T03:05:54.524Z"
+    },
+    {
+      "name": "snapshot_bound",
+      "inputHash": "7e0062c565eb59ae1d9e99c84cf7f5743728e61acc334c2967939ffe9558c459",
+      "input": {
+        "snapshotHash": "9d8ceab729db052505b250a14ab1bc697348d08e7fc24ca94f668ddf1dadd2c9",
+        "cutoff": 45
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:05:54.526Z",
+      "output": {
+        "snapshotHash": "9d8ceab729db052505b250a14ab1bc697348d08e7fc24ca94f668ddf1dadd2c9",
+        "cutoff": 45,
+        "customers": 100,
+        "merchants": 3
+      },
+      "finishedAt": "2026-10-25T03:05:54.527Z"
+    },
+    {
+      "name": "evidence_validated",
+      "inputHash": "820b291c30fe23e2ed370d45e5d2e08ef83f055d0126f703d10901d7b3baeffa",
+      "input": {
+        "analyses": [
+          "mature_returns",
+          "merchant_sales"
+        ],
+        "scope": [
+          1
+        ]
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:05:54.529Z",
+      "output": {
+        "reports": [
+          {
+            "kind": "mature_returns",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS_AND_ORDER_RATE",
+            "rows": [
+              {
+                "merchantIndex": 1,
+                "matureOrders": 81,
+                "immatureOrders": 60,
+                "returnedMatureOrders": 3,
+                "returnRate": 0.037037,
+                "maturePlatformContributionCents": 10058
+              }
+            ],
+            "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+            "includedMerchants": 1
+          },
+          {
+            "kind": "merchant_sales",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS",
+            "rows": [
+              {
+                "merchantIndex": 1,
+                "orders": 141,
+                "retainedObservedCents": 629607,
+                "observedRefundCents": 18497
+              }
+            ],
+            "warning": "Recent refunds are incomplete. Retained volume is not platform profit.",
+            "includedMerchants": 1
+          }
+        ],
+        "validation": {
+          "uniqueGrains": true,
+          "explicitUnits": true,
+          "matureDenominators": true
+        },
+        "note": "Static tested operations; no LLM-generated SQL."
+      },
+      "finishedAt": "2026-10-25T03:05:54.532Z"
+    },
+    {
+      "name": "diagnostic_committed",
+      "inputHash": "a4f7ade0df3251547afb737897edbaf8d9ae242e1e8712403e6d96761e755c94",
+      "input": {
+        "goal": "reduce_return_exposure"
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:05:54.534Z",
+      "output": {
+        "decision": "report",
+        "plan": {
+          "id": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "merchantIndices": [],
+          "maxOfferPct": 0,
+          "duration": 0,
+          "penalty": 0,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "evidenceIds": [
+          "mature_returns",
+          "merchant_sales"
+        ],
+        "reason": "Diagnostic goal completed without outreach."
+      },
+      "finishedAt": "2026-10-25T03:05:54.535Z"
+    }
+  ],
+  "completed": true,
+  "effects": {
+    "training": 0,
+    "pilots": 0,
+    "publish": 0
+  },
+  "snapshotHash": "9d8ceab729db052505b250a14ab1bc697348d08e7fc24ca94f668ddf1dadd2c9"
+}

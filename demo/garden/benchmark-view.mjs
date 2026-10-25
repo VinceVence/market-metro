@@ -1,6 +1,7 @@
 import {esc, num} from './ui.mjs';
 import {renderFreshBenchmark} from './fresh-benchmark-view.mjs';
 import {renderResearchLab} from './research-lab-view.mjs';
+import {renderTrustedWorkflow} from './trusted-workflow-view.mjs';
 
 const dollars = value => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',signDisplay:'exceptZero'}).format(value);
 const interval = m => `${dollars(m.low)} to ${dollars(m.high)}`;
@@ -15,8 +16,12 @@ export function mountBenchmarkView(container){
     loading=(async()=>{
       try{
         if(preferFresh===true){
+          const trusted=await fetch('/benchmarks/v4-1/index.json');
+          if(trusted.ok){renderTrustedWorkflow(container,await trusted.json(),()=>{loaded=false;void load('v3');});loaded=true;return;}
+        }
+        if(preferFresh===true||preferFresh==='v3'){
           const research=await fetch('/benchmarks/v3/index.json');
-          if(research.ok){renderResearchLab(container,await research.json(),()=>{loaded=false;void load('v2');});loaded=true;return;}
+          if(research.ok){renderResearchLab(container,await research.json(),()=>{loaded=false;void load('v2');});const button=document.createElement('button');button.textContent='Trusted workflow ↗';button.className='plb-version-switch';button.onclick=()=>{loaded=false;void load(true);};container.prepend(button);loaded=true;return;}
         }
         if(preferFresh){
           const fresh=await fetch('/benchmarks/v2/index.json');

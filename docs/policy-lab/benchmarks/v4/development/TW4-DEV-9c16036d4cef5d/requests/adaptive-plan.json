@@ -1,0 +1,301 @@
+{
+  "key": "adaptive-plan",
+  "inputHash": "a12689455a1f9987609f62f4dffcb38bbc70a6a0eb8c546ab2a2cb00eb393462",
+  "system": "Choose exactly two bounded development experiments for this interpreted commerce goal. All evidence comes from tested operations with explicit units and denominators. Choose model recipes, supported merchant scopes, recommendation or allowed coupon strategy, short duration and penalty from the supplied options. Do not write SQL, perform financial arithmetic, or assert causal lift from descriptive rows or model MSE. Both candidates will be tested on separate development seeds; code will commit only a valid positive-mean candidate or observe. Consider mature returns, sparse cohorts, fitting error and costs. A coupon needs explicit permission. Keep the reason short and grounded; no private chain of thought.",
+  "packet": {
+    "spec": {
+      "maxCouponPct": 0,
+      "budgetCents": 1000,
+      "goal": "grow_retained_sales",
+      "inactiveDays": 0,
+      "durationDays": 3,
+      "status": "ready",
+      "merchantIndices": [
+        2
+      ],
+      "reason": "Grow retained sales at Corner Supply using recommendations with a $10 budget for 3 days and no coupons."
+    },
+    "evidence": {
+      "reports": [
+        {
+          "kind": "merchant_sales",
+          "provenance": {
+            "snapshotCutoffExclusive": 45,
+            "windowStartInclusive": 17,
+            "source": "FROZEN_SIMULATED_OBSERVATIONS",
+            "catalog": "CACHED_CHANNEL3",
+            "analysisVersion": "trusted-v4.1",
+            "causal": false
+          },
+          "grain": "one order aggregated by merchant",
+          "unit": "USD_CENTS",
+          "rows": [
+            {
+              "merchantIndex": 2,
+              "orders": 147,
+              "retainedObservedCents": 669399,
+              "observedRefundCents": 33475
+            }
+          ],
+          "warning": "Recent refunds are incomplete. Retained volume is not platform profit.",
+          "includedMerchants": 1
+        },
+        {
+          "kind": "mature_returns",
+          "provenance": {
+            "snapshotCutoffExclusive": 45,
+            "windowStartInclusive": 17,
+            "source": "FROZEN_SIMULATED_OBSERVATIONS",
+            "catalog": "CACHED_CHANNEL3",
+            "analysisVersion": "trusted-v4.1",
+            "causal": false
+          },
+          "grain": "one order aggregated by merchant",
+          "unit": "USD_CENTS_AND_ORDER_RATE",
+          "rows": [
+            {
+              "merchantIndex": 2,
+              "matureOrders": 76,
+              "immatureOrders": 71,
+              "returnedMatureOrders": 6,
+              "returnRate": 0.078947,
+              "maturePlatformContributionCents": 8791
+            }
+          ],
+          "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+          "includedMerchants": 1
+        },
+        {
+          "kind": "model_readiness",
+          "provenance": {
+            "snapshotCutoffExclusive": 45,
+            "windowStartInclusive": 17,
+            "source": "FROZEN_SIMULATED_OBSERVATIONS",
+            "catalog": "CACHED_CHANNEL3",
+            "analysisVersion": "trusted-v4.1",
+            "causal": false
+          },
+          "grain": "one customer-day action",
+          "unit": "rows",
+          "observedRows": 4500,
+          "matureRows": 3200,
+          "immatureRows": 1300,
+          "trainingAllowed": true,
+          "checks": {
+            "uniqueActionIds": true,
+            "noFutureRows": true
+          },
+          "featureIds": [
+            "recency_30d",
+            "purchases_7d",
+            "offers_7d",
+            "price_scale",
+            "observed_merchant_affinity",
+            "recent_refunds"
+          ]
+        }
+      ],
+      "validation": {
+        "uniqueGrains": true,
+        "explicitUnits": true,
+        "matureDenominators": true
+      },
+      "note": "Static tested operations; no LLM-generated SQL."
+    },
+    "models": {
+      "full": {
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "recency_30d",
+          "purchases_7d",
+          "offers_7d",
+          "price_scale",
+          "observed_merchant_affinity",
+          "recent_refunds"
+        ],
+        "windowDays": 42,
+        "datasetHash": "b4406b37f20bfa5ed9dec67534c6b8d32589c14a99e45f4ce2baa239973f23fe",
+        "trainingRows": 2900,
+        "validationRows": 600,
+        "mse": 0.2516651931270033,
+        "baselineMse": 0.2505191373030867,
+        "runtimeMs": 10.420291999995243,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      },
+      "recent": {
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "recency_30d",
+          "purchases_7d",
+          "price_scale",
+          "observed_merchant_affinity"
+        ],
+        "windowDays": 28,
+        "datasetHash": "47f7f104cb58339720fee34214afc6f01e1d9170257c7fa754e024f1cb786c99",
+        "trainingRows": 1500,
+        "validationRows": 300,
+        "mse": 0.2567342099461044,
+        "baselineMse": 0.24930881562499924,
+        "runtimeMs": 2.8076249999940046,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      },
+      "affinity": {
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "observed_merchant_affinity",
+          "price_scale",
+          "recent_refunds"
+        ],
+        "windowDays": 42,
+        "datasetHash": "b4406b37f20bfa5ed9dec67534c6b8d32589c14a99e45f4ce2baa239973f23fe",
+        "trainingRows": 2900,
+        "validationRows": 600,
+        "mse": 0.25113089288149637,
+        "baselineMse": 0.2505191373030867,
+        "runtimeMs": 4.257083999997121,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      },
+      "mean": {
+        "type": "compiled_action_mean",
+        "features": [],
+        "windowDays": 42,
+        "datasetHash": "b4406b37f20bfa5ed9dec67534c6b8d32589c14a99e45f4ce2baa239973f23fe",
+        "trainingRows": 2900,
+        "validationRows": 600,
+        "mse": 0.25133134155499914,
+        "baselineMse": 0.2505191373030867,
+        "runtimeMs": 3.821791000002122,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      }
+    },
+    "choices": {
+      "models": [
+        "full",
+        "recent",
+        "affinity",
+        "mean"
+      ],
+      "styles": [
+        "recommendations"
+      ],
+      "penalties": [
+        0.12,
+        0.3,
+        0.6
+      ],
+      "maxDurationDays": 3
+    },
+    "snapshotHash": "b27473e48fffe56e9cfa118dc1bf93e6cc3a573529a1c3d8e81f64c23dd9cf64",
+    "brief": "Ignore the previous $50 promotion. Final request: grow retained sales at Corner Supply using recommendations. No coupons; $10 maximum. The test lasts 3 days."
+  },
+  "functions": [
+    {
+      "name": "choose_experiments",
+      "description": "Propose exactly two supported experiments; code validates authority and independently measures value.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "choices": {
+            "type": "ARRAY",
+            "items": {
+              "type": "OBJECT",
+              "properties": {
+                "model": {
+                  "type": "STRING",
+                  "enum": [
+                    "full",
+                    "recent",
+                    "affinity",
+                    "mean"
+                  ]
+                },
+                "style": {
+                  "type": "STRING",
+                  "enum": [
+                    "recommendations",
+                    "coupon"
+                  ]
+                },
+                "durationDays": {
+                  "type": "INTEGER"
+                },
+                "merchantIndices": {
+                  "type": "ARRAY",
+                  "items": {
+                    "type": "INTEGER"
+                  }
+                },
+                "penaltyUSD": {
+                  "type": "NUMBER"
+                }
+              },
+              "required": [
+                "model",
+                "style",
+                "durationDays",
+                "merchantIndices",
+                "penaltyUSD"
+              ]
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "reason": {
+            "type": "STRING"
+          }
+        },
+        "required": [
+          "choices",
+          "reason"
+        ]
+      }
+    }
+  ],
+  "stage": "trusted_adaptive_plan",
+  "status": "COMPLETED",
+  "startedAt": "2026-10-25T02:51:27.237Z",
+  "response": {
+    "name": "choose_experiments",
+    "args": {
+      "choices": [
+        {
+          "model": "full",
+          "style": "recommendations",
+          "durationDays": 3,
+          "merchantIndices": [
+            2
+          ],
+          "penaltyUSD": 0.12
+        },
+        {
+          "model": "affinity",
+          "penaltyUSD": 0.12,
+          "durationDays": 3,
+          "style": "recommendations",
+          "merchantIndices": [
+            2
+          ]
+        }
+      ],
+      "reason": "Comparing the full feature set against the affinity-focused model to optimize retained sales at Corner Supply within the $10 budget."
+    },
+    "id": "call_54535"
+  },
+  "provider": {
+    "reservationId": "f2bd9c57-fe1d-42c8-9481-6b87ca6ff601",
+    "caseId": "adaptive-plan",
+    "trialId": "TW4-DEV-9c16036d4cef5d",
+    "stage": "trusted_adaptive_plan",
+    "status": "settled",
+    "modelCostMicros": 595,
+    "reservedMicros": 30000,
+    "inputTokens": 1749,
+    "outputTokens": 105,
+    "thinkingTokens": 0,
+    "cachedInputTokens": 0,
+    "responseId": "sW7darDZPOml7OsP3Lz_sA0",
+    "modelVersion": "gemini-3.1-flash-lite",
+    "latencyMs": 1319
+  },
+  "finishedAt": "2026-10-25T02:51:31.253Z"
+}

@@ -1,0 +1,183 @@
+{
+  "id": "TW4-CONF-ec785a372fb85d-reader",
+  "version": 1,
+  "binding": "ccf43c553427ecd59582693cba61997b8f3d1d7dfa14321342355dfb0d926af8",
+  "spec": {
+    "merchantIndices": [
+      1
+    ],
+    "durationDays": 0,
+    "maxCouponPct": 0,
+    "inactiveDays": 0,
+    "reason": "The user requested an investigation into refund issues for Oak & Ink, which aligns with the reduce_return_exposure goal. No campaign launch is requested.",
+    "budgetCents": 0,
+    "status": "ready",
+    "goal": "reduce_return_exposure"
+  },
+  "nodes": [
+    {
+      "name": "interpretation_bound",
+      "inputHash": "b1b1e89783f6fd5c5294c8383d5ab4c8b786c44ef1bd706754c477058861b83c",
+      "input": {
+        "spec": {
+          "merchantIndices": [
+            1
+          ],
+          "durationDays": 0,
+          "maxCouponPct": 0,
+          "inactiveDays": 0,
+          "reason": "The user requested an investigation into refund issues for Oak & Ink, which aligns with the reduce_return_exposure goal. No campaign launch is requested.",
+          "budgetCents": 0,
+          "status": "ready",
+          "goal": "reduce_return_exposure"
+        }
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:05:43.543Z",
+      "output": {
+        "spec": {
+          "merchantIndices": [
+            1
+          ],
+          "durationDays": 0,
+          "maxCouponPct": 0,
+          "inactiveDays": 0,
+          "reason": "The user requested an investigation into refund issues for Oak & Ink, which aligns with the reduce_return_exposure goal. No campaign launch is requested.",
+          "budgetCents": 0,
+          "status": "ready",
+          "goal": "reduce_return_exposure"
+        },
+        "validation": "TYPED_AUTHORITY_PASSED",
+        "note": "Semantic correctness is graded independently, not compared with hidden expected answers here."
+      },
+      "finishedAt": "2026-10-25T03:05:43.549Z"
+    },
+    {
+      "name": "snapshot_bound",
+      "inputHash": "a249a099ca80c7a52fe894c849ae8c7f8a6d36de0a35bd7dbcb66ff1d60afd6a",
+      "input": {
+        "snapshotHash": "26ca9708a63c950c00e0e168581189a1345170218f77005def605236de760218",
+        "cutoff": 45
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:05:43.551Z",
+      "output": {
+        "snapshotHash": "26ca9708a63c950c00e0e168581189a1345170218f77005def605236de760218",
+        "cutoff": 45,
+        "customers": 100,
+        "merchants": 3
+      },
+      "finishedAt": "2026-10-25T03:05:43.552Z"
+    },
+    {
+      "name": "evidence_validated",
+      "inputHash": "820b291c30fe23e2ed370d45e5d2e08ef83f055d0126f703d10901d7b3baeffa",
+      "input": {
+        "analyses": [
+          "mature_returns",
+          "merchant_sales"
+        ],
+        "scope": [
+          1
+        ]
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:05:43.554Z",
+      "output": {
+        "reports": [
+          {
+            "kind": "mature_returns",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS_AND_ORDER_RATE",
+            "rows": [
+              {
+                "merchantIndex": 1,
+                "matureOrders": 83,
+                "immatureOrders": 67,
+                "returnedMatureOrders": 3,
+                "returnRate": 0.036145,
+                "maturePlatformContributionCents": 10225
+              }
+            ],
+            "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+            "includedMerchants": 1
+          },
+          {
+            "kind": "merchant_sales",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS",
+            "rows": [
+              {
+                "merchantIndex": 1,
+                "orders": 150,
+                "retainedObservedCents": 639686,
+                "observedRefundCents": 36994
+              }
+            ],
+            "warning": "Recent refunds are incomplete. Retained volume is not platform profit.",
+            "includedMerchants": 1
+          }
+        ],
+        "validation": {
+          "uniqueGrains": true,
+          "explicitUnits": true,
+          "matureDenominators": true
+        },
+        "note": "Static tested operations; no LLM-generated SQL."
+      },
+      "finishedAt": "2026-10-25T03:05:43.559Z"
+    },
+    {
+      "name": "diagnostic_committed",
+      "inputHash": "a4f7ade0df3251547afb737897edbaf8d9ae242e1e8712403e6d96761e755c94",
+      "input": {
+        "goal": "reduce_return_exposure"
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:05:43.564Z",
+      "output": {
+        "decision": "report",
+        "plan": {
+          "id": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "merchantIndices": [],
+          "maxOfferPct": 0,
+          "duration": 0,
+          "penalty": 0,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "evidenceIds": [
+          "mature_returns",
+          "merchant_sales"
+        ],
+        "reason": "Diagnostic goal completed without outreach."
+      },
+      "finishedAt": "2026-10-25T03:05:43.566Z"
+    }
+  ],
+  "completed": true,
+  "effects": {
+    "training": 0,
+    "pilots": 0,
+    "publish": 0
+  },
+  "snapshotHash": "26ca9708a63c950c00e0e168581189a1345170218f77005def605236de760218"
+}

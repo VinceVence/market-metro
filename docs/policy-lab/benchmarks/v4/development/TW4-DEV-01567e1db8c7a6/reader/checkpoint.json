@@ -1,0 +1,7317 @@
+{
+  "id": "TW4-DEV-01567e1db8c7a6-reader",
+  "version": 1,
+  "binding": "0694499d637ff6dbf6ac08448fd700782d3fd0f228d8193f8c397e039ec46a56",
+  "spec": {
+    "goal": "reactivate_buyers",
+    "status": "ready",
+    "reason": "Reactivating buyers who have been inactive for 7 days across all shops with a $20 budget over 3 days and no discounts.",
+    "merchantIndices": [
+      0,
+      1,
+      2
+    ],
+    "budgetCents": 2000,
+    "durationDays": 3,
+    "inactiveDays": 7,
+    "maxCouponPct": 0
+  },
+  "nodes": [
+    {
+      "name": "interpretation_bound",
+      "inputHash": "015ed2e177f2616445d74ac4639f86c746efcf10068d25695bde1d7dbb607c86",
+      "input": {
+        "spec": {
+          "goal": "reactivate_buyers",
+          "status": "ready",
+          "reason": "Reactivating buyers who have been inactive for 7 days across all shops with a $20 budget over 3 days and no discounts.",
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ],
+          "budgetCents": 2000,
+          "durationDays": 3,
+          "inactiveDays": 7,
+          "maxCouponPct": 0
+        }
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T02:51:15.131Z",
+      "output": {
+        "spec": {
+          "goal": "reactivate_buyers",
+          "status": "ready",
+          "reason": "Reactivating buyers who have been inactive for 7 days across all shops with a $20 budget over 3 days and no discounts.",
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ],
+          "budgetCents": 2000,
+          "durationDays": 3,
+          "inactiveDays": 7,
+          "maxCouponPct": 0
+        },
+        "validation": "TYPED_AUTHORITY_PASSED",
+        "note": "Semantic correctness is graded independently, not compared with hidden expected answers here."
+      },
+      "finishedAt": "2026-10-25T02:51:15.134Z"
+    },
+    {
+      "name": "snapshot_bound",
+      "inputHash": "898daeec22b4a93235a22baa57d19729ad65397fcd4472141818aca040df64c8",
+      "input": {
+        "snapshotHash": "cc7e3b5fdf2fec0cfe38af575ae4bc711dc454f7384d9958a39e6b15bf94c8ba",
+        "cutoff": 45
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T02:51:15.137Z",
+      "output": {
+        "snapshotHash": "cc7e3b5fdf2fec0cfe38af575ae4bc711dc454f7384d9958a39e6b15bf94c8ba",
+        "cutoff": 45,
+        "customers": 100,
+        "merchants": 3
+      },
+      "finishedAt": "2026-10-25T02:51:15.139Z"
+    },
+    {
+      "name": "evidence_validated",
+      "inputHash": "f2ecf8defce314cbfd6b9f059b5883e4d937f5fd3111070cbee9aa3020bbca1f",
+      "input": {
+        "analyses": [
+          "reactivation_cohort",
+          "mature_returns",
+          "model_readiness"
+        ],
+        "scope": [
+          0,
+          1,
+          2
+        ]
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T02:51:15.141Z",
+      "output": {
+        "reports": [
+          {
+            "kind": "reactivation_cohort",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one customer at snapshot",
+            "unit": "customers",
+            "n": 33,
+            "denominator": 100,
+            "inactiveDays": 7,
+            "hasPreviousPurchase": true,
+            "cohortIds": [
+              "WORLD-72005-U0003",
+              "WORLD-72005-U0005",
+              "WORLD-72005-U0008",
+              "WORLD-72005-U0011",
+              "WORLD-72005-U0015",
+              "WORLD-72005-U0019",
+              "WORLD-72005-U0021",
+              "WORLD-72005-U0025",
+              "WORLD-72005-U0026",
+              "WORLD-72005-U0028",
+              "WORLD-72005-U0032",
+              "WORLD-72005-U0038",
+              "WORLD-72005-U0039",
+              "WORLD-72005-U0044",
+              "WORLD-72005-U0047",
+              "WORLD-72005-U0051",
+              "WORLD-72005-U0053",
+              "WORLD-72005-U0054",
+              "WORLD-72005-U0056",
+              "WORLD-72005-U0063",
+              "WORLD-72005-U0065",
+              "WORLD-72005-U0070",
+              "WORLD-72005-U0074",
+              "WORLD-72005-U0075",
+              "WORLD-72005-U0078",
+              "WORLD-72005-U0082",
+              "WORLD-72005-U0084",
+              "WORLD-72005-U0092",
+              "WORLD-72005-U0093",
+              "WORLD-72005-U0094",
+              "WORLD-72005-U0095",
+              "WORLD-72005-U0099",
+              "WORLD-72005-U0100"
+            ],
+            "definition": "At least one observed purchase; snapshot cutoff minus latest observed purchase day is at least 7. Cohort uses purchase history across the district; merchant scope constrains later outreach."
+          },
+          {
+            "kind": "mature_returns",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS_AND_ORDER_RATE",
+            "rows": [
+              {
+                "merchantIndex": 0,
+                "matureOrders": 96,
+                "immatureOrders": 76,
+                "returnedMatureOrders": 3,
+                "returnRate": 0.03125,
+                "maturePlatformContributionCents": 11863
+              },
+              {
+                "merchantIndex": 1,
+                "matureOrders": 66,
+                "immatureOrders": 61,
+                "returnedMatureOrders": 4,
+                "returnRate": 0.060606,
+                "maturePlatformContributionCents": 7233
+              },
+              {
+                "merchantIndex": 2,
+                "matureOrders": 83,
+                "immatureOrders": 73,
+                "returnedMatureOrders": 1,
+                "returnRate": 0.012048,
+                "maturePlatformContributionCents": 10615
+              }
+            ],
+            "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+            "includedMerchants": 3
+          },
+          {
+            "kind": "model_readiness",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one customer-day action",
+            "unit": "rows",
+            "observedRows": 4500,
+            "matureRows": 3200,
+            "immatureRows": 1300,
+            "trainingAllowed": true,
+            "checks": {
+              "uniqueActionIds": true,
+              "noFutureRows": true
+            },
+            "featureIds": [
+              "recency_30d",
+              "purchases_7d",
+              "offers_7d",
+              "price_scale",
+              "observed_merchant_affinity",
+              "recent_refunds"
+            ]
+          }
+        ],
+        "validation": {
+          "uniqueGrains": true,
+          "explicitUnits": true,
+          "matureDenominators": true
+        },
+        "note": "Static tested operations; no LLM-generated SQL."
+      },
+      "finishedAt": "2026-10-25T02:51:15.146Z"
+    },
+    {
+      "name": "models_compared",
+      "inputHash": "3731bbb9ec6ca8c1b5666269e238f69f8a208b0d6a640b244c5151710302f6fc",
+      "input": {
+        "recipes": {
+          "full": {
+            "family": "ridge",
+            "features": [
+              "recency_30d",
+              "purchases_7d",
+              "offers_7d",
+              "price_scale",
+              "observed_merchant_affinity",
+              "recent_refunds"
+            ],
+            "windowDays": 42
+          },
+          "recent": {
+            "family": "ridge",
+            "features": [
+              "recency_30d",
+              "purchases_7d",
+              "price_scale",
+              "observed_merchant_affinity"
+            ],
+            "windowDays": 28
+          },
+          "affinity": {
+            "family": "ridge",
+            "features": [
+              "observed_merchant_affinity",
+              "price_scale",
+              "recent_refunds"
+            ],
+            "windowDays": 42
+          },
+          "mean": {
+            "family": "mean",
+            "features": [],
+            "windowDays": 42
+          }
+        },
+        "snapshotHash": "cc7e3b5fdf2fec0cfe38af575ae4bc711dc454f7384d9958a39e6b15bf94c8ba"
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T02:51:15.148Z",
+      "output": {
+        "full": {
+          "artifact": {
+            "type": "compiled_linear_feature_ridge",
+            "arms": {
+              "none": {
+                "count": 2517,
+                "coef": [
+                  0.21115132496456984,
+                  0.04996360124370559,
+                  -0.04699951008257323,
+                  -0.324027826363717,
+                  0.00690643093684786,
+                  0,
+                  -0.10457597611116715
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:0": {
+                "count": 41,
+                "coef": [
+                  0.05915471922041306,
+                  -0.14470657383053673,
+                  0.3661401078337257,
+                  -0.1975924033196314,
+                  0.21704894499690652,
+                  0.10024221320356427,
+                  -0.2161799561245998
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:0": {
+                "count": 59,
+                "coef": [
+                  0.12861912444621587,
+                  0.06133965165335518,
+                  0.0725408554191177,
+                  -0.1370813668973687,
+                  -0.24792345638341062,
+                  0.2941700515083453,
+                  0.08114298952657195
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:0": {
+                "count": 0,
+                "coef": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:1": {
+                "count": 44,
+                "coef": [
+                  0.0865959304838278,
+                  0.038503279104574004,
+                  0.08892147499999387,
+                  0.026905452100900968,
+                  -0.025494982770508788,
+                  0.17023579483393947,
+                  0.39499001180419235
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:1": {
+                "count": 49,
+                "coef": [
+                  -0.036236768991491926,
+                  0.17468134836504048,
+                  -0.12979538844609667,
+                  -0.003344967691066127,
+                  0.7902091314422743,
+                  -0.10542053002662875,
+                  -0.0544486202027377
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:1": {
+                "count": 54,
+                "coef": [
+                  0.05794493633024372,
+                  -0.11619703402637346,
+                  0.5087158523684532,
+                  0.035814297773656405,
+                  0.19159645613512347,
+                  -0.09261391394514344,
+                  0.4679995385884228
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:2": {
+                "count": 47,
+                "coef": [
+                  0.16833565477435758,
+                  -0.09325963557921628,
+                  -0.2546572430471101,
+                  -0.31184401323714495,
+                  0.17207507067993782,
+                  0.33821631331084945,
+                  0.12294971524141557
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:2": {
+                "count": 47,
+                "coef": [
+                  0.19078268885503552,
+                  0.2326618977879704,
+                  -0.011029836760604476,
+                  -0.3852772329918388,
+                  -0.0593936740492653,
+                  0.35629190674967626,
+                  0.8633739076692084
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:2": {
+                "count": 42,
+                "coef": [
+                  0.1536145122212879,
+                  -0.2812572375005087,
+                  0.21957499997179164,
+                  -0.005386310105142533,
+                  0.2645678752012382,
+                  -0.10994814128546729,
+                  -0.05108827503045211
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              }
+            },
+            "cutoffDay": 45,
+            "windowDays": 42,
+            "trainingRows": 2900,
+            "validationRows": 600,
+            "mse": 0.25545983574090403,
+            "baselineMse": 0.25467222442344056,
+            "runtimeMs": 8.40704199999891,
+            "features": [
+              "bias",
+              "recency_30d",
+              "purchases_7d",
+              "offers_7d",
+              "price_scale",
+              "observed_merchant_affinity",
+              "recent_refunds"
+            ],
+            "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift.",
+            "recipe": {
+              "family": "ridge",
+              "features": [
+                "recency_30d",
+                "purchases_7d",
+                "offers_7d",
+                "price_scale",
+                "observed_merchant_affinity",
+                "recent_refunds"
+              ],
+              "windowDays": 42,
+              "datasetHash": "e817216c8eab67ec86d256d1e2a629b4e83251e29b8c1d8bad236f6653c8a53a"
+            }
+          },
+          "rawArtifact": {
+            "type": "contextual_ridge_bandit",
+            "arms": {
+              "none": {
+                "count": 2517,
+                "coef": [
+                  0.21115132496456984,
+                  0.04996360124370559,
+                  -0.04699951008257323,
+                  -0.324027826363717,
+                  0.00690643093684786,
+                  0,
+                  -0.10457597611116715
+                ],
+                "inverse": [
+                  [
+                    0.016925592025601705,
+                    -0.0033281601473882393,
+                    -0.008243102074786313,
+                    -0.09188372804476329,
+                    -0.0026529815478420924,
+                    0,
+                    -0.004082843943534375
+                  ],
+                  [
+                    -0.0033281601473882406,
+                    0.007291487435476153,
+                    0.010459402881810317,
+                    -0.0013092792912736053,
+                    -0.000031292748671782234,
+                    0,
+                    0.002360131632087763
+                  ],
+                  [
+                    -0.008243102074786316,
+                    0.010459402881810319,
+                    0.03764857668511562,
+                    -0.0015834296339081375,
+                    0.0001387048544762331,
+                    0,
+                    0.0030355284468603265
+                  ],
+                  [
+                    -0.09188372804476334,
+                    -0.001309279291273605,
+                    -0.001583429633908133,
+                    0.6569895789504231,
+                    -0.000992329484399649,
+                    0,
+                    0.009586347570216758
+                  ],
+                  [
+                    -0.002652981547842075,
+                    -0.00003129274867178582,
+                    0.00013870485447622447,
+                    -0.0009923294843997479,
+                    0.0053152857830295434,
+                    0,
+                    0.0007731585804078554
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    -0.004082843943534371,
+                    0.002360131632087761,
+                    0.0030355284468603213,
+                    0.009586347570216744,
+                    0.0007731585804078581,
+                    0,
+                    0.11799083029158608
+                  ]
+                ]
+              },
+              "recommend:0": {
+                "count": 41,
+                "coef": [
+                  0.05915471922041306,
+                  -0.14470657383053673,
+                  0.3661401078337257,
+                  -0.1975924033196314,
+                  0.21704894499690652,
+                  0.10024221320356427,
+                  -0.2161799561245998
+                ],
+                "inverse": [
+                  [
+                    0.1384045463478243,
+                    -0.09146021687576507,
+                    -0.11819441629220424,
+                    -0.11225188250409507,
+                    -0.11535711573431913,
+                    -0.006855445103783707,
+                    -0.008999561591025402
+                  ],
+                  [
+                    -0.09146021687576507,
+                    0.28432792599282763,
+                    0.13345786482843447,
+                    -0.02554592067506134,
+                    -0.011138664246489157,
+                    0.03000450811499363,
+                    0.00902845422661891
+                  ],
+                  [
+                    -0.1181944162922042,
+                    0.13345786482843444,
+                    0.7336015181509303,
+                    -0.015243742770746253,
+                    0.00122385067716193,
+                    -0.008730890325147251,
+                    0.010012410298457708
+                  ],
+                  [
+                    -0.11225188250409499,
+                    -0.025545920675061406,
+                    -0.01524374277074628,
+                    0.9337646321784921,
+                    0.002334312065840893,
+                    -0.0019389350660044067,
+                    -0.013165035733376278
+                  ],
+                  [
+                    -0.1153571157343192,
+                    -0.01113866424648914,
+                    0.001223850677162009,
+                    0.002334312065840983,
+                    0.2589863002305087,
+                    -0.06177443738214143,
+                    -0.02803028773135007
+                  ],
+                  [
+                    -0.00685544510378368,
+                    0.03000450811499362,
+                    -0.008730890325147265,
+                    -0.0019389350660043974,
+                    -0.06177443738214145,
+                    0.13430923263471425,
+                    -0.00549956571239187
+                  ],
+                  [
+                    -0.00899956159102538,
+                    0.009028454226618902,
+                    0.010012410298457695,
+                    -0.013165035733376289,
+                    -0.028030287731350086,
+                    -0.005499565712391867,
+                    0.6773859210915774
+                  ]
+                ]
+              },
+              "coupon5:0": {
+                "count": 59,
+                "coef": [
+                  0.12861912444621587,
+                  0.06133965165335518,
+                  0.0725408554191177,
+                  -0.1370813668973687,
+                  -0.24792345638341062,
+                  0.2941700515083453,
+                  0.08114298952657195
+                ],
+                "inverse": [
+                  [
+                    0.12714720334091667,
+                    -0.079077384315837,
+                    -0.12401855187571766,
+                    -0.09153872865708071,
+                    -0.0873669482528462,
+                    -0.0368950741967378,
+                    -0.010526167051020654
+                  ],
+                  [
+                    -0.07907738431583701,
+                    0.22427066140701696,
+                    0.15471740359505604,
+                    -0.00764636921550545,
+                    -0.008681012522956855,
+                    0.01270857293774841,
+                    0.015107241437261183
+                  ],
+                  [
+                    -0.1240185518757177,
+                    0.15471740359505606,
+                    0.6662517123700125,
+                    -0.0350486666847169,
+                    -0.03302894516331912,
+                    0.02172204057847432,
+                    0.011107249663302841
+                  ],
+                  [
+                    -0.0915387286570807,
+                    -0.007646369215505475,
+                    -0.03504866668471702,
+                    0.8805409574735082,
+                    -0.017673472575328933,
+                    -0.0029225811079857536,
+                    0.020696619143964978
+                  ],
+                  [
+                    -0.0873669482528462,
+                    -0.00868101252295686,
+                    -0.03302894516331912,
+                    -0.017673472575328947,
+                    0.17466564482763544,
+                    0.009324081689228778,
+                    -0.007160071796487004
+                  ],
+                  [
+                    -0.03689507419673778,
+                    0.012708572937748403,
+                    0.021722040578474294,
+                    -0.0029225811079857745,
+                    0.00932408168922878,
+                    0.06752559738584869,
+                    -0.0029660346082224683
+                  ],
+                  [
+                    -0.010526167051020656,
+                    0.015107241437261183,
+                    0.01110724966330284,
+                    0.020696619143964985,
+                    -0.007160071796487004,
+                    -0.0029660346082224657,
+                    0.8941177181128602
+                  ]
+                ]
+              },
+              "coupon10:0": {
+                "count": 0,
+                "coef": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "recommend:1": {
+                "count": 44,
+                "coef": [
+                  0.0865959304838278,
+                  0.038503279104574004,
+                  0.08892147499999387,
+                  0.026905452100900968,
+                  -0.025494982770508788,
+                  0.17023579483393947,
+                  0.39499001180419235
+                ],
+                "inverse": [
+                  [
+                    0.13477292714591213,
+                    -0.12431385465453906,
+                    -0.12227740667771884,
+                    -0.1223343790186486,
+                    -0.1031945234244901,
+                    -0.014879302544511938,
+                    -0.01451886592326035
+                  ],
+                  [
+                    -0.12431385465453906,
+                    0.685054376462932,
+                    0.14627274991595407,
+                    -0.01987642978640891,
+                    -0.003083134668573794,
+                    0.01627959533984389,
+                    -0.012501066081118268
+                  ],
+                  [
+                    -0.12227740667771883,
+                    0.14627274991595407,
+                    0.6409300549625091,
+                    -0.02385968863596453,
+                    -0.03767132229399955,
+                    -0.009944520471051807,
+                    -0.017942684856862564
+                  ],
+                  [
+                    -0.1223343790186486,
+                    -0.01987642978640891,
+                    -0.023859688635964535,
+                    0.9641762679489724,
+                    -0.000043425543498169984,
+                    -0.007171466858982888,
+                    -0.00271173522538427
+                  ],
+                  [
+                    -0.10319452342449009,
+                    -0.003083134668573802,
+                    -0.03767132229399954,
+                    -0.0000434255434981732,
+                    0.23806491026689747,
+                    -0.02381082006096354,
+                    0.01605127502638612
+                  ],
+                  [
+                    -0.014879302544511964,
+                    0.016279595339843914,
+                    -0.009944520471051776,
+                    -0.0071714668589828645,
+                    -0.02381082006096352,
+                    0.11084438089418576,
+                    0.010095133976008813
+                  ],
+                  [
+                    -0.014518865923260352,
+                    -0.012501066081118267,
+                    -0.01794268485686256,
+                    -0.002711735225384268,
+                    0.01605127502638612,
+                    0.010095133976008813,
+                    0.8851899219627598
+                  ]
+                ]
+              },
+              "coupon5:1": {
+                "count": 49,
+                "coef": [
+                  -0.036236768991491926,
+                  0.17468134836504048,
+                  -0.12979538844609667,
+                  -0.003344967691066127,
+                  0.7902091314422743,
+                  -0.10542053002662875,
+                  -0.0544486202027377
+                ],
+                "inverse": [
+                  [
+                    0.12224431861418138,
+                    -0.08590743864779474,
+                    -0.13190540496292072,
+                    -0.10191813235861813,
+                    -0.09982441658814611,
+                    -0.018683091272710957,
+                    -0.012961891815683618
+                  ],
+                  [
+                    -0.08590743864779474,
+                    0.3244598865332675,
+                    0.14312805333889891,
+                    -0.020769562553637388,
+                    0.00878800655076888,
+                    0.005132880705407249,
+                    -0.0006589386647437652
+                  ],
+                  [
+                    -0.13190540496292077,
+                    0.14312805333889897,
+                    0.7258414405558209,
+                    -0.011362991289309421,
+                    -0.018999984796083138,
+                    -0.001853918672513735,
+                    0.019195388309387443
+                  ],
+                  [
+                    -0.10191813235861812,
+                    -0.020769562553637384,
+                    -0.011362991289309409,
+                    0.9367748993826485,
+                    -0.027042329343995263,
+                    -0.011726722388479693,
+                    0.022328369909627985
+                  ],
+                  [
+                    -0.0998244165881461,
+                    0.008788006550768859,
+                    -0.018999984796083214,
+                    -0.02704232934399526,
+                    0.22607215734398756,
+                    -0.009153726488247601,
+                    0.0048385509692819365
+                  ],
+                  [
+                    -0.018683091272710967,
+                    0.00513288070540725,
+                    -0.001853918672513734,
+                    -0.011726722388479693,
+                    -0.009153726488247582,
+                    0.09950650084431391,
+                    0.0038928077284986103
+                  ],
+                  [
+                    -0.012961891815683625,
+                    -0.000658938664743764,
+                    0.019195388309387443,
+                    0.02232836990962799,
+                    0.0048385509692819425,
+                    0.00389280772849861,
+                    0.9637672608342068
+                  ]
+                ]
+              },
+              "coupon10:1": {
+                "count": 54,
+                "coef": [
+                  0.05794493633024372,
+                  -0.11619703402637346,
+                  0.5087158523684532,
+                  0.035814297773656405,
+                  0.19159645613512347,
+                  -0.09261391394514344,
+                  0.4679995385884228
+                ],
+                "inverse": [
+                  [
+                    0.1316240123050089,
+                    -0.08821422975971661,
+                    -0.11897827784657114,
+                    -0.08895114861685724,
+                    -0.09172165148658211,
+                    -0.0444693802849682,
+                    -0.025674391409987715
+                  ],
+                  [
+                    -0.0882142297597166,
+                    0.18373943837325366,
+                    0.14828512952673215,
+                    0.009049304634765313,
+                    -0.010744541526463173,
+                    0.03574592059924929,
+                    0.005369113746994552
+                  ],
+                  [
+                    -0.11897827784657113,
+                    0.14828512952673215,
+                    0.6240256561963103,
+                    -0.0185104144179637,
+                    -0.03864699353611781,
+                    0.021519273906089226,
+                    0.03486445326702162
+                  ],
+                  [
+                    -0.08895114861685723,
+                    0.009049304634765318,
+                    -0.018510414417963642,
+                    0.861999507323481,
+                    -0.022075448072711876,
+                    -0.00540502727839466,
+                    -0.015525533823455579
+                  ],
+                  [
+                    -0.09172165148658211,
+                    -0.010744541526463173,
+                    -0.038646993536117814,
+                    -0.02207544807271187,
+                    0.2040994297746618,
+                    0.010839531643428624,
+                    0.017119923667713664
+                  ],
+                  [
+                    -0.04446938028496821,
+                    0.0357459205992493,
+                    0.021519273906089247,
+                    -0.005405027278394646,
+                    0.010839531643428636,
+                    0.09556936593510372,
+                    0.013142030969975202
+                  ],
+                  [
+                    -0.02567439140998772,
+                    0.0053691137469945565,
+                    0.034864453267021624,
+                    -0.01552553382345558,
+                    0.017119923667713668,
+                    0.013142030969975198,
+                    0.5100445226375029
+                  ]
+                ]
+              },
+              "recommend:2": {
+                "count": 47,
+                "coef": [
+                  0.16833565477435758,
+                  -0.09325963557921628,
+                  -0.2546572430471101,
+                  -0.31184401323714495,
+                  0.17207507067993782,
+                  0.33821631331084945,
+                  0.12294971524141557
+                ],
+                "inverse": [
+                  [
+                    0.13265382430269398,
+                    -0.08390638364835956,
+                    -0.1024830396795228,
+                    -0.0805661756909441,
+                    -0.09595992143764806,
+                    -0.04804233741274656,
+                    -0.008560665721792624
+                  ],
+                  [
+                    -0.08390638364835948,
+                    0.2068684076337822,
+                    0.14697768232416375,
+                    -0.03671560890797889,
+                    -0.021028319336863183,
+                    0.03866951980140619,
+                    -0.005180708352852166
+                  ],
+                  [
+                    -0.1024830396795227,
+                    0.1469776823241638,
+                    0.6502335596559469,
+                    -0.058796012508693506,
+                    -0.060284782843727125,
+                    0.013739032722020227,
+                    -0.01404850210161713
+                  ],
+                  [
+                    -0.08056617569094408,
+                    -0.036715608907978835,
+                    -0.05879601250869339,
+                    0.8747910382445424,
+                    -0.010005273251562299,
+                    0.011626023139410899,
+                    0.01538122823116688
+                  ],
+                  [
+                    -0.09595992143764814,
+                    -0.021028319336863117,
+                    -0.06028478284372703,
+                    -0.010005273251562205,
+                    0.24967489431963938,
+                    -0.0062892255322237415,
+                    0.020983506252489053
+                  ],
+                  [
+                    -0.048042337412746536,
+                    0.038669519801406205,
+                    0.013739032722020237,
+                    0.01162602313941089,
+                    -0.006289225532223791,
+                    0.08772483604826391,
+                    -0.02713736840525032
+                  ],
+                  [
+                    -0.008560665721792633,
+                    -0.005180708352852163,
+                    -0.014048502101617125,
+                    0.015381228231166893,
+                    0.020983506252489063,
+                    -0.027137368405250314,
+                    0.8747192830386089
+                  ]
+                ]
+              },
+              "coupon5:2": {
+                "count": 47,
+                "coef": [
+                  0.19078268885503552,
+                  0.2326618977879704,
+                  -0.011029836760604476,
+                  -0.3852772329918388,
+                  -0.0593936740492653,
+                  0.35629190674967626,
+                  0.8633739076692084
+                ],
+                "inverse": [
+                  [
+                    0.11292112656559357,
+                    -0.08078584866867593,
+                    -0.07705037175243283,
+                    -0.09205276575450903,
+                    -0.09229036312220425,
+                    -0.015725392643177186,
+                    0.004409127849342686
+                  ],
+                  [
+                    -0.08078584866867594,
+                    0.4160973248438784,
+                    0.1547906629602008,
+                    -0.02878848073059794,
+                    -0.03692778653835553,
+                    -0.003171511047707023,
+                    0.0020498292899277606
+                  ],
+                  [
+                    -0.07705037175243287,
+                    0.15479066296020083,
+                    0.6307889892260815,
+                    -0.027076968090547326,
+                    -0.07926155883832725,
+                    0.01537623991985021,
+                    0.03915957922529686
+                  ],
+                  [
+                    -0.09205276575450907,
+                    -0.028788480730597945,
+                    -0.0270769680905473,
+                    0.8753512039938292,
+                    0.004834702149018474,
+                    -0.010201378392319287,
+                    0.03679932215262895
+                  ],
+                  [
+                    -0.09229036312220418,
+                    -0.03692778653835554,
+                    -0.07926155883832728,
+                    0.004834702149018398,
+                    0.2192923712562282,
+                    -0.024260862384006588,
+                    -0.03962168892905845
+                  ],
+                  [
+                    -0.015725392643177186,
+                    -0.0031715110477070216,
+                    0.015376239919850213,
+                    -0.010201378392319278,
+                    -0.02426086238400659,
+                    0.09195835087000546,
+                    -0.015065011253842023
+                  ],
+                  [
+                    0.004409127849342668,
+                    0.002049829289927765,
+                    0.039159579225296864,
+                    0.03679932215262896,
+                    -0.03962168892905844,
+                    -0.015065011253842027,
+                    0.7958071354557473
+                  ]
+                ]
+              },
+              "coupon10:2": {
+                "count": 42,
+                "coef": [
+                  0.1536145122212879,
+                  -0.2812572375005087,
+                  0.21957499997179164,
+                  -0.005386310105142533,
+                  0.2645678752012382,
+                  -0.10994814128546729,
+                  -0.05108827503045211
+                ],
+                "inverse": [
+                  [
+                    0.15440327154980044,
+                    -0.09824390202063114,
+                    -0.1393511665533303,
+                    -0.10224833380281871,
+                    -0.10927516315138909,
+                    -0.050526226807854714,
+                    -0.013721344142453013
+                  ],
+                  [
+                    -0.09824390202063119,
+                    0.25852750502833627,
+                    0.16479030599228292,
+                    -0.00272903683241142,
+                    -0.01414616029434673,
+                    0.03201187024507073,
+                    0.011579499800449679
+                  ],
+                  [
+                    -0.13935116655333038,
+                    0.16479030599228292,
+                    0.6706191470264025,
+                    -0.010249702585207156,
+                    -0.0558031391720813,
+                    0.026558013590149348,
+                    0.0088046495085303
+                  ],
+                  [
+                    -0.10224833380281872,
+                    -0.002729036832411406,
+                    -0.010249702585207143,
+                    0.9210675486346314,
+                    -0.01685722908674758,
+                    -0.011182621381935948,
+                    0.03611363816714313
+                  ],
+                  [
+                    -0.10927516315138902,
+                    -0.014146160294346807,
+                    -0.055803139172081406,
+                    -0.01685722908674758,
+                    0.25608323289970314,
+                    0.010932481302655164,
+                    0.007459521403554033
+                  ],
+                  [
+                    -0.0505262268078547,
+                    0.03201187024507071,
+                    0.026558013590149334,
+                    -0.01118262138193597,
+                    0.010932481302655178,
+                    0.09806853795248581,
+                    -0.016770202858890828
+                  ],
+                  [
+                    -0.013721344142453015,
+                    0.011579499800449677,
+                    0.008804649508530292,
+                    0.036113638167143136,
+                    0.00745952140355404,
+                    -0.016770202858890828,
+                    0.9079384367115053
+                  ]
+                ]
+              }
+            },
+            "cutoffDay": 45,
+            "windowDays": 42,
+            "trainingRows": 2900,
+            "validationRows": 600,
+            "mse": 0.25545983574090403,
+            "baselineMse": 0.25467222442344056,
+            "runtimeMs": 8.40704199999891,
+            "features": [
+              "bias",
+              "recency_30d",
+              "purchases_7d",
+              "offers_7d",
+              "price_scale",
+              "observed_merchant_affinity",
+              "recent_refunds"
+            ],
+            "disclosure": "Chronological reward prediction check, not causal lift. Final coefficients refit on all mature training observations."
+          },
+          "vectors": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ]
+          ],
+          "summary": {
+            "type": "compiled_linear_feature_ridge",
+            "features": [
+              "recency_30d",
+              "purchases_7d",
+              "offers_7d",
+              "price_scale",
+              "observed_merchant_affinity",
+              "recent_refunds"
+            ],
+            "windowDays": 42,
+            "datasetHash": "e817216c8eab67ec86d256d1e2a629b4e83251e29b8c1d8bad236f6653c8a53a",
+            "trainingRows": 2900,
+            "validationRows": 600,
+            "mse": 0.25545983574090403,
+            "baselineMse": 0.25467222442344056,
+            "runtimeMs": 8.40704199999891,
+            "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+          }
+        },
+        "recent": {
+          "artifact": {
+            "type": "compiled_linear_feature_ridge",
+            "arms": {
+              "none": {
+                "count": 1315,
+                "coef": [
+                  0.15080588721789567,
+                  0.043704388420917714,
+                  -0.047974428374719845,
+                  0,
+                  0.07958466577121559,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:0": {
+                "count": 19,
+                "coef": [
+                  0.12444572532836817,
+                  -0.17597278461242838,
+                  0.3373989995427668,
+                  0,
+                  0.04997433337959198,
+                  0.0824696088837717,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:0": {
+                "count": 37,
+                "coef": [
+                  0.19764193407129332,
+                  0.0616316560778422,
+                  -0.19433461017430206,
+                  0,
+                  -0.35269572780532277,
+                  0.24049671202220307,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:0": {
+                "count": 0,
+                "coef": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:1": {
+                "count": 20,
+                "coef": [
+                  0.2192514678248942,
+                  0.07178089017417405,
+                  0.18283528008277158,
+                  0,
+                  -0.20692830393305672,
+                  -0.1701104606454215,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:1": {
+                "count": 21,
+                "coef": [
+                  0.0171916232131282,
+                  0.5094284359360779,
+                  0.031503087155941266,
+                  0,
+                  0.5665523498343555,
+                  -0.32535266564027376,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:1": {
+                "count": 26,
+                "coef": [
+                  0.14603640819652638,
+                  -0.06850848507456642,
+                  0.177824186290069,
+                  0,
+                  0.2555636958185533,
+                  -0.14972679808534795,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:2": {
+                "count": 20,
+                "coef": [
+                  0.22611051999370496,
+                  -0.06633683986131683,
+                  0.1311632759018212,
+                  0,
+                  -0.13522590449424798,
+                  0.0023899822871869536,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:2": {
+                "count": 25,
+                "coef": [
+                  0.10224597379923098,
+                  0.5143938853384807,
+                  -0.016828176038367136,
+                  0,
+                  -0.018495577465716895,
+                  0.08581361643866647,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:2": {
+                "count": 17,
+                "coef": [
+                  0.14011923060972176,
+                  -0.22216770520520815,
+                  0.30147024429166036,
+                  0,
+                  0.6082963047125673,
+                  -0.1999104301315292,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              }
+            },
+            "cutoffDay": 45,
+            "windowDays": 28,
+            "trainingRows": 1500,
+            "validationRows": 300,
+            "mse": 0.27901517960639344,
+            "baselineMse": 0.27774677284722205,
+            "runtimeMs": 3.1953749999993306,
+            "features": [
+              "bias",
+              "recency_30d",
+              "purchases_7d",
+              "offers_7d",
+              "price_scale",
+              "observed_merchant_affinity",
+              "recent_refunds"
+            ],
+            "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift.",
+            "recipe": {
+              "family": "ridge",
+              "features": [
+                "recency_30d",
+                "purchases_7d",
+                "price_scale",
+                "observed_merchant_affinity"
+              ],
+              "windowDays": 28,
+              "datasetHash": "14dccf2d622cbf92305be1afc18ab303595e5774d4198b9c368f1d0ca47a65fb"
+            }
+          },
+          "rawArtifact": {
+            "type": "contextual_ridge_bandit",
+            "arms": {
+              "none": {
+                "count": 1315,
+                "coef": [
+                  0.15080588721789567,
+                  0.043704388420917714,
+                  -0.047974428374719845,
+                  0.07958466577121559,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.008099523431374335,
+                    -0.010731652056657819,
+                    -0.0157561452627621,
+                    -0.005126073981570752,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.010731652056657817,
+                    0.031920067543664235,
+                    0.028047626302011422,
+                    -0.0005025224124002576,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.015756145262762106,
+                    0.028047626302011422,
+                    0.06428693751531392,
+                    -0.0003236579253479826,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.005126073981570749,
+                    -0.0005025224124002618,
+                    -0.0003236579253479919,
+                    0.01023546312234971,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "recommend:0": {
+                "count": 19,
+                "coef": [
+                  0.12444572532836817,
+                  -0.17597278461242838,
+                  0.3373989995427668,
+                  0.04997433337959198,
+                  0.0824696088837717,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.20159598416415328,
+                    -0.1339029395002377,
+                    -0.12922026684464835,
+                    -0.17419735203256898,
+                    -0.025721632894061177,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.1339029395002377,
+                    0.6956594326561997,
+                    0.1277166242404662,
+                    -0.04128126964385938,
+                    0.019444838052171898,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.1292202668446483,
+                    0.12771662424046615,
+                    0.8017342746098174,
+                    -0.021896379792429803,
+                    0.0072633188315633515,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.17419735203256909,
+                    -0.04128126964385937,
+                    -0.021896379792429733,
+                    0.4052558436393583,
+                    -0.10506398040696951,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.025721632894061132,
+                    0.019444838052171905,
+                    0.007263318831563338,
+                    -0.10506398040696958,
+                    0.19976253142679315,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon5:0": {
+                "count": 37,
+                "coef": [
+                  0.19764193407129332,
+                  0.0616316560778422,
+                  -0.19433461017430206,
+                  -0.35269572780532277,
+                  0.24049671202220307,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.18546282973421943,
+                    -0.14586980359096152,
+                    -0.11961649803204476,
+                    -0.14869968760391555,
+                    -0.059444010268163754,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.14586980359096147,
+                    0.5176659491213108,
+                    0.1580379960160993,
+                    0.0444228829789418,
+                    -0.017654702662519287,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.11961649803204476,
+                    0.1580379960160993,
+                    0.7139971554562122,
+                    -0.05019382432051754,
+                    0.024889439432980227,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.14869968760391553,
+                    0.044422882978941806,
+                    -0.05019382432051754,
+                    0.24958991510720852,
+                    0.017960401694046182,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.059444010268163754,
+                    -0.017654702662519287,
+                    0.024889439432980227,
+                    0.017960401694046186,
+                    0.09930621783060205,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon10:0": {
+                "count": 0,
+                "coef": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "recommend:1": {
+                "count": 20,
+                "coef": [
+                  0.2192514678248942,
+                  0.07178089017417405,
+                  0.18283528008277158,
+                  -0.20692830393305672,
+                  -0.1701104606454215,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.1871692053162307,
+                    -0.1452821379342301,
+                    -0.11849089012560503,
+                    -0.1779085484956061,
+                    -0.053337733784223046,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.1452821379342301,
+                    0.7658193443967606,
+                    0.10187572958610684,
+                    0.028292433959383377,
+                    0.020934560063029486,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.11849089012560506,
+                    0.10187572958610686,
+                    0.7864663088345747,
+                    -0.08420540438757451,
+                    -0.04839303249336876,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.17790854849560606,
+                    0.028292433959383353,
+                    -0.08420540438757457,
+                    0.39734951939425234,
+                    0.020104669740673715,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.05333773378422306,
+                    0.02093456006302949,
+                    -0.04839303249336877,
+                    0.020104669740673747,
+                    0.2123540153262045,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon5:1": {
+                "count": 21,
+                "coef": [
+                  0.0171916232131282,
+                  0.5094284359360779,
+                  0.031503087155941266,
+                  0.5665523498343555,
+                  -0.32535266564027376,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.16478596314525695,
+                    -0.10022775902522021,
+                    -0.12718297072472293,
+                    -0.16734501585708217,
+                    -0.03571571808818378,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.10022775902522021,
+                    0.6210838390412645,
+                    0.11602873442271001,
+                    -0.05832796613035071,
+                    -0.014188892725122759,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.12718297072472293,
+                    0.11602873442270999,
+                    0.8435073103257287,
+                    -0.005913340297141312,
+                    -0.03513168415057775,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.16734501585708217,
+                    -0.058327966130350704,
+                    -0.0059133402971413155,
+                    0.38785937666933756,
+                    0.000568552361058731,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.03571571808818378,
+                    -0.01418889272512276,
+                    -0.03513168415057775,
+                    0.000568552361058731,
+                    0.2356512790676277,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon10:1": {
+                "count": 26,
+                "coef": [
+                  0.14603640819652638,
+                  -0.06850848507456642,
+                  0.177824186290069,
+                  0.2555636958185533,
+                  -0.14972679808534795,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.19733684695425333,
+                    -0.1728211677154022,
+                    -0.13821953283166774,
+                    -0.17587876819909373,
+                    -0.058398598652868575,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.17282116771540218,
+                    0.41554250103665064,
+                    0.16103228498377187,
+                    0.03986119809960464,
+                    0.039044435161970016,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.13821953283166777,
+                    0.16103228498377195,
+                    0.6940428565882434,
+                    -0.01836778292550137,
+                    0.010882241123042011,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.1758787681990937,
+                    0.03986119809960464,
+                    -0.018367782925501376,
+                    0.37685174820712675,
+                    0.011764735006128374,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.05839859865286858,
+                    0.03904443516197002,
+                    0.010882241123042006,
+                    0.011764735006128372,
+                    0.18033133776180538,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "recommend:2": {
+                "count": 20,
+                "coef": [
+                  0.22611051999370496,
+                  -0.06633683986131683,
+                  0.1311632759018212,
+                  -0.13522590449424798,
+                  0.0023899822871869536,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.20430229913265363,
+                    -0.13047202715483405,
+                    -0.11890008757510905,
+                    -0.18974818146395867,
+                    -0.08158657652613516,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.13047202715483405,
+                    0.5140547227836884,
+                    0.1362053992481535,
+                    -0.035251036511574387,
+                    0.023998098312713316,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.11890008757510906,
+                    0.1362053992481535,
+                    0.7993948534320924,
+                    -0.004449179823224792,
+                    -0.027697428337262818,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.18974818146395867,
+                    -0.035251036511574324,
+                    -0.0044491798232247776,
+                    0.5064901588117681,
+                    0.005569387288854167,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.08158657652613516,
+                    0.023998098312713306,
+                    -0.027697428337262842,
+                    0.005569387288854164,
+                    0.16305475160831545,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon5:2": {
+                "count": 25,
+                "coef": [
+                  0.10224597379923098,
+                  0.5143938853384807,
+                  -0.016828176038367136,
+                  -0.018495577465716895,
+                  0.08581361643866647,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.1648923811758643,
+                    -0.12356419604516625,
+                    -0.06393647256090706,
+                    -0.15768655752364008,
+                    -0.012514790582222119,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.12356419604516626,
+                    0.6372623298549626,
+                    0.13097931083387243,
+                    0.01497372164968925,
+                    -0.06401303448131256,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.06393647256090709,
+                    0.13097931083387243,
+                    0.6713710854898377,
+                    -0.11045175122500796,
+                    0.019397554070703375,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.15768655752364014,
+                    0.014973721649689247,
+                    -0.11045175122500797,
+                    0.3357795112167081,
+                    -0.06053384041748189,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.012514790582222109,
+                    -0.06401303448131257,
+                    0.019397554070703378,
+                    -0.060533840417481895,
+                    0.1623307031433455,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon10:2": {
+                "count": 17,
+                "coef": [
+                  0.14011923060972176,
+                  -0.22216770520520815,
+                  0.30147024429166036,
+                  0.6082963047125673,
+                  -0.1999104301315292,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.23347579048163877,
+                    -0.16438214543459037,
+                    -0.11937245275849352,
+                    -0.20749909053426763,
+                    -0.09031108598738145,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.16438214543459037,
+                    0.559381465655954,
+                    0.09742399339351775,
+                    0.05943840425151138,
+                    0.05391895225035031,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.1193724527584935,
+                    0.09742399339351775,
+                    0.8283158833029635,
+                    -0.10677825502499712,
+                    -0.02019611112101237,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.2074990905342676,
+                    0.05943840425151137,
+                    -0.10677825502499712,
+                    0.4475512675161868,
+                    0.03320556400891909,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.0903110859873815,
+                    0.053918952250350344,
+                    -0.020196111121012373,
+                    0.033205564008919136,
+                    0.20754518879400477,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              }
+            },
+            "cutoffDay": 45,
+            "windowDays": 28,
+            "trainingRows": 1500,
+            "validationRows": 300,
+            "mse": 0.27901517960639344,
+            "baselineMse": 0.27774677284722205,
+            "runtimeMs": 3.1953749999993306,
+            "features": [
+              "bias",
+              "recency_30d",
+              "purchases_7d",
+              "offers_7d",
+              "price_scale",
+              "observed_merchant_affinity",
+              "recent_refunds"
+            ],
+            "disclosure": "Chronological reward prediction check, not causal lift. Final coefficients refit on all mature training observations."
+          },
+          "vectors": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "summary": {
+            "type": "compiled_linear_feature_ridge",
+            "features": [
+              "recency_30d",
+              "purchases_7d",
+              "price_scale",
+              "observed_merchant_affinity"
+            ],
+            "windowDays": 28,
+            "datasetHash": "14dccf2d622cbf92305be1afc18ab303595e5774d4198b9c368f1d0ca47a65fb",
+            "trainingRows": 1500,
+            "validationRows": 300,
+            "mse": 0.27901517960639344,
+            "baselineMse": 0.27774677284722205,
+            "runtimeMs": 3.1953749999993306,
+            "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+          }
+        },
+        "affinity": {
+          "artifact": {
+            "type": "compiled_linear_feature_ridge",
+            "arms": {
+              "none": {
+                "count": 2517,
+                "coef": [
+                  0.17165171826488246,
+                  0,
+                  0,
+                  0,
+                  0.007605450629724756,
+                  0,
+                  -0.11780185238124447
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:0": {
+                "count": 41,
+                "coef": [
+                  0.03425108656337186,
+                  0,
+                  0,
+                  0,
+                  0.20751143766858635,
+                  0.1304167269884979,
+                  -0.21807969182606302
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:0": {
+                "count": 59,
+                "coef": [
+                  0.13913432995037597,
+                  0,
+                  0,
+                  0,
+                  -0.24703454390039828,
+                  0.2897211408115245,
+                  0.0801993986561812
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:0": {
+                "count": 0,
+                "coef": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:1": {
+                "count": 44,
+                "coef": [
+                  0.11035681264398492,
+                  0,
+                  0,
+                  0,
+                  -0.020380526173505692,
+                  0.17132389869380765,
+                  0.39782762239562325
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:1": {
+                "count": 49,
+                "coef": [
+                  -0.01850632697604231,
+                  0,
+                  0,
+                  0,
+                  0.7785402981283757,
+                  -0.10938214373804973,
+                  -0.04818244507600481
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:1": {
+                "count": 54,
+                "coef": [
+                  0.0665661677544826,
+                  0,
+                  0,
+                  0,
+                  0.2225518531681239,
+                  -0.06061850084233031,
+                  0.4361197472085174
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:2": {
+                "count": 47,
+                "coef": [
+                  0.07727530086109485,
+                  0,
+                  0,
+                  0,
+                  0.1404915015600428,
+                  0.35783510581088046,
+                  0.12246244339983364
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:2": {
+                "count": 47,
+                "coef": [
+                  0.1857733452789435,
+                  0,
+                  0,
+                  0,
+                  -0.049725919477284775,
+                  0.3566445588726896,
+                  0.8849733540331342
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:2": {
+                "count": 42,
+                "coef": [
+                  0.10057613654563231,
+                  0,
+                  0,
+                  0,
+                  0.2821269082227863,
+                  -0.07948847892932988,
+                  -0.0394020166670315
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              }
+            },
+            "cutoffDay": 45,
+            "windowDays": 42,
+            "trainingRows": 2900,
+            "validationRows": 600,
+            "mse": 0.25561646902376317,
+            "baselineMse": 0.25467222442344056,
+            "runtimeMs": 4.679790999998659,
+            "features": [
+              "bias",
+              "recency_30d",
+              "purchases_7d",
+              "offers_7d",
+              "price_scale",
+              "observed_merchant_affinity",
+              "recent_refunds"
+            ],
+            "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift.",
+            "recipe": {
+              "family": "ridge",
+              "features": [
+                "observed_merchant_affinity",
+                "price_scale",
+                "recent_refunds"
+              ],
+              "windowDays": 42,
+              "datasetHash": "e817216c8eab67ec86d256d1e2a629b4e83251e29b8c1d8bad236f6653c8a53a"
+            }
+          },
+          "rawArtifact": {
+            "type": "contextual_ridge_bandit",
+            "arms": {
+              "none": {
+                "count": 2517,
+                "coef": [
+                  0.17165171826488246,
+                  0,
+                  0.007605450629724756,
+                  -0.11780185238124447,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.0018648718941061042,
+                    0,
+                    -0.0027799356794224813,
+                    -0.0016496455782207666,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.002779935679422481,
+                    0,
+                    0.0053121393274737855,
+                    0.0008013791720158864,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.0016496455782207663,
+                    0,
+                    0.0008013791720158864,
+                    0.11706877312048734,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "recommend:0": {
+                "count": 41,
+                "coef": [
+                  0.03425108656337186,
+                  0.1304167269884979,
+                  0.20751143766858635,
+                  -0.21807969182606302,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.08486617355950858,
+                    0.0003207841807160359,
+                    -0.11803928799135652,
+                    -0.00704658542301309,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0.0003207841807160566,
+                    0.1303667225801183,
+                    -0.06038055596679587,
+                    -0.006247413907979377,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.11803928799135652,
+                    -0.06038055596679583,
+                    0.25848589337465705,
+                    -0.027714064094903988,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.007046585423013076,
+                    -0.006247413907979377,
+                    -0.027714064094904005,
+                    0.6768864276820704,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon5:0": {
+                "count": 59,
+                "coef": [
+                  0.13913432995037597,
+                  0.2897211408115245,
+                  -0.24703454390039828,
+                  0.0801993986561812,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.07972583513383154,
+                    -0.031006288675845976,
+                    -0.09594803961094002,
+                    -0.0027461885481201657,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.031006288675845973,
+                    0.06650181449842527,
+                    0.010402321297200649,
+                    -0.003794445707603641,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.09594803961094002,
+                    0.010402321297200649,
+                    0.1725941468936415,
+                    -0.006072866755986106,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.0027461885481201665,
+                    -0.0037944457076036398,
+                    -0.006072866755986106,
+                    0.8925854187315357,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon10:0": {
+                "count": 0,
+                "coef": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "recommend:1": {
+                "count": 44,
+                "coef": [
+                  0.11035681264398492,
+                  0.17132389869380765,
+                  -0.020380526173505692,
+                  0.39782762239562325,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.07989557586180723,
+                    -0.014987807777895759,
+                    -0.10974309058076596,
+                    -0.01966335856903327,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.014987807777895774,
+                    0.11010929829029462,
+                    -0.024562077107212907,
+                    0.010029607131728714,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.10974309058076594,
+                    -0.024562077107212928,
+                    0.23580226107246852,
+                    0.015062903676739002,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.019663358569033267,
+                    0.01002960713172871,
+                    0.015062903676739006,
+                    0.8845659815192977,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon5:1": {
+                "count": 49,
+                "coef": [
+                  -0.01850632697604231,
+                  -0.10938214373804973,
+                  0.7785402981283757,
+                  -0.04818244507600481,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.07375600968437088,
+                    -0.019222488630525593,
+                    -0.1038011119126059,
+                    -0.007798083458370816,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.019222488630525607,
+                    0.09926049067704867,
+                    -0.009758876198739332,
+                    0.00429699098586583,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.10380111191260588,
+                    -0.00975887619873935,
+                    0.2242905499958953,
+                    0.006163570186330569,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.0077980834583708195,
+                    0.004296990985865829,
+                    0.006163570186330574,
+                    0.9626589148761083,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon10:1": {
+                "count": 54,
+                "coef": [
+                  0.0665661677544826,
+                  -0.06061850084233031,
+                  0.2225518531681239,
+                  0.4361197472085174,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.0759350044246811,
+                    -0.02876507995104997,
+                    -0.10205591667013295,
+                    -0.021643658340952783,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.028765079951049977,
+                    0.08844250640440335,
+                    0.012291929623786038,
+                    0.012416445832200413,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.10205591667013293,
+                    0.012291929623786025,
+                    0.20107028535362845,
+                    0.018866766192753598,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.021643658340952783,
+                    0.012416445832200411,
+                    0.018866766192753605,
+                    0.5078040899179455,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "recommend:2": {
+                "count": 47,
+                "coef": [
+                  0.07727530086109485,
+                  0.35783510581088046,
+                  0.1404915015600428,
+                  0.12246244339983364,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.0841620138670743,
+                    -0.031437669368305866,
+                    -0.10991242141640678,
+                    -0.009910163753051371,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.031437669368305846,
+                    0.07979051964429223,
+                    -0.0031639798893842315,
+                    -0.026712086820835073,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.10991242141640678,
+                    -0.0031639798893841973,
+                    0.24345769874643663,
+                    0.019858449339927385,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.009910163753051378,
+                    -0.026712086820835066,
+                    0.019858449339927395,
+                    0.8741714879669552,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon5:2": {
+                "count": 47,
+                "coef": [
+                  0.1857733452789435,
+                  0.3566445588726896,
+                  -0.049725919477284775,
+                  0.8849733540331342,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.08215850469607353,
+                    -0.016111791010182376,
+                    -0.1047859619865384,
+                    0.012268679484847398,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.01611179101018238,
+                    0.09134260964570491,
+                    -0.022645115577096142,
+                    -0.01572491791565418,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.10478596198653839,
+                    -0.022645115577096142,
+                    0.20852472453115065,
+                    -0.035068350545567374,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0.012268679484847387,
+                    -0.015724917915654182,
+                    -0.03506835054556736,
+                    0.7915674152777693,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon10:2": {
+                "count": 42,
+                "coef": [
+                  0.10057613654563231,
+                  -0.07948847892932988,
+                  0.2821269082227863,
+                  -0.0394020166670315,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.09481549515511671,
+                    -0.03874593374729329,
+                    -0.12300662382087416,
+                    -0.005015922734257733,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.03874593374729329,
+                    0.0939122281863977,
+                    0.012986328867289095,
+                    -0.017796186313125056,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.12300662382087416,
+                    0.012986328867289095,
+                    0.2510983132037421,
+                    0.008908183367912388,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    -0.005015922734257732,
+                    -0.017796186313125056,
+                    0.008908183367912388,
+                    0.9059887143563963,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              }
+            },
+            "cutoffDay": 45,
+            "windowDays": 42,
+            "trainingRows": 2900,
+            "validationRows": 600,
+            "mse": 0.25561646902376317,
+            "baselineMse": 0.25467222442344056,
+            "runtimeMs": 4.679790999998659,
+            "features": [
+              "bias",
+              "recency_30d",
+              "purchases_7d",
+              "offers_7d",
+              "price_scale",
+              "observed_merchant_affinity",
+              "recent_refunds"
+            ],
+            "disclosure": "Chronological reward prediction check, not causal lift. Final coefficients refit on all mature training observations."
+          },
+          "vectors": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "summary": {
+            "type": "compiled_linear_feature_ridge",
+            "features": [
+              "observed_merchant_affinity",
+              "price_scale",
+              "recent_refunds"
+            ],
+            "windowDays": 42,
+            "datasetHash": "e817216c8eab67ec86d256d1e2a629b4e83251e29b8c1d8bad236f6653c8a53a",
+            "trainingRows": 2900,
+            "validationRows": 600,
+            "mse": 0.25561646902376317,
+            "baselineMse": 0.25467222442344056,
+            "runtimeMs": 4.679790999998659,
+            "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+          }
+        },
+        "mean": {
+          "artifact": {
+            "type": "compiled_action_mean",
+            "arms": {
+              "none": {
+                "count": 2517,
+                "coef": [
+                  0.17438046068308058,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:0": {
+                "count": 41,
+                "coef": [
+                  0.16500000000000012,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:0": {
+                "count": 59,
+                "coef": [
+                  0.11916666666666675,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:0": {
+                "count": 0,
+                "coef": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:1": {
+                "count": 44,
+                "coef": [
+                  0.14666666666666683,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:1": {
+                "count": 49,
+                "coef": [
+                  0.32340000000000024,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:1": {
+                "count": 54,
+                "coef": [
+                  0.1681818181818183,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "recommend:2": {
+                "count": 47,
+                "coef": [
+                  0.29208333333333353,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon5:2": {
+                "count": 47,
+                "coef": [
+                  0.2833333333333335,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "coupon10:2": {
+                "count": 42,
+                "coef": [
+                  0.2055813953488373,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              }
+            },
+            "cutoffDay": 45,
+            "windowDays": 42,
+            "trainingRows": 2900,
+            "validationRows": 600,
+            "mse": 0.2544365036270598,
+            "baselineMse": 0.25467222442344056,
+            "runtimeMs": 3.8875410000000556,
+            "features": [
+              "bias",
+              "recency_30d",
+              "purchases_7d",
+              "offers_7d",
+              "price_scale",
+              "observed_merchant_affinity",
+              "recent_refunds"
+            ],
+            "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift.",
+            "recipe": {
+              "family": "mean",
+              "features": [],
+              "windowDays": 42,
+              "datasetHash": "e817216c8eab67ec86d256d1e2a629b4e83251e29b8c1d8bad236f6653c8a53a"
+            }
+          },
+          "rawArtifact": {
+            "type": "contextual_ridge_bandit",
+            "arms": {
+              "none": {
+                "count": 2517,
+                "coef": [
+                  0.17438046068308058,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.0003971405877680699,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "recommend:0": {
+                "count": 41,
+                "coef": [
+                  0.16500000000000012,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.023809523809523808,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon5:0": {
+                "count": 59,
+                "coef": [
+                  0.11916666666666675,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.016666666666666666,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon10:0": {
+                "count": 0,
+                "coef": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "recommend:1": {
+                "count": 44,
+                "coef": [
+                  0.14666666666666683,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.022222222222222223,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon5:1": {
+                "count": 49,
+                "coef": [
+                  0.32340000000000024,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.02,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon10:1": {
+                "count": 54,
+                "coef": [
+                  0.1681818181818183,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.01818181818181818,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "recommend:2": {
+                "count": 47,
+                "coef": [
+                  0.29208333333333353,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.020833333333333332,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon5:2": {
+                "count": 47,
+                "coef": [
+                  0.2833333333333335,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.020833333333333332,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              },
+              "coupon10:2": {
+                "count": 42,
+                "coef": [
+                  0.2055813953488373,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inverse": [
+                  [
+                    0.023255813953488372,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                ]
+              }
+            },
+            "cutoffDay": 45,
+            "windowDays": 42,
+            "trainingRows": 2900,
+            "validationRows": 600,
+            "mse": 0.2544365036270598,
+            "baselineMse": 0.25467222442344056,
+            "runtimeMs": 3.8875410000000556,
+            "features": [
+              "bias",
+              "recency_30d",
+              "purchases_7d",
+              "offers_7d",
+              "price_scale",
+              "observed_merchant_affinity",
+              "recent_refunds"
+            ],
+            "disclosure": "Chronological reward prediction check, not causal lift. Final coefficients refit on all mature training observations."
+          },
+          "vectors": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          "summary": {
+            "type": "compiled_action_mean",
+            "features": [],
+            "windowDays": 42,
+            "datasetHash": "e817216c8eab67ec86d256d1e2a629b4e83251e29b8c1d8bad236f6653c8a53a",
+            "trainingRows": 2900,
+            "validationRows": 600,
+            "mse": 0.2544365036270598,
+            "baselineMse": 0.25467222442344056,
+            "runtimeMs": 3.8875410000000556,
+            "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+          }
+        }
+      },
+      "finishedAt": "2026-10-25T02:51:15.190Z"
+    },
+    {
+      "name": "experiment_spec_validated",
+      "inputHash": "dcd5a4055c4ddde52eeaa6732b063242d5b1acc72e59c7f6fcf6b2c43302aca7",
+      "input": {
+        "choices": [
+          {
+            "model": "mean",
+            "style": "recommendations",
+            "durationDays": 3,
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "penaltyUSD": 0.6
+          },
+          {
+            "model": "full",
+            "style": "recommendations",
+            "durationDays": 3,
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "penaltyUSD": 0.6
+          }
+        ]
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T02:51:15.195Z",
+      "output": {
+        "choices": [
+          {
+            "model": "mean",
+            "style": "recommendations",
+            "durationDays": 3,
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "penaltyUSD": 0.6
+          },
+          {
+            "model": "full",
+            "style": "recommendations",
+            "durationDays": 3,
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "penaltyUSD": 0.6
+          }
+        ],
+        "plans": [
+          {
+            "id": "PLAN-ba0863fc6481",
+            "strategy": "recommendations",
+            "audience": "lapsed",
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "maxOfferPct": 0,
+            "duration": 3,
+            "penalty": 0.6,
+            "epsilon": 0,
+            "windowDays": 42
+          },
+          {
+            "id": "PLAN-1088a198dee4",
+            "strategy": "recommendations",
+            "audience": "lapsed",
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "maxOfferPct": 0,
+            "duration": 3,
+            "penalty": 0.6,
+            "epsilon": 0,
+            "windowDays": 42
+          }
+        ],
+        "validation": "MATCHED_TWO_PILOT_LIMIT"
+      },
+      "finishedAt": "2026-10-25T02:51:15.198Z"
+    },
+    {
+      "name": "development_pilots",
+      "inputHash": "a7776795f4a666c7aa7412da6470835f8c6cb73624255d54cdc99f8f7b112afb",
+      "input": {
+        "choices": [
+          {
+            "model": "mean",
+            "style": "recommendations",
+            "durationDays": 3,
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "penaltyUSD": 0.6
+          },
+          {
+            "model": "full",
+            "style": "recommendations",
+            "durationDays": 3,
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "penaltyUSD": 0.6
+          }
+        ],
+        "plans": [
+          {
+            "id": "PLAN-ba0863fc6481",
+            "strategy": "recommendations",
+            "audience": "lapsed",
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "maxOfferPct": 0,
+            "duration": 3,
+            "penalty": 0.6,
+            "epsilon": 0,
+            "windowDays": 42
+          },
+          {
+            "id": "PLAN-1088a198dee4",
+            "strategy": "recommendations",
+            "audience": "lapsed",
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "maxOfferPct": 0,
+            "duration": 3,
+            "penalty": 0.6,
+            "epsilon": 0,
+            "windowDays": 42
+          }
+        ]
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T02:51:15.201Z",
+      "output": [
+        {
+          "id": "PILOT-0",
+          "choice": {
+            "model": "mean",
+            "style": "recommendations",
+            "durationDays": 3,
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "penaltyUSD": 0.6
+          },
+          "plan": {
+            "id": "PLAN-ba0863fc6481",
+            "strategy": "recommendations",
+            "audience": "lapsed",
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "maxOfferPct": 0,
+            "duration": 3,
+            "penalty": 0.6,
+            "epsilon": 0,
+            "windowDays": 42
+          },
+          "estimate": {
+            "mean": 0,
+            "low": 0,
+            "high": 0,
+            "seeds": 3,
+            "cases": 3,
+            "winRate": 0,
+            "worst": 0,
+            "worstDecileMean": 0,
+            "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios",
+            "unit": "USD_PER_100_SHOPPER_MARKET"
+          },
+          "replicas": [
+            {
+              "seed": 81001,
+              "deltaUSD": 0,
+              "merchantDeltaUSD": 0,
+              "spendCents": 0,
+              "valid": true
+            },
+            {
+              "seed": 81002,
+              "deltaUSD": 0,
+              "merchantDeltaUSD": 0,
+              "spendCents": 0,
+              "valid": true
+            },
+            {
+              "seed": 81003,
+              "deltaUSD": 0,
+              "merchantDeltaUSD": 0,
+              "spendCents": 0,
+              "valid": true
+            }
+          ],
+          "valid": true
+        },
+        {
+          "id": "PILOT-1",
+          "choice": {
+            "model": "full",
+            "style": "recommendations",
+            "durationDays": 3,
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "penaltyUSD": 0.6
+          },
+          "plan": {
+            "id": "PLAN-1088a198dee4",
+            "strategy": "recommendations",
+            "audience": "lapsed",
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "maxOfferPct": 0,
+            "duration": 3,
+            "penalty": 0.6,
+            "epsilon": 0,
+            "windowDays": 42
+          },
+          "estimate": {
+            "mean": 0,
+            "low": 0,
+            "high": 0,
+            "seeds": 3,
+            "cases": 3,
+            "winRate": 0,
+            "worst": 0,
+            "worstDecileMean": 0,
+            "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios",
+            "unit": "USD_PER_100_SHOPPER_MARKET"
+          },
+          "replicas": [
+            {
+              "seed": 81011,
+              "deltaUSD": 0,
+              "merchantDeltaUSD": 0,
+              "spendCents": 0,
+              "valid": true
+            },
+            {
+              "seed": 81012,
+              "deltaUSD": 0,
+              "merchantDeltaUSD": 0,
+              "spendCents": 0,
+              "valid": true
+            },
+            {
+              "seed": 81013,
+              "deltaUSD": 0,
+              "merchantDeltaUSD": 0,
+              "spendCents": 0,
+              "valid": true
+            }
+          ],
+          "valid": true
+        }
+      ],
+      "finishedAt": "2026-10-25T02:51:15.803Z"
+    },
+    {
+      "name": "decision_committed",
+      "inputHash": "52af4eb6748c69d8006f7deec5140a0ebf31f77333128a8468611384b6a454ff",
+      "input": {
+        "pilotIds": [
+          "PILOT-0",
+          "PILOT-1"
+        ]
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T02:51:15.808Z",
+      "output": {
+        "decision": "observe",
+        "pilotId": null,
+        "plan": {
+          "id": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "merchantIndices": [],
+          "maxOfferPct": 0,
+          "duration": 0,
+          "penalty": 0,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "model": null,
+        "reason": "No tested candidate met the positive development-value and merchant checks.",
+        "authority": "SIMULATED_ONLY",
+        "effectId": null
+      },
+      "finishedAt": "2026-10-25T02:51:15.812Z"
+    }
+  ],
+  "completed": true,
+  "effects": {
+    "training": 4,
+    "pilots": 2,
+    "publish": 0
+  },
+  "snapshotHash": "cc7e3b5fdf2fec0cfe38af575ae4bc711dc454f7384d9958a39e6b15bf94c8ba"
+}

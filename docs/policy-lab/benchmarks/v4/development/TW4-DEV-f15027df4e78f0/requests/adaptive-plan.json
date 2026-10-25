@@ -1,0 +1,335 @@
+{
+  "key": "adaptive-plan",
+  "inputHash": "5617262ab5ca233e70a485498682da9f27eff7f0680dc31bc404bd79c9176d51",
+  "system": "Choose exactly two bounded development experiments for this interpreted commerce goal. All evidence comes from tested operations with explicit units and denominators. Choose model recipes, supported merchant scopes, recommendation or allowed coupon strategy, short duration and penalty from the supplied options. Do not write SQL, perform financial arithmetic, or assert causal lift from descriptive rows or model MSE. Both candidates will be tested on separate development seeds; code will commit only a valid positive-mean candidate or observe. Consider mature returns, sparse cohorts, fitting error and costs. A coupon needs explicit permission. Keep the reason short and grounded; no private chain of thought.",
+  "packet": {
+    "spec": {
+      "status": "ready",
+      "merchantIndices": [
+        0,
+        1,
+        2
+      ],
+      "reason": "The merchant requested to grow retained sales for all shops for 3 days with no coupons. I have set the budget to the maximum allowed limit of $100.00 (10000 cents).",
+      "budgetCents": 10000,
+      "durationDays": 3,
+      "goal": "grow_retained_sales",
+      "maxCouponPct": 0,
+      "inactiveDays": 0
+    },
+    "evidence": {
+      "reports": [
+        {
+          "kind": "merchant_sales",
+          "provenance": {
+            "snapshotCutoffExclusive": 45,
+            "windowStartInclusive": 17,
+            "source": "FROZEN_SIMULATED_OBSERVATIONS",
+            "catalog": "CACHED_CHANNEL3",
+            "analysisVersion": "trusted-v4.1",
+            "causal": false
+          },
+          "grain": "one order aggregated by merchant",
+          "unit": "USD_CENTS",
+          "rows": [
+            {
+              "merchantIndex": 0,
+              "orders": 138,
+              "retainedObservedCents": 620501,
+              "observedRefundCents": 42695
+            },
+            {
+              "merchantIndex": 1,
+              "orders": 142,
+              "retainedObservedCents": 622513,
+              "observedRefundCents": 0
+            },
+            {
+              "merchantIndex": 2,
+              "orders": 144,
+              "retainedObservedCents": 676964,
+              "observedRefundCents": 15298
+            }
+          ],
+          "warning": "Recent refunds are incomplete. Retained volume is not platform profit.",
+          "includedMerchants": 3
+        },
+        {
+          "kind": "mature_returns",
+          "provenance": {
+            "snapshotCutoffExclusive": 45,
+            "windowStartInclusive": 17,
+            "source": "FROZEN_SIMULATED_OBSERVATIONS",
+            "catalog": "CACHED_CHANNEL3",
+            "analysisVersion": "trusted-v4.1",
+            "causal": false
+          },
+          "grain": "one order aggregated by merchant",
+          "unit": "USD_CENTS_AND_ORDER_RATE",
+          "rows": [
+            {
+              "merchantIndex": 0,
+              "matureOrders": 70,
+              "immatureOrders": 68,
+              "returnedMatureOrders": 6,
+              "returnRate": 0.085714,
+              "maturePlatformContributionCents": 8220
+            },
+            {
+              "merchantIndex": 1,
+              "matureOrders": 83,
+              "immatureOrders": 59,
+              "returnedMatureOrders": 0,
+              "returnRate": 0,
+              "maturePlatformContributionCents": 10873
+            },
+            {
+              "merchantIndex": 2,
+              "matureOrders": 77,
+              "immatureOrders": 67,
+              "returnedMatureOrders": 2,
+              "returnRate": 0.025974,
+              "maturePlatformContributionCents": 9253
+            }
+          ],
+          "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+          "includedMerchants": 3
+        },
+        {
+          "kind": "model_readiness",
+          "provenance": {
+            "snapshotCutoffExclusive": 45,
+            "windowStartInclusive": 17,
+            "source": "FROZEN_SIMULATED_OBSERVATIONS",
+            "catalog": "CACHED_CHANNEL3",
+            "analysisVersion": "trusted-v4.1",
+            "causal": false
+          },
+          "grain": "one customer-day action",
+          "unit": "rows",
+          "observedRows": 4500,
+          "matureRows": 3200,
+          "immatureRows": 1300,
+          "trainingAllowed": true,
+          "checks": {
+            "uniqueActionIds": true,
+            "noFutureRows": true
+          },
+          "featureIds": [
+            "recency_30d",
+            "purchases_7d",
+            "offers_7d",
+            "price_scale",
+            "observed_merchant_affinity",
+            "recent_refunds"
+          ]
+        }
+      ],
+      "validation": {
+        "uniqueGrains": true,
+        "explicitUnits": true,
+        "matureDenominators": true
+      },
+      "note": "Static tested operations; no LLM-generated SQL."
+    },
+    "models": {
+      "full": {
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "recency_30d",
+          "purchases_7d",
+          "offers_7d",
+          "price_scale",
+          "observed_merchant_affinity",
+          "recent_refunds"
+        ],
+        "windowDays": 42,
+        "datasetHash": "cc7d75cb0b5cf9916da1e207829c25311bd1eaf0d117293e9b4a3368535148a6",
+        "trainingRows": 2900,
+        "validationRows": 600,
+        "mse": 0.26611405000950367,
+        "baselineMse": 0.26139786291115275,
+        "runtimeMs": 10.028582999999344,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      },
+      "recent": {
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "recency_30d",
+          "purchases_7d",
+          "price_scale",
+          "observed_merchant_affinity"
+        ],
+        "windowDays": 28,
+        "datasetHash": "b25a12f840473f96269d883fe360dd7c9cbf87fea20bb4161380d1b36ee6c234",
+        "trainingRows": 1500,
+        "validationRows": 300,
+        "mse": 0.2548065002126474,
+        "baselineMse": 0.25645945562499906,
+        "runtimeMs": 2.758125000000291,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      },
+      "affinity": {
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "observed_merchant_affinity",
+          "price_scale",
+          "recent_refunds"
+        ],
+        "windowDays": 42,
+        "datasetHash": "cc7d75cb0b5cf9916da1e207829c25311bd1eaf0d117293e9b4a3368535148a6",
+        "trainingRows": 2900,
+        "validationRows": 600,
+        "mse": 0.26536002521437163,
+        "baselineMse": 0.26139786291115275,
+        "runtimeMs": 4.207792000001064,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      },
+      "mean": {
+        "type": "compiled_action_mean",
+        "features": [],
+        "windowDays": 42,
+        "datasetHash": "cc7d75cb0b5cf9916da1e207829c25311bd1eaf0d117293e9b4a3368535148a6",
+        "trainingRows": 2900,
+        "validationRows": 600,
+        "mse": 0.2630852634469132,
+        "baselineMse": 0.26139786291115275,
+        "runtimeMs": 3.341042000000016,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      }
+    },
+    "choices": {
+      "models": [
+        "full",
+        "recent",
+        "affinity",
+        "mean"
+      ],
+      "styles": [
+        "recommendations"
+      ],
+      "penalties": [
+        0.12,
+        0.3,
+        0.6
+      ],
+      "maxDurationDays": 3
+    },
+    "snapshotHash": "4384e07abc91bd8d827ef78dd3d8197209d7c9aa1d5bb5eaee21906b834c1140",
+    "brief": "Grow retained sales for all shops with no coupons. The test lasts 3 days; decide the budget yourself."
+  },
+  "functions": [
+    {
+      "name": "choose_experiments",
+      "description": "Propose exactly two supported experiments; code validates authority and independently measures value.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "choices": {
+            "type": "ARRAY",
+            "items": {
+              "type": "OBJECT",
+              "properties": {
+                "model": {
+                  "type": "STRING",
+                  "enum": [
+                    "full",
+                    "recent",
+                    "affinity",
+                    "mean"
+                  ]
+                },
+                "style": {
+                  "type": "STRING",
+                  "enum": [
+                    "recommendations",
+                    "coupon"
+                  ]
+                },
+                "durationDays": {
+                  "type": "INTEGER"
+                },
+                "merchantIndices": {
+                  "type": "ARRAY",
+                  "items": {
+                    "type": "INTEGER"
+                  }
+                },
+                "penaltyUSD": {
+                  "type": "NUMBER"
+                }
+              },
+              "required": [
+                "model",
+                "style",
+                "durationDays",
+                "merchantIndices",
+                "penaltyUSD"
+              ]
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "reason": {
+            "type": "STRING"
+          }
+        },
+        "required": [
+          "choices",
+          "reason"
+        ]
+      }
+    }
+  ],
+  "stage": "trusted_adaptive_plan",
+  "status": "COMPLETED",
+  "startedAt": "2026-10-25T02:51:47.425Z",
+  "response": {
+    "name": "choose_experiments",
+    "args": {
+      "choices": [
+        {
+          "penaltyUSD": 0.12,
+          "durationDays": 3,
+          "style": "recommendations",
+          "model": "recent",
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "merchantIndices": [
+            0,
+            1,
+            2
+          ],
+          "style": "recommendations",
+          "model": "affinity",
+          "penaltyUSD": 0.12,
+          "durationDays": 3
+        }
+      ],
+      "reason": "Comparing the 'recent' model (lowest MSE) against the 'affinity' model to optimize recommendation relevance for retained sales growth across all merchants."
+    },
+    "id": "call_1991627"
+  },
+  "provider": {
+    "reservationId": "ba13227e-b073-47c2-9cd4-2674a0abc364",
+    "caseId": "adaptive-plan",
+    "trialId": "TW4-DEV-f15027df4e78f0",
+    "stage": "trusted_adaptive_plan",
+    "status": "settled",
+    "modelCostMicros": 656,
+    "reservedMicros": 30000,
+    "inputTokens": 1925,
+    "outputTokens": 116,
+    "thinkingTokens": 0,
+    "cachedInputTokens": 0,
+    "responseId": "x27dapSJAp3CweoPzpq4-Qo",
+    "modelVersion": "gemini-3.1-flash-lite",
+    "latencyMs": 2086
+  },
+  "finishedAt": "2026-10-25T02:51:52.924Z"
+}

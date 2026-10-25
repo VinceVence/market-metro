@@ -1,5 +1,7 @@
 # Commerce Policy Lab
 
+The latest [trusted workflow and confirmation](benchmarks/v4-1/README.md) completed **24/24** authored requests with a source-ID Gemini interpreter versus **17/24** with the same downstream workflow and a command parser. The default uses predictable workers after interpretation; extra free-form planning was not promoted. [Open the standalone demo](http://127.0.0.1:4173/trusted.html) for recorded evidence or a live request. No saved private economy is required for playback.
+
 Open Market Metro and click **Run demo**. This opens Policy Lab settings. The existing district UI and older simulation controls remain available.
 
 [Open the completed POC](http://127.0.0.1:4173/?run=GARDEN-LAB-df43cd08499c0c0a&policyLab=GARDEN-LAB-df43cd08499c0c0a)

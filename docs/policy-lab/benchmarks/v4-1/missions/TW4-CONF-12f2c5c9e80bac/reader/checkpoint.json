@@ -1,0 +1,183 @@
+{
+  "id": "TW4-CONF-12f2c5c9e80bac-reader",
+  "version": 1,
+  "binding": "c5521feda4999aed57a863b5f6f30c8e6b55a548a23ab6b4ed447ee9f95f479f",
+  "spec": {
+    "goal": "understand_market",
+    "inactiveDays": 0,
+    "durationDays": 0,
+    "budgetCents": 0,
+    "status": "ready",
+    "maxCouponPct": 0,
+    "merchantIndices": [
+      0
+    ],
+    "reason": "The user wants to understand sales fluctuations for Willow Goods without running a promotion."
+  },
+  "nodes": [
+    {
+      "name": "interpretation_bound",
+      "inputHash": "b6d7fa92318e5affe16aa159e11924376b034af216ba3b60ffda9394cf2c7b45",
+      "input": {
+        "spec": {
+          "goal": "understand_market",
+          "inactiveDays": 0,
+          "durationDays": 0,
+          "budgetCents": 0,
+          "status": "ready",
+          "maxCouponPct": 0,
+          "merchantIndices": [
+            0
+          ],
+          "reason": "The user wants to understand sales fluctuations for Willow Goods without running a promotion."
+        }
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:06:05.897Z",
+      "output": {
+        "spec": {
+          "goal": "understand_market",
+          "inactiveDays": 0,
+          "durationDays": 0,
+          "budgetCents": 0,
+          "status": "ready",
+          "maxCouponPct": 0,
+          "merchantIndices": [
+            0
+          ],
+          "reason": "The user wants to understand sales fluctuations for Willow Goods without running a promotion."
+        },
+        "validation": "TYPED_AUTHORITY_PASSED",
+        "note": "Semantic correctness is graded independently, not compared with hidden expected answers here."
+      },
+      "finishedAt": "2026-10-25T03:06:05.901Z"
+    },
+    {
+      "name": "snapshot_bound",
+      "inputHash": "13e34aef1e1e0c98c4c563316ad9d8ab87ddf51a02802994ded85b61fd79a557",
+      "input": {
+        "snapshotHash": "282002b83514a052ba5f086d37139466c30fa3b86672b38db5e301737e2fe304",
+        "cutoff": 45
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:06:05.902Z",
+      "output": {
+        "snapshotHash": "282002b83514a052ba5f086d37139466c30fa3b86672b38db5e301737e2fe304",
+        "cutoff": 45,
+        "customers": 100,
+        "merchants": 3
+      },
+      "finishedAt": "2026-10-25T03:06:05.904Z"
+    },
+    {
+      "name": "evidence_validated",
+      "inputHash": "5ebf730996c3164a929e7b16e7fec0834061bb09e17f55ac0c83b0074cb9b88e",
+      "input": {
+        "analyses": [
+          "merchant_sales",
+          "mature_returns"
+        ],
+        "scope": [
+          0
+        ]
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:06:05.905Z",
+      "output": {
+        "reports": [
+          {
+            "kind": "merchant_sales",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS",
+            "rows": [
+              {
+                "merchantIndex": 0,
+                "orders": 145,
+                "retainedObservedCents": 659049,
+                "observedRefundCents": 15298
+              }
+            ],
+            "warning": "Recent refunds are incomplete. Retained volume is not platform profit.",
+            "includedMerchants": 1
+          },
+          {
+            "kind": "mature_returns",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS_AND_ORDER_RATE",
+            "rows": [
+              {
+                "merchantIndex": 0,
+                "matureOrders": 79,
+                "immatureOrders": 66,
+                "returnedMatureOrders": 2,
+                "returnRate": 0.025316,
+                "maturePlatformContributionCents": 10485
+              }
+            ],
+            "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+            "includedMerchants": 1
+          }
+        ],
+        "validation": {
+          "uniqueGrains": true,
+          "explicitUnits": true,
+          "matureDenominators": true
+        },
+        "note": "Static tested operations; no LLM-generated SQL."
+      },
+      "finishedAt": "2026-10-25T03:06:05.907Z"
+    },
+    {
+      "name": "diagnostic_committed",
+      "inputHash": "ea5bce66dfc0c4968b4f4a9948a9114caf9cf8047cc4b9ced41ca32b0767b90c",
+      "input": {
+        "goal": "understand_market"
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:06:05.909Z",
+      "output": {
+        "decision": "report",
+        "plan": {
+          "id": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "merchantIndices": [],
+          "maxOfferPct": 0,
+          "duration": 0,
+          "penalty": 0,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "evidenceIds": [
+          "merchant_sales",
+          "mature_returns"
+        ],
+        "reason": "Diagnostic goal completed without outreach."
+      },
+      "finishedAt": "2026-10-25T03:06:05.910Z"
+    }
+  ],
+  "completed": true,
+  "effects": {
+    "training": 0,
+    "pilots": 0,
+    "publish": 0
+  },
+  "snapshotHash": "282002b83514a052ba5f086d37139466c30fa3b86672b38db5e301737e2fe304"
+}

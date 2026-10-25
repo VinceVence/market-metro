@@ -1,0 +1,183 @@
+{
+  "id": "TW4-EVAL-881d83883f0185-reader",
+  "version": 1,
+  "binding": "c6e9160a72697cdf7f4eb98d9f684e71c00159eb69d3e370e12649a28246bca5",
+  "spec": {
+    "merchantIndices": [
+      0
+    ],
+    "status": "ready",
+    "budgetCents": 0,
+    "maxCouponPct": 0,
+    "reason": "The user requested a diagnostic audit of refund exposure for Willow Goods, which is a non-intervention goal.",
+    "inactiveDays": 0,
+    "goal": "reduce_return_exposure",
+    "durationDays": 0
+  },
+  "nodes": [
+    {
+      "name": "interpretation_bound",
+      "inputHash": "db63733ee2306d59dae297c68f2e12d593559597493ffef83ebb0c9c6fc0e773",
+      "input": {
+        "spec": {
+          "merchantIndices": [
+            0
+          ],
+          "status": "ready",
+          "budgetCents": 0,
+          "maxCouponPct": 0,
+          "reason": "The user requested a diagnostic audit of refund exposure for Willow Goods, which is a non-intervention goal.",
+          "inactiveDays": 0,
+          "goal": "reduce_return_exposure",
+          "durationDays": 0
+        }
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T02:58:28.995Z",
+      "output": {
+        "spec": {
+          "merchantIndices": [
+            0
+          ],
+          "status": "ready",
+          "budgetCents": 0,
+          "maxCouponPct": 0,
+          "reason": "The user requested a diagnostic audit of refund exposure for Willow Goods, which is a non-intervention goal.",
+          "inactiveDays": 0,
+          "goal": "reduce_return_exposure",
+          "durationDays": 0
+        },
+        "validation": "TYPED_AUTHORITY_PASSED",
+        "note": "Semantic correctness is graded independently, not compared with hidden expected answers here."
+      },
+      "finishedAt": "2026-10-25T02:58:28.999Z"
+    },
+    {
+      "name": "snapshot_bound",
+      "inputHash": "edc559255807437d0712b10fdd1592f6e80a861621e91156d8f46157b8751f03",
+      "input": {
+        "snapshotHash": "a817285441db9d814caaff036dbc8c4036ab823552501cc57dca6436e04d58be",
+        "cutoff": 45
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T02:58:29.001Z",
+      "output": {
+        "snapshotHash": "a817285441db9d814caaff036dbc8c4036ab823552501cc57dca6436e04d58be",
+        "cutoff": 45,
+        "customers": 100,
+        "merchants": 3
+      },
+      "finishedAt": "2026-10-25T02:58:29.002Z"
+    },
+    {
+      "name": "evidence_validated",
+      "inputHash": "b967c057b95818b6251492d84d67753346a2ac8e5ee67f50a5c3c33d31f401d8",
+      "input": {
+        "analyses": [
+          "mature_returns",
+          "merchant_sales"
+        ],
+        "scope": [
+          0
+        ]
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T02:58:29.003Z",
+      "output": {
+        "reports": [
+          {
+            "kind": "mature_returns",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS_AND_ORDER_RATE",
+            "rows": [
+              {
+                "merchantIndex": 0,
+                "matureOrders": 84,
+                "immatureOrders": 66,
+                "returnedMatureOrders": 2,
+                "returnRate": 0.02381,
+                "maturePlatformContributionCents": 10347
+              }
+            ],
+            "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+            "includedMerchants": 1
+          },
+          {
+            "kind": "merchant_sales",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS",
+            "rows": [
+              {
+                "merchantIndex": 0,
+                "orders": 150,
+                "retainedObservedCents": 646219,
+                "observedRefundCents": 9597
+              }
+            ],
+            "warning": "Recent refunds are incomplete. Retained volume is not platform profit.",
+            "includedMerchants": 1
+          }
+        ],
+        "validation": {
+          "uniqueGrains": true,
+          "explicitUnits": true,
+          "matureDenominators": true
+        },
+        "note": "Static tested operations; no LLM-generated SQL."
+      },
+      "finishedAt": "2026-10-25T02:58:29.008Z"
+    },
+    {
+      "name": "diagnostic_committed",
+      "inputHash": "a4f7ade0df3251547afb737897edbaf8d9ae242e1e8712403e6d96761e755c94",
+      "input": {
+        "goal": "reduce_return_exposure"
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T02:58:29.011Z",
+      "output": {
+        "decision": "report",
+        "plan": {
+          "id": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "merchantIndices": [],
+          "maxOfferPct": 0,
+          "duration": 0,
+          "penalty": 0,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "evidenceIds": [
+          "mature_returns",
+          "merchant_sales"
+        ],
+        "reason": "Diagnostic goal completed without outreach."
+      },
+      "finishedAt": "2026-10-25T02:58:29.013Z"
+    }
+  ],
+  "completed": true,
+  "effects": {
+    "training": 0,
+    "pilots": 0,
+    "publish": 0
+  },
+  "snapshotHash": "a817285441db9d814caaff036dbc8c4036ab823552501cc57dca6436e04d58be"
+}

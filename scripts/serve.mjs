@@ -1,4 +1,5 @@
 import {continuousReport} from './marketing/continuous-report.mjs';
+import {createTrustedWorkflowService} from './trusted-workflow/service.mjs';
 import {createPolicyLab,policySpendStatus} from './policy-lab/service.mjs';
 import {createAutonomousPlanner} from './marketing/autonomous-planner.mjs';
 import {createJudgeDemo} from './marketing/judge-demo.mjs';
@@ -41,6 +42,7 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
   const commerce=market?createPayPalCommerce({store:market.store,market,paypal,funding}):null;
   const liveMarket=market?createContinuousMarket({store:market.store,market,commerce}):null;
   const policyLab=market?createPolicyLab({store:market.store,market}):null;
+  const trustedWorkflow=market?createTrustedWorkflowService():null;
   const server = http.createServer(async (req, res) => {
     try {
       const port = server.address().port;
@@ -52,6 +54,8 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
         if(path.startsWith('/api/workflows')&&!workflow)return json(res,503,{error:{code:'WORKFLOW_UNAVAILABLE',message:'Campaign workflow is not initialized.'}});
         if(req.method==='GET'&&path==='/api/market/planner')return json(res,200,planner?.status()||{available:false});
         if(req.method==='GET'&&path==='/api/market/policy-lab/budget')return json(res,200,await policySpendStatus());
+        const trustedRead=path.match(/^\/api\/market\/trusted-workflow\/(TW4-LIVE-[a-f0-9]{16})$/);
+        if(req.method==='GET'&&trustedRead&&trustedWorkflow)return json(res,200,await trustedWorkflow.get(trustedRead[1]));
         const policyRead=path.match(/^\/api\/market\/policy-lab\/([^/]+)(?:\/(trace))?$/);
         if(req.method==='GET'&&policyRead&&policyLab)return json(res,200,policyRead[2]?policyLab.trace(policyRead[1],url.searchParams.get('customer')):policyLab.snapshot(policyRead[1]));
         const commerceRead=path.match(/^\/api\/market\/commerce\/([^/]+)$/);
@@ -101,6 +105,9 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
         }
         const input = await body(req,path.startsWith('/api/workflows')?32768:4096);
         if (!input || Array.isArray(input) || typeof input !== 'object') throw new SandboxError(400, 'INVALID_JSON', 'Expected a JSON object.');
+        if(path==='/api/market/trusted-workflow/start'&&trustedWorkflow){try{return json(res,202,await trustedWorkflow.start(input));}catch(e){throw new SandboxError(400,'TRUSTED_MISSION_REJECTED',e.message);}}
+        const trustedResume=path.match(/^\/api\/market\/trusted-workflow\/(TW4-LIVE-[a-f0-9]{16})\/resume$/);
+        if(trustedResume&&trustedWorkflow){if(Object.keys(input).length)throw new SandboxError(400,'INVALID_RESUME','Resume uses the saved mission unchanged.');return json(res,202,await trustedWorkflow.resume(trustedResume[1]));}
         if(path==='/api/market/policy-lab/start'&&policyLab)return json(res,200,policyLab.start(input));
         const policyControl=path.match(/^\/api\/market\/policy-lab\/([^/]+)\/control$/);
         if(policyControl&&policyLab)return json(res,200,policyLab.control(policyControl[1],input));

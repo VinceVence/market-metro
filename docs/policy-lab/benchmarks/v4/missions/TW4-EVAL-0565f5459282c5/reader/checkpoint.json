@@ -1,0 +1,183 @@
+{
+  "id": "TW4-EVAL-0565f5459282c5-reader",
+  "version": 1,
+  "binding": "6816efc13acc3180da0c1a2ca785271ddb132e7400563db5337459ec758d33c1",
+  "spec": {
+    "merchantIndices": [
+      1
+    ],
+    "budgetCents": 0,
+    "durationDays": 0,
+    "goal": "understand_market",
+    "inactiveDays": 0,
+    "maxCouponPct": 0,
+    "reason": "The user requested an analysis of market trends for Oak & Ink and explicitly prohibited any outreach or spending.",
+    "status": "ready"
+  },
+  "nodes": [
+    {
+      "name": "interpretation_bound",
+      "inputHash": "033b29d60db92525f76685b7da4152bc4c6def6480bcaaf23b6ec20e11323f8f",
+      "input": {
+        "spec": {
+          "merchantIndices": [
+            1
+          ],
+          "budgetCents": 0,
+          "durationDays": 0,
+          "goal": "understand_market",
+          "inactiveDays": 0,
+          "maxCouponPct": 0,
+          "reason": "The user requested an analysis of market trends for Oak & Ink and explicitly prohibited any outreach or spending.",
+          "status": "ready"
+        }
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:00:03.728Z",
+      "output": {
+        "spec": {
+          "merchantIndices": [
+            1
+          ],
+          "budgetCents": 0,
+          "durationDays": 0,
+          "goal": "understand_market",
+          "inactiveDays": 0,
+          "maxCouponPct": 0,
+          "reason": "The user requested an analysis of market trends for Oak & Ink and explicitly prohibited any outreach or spending.",
+          "status": "ready"
+        },
+        "validation": "TYPED_AUTHORITY_PASSED",
+        "note": "Semantic correctness is graded independently, not compared with hidden expected answers here."
+      },
+      "finishedAt": "2026-10-25T03:00:03.734Z"
+    },
+    {
+      "name": "snapshot_bound",
+      "inputHash": "f4e0b47e33991772caf2e090d332035cda0a70c84ebc35b01814cba28387c38e",
+      "input": {
+        "snapshotHash": "7af21b168d1dea93a6f6abd1c8257a049526289d586d131128666f3fe7470171",
+        "cutoff": 45
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:00:03.737Z",
+      "output": {
+        "snapshotHash": "7af21b168d1dea93a6f6abd1c8257a049526289d586d131128666f3fe7470171",
+        "cutoff": 45,
+        "customers": 100,
+        "merchants": 3
+      },
+      "finishedAt": "2026-10-25T03:00:03.739Z"
+    },
+    {
+      "name": "evidence_validated",
+      "inputHash": "b476b5dc02576e8c1f614081be51a006bff4d379093085cd0618e0cdc80ed49a",
+      "input": {
+        "analyses": [
+          "merchant_sales",
+          "mature_returns"
+        ],
+        "scope": [
+          1
+        ]
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:00:03.741Z",
+      "output": {
+        "reports": [
+          {
+            "kind": "merchant_sales",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS",
+            "rows": [
+              {
+                "merchantIndex": 1,
+                "orders": 193,
+                "retainedObservedCents": 837071,
+                "observedRefundCents": 18497
+              }
+            ],
+            "warning": "Recent refunds are incomplete. Retained volume is not platform profit.",
+            "includedMerchants": 1
+          },
+          {
+            "kind": "mature_returns",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS_AND_ORDER_RATE",
+            "rows": [
+              {
+                "merchantIndex": 1,
+                "matureOrders": 90,
+                "immatureOrders": 103,
+                "returnedMatureOrders": 4,
+                "returnRate": 0.044444,
+                "maturePlatformContributionCents": 10593
+              }
+            ],
+            "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+            "includedMerchants": 1
+          }
+        ],
+        "validation": {
+          "uniqueGrains": true,
+          "explicitUnits": true,
+          "matureDenominators": true
+        },
+        "note": "Static tested operations; no LLM-generated SQL."
+      },
+      "finishedAt": "2026-10-25T03:00:03.743Z"
+    },
+    {
+      "name": "diagnostic_committed",
+      "inputHash": "ea5bce66dfc0c4968b4f4a9948a9114caf9cf8047cc4b9ced41ca32b0767b90c",
+      "input": {
+        "goal": "understand_market"
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:00:03.746Z",
+      "output": {
+        "decision": "report",
+        "plan": {
+          "id": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "merchantIndices": [],
+          "maxOfferPct": 0,
+          "duration": 0,
+          "penalty": 0,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "evidenceIds": [
+          "merchant_sales",
+          "mature_returns"
+        ],
+        "reason": "Diagnostic goal completed without outreach."
+      },
+      "finishedAt": "2026-10-25T03:00:03.748Z"
+    }
+  ],
+  "completed": true,
+  "effects": {
+    "training": 0,
+    "pilots": 0,
+    "publish": 0
+  },
+  "snapshotHash": "7af21b168d1dea93a6f6abd1c8257a049526289d586d131128666f3fe7470171"
+}

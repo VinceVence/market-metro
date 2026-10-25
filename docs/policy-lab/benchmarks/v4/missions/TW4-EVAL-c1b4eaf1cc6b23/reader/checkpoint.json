@@ -1,0 +1,183 @@
+{
+  "id": "TW4-EVAL-c1b4eaf1cc6b23-reader",
+  "version": 1,
+  "binding": "b495f47e3b0ec82e22828b7d7f1fcf076feb3d6e2c227142d0b859459f8ea222",
+  "spec": {
+    "maxCouponPct": 0,
+    "durationDays": 0,
+    "inactiveDays": 0,
+    "status": "ready",
+    "merchantIndices": [
+      2
+    ],
+    "budgetCents": 0,
+    "goal": "reduce_return_exposure",
+    "reason": "The user requested an investigation into refunds for Corner Supply, which is a diagnostic goal requiring no budget or discounts."
+  },
+  "nodes": [
+    {
+      "name": "interpretation_bound",
+      "inputHash": "13cfc5985a90c0583f5a11b2b8e8668b767494572bcfe2b0b69743eb71af4bbb",
+      "input": {
+        "spec": {
+          "maxCouponPct": 0,
+          "durationDays": 0,
+          "inactiveDays": 0,
+          "status": "ready",
+          "merchantIndices": [
+            2
+          ],
+          "budgetCents": 0,
+          "goal": "reduce_return_exposure",
+          "reason": "The user requested an investigation into refunds for Corner Supply, which is a diagnostic goal requiring no budget or discounts."
+        }
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:00:01.071Z",
+      "output": {
+        "spec": {
+          "maxCouponPct": 0,
+          "durationDays": 0,
+          "inactiveDays": 0,
+          "status": "ready",
+          "merchantIndices": [
+            2
+          ],
+          "budgetCents": 0,
+          "goal": "reduce_return_exposure",
+          "reason": "The user requested an investigation into refunds for Corner Supply, which is a diagnostic goal requiring no budget or discounts."
+        },
+        "validation": "TYPED_AUTHORITY_PASSED",
+        "note": "Semantic correctness is graded independently, not compared with hidden expected answers here."
+      },
+      "finishedAt": "2026-10-25T03:00:01.075Z"
+    },
+    {
+      "name": "snapshot_bound",
+      "inputHash": "da062eda1e950e35a211b20c46668f4406129abc511f1d14e197c522451461b6",
+      "input": {
+        "snapshotHash": "93aa8d0db879916aff67ade0d48dcb3f36fce347b7dca8d74e3e062e1b7cd526",
+        "cutoff": 45
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:00:01.076Z",
+      "output": {
+        "snapshotHash": "93aa8d0db879916aff67ade0d48dcb3f36fce347b7dca8d74e3e062e1b7cd526",
+        "cutoff": 45,
+        "customers": 100,
+        "merchants": 3
+      },
+      "finishedAt": "2026-10-25T03:00:01.079Z"
+    },
+    {
+      "name": "evidence_validated",
+      "inputHash": "4cd19cb7cce236ef1b89aa2dfe8b9650c2b29fd035c2ca590bef60fec8442c50",
+      "input": {
+        "analyses": [
+          "mature_returns",
+          "merchant_sales"
+        ],
+        "scope": [
+          2
+        ]
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:00:01.082Z",
+      "output": {
+        "reports": [
+          {
+            "kind": "mature_returns",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS_AND_ORDER_RATE",
+            "rows": [
+              {
+                "merchantIndex": 2,
+                "matureOrders": 72,
+                "immatureOrders": 69,
+                "returnedMatureOrders": 2,
+                "returnRate": 0.027778,
+                "maturePlatformContributionCents": 8789
+              }
+            ],
+            "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+            "includedMerchants": 1
+          },
+          {
+            "kind": "merchant_sales",
+            "provenance": {
+              "snapshotCutoffExclusive": 45,
+              "windowStartInclusive": 17,
+              "source": "FROZEN_SIMULATED_OBSERVATIONS",
+              "catalog": "CACHED_CHANNEL3",
+              "analysisVersion": "trusted-v4.1",
+              "causal": false
+            },
+            "grain": "one order aggregated by merchant",
+            "unit": "USD_CENTS",
+            "rows": [
+              {
+                "merchantIndex": 2,
+                "orders": 141,
+                "retainedObservedCents": 636325,
+                "observedRefundCents": 6398
+              }
+            ],
+            "warning": "Recent refunds are incomplete. Retained volume is not platform profit.",
+            "includedMerchants": 1
+          }
+        ],
+        "validation": {
+          "uniqueGrains": true,
+          "explicitUnits": true,
+          "matureDenominators": true
+        },
+        "note": "Static tested operations; no LLM-generated SQL."
+      },
+      "finishedAt": "2026-10-25T03:00:01.085Z"
+    },
+    {
+      "name": "diagnostic_committed",
+      "inputHash": "a4f7ade0df3251547afb737897edbaf8d9ae242e1e8712403e6d96761e755c94",
+      "input": {
+        "goal": "reduce_return_exposure"
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:00:01.087Z",
+      "output": {
+        "decision": "report",
+        "plan": {
+          "id": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "merchantIndices": [],
+          "maxOfferPct": 0,
+          "duration": 0,
+          "penalty": 0,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "evidenceIds": [
+          "mature_returns",
+          "merchant_sales"
+        ],
+        "reason": "Diagnostic goal completed without outreach."
+      },
+      "finishedAt": "2026-10-25T03:00:01.088Z"
+    }
+  ],
+  "completed": true,
+  "effects": {
+    "training": 0,
+    "pilots": 0,
+    "publish": 0
+  },
+  "snapshotHash": "93aa8d0db879916aff67ade0d48dcb3f36fce347b7dca8d74e3e062e1b7cd526"
+}

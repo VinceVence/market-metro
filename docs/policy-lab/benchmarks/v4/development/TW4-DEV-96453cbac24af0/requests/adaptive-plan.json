@@ -1,0 +1,322 @@
+{
+  "key": "adaptive-plan",
+  "inputHash": "b72fc3bccbc7a3c0a10c53ed53b8651fa09978687ed24c379b0e46e90353dff0",
+  "system": "Choose exactly two bounded development experiments for this interpreted commerce goal. All evidence comes from tested operations with explicit units and denominators. Choose model recipes, supported merchant scopes, recommendation or allowed coupon strategy, short duration and penalty from the supplied options. Do not write SQL, perform financial arithmetic, or assert causal lift from descriptive rows or model MSE. Both candidates will be tested on separate development seeds; code will commit only a valid positive-mean candidate or observe. Consider mature returns, sparse cohorts, fitting error and costs. A coupon needs explicit permission. Keep the reason short and grounded; no private chain of thought.",
+  "packet": {
+    "spec": {
+      "inactiveDays": 7,
+      "status": "ready",
+      "merchantIndices": [
+        0
+      ],
+      "maxCouponPct": 0,
+      "reason": "The requested 30-day inactivity window is not supported; the campaign has been adjusted to the supported 7-day window for reactivating buyers at Willow Goods.",
+      "durationDays": 3,
+      "goal": "reactivate_buyers",
+      "budgetCents": 2000
+    },
+    "evidence": {
+      "reports": [
+        {
+          "kind": "reactivation_cohort",
+          "provenance": {
+            "snapshotCutoffExclusive": 45,
+            "windowStartInclusive": 17,
+            "source": "FROZEN_SIMULATED_OBSERVATIONS",
+            "catalog": "CACHED_CHANNEL3",
+            "analysisVersion": "trusted-v4.1",
+            "causal": false
+          },
+          "grain": "one customer at snapshot",
+          "unit": "customers",
+          "n": 24,
+          "denominator": 100,
+          "inactiveDays": 7,
+          "hasPreviousPurchase": true,
+          "cohortIds": [
+            "WORLD-72007-U0001",
+            "WORLD-72007-U0009",
+            "WORLD-72007-U0015",
+            "WORLD-72007-U0025",
+            "WORLD-72007-U0030",
+            "WORLD-72007-U0039",
+            "WORLD-72007-U0042",
+            "WORLD-72007-U0045",
+            "WORLD-72007-U0049",
+            "WORLD-72007-U0051",
+            "WORLD-72007-U0054",
+            "WORLD-72007-U0061",
+            "WORLD-72007-U0065",
+            "WORLD-72007-U0071",
+            "WORLD-72007-U0074",
+            "WORLD-72007-U0077",
+            "WORLD-72007-U0079",
+            "WORLD-72007-U0081",
+            "WORLD-72007-U0083",
+            "WORLD-72007-U0084",
+            "WORLD-72007-U0085",
+            "WORLD-72007-U0086",
+            "WORLD-72007-U0087",
+            "WORLD-72007-U0088"
+          ],
+          "definition": "At least one observed purchase; snapshot cutoff minus latest observed purchase day is at least 7. Cohort uses purchase history across the district; merchant scope constrains later outreach."
+        },
+        {
+          "kind": "mature_returns",
+          "provenance": {
+            "snapshotCutoffExclusive": 45,
+            "windowStartInclusive": 17,
+            "source": "FROZEN_SIMULATED_OBSERVATIONS",
+            "catalog": "CACHED_CHANNEL3",
+            "analysisVersion": "trusted-v4.1",
+            "causal": false
+          },
+          "grain": "one order aggregated by merchant",
+          "unit": "USD_CENTS_AND_ORDER_RATE",
+          "rows": [
+            {
+              "merchantIndex": 0,
+              "matureOrders": 78,
+              "immatureOrders": 59,
+              "returnedMatureOrders": 0,
+              "returnRate": 0,
+              "maturePlatformContributionCents": 8998
+            }
+          ],
+          "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+          "includedMerchants": 1
+        },
+        {
+          "kind": "model_readiness",
+          "provenance": {
+            "snapshotCutoffExclusive": 45,
+            "windowStartInclusive": 17,
+            "source": "FROZEN_SIMULATED_OBSERVATIONS",
+            "catalog": "CACHED_CHANNEL3",
+            "analysisVersion": "trusted-v4.1",
+            "causal": false
+          },
+          "grain": "one customer-day action",
+          "unit": "rows",
+          "observedRows": 4500,
+          "matureRows": 3200,
+          "immatureRows": 1300,
+          "trainingAllowed": true,
+          "checks": {
+            "uniqueActionIds": true,
+            "noFutureRows": true
+          },
+          "featureIds": [
+            "recency_30d",
+            "purchases_7d",
+            "offers_7d",
+            "price_scale",
+            "observed_merchant_affinity",
+            "recent_refunds"
+          ]
+        }
+      ],
+      "validation": {
+        "uniqueGrains": true,
+        "explicitUnits": true,
+        "matureDenominators": true
+      },
+      "note": "Static tested operations; no LLM-generated SQL."
+    },
+    "models": {
+      "full": {
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "recency_30d",
+          "purchases_7d",
+          "offers_7d",
+          "price_scale",
+          "observed_merchant_affinity",
+          "recent_refunds"
+        ],
+        "windowDays": 42,
+        "datasetHash": "495be33ec86a0909442cbd0b37f7bece13c0b02945997995694c1493805a6b95",
+        "trainingRows": 2900,
+        "validationRows": 600,
+        "mse": 0.24027593623583746,
+        "baselineMse": 0.23553516304977787,
+        "runtimeMs": 11.945166000004974,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      },
+      "recent": {
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "recency_30d",
+          "purchases_7d",
+          "price_scale",
+          "observed_merchant_affinity"
+        ],
+        "windowDays": 28,
+        "datasetHash": "eab6257fab455660753f89d9d55fc7eba3339c6b9ba622161938cb843536f069",
+        "trainingRows": 1500,
+        "validationRows": 300,
+        "mse": 0.25857077721641153,
+        "baselineMse": 0.2519112189583328,
+        "runtimeMs": 2.786374999996042,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      },
+      "affinity": {
+        "type": "compiled_linear_feature_ridge",
+        "features": [
+          "observed_merchant_affinity",
+          "price_scale",
+          "recent_refunds"
+        ],
+        "windowDays": 42,
+        "datasetHash": "495be33ec86a0909442cbd0b37f7bece13c0b02945997995694c1493805a6b95",
+        "trainingRows": 2900,
+        "validationRows": 600,
+        "mse": 0.23884546229548964,
+        "baselineMse": 0.23553516304977787,
+        "runtimeMs": 4.265625,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      },
+      "mean": {
+        "type": "compiled_action_mean",
+        "features": [],
+        "windowDays": 42,
+        "datasetHash": "495be33ec86a0909442cbd0b37f7bece13c0b02945997995694c1493805a6b95",
+        "trainingRows": 2900,
+        "validationRows": 600,
+        "mse": 0.2364820137606605,
+        "baselineMse": 0.23553516304977787,
+        "runtimeMs": 3.353291999999783,
+        "disclosure": "Agent-authored bounded linear features. Coefficients compile to the unchanged seven-input policy interface. Prediction MSE is not causal lift."
+      }
+    },
+    "choices": {
+      "models": [
+        "full",
+        "recent",
+        "affinity",
+        "mean"
+      ],
+      "styles": [
+        "recommendations"
+      ],
+      "penalties": [
+        0.12,
+        0.3,
+        0.6
+      ],
+      "maxDurationDays": 3
+    },
+    "snapshotHash": "423b5b99481f65adf10ac0166d7b4d0dae5bd0fb6bd3f9b8785abd67ad6828de",
+    "brief": "Reactivate people inactive for 30 days at Willow Goods. Budget $20, campaign lasts 3 days, no coupons."
+  },
+  "functions": [
+    {
+      "name": "choose_experiments",
+      "description": "Propose exactly two supported experiments; code validates authority and independently measures value.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "choices": {
+            "type": "ARRAY",
+            "items": {
+              "type": "OBJECT",
+              "properties": {
+                "model": {
+                  "type": "STRING",
+                  "enum": [
+                    "full",
+                    "recent",
+                    "affinity",
+                    "mean"
+                  ]
+                },
+                "style": {
+                  "type": "STRING",
+                  "enum": [
+                    "recommendations",
+                    "coupon"
+                  ]
+                },
+                "durationDays": {
+                  "type": "INTEGER"
+                },
+                "merchantIndices": {
+                  "type": "ARRAY",
+                  "items": {
+                    "type": "INTEGER"
+                  }
+                },
+                "penaltyUSD": {
+                  "type": "NUMBER"
+                }
+              },
+              "required": [
+                "model",
+                "style",
+                "durationDays",
+                "merchantIndices",
+                "penaltyUSD"
+              ]
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "reason": {
+            "type": "STRING"
+          }
+        },
+        "required": [
+          "choices",
+          "reason"
+        ]
+      }
+    }
+  ],
+  "stage": "trusted_adaptive_plan",
+  "status": "COMPLETED",
+  "startedAt": "2026-10-25T02:51:36.141Z",
+  "response": {
+    "name": "choose_experiments",
+    "args": {
+      "choices": [
+        {
+          "merchantIndices": [
+            0
+          ],
+          "durationDays": 3,
+          "style": "recommendations",
+          "penaltyUSD": 0.12,
+          "model": "affinity"
+        },
+        {
+          "model": "full",
+          "penaltyUSD": 0.3,
+          "style": "recommendations",
+          "merchantIndices": [
+            0
+          ],
+          "durationDays": 3
+        }
+      ],
+      "reason": "The affinity model shows the lowest MSE relative to baseline, while the full model provides a robust feature set for the reactivation cohort. Both are tested within the 3-day duration constraint."
+    },
+    "id": "call_412399"
+  },
+  "provider": {
+    "reservationId": "4fc8a0e1-0022-460c-a793-308c6989611a",
+    "caseId": "adaptive-plan",
+    "trialId": "TW4-DEV-96453cbac24af0",
+    "stage": "trusted_adaptive_plan",
+    "status": "settled",
+    "modelCostMicros": 693,
+    "reservedMicros": 30000,
+    "inputTokens": 2073,
+    "outputTokens": 116,
+    "thinkingTokens": 0,
+    "cachedInputTokens": 0,
+    "responseId": "vG7dapC_Deml7OsP3Lz_sA0",
+    "modelVersion": "gemini-3.1-flash-lite",
+    "latencyMs": 2093
+  },
+  "finishedAt": "2026-10-25T02:51:42.128Z"
+}

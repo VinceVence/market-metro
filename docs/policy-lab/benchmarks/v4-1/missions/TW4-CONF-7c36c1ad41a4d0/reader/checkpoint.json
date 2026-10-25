@@ -1,0 +1,82 @@
+{
+  "id": "TW4-CONF-7c36c1ad41a4d0-reader",
+  "version": 1,
+  "binding": "442aeb40c1c77ba20e583fce7f1f736e76dfff7e17096ec49347242de31ae329",
+  "spec": {
+    "status": "clarify",
+    "goal": null,
+    "merchantIndices": [],
+    "budgetCents": null,
+    "maxCouponPct": null,
+    "durationDays": null,
+    "inactiveDays": null,
+    "reason": "The requested discount of 15% exceeds the maximum supported limit of 10%."
+  },
+  "nodes": [
+    {
+      "name": "interpretation_bound",
+      "inputHash": "ab62c19bd7bffd606c777a2d35d157b2f0f69c43e41542dda3b306ba085137e0",
+      "input": {
+        "spec": {
+          "status": "clarify",
+          "goal": null,
+          "merchantIndices": [],
+          "budgetCents": null,
+          "maxCouponPct": null,
+          "durationDays": null,
+          "inactiveDays": null,
+          "reason": "The requested discount of 15% exceeds the maximum supported limit of 10%."
+        }
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:06:24.721Z",
+      "output": {
+        "spec": {
+          "status": "clarify",
+          "goal": null,
+          "merchantIndices": [],
+          "budgetCents": null,
+          "maxCouponPct": null,
+          "durationDays": null,
+          "inactiveDays": null,
+          "reason": "The requested discount of 15% exceeds the maximum supported limit of 10%."
+        },
+        "validation": "TYPED_AUTHORITY_PASSED",
+        "note": "Semantic correctness is graded independently, not compared with hidden expected answers here."
+      },
+      "finishedAt": "2026-10-25T03:06:24.725Z"
+    },
+    {
+      "name": "clarification_committed",
+      "inputHash": "28c2fbb652ad82ff7fae7af14d73f999bfba4f2426c14f564466b83e25015d74",
+      "input": {
+        "reason": "The requested discount of 15% exceeds the maximum supported limit of 10%."
+      },
+      "status": "COMPLETED",
+      "startedAt": "2026-10-25T03:06:24.726Z",
+      "output": {
+        "decision": "clarify",
+        "reason": "The requested discount of 15% exceeds the maximum supported limit of 10%.",
+        "plan": {
+          "id": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "merchantIndices": [],
+          "maxOfferPct": 0,
+          "duration": 0,
+          "penalty": 0,
+          "epsilon": 0,
+          "windowDays": 42
+        }
+      },
+      "finishedAt": "2026-10-25T03:06:24.728Z"
+    }
+  ],
+  "completed": true,
+  "effects": {
+    "training": 0,
+    "pilots": 0,
+    "publish": 0
+  },
+  "snapshotHash": "7df09649459d88b0bd7e3588abfae2e84e8a5dc3e0b6181ec8ef096fccac8412"
+}

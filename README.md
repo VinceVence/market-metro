@@ -1,6 +1,8 @@
 # Market Metro: the learning market
 
-**Current POC: [Commerce Policy Lab](docs/policy-lab/README.md).** Click **Run demo** for three Gemini reasoning roles, competing merchant policies, a real local contextual bandit, paired controls, delayed financial outcomes and customer traces. The first completed trial and its limitations are recorded in the [measured report](docs/policy-lab/runs/GARDEN-LAB-df43cd08499c0c0a/summary.md). New trials default to no additional sandbox payment and retain the $0.25 model cap beneath the $50 hackathon ceiling.
+**Latest:** [Trusted commerce workflow](docs/policy-lab/benchmarks/v4-1/README.md) — source-grounded Gemini requests, tested data/model workers, durable checkpoints and fresh confirmation results. Open [`/trusted.html`](http://127.0.0.1:4173/trusted.html) with the local server running to inspect recorded runs without model credentials or a saved private economy, or submit a bounded live mission.
+
+**Earlier live POC: [Commerce Policy Lab](docs/policy-lab/README.md).** Click **Run demo** for three Gemini reasoning roles, competing merchant policies, a real local contextual bandit, paired controls, delayed financial outcomes and customer traces. The first completed trial and its limitations are recorded in the [measured report](docs/policy-lab/runs/GARDEN-LAB-df43cd08499c0c0a/summary.md). New trials default to no additional sandbox payment and retain the $0.25 model cap beneath the $50 hackathon ceiling.
 
 The earlier simulation modes remain available:
 

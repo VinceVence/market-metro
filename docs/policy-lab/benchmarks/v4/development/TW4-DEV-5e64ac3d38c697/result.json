@@ -1,0 +1,4798 @@
+{
+  "id": "TW4-DEV-5e64ac3d38c697",
+  "taskId": "dev-04",
+  "family": "diagnostic",
+  "brief": "Audit refund exposure at Willow Goods. Report only; do not launch anything.",
+  "seed": 72004,
+  "scenario": "supply_delay",
+  "protocolHash": "DEVELOPMENT",
+  "expectedSpec": {
+    "status": "ready",
+    "goal": "reduce_return_exposure",
+    "merchantIndices": [
+      0
+    ],
+    "budgetCents": 0,
+    "maxCouponPct": 0,
+    "durationDays": 0,
+    "inactiveDays": 0
+  },
+  "methods": [
+    {
+      "method": "rules",
+      "spec": {
+        "status": "ready",
+        "goal": "reduce_return_exposure",
+        "merchantIndices": [
+          0
+        ],
+        "budgetCents": 0,
+        "maxCouponPct": 0,
+        "durationDays": 0,
+        "inactiveDays": 0,
+        "reason": "Recognized a diagnostic request without deployment authority."
+      },
+      "error": null,
+      "readerError": null,
+      "planReason": null,
+      "state": {
+        "id": "TW4-DEV-5e64ac3d38c697-rules",
+        "version": 1,
+        "binding": "2ed4ccaaf45239b82f7a9736a0c6e5763e35abef3d77c63031366aaa53c462c4",
+        "spec": {
+          "status": "ready",
+          "goal": "reduce_return_exposure",
+          "merchantIndices": [
+            0
+          ],
+          "budgetCents": 0,
+          "maxCouponPct": 0,
+          "durationDays": 0,
+          "inactiveDays": 0,
+          "reason": "Recognized a diagnostic request without deployment authority."
+        },
+        "nodes": [
+          {
+            "name": "interpretation_bound",
+            "inputHash": "efb4839294e9e631de56c7eaf4fd4ee01dc74775c2e65e964e0143ddd2e5ebc1",
+            "input": {
+              "spec": {
+                "status": "ready",
+                "goal": "reduce_return_exposure",
+                "merchantIndices": [
+                  0
+                ],
+                "budgetCents": 0,
+                "maxCouponPct": 0,
+                "durationDays": 0,
+                "inactiveDays": 0,
+                "reason": "Recognized a diagnostic request without deployment authority."
+              }
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.674Z",
+            "output": {
+              "spec": {
+                "status": "ready",
+                "goal": "reduce_return_exposure",
+                "merchantIndices": [
+                  0
+                ],
+                "budgetCents": 0,
+                "maxCouponPct": 0,
+                "durationDays": 0,
+                "inactiveDays": 0,
+                "reason": "Recognized a diagnostic request without deployment authority."
+              },
+              "validation": "TYPED_AUTHORITY_PASSED",
+              "note": "Semantic correctness is graded independently, not compared with hidden expected answers here."
+            },
+            "finishedAt": "2026-10-25T02:55:58.677Z"
+          },
+          {
+            "name": "snapshot_bound",
+            "inputHash": "ae43c115992f79f80249515eed730914006f943492a391401fbbff96ab07ceff",
+            "input": {
+              "snapshotHash": "84cc43619716b5714d46fafa6470d91edd2fbcad62e16295e1bc496a5efcd2b7",
+              "cutoff": 45
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.679Z",
+            "output": {
+              "snapshotHash": "84cc43619716b5714d46fafa6470d91edd2fbcad62e16295e1bc496a5efcd2b7",
+              "cutoff": 45,
+              "customers": 100,
+              "merchants": 3
+            },
+            "finishedAt": "2026-10-25T02:55:58.680Z"
+          },
+          {
+            "name": "evidence_validated",
+            "inputHash": "b967c057b95818b6251492d84d67753346a2ac8e5ee67f50a5c3c33d31f401d8",
+            "input": {
+              "analyses": [
+                "mature_returns",
+                "merchant_sales"
+              ],
+              "scope": [
+                0
+              ]
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.681Z",
+            "output": {
+              "reports": [
+                {
+                  "kind": "mature_returns",
+                  "provenance": {
+                    "snapshotCutoffExclusive": 45,
+                    "windowStartInclusive": 17,
+                    "source": "FROZEN_SIMULATED_OBSERVATIONS",
+                    "catalog": "CACHED_CHANNEL3",
+                    "analysisVersion": "trusted-v4.1",
+                    "causal": false
+                  },
+                  "grain": "one order aggregated by merchant",
+                  "unit": "USD_CENTS_AND_ORDER_RATE",
+                  "rows": [
+                    {
+                      "merchantIndex": 0,
+                      "matureOrders": 76,
+                      "immatureOrders": 70,
+                      "returnedMatureOrders": 1,
+                      "returnRate": 0.013158,
+                      "maturePlatformContributionCents": 10098
+                    }
+                  ],
+                  "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+                  "includedMerchants": 1
+                },
+                {
+                  "kind": "merchant_sales",
+                  "provenance": {
+                    "snapshotCutoffExclusive": 45,
+                    "windowStartInclusive": 17,
+                    "source": "FROZEN_SIMULATED_OBSERVATIONS",
+                    "catalog": "CACHED_CHANNEL3",
+                    "analysisVersion": "trusted-v4.1",
+                    "causal": false
+                  },
+                  "grain": "one order aggregated by merchant",
+                  "unit": "USD_CENTS",
+                  "rows": [
+                    {
+                      "merchantIndex": 0,
+                      "orders": 146,
+                      "retainedObservedCents": 668771,
+                      "observedRefundCents": 8900
+                    }
+                  ],
+                  "warning": "Recent refunds are incomplete. Retained volume is not platform profit.",
+                  "includedMerchants": 1
+                }
+              ],
+              "validation": {
+                "uniqueGrains": true,
+                "explicitUnits": true,
+                "matureDenominators": true
+              },
+              "note": "Static tested operations; no LLM-generated SQL."
+            },
+            "finishedAt": "2026-10-25T02:55:58.683Z"
+          },
+          {
+            "name": "diagnostic_committed",
+            "inputHash": "a4f7ade0df3251547afb737897edbaf8d9ae242e1e8712403e6d96761e755c94",
+            "input": {
+              "goal": "reduce_return_exposure"
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.686Z",
+            "output": {
+              "decision": "report",
+              "plan": {
+                "id": "observe",
+                "strategy": "observe",
+                "audience": "all",
+                "merchantIndices": [],
+                "maxOfferPct": 0,
+                "duration": 0,
+                "penalty": 0,
+                "epsilon": 0,
+                "windowDays": 42
+              },
+              "evidenceIds": [
+                "mature_returns",
+                "merchant_sales"
+              ],
+              "reason": "Diagnostic goal completed without outreach."
+            },
+            "finishedAt": "2026-10-25T02:55:58.688Z"
+          }
+        ],
+        "completed": true,
+        "effects": {
+          "training": 0,
+          "pilots": 0,
+          "publish": 0
+        },
+        "snapshotHash": "84cc43619716b5714d46fafa6470d91edd2fbcad62e16295e1bc496a5efcd2b7"
+      },
+      "policy": {
+        "decision": "report",
+        "plan": {
+          "id": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "merchantIndices": [],
+          "maxOfferPct": 0,
+          "duration": 0,
+          "penalty": 0,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "completed": true
+      },
+      "grade": {
+        "exactInterpretation": true,
+        "goalCompleted": true,
+        "incorrectReady": false,
+        "unsupportedReady": false,
+        "unnecessaryClarification": false,
+        "rawInterpretationCorrect": true,
+        "incorrectReadyAttempt": false
+      },
+      "allocatedModelUSD": 0,
+      "score": {
+        "policy": "observe",
+        "seed": 72004,
+        "scenario": "supply_delay",
+        "purchases": 1118,
+        "platformProxyCents": 145564,
+        "retainedCents": 5087908,
+        "merchantContributionCents": 1765235,
+        "outreachCents": 0,
+        "platformSupportCents": 0,
+        "jointBudgetSpentCents": 0,
+        "offers": 0,
+        "recommendations": 0,
+        "redemptions": 0,
+        "cohortLapsed": 32,
+        "reactivatedCustomers": 32,
+        "checks": {
+          "accounting": 0,
+          "eligibility": 0,
+          "propensity": 0,
+          "inventory": 0,
+          "budget": 0,
+          "maturity": 0
+        },
+        "modelCalls": 0,
+        "allocatedModelUSD": 0,
+        "daily": [
+          {
+            "day": 31,
+            "platformProxyCents": 1523,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 32,
+            "platformProxyCents": 4753,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 33,
+            "platformProxyCents": 5940,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 34,
+            "platformProxyCents": 7853,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 35,
+            "platformProxyCents": 9972,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 36,
+            "platformProxyCents": 12731,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 37,
+            "platformProxyCents": 15952,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 38,
+            "platformProxyCents": 17523,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 39,
+            "platformProxyCents": 18916,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 40,
+            "platformProxyCents": 20206,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 41,
+            "platformProxyCents": 22328,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 42,
+            "platformProxyCents": 23959,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 43,
+            "platformProxyCents": 26181,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 44,
+            "platformProxyCents": 27471,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 45,
+            "platformProxyCents": 27852,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 46,
+            "platformProxyCents": 28058,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 47,
+            "platformProxyCents": 28264,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 48,
+            "platformProxyCents": 28264,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 49,
+            "platformProxyCents": 29196,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 50,
+            "platformProxyCents": 32162,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 51,
+            "platformProxyCents": 35571,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 52,
+            "platformProxyCents": 38720,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 53,
+            "platformProxyCents": 40628,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 54,
+            "platformProxyCents": 42590,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 55,
+            "platformProxyCents": 44270,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 56,
+            "platformProxyCents": 45717,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 57,
+            "platformProxyCents": 48660,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 58,
+            "platformProxyCents": 50949,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 59,
+            "platformProxyCents": 54125,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 60,
+            "platformProxyCents": 57086,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 61,
+            "platformProxyCents": 59069,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 62,
+            "platformProxyCents": 61519,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 63,
+            "platformProxyCents": 62854,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 64,
+            "platformProxyCents": 65098,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 65,
+            "platformProxyCents": 67777,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 66,
+            "platformProxyCents": 69766,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 67,
+            "platformProxyCents": 72116,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 68,
+            "platformProxyCents": 74647,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 69,
+            "platformProxyCents": 76609,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 70,
+            "platformProxyCents": 78226,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 71,
+            "platformProxyCents": 81102,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 72,
+            "platformProxyCents": 83593,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 73,
+            "platformProxyCents": 86227,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 74,
+            "platformProxyCents": 88319,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 75,
+            "platformProxyCents": 90899,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 76,
+            "platformProxyCents": 94151,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 77,
+            "platformProxyCents": 96165,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 78,
+            "platformProxyCents": 98871,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 79,
+            "platformProxyCents": 101248,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 80,
+            "platformProxyCents": 104133,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 81,
+            "platformProxyCents": 105468,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 82,
+            "platformProxyCents": 107327,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 83,
+            "platformProxyCents": 109419,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 84,
+            "platformProxyCents": 111457,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 85,
+            "platformProxyCents": 114315,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 86,
+            "platformProxyCents": 116586,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 87,
+            "platformProxyCents": 118264,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 88,
+            "platformProxyCents": 120508,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 89,
+            "platformProxyCents": 123030,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 90,
+            "platformProxyCents": 125143,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 91,
+            "platformProxyCents": 127127,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 92,
+            "platformProxyCents": 129994,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 93,
+            "platformProxyCents": 131844,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 94,
+            "platformProxyCents": 133627,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 95,
+            "platformProxyCents": 136700,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 96,
+            "platformProxyCents": 138971,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 97,
+            "platformProxyCents": 140996,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 98,
+            "platformProxyCents": 142461,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 99,
+            "platformProxyCents": 144726,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 100,
+            "platformProxyCents": 145564,
+            "allocatedModelUSD": 0
+          }
+        ],
+        "fits": [],
+        "publications": [
+          {
+            "asOfDay": 45,
+            "effectiveDay": 45,
+            "expiresDay": 45,
+            "trainingCutoffDay": null,
+            "policy": "observe",
+            "strategy": "observe",
+            "audience": "all",
+            "maxOfferPct": 0,
+            "penaltyUSD": 0,
+            "merchantIndices": []
+          }
+        ],
+        "matureOutcomes": 7000,
+        "trace": [
+          {
+            "day": 45,
+            "customerId": "FINAL-72004-U0092",
+            "action": "none",
+            "orderId": "FINAL-72004-O8534",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8534",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0092",
+              "campaign_id": null,
+              "event_ts": "2026-12-08T01:00:00.000Z",
+              "event_date": "2026-12-08",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 45,
+            "customerId": "FINAL-72004-U0023",
+            "action": "none",
+            "orderId": "FINAL-72004-O8551",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8551",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0023",
+              "campaign_id": null,
+              "event_ts": "2026-12-08T01:00:00.000Z",
+              "event_date": "2026-12-08",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 46,
+            "customerId": "FINAL-72004-U0061",
+            "action": "none",
+            "orderId": "FINAL-72004-O8582",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8582",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0061",
+              "campaign_id": null,
+              "event_ts": "2026-12-09T01:00:00.000Z",
+              "event_date": "2026-12-09",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 46,
+            "customerId": "FINAL-72004-U0075",
+            "action": "none",
+            "orderId": "FINAL-72004-O8595",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8595",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0075",
+              "campaign_id": null,
+              "event_ts": "2026-12-09T01:00:00.000Z",
+              "event_date": "2026-12-09",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0074",
+            "action": "none",
+            "orderId": "FINAL-72004-O8678",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8678",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0074",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0085",
+            "action": "none",
+            "orderId": "FINAL-72004-O8686",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8686",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0085",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0097",
+            "action": "none",
+            "orderId": "FINAL-72004-O8698",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8698",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0097",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0013",
+            "action": "none",
+            "orderId": "FINAL-72004-O8711",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8711",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0013",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0053",
+            "action": "none",
+            "orderId": "FINAL-72004-O8749",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8749",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0053",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0059",
+            "action": "none",
+            "orderId": "FINAL-72004-O8757",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8757",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0059",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0060",
+            "action": "none",
+            "orderId": "FINAL-72004-O8763",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8763",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0060",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0063",
+            "action": "none",
+            "orderId": "FINAL-72004-O8770",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8770",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0063",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0078",
+            "action": "none",
+            "orderId": "FINAL-72004-O8782",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8782",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0078",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0082",
+            "action": "none",
+            "orderId": "FINAL-72004-O8788",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8788",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0082",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0093",
+            "action": "none",
+            "orderId": "FINAL-72004-O8796",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8796",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0093",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0095",
+            "action": "none",
+            "orderId": "FINAL-72004-O8802",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8802",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0095",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 4628,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0096",
+            "action": "none",
+            "orderId": "FINAL-72004-O8808",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8808",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0096",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0003",
+            "action": "none",
+            "orderId": "FINAL-72004-O8814",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8814",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0003",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0011",
+            "action": "none",
+            "orderId": "FINAL-72004-O8823",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8823",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0011",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1663,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0020",
+            "action": "none",
+            "orderId": "FINAL-72004-O8832",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8832",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0020",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 4628,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0024",
+            "action": "none",
+            "orderId": "FINAL-72004-O8838",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8838",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0024",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0028",
+            "action": "none",
+            "orderId": "FINAL-72004-O8844",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8844",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0028",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 4628,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0031",
+            "action": "none",
+            "orderId": "FINAL-72004-O8850",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8850",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0031",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0032",
+            "action": "none",
+            "orderId": "FINAL-72004-O8856",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8856",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0032",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1663,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0036",
+            "action": "none",
+            "orderId": "FINAL-72004-O8863",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8863",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0036",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1376,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0041",
+            "action": "none",
+            "orderId": "FINAL-72004-O8871",
+            "modelId": null,
+            "rewardCents": -58,
+            "order": {
+              "order_id": "FINAL-72004-O8871",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0041",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1376,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 3199,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0043",
+            "action": "none",
+            "orderId": "FINAL-72004-O8877",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8877",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0043",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1376,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 50,
+            "customerId": "FINAL-72004-U0056",
+            "action": "none",
+            "orderId": "FINAL-72004-O8903",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8903",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0056",
+              "campaign_id": null,
+              "event_ts": "2026-12-13T01:00:00.000Z",
+              "event_date": "2026-12-13",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 50,
+            "customerId": "FINAL-72004-U0057",
+            "action": "none",
+            "orderId": "FINAL-72004-O8909",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8909",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0057",
+              "campaign_id": null,
+              "event_ts": "2026-12-13T01:00:00.000Z",
+              "event_date": "2026-12-13",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 50,
+            "customerId": "FINAL-72004-U0058",
+            "action": "none",
+            "orderId": "FINAL-72004-O8915",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8915",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0058",
+              "campaign_id": null,
+              "event_ts": "2026-12-13T01:00:00.000Z",
+              "event_date": "2026-12-13",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          }
+        ]
+      },
+      "deltaPlatformUSD": 0,
+      "deltaMerchantUSD": 0,
+      "control": {
+        "platformProxyCents": 145564,
+        "purchases": 1118
+      }
+    },
+    {
+      "method": "reader",
+      "spec": {
+        "budgetCents": 0,
+        "durationDays": 0,
+        "maxCouponPct": 0,
+        "status": "ready",
+        "inactiveDays": 0,
+        "goal": "reduce_return_exposure",
+        "reason": "The user requested an audit of refund exposure for Willow Goods, which is a diagnostic task.",
+        "merchantIndices": [
+          0
+        ]
+      },
+      "error": null,
+      "readerError": null,
+      "planReason": null,
+      "state": {
+        "id": "TW4-DEV-5e64ac3d38c697-reader",
+        "version": 1,
+        "binding": "eddbeb136ef5163e500466edb3f9e8ad4b67a4d353af4f1427f1833256d8fdbf",
+        "spec": {
+          "budgetCents": 0,
+          "durationDays": 0,
+          "maxCouponPct": 0,
+          "status": "ready",
+          "inactiveDays": 0,
+          "goal": "reduce_return_exposure",
+          "reason": "The user requested an audit of refund exposure for Willow Goods, which is a diagnostic task.",
+          "merchantIndices": [
+            0
+          ]
+        },
+        "nodes": [
+          {
+            "name": "interpretation_bound",
+            "inputHash": "f6aefb787c67670135efa602cedd89bd3daecdadc2572dee0a70dc167151b053",
+            "input": {
+              "spec": {
+                "budgetCents": 0,
+                "durationDays": 0,
+                "maxCouponPct": 0,
+                "status": "ready",
+                "inactiveDays": 0,
+                "goal": "reduce_return_exposure",
+                "reason": "The user requested an audit of refund exposure for Willow Goods, which is a diagnostic task.",
+                "merchantIndices": [
+                  0
+                ]
+              }
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.724Z",
+            "output": {
+              "spec": {
+                "budgetCents": 0,
+                "durationDays": 0,
+                "maxCouponPct": 0,
+                "status": "ready",
+                "inactiveDays": 0,
+                "goal": "reduce_return_exposure",
+                "reason": "The user requested an audit of refund exposure for Willow Goods, which is a diagnostic task.",
+                "merchantIndices": [
+                  0
+                ]
+              },
+              "validation": "TYPED_AUTHORITY_PASSED",
+              "note": "Semantic correctness is graded independently, not compared with hidden expected answers here."
+            },
+            "finishedAt": "2026-10-25T02:55:58.731Z"
+          },
+          {
+            "name": "snapshot_bound",
+            "inputHash": "ae43c115992f79f80249515eed730914006f943492a391401fbbff96ab07ceff",
+            "input": {
+              "snapshotHash": "84cc43619716b5714d46fafa6470d91edd2fbcad62e16295e1bc496a5efcd2b7",
+              "cutoff": 45
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.733Z",
+            "output": {
+              "snapshotHash": "84cc43619716b5714d46fafa6470d91edd2fbcad62e16295e1bc496a5efcd2b7",
+              "cutoff": 45,
+              "customers": 100,
+              "merchants": 3
+            },
+            "finishedAt": "2026-10-25T02:55:58.735Z"
+          },
+          {
+            "name": "evidence_validated",
+            "inputHash": "b967c057b95818b6251492d84d67753346a2ac8e5ee67f50a5c3c33d31f401d8",
+            "input": {
+              "analyses": [
+                "mature_returns",
+                "merchant_sales"
+              ],
+              "scope": [
+                0
+              ]
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.737Z",
+            "output": {
+              "reports": [
+                {
+                  "kind": "mature_returns",
+                  "provenance": {
+                    "snapshotCutoffExclusive": 45,
+                    "windowStartInclusive": 17,
+                    "source": "FROZEN_SIMULATED_OBSERVATIONS",
+                    "catalog": "CACHED_CHANNEL3",
+                    "analysisVersion": "trusted-v4.1",
+                    "causal": false
+                  },
+                  "grain": "one order aggregated by merchant",
+                  "unit": "USD_CENTS_AND_ORDER_RATE",
+                  "rows": [
+                    {
+                      "merchantIndex": 0,
+                      "matureOrders": 76,
+                      "immatureOrders": 70,
+                      "returnedMatureOrders": 1,
+                      "returnRate": 0.013158,
+                      "maturePlatformContributionCents": 10098
+                    }
+                  ],
+                  "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+                  "includedMerchants": 1
+                },
+                {
+                  "kind": "merchant_sales",
+                  "provenance": {
+                    "snapshotCutoffExclusive": 45,
+                    "windowStartInclusive": 17,
+                    "source": "FROZEN_SIMULATED_OBSERVATIONS",
+                    "catalog": "CACHED_CHANNEL3",
+                    "analysisVersion": "trusted-v4.1",
+                    "causal": false
+                  },
+                  "grain": "one order aggregated by merchant",
+                  "unit": "USD_CENTS",
+                  "rows": [
+                    {
+                      "merchantIndex": 0,
+                      "orders": 146,
+                      "retainedObservedCents": 668771,
+                      "observedRefundCents": 8900
+                    }
+                  ],
+                  "warning": "Recent refunds are incomplete. Retained volume is not platform profit.",
+                  "includedMerchants": 1
+                }
+              ],
+              "validation": {
+                "uniqueGrains": true,
+                "explicitUnits": true,
+                "matureDenominators": true
+              },
+              "note": "Static tested operations; no LLM-generated SQL."
+            },
+            "finishedAt": "2026-10-25T02:55:58.740Z"
+          },
+          {
+            "name": "diagnostic_committed",
+            "inputHash": "a4f7ade0df3251547afb737897edbaf8d9ae242e1e8712403e6d96761e755c94",
+            "input": {
+              "goal": "reduce_return_exposure"
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.742Z",
+            "output": {
+              "decision": "report",
+              "plan": {
+                "id": "observe",
+                "strategy": "observe",
+                "audience": "all",
+                "merchantIndices": [],
+                "maxOfferPct": 0,
+                "duration": 0,
+                "penalty": 0,
+                "epsilon": 0,
+                "windowDays": 42
+              },
+              "evidenceIds": [
+                "mature_returns",
+                "merchant_sales"
+              ],
+              "reason": "Diagnostic goal completed without outreach."
+            },
+            "finishedAt": "2026-10-25T02:55:58.744Z"
+          }
+        ],
+        "completed": true,
+        "effects": {
+          "training": 0,
+          "pilots": 0,
+          "publish": 0
+        },
+        "snapshotHash": "84cc43619716b5714d46fafa6470d91edd2fbcad62e16295e1bc496a5efcd2b7"
+      },
+      "policy": {
+        "decision": "report",
+        "plan": {
+          "id": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "merchantIndices": [],
+          "maxOfferPct": 0,
+          "duration": 0,
+          "penalty": 0,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "completed": true
+      },
+      "grade": {
+        "exactInterpretation": true,
+        "goalCompleted": true,
+        "incorrectReady": false,
+        "unsupportedReady": false,
+        "unnecessaryClarification": false,
+        "rawInterpretationCorrect": true,
+        "incorrectReadyAttempt": false
+      },
+      "allocatedModelUSD": 0.000381,
+      "score": {
+        "policy": "observe",
+        "seed": 72004,
+        "scenario": "supply_delay",
+        "purchases": 1118,
+        "platformProxyCents": 145564,
+        "retainedCents": 5087908,
+        "merchantContributionCents": 1765235,
+        "outreachCents": 0,
+        "platformSupportCents": 0,
+        "jointBudgetSpentCents": 0,
+        "offers": 0,
+        "recommendations": 0,
+        "redemptions": 0,
+        "cohortLapsed": 32,
+        "reactivatedCustomers": 32,
+        "checks": {
+          "accounting": 0,
+          "eligibility": 0,
+          "propensity": 0,
+          "inventory": 0,
+          "budget": 0,
+          "maturity": 0
+        },
+        "modelCalls": 0,
+        "allocatedModelUSD": 0,
+        "daily": [
+          {
+            "day": 31,
+            "platformProxyCents": 1523,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 32,
+            "platformProxyCents": 4753,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 33,
+            "platformProxyCents": 5940,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 34,
+            "platformProxyCents": 7853,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 35,
+            "platformProxyCents": 9972,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 36,
+            "platformProxyCents": 12731,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 37,
+            "platformProxyCents": 15952,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 38,
+            "platformProxyCents": 17523,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 39,
+            "platformProxyCents": 18916,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 40,
+            "platformProxyCents": 20206,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 41,
+            "platformProxyCents": 22328,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 42,
+            "platformProxyCents": 23959,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 43,
+            "platformProxyCents": 26181,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 44,
+            "platformProxyCents": 27471,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 45,
+            "platformProxyCents": 27852,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 46,
+            "platformProxyCents": 28058,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 47,
+            "platformProxyCents": 28264,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 48,
+            "platformProxyCents": 28264,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 49,
+            "platformProxyCents": 29196,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 50,
+            "platformProxyCents": 32162,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 51,
+            "platformProxyCents": 35571,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 52,
+            "platformProxyCents": 38720,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 53,
+            "platformProxyCents": 40628,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 54,
+            "platformProxyCents": 42590,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 55,
+            "platformProxyCents": 44270,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 56,
+            "platformProxyCents": 45717,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 57,
+            "platformProxyCents": 48660,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 58,
+            "platformProxyCents": 50949,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 59,
+            "platformProxyCents": 54125,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 60,
+            "platformProxyCents": 57086,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 61,
+            "platformProxyCents": 59069,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 62,
+            "platformProxyCents": 61519,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 63,
+            "platformProxyCents": 62854,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 64,
+            "platformProxyCents": 65098,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 65,
+            "platformProxyCents": 67777,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 66,
+            "platformProxyCents": 69766,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 67,
+            "platformProxyCents": 72116,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 68,
+            "platformProxyCents": 74647,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 69,
+            "platformProxyCents": 76609,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 70,
+            "platformProxyCents": 78226,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 71,
+            "platformProxyCents": 81102,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 72,
+            "platformProxyCents": 83593,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 73,
+            "platformProxyCents": 86227,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 74,
+            "platformProxyCents": 88319,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 75,
+            "platformProxyCents": 90899,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 76,
+            "platformProxyCents": 94151,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 77,
+            "platformProxyCents": 96165,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 78,
+            "platformProxyCents": 98871,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 79,
+            "platformProxyCents": 101248,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 80,
+            "platformProxyCents": 104133,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 81,
+            "platformProxyCents": 105468,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 82,
+            "platformProxyCents": 107327,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 83,
+            "platformProxyCents": 109419,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 84,
+            "platformProxyCents": 111457,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 85,
+            "platformProxyCents": 114315,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 86,
+            "platformProxyCents": 116586,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 87,
+            "platformProxyCents": 118264,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 88,
+            "platformProxyCents": 120508,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 89,
+            "platformProxyCents": 123030,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 90,
+            "platformProxyCents": 125143,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 91,
+            "platformProxyCents": 127127,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 92,
+            "platformProxyCents": 129994,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 93,
+            "platformProxyCents": 131844,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 94,
+            "platformProxyCents": 133627,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 95,
+            "platformProxyCents": 136700,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 96,
+            "platformProxyCents": 138971,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 97,
+            "platformProxyCents": 140996,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 98,
+            "platformProxyCents": 142461,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 99,
+            "platformProxyCents": 144726,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 100,
+            "platformProxyCents": 145564,
+            "allocatedModelUSD": 0
+          }
+        ],
+        "fits": [],
+        "publications": [
+          {
+            "asOfDay": 45,
+            "effectiveDay": 45,
+            "expiresDay": 45,
+            "trainingCutoffDay": null,
+            "policy": "observe",
+            "strategy": "observe",
+            "audience": "all",
+            "maxOfferPct": 0,
+            "penaltyUSD": 0,
+            "merchantIndices": []
+          }
+        ],
+        "matureOutcomes": 7000,
+        "trace": [
+          {
+            "day": 45,
+            "customerId": "FINAL-72004-U0092",
+            "action": "none",
+            "orderId": "FINAL-72004-O8534",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8534",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0092",
+              "campaign_id": null,
+              "event_ts": "2026-12-08T01:00:00.000Z",
+              "event_date": "2026-12-08",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 45,
+            "customerId": "FINAL-72004-U0023",
+            "action": "none",
+            "orderId": "FINAL-72004-O8551",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8551",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0023",
+              "campaign_id": null,
+              "event_ts": "2026-12-08T01:00:00.000Z",
+              "event_date": "2026-12-08",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 46,
+            "customerId": "FINAL-72004-U0061",
+            "action": "none",
+            "orderId": "FINAL-72004-O8582",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8582",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0061",
+              "campaign_id": null,
+              "event_ts": "2026-12-09T01:00:00.000Z",
+              "event_date": "2026-12-09",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 46,
+            "customerId": "FINAL-72004-U0075",
+            "action": "none",
+            "orderId": "FINAL-72004-O8595",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8595",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0075",
+              "campaign_id": null,
+              "event_ts": "2026-12-09T01:00:00.000Z",
+              "event_date": "2026-12-09",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0074",
+            "action": "none",
+            "orderId": "FINAL-72004-O8678",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8678",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0074",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0085",
+            "action": "none",
+            "orderId": "FINAL-72004-O8686",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8686",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0085",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0097",
+            "action": "none",
+            "orderId": "FINAL-72004-O8698",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8698",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0097",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0013",
+            "action": "none",
+            "orderId": "FINAL-72004-O8711",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8711",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0013",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0053",
+            "action": "none",
+            "orderId": "FINAL-72004-O8749",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8749",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0053",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0059",
+            "action": "none",
+            "orderId": "FINAL-72004-O8757",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8757",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0059",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0060",
+            "action": "none",
+            "orderId": "FINAL-72004-O8763",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8763",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0060",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0063",
+            "action": "none",
+            "orderId": "FINAL-72004-O8770",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8770",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0063",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0078",
+            "action": "none",
+            "orderId": "FINAL-72004-O8782",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8782",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0078",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0082",
+            "action": "none",
+            "orderId": "FINAL-72004-O8788",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8788",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0082",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0093",
+            "action": "none",
+            "orderId": "FINAL-72004-O8796",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8796",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0093",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0095",
+            "action": "none",
+            "orderId": "FINAL-72004-O8802",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8802",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0095",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 4628,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0096",
+            "action": "none",
+            "orderId": "FINAL-72004-O8808",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8808",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0096",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0003",
+            "action": "none",
+            "orderId": "FINAL-72004-O8814",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8814",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0003",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0011",
+            "action": "none",
+            "orderId": "FINAL-72004-O8823",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8823",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0011",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1663,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0020",
+            "action": "none",
+            "orderId": "FINAL-72004-O8832",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8832",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0020",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 4628,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0024",
+            "action": "none",
+            "orderId": "FINAL-72004-O8838",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8838",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0024",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0028",
+            "action": "none",
+            "orderId": "FINAL-72004-O8844",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8844",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0028",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 4628,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0031",
+            "action": "none",
+            "orderId": "FINAL-72004-O8850",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8850",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0031",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0032",
+            "action": "none",
+            "orderId": "FINAL-72004-O8856",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8856",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0032",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1663,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0036",
+            "action": "none",
+            "orderId": "FINAL-72004-O8863",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8863",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0036",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1376,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0041",
+            "action": "none",
+            "orderId": "FINAL-72004-O8871",
+            "modelId": null,
+            "rewardCents": -58,
+            "order": {
+              "order_id": "FINAL-72004-O8871",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0041",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1376,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 3199,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0043",
+            "action": "none",
+            "orderId": "FINAL-72004-O8877",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8877",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0043",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1376,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 50,
+            "customerId": "FINAL-72004-U0056",
+            "action": "none",
+            "orderId": "FINAL-72004-O8903",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8903",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0056",
+              "campaign_id": null,
+              "event_ts": "2026-12-13T01:00:00.000Z",
+              "event_date": "2026-12-13",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 50,
+            "customerId": "FINAL-72004-U0057",
+            "action": "none",
+            "orderId": "FINAL-72004-O8909",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8909",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0057",
+              "campaign_id": null,
+              "event_ts": "2026-12-13T01:00:00.000Z",
+              "event_date": "2026-12-13",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 50,
+            "customerId": "FINAL-72004-U0058",
+            "action": "none",
+            "orderId": "FINAL-72004-O8915",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8915",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0058",
+              "campaign_id": null,
+              "event_ts": "2026-12-13T01:00:00.000Z",
+              "event_date": "2026-12-13",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          }
+        ]
+      },
+      "deltaPlatformUSD": -0.000381,
+      "deltaMerchantUSD": 0,
+      "control": {
+        "platformProxyCents": 145564,
+        "purchases": 1118
+      }
+    },
+    {
+      "method": "adaptive",
+      "spec": {
+        "budgetCents": 0,
+        "durationDays": 0,
+        "maxCouponPct": 0,
+        "status": "ready",
+        "inactiveDays": 0,
+        "goal": "reduce_return_exposure",
+        "reason": "The user requested an audit of refund exposure for Willow Goods, which is a diagnostic task.",
+        "merchantIndices": [
+          0
+        ]
+      },
+      "error": null,
+      "readerError": null,
+      "planReason": null,
+      "state": {
+        "id": "TW4-DEV-5e64ac3d38c697-adaptive",
+        "version": 1,
+        "binding": "32efc17d459e1b3d34e2eee75c66099a6aca66d07bcfc23d9958916fc03b4ca3",
+        "spec": {
+          "budgetCents": 0,
+          "durationDays": 0,
+          "maxCouponPct": 0,
+          "status": "ready",
+          "inactiveDays": 0,
+          "goal": "reduce_return_exposure",
+          "reason": "The user requested an audit of refund exposure for Willow Goods, which is a diagnostic task.",
+          "merchantIndices": [
+            0
+          ]
+        },
+        "nodes": [
+          {
+            "name": "interpretation_bound",
+            "inputHash": "f6aefb787c67670135efa602cedd89bd3daecdadc2572dee0a70dc167151b053",
+            "input": {
+              "spec": {
+                "budgetCents": 0,
+                "durationDays": 0,
+                "maxCouponPct": 0,
+                "status": "ready",
+                "inactiveDays": 0,
+                "goal": "reduce_return_exposure",
+                "reason": "The user requested an audit of refund exposure for Willow Goods, which is a diagnostic task.",
+                "merchantIndices": [
+                  0
+                ]
+              }
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.781Z",
+            "output": {
+              "spec": {
+                "budgetCents": 0,
+                "durationDays": 0,
+                "maxCouponPct": 0,
+                "status": "ready",
+                "inactiveDays": 0,
+                "goal": "reduce_return_exposure",
+                "reason": "The user requested an audit of refund exposure for Willow Goods, which is a diagnostic task.",
+                "merchantIndices": [
+                  0
+                ]
+              },
+              "validation": "TYPED_AUTHORITY_PASSED",
+              "note": "Semantic correctness is graded independently, not compared with hidden expected answers here."
+            },
+            "finishedAt": "2026-10-25T02:55:58.785Z"
+          },
+          {
+            "name": "snapshot_bound",
+            "inputHash": "ae43c115992f79f80249515eed730914006f943492a391401fbbff96ab07ceff",
+            "input": {
+              "snapshotHash": "84cc43619716b5714d46fafa6470d91edd2fbcad62e16295e1bc496a5efcd2b7",
+              "cutoff": 45
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.787Z",
+            "output": {
+              "snapshotHash": "84cc43619716b5714d46fafa6470d91edd2fbcad62e16295e1bc496a5efcd2b7",
+              "cutoff": 45,
+              "customers": 100,
+              "merchants": 3
+            },
+            "finishedAt": "2026-10-25T02:55:58.790Z"
+          },
+          {
+            "name": "evidence_validated",
+            "inputHash": "b967c057b95818b6251492d84d67753346a2ac8e5ee67f50a5c3c33d31f401d8",
+            "input": {
+              "analyses": [
+                "mature_returns",
+                "merchant_sales"
+              ],
+              "scope": [
+                0
+              ]
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.795Z",
+            "output": {
+              "reports": [
+                {
+                  "kind": "mature_returns",
+                  "provenance": {
+                    "snapshotCutoffExclusive": 45,
+                    "windowStartInclusive": 17,
+                    "source": "FROZEN_SIMULATED_OBSERVATIONS",
+                    "catalog": "CACHED_CHANNEL3",
+                    "analysisVersion": "trusted-v4.1",
+                    "causal": false
+                  },
+                  "grain": "one order aggregated by merchant",
+                  "unit": "USD_CENTS_AND_ORDER_RATE",
+                  "rows": [
+                    {
+                      "merchantIndex": 0,
+                      "matureOrders": 76,
+                      "immatureOrders": 70,
+                      "returnedMatureOrders": 1,
+                      "returnRate": 0.013158,
+                      "maturePlatformContributionCents": 10098
+                    }
+                  ],
+                  "warning": "Numerator and denominator both contain mature orders only. Order-linked contribution excludes no-purchase outreach costs; it is not the full platform total.",
+                  "includedMerchants": 1
+                },
+                {
+                  "kind": "merchant_sales",
+                  "provenance": {
+                    "snapshotCutoffExclusive": 45,
+                    "windowStartInclusive": 17,
+                    "source": "FROZEN_SIMULATED_OBSERVATIONS",
+                    "catalog": "CACHED_CHANNEL3",
+                    "analysisVersion": "trusted-v4.1",
+                    "causal": false
+                  },
+                  "grain": "one order aggregated by merchant",
+                  "unit": "USD_CENTS",
+                  "rows": [
+                    {
+                      "merchantIndex": 0,
+                      "orders": 146,
+                      "retainedObservedCents": 668771,
+                      "observedRefundCents": 8900
+                    }
+                  ],
+                  "warning": "Recent refunds are incomplete. Retained volume is not platform profit.",
+                  "includedMerchants": 1
+                }
+              ],
+              "validation": {
+                "uniqueGrains": true,
+                "explicitUnits": true,
+                "matureDenominators": true
+              },
+              "note": "Static tested operations; no LLM-generated SQL."
+            },
+            "finishedAt": "2026-10-25T02:55:58.798Z"
+          },
+          {
+            "name": "diagnostic_committed",
+            "inputHash": "a4f7ade0df3251547afb737897edbaf8d9ae242e1e8712403e6d96761e755c94",
+            "input": {
+              "goal": "reduce_return_exposure"
+            },
+            "status": "COMPLETED",
+            "startedAt": "2026-10-25T02:55:58.799Z",
+            "output": {
+              "decision": "report",
+              "plan": {
+                "id": "observe",
+                "strategy": "observe",
+                "audience": "all",
+                "merchantIndices": [],
+                "maxOfferPct": 0,
+                "duration": 0,
+                "penalty": 0,
+                "epsilon": 0,
+                "windowDays": 42
+              },
+              "evidenceIds": [
+                "mature_returns",
+                "merchant_sales"
+              ],
+              "reason": "Diagnostic goal completed without outreach."
+            },
+            "finishedAt": "2026-10-25T02:55:58.802Z"
+          }
+        ],
+        "completed": true,
+        "effects": {
+          "training": 0,
+          "pilots": 0,
+          "publish": 0
+        },
+        "snapshotHash": "84cc43619716b5714d46fafa6470d91edd2fbcad62e16295e1bc496a5efcd2b7"
+      },
+      "policy": {
+        "decision": "report",
+        "plan": {
+          "id": "observe",
+          "strategy": "observe",
+          "audience": "all",
+          "merchantIndices": [],
+          "maxOfferPct": 0,
+          "duration": 0,
+          "penalty": 0,
+          "epsilon": 0,
+          "windowDays": 42
+        },
+        "completed": true
+      },
+      "grade": {
+        "exactInterpretation": true,
+        "goalCompleted": true,
+        "incorrectReady": false,
+        "unsupportedReady": false,
+        "unnecessaryClarification": false,
+        "rawInterpretationCorrect": true,
+        "incorrectReadyAttempt": false
+      },
+      "allocatedModelUSD": 0.000381,
+      "score": {
+        "policy": "observe",
+        "seed": 72004,
+        "scenario": "supply_delay",
+        "purchases": 1118,
+        "platformProxyCents": 145564,
+        "retainedCents": 5087908,
+        "merchantContributionCents": 1765235,
+        "outreachCents": 0,
+        "platformSupportCents": 0,
+        "jointBudgetSpentCents": 0,
+        "offers": 0,
+        "recommendations": 0,
+        "redemptions": 0,
+        "cohortLapsed": 32,
+        "reactivatedCustomers": 32,
+        "checks": {
+          "accounting": 0,
+          "eligibility": 0,
+          "propensity": 0,
+          "inventory": 0,
+          "budget": 0,
+          "maturity": 0
+        },
+        "modelCalls": 0,
+        "allocatedModelUSD": 0,
+        "daily": [
+          {
+            "day": 31,
+            "platformProxyCents": 1523,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 32,
+            "platformProxyCents": 4753,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 33,
+            "platformProxyCents": 5940,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 34,
+            "platformProxyCents": 7853,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 35,
+            "platformProxyCents": 9972,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 36,
+            "platformProxyCents": 12731,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 37,
+            "platformProxyCents": 15952,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 38,
+            "platformProxyCents": 17523,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 39,
+            "platformProxyCents": 18916,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 40,
+            "platformProxyCents": 20206,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 41,
+            "platformProxyCents": 22328,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 42,
+            "platformProxyCents": 23959,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 43,
+            "platformProxyCents": 26181,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 44,
+            "platformProxyCents": 27471,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 45,
+            "platformProxyCents": 27852,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 46,
+            "platformProxyCents": 28058,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 47,
+            "platformProxyCents": 28264,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 48,
+            "platformProxyCents": 28264,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 49,
+            "platformProxyCents": 29196,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 50,
+            "platformProxyCents": 32162,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 51,
+            "platformProxyCents": 35571,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 52,
+            "platformProxyCents": 38720,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 53,
+            "platformProxyCents": 40628,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 54,
+            "platformProxyCents": 42590,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 55,
+            "platformProxyCents": 44270,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 56,
+            "platformProxyCents": 45717,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 57,
+            "platformProxyCents": 48660,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 58,
+            "platformProxyCents": 50949,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 59,
+            "platformProxyCents": 54125,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 60,
+            "platformProxyCents": 57086,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 61,
+            "platformProxyCents": 59069,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 62,
+            "platformProxyCents": 61519,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 63,
+            "platformProxyCents": 62854,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 64,
+            "platformProxyCents": 65098,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 65,
+            "platformProxyCents": 67777,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 66,
+            "platformProxyCents": 69766,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 67,
+            "platformProxyCents": 72116,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 68,
+            "platformProxyCents": 74647,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 69,
+            "platformProxyCents": 76609,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 70,
+            "platformProxyCents": 78226,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 71,
+            "platformProxyCents": 81102,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 72,
+            "platformProxyCents": 83593,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 73,
+            "platformProxyCents": 86227,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 74,
+            "platformProxyCents": 88319,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 75,
+            "platformProxyCents": 90899,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 76,
+            "platformProxyCents": 94151,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 77,
+            "platformProxyCents": 96165,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 78,
+            "platformProxyCents": 98871,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 79,
+            "platformProxyCents": 101248,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 80,
+            "platformProxyCents": 104133,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 81,
+            "platformProxyCents": 105468,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 82,
+            "platformProxyCents": 107327,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 83,
+            "platformProxyCents": 109419,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 84,
+            "platformProxyCents": 111457,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 85,
+            "platformProxyCents": 114315,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 86,
+            "platformProxyCents": 116586,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 87,
+            "platformProxyCents": 118264,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 88,
+            "platformProxyCents": 120508,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 89,
+            "platformProxyCents": 123030,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 90,
+            "platformProxyCents": 125143,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 91,
+            "platformProxyCents": 127127,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 92,
+            "platformProxyCents": 129994,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 93,
+            "platformProxyCents": 131844,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 94,
+            "platformProxyCents": 133627,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 95,
+            "platformProxyCents": 136700,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 96,
+            "platformProxyCents": 138971,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 97,
+            "platformProxyCents": 140996,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 98,
+            "platformProxyCents": 142461,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 99,
+            "platformProxyCents": 144726,
+            "allocatedModelUSD": 0
+          },
+          {
+            "day": 100,
+            "platformProxyCents": 145564,
+            "allocatedModelUSD": 0
+          }
+        ],
+        "fits": [],
+        "publications": [
+          {
+            "asOfDay": 45,
+            "effectiveDay": 45,
+            "expiresDay": 45,
+            "trainingCutoffDay": null,
+            "policy": "observe",
+            "strategy": "observe",
+            "audience": "all",
+            "maxOfferPct": 0,
+            "penaltyUSD": 0,
+            "merchantIndices": []
+          }
+        ],
+        "matureOutcomes": 7000,
+        "trace": [
+          {
+            "day": 45,
+            "customerId": "FINAL-72004-U0092",
+            "action": "none",
+            "orderId": "FINAL-72004-O8534",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8534",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0092",
+              "campaign_id": null,
+              "event_ts": "2026-12-08T01:00:00.000Z",
+              "event_date": "2026-12-08",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 45,
+            "customerId": "FINAL-72004-U0023",
+            "action": "none",
+            "orderId": "FINAL-72004-O8551",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8551",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0023",
+              "campaign_id": null,
+              "event_ts": "2026-12-08T01:00:00.000Z",
+              "event_date": "2026-12-08",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 46,
+            "customerId": "FINAL-72004-U0061",
+            "action": "none",
+            "orderId": "FINAL-72004-O8582",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8582",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0061",
+              "campaign_id": null,
+              "event_ts": "2026-12-09T01:00:00.000Z",
+              "event_date": "2026-12-09",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 46,
+            "customerId": "FINAL-72004-U0075",
+            "action": "none",
+            "orderId": "FINAL-72004-O8595",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8595",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0075",
+              "campaign_id": null,
+              "event_ts": "2026-12-09T01:00:00.000Z",
+              "event_date": "2026-12-09",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0074",
+            "action": "none",
+            "orderId": "FINAL-72004-O8678",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8678",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0074",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0085",
+            "action": "none",
+            "orderId": "FINAL-72004-O8686",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8686",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0085",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0097",
+            "action": "none",
+            "orderId": "FINAL-72004-O8698",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8698",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0097",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 48,
+            "customerId": "FINAL-72004-U0013",
+            "action": "none",
+            "orderId": "FINAL-72004-O8711",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8711",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0013",
+              "campaign_id": null,
+              "event_ts": "2026-12-11T01:00:00.000Z",
+              "event_date": "2026-12-11",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0053",
+            "action": "none",
+            "orderId": "FINAL-72004-O8749",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8749",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0053",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0059",
+            "action": "none",
+            "orderId": "FINAL-72004-O8757",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8757",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0059",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0060",
+            "action": "none",
+            "orderId": "FINAL-72004-O8763",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8763",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0060",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0063",
+            "action": "none",
+            "orderId": "FINAL-72004-O8770",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8770",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0063",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0078",
+            "action": "none",
+            "orderId": "FINAL-72004-O8782",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8782",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0078",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0082",
+            "action": "none",
+            "orderId": "FINAL-72004-O8788",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8788",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0082",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0093",
+            "action": "none",
+            "orderId": "FINAL-72004-O8796",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8796",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0093",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0095",
+            "action": "none",
+            "orderId": "FINAL-72004-O8802",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8802",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0095",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 4628,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0096",
+            "action": "none",
+            "orderId": "FINAL-72004-O8808",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8808",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0096",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0003",
+            "action": "none",
+            "orderId": "FINAL-72004-O8814",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8814",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0003",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0011",
+            "action": "none",
+            "orderId": "FINAL-72004-O8823",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8823",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0011",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1663,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0020",
+            "action": "none",
+            "orderId": "FINAL-72004-O8832",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8832",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0020",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 4628,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0024",
+            "action": "none",
+            "orderId": "FINAL-72004-O8838",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8838",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0024",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0028",
+            "action": "none",
+            "orderId": "FINAL-72004-O8844",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8844",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0028",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 4628,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0031",
+            "action": "none",
+            "orderId": "FINAL-72004-O8850",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8850",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0031",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 3827,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0032",
+            "action": "none",
+            "orderId": "FINAL-72004-O8856",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8856",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M003",
+              "customer_id": "FINAL-72004-U0032",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1663,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0036",
+            "action": "none",
+            "orderId": "FINAL-72004-O8863",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8863",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0036",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1376,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0041",
+            "action": "none",
+            "orderId": "FINAL-72004-O8871",
+            "modelId": null,
+            "rewardCents": -58,
+            "order": {
+              "order_id": "FINAL-72004-O8871",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0041",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1376,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 3199,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 49,
+            "customerId": "FINAL-72004-U0043",
+            "action": "none",
+            "orderId": "FINAL-72004-O8877",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8877",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M002",
+              "customer_id": "FINAL-72004-U0043",
+              "campaign_id": null,
+              "event_ts": "2026-12-12T01:00:00.000Z",
+              "event_date": "2026-12-12",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1376,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 50,
+            "customerId": "FINAL-72004-U0056",
+            "action": "none",
+            "orderId": "FINAL-72004-O8903",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8903",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0056",
+              "campaign_id": null,
+              "event_ts": "2026-12-13T01:00:00.000Z",
+              "event_date": "2026-12-13",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 50,
+            "customerId": "FINAL-72004-U0057",
+            "action": "none",
+            "orderId": "FINAL-72004-O8909",
+            "modelId": null,
+            "rewardCents": 103,
+            "order": {
+              "order_id": "FINAL-72004-O8909",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0057",
+              "campaign_id": null,
+              "event_ts": "2026-12-13T01:00:00.000Z",
+              "event_date": "2026-12-13",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 3199,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 3199,
+              "cost_cents": 1919,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 161,
+              "refund": 0,
+              "processing": 58
+            },
+            "source": "SIMULATED"
+          },
+          {
+            "day": 50,
+            "customerId": "FINAL-72004-U0058",
+            "action": "none",
+            "orderId": "FINAL-72004-O8915",
+            "modelId": null,
+            "rewardCents": 233,
+            "order": {
+              "order_id": "FINAL-72004-O8915",
+              "run_id": "FINAL-72004",
+              "merchant_id": "FINAL-72004-M001",
+              "customer_id": "FINAL-72004-U0058",
+              "campaign_id": null,
+              "event_ts": "2026-12-13T01:00:00.000Z",
+              "event_date": "2026-12-13",
+              "channel": "direct",
+              "currency": "USD",
+              "subtotal_cents": 8900,
+              "discount_cents": 0,
+              "shipping_cents": 0,
+              "total_cents": 8900,
+              "cost_cents": 5340,
+              "delivery_cost_cents": 350,
+              "status": "PAID",
+              "source": "SIMULATED",
+              "sandbox_requested": 0,
+              "fee": 360,
+              "refund": 0,
+              "processing": 127
+            },
+            "source": "SIMULATED"
+          }
+        ]
+      },
+      "deltaPlatformUSD": -0.000381,
+      "deltaMerchantUSD": 0,
+      "control": {
+        "platformProxyCents": 145564,
+        "purchases": 1118
+      }
+    }
+  ],
+  "costs": {
+    "actualModelUSD": 0.000381,
+    "readerUSD": 0.000381,
+    "plannerUSD": 0,
+    "requests": 1
+  },
+  "elapsedMs": 3454,
+  "sharedEvidence": true,
+  "evaluationUnsealedAfterCommit": true
+}
