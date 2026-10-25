@@ -30,6 +30,8 @@ names = {'organic': 'No outreach', 'static': 'Best static rule', 'riskStatic': '
 def save(fig, name):
     for ext in ['svg', 'png', 'pdf']:
         fig.savefig(OUT / f'{name}.{ext}', dpi=180, bbox_inches='tight')
+    svg = OUT / f'{name}.svg'
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines()) + '\n')
     plt.close(fig)
 
 def heading(fig, title, subtitle):

@@ -32,6 +32,7 @@ def route(ax,points,label='',at=None,dashed=False):
 def save(fig,name,caption):
     fig.text(.035,.025,caption,fontsize=10.5,color='#526E79',va='bottom');pdf.savefig(fig,bbox_inches='tight')
     for ext in ['png','svg','pdf']:fig.savefig(OUT/f'{name}.{ext}',dpi=180,bbox_inches='tight')
+    svg=OUT/f'{name}.svg';svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')
     plt.close(fig);figures.append({'name':name,'caption':caption,'files':{ext:f'docs/figures/architecture-planes/{name}.{ext}' for ext in ['png','svg','pdf']}})
 
 fig,ax=canvas('A · Market Metro: planes and responsibilities','Logical components inside one local app, plus external providers · Snapshot: 25 October 2026')
