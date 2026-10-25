@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Market Metro · Agent team</title>
+<link rel="stylesheet" href="/garden/style.css"><link rel="stylesheet" href="/garden/policy-lab.css">
+<style>body{background:#dce6df}.mesh-home{padding:25px;font-family:'DM Sans',sans-serif}.mesh-home a{color:#2c6673}.mesh-home button{margin:12px 0}</style></head>
+<body><main class="mesh-home"><h1>Market Metro agent team</h1><p>Investigate → propose → review → execute → compare.</p><button id="open-mesh" class="primary">Open agent team</button><p><a href="/">Market & warehouse</a> · <a href="/campaign-controller.html">Prior campaign benchmarks</a></p></main>
+<script type="importmap">{"imports":{"three":"/vendor/three/three.module.js","three/addons/":"/vendor/three-addons/"}}</script>
+<script type="module">
+import {mountPolicyLab} from '/garden/policy-lab.mjs';
+const team=mountPolicyLab({onWarehouse:id=>{location.href='/?run='+encodeURIComponent(id);},onError:message=>{document.querySelector('.mesh-home p').textContent=message;}});
+const open=()=>{const id=new URL(location.href).searchParams.get('policyLab');return team.open(id||undefined);};
+document.querySelector('#open-mesh').onclick=open;await open();
+</script></body></html>

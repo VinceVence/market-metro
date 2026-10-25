@@ -1,6 +1,7 @@
 import {continuousReport} from './marketing/continuous-report.mjs';
 import {createTrustedWorkflowService} from './trusted-workflow/service.mjs';
-import {createPolicyLab,policySpendStatus} from './policy-lab/service.mjs';
+import {policySpendStatus} from './policy-lab/service.mjs';
+import {createAgentMesh} from './agent-mesh/integration.mjs';
 import {createAutonomousPlanner} from './marketing/autonomous-planner.mjs';
 import {createJudgeDemo} from './marketing/judge-demo.mjs';
 import {createContinuousMarket} from './marketing/continuous-market.mjs';
@@ -41,7 +42,7 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
   const judgeDemo=workflow&&market?createJudgeDemo({store:market.store,workflow,market}):null;
   const commerce=market?createPayPalCommerce({store:market.store,market,paypal,funding}):null;
   const liveMarket=market?createContinuousMarket({store:market.store,market,commerce}):null;
-  const policyLab=market?createPolicyLab({store:market.store,market}):null;
+  const policyLab=market?createAgentMesh({store:market.store,market}):null;
   const trustedWorkflow=market?createTrustedWorkflowService():null;
   const server = http.createServer(async (req, res) => {
     try {

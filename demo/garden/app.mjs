@@ -78,7 +78,7 @@ function render(next){
   if(next.status==='COMPLETED'||next.workflowId||next.continuous)setPlaying(false);
   else if(!playing)setPlaying(false);
   if(next.policyLab){
-    $('planner-source').textContent=next.policyLab.branch==='mesh'?'3 Gemini agents · local bandit · $'+(next.policyLab.modelCostMicros/1e6).toFixed(5):next.policyLab.branch==='rules'?'Rules coordinator · same local learner':'No-campaign comparison';
+    $('planner-source').textContent=next.policyLab.branch==='mesh'?'3 Gemini agents · local models · $'+(next.policyLab.modelCostMicros/1e6).toFixed(5):next.policyLab.branch==='rules'?'Rules coordinator · same local learner':'No-campaign comparison';
     $('phase-title').textContent=next.tick<30?'Collecting randomized history':next.tick>=100?'Observing delayed outcomes':'Commerce policy experiment';
     $('clock-label').textContent='Seed '+next.seed+' · 1 day / '+next.policyLab.settings.dayMs/1000+'s · agents work in background';
     for(const id of ['step','week','finish'])$(id).hidden=true;
