@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "createdFor": "Open-market hypothesis; NOT a result on the previous unchanged closed simulator",
+  "code": {
+    "scripts/open-market/economy.mjs": "c7257be1c90f76f2237acb7492c6822a9f09e4d57521cb0f355ac6db9ff874d6",
+    "scripts/open-market/run.mjs": "fdd44d9659a06a6bbe8fa744255390e15a8df8c484a261e4203ac184946c1b37",
+    "scripts/open-market/benchmark.mjs": "6c8e614c868eeb4d806109f50f7276063fa251f806c762d198515e453f725511",
+    "scripts/agent-mesh/aggressive-policy.mjs": "c81e4a6cc26f8b31850d22ba41719d039ad0e1f1a53d078285e77fd177a7cbbd"
+  },
+  "originalBenchmarkHash": "a414246ce78e0fec05ece95b711d46532bf384c1026fa54cb27ac45446602b27",
+  "catalogHash": "5a2ed6057e2e24d31079a9aa9ce8fba66500502dff7775ee9aca6cc3b85e95dd",
+  "variants": {
+    "closed": {
+      "enabled": false,
+      "attractiveness": 0,
+      "response": 1
+    },
+    "nominal": {
+      "enabled": true,
+      "attractiveness": 0.5,
+      "response": 1
+    },
+    "stronger": {
+      "enabled": true,
+      "attractiveness": 1.25,
+      "response": 1
+    },
+    "placebo": {
+      "enabled": true,
+      "attractiveness": 0.5,
+      "response": 0
+    }
+  },
+  "developmentSeeds": [
+    114001,
+    114002,
+    114003
+  ],
+  "confirmationSeeds": [
+    115001,
+    115002,
+    115003,
+    115004,
+    115005,
+    115006,
+    115007,
+    115008
+  ],
+  "scenarios": [
+    "steady",
+    "rival_sale",
+    "budget_squeeze",
+    "supply_delay",
+    "returns_wave"
+  ],
+  "policies": [
+    {
+      "id": "organic",
+      "floor": 0,
+      "loyal": false,
+      "risk": false,
+      "weekdays": null
+    },
+    {
+      "id": "broad-full-price",
+      "floor": 0,
+      "loyal": true,
+      "risk": false,
+      "weekdays": null
+    },
+    {
+      "id": "return-aware",
+      "floor": 0,
+      "loyal": true,
+      "risk": true,
+      "weekdays": null
+    },
+    {
+      "id": "high-value-return-aware",
+      "floor": 0.5,
+      "loyal": true,
+      "risk": true,
+      "weekdays": null
+    },
+    {
+      "id": "high-value-weekly-return-aware",
+      "floor": 0.5,
+      "loyal": true,
+      "risk": true,
+      "weekdays": [
+        0,
+        1
+      ]
+    }
+  ],
+  "shoppingDays": 400,
+  "campaignWindow": [
+    30,
+    99
+  ],
+  "customers": 100,
+  "virtualBudgetCents": 5000,
+  "conservativeInferenceUSD": 0.1,
+  "primary": "Mean paired modeled PayPal contribution at400 days, after outreach, processing, returns and$0.10 allocated inference; nominal outside competitor assumption. Seed-clustered95% intervals. Agent-independent numerical policy gets same outcomes without model cost.",
+  "selection": "Choose highest development mean on nominal markets with positive platform lower95% and nonnegative merchant lower95%; otherwise organic. Freeze before confirmation. Compare chosen, broad full-price, previous high-value-weekly-return-aware and no campaign on every variant. Do not tune on confirmation.",
+  "controls": "closed=exact old environment; placebo=no behavioral response/contact-fatigue effect after warmup; stronger=larger outside appeal. All policies face identical scenario, wallet, draw, fee and response functions within each variant.",
+  "visibility": "Outside purchases, latent affinity, future refunds and confirmation outcomes are excluded from live agent evidence. Outside ledger exists only for evaluator cash/share accounting.",
+  "economicAssumptions": "External retailer at same product list prices, no stock limit, utility intercept0.1 plus declared appeal,3.5% return probability, same5–13day refund delay. No outside PayPal fees. Choice parameters uncalibrated; no claimed real-world ROI.",
+  "demo": {
+    "seed": 116001,
+    "scenario": "rival_sale",
+    "variant": "nominal",
+    "chosenBeforeOutcome": true
+  },
+  "cloudCalls": 0,
+  "hash": "084889eb51a126e93ce4b8606cb6b1ad1d6a562cc1de80434dd9c39310249c34"
+}

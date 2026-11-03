@@ -1,0 +1,62 @@
+{
+  "createdAt": "2026-11-01T02:36:07.339Z",
+  "cases": [
+    {
+      "seed": 970100,
+      "scenario": "ordinary"
+    },
+    {
+      "seed": 970101,
+      "scenario": "scarce_stock"
+    },
+    {
+      "seed": 970102,
+      "scenario": "concentrated_needs"
+    },
+    {
+      "seed": 970103,
+      "scenario": "mixed_deadlines"
+    },
+    {
+      "seed": 970104,
+      "scenario": "supplier_delay"
+    },
+    {
+      "seed": 970105,
+      "scenario": "preference_shift"
+    }
+  ],
+  "contract": {
+    "id": "joint_funded_horizon_v1",
+    "horizonDays": 10,
+    "requestLimit": 40,
+    "basketsPerRequest": 24,
+    "forecastCoverDays": 3,
+    "returnProbability": 0.035,
+    "source": "NUMERICAL_ROLLING_HORIZON",
+    "modelCalls": 0,
+    "objective": "Expected retail payment contribution, with small merchant margin and preference tie breaks. Positive procurement penalties prevent fee-farming stock purchases."
+  },
+  "reference": "fixed_fast",
+  "sourceHashes": {
+    "scripts/commerce-deadlines/environment.mjs": "52af591f7a5b5454448d11248e86d2e4324d9504eccf7d9525773fbfac822cec",
+    "scripts/commerce-deadlines/suppliers.mjs": "fe8fb8c471383492ea8a28e77f4e73894b7d0a87ceb835246743337a11cba682",
+    "scripts/commerce-deadlines/policies.mjs": "c1df75eac6bc1388c337b0f44dd825343479833ffc52cc6b4b49841693c81d36",
+    "scripts/commerce-deadlines/evaluate.mjs": "37046de3122303f9ced937ade3fe8c35d2b6ef315ebadd77e7239eb3d299c0dd",
+    "scripts/commerce-deadlines/horizon.mjs": "8976fb59eef1c624ed5360c59eeda63c11422ed0e5c74b11fbd6e5bb9cacfeec",
+    "scripts/commerce-deadlines/horizon-worker.py": "a1b31b5c58b927b9ede57013a48bbe9629272fd0348c88191dca05f190c5c733",
+    "scripts/commerce-deadlines/horizon-trial.mjs": "4ef90f89b8bf9bc0d7393ec5e383b28024dd0582ef4212ac918510613e49f721"
+  },
+  "scope": "Single predeclared numerical controller using only current public observations. Same frozen buyers, funding, fees, request streams, deadlines and fulfillment as the48-run development audit. Same rolling Gamma-Poisson model and basket generator; the new tool jointly schedules known funded baskets and procurement over10 days. Future forecasts are not future facts. All monetary/stock changes pass an atomic trusted execution gate.",
+  "goals": {
+    "platformRatio": 2,
+    "merchantContribution": "preserve",
+    "supplierContribution": "preserve",
+    "terminalCash": "preserve",
+    "inventoryMaxRatio": 1.1
+  },
+  "advancement": "This cannot prove2x where a valid upper bound is lower. No new paid model calls; measure coordination improvements and retain failures. No final held-out markets opened.",
+  "source": "NUMERICAL_NOT_LLM",
+  "newModelCalls": 0,
+  "nativePaymentCalls": 0
+}

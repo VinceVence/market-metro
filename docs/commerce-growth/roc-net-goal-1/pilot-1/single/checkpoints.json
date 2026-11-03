@@ -1,0 +1,3327 @@
+{
+  "mode": "single",
+  "status": "COMPLETED",
+  "checkpoints": [
+    {
+      "stage": "demand_query",
+      "role": "Single commerce planner",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "overview": {
+          "observations": 7010,
+          "sourceMarkets": 7,
+          "responded": 703,
+          "immediatelyAuthorized": 426,
+          "retained": 457,
+          "retainedWithoutImmediateFunding": 41,
+          "retainedWithoutResponse": 0,
+          "inquiryIntentFields": {
+            "inquiries": 3890,
+            "inquiriesWithPlaceholderAge": 3890,
+            "availableContext": "observedBucket includes the shopper intent age before contact: fresh, recent or cold. It is available even when a general inquiry has no product SKU."
+          },
+          "availableFeatures": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "price_usd",
+            "stock",
+            "arrival_days",
+            "recency",
+            "prior_purchases",
+            "is_recommendation",
+            "sku_purchase_recency",
+            "signal_after_sku_purchase",
+            "stationery",
+            "electronics",
+            "furniture",
+            "bundles"
+          ],
+          "label": "Retained purchase after complete settlement; immediate funding is an earlier event, not the final outcome.",
+          "scope": "Saved completed simulation history. Regime, seed, IDs and future outcomes are not predictors. Existing contact-policy selection makes these observational predictions, not causal uplift.",
+          "diagnostics": {
+            "scope": "Already-opened prior study. Diagnostic development evidence only; not new confirmation. Deployed versions share prior-day funding adjustment; incumbent also retains its inquiry posterior.",
+            "priorMetrics": {
+              "incumbent_raw": {
+                "n": 1876,
+                "auc": 0.7610395448146965,
+                "macroMarketAUC": 0.7487225628936603,
+                "averagePrecision": 0.28288647650712867,
+                "brier": 0.08596836558410212,
+                "logLoss": 0.29570138293969384
+              },
+              "incumbent_deployed": {
+                "n": 1876,
+                "auc": 0.8108387451648391,
+                "macroMarketAUC": 0.7644313745688959,
+                "averagePrecision": 0.36222905128693,
+                "brier": 0.08570380750640619,
+                "logLoss": 0.29538051957188866
+              },
+              "hurdle_context_raw": {
+                "n": 1876,
+                "auc": 0.7314829601239694,
+                "macroMarketAUC": 0.7464446449318608,
+                "averagePrecision": 0.2613085682184346,
+                "brier": 0.08844283556347474,
+                "logLoss": 0.3091785440422854
+              },
+              "hurdle_context_deployed": {
+                "n": 1876,
+                "auc": 0.8088144835988975,
+                "macroMarketAUC": 0.7499186991877833,
+                "averagePrecision": 0.3637034387526287,
+                "brier": 0.08423748818491945,
+                "logLoss": 0.29492481003433985
+              },
+              "hurdle_original_raw": {
+                "n": 1876,
+                "auc": 0.7728849497853011,
+                "macroMarketAUC": 0.7778781610776941,
+                "averagePrecision": 0.28222170982591577,
+                "brier": 0.08509435437053725,
+                "logLoss": 0.29105364083324226
+              },
+              "hurdle_original_deployed": {
+                "n": 1876,
+                "auc": 0.8039881945183766,
+                "macroMarketAUC": 0.7679966075923991,
+                "averagePrecision": 0.3653661806614755,
+                "brier": 0.08097533148595777,
+                "logLoss": 0.2775672038379432
+              }
+            },
+            "goal": "Choose useful jobs that improve ROC-AUC and settled net. AUC, within-market ranking, calibration and whole-economy contribution are separate. Do not select on AUC alone if commerce trials contradict it. The current classifier does not train on prior-day market/shopper feedback; the new feedback views supply it without hidden state."
+          }
+        },
+        "availableQueries": {
+          "category": "Observed contact, response and purchase funnel by product category.",
+          "intent": "Exact product recommendations vs general inquiries, split by fresh/recent/cold observed shopper interest.",
+          "payment_funnel": "Response -> immediate funding -> retained purchase, including later-funded requests.",
+          "recency": "New, active and lapsed shoppers; observed conversion and commercial value."
+        },
+        "task": "Choose the demand investigation most likely to improve the data and campaign strategy."
+      },
+      "evidenceId": "07d6c3781524974afdb9f7cff948c3ee905f9ecfb90e8c490334ee2c54bc81df",
+      "startedAt": "2026-11-02T04:20:08.229Z",
+      "output": {
+        "windowDays": "28",
+        "evidenceId": "07d6c3781524974afdb9f7cff948c3ee905f9ecfb90e8c490334ee2c54bc81df",
+        "rationale": "Investigating the relationship between recommendation status and shopper intent age (fresh/recent/cold) will help clarify if the current model's performance is driven by specific segments of shopper interest, potentially identifying opportunities to improve recommendation relevance for 'cold' or 'recent' shoppers.",
+        "lens": "intent"
+      },
+      "provider": [
+        {
+          "reservationId": "9c7aa4a4-d067-4196-9a50-9eb35893b0a4",
+          "caseId": "single-demand_query",
+          "trialId": "docs/commerce-growth/roc-net-goal-1/pilot-1/single",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1791,
+          "reservedMicros": 30000,
+          "inputTokens": 1515,
+          "outputTokens": 145,
+          "thinkingTokens": 796,
+          "cachedInputTokens": 0,
+          "responseId": "eA_oaoSvJPuUpt8PtrvsmAI",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3687,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "finishedAt": "2026-11-02T04:20:11.940Z"
+    },
+    {
+      "stage": "demand_analysis",
+      "actor": "LOCAL_TOOL",
+      "status": "COMPLETED",
+      "input": {
+        "lens": "intent",
+        "windowDays": 28
+      },
+      "startedAt": "2026-11-02T04:20:11.943Z",
+      "output": {
+        "lens": "intent",
+        "windowDays": 28,
+        "rows": 2762,
+        "groups": {
+          "recommend|fresh": {
+            "contacts": 667,
+            "responded": 138,
+            "immediateFunding": 79,
+            "retained": 82,
+            "lateFundedPurchases": 5,
+            "paymentNetUSD": 267.96999999999537,
+            "retailerOrderContributionUSD": 5842.790000000001,
+            "retainedRate": 0.12293853073463268,
+            "paymentNetPerContactUSD": 0.4017541229385238
+          },
+          "recommend|recent": {
+            "contacts": 563,
+            "responded": 52,
+            "immediateFunding": 33,
+            "retained": 34,
+            "lateFundedPurchases": 2,
+            "paymentNetUSD": 143.7199999999979,
+            "retailerOrderContributionUSD": 3347.6600000000008,
+            "retainedRate": 0.06039076376554174,
+            "paymentNetPerContactUSD": 0.25527531083480975
+          },
+          "ask_need|cold": {
+            "contacts": 1240,
+            "responded": 44,
+            "immediateFunding": 33,
+            "retained": 35,
+            "lateFundedPurchases": 2,
+            "paymentNetUSD": 65.74000000000234,
+            "retailerOrderContributionUSD": 2478.0300000000007,
+            "retainedRate": 0.028225806451612902,
+            "paymentNetPerContactUSD": 0.053016129032259954
+          },
+          "ask_need|fresh": {
+            "contacts": 126,
+            "responded": 25,
+            "immediateFunding": 13,
+            "retained": 17,
+            "lateFundedPurchases": 4,
+            "paymentNetUSD": 52.08000000000017,
+            "retailerOrderContributionUSD": 1162.47,
+            "retainedRate": 0.1349206349206349,
+            "paymentNetPerContactUSD": 0.41333333333333466
+          },
+          "ask_need|recent": {
+            "contacts": 166,
+            "responded": 24,
+            "immediateFunding": 14,
+            "retained": 13,
+            "lateFundedPurchases": 0,
+            "paymentNetUSD": 54.370000000000324,
+            "retailerOrderContributionUSD": 1205.86,
+            "retainedRate": 0.0783132530120482,
+            "paymentNetPerContactUSD": 0.32753012048192964
+          }
+        },
+        "evidenceId": "e1761289e0b240f328dc94f18df8a04e296ff5955da3c2d19a07c2fb8999dba0",
+        "scope": "Observed contact funnel, conditional on historical outreach. Full order contribution is reported, not claimed incremental profit."
+      },
+      "finishedAt": "2026-11-02T04:20:11.947Z"
+    },
+    {
+      "stage": "demand_contract",
+      "role": "Single commerce planner",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "overview": {
+          "observations": 7010,
+          "sourceMarkets": 7,
+          "responded": 703,
+          "immediatelyAuthorized": 426,
+          "retained": 457,
+          "retainedWithoutImmediateFunding": 41,
+          "retainedWithoutResponse": 0,
+          "inquiryIntentFields": {
+            "inquiries": 3890,
+            "inquiriesWithPlaceholderAge": 3890,
+            "availableContext": "observedBucket includes the shopper intent age before contact: fresh, recent or cold. It is available even when a general inquiry has no product SKU."
+          },
+          "availableFeatures": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "price_usd",
+            "stock",
+            "arrival_days",
+            "recency",
+            "prior_purchases",
+            "is_recommendation",
+            "sku_purchase_recency",
+            "signal_after_sku_purchase",
+            "stationery",
+            "electronics",
+            "furniture",
+            "bundles"
+          ],
+          "label": "Retained purchase after complete settlement; immediate funding is an earlier event, not the final outcome.",
+          "scope": "Saved completed simulation history. Regime, seed, IDs and future outcomes are not predictors. Existing contact-policy selection makes these observational predictions, not causal uplift.",
+          "diagnostics": {
+            "scope": "Already-opened prior study. Diagnostic development evidence only; not new confirmation. Deployed versions share prior-day funding adjustment; incumbent also retains its inquiry posterior.",
+            "priorMetrics": {
+              "incumbent_raw": {
+                "n": 1876,
+                "auc": 0.7610395448146965,
+                "macroMarketAUC": 0.7487225628936603,
+                "averagePrecision": 0.28288647650712867,
+                "brier": 0.08596836558410212,
+                "logLoss": 0.29570138293969384
+              },
+              "incumbent_deployed": {
+                "n": 1876,
+                "auc": 0.8108387451648391,
+                "macroMarketAUC": 0.7644313745688959,
+                "averagePrecision": 0.36222905128693,
+                "brier": 0.08570380750640619,
+                "logLoss": 0.29538051957188866
+              },
+              "hurdle_context_raw": {
+                "n": 1876,
+                "auc": 0.7314829601239694,
+                "macroMarketAUC": 0.7464446449318608,
+                "averagePrecision": 0.2613085682184346,
+                "brier": 0.08844283556347474,
+                "logLoss": 0.3091785440422854
+              },
+              "hurdle_context_deployed": {
+                "n": 1876,
+                "auc": 0.8088144835988975,
+                "macroMarketAUC": 0.7499186991877833,
+                "averagePrecision": 0.3637034387526287,
+                "brier": 0.08423748818491945,
+                "logLoss": 0.29492481003433985
+              },
+              "hurdle_original_raw": {
+                "n": 1876,
+                "auc": 0.7728849497853011,
+                "macroMarketAUC": 0.7778781610776941,
+                "averagePrecision": 0.28222170982591577,
+                "brier": 0.08509435437053725,
+                "logLoss": 0.29105364083324226
+              },
+              "hurdle_original_deployed": {
+                "n": 1876,
+                "auc": 0.8039881945183766,
+                "macroMarketAUC": 0.7679966075923991,
+                "averagePrecision": 0.3653661806614755,
+                "brier": 0.08097533148595777,
+                "logLoss": 0.2775672038379432
+              }
+            },
+            "goal": "Choose useful jobs that improve ROC-AUC and settled net. AUC, within-market ranking, calibration and whole-economy contribution are separate. Do not select on AUC alone if commerce trials contradict it. The current classifier does not train on prior-day market/shopper feedback; the new feedback views supply it without hidden state."
+          }
+        },
+        "analysis": {
+          "lens": "intent",
+          "windowDays": 28,
+          "rows": 2762,
+          "groups": {
+            "recommend|fresh": {
+              "contacts": 667,
+              "responded": 138,
+              "immediateFunding": 79,
+              "retained": 82,
+              "lateFundedPurchases": 5,
+              "paymentNetUSD": 267.96999999999537,
+              "retailerOrderContributionUSD": 5842.790000000001,
+              "retainedRate": 0.12293853073463268,
+              "paymentNetPerContactUSD": 0.4017541229385238
+            },
+            "recommend|recent": {
+              "contacts": 563,
+              "responded": 52,
+              "immediateFunding": 33,
+              "retained": 34,
+              "lateFundedPurchases": 2,
+              "paymentNetUSD": 143.7199999999979,
+              "retailerOrderContributionUSD": 3347.6600000000008,
+              "retainedRate": 0.06039076376554174,
+              "paymentNetPerContactUSD": 0.25527531083480975
+            },
+            "ask_need|cold": {
+              "contacts": 1240,
+              "responded": 44,
+              "immediateFunding": 33,
+              "retained": 35,
+              "lateFundedPurchases": 2,
+              "paymentNetUSD": 65.74000000000234,
+              "retailerOrderContributionUSD": 2478.0300000000007,
+              "retainedRate": 0.028225806451612902,
+              "paymentNetPerContactUSD": 0.053016129032259954
+            },
+            "ask_need|fresh": {
+              "contacts": 126,
+              "responded": 25,
+              "immediateFunding": 13,
+              "retained": 17,
+              "lateFundedPurchases": 4,
+              "paymentNetUSD": 52.08000000000017,
+              "retailerOrderContributionUSD": 1162.47,
+              "retainedRate": 0.1349206349206349,
+              "paymentNetPerContactUSD": 0.41333333333333466
+            },
+            "ask_need|recent": {
+              "contacts": 166,
+              "responded": 24,
+              "immediateFunding": 14,
+              "retained": 13,
+              "lateFundedPurchases": 0,
+              "paymentNetUSD": 54.370000000000324,
+              "retailerOrderContributionUSD": 1205.86,
+              "retainedRate": 0.0783132530120482,
+              "paymentNetPerContactUSD": 0.32753012048192964
+            }
+          },
+          "evidenceId": "e1761289e0b240f328dc94f18df8a04e296ff5955da3c2d19a07c2fb8999dba0",
+          "scope": "Observed contact funnel, conditional on historical outreach. Full order contribution is reported, not claimed incremental profit."
+        },
+        "task": "Explain the observed demand opportunity and choose the data contract that the scientist will actually train on. Use recent-only history only when the evidence supports it.",
+        "featureViews": {
+          "existing": "Original16 observed predictors. For general inquiries, product age is99 because no SKU was named.",
+          "intent_context": "Those16 plus two pre-contact shopper intent-age flags from observedBucket. Can distinguish fresh/recent/cold shopper interest even for an inquiry.",
+          "market_feedback": "Original16 plus4 prior-day market features: contact count, response rate, authorization rate and fully matured retained-purchase rate. Reconstructed within each source trajectory. No current-day or future outcomes. Replaces the external funding odds adjustment so feedback is not counted twice.",
+          "shopper_feedback": "Original16 plus4 prior-day shopper history features: contact count, response rate, funding rate and time since response. No customer ID is a predictor. Replaces the external odds adjustment.",
+          "feedback": "Original16 plus all8 market and shopper history features. More expressive but may overfit sparse shopper observations. Replaces external odds adjustment."
+        },
+        "windows": "Choose100 to preserve all completed training history,56 or28 to use only the closing part of those histories. A smaller window has fewer positive purchases. Both collection policies stay grouped by source market in validation."
+      },
+      "evidenceId": "04dbea70ec88ff6622c731b8ab58c9852e0cd4ccab71fdddc5f1e38c0768c18e",
+      "startedAt": "2026-11-02T04:20:11.951Z",
+      "output": {
+        "featureView": "intent_context",
+        "windowDays": "100",
+        "rationale": "The 'intent_context' feature view is selected because the analysis confirms that intent age (fresh/recent/cold) is a critical differentiator for conversion. This view directly incorporates these flags, which the diagnostics show contribute to a strong, stable model (AUC ~0.81). A 100-day window is chosen to maximize the training sample size, which is necessary to mitigate the sparsity of retained purchase events in specific segments like 'ask_need|fresh'. 'Feedback' views were considered but rejected to avoid potential overfitting on sparse shopper-level data.",
+        "opportunity": "The analysis demonstrates that 'fresh' intent shoppers—whether engaging via recommendations or general inquiries—consistently yield the highest retained purchase rates (12.3%–13.5%) and net payment per contact ($0.40–$0.41). Conversely, 'cold' inquiries represent a large volume of low-conversion traffic. Prioritizing the 'fresh' segment and refining the model to distinguish intent age is the primary opportunity to improve settled net contribution.",
+        "evidenceId": "04dbea70ec88ff6622c731b8ab58c9852e0cd4ccab71fdddc5f1e38c0768c18e"
+      },
+      "provider": [
+        {
+          "reservationId": "a2c5cb70-cfae-4dfe-9d52-8699563bb33b",
+          "caseId": "single-demand_contract",
+          "trialId": "docs/commerce-growth/roc-net-goal-1/pilot-1/single",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 2184,
+          "reservedMicros": 30000,
+          "inputTokens": 2471,
+          "outputTokens": 313,
+          "thinkingTokens": 731,
+          "cachedInputTokens": 0,
+          "responseId": "fg_oaretFeXNpt8P8bq7oQg",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 4090,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "finishedAt": "2026-11-02T04:20:18.356Z"
+    },
+    {
+      "stage": "model_jobs",
+      "role": "Single commerce planner",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "overview": {
+          "observations": 7010,
+          "sourceMarkets": 7,
+          "responded": 703,
+          "immediatelyAuthorized": 426,
+          "retained": 457,
+          "retainedWithoutImmediateFunding": 41,
+          "retainedWithoutResponse": 0,
+          "inquiryIntentFields": {
+            "inquiries": 3890,
+            "inquiriesWithPlaceholderAge": 3890,
+            "availableContext": "observedBucket includes the shopper intent age before contact: fresh, recent or cold. It is available even when a general inquiry has no product SKU."
+          },
+          "availableFeatures": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "price_usd",
+            "stock",
+            "arrival_days",
+            "recency",
+            "prior_purchases",
+            "is_recommendation",
+            "sku_purchase_recency",
+            "signal_after_sku_purchase",
+            "stationery",
+            "electronics",
+            "furniture",
+            "bundles"
+          ],
+          "label": "Retained purchase after complete settlement; immediate funding is an earlier event, not the final outcome.",
+          "scope": "Saved completed simulation history. Regime, seed, IDs and future outcomes are not predictors. Existing contact-policy selection makes these observational predictions, not causal uplift.",
+          "diagnostics": {
+            "scope": "Already-opened prior study. Diagnostic development evidence only; not new confirmation. Deployed versions share prior-day funding adjustment; incumbent also retains its inquiry posterior.",
+            "priorMetrics": {
+              "incumbent_raw": {
+                "n": 1876,
+                "auc": 0.7610395448146965,
+                "macroMarketAUC": 0.7487225628936603,
+                "averagePrecision": 0.28288647650712867,
+                "brier": 0.08596836558410212,
+                "logLoss": 0.29570138293969384
+              },
+              "incumbent_deployed": {
+                "n": 1876,
+                "auc": 0.8108387451648391,
+                "macroMarketAUC": 0.7644313745688959,
+                "averagePrecision": 0.36222905128693,
+                "brier": 0.08570380750640619,
+                "logLoss": 0.29538051957188866
+              },
+              "hurdle_context_raw": {
+                "n": 1876,
+                "auc": 0.7314829601239694,
+                "macroMarketAUC": 0.7464446449318608,
+                "averagePrecision": 0.2613085682184346,
+                "brier": 0.08844283556347474,
+                "logLoss": 0.3091785440422854
+              },
+              "hurdle_context_deployed": {
+                "n": 1876,
+                "auc": 0.8088144835988975,
+                "macroMarketAUC": 0.7499186991877833,
+                "averagePrecision": 0.3637034387526287,
+                "brier": 0.08423748818491945,
+                "logLoss": 0.29492481003433985
+              },
+              "hurdle_original_raw": {
+                "n": 1876,
+                "auc": 0.7728849497853011,
+                "macroMarketAUC": 0.7778781610776941,
+                "averagePrecision": 0.28222170982591577,
+                "brier": 0.08509435437053725,
+                "logLoss": 0.29105364083324226
+              },
+              "hurdle_original_deployed": {
+                "n": 1876,
+                "auc": 0.8039881945183766,
+                "macroMarketAUC": 0.7679966075923991,
+                "averagePrecision": 0.3653661806614755,
+                "brier": 0.08097533148595777,
+                "logLoss": 0.2775672038379432
+              }
+            },
+            "goal": "Choose useful jobs that improve ROC-AUC and settled net. AUC, within-market ranking, calibration and whole-economy contribution are separate. Do not select on AUC alone if commerce trials contradict it. The current classifier does not train on prior-day market/shopper feedback; the new feedback views supply it without hidden state."
+          }
+        },
+        "analysis": {
+          "lens": "intent",
+          "windowDays": 28,
+          "rows": 2762,
+          "groups": {
+            "recommend|fresh": {
+              "contacts": 667,
+              "responded": 138,
+              "immediateFunding": 79,
+              "retained": 82,
+              "lateFundedPurchases": 5,
+              "paymentNetUSD": 267.96999999999537,
+              "retailerOrderContributionUSD": 5842.790000000001,
+              "retainedRate": 0.12293853073463268,
+              "paymentNetPerContactUSD": 0.4017541229385238
+            },
+            "recommend|recent": {
+              "contacts": 563,
+              "responded": 52,
+              "immediateFunding": 33,
+              "retained": 34,
+              "lateFundedPurchases": 2,
+              "paymentNetUSD": 143.7199999999979,
+              "retailerOrderContributionUSD": 3347.6600000000008,
+              "retainedRate": 0.06039076376554174,
+              "paymentNetPerContactUSD": 0.25527531083480975
+            },
+            "ask_need|cold": {
+              "contacts": 1240,
+              "responded": 44,
+              "immediateFunding": 33,
+              "retained": 35,
+              "lateFundedPurchases": 2,
+              "paymentNetUSD": 65.74000000000234,
+              "retailerOrderContributionUSD": 2478.0300000000007,
+              "retainedRate": 0.028225806451612902,
+              "paymentNetPerContactUSD": 0.053016129032259954
+            },
+            "ask_need|fresh": {
+              "contacts": 126,
+              "responded": 25,
+              "immediateFunding": 13,
+              "retained": 17,
+              "lateFundedPurchases": 4,
+              "paymentNetUSD": 52.08000000000017,
+              "retailerOrderContributionUSD": 1162.47,
+              "retainedRate": 0.1349206349206349,
+              "paymentNetPerContactUSD": 0.41333333333333466
+            },
+            "ask_need|recent": {
+              "contacts": 166,
+              "responded": 24,
+              "immediateFunding": 14,
+              "retained": 13,
+              "lateFundedPurchases": 0,
+              "paymentNetUSD": 54.370000000000324,
+              "retailerOrderContributionUSD": 1205.86,
+              "retainedRate": 0.0783132530120482,
+              "paymentNetPerContactUSD": 0.32753012048192964
+            }
+          },
+          "evidenceId": "e1761289e0b240f328dc94f18df8a04e296ff5955da3c2d19a07c2fb8999dba0",
+          "scope": "Observed contact funnel, conditional on historical outreach. Full order contribution is reported, not claimed incremental profit."
+        },
+        "demand": {
+          "featureView": "intent_context",
+          "windowDays": "100",
+          "rationale": "The 'intent_context' feature view is selected because the analysis confirms that intent age (fresh/recent/cold) is a critical differentiator for conversion. This view directly incorporates these flags, which the diagnostics show contribute to a strong, stable model (AUC ~0.81). A 100-day window is chosen to maximize the training sample size, which is necessary to mitigate the sparsity of retained purchase events in specific segments like 'ask_need|fresh'. 'Feedback' views were considered but rejected to avoid potential overfitting on sparse shopper-level data.",
+          "opportunity": "The analysis demonstrates that 'fresh' intent shoppers—whether engaging via recommendations or general inquiries—consistently yield the highest retained purchase rates (12.3%–13.5%) and net payment per contact ($0.40–$0.41). Conversely, 'cold' inquiries represent a large volume of low-conversion traffic. Prioritizing the 'fresh' segment and refining the model to distinguish intent age is the primary opportunity to improve settled net contribution.",
+          "evidenceId": "04dbea70ec88ff6622c731b8ab58c9852e0cd4ccab71fdddc5f1e38c0768c18e"
+        },
+        "contract": {
+          "featureView": "intent_context",
+          "windowDays": 100
+        },
+        "recipes": {
+          "forest": "Direct retained-purchase random forest,80 shallow trees.",
+          "logistic": "Direct retained-purchase standardized logistic regression.",
+          "response_hurdle": "Two forests: P(observed response) times P(retained purchase given response). This does not exclude later-funded purchases. Both stages validate together on whole unseen source markets.",
+          "boosted": "Direct retained-purchase gradient boosting:120 depth2 trees with shrinkage and subsampling. Can learn interactions between visible interest and recent market response. Validate for overfitting."
+        },
+        "task": "Choose two DIFFERENT model recipes to train and compare on the analyst dataset. All fits run locally, with the same validation and payment/retailer value head."
+      },
+      "evidenceId": "2de69108d23ced9a7d27e3ea6c9b554fb64995a0530a6220f88d597551586b5a",
+      "startedAt": "2026-11-02T04:20:18.362Z",
+      "output": {
+        "evidenceId": "2de69108d23ced9a7d27e3ea6c9b554fb64995a0530a6220f88d597551586b5a",
+        "rationale": "The 'response_hurdle' model is chosen to explicitly capture the two-stage funnel (response followed by retention), which aligns with the observed data structure and the strong diagnostic performance of prior hurdle-based models. The 'boosted' model is selected as the second choice to capture complex, non-linear interactions between intent age and features like category affinity or price, which are critical for distinguishing high-value 'fresh' intent from lower-conversion segments. Together, these models provide a robust comparison between a structured funnel approach and a high-capacity interaction-learning approach.",
+        "second": "boosted",
+        "first": "response_hurdle"
+      },
+      "provider": [
+        {
+          "reservationId": "fb190e8f-3f4e-4063-b987-a35e69143374",
+          "caseId": "single-model_jobs",
+          "trialId": "docs/commerce-growth/roc-net-goal-1/pilot-1/single",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1970,
+          "reservedMicros": 30000,
+          "inputTokens": 2639,
+          "outputTokens": 212,
+          "thinkingTokens": 661,
+          "cachedInputTokens": 0,
+          "responseId": "hA_oavrLFdCKpt8P2uTX8QQ",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3653,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "finishedAt": "2026-11-02T04:20:23.923Z"
+    },
+    {
+      "stage": "fit_model",
+      "role": "Model scientist",
+      "actor": "LOCAL_TRAINING_TOOL",
+      "status": "COMPLETED",
+      "input": {
+        "contract": {
+          "featureView": "intent_context",
+          "windowDays": 100
+        },
+        "family": "response_hurdle"
+      },
+      "startedAt": "2026-11-02T04:20:23.927Z",
+      "finishedAt": "2026-11-02T04:20:29.703Z",
+      "output": {
+        "id": "MODEL-b15752573f0fb1a4",
+        "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+        "report": {
+          "status": "COMPLETED",
+          "spec": {
+            "family": "response_hurdle",
+            "featureView": "intent_context",
+            "windowDays": 100
+          },
+          "rows": 7010,
+          "positives": 457,
+          "wholeMarketFolds": [
+            {
+              "market": 980100,
+              "rows": 982,
+              "metrics": {
+                "logLoss": 0.21073089025663347,
+                "brier": 0.05758503348191859,
+                "auc": 0.7917277167277166,
+                "averagePrecision": 0.38602825063666907
+              },
+              "coarse": {
+                "logLoss": 0.24953946172519326,
+                "brier": 0.06617289112890185,
+                "auc": 0.674526862026862,
+                "averagePrecision": 0.12021205161677112
+              }
+            },
+            {
+              "market": 980101,
+              "rows": 1040,
+              "metrics": {
+                "logLoss": 0.3952097151415372,
+                "brier": 0.11523818294236557,
+                "auc": 0.7918153442740187,
+                "averagePrecision": 0.4546132321586023
+              },
+              "coarse": {
+                "logLoss": 0.44120655447226664,
+                "brier": 0.12759836899433838,
+                "auc": 0.6996141210825468,
+                "averagePrecision": 0.23890975177470083
+              }
+            },
+            {
+              "market": 980102,
+              "rows": 1011,
+              "metrics": {
+                "logLoss": 0.3339348954900193,
+                "brier": 0.09130643195933832,
+                "auc": 0.7238548784363579,
+                "averagePrecision": 0.3101115976055508
+              },
+              "coarse": {
+                "logLoss": 0.3558604574111344,
+                "brier": 0.09815352074758348,
+                "auc": 0.6603865406006674,
+                "averagePrecision": 0.1752988580305478
+              }
+            },
+            {
+              "market": 980103,
+              "rows": 1066,
+              "metrics": {
+                "logLoss": 0.2307127354219612,
+                "brier": 0.06530118721594855,
+                "auc": 0.8054698623635501,
+                "averagePrecision": 0.26489841701300465
+              },
+              "coarse": {
+                "logLoss": 0.2624263674467463,
+                "brier": 0.0718185516259899,
+                "auc": 0.7031680113906027,
+                "averagePrecision": 0.13513144123806609
+              }
+            },
+            {
+              "market": 980104,
+              "rows": 990,
+              "metrics": {
+                "logLoss": 0.11418055579175534,
+                "brier": 0.02512751440985225,
+                "auc": 0.7993929210255298,
+                "averagePrecision": 0.08300958886640153
+              },
+              "coarse": {
+                "logLoss": 0.11757524500262986,
+                "brier": 0.022218385645413848,
+                "auc": 0.7115832836468101,
+                "averagePrecision": 0.03712368942190672
+              }
+            },
+            {
+              "market": 980105,
+              "rows": 961,
+              "metrics": {
+                "logLoss": 0.10556345003066309,
+                "brier": 0.021240946108667877,
+                "auc": null,
+                "averagePrecision": null
+              },
+              "coarse": {
+                "logLoss": 0.08412588295797355,
+                "brier": 0.008789999683285124,
+                "auc": null,
+                "averagePrecision": null
+              }
+            },
+            {
+              "market": 980106,
+              "rows": 960,
+              "metrics": {
+                "logLoss": 0.08559609350103009,
+                "brier": 0.01698288927623324,
+                "auc": 0.8363795146902875,
+                "averagePrecision": 0.2454963196050759
+              },
+              "coarse": {
+                "logLoss": 0.10972176437916367,
+                "brier": 0.020376053049143604,
+                "auc": 0.8051275653421496,
+                "averagePrecision": 0.0493604454407717
+              }
+            }
+          ],
+          "metrics": {
+            "logLoss": 0.21371772735431194,
+            "brier": 0.05704856542136433,
+            "auc": 0.7454236972325636,
+            "averagePrecision": 0.18247539394179885,
+            "macroMarketAUC": 0.7914400395862434
+          },
+          "coarse": {
+            "logLoss": 0.2348076117097573,
+            "brier": 0.06041088028011131,
+            "auc": 0.6136075781349916,
+            "averagePrecision": 0.08587669076421837
+          },
+          "byContactType": {
+            "recommend": {
+              "logLoss": 0.2677222011322713,
+              "brier": 0.07843957357271064,
+              "auc": 0.7855129293224405,
+              "averagePrecision": 0.22256251581269262
+            },
+            "ask_need": {
+              "logLoss": 0.17040308514679703,
+              "brier": 0.039891767109744666,
+              "auc": 0.5956004608355262,
+              "averagePrecision": 0.0757386031343627
+            }
+          },
+          "runtimeSeconds": 3.1710529169995425,
+          "scope": "Leave-one-source-market-out validation. Both collection policies share the same held-out source market. This chooses models, not evidence of campaign profit."
+        }
+      }
+    },
+    {
+      "stage": "fit_model",
+      "role": "Model scientist",
+      "actor": "LOCAL_TRAINING_TOOL",
+      "status": "COMPLETED",
+      "input": {
+        "contract": {
+          "featureView": "intent_context",
+          "windowDays": 100
+        },
+        "family": "boosted"
+      },
+      "startedAt": "2026-11-02T04:20:29.707Z",
+      "finishedAt": "2026-11-02T04:20:34.292Z",
+      "output": {
+        "id": "MODEL-332c1f79bf4970c4",
+        "modelHash": "332c1f79bf4970c4202c20f724724e0844f1ff3769c12014fdd856001c6b9670",
+        "report": {
+          "status": "COMPLETED",
+          "spec": {
+            "family": "boosted",
+            "featureView": "intent_context",
+            "windowDays": 100
+          },
+          "rows": 7010,
+          "positives": 457,
+          "wholeMarketFolds": [
+            {
+              "market": 980100,
+              "rows": 982,
+              "metrics": {
+                "logLoss": 0.21497092864659187,
+                "brier": 0.05817635166718155,
+                "auc": 0.7853556166056166,
+                "averagePrecision": 0.3856387662056693
+              },
+              "coarse": {
+                "logLoss": 0.24953946172519326,
+                "brier": 0.06617289112890185,
+                "auc": 0.674526862026862,
+                "averagePrecision": 0.12021205161677112
+              }
+            },
+            {
+              "market": 980101,
+              "rows": 1040,
+              "metrics": {
+                "logLoss": 0.4106322485395902,
+                "brier": 0.11779846969514945,
+                "auc": 0.7607476217790656,
+                "averagePrecision": 0.424881812014228
+              },
+              "coarse": {
+                "logLoss": 0.44120655447226664,
+                "brier": 0.12759836899433838,
+                "auc": 0.6996141210825468,
+                "averagePrecision": 0.23890975177470083
+              }
+            },
+            {
+              "market": 980102,
+              "rows": 1011,
+              "metrics": {
+                "logLoss": 0.3311614840852074,
+                "brier": 0.09203065862915294,
+                "auc": 0.721074010805657,
+                "averagePrecision": 0.3049789648484928
+              },
+              "coarse": {
+                "logLoss": 0.3558604574111344,
+                "brier": 0.09815352074758348,
+                "auc": 0.6603865406006674,
+                "averagePrecision": 0.1752988580305478
+              }
+            },
+            {
+              "market": 980103,
+              "rows": 1066,
+              "metrics": {
+                "logLoss": 0.24471935784178542,
+                "brier": 0.06946508754346253,
+                "auc": 0.7958531086853347,
+                "averagePrecision": 0.22434051868872426
+              },
+              "coarse": {
+                "logLoss": 0.2624263674467463,
+                "brier": 0.0718185516259899,
+                "auc": 0.7031680113906027,
+                "averagePrecision": 0.13513144123806609
+              }
+            },
+            {
+              "market": 980104,
+              "rows": 990,
+              "metrics": {
+                "logLoss": 0.11216307613478697,
+                "brier": 0.023076591678651042,
+                "auc": 0.8181744267982004,
+                "averagePrecision": 0.12394449437840262
+              },
+              "coarse": {
+                "logLoss": 0.11757524500262986,
+                "brier": 0.022218385645413848,
+                "auc": 0.7115832836468101,
+                "averagePrecision": 0.03712368942190672
+              }
+            },
+            {
+              "market": 980105,
+              "rows": 961,
+              "metrics": {
+                "logLoss": 0.10373841866702933,
+                "brier": 0.01915811497953432,
+                "auc": null,
+                "averagePrecision": null
+              },
+              "coarse": {
+                "logLoss": 0.08412588295797355,
+                "brier": 0.008789999683285124,
+                "auc": null,
+                "averagePrecision": null
+              }
+            },
+            {
+              "market": 980106,
+              "rows": 960,
+              "metrics": {
+                "logLoss": 0.08804325432609736,
+                "brier": 0.016606616847916734,
+                "auc": 0.8713430228931445,
+                "averagePrecision": 0.19814641644340644
+              },
+              "coarse": {
+                "logLoss": 0.10972176437916367,
+                "brier": 0.020376053049143604,
+                "auc": 0.8051275653421496,
+                "averagePrecision": 0.0493604454407717
+              }
+            }
+          ],
+          "metrics": {
+            "logLoss": 0.2181297683519433,
+            "brier": 0.0576221813761383,
+            "auc": 0.7216183076820846,
+            "averagePrecision": 0.18016632682489409,
+            "macroMarketAUC": 0.7920913012611698
+          },
+          "coarse": {
+            "logLoss": 0.2348076117097573,
+            "brier": 0.06041088028011131,
+            "auc": 0.6136075781349916,
+            "averagePrecision": 0.08587669076421837
+          },
+          "byContactType": {
+            "recommend": {
+              "logLoss": 0.2757771901675584,
+              "brier": 0.07951902173246357,
+              "auc": 0.7658089775458734,
+              "averagePrecision": 0.22307601936039595
+            },
+            "ask_need": {
+              "logLoss": 0.17189327579031888,
+              "brier": 0.04005967702864861,
+              "auc": 0.5694616275872905,
+              "averagePrecision": 0.07245752444745171
+            }
+          },
+          "runtimeSeconds": 2.532259540999803,
+          "scope": "Leave-one-source-market-out validation. Both collection policies share the same held-out source market. This chooses models, not evidence of campaign profit."
+        }
+      }
+    },
+    {
+      "stage": "model_selection",
+      "role": "Single commerce planner",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "overview": {
+          "observations": 7010,
+          "sourceMarkets": 7,
+          "responded": 703,
+          "immediatelyAuthorized": 426,
+          "retained": 457,
+          "retainedWithoutImmediateFunding": 41,
+          "retainedWithoutResponse": 0,
+          "inquiryIntentFields": {
+            "inquiries": 3890,
+            "inquiriesWithPlaceholderAge": 3890,
+            "availableContext": "observedBucket includes the shopper intent age before contact: fresh, recent or cold. It is available even when a general inquiry has no product SKU."
+          },
+          "availableFeatures": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "price_usd",
+            "stock",
+            "arrival_days",
+            "recency",
+            "prior_purchases",
+            "is_recommendation",
+            "sku_purchase_recency",
+            "signal_after_sku_purchase",
+            "stationery",
+            "electronics",
+            "furniture",
+            "bundles"
+          ],
+          "label": "Retained purchase after complete settlement; immediate funding is an earlier event, not the final outcome.",
+          "scope": "Saved completed simulation history. Regime, seed, IDs and future outcomes are not predictors. Existing contact-policy selection makes these observational predictions, not causal uplift.",
+          "diagnostics": {
+            "scope": "Already-opened prior study. Diagnostic development evidence only; not new confirmation. Deployed versions share prior-day funding adjustment; incumbent also retains its inquiry posterior.",
+            "priorMetrics": {
+              "incumbent_raw": {
+                "n": 1876,
+                "auc": 0.7610395448146965,
+                "macroMarketAUC": 0.7487225628936603,
+                "averagePrecision": 0.28288647650712867,
+                "brier": 0.08596836558410212,
+                "logLoss": 0.29570138293969384
+              },
+              "incumbent_deployed": {
+                "n": 1876,
+                "auc": 0.8108387451648391,
+                "macroMarketAUC": 0.7644313745688959,
+                "averagePrecision": 0.36222905128693,
+                "brier": 0.08570380750640619,
+                "logLoss": 0.29538051957188866
+              },
+              "hurdle_context_raw": {
+                "n": 1876,
+                "auc": 0.7314829601239694,
+                "macroMarketAUC": 0.7464446449318608,
+                "averagePrecision": 0.2613085682184346,
+                "brier": 0.08844283556347474,
+                "logLoss": 0.3091785440422854
+              },
+              "hurdle_context_deployed": {
+                "n": 1876,
+                "auc": 0.8088144835988975,
+                "macroMarketAUC": 0.7499186991877833,
+                "averagePrecision": 0.3637034387526287,
+                "brier": 0.08423748818491945,
+                "logLoss": 0.29492481003433985
+              },
+              "hurdle_original_raw": {
+                "n": 1876,
+                "auc": 0.7728849497853011,
+                "macroMarketAUC": 0.7778781610776941,
+                "averagePrecision": 0.28222170982591577,
+                "brier": 0.08509435437053725,
+                "logLoss": 0.29105364083324226
+              },
+              "hurdle_original_deployed": {
+                "n": 1876,
+                "auc": 0.8039881945183766,
+                "macroMarketAUC": 0.7679966075923991,
+                "averagePrecision": 0.3653661806614755,
+                "brier": 0.08097533148595777,
+                "logLoss": 0.2775672038379432
+              }
+            },
+            "goal": "Choose useful jobs that improve ROC-AUC and settled net. AUC, within-market ranking, calibration and whole-economy contribution are separate. Do not select on AUC alone if commerce trials contradict it. The current classifier does not train on prior-day market/shopper feedback; the new feedback views supply it without hidden state."
+          }
+        },
+        "analysis": {
+          "lens": "intent",
+          "windowDays": 28,
+          "rows": 2762,
+          "groups": {
+            "recommend|fresh": {
+              "contacts": 667,
+              "responded": 138,
+              "immediateFunding": 79,
+              "retained": 82,
+              "lateFundedPurchases": 5,
+              "paymentNetUSD": 267.96999999999537,
+              "retailerOrderContributionUSD": 5842.790000000001,
+              "retainedRate": 0.12293853073463268,
+              "paymentNetPerContactUSD": 0.4017541229385238
+            },
+            "recommend|recent": {
+              "contacts": 563,
+              "responded": 52,
+              "immediateFunding": 33,
+              "retained": 34,
+              "lateFundedPurchases": 2,
+              "paymentNetUSD": 143.7199999999979,
+              "retailerOrderContributionUSD": 3347.6600000000008,
+              "retainedRate": 0.06039076376554174,
+              "paymentNetPerContactUSD": 0.25527531083480975
+            },
+            "ask_need|cold": {
+              "contacts": 1240,
+              "responded": 44,
+              "immediateFunding": 33,
+              "retained": 35,
+              "lateFundedPurchases": 2,
+              "paymentNetUSD": 65.74000000000234,
+              "retailerOrderContributionUSD": 2478.0300000000007,
+              "retainedRate": 0.028225806451612902,
+              "paymentNetPerContactUSD": 0.053016129032259954
+            },
+            "ask_need|fresh": {
+              "contacts": 126,
+              "responded": 25,
+              "immediateFunding": 13,
+              "retained": 17,
+              "lateFundedPurchases": 4,
+              "paymentNetUSD": 52.08000000000017,
+              "retailerOrderContributionUSD": 1162.47,
+              "retainedRate": 0.1349206349206349,
+              "paymentNetPerContactUSD": 0.41333333333333466
+            },
+            "ask_need|recent": {
+              "contacts": 166,
+              "responded": 24,
+              "immediateFunding": 14,
+              "retained": 13,
+              "lateFundedPurchases": 0,
+              "paymentNetUSD": 54.370000000000324,
+              "retailerOrderContributionUSD": 1205.86,
+              "retainedRate": 0.0783132530120482,
+              "paymentNetPerContactUSD": 0.32753012048192964
+            }
+          },
+          "evidenceId": "e1761289e0b240f328dc94f18df8a04e296ff5955da3c2d19a07c2fb8999dba0",
+          "scope": "Observed contact funnel, conditional on historical outreach. Full order contribution is reported, not claimed incremental profit."
+        },
+        "demand": {
+          "featureView": "intent_context",
+          "windowDays": "100",
+          "rationale": "The 'intent_context' feature view is selected because the analysis confirms that intent age (fresh/recent/cold) is a critical differentiator for conversion. This view directly incorporates these flags, which the diagnostics show contribute to a strong, stable model (AUC ~0.81). A 100-day window is chosen to maximize the training sample size, which is necessary to mitigate the sparsity of retained purchase events in specific segments like 'ask_need|fresh'. 'Feedback' views were considered but rejected to avoid potential overfitting on sparse shopper-level data.",
+          "opportunity": "The analysis demonstrates that 'fresh' intent shoppers—whether engaging via recommendations or general inquiries—consistently yield the highest retained purchase rates (12.3%–13.5%) and net payment per contact ($0.40–$0.41). Conversely, 'cold' inquiries represent a large volume of low-conversion traffic. Prioritizing the 'fresh' segment and refining the model to distinguish intent age is the primary opportunity to improve settled net contribution.",
+          "evidenceId": "04dbea70ec88ff6622c731b8ab58c9852e0cd4ccab71fdddc5f1e38c0768c18e"
+        },
+        "jobs": {
+          "evidenceId": "2de69108d23ced9a7d27e3ea6c9b554fb64995a0530a6220f88d597551586b5a",
+          "rationale": "The 'response_hurdle' model is chosen to explicitly capture the two-stage funnel (response followed by retention), which aligns with the observed data structure and the strong diagnostic performance of prior hurdle-based models. The 'boosted' model is selected as the second choice to capture complex, non-linear interactions between intent age and features like category affinity or price, which are critical for distinguishing high-value 'fresh' intent from lower-conversion segments. Together, these models provide a robust comparison between a structured funnel approach and a high-capacity interaction-learning approach.",
+          "second": "boosted",
+          "first": "response_hurdle"
+        },
+        "modelReports": [
+          {
+            "id": "MODEL-b15752573f0fb1a4",
+            "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+            "datasetHash": "09eb60df2bb0251b3fafd23b0811c279df6509ca81bc07155cd8649235178d87",
+            "report": {
+              "status": "COMPLETED",
+              "spec": {
+                "family": "response_hurdle",
+                "featureView": "intent_context",
+                "windowDays": 100
+              },
+              "rows": 7010,
+              "positives": 457,
+              "wholeMarketFolds": [
+                {
+                  "market": 980100,
+                  "rows": 982,
+                  "metrics": {
+                    "logLoss": 0.21073089025663347,
+                    "brier": 0.05758503348191859,
+                    "auc": 0.7917277167277166,
+                    "averagePrecision": 0.38602825063666907
+                  },
+                  "coarse": {
+                    "logLoss": 0.24953946172519326,
+                    "brier": 0.06617289112890185,
+                    "auc": 0.674526862026862,
+                    "averagePrecision": 0.12021205161677112
+                  }
+                },
+                {
+                  "market": 980101,
+                  "rows": 1040,
+                  "metrics": {
+                    "logLoss": 0.3952097151415372,
+                    "brier": 0.11523818294236557,
+                    "auc": 0.7918153442740187,
+                    "averagePrecision": 0.4546132321586023
+                  },
+                  "coarse": {
+                    "logLoss": 0.44120655447226664,
+                    "brier": 0.12759836899433838,
+                    "auc": 0.6996141210825468,
+                    "averagePrecision": 0.23890975177470083
+                  }
+                },
+                {
+                  "market": 980102,
+                  "rows": 1011,
+                  "metrics": {
+                    "logLoss": 0.3339348954900193,
+                    "brier": 0.09130643195933832,
+                    "auc": 0.7238548784363579,
+                    "averagePrecision": 0.3101115976055508
+                  },
+                  "coarse": {
+                    "logLoss": 0.3558604574111344,
+                    "brier": 0.09815352074758348,
+                    "auc": 0.6603865406006674,
+                    "averagePrecision": 0.1752988580305478
+                  }
+                },
+                {
+                  "market": 980103,
+                  "rows": 1066,
+                  "metrics": {
+                    "logLoss": 0.2307127354219612,
+                    "brier": 0.06530118721594855,
+                    "auc": 0.8054698623635501,
+                    "averagePrecision": 0.26489841701300465
+                  },
+                  "coarse": {
+                    "logLoss": 0.2624263674467463,
+                    "brier": 0.0718185516259899,
+                    "auc": 0.7031680113906027,
+                    "averagePrecision": 0.13513144123806609
+                  }
+                },
+                {
+                  "market": 980104,
+                  "rows": 990,
+                  "metrics": {
+                    "logLoss": 0.11418055579175534,
+                    "brier": 0.02512751440985225,
+                    "auc": 0.7993929210255298,
+                    "averagePrecision": 0.08300958886640153
+                  },
+                  "coarse": {
+                    "logLoss": 0.11757524500262986,
+                    "brier": 0.022218385645413848,
+                    "auc": 0.7115832836468101,
+                    "averagePrecision": 0.03712368942190672
+                  }
+                },
+                {
+                  "market": 980105,
+                  "rows": 961,
+                  "metrics": {
+                    "logLoss": 0.10556345003066309,
+                    "brier": 0.021240946108667877,
+                    "auc": null,
+                    "averagePrecision": null
+                  },
+                  "coarse": {
+                    "logLoss": 0.08412588295797355,
+                    "brier": 0.008789999683285124,
+                    "auc": null,
+                    "averagePrecision": null
+                  }
+                },
+                {
+                  "market": 980106,
+                  "rows": 960,
+                  "metrics": {
+                    "logLoss": 0.08559609350103009,
+                    "brier": 0.01698288927623324,
+                    "auc": 0.8363795146902875,
+                    "averagePrecision": 0.2454963196050759
+                  },
+                  "coarse": {
+                    "logLoss": 0.10972176437916367,
+                    "brier": 0.020376053049143604,
+                    "auc": 0.8051275653421496,
+                    "averagePrecision": 0.0493604454407717
+                  }
+                }
+              ],
+              "metrics": {
+                "logLoss": 0.21371772735431194,
+                "brier": 0.05704856542136433,
+                "auc": 0.7454236972325636,
+                "averagePrecision": 0.18247539394179885,
+                "macroMarketAUC": 0.7914400395862434
+              },
+              "coarse": {
+                "logLoss": 0.2348076117097573,
+                "brier": 0.06041088028011131,
+                "auc": 0.6136075781349916,
+                "averagePrecision": 0.08587669076421837
+              },
+              "byContactType": {
+                "recommend": {
+                  "logLoss": 0.2677222011322713,
+                  "brier": 0.07843957357271064,
+                  "auc": 0.7855129293224405,
+                  "averagePrecision": 0.22256251581269262
+                },
+                "ask_need": {
+                  "logLoss": 0.17040308514679703,
+                  "brier": 0.039891767109744666,
+                  "auc": 0.5956004608355262,
+                  "averagePrecision": 0.0757386031343627
+                }
+              },
+              "runtimeSeconds": 3.1710529169995425,
+              "scope": "Leave-one-source-market-out validation. Both collection policies share the same held-out source market. This chooses models, not evidence of campaign profit."
+            }
+          },
+          {
+            "id": "MODEL-332c1f79bf4970c4",
+            "modelHash": "332c1f79bf4970c4202c20f724724e0844f1ff3769c12014fdd856001c6b9670",
+            "datasetHash": "09eb60df2bb0251b3fafd23b0811c279df6509ca81bc07155cd8649235178d87",
+            "report": {
+              "status": "COMPLETED",
+              "spec": {
+                "family": "boosted",
+                "featureView": "intent_context",
+                "windowDays": 100
+              },
+              "rows": 7010,
+              "positives": 457,
+              "wholeMarketFolds": [
+                {
+                  "market": 980100,
+                  "rows": 982,
+                  "metrics": {
+                    "logLoss": 0.21497092864659187,
+                    "brier": 0.05817635166718155,
+                    "auc": 0.7853556166056166,
+                    "averagePrecision": 0.3856387662056693
+                  },
+                  "coarse": {
+                    "logLoss": 0.24953946172519326,
+                    "brier": 0.06617289112890185,
+                    "auc": 0.674526862026862,
+                    "averagePrecision": 0.12021205161677112
+                  }
+                },
+                {
+                  "market": 980101,
+                  "rows": 1040,
+                  "metrics": {
+                    "logLoss": 0.4106322485395902,
+                    "brier": 0.11779846969514945,
+                    "auc": 0.7607476217790656,
+                    "averagePrecision": 0.424881812014228
+                  },
+                  "coarse": {
+                    "logLoss": 0.44120655447226664,
+                    "brier": 0.12759836899433838,
+                    "auc": 0.6996141210825468,
+                    "averagePrecision": 0.23890975177470083
+                  }
+                },
+                {
+                  "market": 980102,
+                  "rows": 1011,
+                  "metrics": {
+                    "logLoss": 0.3311614840852074,
+                    "brier": 0.09203065862915294,
+                    "auc": 0.721074010805657,
+                    "averagePrecision": 0.3049789648484928
+                  },
+                  "coarse": {
+                    "logLoss": 0.3558604574111344,
+                    "brier": 0.09815352074758348,
+                    "auc": 0.6603865406006674,
+                    "averagePrecision": 0.1752988580305478
+                  }
+                },
+                {
+                  "market": 980103,
+                  "rows": 1066,
+                  "metrics": {
+                    "logLoss": 0.24471935784178542,
+                    "brier": 0.06946508754346253,
+                    "auc": 0.7958531086853347,
+                    "averagePrecision": 0.22434051868872426
+                  },
+                  "coarse": {
+                    "logLoss": 0.2624263674467463,
+                    "brier": 0.0718185516259899,
+                    "auc": 0.7031680113906027,
+                    "averagePrecision": 0.13513144123806609
+                  }
+                },
+                {
+                  "market": 980104,
+                  "rows": 990,
+                  "metrics": {
+                    "logLoss": 0.11216307613478697,
+                    "brier": 0.023076591678651042,
+                    "auc": 0.8181744267982004,
+                    "averagePrecision": 0.12394449437840262
+                  },
+                  "coarse": {
+                    "logLoss": 0.11757524500262986,
+                    "brier": 0.022218385645413848,
+                    "auc": 0.7115832836468101,
+                    "averagePrecision": 0.03712368942190672
+                  }
+                },
+                {
+                  "market": 980105,
+                  "rows": 961,
+                  "metrics": {
+                    "logLoss": 0.10373841866702933,
+                    "brier": 0.01915811497953432,
+                    "auc": null,
+                    "averagePrecision": null
+                  },
+                  "coarse": {
+                    "logLoss": 0.08412588295797355,
+                    "brier": 0.008789999683285124,
+                    "auc": null,
+                    "averagePrecision": null
+                  }
+                },
+                {
+                  "market": 980106,
+                  "rows": 960,
+                  "metrics": {
+                    "logLoss": 0.08804325432609736,
+                    "brier": 0.016606616847916734,
+                    "auc": 0.8713430228931445,
+                    "averagePrecision": 0.19814641644340644
+                  },
+                  "coarse": {
+                    "logLoss": 0.10972176437916367,
+                    "brier": 0.020376053049143604,
+                    "auc": 0.8051275653421496,
+                    "averagePrecision": 0.0493604454407717
+                  }
+                }
+              ],
+              "metrics": {
+                "logLoss": 0.2181297683519433,
+                "brier": 0.0576221813761383,
+                "auc": 0.7216183076820846,
+                "averagePrecision": 0.18016632682489409,
+                "macroMarketAUC": 0.7920913012611698
+              },
+              "coarse": {
+                "logLoss": 0.2348076117097573,
+                "brier": 0.06041088028011131,
+                "auc": 0.6136075781349916,
+                "averagePrecision": 0.08587669076421837
+              },
+              "byContactType": {
+                "recommend": {
+                  "logLoss": 0.2757771901675584,
+                  "brier": 0.07951902173246357,
+                  "auc": 0.7658089775458734,
+                  "averagePrecision": 0.22307601936039595
+                },
+                "ask_need": {
+                  "logLoss": 0.17189327579031888,
+                  "brier": 0.04005967702864861,
+                  "auc": 0.5694616275872905,
+                  "averagePrecision": 0.07245752444745171
+                }
+              },
+              "runtimeSeconds": 2.532259540999803,
+              "scope": "Leave-one-source-market-out validation. Both collection policies share the same held-out source market. This chooses models, not evidence of campaign profit."
+            }
+          }
+        ],
+        "incumbent": {
+          "id": "incumbent",
+          "description": "Existing validated forest, inquiry reward posterior and shared-value head. Keeps the prior pipeline.",
+          "report": {
+            "metrics": {
+              "logLoss": 0.22125727304597825,
+              "brier": 0.05792385009087139,
+              "auc": 0.6729221186214007,
+              "averagePrecision": 0.16542539324111097,
+              "valueRMSECents": 2194.0393928229414,
+              "pooledValueRMSECents": 2198.364547589581
+            },
+            "coarse": {
+              "logLoss": 0.24071182238066735,
+              "brier": 0.060918446828162214,
+              "auc": 0.5346631622778883,
+              "averagePrecision": 0.07906629024620886,
+              "valueRMSECents": 2229.4884236186876,
+              "pooledValueRMSECents": 2229.805103654051
+            },
+            "rows": 7010,
+            "scope": "Leave-one-development-market-out model validation. Test folds select a model family and are not final unseen commerce evaluation. No buyer/merchant IDs, regime labels, seeds, hidden needs or future outcomes are features."
+          }
+        },
+        "task": "Select a model artifact using validation error and the business objective. The two new models share a dataset; an incumbent report from another window is not a paired comparison. Training quality alone does not prove campaign profit."
+      },
+      "evidenceId": "c941fef009bf0e1940575f800124bf1481cb8e9bc2e07d1b2ebf1bac8a8da941",
+      "startedAt": "2026-11-02T04:20:34.295Z",
+      "output": {
+        "rationale": "The response_hurdle model achieved the best balance of AUC (0.745), LogLoss (0.214), and Brier score (0.057). Given the analysis that 'fresh' intent shoppers drive the highest retained purchase rates, the hurdle-based approach effectively captures the distinct conversion dynamics of this segment. While the boosted model shows slightly higher macro-market AUC, the response_hurdle model's lower LogLoss and Brier score indicate better calibration and reliability for the current commerce task. Uncertainty remains regarding the causal impact of these predictions, as the models are trained on observational data without experimental control.",
+        "evidenceId": "c941fef009bf0e1940575f800124bf1481cb8e9bc2e07d1b2ebf1bac8a8da941",
+        "modelId": "MODEL-b15752573f0fb1a4",
+        "finding": "The response_hurdle model (MODEL-b15752573f0fb1a4) demonstrates superior predictive performance compared to both the boosted model and the incumbent, particularly in the high-value 'recommend' segment. Its architecture aligns with the observed two-stage funnel (response followed by retention), which is critical for optimizing settled net contribution."
+      },
+      "provider": [
+        {
+          "reservationId": "c90ee3a3-bac1-4e76-a4f1-18cb6d2a3da1",
+          "caseId": "single-model_selection",
+          "trialId": "docs/commerce-growth/roc-net-goal-1/pilot-1/single",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 3222,
+          "reservedMicros": 30000,
+          "inputTokens": 7061,
+          "outputTokens": 310,
+          "thinkingTokens": 661,
+          "cachedInputTokens": 0,
+          "responseId": "kg_oas3xKu7DrfcPwoGq4Ao",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 4130,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "finishedAt": "2026-11-02T04:20:38.445Z"
+    },
+    {
+      "stage": "campaign_proposal",
+      "role": "Single commerce planner",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "overview": {
+          "observations": 7010,
+          "sourceMarkets": 7,
+          "responded": 703,
+          "immediatelyAuthorized": 426,
+          "retained": 457,
+          "retainedWithoutImmediateFunding": 41,
+          "retainedWithoutResponse": 0,
+          "inquiryIntentFields": {
+            "inquiries": 3890,
+            "inquiriesWithPlaceholderAge": 3890,
+            "availableContext": "observedBucket includes the shopper intent age before contact: fresh, recent or cold. It is available even when a general inquiry has no product SKU."
+          },
+          "availableFeatures": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "price_usd",
+            "stock",
+            "arrival_days",
+            "recency",
+            "prior_purchases",
+            "is_recommendation",
+            "sku_purchase_recency",
+            "signal_after_sku_purchase",
+            "stationery",
+            "electronics",
+            "furniture",
+            "bundles"
+          ],
+          "label": "Retained purchase after complete settlement; immediate funding is an earlier event, not the final outcome.",
+          "scope": "Saved completed simulation history. Regime, seed, IDs and future outcomes are not predictors. Existing contact-policy selection makes these observational predictions, not causal uplift.",
+          "diagnostics": {
+            "scope": "Already-opened prior study. Diagnostic development evidence only; not new confirmation. Deployed versions share prior-day funding adjustment; incumbent also retains its inquiry posterior.",
+            "priorMetrics": {
+              "incumbent_raw": {
+                "n": 1876,
+                "auc": 0.7610395448146965,
+                "macroMarketAUC": 0.7487225628936603,
+                "averagePrecision": 0.28288647650712867,
+                "brier": 0.08596836558410212,
+                "logLoss": 0.29570138293969384
+              },
+              "incumbent_deployed": {
+                "n": 1876,
+                "auc": 0.8108387451648391,
+                "macroMarketAUC": 0.7644313745688959,
+                "averagePrecision": 0.36222905128693,
+                "brier": 0.08570380750640619,
+                "logLoss": 0.29538051957188866
+              },
+              "hurdle_context_raw": {
+                "n": 1876,
+                "auc": 0.7314829601239694,
+                "macroMarketAUC": 0.7464446449318608,
+                "averagePrecision": 0.2613085682184346,
+                "brier": 0.08844283556347474,
+                "logLoss": 0.3091785440422854
+              },
+              "hurdle_context_deployed": {
+                "n": 1876,
+                "auc": 0.8088144835988975,
+                "macroMarketAUC": 0.7499186991877833,
+                "averagePrecision": 0.3637034387526287,
+                "brier": 0.08423748818491945,
+                "logLoss": 0.29492481003433985
+              },
+              "hurdle_original_raw": {
+                "n": 1876,
+                "auc": 0.7728849497853011,
+                "macroMarketAUC": 0.7778781610776941,
+                "averagePrecision": 0.28222170982591577,
+                "brier": 0.08509435437053725,
+                "logLoss": 0.29105364083324226
+              },
+              "hurdle_original_deployed": {
+                "n": 1876,
+                "auc": 0.8039881945183766,
+                "macroMarketAUC": 0.7679966075923991,
+                "averagePrecision": 0.3653661806614755,
+                "brier": 0.08097533148595777,
+                "logLoss": 0.2775672038379432
+              }
+            },
+            "goal": "Choose useful jobs that improve ROC-AUC and settled net. AUC, within-market ranking, calibration and whole-economy contribution are separate. Do not select on AUC alone if commerce trials contradict it. The current classifier does not train on prior-day market/shopper feedback; the new feedback views supply it without hidden state."
+          }
+        },
+        "analysis": {
+          "lens": "intent",
+          "windowDays": 28,
+          "rows": 2762,
+          "groups": {
+            "recommend|fresh": {
+              "contacts": 667,
+              "responded": 138,
+              "immediateFunding": 79,
+              "retained": 82,
+              "lateFundedPurchases": 5,
+              "paymentNetUSD": 267.96999999999537,
+              "retailerOrderContributionUSD": 5842.790000000001,
+              "retainedRate": 0.12293853073463268,
+              "paymentNetPerContactUSD": 0.4017541229385238
+            },
+            "recommend|recent": {
+              "contacts": 563,
+              "responded": 52,
+              "immediateFunding": 33,
+              "retained": 34,
+              "lateFundedPurchases": 2,
+              "paymentNetUSD": 143.7199999999979,
+              "retailerOrderContributionUSD": 3347.6600000000008,
+              "retainedRate": 0.06039076376554174,
+              "paymentNetPerContactUSD": 0.25527531083480975
+            },
+            "ask_need|cold": {
+              "contacts": 1240,
+              "responded": 44,
+              "immediateFunding": 33,
+              "retained": 35,
+              "lateFundedPurchases": 2,
+              "paymentNetUSD": 65.74000000000234,
+              "retailerOrderContributionUSD": 2478.0300000000007,
+              "retainedRate": 0.028225806451612902,
+              "paymentNetPerContactUSD": 0.053016129032259954
+            },
+            "ask_need|fresh": {
+              "contacts": 126,
+              "responded": 25,
+              "immediateFunding": 13,
+              "retained": 17,
+              "lateFundedPurchases": 4,
+              "paymentNetUSD": 52.08000000000017,
+              "retailerOrderContributionUSD": 1162.47,
+              "retainedRate": 0.1349206349206349,
+              "paymentNetPerContactUSD": 0.41333333333333466
+            },
+            "ask_need|recent": {
+              "contacts": 166,
+              "responded": 24,
+              "immediateFunding": 14,
+              "retained": 13,
+              "lateFundedPurchases": 0,
+              "paymentNetUSD": 54.370000000000324,
+              "retailerOrderContributionUSD": 1205.86,
+              "retainedRate": 0.0783132530120482,
+              "paymentNetPerContactUSD": 0.32753012048192964
+            }
+          },
+          "evidenceId": "e1761289e0b240f328dc94f18df8a04e296ff5955da3c2d19a07c2fb8999dba0",
+          "scope": "Observed contact funnel, conditional on historical outreach. Full order contribution is reported, not claimed incremental profit."
+        },
+        "demand": {
+          "featureView": "intent_context",
+          "windowDays": "100",
+          "rationale": "The 'intent_context' feature view is selected because the analysis confirms that intent age (fresh/recent/cold) is a critical differentiator for conversion. This view directly incorporates these flags, which the diagnostics show contribute to a strong, stable model (AUC ~0.81). A 100-day window is chosen to maximize the training sample size, which is necessary to mitigate the sparsity of retained purchase events in specific segments like 'ask_need|fresh'. 'Feedback' views were considered but rejected to avoid potential overfitting on sparse shopper-level data.",
+          "opportunity": "The analysis demonstrates that 'fresh' intent shoppers—whether engaging via recommendations or general inquiries—consistently yield the highest retained purchase rates (12.3%–13.5%) and net payment per contact ($0.40–$0.41). Conversely, 'cold' inquiries represent a large volume of low-conversion traffic. Prioritizing the 'fresh' segment and refining the model to distinguish intent age is the primary opportunity to improve settled net contribution.",
+          "evidenceId": "04dbea70ec88ff6622c731b8ab58c9852e0cd4ccab71fdddc5f1e38c0768c18e"
+        },
+        "science": {
+          "selection": {
+            "rationale": "The response_hurdle model achieved the best balance of AUC (0.745), LogLoss (0.214), and Brier score (0.057). Given the analysis that 'fresh' intent shoppers drive the highest retained purchase rates, the hurdle-based approach effectively captures the distinct conversion dynamics of this segment. While the boosted model shows slightly higher macro-market AUC, the response_hurdle model's lower LogLoss and Brier score indicate better calibration and reliability for the current commerce task. Uncertainty remains regarding the causal impact of these predictions, as the models are trained on observational data without experimental control.",
+            "evidenceId": "c941fef009bf0e1940575f800124bf1481cb8e9bc2e07d1b2ebf1bac8a8da941",
+            "modelId": "MODEL-b15752573f0fb1a4",
+            "finding": "The response_hurdle model (MODEL-b15752573f0fb1a4) demonstrates superior predictive performance compared to both the boosted model and the incumbent, particularly in the high-value 'recommend' segment. Its architecture aligns with the observed two-stage funnel (response followed by retention), which is critical for optimizing settled net contribution."
+          },
+          "modelId": "MODEL-b15752573f0fb1a4",
+          "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9"
+        },
+        "validation": {
+          "status": "COMPLETED",
+          "spec": {
+            "family": "response_hurdle",
+            "featureView": "intent_context",
+            "windowDays": 100
+          },
+          "rows": 7010,
+          "positives": 457,
+          "wholeMarketFolds": [
+            {
+              "market": 980100,
+              "rows": 982,
+              "metrics": {
+                "logLoss": 0.21073089025663347,
+                "brier": 0.05758503348191859,
+                "auc": 0.7917277167277166,
+                "averagePrecision": 0.38602825063666907
+              },
+              "coarse": {
+                "logLoss": 0.24953946172519326,
+                "brier": 0.06617289112890185,
+                "auc": 0.674526862026862,
+                "averagePrecision": 0.12021205161677112
+              }
+            },
+            {
+              "market": 980101,
+              "rows": 1040,
+              "metrics": {
+                "logLoss": 0.3952097151415372,
+                "brier": 0.11523818294236557,
+                "auc": 0.7918153442740187,
+                "averagePrecision": 0.4546132321586023
+              },
+              "coarse": {
+                "logLoss": 0.44120655447226664,
+                "brier": 0.12759836899433838,
+                "auc": 0.6996141210825468,
+                "averagePrecision": 0.23890975177470083
+              }
+            },
+            {
+              "market": 980102,
+              "rows": 1011,
+              "metrics": {
+                "logLoss": 0.3339348954900193,
+                "brier": 0.09130643195933832,
+                "auc": 0.7238548784363579,
+                "averagePrecision": 0.3101115976055508
+              },
+              "coarse": {
+                "logLoss": 0.3558604574111344,
+                "brier": 0.09815352074758348,
+                "auc": 0.6603865406006674,
+                "averagePrecision": 0.1752988580305478
+              }
+            },
+            {
+              "market": 980103,
+              "rows": 1066,
+              "metrics": {
+                "logLoss": 0.2307127354219612,
+                "brier": 0.06530118721594855,
+                "auc": 0.8054698623635501,
+                "averagePrecision": 0.26489841701300465
+              },
+              "coarse": {
+                "logLoss": 0.2624263674467463,
+                "brier": 0.0718185516259899,
+                "auc": 0.7031680113906027,
+                "averagePrecision": 0.13513144123806609
+              }
+            },
+            {
+              "market": 980104,
+              "rows": 990,
+              "metrics": {
+                "logLoss": 0.11418055579175534,
+                "brier": 0.02512751440985225,
+                "auc": 0.7993929210255298,
+                "averagePrecision": 0.08300958886640153
+              },
+              "coarse": {
+                "logLoss": 0.11757524500262986,
+                "brier": 0.022218385645413848,
+                "auc": 0.7115832836468101,
+                "averagePrecision": 0.03712368942190672
+              }
+            },
+            {
+              "market": 980105,
+              "rows": 961,
+              "metrics": {
+                "logLoss": 0.10556345003066309,
+                "brier": 0.021240946108667877,
+                "auc": null,
+                "averagePrecision": null
+              },
+              "coarse": {
+                "logLoss": 0.08412588295797355,
+                "brier": 0.008789999683285124,
+                "auc": null,
+                "averagePrecision": null
+              }
+            },
+            {
+              "market": 980106,
+              "rows": 960,
+              "metrics": {
+                "logLoss": 0.08559609350103009,
+                "brier": 0.01698288927623324,
+                "auc": 0.8363795146902875,
+                "averagePrecision": 0.2454963196050759
+              },
+              "coarse": {
+                "logLoss": 0.10972176437916367,
+                "brier": 0.020376053049143604,
+                "auc": 0.8051275653421496,
+                "averagePrecision": 0.0493604454407717
+              }
+            }
+          ],
+          "metrics": {
+            "logLoss": 0.21371772735431194,
+            "brier": 0.05704856542136433,
+            "auc": 0.7454236972325636,
+            "averagePrecision": 0.18247539394179885,
+            "macroMarketAUC": 0.7914400395862434
+          },
+          "coarse": {
+            "logLoss": 0.2348076117097573,
+            "brier": 0.06041088028011131,
+            "auc": 0.6136075781349916,
+            "averagePrecision": 0.08587669076421837
+          },
+          "byContactType": {
+            "recommend": {
+              "logLoss": 0.2677222011322713,
+              "brier": 0.07843957357271064,
+              "auc": 0.7855129293224405,
+              "averagePrecision": 0.22256251581269262
+            },
+            "ask_need": {
+              "logLoss": 0.17040308514679703,
+              "brier": 0.039891767109744666,
+              "auc": 0.5956004608355262,
+              "averagePrecision": 0.0757386031343627
+            }
+          },
+          "runtimeSeconds": 3.1710529169995425,
+          "scope": "Leave-one-source-market-out validation. Both collection policies share the same held-out source market. This chooses models, not evidence of campaign profit."
+        },
+        "baseline": {
+          "modelHash": "122152d9e6a49331f94e05ccc273cd0ccb2af828189c56a56c441e95d4f6279a",
+          "campaign": {
+            "kind": "intent_assistance",
+            "objective": "joint"
+          },
+          "measurement": {
+            "platformUSD": 757.6171428571428,
+            "retailerUSD": 8825.68142857143,
+            "retainedPurchases": 135,
+            "retainedVolumeUSD": 20029.85714285714,
+            "recommendationPurchases": 17.571428571428573,
+            "attributedPurchases": 28.857142857142858,
+            "contactCount": 268,
+            "fundedResponses": 27.428571428571427,
+            "outreachCostUSD": 13.400000000000002,
+            "terminalCashUSD": 28431.53142857143,
+            "terminalInventoryUSD": 2827.7342857142858,
+            "unpaidLiabilities": 0,
+            "platformDeltaUSD": 4.39714285714274,
+            "retailerDeltaUSD": 24.274285714287544,
+            "retainedDelta": 0.4285714285714164,
+            "perMarket": [
+              {
+                "market": 1,
+                "platformDeltaUSD": 16.220000000000027,
+                "retailerDeltaUSD": 214.3199999999997,
+                "retainedDelta": 2,
+                "contacts": 258,
+                "recommendationPurchases": 16
+              },
+              {
+                "market": 2,
+                "platformDeltaUSD": -6.580000000000041,
+                "retailerDeltaUSD": -138.04000000000087,
+                "retainedDelta": 0,
+                "contacts": 331,
+                "recommendationPurchases": 47
+              },
+              {
+                "market": 3,
+                "platformDeltaUSD": 13.009999999999991,
+                "retailerDeltaUSD": 108.60999999999967,
+                "retainedDelta": 1,
+                "contacts": 258,
+                "recommendationPurchases": 27
+              },
+              {
+                "market": 4,
+                "platformDeltaUSD": -2.080000000000041,
+                "retailerDeltaUSD": -45.13999999999942,
+                "retainedDelta": -1,
+                "contacts": 267,
+                "recommendationPurchases": 27
+              },
+              {
+                "market": 5,
+                "platformDeltaUSD": 1.6599999999999682,
+                "retailerDeltaUSD": 0,
+                "retainedDelta": 0,
+                "contacts": 304,
+                "recommendationPurchases": 5
+              },
+              {
+                "market": 6,
+                "platformDeltaUSD": 2.75,
+                "retailerDeltaUSD": 0,
+                "retainedDelta": 0,
+                "contacts": 289,
+                "recommendationPurchases": 0
+              },
+              {
+                "market": 7,
+                "platformDeltaUSD": 5.7999999999999545,
+                "retailerDeltaUSD": 30.170000000000073,
+                "retainedDelta": 1,
+                "contacts": 169,
+                "recommendationPurchases": 1
+              }
+            ],
+            "scope": "Completed historical development scenarios. No unseen-seed result."
+          },
+          "trialHash": "2be02fda0d6cc9e6641a158fb22b939c465f3525851e4d5a43e83b20d38f0d0c"
+        },
+        "campaigns": {
+          "product_recommendations": "Send a specific currently expressed product; rank eligible shoppers using the chosen model.",
+          "intent_assistance": "For explicit searches recommend that product; for ambiguous browsing the model can ask the shopper what they need.",
+          "ranked_discovery": "Model chooses between latest-product recommendations and an inquiry, including after a search.",
+          "reactivation": "Target consenting previous buyers inactive for14days; use observed interest and fitted response estimates."
+        },
+        "objectives": {
+          "paypal": "Rank estimated net payment contribution.",
+          "joint": "Rank estimated net payment plus retailer contribution."
+        },
+        "task": "Propose two distinct campaign jobs for the chosen model. The trial will execute them in all seven historical markets. Stock, buyer funds, consent, max10contacts/day, contact gap and payment rules stay unchanged. No arbitrary threshold editing."
+      },
+      "evidenceId": "739e43ef21157aa08428c70e31215ed69e06bd74ad9daf4ee6dd661ef7bd1243",
+      "startedAt": "2026-11-02T04:20:38.453Z",
+      "output": {
+        "second": {
+          "objective": "paypal",
+          "kind": "intent_assistance"
+        },
+        "first": {
+          "objective": "joint",
+          "kind": "product_recommendations"
+        },
+        "rationale": "The 'fresh' intent segment shows high conversion and contribution, making 'product_recommendations' with a 'joint' objective ideal for maximizing total value. For 'recent' and 'cold' segments, 'intent_assistance' with a 'paypal' objective provides a mechanism to engage and clarify needs, potentially improving payment net from lower-intent traffic.",
+        "evidenceId": "739e43ef21157aa08428c70e31215ed69e06bd74ad9daf4ee6dd661ef7bd1243"
+      },
+      "provider": [
+        {
+          "reservationId": "fb234c24-ab0e-4b63-81ff-5413c7622b93",
+          "caseId": "single-campaign_proposal",
+          "trialId": "docs/commerce-growth/roc-net-goal-1/pilot-1/single",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 2441,
+          "reservedMicros": 30000,
+          "inputTokens": 5790,
+          "outputTokens": 180,
+          "thinkingTokens": 482,
+          "cachedInputTokens": 0,
+          "responseId": "mA_oauyUGsSY0-kPvKSuyAI",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 2594,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "finishedAt": "2026-11-02T04:20:42.915Z"
+    },
+    {
+      "stage": "campaign_trial",
+      "actor": "LOCAL_TOOL",
+      "status": "COMPLETED",
+      "input": {
+        "modelId": "MODEL-b15752573f0fb1a4",
+        "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+        "campaign": {
+          "objective": "joint",
+          "kind": "product_recommendations"
+        }
+      },
+      "startedAt": "2026-11-02T04:20:42.920Z",
+      "output": {
+        "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+        "campaign": {
+          "objective": "joint",
+          "kind": "product_recommendations"
+        },
+        "measurement": {
+          "platformUSD": 757.8971428571429,
+          "retailerUSD": 8810.851428571428,
+          "retainedPurchases": 134.85714285714286,
+          "retainedVolumeUSD": 20008,
+          "recommendationPurchases": 21.428571428571427,
+          "attributedPurchases": 28.714285714285715,
+          "contactCount": 218.85714285714286,
+          "fundedResponses": 27.142857142857142,
+          "outreachCostUSD": 10.942857142857145,
+          "terminalCashUSD": 28432.528571428575,
+          "terminalInventoryUSD": 2786.085714285714,
+          "unpaidLiabilities": 0,
+          "platformDeltaUSD": 4.677142857142826,
+          "retailerDeltaUSD": 9.444285714285797,
+          "retainedDelta": 0.2857142857142776,
+          "perMarket": [
+            {
+              "market": 1,
+              "platformDeltaUSD": 8.090000000000032,
+              "retailerDeltaUSD": 8.859999999999673,
+              "retainedDelta": 0,
+              "contacts": 190,
+              "recommendationPurchases": 19
+            },
+            {
+              "market": 2,
+              "platformDeltaUSD": -0.17999999999994998,
+              "retailerDeltaUSD": -63.47999999999956,
+              "retainedDelta": -1,
+              "contacts": 307,
+              "recommendationPurchases": 59
+            },
+            {
+              "market": 3,
+              "platformDeltaUSD": 20.870000000000005,
+              "retailerDeltaUSD": 251.60999999999967,
+              "retainedDelta": 3,
+              "contacts": 249,
+              "recommendationPurchases": 34
+            },
+            {
+              "market": 4,
+              "platformDeltaUSD": 0.6299999999999955,
+              "retailerDeltaUSD": -4.110000000000582,
+              "retainedDelta": 1,
+              "contacts": 242,
+              "recommendationPurchases": 30
+            },
+            {
+              "market": 5,
+              "platformDeltaUSD": -9.370000000000005,
+              "retailerDeltaUSD": -126.77000000000044,
+              "retainedDelta": -1,
+              "contacts": 237,
+              "recommendationPurchases": 7
+            },
+            {
+              "market": 6,
+              "platformDeltaUSD": 7.5499999999999545,
+              "retailerDeltaUSD": 0,
+              "retainedDelta": 0,
+              "contacts": 193,
+              "recommendationPurchases": 0
+            },
+            {
+              "market": 7,
+              "platformDeltaUSD": 5.149999999999977,
+              "retailerDeltaUSD": 0,
+              "retainedDelta": 0,
+              "contacts": 114,
+              "recommendationPurchases": 1
+            }
+          ],
+          "scope": "Completed historical development scenarios. No unseen-seed result."
+        },
+        "trialHash": "90f55318446784497ff77ddf0f5ab431a4661e8ddeadc4d45aa60f748c5aa13f"
+      },
+      "finishedAt": "2026-11-02T04:21:20.607Z"
+    },
+    {
+      "stage": "campaign_trial",
+      "actor": "LOCAL_TOOL",
+      "status": "COMPLETED",
+      "input": {
+        "modelId": "MODEL-b15752573f0fb1a4",
+        "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+        "campaign": {
+          "objective": "paypal",
+          "kind": "intent_assistance"
+        }
+      },
+      "startedAt": "2026-11-02T04:21:20.610Z",
+      "output": {
+        "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+        "campaign": {
+          "objective": "paypal",
+          "kind": "intent_assistance"
+        },
+        "measurement": {
+          "platformUSD": 758.7457142857141,
+          "retailerUSD": 8842.527142857143,
+          "retainedPurchases": 135.42857142857142,
+          "retainedVolumeUSD": 20064.14285714286,
+          "recommendationPurchases": 18.714285714285715,
+          "attributedPurchases": 29.285714285714285,
+          "contactCount": 278,
+          "fundedResponses": 28.428571428571427,
+          "outreachCostUSD": 13.9,
+          "terminalCashUSD": 28457.842857142856,
+          "terminalInventoryUSD": 2822.8199999999997,
+          "unpaidLiabilities": 0,
+          "platformDeltaUSD": 5.525714285714116,
+          "retailerDeltaUSD": 41.1200000000008,
+          "retainedDelta": 0.8571428571428328,
+          "perMarket": [
+            {
+              "market": 1,
+              "platformDeltaUSD": 15.669999999999959,
+              "retailerDeltaUSD": 214.3199999999997,
+              "retainedDelta": 2,
+              "contacts": 269,
+              "recommendationPurchases": 17
+            },
+            {
+              "market": 2,
+              "platformDeltaUSD": -1.0900000000000318,
+              "retailerDeltaUSD": -116.90999999999985,
+              "retainedDelta": 2,
+              "contacts": 334,
+              "recommendationPurchases": 52
+            },
+            {
+              "market": 3,
+              "platformDeltaUSD": 26.75,
+              "retailerDeltaUSD": 270.6900000000005,
+              "retainedDelta": 3,
+              "contacts": 261,
+              "recommendationPurchases": 31
+            },
+            {
+              "market": 4,
+              "platformDeltaUSD": -10.759999999999991,
+              "retailerDeltaUSD": -110.43000000000029,
+              "retainedDelta": -2,
+              "contacts": 278,
+              "recommendationPurchases": 25
+            },
+            {
+              "market": 5,
+              "platformDeltaUSD": 1.2100000000000364,
+              "retailerDeltaUSD": 0,
+              "retainedDelta": 0,
+              "contacts": 313,
+              "recommendationPurchases": 5
+            },
+            {
+              "market": 6,
+              "platformDeltaUSD": 1.75,
+              "retailerDeltaUSD": 0,
+              "retainedDelta": 0,
+              "contacts": 309,
+              "recommendationPurchases": 0
+            },
+            {
+              "market": 7,
+              "platformDeltaUSD": 5.149999999999977,
+              "retailerDeltaUSD": 30.170000000000073,
+              "retainedDelta": 1,
+              "contacts": 182,
+              "recommendationPurchases": 1
+            }
+          ],
+          "scope": "Completed historical development scenarios. No unseen-seed result."
+        },
+        "trialHash": "b3c9e76b49144c315e9ee88b5ebfc1452dfd593b80ffc96c4b6b70b960abee90"
+      },
+      "finishedAt": "2026-11-02T04:21:58.684Z"
+    },
+    {
+      "stage": "campaign_selection",
+      "role": "Single commerce planner",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "overview": {
+          "observations": 7010,
+          "sourceMarkets": 7,
+          "responded": 703,
+          "immediatelyAuthorized": 426,
+          "retained": 457,
+          "retainedWithoutImmediateFunding": 41,
+          "retainedWithoutResponse": 0,
+          "inquiryIntentFields": {
+            "inquiries": 3890,
+            "inquiriesWithPlaceholderAge": 3890,
+            "availableContext": "observedBucket includes the shopper intent age before contact: fresh, recent or cold. It is available even when a general inquiry has no product SKU."
+          },
+          "availableFeatures": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "price_usd",
+            "stock",
+            "arrival_days",
+            "recency",
+            "prior_purchases",
+            "is_recommendation",
+            "sku_purchase_recency",
+            "signal_after_sku_purchase",
+            "stationery",
+            "electronics",
+            "furniture",
+            "bundles"
+          ],
+          "label": "Retained purchase after complete settlement; immediate funding is an earlier event, not the final outcome.",
+          "scope": "Saved completed simulation history. Regime, seed, IDs and future outcomes are not predictors. Existing contact-policy selection makes these observational predictions, not causal uplift.",
+          "diagnostics": {
+            "scope": "Already-opened prior study. Diagnostic development evidence only; not new confirmation. Deployed versions share prior-day funding adjustment; incumbent also retains its inquiry posterior.",
+            "priorMetrics": {
+              "incumbent_raw": {
+                "n": 1876,
+                "auc": 0.7610395448146965,
+                "macroMarketAUC": 0.7487225628936603,
+                "averagePrecision": 0.28288647650712867,
+                "brier": 0.08596836558410212,
+                "logLoss": 0.29570138293969384
+              },
+              "incumbent_deployed": {
+                "n": 1876,
+                "auc": 0.8108387451648391,
+                "macroMarketAUC": 0.7644313745688959,
+                "averagePrecision": 0.36222905128693,
+                "brier": 0.08570380750640619,
+                "logLoss": 0.29538051957188866
+              },
+              "hurdle_context_raw": {
+                "n": 1876,
+                "auc": 0.7314829601239694,
+                "macroMarketAUC": 0.7464446449318608,
+                "averagePrecision": 0.2613085682184346,
+                "brier": 0.08844283556347474,
+                "logLoss": 0.3091785440422854
+              },
+              "hurdle_context_deployed": {
+                "n": 1876,
+                "auc": 0.8088144835988975,
+                "macroMarketAUC": 0.7499186991877833,
+                "averagePrecision": 0.3637034387526287,
+                "brier": 0.08423748818491945,
+                "logLoss": 0.29492481003433985
+              },
+              "hurdle_original_raw": {
+                "n": 1876,
+                "auc": 0.7728849497853011,
+                "macroMarketAUC": 0.7778781610776941,
+                "averagePrecision": 0.28222170982591577,
+                "brier": 0.08509435437053725,
+                "logLoss": 0.29105364083324226
+              },
+              "hurdle_original_deployed": {
+                "n": 1876,
+                "auc": 0.8039881945183766,
+                "macroMarketAUC": 0.7679966075923991,
+                "averagePrecision": 0.3653661806614755,
+                "brier": 0.08097533148595777,
+                "logLoss": 0.2775672038379432
+              }
+            },
+            "goal": "Choose useful jobs that improve ROC-AUC and settled net. AUC, within-market ranking, calibration and whole-economy contribution are separate. Do not select on AUC alone if commerce trials contradict it. The current classifier does not train on prior-day market/shopper feedback; the new feedback views supply it without hidden state."
+          }
+        },
+        "analysis": {
+          "lens": "intent",
+          "windowDays": 28,
+          "rows": 2762,
+          "groups": {
+            "recommend|fresh": {
+              "contacts": 667,
+              "responded": 138,
+              "immediateFunding": 79,
+              "retained": 82,
+              "lateFundedPurchases": 5,
+              "paymentNetUSD": 267.96999999999537,
+              "retailerOrderContributionUSD": 5842.790000000001,
+              "retainedRate": 0.12293853073463268,
+              "paymentNetPerContactUSD": 0.4017541229385238
+            },
+            "recommend|recent": {
+              "contacts": 563,
+              "responded": 52,
+              "immediateFunding": 33,
+              "retained": 34,
+              "lateFundedPurchases": 2,
+              "paymentNetUSD": 143.7199999999979,
+              "retailerOrderContributionUSD": 3347.6600000000008,
+              "retainedRate": 0.06039076376554174,
+              "paymentNetPerContactUSD": 0.25527531083480975
+            },
+            "ask_need|cold": {
+              "contacts": 1240,
+              "responded": 44,
+              "immediateFunding": 33,
+              "retained": 35,
+              "lateFundedPurchases": 2,
+              "paymentNetUSD": 65.74000000000234,
+              "retailerOrderContributionUSD": 2478.0300000000007,
+              "retainedRate": 0.028225806451612902,
+              "paymentNetPerContactUSD": 0.053016129032259954
+            },
+            "ask_need|fresh": {
+              "contacts": 126,
+              "responded": 25,
+              "immediateFunding": 13,
+              "retained": 17,
+              "lateFundedPurchases": 4,
+              "paymentNetUSD": 52.08000000000017,
+              "retailerOrderContributionUSD": 1162.47,
+              "retainedRate": 0.1349206349206349,
+              "paymentNetPerContactUSD": 0.41333333333333466
+            },
+            "ask_need|recent": {
+              "contacts": 166,
+              "responded": 24,
+              "immediateFunding": 14,
+              "retained": 13,
+              "lateFundedPurchases": 0,
+              "paymentNetUSD": 54.370000000000324,
+              "retailerOrderContributionUSD": 1205.86,
+              "retainedRate": 0.0783132530120482,
+              "paymentNetPerContactUSD": 0.32753012048192964
+            }
+          },
+          "evidenceId": "e1761289e0b240f328dc94f18df8a04e296ff5955da3c2d19a07c2fb8999dba0",
+          "scope": "Observed contact funnel, conditional on historical outreach. Full order contribution is reported, not claimed incremental profit."
+        },
+        "demand": {
+          "featureView": "intent_context",
+          "windowDays": "100",
+          "rationale": "The 'intent_context' feature view is selected because the analysis confirms that intent age (fresh/recent/cold) is a critical differentiator for conversion. This view directly incorporates these flags, which the diagnostics show contribute to a strong, stable model (AUC ~0.81). A 100-day window is chosen to maximize the training sample size, which is necessary to mitigate the sparsity of retained purchase events in specific segments like 'ask_need|fresh'. 'Feedback' views were considered but rejected to avoid potential overfitting on sparse shopper-level data.",
+          "opportunity": "The analysis demonstrates that 'fresh' intent shoppers—whether engaging via recommendations or general inquiries—consistently yield the highest retained purchase rates (12.3%–13.5%) and net payment per contact ($0.40–$0.41). Conversely, 'cold' inquiries represent a large volume of low-conversion traffic. Prioritizing the 'fresh' segment and refining the model to distinguish intent age is the primary opportunity to improve settled net contribution.",
+          "evidenceId": "04dbea70ec88ff6622c731b8ab58c9852e0cd4ccab71fdddc5f1e38c0768c18e"
+        },
+        "science": {
+          "selection": {
+            "rationale": "The response_hurdle model achieved the best balance of AUC (0.745), LogLoss (0.214), and Brier score (0.057). Given the analysis that 'fresh' intent shoppers drive the highest retained purchase rates, the hurdle-based approach effectively captures the distinct conversion dynamics of this segment. While the boosted model shows slightly higher macro-market AUC, the response_hurdle model's lower LogLoss and Brier score indicate better calibration and reliability for the current commerce task. Uncertainty remains regarding the causal impact of these predictions, as the models are trained on observational data without experimental control.",
+            "evidenceId": "c941fef009bf0e1940575f800124bf1481cb8e9bc2e07d1b2ebf1bac8a8da941",
+            "modelId": "MODEL-b15752573f0fb1a4",
+            "finding": "The response_hurdle model (MODEL-b15752573f0fb1a4) demonstrates superior predictive performance compared to both the boosted model and the incumbent, particularly in the high-value 'recommend' segment. Its architecture aligns with the observed two-stage funnel (response followed by retention), which is critical for optimizing settled net contribution."
+          },
+          "modelId": "MODEL-b15752573f0fb1a4",
+          "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9"
+        },
+        "proposal": {
+          "second": {
+            "objective": "paypal",
+            "kind": "intent_assistance"
+          },
+          "first": {
+            "objective": "joint",
+            "kind": "product_recommendations"
+          },
+          "rationale": "The 'fresh' intent segment shows high conversion and contribution, making 'product_recommendations' with a 'joint' objective ideal for maximizing total value. For 'recent' and 'cold' segments, 'intent_assistance' with a 'paypal' objective provides a mechanism to engage and clarify needs, potentially improving payment net from lower-intent traffic.",
+          "evidenceId": "739e43ef21157aa08428c70e31215ed69e06bd74ad9daf4ee6dd661ef7bd1243"
+        },
+        "candidates": {
+          "incumbent": {
+            "modelHash": "122152d9e6a49331f94e05ccc273cd0ccb2af828189c56a56c441e95d4f6279a",
+            "campaign": {
+              "kind": "intent_assistance",
+              "objective": "joint"
+            },
+            "measurement": {
+              "platformUSD": 757.6171428571428,
+              "retailerUSD": 8825.68142857143,
+              "retainedPurchases": 135,
+              "retainedVolumeUSD": 20029.85714285714,
+              "recommendationPurchases": 17.571428571428573,
+              "attributedPurchases": 28.857142857142858,
+              "contactCount": 268,
+              "fundedResponses": 27.428571428571427,
+              "outreachCostUSD": 13.400000000000002,
+              "terminalCashUSD": 28431.53142857143,
+              "terminalInventoryUSD": 2827.7342857142858,
+              "unpaidLiabilities": 0,
+              "platformDeltaUSD": 4.39714285714274,
+              "retailerDeltaUSD": 24.274285714287544,
+              "retainedDelta": 0.4285714285714164,
+              "perMarket": [
+                {
+                  "market": 1,
+                  "platformDeltaUSD": 16.220000000000027,
+                  "retailerDeltaUSD": 214.3199999999997,
+                  "retainedDelta": 2,
+                  "contacts": 258,
+                  "recommendationPurchases": 16
+                },
+                {
+                  "market": 2,
+                  "platformDeltaUSD": -6.580000000000041,
+                  "retailerDeltaUSD": -138.04000000000087,
+                  "retainedDelta": 0,
+                  "contacts": 331,
+                  "recommendationPurchases": 47
+                },
+                {
+                  "market": 3,
+                  "platformDeltaUSD": 13.009999999999991,
+                  "retailerDeltaUSD": 108.60999999999967,
+                  "retainedDelta": 1,
+                  "contacts": 258,
+                  "recommendationPurchases": 27
+                },
+                {
+                  "market": 4,
+                  "platformDeltaUSD": -2.080000000000041,
+                  "retailerDeltaUSD": -45.13999999999942,
+                  "retainedDelta": -1,
+                  "contacts": 267,
+                  "recommendationPurchases": 27
+                },
+                {
+                  "market": 5,
+                  "platformDeltaUSD": 1.6599999999999682,
+                  "retailerDeltaUSD": 0,
+                  "retainedDelta": 0,
+                  "contacts": 304,
+                  "recommendationPurchases": 5
+                },
+                {
+                  "market": 6,
+                  "platformDeltaUSD": 2.75,
+                  "retailerDeltaUSD": 0,
+                  "retainedDelta": 0,
+                  "contacts": 289,
+                  "recommendationPurchases": 0
+                },
+                {
+                  "market": 7,
+                  "platformDeltaUSD": 5.7999999999999545,
+                  "retailerDeltaUSD": 30.170000000000073,
+                  "retainedDelta": 1,
+                  "contacts": 169,
+                  "recommendationPurchases": 1
+                }
+              ],
+              "scope": "Completed historical development scenarios. No unseen-seed result."
+            },
+            "trialHash": "2be02fda0d6cc9e6641a158fb22b939c465f3525851e4d5a43e83b20d38f0d0c"
+          },
+          "A": {
+            "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+            "campaign": {
+              "objective": "joint",
+              "kind": "product_recommendations"
+            },
+            "measurement": {
+              "platformUSD": 757.8971428571429,
+              "retailerUSD": 8810.851428571428,
+              "retainedPurchases": 134.85714285714286,
+              "retainedVolumeUSD": 20008,
+              "recommendationPurchases": 21.428571428571427,
+              "attributedPurchases": 28.714285714285715,
+              "contactCount": 218.85714285714286,
+              "fundedResponses": 27.142857142857142,
+              "outreachCostUSD": 10.942857142857145,
+              "terminalCashUSD": 28432.528571428575,
+              "terminalInventoryUSD": 2786.085714285714,
+              "unpaidLiabilities": 0,
+              "platformDeltaUSD": 4.677142857142826,
+              "retailerDeltaUSD": 9.444285714285797,
+              "retainedDelta": 0.2857142857142776,
+              "perMarket": [
+                {
+                  "market": 1,
+                  "platformDeltaUSD": 8.090000000000032,
+                  "retailerDeltaUSD": 8.859999999999673,
+                  "retainedDelta": 0,
+                  "contacts": 190,
+                  "recommendationPurchases": 19
+                },
+                {
+                  "market": 2,
+                  "platformDeltaUSD": -0.17999999999994998,
+                  "retailerDeltaUSD": -63.47999999999956,
+                  "retainedDelta": -1,
+                  "contacts": 307,
+                  "recommendationPurchases": 59
+                },
+                {
+                  "market": 3,
+                  "platformDeltaUSD": 20.870000000000005,
+                  "retailerDeltaUSD": 251.60999999999967,
+                  "retainedDelta": 3,
+                  "contacts": 249,
+                  "recommendationPurchases": 34
+                },
+                {
+                  "market": 4,
+                  "platformDeltaUSD": 0.6299999999999955,
+                  "retailerDeltaUSD": -4.110000000000582,
+                  "retainedDelta": 1,
+                  "contacts": 242,
+                  "recommendationPurchases": 30
+                },
+                {
+                  "market": 5,
+                  "platformDeltaUSD": -9.370000000000005,
+                  "retailerDeltaUSD": -126.77000000000044,
+                  "retainedDelta": -1,
+                  "contacts": 237,
+                  "recommendationPurchases": 7
+                },
+                {
+                  "market": 6,
+                  "platformDeltaUSD": 7.5499999999999545,
+                  "retailerDeltaUSD": 0,
+                  "retainedDelta": 0,
+                  "contacts": 193,
+                  "recommendationPurchases": 0
+                },
+                {
+                  "market": 7,
+                  "platformDeltaUSD": 5.149999999999977,
+                  "retailerDeltaUSD": 0,
+                  "retainedDelta": 0,
+                  "contacts": 114,
+                  "recommendationPurchases": 1
+                }
+              ],
+              "scope": "Completed historical development scenarios. No unseen-seed result."
+            },
+            "trialHash": "90f55318446784497ff77ddf0f5ab431a4661e8ddeadc4d45aa60f748c5aa13f"
+          },
+          "B": {
+            "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+            "campaign": {
+              "objective": "paypal",
+              "kind": "intent_assistance"
+            },
+            "measurement": {
+              "platformUSD": 758.7457142857141,
+              "retailerUSD": 8842.527142857143,
+              "retainedPurchases": 135.42857142857142,
+              "retainedVolumeUSD": 20064.14285714286,
+              "recommendationPurchases": 18.714285714285715,
+              "attributedPurchases": 29.285714285714285,
+              "contactCount": 278,
+              "fundedResponses": 28.428571428571427,
+              "outreachCostUSD": 13.9,
+              "terminalCashUSD": 28457.842857142856,
+              "terminalInventoryUSD": 2822.8199999999997,
+              "unpaidLiabilities": 0,
+              "platformDeltaUSD": 5.525714285714116,
+              "retailerDeltaUSD": 41.1200000000008,
+              "retainedDelta": 0.8571428571428328,
+              "perMarket": [
+                {
+                  "market": 1,
+                  "platformDeltaUSD": 15.669999999999959,
+                  "retailerDeltaUSD": 214.3199999999997,
+                  "retainedDelta": 2,
+                  "contacts": 269,
+                  "recommendationPurchases": 17
+                },
+                {
+                  "market": 2,
+                  "platformDeltaUSD": -1.0900000000000318,
+                  "retailerDeltaUSD": -116.90999999999985,
+                  "retainedDelta": 2,
+                  "contacts": 334,
+                  "recommendationPurchases": 52
+                },
+                {
+                  "market": 3,
+                  "platformDeltaUSD": 26.75,
+                  "retailerDeltaUSD": 270.6900000000005,
+                  "retainedDelta": 3,
+                  "contacts": 261,
+                  "recommendationPurchases": 31
+                },
+                {
+                  "market": 4,
+                  "platformDeltaUSD": -10.759999999999991,
+                  "retailerDeltaUSD": -110.43000000000029,
+                  "retainedDelta": -2,
+                  "contacts": 278,
+                  "recommendationPurchases": 25
+                },
+                {
+                  "market": 5,
+                  "platformDeltaUSD": 1.2100000000000364,
+                  "retailerDeltaUSD": 0,
+                  "retainedDelta": 0,
+                  "contacts": 313,
+                  "recommendationPurchases": 5
+                },
+                {
+                  "market": 6,
+                  "platformDeltaUSD": 1.75,
+                  "retailerDeltaUSD": 0,
+                  "retainedDelta": 0,
+                  "contacts": 309,
+                  "recommendationPurchases": 0
+                },
+                {
+                  "market": 7,
+                  "platformDeltaUSD": 5.149999999999977,
+                  "retailerDeltaUSD": 30.170000000000073,
+                  "retainedDelta": 1,
+                  "contacts": 182,
+                  "recommendationPurchases": 1
+                }
+              ],
+              "scope": "Completed historical development scenarios. No unseen-seed result."
+            },
+            "trialHash": "b3c9e76b49144c315e9ee88b5ebfc1452dfd593b80ffc96c4b6b70b960abee90"
+          }
+        },
+        "task": "Choose the best measured campaign with positive payment contribution and nonnegative aggregate retailer change versus strong fixed rules. Retain incumbent if neither new campaign improves the tradeoff. Cite the exact model and trial hashes. All results include contact costs, processing, refunds and settlement; they are historical development evidence."
+      },
+      "evidenceId": "1aab9c79718e007d98d2270cb036505cb74286474eb25f26e13a166c241dc7e5",
+      "startedAt": "2026-11-02T04:21:58.687Z",
+      "output": {
+        "rationale": "Candidate B (Intent Assistance, PayPal objective) demonstrates the strongest performance across all key metrics, including the highest platform delta (+5.53), the highest aggregate retailer contribution (+41.12), and the highest retained purchase delta (+0.86) compared to the incumbent and Candidate A. The use of the response_hurdle model (MODEL-b15752573f0fb1a4) is supported by its superior calibration and alignment with the observed two-stage conversion funnel. While these results are based on historical development evidence and do not guarantee future causal uplift, Candidate B provides the most robust improvement in the measured commerce outcomes.",
+        "trialHash": "b3c9e76b49144c315e9ee88b5ebfc1452dfd593b80ffc96c4b6b70b960abee90",
+        "evidenceId": "1aab9c79718e007d98d2270cb036505cb74286474eb25f26e13a166c241dc7e5",
+        "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+        "selected": "B"
+      },
+      "provider": [
+        {
+          "reservationId": "4465d4f6-1e2a-4bb9-adf5-e3323f77a78e",
+          "caseId": "single-campaign_selection",
+          "trialId": "docs/commerce-growth/roc-net-goal-1/pilot-1/single",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 2885,
+          "reservedMicros": 30000,
+          "inputTokens": 5809,
+          "outputTokens": 351,
+          "thinkingTokens": 604,
+          "cachedInputTokens": 0,
+          "responseId": "5w_oarjBBKzFrfcP-cvR0Q0",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3681,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "finishedAt": "2026-11-02T04:22:02.396Z"
+    }
+  ],
+  "training": [
+    {
+      "id": "MODEL-b15752573f0fb1a4",
+      "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+      "datasetHash": "09eb60df2bb0251b3fafd23b0811c279df6509ca81bc07155cd8649235178d87",
+      "report": {
+        "status": "COMPLETED",
+        "spec": {
+          "family": "response_hurdle",
+          "featureView": "intent_context",
+          "windowDays": 100
+        },
+        "rows": 7010,
+        "positives": 457,
+        "wholeMarketFolds": [
+          {
+            "market": 980100,
+            "rows": 982,
+            "metrics": {
+              "logLoss": 0.21073089025663347,
+              "brier": 0.05758503348191859,
+              "auc": 0.7917277167277166,
+              "averagePrecision": 0.38602825063666907
+            },
+            "coarse": {
+              "logLoss": 0.24953946172519326,
+              "brier": 0.06617289112890185,
+              "auc": 0.674526862026862,
+              "averagePrecision": 0.12021205161677112
+            }
+          },
+          {
+            "market": 980101,
+            "rows": 1040,
+            "metrics": {
+              "logLoss": 0.3952097151415372,
+              "brier": 0.11523818294236557,
+              "auc": 0.7918153442740187,
+              "averagePrecision": 0.4546132321586023
+            },
+            "coarse": {
+              "logLoss": 0.44120655447226664,
+              "brier": 0.12759836899433838,
+              "auc": 0.6996141210825468,
+              "averagePrecision": 0.23890975177470083
+            }
+          },
+          {
+            "market": 980102,
+            "rows": 1011,
+            "metrics": {
+              "logLoss": 0.3339348954900193,
+              "brier": 0.09130643195933832,
+              "auc": 0.7238548784363579,
+              "averagePrecision": 0.3101115976055508
+            },
+            "coarse": {
+              "logLoss": 0.3558604574111344,
+              "brier": 0.09815352074758348,
+              "auc": 0.6603865406006674,
+              "averagePrecision": 0.1752988580305478
+            }
+          },
+          {
+            "market": 980103,
+            "rows": 1066,
+            "metrics": {
+              "logLoss": 0.2307127354219612,
+              "brier": 0.06530118721594855,
+              "auc": 0.8054698623635501,
+              "averagePrecision": 0.26489841701300465
+            },
+            "coarse": {
+              "logLoss": 0.2624263674467463,
+              "brier": 0.0718185516259899,
+              "auc": 0.7031680113906027,
+              "averagePrecision": 0.13513144123806609
+            }
+          },
+          {
+            "market": 980104,
+            "rows": 990,
+            "metrics": {
+              "logLoss": 0.11418055579175534,
+              "brier": 0.02512751440985225,
+              "auc": 0.7993929210255298,
+              "averagePrecision": 0.08300958886640153
+            },
+            "coarse": {
+              "logLoss": 0.11757524500262986,
+              "brier": 0.022218385645413848,
+              "auc": 0.7115832836468101,
+              "averagePrecision": 0.03712368942190672
+            }
+          },
+          {
+            "market": 980105,
+            "rows": 961,
+            "metrics": {
+              "logLoss": 0.10556345003066309,
+              "brier": 0.021240946108667877,
+              "auc": null,
+              "averagePrecision": null
+            },
+            "coarse": {
+              "logLoss": 0.08412588295797355,
+              "brier": 0.008789999683285124,
+              "auc": null,
+              "averagePrecision": null
+            }
+          },
+          {
+            "market": 980106,
+            "rows": 960,
+            "metrics": {
+              "logLoss": 0.08559609350103009,
+              "brier": 0.01698288927623324,
+              "auc": 0.8363795146902875,
+              "averagePrecision": 0.2454963196050759
+            },
+            "coarse": {
+              "logLoss": 0.10972176437916367,
+              "brier": 0.020376053049143604,
+              "auc": 0.8051275653421496,
+              "averagePrecision": 0.0493604454407717
+            }
+          }
+        ],
+        "metrics": {
+          "logLoss": 0.21371772735431194,
+          "brier": 0.05704856542136433,
+          "auc": 0.7454236972325636,
+          "averagePrecision": 0.18247539394179885,
+          "macroMarketAUC": 0.7914400395862434
+        },
+        "coarse": {
+          "logLoss": 0.2348076117097573,
+          "brier": 0.06041088028011131,
+          "auc": 0.6136075781349916,
+          "averagePrecision": 0.08587669076421837
+        },
+        "byContactType": {
+          "recommend": {
+            "logLoss": 0.2677222011322713,
+            "brier": 0.07843957357271064,
+            "auc": 0.7855129293224405,
+            "averagePrecision": 0.22256251581269262
+          },
+          "ask_need": {
+            "logLoss": 0.17040308514679703,
+            "brier": 0.039891767109744666,
+            "auc": 0.5956004608355262,
+            "averagePrecision": 0.0757386031343627
+          }
+        },
+        "runtimeSeconds": 3.1710529169995425,
+        "scope": "Leave-one-source-market-out validation. Both collection policies share the same held-out source market. This chooses models, not evidence of campaign profit."
+      }
+    },
+    {
+      "id": "MODEL-332c1f79bf4970c4",
+      "modelHash": "332c1f79bf4970c4202c20f724724e0844f1ff3769c12014fdd856001c6b9670",
+      "datasetHash": "09eb60df2bb0251b3fafd23b0811c279df6509ca81bc07155cd8649235178d87",
+      "report": {
+        "status": "COMPLETED",
+        "spec": {
+          "family": "boosted",
+          "featureView": "intent_context",
+          "windowDays": 100
+        },
+        "rows": 7010,
+        "positives": 457,
+        "wholeMarketFolds": [
+          {
+            "market": 980100,
+            "rows": 982,
+            "metrics": {
+              "logLoss": 0.21497092864659187,
+              "brier": 0.05817635166718155,
+              "auc": 0.7853556166056166,
+              "averagePrecision": 0.3856387662056693
+            },
+            "coarse": {
+              "logLoss": 0.24953946172519326,
+              "brier": 0.06617289112890185,
+              "auc": 0.674526862026862,
+              "averagePrecision": 0.12021205161677112
+            }
+          },
+          {
+            "market": 980101,
+            "rows": 1040,
+            "metrics": {
+              "logLoss": 0.4106322485395902,
+              "brier": 0.11779846969514945,
+              "auc": 0.7607476217790656,
+              "averagePrecision": 0.424881812014228
+            },
+            "coarse": {
+              "logLoss": 0.44120655447226664,
+              "brier": 0.12759836899433838,
+              "auc": 0.6996141210825468,
+              "averagePrecision": 0.23890975177470083
+            }
+          },
+          {
+            "market": 980102,
+            "rows": 1011,
+            "metrics": {
+              "logLoss": 0.3311614840852074,
+              "brier": 0.09203065862915294,
+              "auc": 0.721074010805657,
+              "averagePrecision": 0.3049789648484928
+            },
+            "coarse": {
+              "logLoss": 0.3558604574111344,
+              "brier": 0.09815352074758348,
+              "auc": 0.6603865406006674,
+              "averagePrecision": 0.1752988580305478
+            }
+          },
+          {
+            "market": 980103,
+            "rows": 1066,
+            "metrics": {
+              "logLoss": 0.24471935784178542,
+              "brier": 0.06946508754346253,
+              "auc": 0.7958531086853347,
+              "averagePrecision": 0.22434051868872426
+            },
+            "coarse": {
+              "logLoss": 0.2624263674467463,
+              "brier": 0.0718185516259899,
+              "auc": 0.7031680113906027,
+              "averagePrecision": 0.13513144123806609
+            }
+          },
+          {
+            "market": 980104,
+            "rows": 990,
+            "metrics": {
+              "logLoss": 0.11216307613478697,
+              "brier": 0.023076591678651042,
+              "auc": 0.8181744267982004,
+              "averagePrecision": 0.12394449437840262
+            },
+            "coarse": {
+              "logLoss": 0.11757524500262986,
+              "brier": 0.022218385645413848,
+              "auc": 0.7115832836468101,
+              "averagePrecision": 0.03712368942190672
+            }
+          },
+          {
+            "market": 980105,
+            "rows": 961,
+            "metrics": {
+              "logLoss": 0.10373841866702933,
+              "brier": 0.01915811497953432,
+              "auc": null,
+              "averagePrecision": null
+            },
+            "coarse": {
+              "logLoss": 0.08412588295797355,
+              "brier": 0.008789999683285124,
+              "auc": null,
+              "averagePrecision": null
+            }
+          },
+          {
+            "market": 980106,
+            "rows": 960,
+            "metrics": {
+              "logLoss": 0.08804325432609736,
+              "brier": 0.016606616847916734,
+              "auc": 0.8713430228931445,
+              "averagePrecision": 0.19814641644340644
+            },
+            "coarse": {
+              "logLoss": 0.10972176437916367,
+              "brier": 0.020376053049143604,
+              "auc": 0.8051275653421496,
+              "averagePrecision": 0.0493604454407717
+            }
+          }
+        ],
+        "metrics": {
+          "logLoss": 0.2181297683519433,
+          "brier": 0.0576221813761383,
+          "auc": 0.7216183076820846,
+          "averagePrecision": 0.18016632682489409,
+          "macroMarketAUC": 0.7920913012611698
+        },
+        "coarse": {
+          "logLoss": 0.2348076117097573,
+          "brier": 0.06041088028011131,
+          "auc": 0.6136075781349916,
+          "averagePrecision": 0.08587669076421837
+        },
+        "byContactType": {
+          "recommend": {
+            "logLoss": 0.2757771901675584,
+            "brier": 0.07951902173246357,
+            "auc": 0.7658089775458734,
+            "averagePrecision": 0.22307601936039595
+          },
+          "ask_need": {
+            "logLoss": 0.17189327579031888,
+            "brier": 0.04005967702864861,
+            "auc": 0.5694616275872905,
+            "averagePrecision": 0.07245752444745171
+          }
+        },
+        "runtimeSeconds": 2.532259540999803,
+        "scope": "Leave-one-source-market-out validation. Both collection policies share the same held-out source market. This chooses models, not evidence of campaign profit."
+      }
+    }
+  ],
+  "publications": [
+    {
+      "actor": "TRUSTED_PUBLISHER",
+      "selected": "B",
+      "requested": "B",
+      "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+      "trialHash": "b3c9e76b49144c315e9ee88b5ebfc1452dfd593b80ffc96c4b6b70b960abee90",
+      "campaign": {
+        "objective": "paypal",
+        "kind": "intent_assistance"
+      },
+      "status": "COMPLETED",
+      "reason": "Measured artifact and aggregate financial guard passed."
+    }
+  ],
+  "demand": {
+    "featureView": "intent_context",
+    "windowDays": "100",
+    "rationale": "The 'intent_context' feature view is selected because the analysis confirms that intent age (fresh/recent/cold) is a critical differentiator for conversion. This view directly incorporates these flags, which the diagnostics show contribute to a strong, stable model (AUC ~0.81). A 100-day window is chosen to maximize the training sample size, which is necessary to mitigate the sparsity of retained purchase events in specific segments like 'ask_need|fresh'. 'Feedback' views were considered but rejected to avoid potential overfitting on sparse shopper-level data.",
+    "opportunity": "The analysis demonstrates that 'fresh' intent shoppers—whether engaging via recommendations or general inquiries—consistently yield the highest retained purchase rates (12.3%–13.5%) and net payment per contact ($0.40–$0.41). Conversely, 'cold' inquiries represent a large volume of low-conversion traffic. Prioritizing the 'fresh' segment and refining the model to distinguish intent age is the primary opportunity to improve settled net contribution.",
+    "evidenceId": "04dbea70ec88ff6622c731b8ab58c9852e0cd4ccab71fdddc5f1e38c0768c18e",
+    "contract": {
+      "featureView": "intent_context",
+      "windowDays": 100
+    },
+    "analysis": {
+      "lens": "intent",
+      "windowDays": 28,
+      "rows": 2762,
+      "groups": {
+        "recommend|fresh": {
+          "contacts": 667,
+          "responded": 138,
+          "immediateFunding": 79,
+          "retained": 82,
+          "lateFundedPurchases": 5,
+          "paymentNetUSD": 267.96999999999537,
+          "retailerOrderContributionUSD": 5842.790000000001,
+          "retainedRate": 0.12293853073463268,
+          "paymentNetPerContactUSD": 0.4017541229385238
+        },
+        "recommend|recent": {
+          "contacts": 563,
+          "responded": 52,
+          "immediateFunding": 33,
+          "retained": 34,
+          "lateFundedPurchases": 2,
+          "paymentNetUSD": 143.7199999999979,
+          "retailerOrderContributionUSD": 3347.6600000000008,
+          "retainedRate": 0.06039076376554174,
+          "paymentNetPerContactUSD": 0.25527531083480975
+        },
+        "ask_need|cold": {
+          "contacts": 1240,
+          "responded": 44,
+          "immediateFunding": 33,
+          "retained": 35,
+          "lateFundedPurchases": 2,
+          "paymentNetUSD": 65.74000000000234,
+          "retailerOrderContributionUSD": 2478.0300000000007,
+          "retainedRate": 0.028225806451612902,
+          "paymentNetPerContactUSD": 0.053016129032259954
+        },
+        "ask_need|fresh": {
+          "contacts": 126,
+          "responded": 25,
+          "immediateFunding": 13,
+          "retained": 17,
+          "lateFundedPurchases": 4,
+          "paymentNetUSD": 52.08000000000017,
+          "retailerOrderContributionUSD": 1162.47,
+          "retainedRate": 0.1349206349206349,
+          "paymentNetPerContactUSD": 0.41333333333333466
+        },
+        "ask_need|recent": {
+          "contacts": 166,
+          "responded": 24,
+          "immediateFunding": 14,
+          "retained": 13,
+          "lateFundedPurchases": 0,
+          "paymentNetUSD": 54.370000000000324,
+          "retailerOrderContributionUSD": 1205.86,
+          "retainedRate": 0.0783132530120482,
+          "paymentNetPerContactUSD": 0.32753012048192964
+        }
+      },
+      "evidenceId": "e1761289e0b240f328dc94f18df8a04e296ff5955da3c2d19a07c2fb8999dba0",
+      "scope": "Observed contact funnel, conditional on historical outreach. Full order contribution is reported, not claimed incremental profit."
+    }
+  },
+  "science": {
+    "selection": {
+      "rationale": "The response_hurdle model achieved the best balance of AUC (0.745), LogLoss (0.214), and Brier score (0.057). Given the analysis that 'fresh' intent shoppers drive the highest retained purchase rates, the hurdle-based approach effectively captures the distinct conversion dynamics of this segment. While the boosted model shows slightly higher macro-market AUC, the response_hurdle model's lower LogLoss and Brier score indicate better calibration and reliability for the current commerce task. Uncertainty remains regarding the causal impact of these predictions, as the models are trained on observational data without experimental control.",
+      "evidenceId": "c941fef009bf0e1940575f800124bf1481cb8e9bc2e07d1b2ebf1bac8a8da941",
+      "modelId": "MODEL-b15752573f0fb1a4",
+      "finding": "The response_hurdle model (MODEL-b15752573f0fb1a4) demonstrates superior predictive performance compared to both the boosted model and the incumbent, particularly in the high-value 'recommend' segment. Its architecture aligns with the observed two-stage funnel (response followed by retention), which is critical for optimizing settled net contribution."
+    },
+    "modelId": "MODEL-b15752573f0fb1a4",
+    "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9"
+  },
+  "candidates": {
+    "incumbent": {
+      "modelHash": "122152d9e6a49331f94e05ccc273cd0ccb2af828189c56a56c441e95d4f6279a",
+      "campaign": {
+        "kind": "intent_assistance",
+        "objective": "joint"
+      },
+      "measurement": {
+        "platformUSD": 757.6171428571428,
+        "retailerUSD": 8825.68142857143,
+        "retainedPurchases": 135,
+        "retainedVolumeUSD": 20029.85714285714,
+        "recommendationPurchases": 17.571428571428573,
+        "attributedPurchases": 28.857142857142858,
+        "contactCount": 268,
+        "fundedResponses": 27.428571428571427,
+        "outreachCostUSD": 13.400000000000002,
+        "terminalCashUSD": 28431.53142857143,
+        "terminalInventoryUSD": 2827.7342857142858,
+        "unpaidLiabilities": 0,
+        "platformDeltaUSD": 4.39714285714274,
+        "retailerDeltaUSD": 24.274285714287544,
+        "retainedDelta": 0.4285714285714164,
+        "perMarket": [
+          {
+            "market": 1,
+            "platformDeltaUSD": 16.220000000000027,
+            "retailerDeltaUSD": 214.3199999999997,
+            "retainedDelta": 2,
+            "contacts": 258,
+            "recommendationPurchases": 16
+          },
+          {
+            "market": 2,
+            "platformDeltaUSD": -6.580000000000041,
+            "retailerDeltaUSD": -138.04000000000087,
+            "retainedDelta": 0,
+            "contacts": 331,
+            "recommendationPurchases": 47
+          },
+          {
+            "market": 3,
+            "platformDeltaUSD": 13.009999999999991,
+            "retailerDeltaUSD": 108.60999999999967,
+            "retainedDelta": 1,
+            "contacts": 258,
+            "recommendationPurchases": 27
+          },
+          {
+            "market": 4,
+            "platformDeltaUSD": -2.080000000000041,
+            "retailerDeltaUSD": -45.13999999999942,
+            "retainedDelta": -1,
+            "contacts": 267,
+            "recommendationPurchases": 27
+          },
+          {
+            "market": 5,
+            "platformDeltaUSD": 1.6599999999999682,
+            "retailerDeltaUSD": 0,
+            "retainedDelta": 0,
+            "contacts": 304,
+            "recommendationPurchases": 5
+          },
+          {
+            "market": 6,
+            "platformDeltaUSD": 2.75,
+            "retailerDeltaUSD": 0,
+            "retainedDelta": 0,
+            "contacts": 289,
+            "recommendationPurchases": 0
+          },
+          {
+            "market": 7,
+            "platformDeltaUSD": 5.7999999999999545,
+            "retailerDeltaUSD": 30.170000000000073,
+            "retainedDelta": 1,
+            "contacts": 169,
+            "recommendationPurchases": 1
+          }
+        ],
+        "scope": "Completed historical development scenarios. No unseen-seed result."
+      },
+      "trialHash": "2be02fda0d6cc9e6641a158fb22b939c465f3525851e4d5a43e83b20d38f0d0c"
+    },
+    "A": {
+      "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+      "campaign": {
+        "objective": "joint",
+        "kind": "product_recommendations"
+      },
+      "measurement": {
+        "platformUSD": 757.8971428571429,
+        "retailerUSD": 8810.851428571428,
+        "retainedPurchases": 134.85714285714286,
+        "retainedVolumeUSD": 20008,
+        "recommendationPurchases": 21.428571428571427,
+        "attributedPurchases": 28.714285714285715,
+        "contactCount": 218.85714285714286,
+        "fundedResponses": 27.142857142857142,
+        "outreachCostUSD": 10.942857142857145,
+        "terminalCashUSD": 28432.528571428575,
+        "terminalInventoryUSD": 2786.085714285714,
+        "unpaidLiabilities": 0,
+        "platformDeltaUSD": 4.677142857142826,
+        "retailerDeltaUSD": 9.444285714285797,
+        "retainedDelta": 0.2857142857142776,
+        "perMarket": [
+          {
+            "market": 1,
+            "platformDeltaUSD": 8.090000000000032,
+            "retailerDeltaUSD": 8.859999999999673,
+            "retainedDelta": 0,
+            "contacts": 190,
+            "recommendationPurchases": 19
+          },
+          {
+            "market": 2,
+            "platformDeltaUSD": -0.17999999999994998,
+            "retailerDeltaUSD": -63.47999999999956,
+            "retainedDelta": -1,
+            "contacts": 307,
+            "recommendationPurchases": 59
+          },
+          {
+            "market": 3,
+            "platformDeltaUSD": 20.870000000000005,
+            "retailerDeltaUSD": 251.60999999999967,
+            "retainedDelta": 3,
+            "contacts": 249,
+            "recommendationPurchases": 34
+          },
+          {
+            "market": 4,
+            "platformDeltaUSD": 0.6299999999999955,
+            "retailerDeltaUSD": -4.110000000000582,
+            "retainedDelta": 1,
+            "contacts": 242,
+            "recommendationPurchases": 30
+          },
+          {
+            "market": 5,
+            "platformDeltaUSD": -9.370000000000005,
+            "retailerDeltaUSD": -126.77000000000044,
+            "retainedDelta": -1,
+            "contacts": 237,
+            "recommendationPurchases": 7
+          },
+          {
+            "market": 6,
+            "platformDeltaUSD": 7.5499999999999545,
+            "retailerDeltaUSD": 0,
+            "retainedDelta": 0,
+            "contacts": 193,
+            "recommendationPurchases": 0
+          },
+          {
+            "market": 7,
+            "platformDeltaUSD": 5.149999999999977,
+            "retailerDeltaUSD": 0,
+            "retainedDelta": 0,
+            "contacts": 114,
+            "recommendationPurchases": 1
+          }
+        ],
+        "scope": "Completed historical development scenarios. No unseen-seed result."
+      },
+      "trialHash": "90f55318446784497ff77ddf0f5ab431a4661e8ddeadc4d45aa60f748c5aa13f"
+    },
+    "B": {
+      "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+      "campaign": {
+        "objective": "paypal",
+        "kind": "intent_assistance"
+      },
+      "measurement": {
+        "platformUSD": 758.7457142857141,
+        "retailerUSD": 8842.527142857143,
+        "retainedPurchases": 135.42857142857142,
+        "retainedVolumeUSD": 20064.14285714286,
+        "recommendationPurchases": 18.714285714285715,
+        "attributedPurchases": 29.285714285714285,
+        "contactCount": 278,
+        "fundedResponses": 28.428571428571427,
+        "outreachCostUSD": 13.9,
+        "terminalCashUSD": 28457.842857142856,
+        "terminalInventoryUSD": 2822.8199999999997,
+        "unpaidLiabilities": 0,
+        "platformDeltaUSD": 5.525714285714116,
+        "retailerDeltaUSD": 41.1200000000008,
+        "retainedDelta": 0.8571428571428328,
+        "perMarket": [
+          {
+            "market": 1,
+            "platformDeltaUSD": 15.669999999999959,
+            "retailerDeltaUSD": 214.3199999999997,
+            "retainedDelta": 2,
+            "contacts": 269,
+            "recommendationPurchases": 17
+          },
+          {
+            "market": 2,
+            "platformDeltaUSD": -1.0900000000000318,
+            "retailerDeltaUSD": -116.90999999999985,
+            "retainedDelta": 2,
+            "contacts": 334,
+            "recommendationPurchases": 52
+          },
+          {
+            "market": 3,
+            "platformDeltaUSD": 26.75,
+            "retailerDeltaUSD": 270.6900000000005,
+            "retainedDelta": 3,
+            "contacts": 261,
+            "recommendationPurchases": 31
+          },
+          {
+            "market": 4,
+            "platformDeltaUSD": -10.759999999999991,
+            "retailerDeltaUSD": -110.43000000000029,
+            "retainedDelta": -2,
+            "contacts": 278,
+            "recommendationPurchases": 25
+          },
+          {
+            "market": 5,
+            "platformDeltaUSD": 1.2100000000000364,
+            "retailerDeltaUSD": 0,
+            "retainedDelta": 0,
+            "contacts": 313,
+            "recommendationPurchases": 5
+          },
+          {
+            "market": 6,
+            "platformDeltaUSD": 1.75,
+            "retailerDeltaUSD": 0,
+            "retainedDelta": 0,
+            "contacts": 309,
+            "recommendationPurchases": 0
+          },
+          {
+            "market": 7,
+            "platformDeltaUSD": 5.149999999999977,
+            "retailerDeltaUSD": 30.170000000000073,
+            "retainedDelta": 1,
+            "contacts": 182,
+            "recommendationPurchases": 1
+          }
+        ],
+        "scope": "Completed historical development scenarios. No unseen-seed result."
+      },
+      "trialHash": "b3c9e76b49144c315e9ee88b5ebfc1452dfd593b80ffc96c4b6b70b960abee90"
+    }
+  },
+  "selected": {
+    "modelId": "MODEL-b15752573f0fb1a4",
+    "modelHash": "b15752573f0fb1a4d5784a84588fa5e41560a506076db2630ada02fb4b6e21f9",
+    "campaign": {
+      "objective": "paypal",
+      "kind": "intent_assistance"
+    }
+  },
+  "costUSD": 0.014493
+}

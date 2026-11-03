@@ -1,0 +1,177 @@
+{
+  "createdAt": "2026-11-01T03:17:00.422Z",
+  "version": "commerce-growth-1",
+  "contract": {
+    "version": "commerce-growth-1",
+    "approvedAt": "2026-11-01T03:09:13.726233+00:00",
+    "approval": "User: Add the separate customer-growth scenario",
+    "goal": "At least2x strong fixed settled modeled platform net; preserve merchant contribution;3x stretch",
+    "scenarioStatus": "APPROVED_IMPLEMENTING",
+    "kernelSourceHash": "52af591f7a5b5454448d11248e86d2e4324d9504eccf7d9525773fbfac822cec",
+    "rules": {
+      "customers": 100,
+      "marketDays": 100,
+      "sharedWarmupDays": 30,
+      "clearingDays": 26,
+      "outreachCostCents": 5,
+      "dailyContactLimit": 10,
+      "customerContactGapDays": 7,
+      "campaignBudgetCents": 5000,
+      "marketingConsentProbability": 0.8,
+      "consentRevocationProbability": 0.08,
+      "consentRevocationDay": 60,
+      "falseSignalProbability": 0.02,
+      "askResponseFactor": 0.85,
+      "recommendationResponseFactor": 1,
+      "needSearchSignalProbability": 0.65,
+      "bayesianResponsePrior": {
+        "success": 1,
+        "failure": 3
+      },
+      "bayesianUncertaintyWeight": 0.5,
+      "failureCircuitContacts": 20,
+      "failureCircuitProbeDays": 7
+    },
+    "regimes": {
+      "ordinary": {
+        "baseScenario": "ordinary",
+        "organicProbability": 0.45,
+        "responseProbability": 0.55,
+        "needSignalProbability": 0.7
+      },
+      "discovery": {
+        "baseScenario": "scarce_stock",
+        "organicProbability": 0.2,
+        "responseProbability": 0.75,
+        "needSignalProbability": 0.7
+      },
+      "reactivation": {
+        "baseScenario": "concentrated_needs",
+        "organicProbability": 0.2,
+        "responseProbability": 0.65,
+        "needSignalProbability": 0.4
+      },
+      "preference_shift": {
+        "baseScenario": "preference_shift",
+        "organicProbability": 0.35,
+        "responseProbability": 0.65,
+        "needSignalProbability": 0.7
+      },
+      "low_response": {
+        "baseScenario": "supplier_delay",
+        "organicProbability": 0.45,
+        "responseProbability": 0.15,
+        "needSignalProbability": 0.7
+      },
+      "zero_response": {
+        "baseScenario": "mixed_deadlines",
+        "organicProbability": 0.45,
+        "responseProbability": 0,
+        "needSignalProbability": 0.7
+      },
+      "well_served": {
+        "baseScenario": "ordinary",
+        "organicProbability": 0.9,
+        "responseProbability": 0.65,
+        "needSignalProbability": 0.7
+      }
+    },
+    "assumptions": [
+      "Authored, uncalibrated consumer response parameters; not PayPal customer data",
+      "All latent needs generated once from the existing seeded request generator; no extra needs or repeated durable-goods subscriptions",
+      "All needs are organic during shared warmup; discovery changes after day30 only",
+      "No new shopper money, cross-buyer transfers, credit, or price changes",
+      "Same original wallet, wage, household expense, product, inventory, fee, refund, and supplier dynamics",
+      "Contact requires current marketing consent; a response reveals a conditional request, and capture still requires its own existing-funds authorization",
+      "Outreach cost paid from the platform existing cash, deducted from modeled net",
+      "Equal weights across all seven regimes, including negative controls",
+      "All comparators share parsed observations, candidate products, outreach limits and legal payment tools",
+      "Interest signals identify a viewed catalogue SKU, not proof of an active need; false browsing signals are generated independently"
+    ],
+    "developmentSeeds": {
+      "ordinary": 980100,
+      "discovery": 980101,
+      "reactivation": 980102,
+      "preference_shift": 980103,
+      "low_response": 980104,
+      "zero_response": 980105,
+      "well_served": 980106
+    },
+    "advancement": "Freeze behavior before comparisons. Rebuild strong no-outreach and outreach-aware fixed rules plus a local learned controller. Derive a new financial bound from these exact markets and opening balances. No paid LLM trial or held-out opening until an observed-only candidate demonstrates feasible2x headroom. Old reachability thresholds do not automatically transfer to the new cohort.",
+    "nativePaymentCallsAllowed": false,
+    "paidModelCallsAtThisStage": false,
+    "originalEconomyPreserved": true
+  },
+  "cases": [
+    {
+      "regime": "ordinary",
+      "seed": 980100
+    },
+    {
+      "regime": "discovery",
+      "seed": 980101
+    },
+    {
+      "regime": "reactivation",
+      "seed": 980102
+    },
+    {
+      "regime": "preference_shift",
+      "seed": 980103
+    },
+    {
+      "regime": "low_response",
+      "seed": 980104
+    },
+    {
+      "regime": "zero_response",
+      "seed": 980105
+    },
+    {
+      "regime": "well_served",
+      "seed": 980106
+    }
+  ],
+  "policies": [
+    {
+      "id": "no_outreach",
+      "mode": "none"
+    },
+    {
+      "id": "fixed_coverage",
+      "mode": "coverage"
+    },
+    {
+      "id": "fixed_intent",
+      "mode": "intent"
+    },
+    {
+      "id": "fixed_rfm",
+      "mode": "rfm"
+    },
+    {
+      "id": "fixed_stock",
+      "mode": "stock"
+    },
+    {
+      "id": "learned_discovery",
+      "mode": "bayesian"
+    }
+  ],
+  "sourceHashes": {
+    "docs/commerce-growth/contract.json": "31b6c951ceb2028a387bd7ba57173394243843e11e9098fd9f6a87753dcdb09d",
+    "scripts/commerce-growth/kernel.mjs": "3ac01579b675c4a2162f11534d108082e386d4d037d451a4ce15d5bfb9aa0993",
+    "scripts/commerce-growth/environment.mjs": "2dd15576366e38741d6dde1f2cd1bd748a8da485e815bb0d7a02e310d552a0a3",
+    "scripts/commerce-growth/policies.mjs": "0d93abb0ac9f460989002aff9a12c7e8660d62f18b16095f221ee4faedb33603",
+    "scripts/commerce-growth/evaluate.mjs": "43777de48ffa7f1df2e819288b5dd4b97f972d01c716dcee8b4b51c7d2cf522e",
+    "scripts/commerce-growth/benchmark.mjs": "e5febd0e7039fecacd7e09cbcf17f5bb0255a43a4694039a211df1adca5fa0e6",
+    "scripts/commerce-deadlines/environment.mjs": "52af591f7a5b5454448d11248e86d2e4324d9504eccf7d9525773fbfac822cec",
+    "scripts/commerce-deadlines/suppliers.mjs": "fe8fb8c471383492ea8a28e77f4e73894b7d0a87ceb835246743337a11cba682",
+    "scripts/commerce-deadlines/policies.mjs": "c1df75eac6bc1388c337b0f44dd825343479833ffc52cc6b4b49841693c81d36",
+    "scripts/commerce-deadlines/evaluate.mjs": "44456586804dde0b4d7b2d446744400f6de2b8903a1a1679c72ad2de68bdd09b",
+    "scripts/behavior-v4/catalog.mjs": "d28989a7cf1e95ec751d74e3136574d0e30886f997cfada9a295a91588fd80a8",
+    "scripts/marketing/economy.mjs": "cefe444cda73462e32a5ba5f00a4fb58803b6584fd183f41a649fbcb2e9636a1"
+  },
+  "scope": "Seven equally weighted development regimes. Rebuilt no-outreach, four outreach-aware fixed baselines and one observed-data Bayesian workflow. Every arm has identical latent needs, consent, funding, catalog, costs, limits and shared warmup. Fixed-fast commerce fulfillment is common to isolate marketing discovery. No final holdout opened, no LLM call and no native payment.",
+  "selection": "Choose highest mean settled platform net among solvent fixed workflows. Require2x and nonnegative retailer, wholesaler, manufacturer and terminal cash changes, <=110% terminal inventory, no unpaid liabilities, preserved per-retailer contribution, and a valid financial bound before any paid agent trial. More fulfillment-rule comparisons are required before a successful candidate can be promoted to held-out testing."
+}

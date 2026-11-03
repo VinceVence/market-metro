@@ -1,0 +1,1386 @@
+{
+  "createdAt": "2026-10-31T11:50:36.527Z",
+  "settings": {
+    "customers": 100,
+    "days": 365,
+    "campaignStop": 355,
+    "budgetCents": 23929
+  },
+  "training": [
+    {
+      "scenario": "steady",
+      "seed": 550100
+    },
+    {
+      "scenario": "rival_sale",
+      "seed": 550101
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 550102
+    },
+    {
+      "scenario": "returns_wave",
+      "seed": 550103
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 550104
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 550105
+    }
+  ],
+  "validation": [
+    {
+      "seed": 857200,
+      "scenario": "steady"
+    },
+    {
+      "seed": 857201,
+      "scenario": "rival_sale"
+    },
+    {
+      "seed": 857202,
+      "scenario": "budget_squeeze"
+    },
+    {
+      "seed": 857203,
+      "scenario": "returns_wave"
+    },
+    {
+      "seed": 857204,
+      "scenario": "preference_shift"
+    },
+    {
+      "seed": 857205,
+      "scenario": "supply_delay"
+    },
+    {
+      "seed": 857206,
+      "scenario": "steady"
+    },
+    {
+      "seed": 857207,
+      "scenario": "rival_sale"
+    },
+    {
+      "seed": 857208,
+      "scenario": "budget_squeeze"
+    },
+    {
+      "seed": 857209,
+      "scenario": "returns_wave"
+    },
+    {
+      "seed": 857210,
+      "scenario": "preference_shift"
+    },
+    {
+      "seed": 857211,
+      "scenario": "supply_delay"
+    }
+  ],
+  "reference": {
+    "id": "fixed-category_interest",
+    "kind": "discovery",
+    "business": {
+      "demand": {
+        "stockDays": [
+          14,
+          14,
+          14
+        ],
+        "windowDays": 14,
+        "useLostDemand": false,
+        "topK": 4,
+        "retrainDays": 14
+      },
+      "economics": {
+        "pricePct": [
+          0,
+          0,
+          0
+        ],
+        "merchantRail": "auto",
+        "supplierRail": "auto"
+      },
+      "lifecycle": {
+        "marketing": "weekly_featured",
+        "subscriptions": true,
+        "interval": "observed",
+        "minimumRepeat": 2,
+        "discountPct": 0
+      }
+    },
+    "discovery": "category_interest",
+    "intervalDays": 7,
+    "modelName": "ridge",
+    "thresholdCents": 0
+  },
+  "configs": [
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-0",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 1,
+        "interest": 0,
+        "priceFit": 0,
+        "value": 0,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-1",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 1,
+        "interest": 0,
+        "priceFit": 0,
+        "value": 0.5,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-2",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 1,
+        "interest": 0,
+        "priceFit": 1,
+        "value": 0,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-3",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 1,
+        "interest": 0,
+        "priceFit": 1,
+        "value": 0.5,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-4",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 1,
+        "interest": 1,
+        "priceFit": 0,
+        "value": 0,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-5",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 1,
+        "interest": 1,
+        "priceFit": 0,
+        "value": 0.5,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-6",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 1,
+        "interest": 1,
+        "priceFit": 1,
+        "value": 0,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-7",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 1,
+        "interest": 1,
+        "priceFit": 1,
+        "value": 0.5,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-8",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 3,
+        "interest": 0,
+        "priceFit": 0,
+        "value": 0,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-9",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 3,
+        "interest": 0,
+        "priceFit": 0,
+        "value": 0.5,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-10",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 3,
+        "interest": 0,
+        "priceFit": 1,
+        "value": 0,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-11",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 3,
+        "interest": 0,
+        "priceFit": 1,
+        "value": 0.5,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-12",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 3,
+        "interest": 1,
+        "priceFit": 0,
+        "value": 0,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-13",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 3,
+        "interest": 1,
+        "priceFit": 0,
+        "value": 0.5,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-14",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 3,
+        "interest": 1,
+        "priceFit": 1,
+        "value": 0,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "coverage",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "coverage-15",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "coverage": {
+        "novelty": 3,
+        "interest": 1,
+        "priceFit": 1,
+        "value": 0.5,
+        "cadence": 7
+      },
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "expert-16",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "expert": "catalog_rotation",
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "expert-17",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "expert": "adjacent_bundle",
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            5,
+            5
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "expert-18",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "expert": "catalog_rotation",
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            5,
+            5
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "expert-19",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "expert": "adjacent_bundle",
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            10,
+            10
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "expert-20",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "expert": "catalog_rotation",
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            10,
+            10
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "expert-21",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "expert": "adjacent_bundle",
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            0,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "expert-22",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "expert": "catalog_rotation",
+      "trimDays": 56,
+      "riskPricing": true
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            0,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "expert-23",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 335,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      },
+      "expert": "adjacent_bundle",
+      "trimDays": 56,
+      "riskPricing": true
+    }
+  ],
+  "goalCostUSD": 0.204728,
+  "hashes": {
+    "scripts/commerce-economy-v5/engine.mjs": "0f53b513cad90ba9a5bc0c389ac6d5a05318a74414a1fe5d622e2cff87695913",
+    "scripts/commerce-economy-v5/operations.mjs": "497d39303192b84bef382032f7b5643ff6c8042acf72cd3ca08a9f5a233b323e",
+    "scripts/commerce-economy-v5/network.mjs": "a80b225e6f6130656849a4ed881075eb1fdc5815b9a74fb24b1631eb51730c24",
+    "scripts/commerce-economy-v5/policies.mjs": "ac505ea2eba47972578587cbd87575886c2d2b7dc73776a723d6123b51e38ccb",
+    "scripts/commerce-economy-v5/learning/evaluation.mjs": "39a5aa48ea2e42a1fe37455a464779addf054c46536a5e03d3513a135fe1e56e",
+    "scripts/commerce-economy-v5/learning/experts.mjs": "5e65571b6ea98fbaeebf83c02f5937aef18d6b4c86dce1b3e7bc7498d128905b",
+    "scripts/commerce-economy-v5/learning/coverage-policy.mjs": "a04c25f2f3265661fcf8a89c18041f7c7e0670141739160b389b6a886003a172",
+    "scripts/commerce-economy-v5/learning/coverage-search.mjs": "49da84cace0deb8bae652a7cbb46c5595ce991b223dbf8009db05c17bbb6adfe"
+  },
+  "scope": "Separate annual research trial. Economic response, fees and balance equations remain frozen. Both arms get equal daily-equivalent marketing budgets,335 scored days and14-day return followup. Existing100-day failures remain authoritative for that horizon. New controls only call existing legal price and replenishment-assortment interfaces.24 candidates; no new model calls. A catalogue-rotation policy with fixed business settings is an additional strong comparator.",
+  "selection": "Select the strongest financially feasible fixed comparator on development before validation. Freeze at most3 feasible candidates before opening validation. Require2x after goal design cost, aggregate financial gates and every upstream party nonnegative to open a final target test. This is not a claim for100-day economies.",
+  "hash": "e820bb8930cb0f894a4f502addc9b21b512bcc10c64cdb4f2ca32dcf1788df87"
+}

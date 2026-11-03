@@ -6,7 +6,7 @@ import {createLayout,createWalker,requestDestination,updateWalker,homePoint,shop
 const shirtColors=[0xc67f5b,0x648ca5,0xc6a855,0x8679a8,0x6e9572,0xb17b91];
 const skins=[0xe0b38e,0xc59068,0x9b6a4d,0xedc19b,0xb8835c,0xd1a47d];
 
-export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,autoFit=false}={}){
+export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,autoFit=false,night=false}={}){
   let frame=null,layout=createLayout(8),lastRun=null,lastTick=-1,scene,renderer,camera,controls,world,raf=0;
   let hovered=null,selected=null,pointerInside=false,dragging=false,down=null,lastTime=0,statsTime=0,rotationTarget=null;
   const pointer=new THREE.Vector2(),ray=new THREE.Raycaster(),actors=new Map(),pickables=[],labels=[],materials=new Map();
@@ -158,7 +158,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     tooltip.style.transform='translate('+x+'px,'+y+'px)';parent.dataset.hoverType=hovered.type;
   }
   function setFrame(next){
-    const visualTick=next.simTime?.elapsedHours??next.tick;
+    const visualTick=next.replayTick??next.simTime?.elapsedHours??next.tick;
     const changed=lastRun!==next.runId,newDay=lastTick!==visualTick;frame=next;
     if(!renderer||parent.dataset.renderState!=='ready')return;
     if(changed){clearWorld();layout=createLayout(next.merchantCount);environment();cameraHome();lastRun=next.runId;}
@@ -193,7 +193,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     lastTick=visualTick;parent.dataset.actorCount=String(actors.size);
   }
   try{
-    scene=new THREE.Scene();scene.background=new THREE.Color(0xdfe8ed);scene.fog=new THREE.Fog(0xdfe8ed,160,255);
+    const sky=night?0x0a1b33:0xdfe8ed;scene=new THREE.Scene();scene.background=new THREE.Color(sky);scene.fog=new THREE.Fog(sky,160,255);
     renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));
     renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.93;
     renderer.domElement.tabIndex=0;renderer.domElement.setAttribute('aria-label','3D market. Drag to pan, right-drag to orbit, scroll to zoom. Arrow keys pan; R rotates; Home resets.');
@@ -205,7 +205,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     scene.add(new THREE.HemisphereLight(0xe5f1ff,0xb5a58b,2.0));
     const sun=new THREE.DirectionalLight(0xffedd0,2.6);sun.position.set(-35,65,35);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
     Object.assign(sun.shadow.camera,{left:-65,right:65,top:55,bottom:-55,near:1,far:160});sun.shadow.bias=-.0003;sun.shadow.normalBias=.025;sun.shadow.radius=4;scene.add(sun);
-    const floor=mesh(scene,new THREE.PlaneGeometry(600,600),mat(0xdfe8ed),0,-1.2,0);floor.rotation.x=-Math.PI/2;floor.castShadow=false;
+    const floor=mesh(scene,new THREE.PlaneGeometry(600,600),mat(night?0x132d4b:0xdfe8ed),0,-1.2,0);floor.rotation.x=-Math.PI/2;floor.castShadow=false;
     hoverRing=ring(0x83bb9b);selectRing=ring(0xe2b765);environment();cameraHome();
     const observer=new ResizeObserver(()=>resize(false));observer.observe(parent);
     renderer.domElement.addEventListener('pointermove',e=>{
@@ -227,7 +227,8 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();parent.dataset.renderState='context-lost';tooltip.hidden=false;tooltip.querySelector('strong').textContent='3D view paused';tooltip.querySelector('span').textContent='Graphics context interrupted. Reload to restore the view; saved data is safe.';});
     renderer.domElement.addEventListener('webglcontextrestored',()=>{parent.dataset.renderState='ready';tooltip.hidden=true;if(frame)setFrame(frame);});
     function loop(){
-      raf=requestAnimationFrame(loop);const now=performance.now(),dt=Math.min(.05,(now-lastTime)/1000||.016)*playbackRate;lastTime=now;if(paused)return;
+      // Pause shopper motion, not rendering: resize, scrub and camera controls still need a frame.
+      raf=requestAnimationFrame(loop);const now=performance.now(),cameraDt=Math.min(.05,(now-lastTime)/1000||.016),dt=paused?0:cameraDt*playbackRate;lastTime=now;
       const walkers=[...actors.values()].map(a=>a.walker);
       for(const a of actors.values()){
         updateWalker(a.walker,layout,reduced()?0:dt,walkers);
@@ -244,7 +245,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
           if(Math.abs(dx)<.1){if(van.state==='outbound')van.pause=2.2;else van.state='parked';}
         }
       }
-      if(rotationTarget){const offset=camera.position.clone().sub(controls.target),spherical=new THREE.Spherical().setFromVector3(offset);const d=Math.atan2(Math.sin(rotationTarget-spherical.theta),Math.cos(rotationTarget-spherical.theta));spherical.theta+=d*Math.min(1,dt*7);camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(spherical));if(Math.abs(d)<.005)rotationTarget=null;}
+      if(rotationTarget){const offset=camera.position.clone().sub(controls.target),spherical=new THREE.Spherical().setFromVector3(offset);const d=Math.atan2(Math.sin(rotationTarget-spherical.theta),Math.cos(rotationTarget-spherical.theta));spherical.theta+=d*Math.min(1,cameraDt*7);camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(spherical));if(Math.abs(d)<.005)rotationTarget=null;}
       controls.update();
       const tx=THREE.MathUtils.clamp(controls.target.x,-layout.edge,layout.edge),tz=THREE.MathUtils.clamp(controls.target.z,-25,25);
       camera.position.x+=tx-controls.target.x;camera.position.z+=tz-controls.target.z;controls.target.set(tx,controls.target.y,tz);

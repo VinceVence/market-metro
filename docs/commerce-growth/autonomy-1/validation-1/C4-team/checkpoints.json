@@ -1,0 +1,1636 @@
+{
+  "id": "VALIDATION-1-C4",
+  "status": "READY",
+  "rounds": 2,
+  "calls": 6,
+  "background": false,
+  "pending": false,
+  "lastDay": 125,
+  "activeModel": "INTENT-5f7ad618ab3c143e",
+  "campaign": {
+    "evidenceId": "c7d736a203838412e2964206b730fae0baf200bb3edf7b509dbb8543f2a1045d",
+    "coverDays": "7",
+    "minimumNetCents": "0",
+    "audience": "recent_interest",
+    "contactsPerDay": "10",
+    "decision": "publish",
+    "routing": "fast",
+    "rationale": "The forest model (AUC 0.67) with the 'clarify_ambiguous' recipe remains optimal. Continuing with 10 contacts/day using 'both' recommendations and inquiries maximizes expected net contribution while leveraging the model's ability to prioritize high-intent 'product_searches'.",
+    "contactKinds": "both",
+    "forecast": "recent14",
+    "stopped": false,
+    "modelId": "INTENT-5f7ad618ab3c143e",
+    "publishedDay": 75
+  },
+  "supply": {
+    "outreach": "fresh_signal",
+    "maxAge": 7,
+    "contactsPerDay": 10,
+    "arrivalDays": 5,
+    "coldContacts": 0,
+    "forecast": "recent14",
+    "coverDays": 7,
+    "allocation": "joint",
+    "target": "cheap",
+    "routing": "fast"
+  },
+  "checkpoints": [
+    {
+      "role": "Market analyst",
+      "actor": "GEMINI",
+      "day": 30,
+      "status": "VALIDATED",
+      "input": {
+        "day": 30,
+        "reason": "First campaign: inspect historical validation and current commerce signals.",
+        "remainingMarketDays": 70,
+        "contactBudgetCents": 5000,
+        "stock": {
+          "Stationery": 5,
+          "Electronics": 7,
+          "Furniture": 8,
+          "Office bundles": 8
+        },
+        "openFundedRequests": 1,
+        "urgentRequests": 0,
+        "recentContacts": 0,
+        "recentFundedResponses": 0,
+        "matureOwnResponses": 0,
+        "ownRetainedRate": null,
+        "matureOrders": 55,
+        "retainedPaymentVolumeCents": 573400,
+        "activeCampaign": null,
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+        "historicalIntent": {
+          "product_browses": {
+            "contacts": 1945,
+            "retained": 101,
+            "netCents": 32180
+          },
+          "product_searches": {
+            "contacts": 1175,
+            "retained": 192,
+            "netCents": 63426
+          },
+          "general_inquiries": {
+            "contacts": 3890,
+            "retained": 164,
+            "netCents": 37764
+          }
+        },
+        "analysisTask": "Identify a specific commercial opportunity or failure from contact, conversion, funding and stock evidence. Model selection belongs to the scientist; do not substitute a model accuracy summary for market analysis."
+      },
+      "startedAt": "2026-11-01T13:08:05.288Z",
+      "output": {
+        "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+        "rationale": "Historical data indicates that users with specific search intent are more likely to convert and generate higher net value. Prioritizing contact efforts toward these high-intent users will optimize the limited contact budget and improve the settled modeled contribution.",
+        "focus": "conversion_quality",
+        "finding": "Product searches exhibit a significantly higher conversion rate (16.3%) and higher net value per retained order compared to product browsing (5.2%) and general inquiries (4.2%)."
+      },
+      "provider": [
+        {
+          "reservationId": "6acbcbc3-2317-442e-922e-cdc76b87afff",
+          "caseId": "Market analyst-30",
+          "trialId": "VALIDATION-1-C4",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1319,
+          "reservedMicros": 30000,
+          "inputTokens": 709,
+          "outputTokens": 169,
+          "thinkingTokens": 592,
+          "cachedInputTokens": 0,
+          "responseId": "tznnasyMEtCKpt8P2uTX8QQ",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 2956,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 30,
+      "finishedAt": "2026-11-01T13:08:10.134Z"
+    },
+    {
+      "role": "ML scientist",
+      "actor": "GEMINI",
+      "day": 30,
+      "status": "VALIDATED",
+      "input": {
+        "day": 30,
+        "reason": "First campaign: inspect historical validation and current commerce signals.",
+        "remainingMarketDays": 70,
+        "contactBudgetCents": 5000,
+        "stock": {
+          "Stationery": 5,
+          "Electronics": 7,
+          "Furniture": 8,
+          "Office bundles": 8
+        },
+        "openFundedRequests": 1,
+        "urgentRequests": 0,
+        "recentContacts": 0,
+        "recentFundedResponses": 0,
+        "matureOwnResponses": 0,
+        "ownRetainedRate": null,
+        "matureOrders": 55,
+        "retainedPaymentVolumeCents": 573400,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "logistic": {
+            "logLoss": 0.2280026147419293,
+            "brier": 0.05914209271715025,
+            "auc": 0.6447440345861934,
+            "averagePrecision": 0.13403096929864852
+          },
+          "forest": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          }
+        },
+        "activeModel": null,
+        "activeCampaign": null,
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+        "analyst": {
+          "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+          "rationale": "Historical data indicates that users with specific search intent are more likely to convert and generate higher net value. Prioritizing contact efforts toward these high-intent users will optimize the limited contact budget and improve the settled modeled contribution.",
+          "focus": "conversion_quality",
+          "finding": "Product searches exhibit a significantly higher conversion rate (16.3%) and higher net value per retained order compared to product browsing (5.2%) and general inquiries (4.2%)."
+        },
+        "developmentEvidence": {
+          "source": "Seven previously used synthetic development markets. Not future predictions or held-out results.",
+          "scope": "Same frozen economy and original strong fixed controller. All inputs and outcomes are available historical observations. Individual merchant tradeoffs remain visible.",
+          "candidates": [
+            {
+              "recipe": "unified",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.54,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8049.63,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 23,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.5042857142855155,
+                "MERCHANT-1": 146.7128571428575,
+                "MERCHANT-2": -13.332857142857165
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "unified",
+              "valuation": "contextual",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 701.5257142857142,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8031.431428571429,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.85714285714286,
+              "exactRecommendationPurchases": 22.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 14.347142857142899,
+                "MERCHANT-1": 119.67428571428627,
+                "MERCHANT-2": -13.335714285714289
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "inquiry_expert",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 706.2414285714286,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8094.357142857142,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.14285714285714,
+              "exactRecommendationPurchases": 19.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 38.695714285714416,
+                "MERCHANT-1": 179.20285714285728,
+                "MERCHANT-2": -34.28714285714295
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 708.3285714285714,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8093.4685714285715,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 19.142857142857142,
+              "merchantDeltas": {
+                "MERCHANT-0": 25.49714285714265,
+                "MERCHANT-1": 168.53857142857123,
+                "MERCHANT-2": -11.31285714285707
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            }
+          ]
+        },
+        "recipeMeaning": {
+          "unified": "Use the fitted classifier for both contact types.",
+          "inquiry_expert": "Use the fitted classifier for product recommendations and an observed intent-age reward posterior for inquiries.",
+          "clarify_ambiguous": "Use that inquiry expert for browsing ambiguity; explicit product searches keep product recommendations."
+        },
+        "valuationMeaning": {
+          "pooled": "Use measured average retained payment value by contact kind.",
+          "contextual": "Train a conditional payment-value forest on observed retained purchases."
+        },
+        "inquiryCalibration": {
+          "ask_need|fresh": {
+            "contacts": 93,
+            "retained": 18,
+            "grossCents": 285500,
+            "retailNetCents": 6597
+          },
+          "ask_need|cold": {
+            "contacts": 725,
+            "retained": 30,
+            "grossCents": 309700,
+            "retailNetCents": 4338
+          },
+          "ask_need|recent": {
+            "contacts": 326,
+            "retained": 23,
+            "grossCents": 282000,
+            "retailNetCents": 5400
+          },
+          "recommend|fresh": {
+            "contacts": 916,
+            "retained": 170,
+            "grossCents": 2453700,
+            "retailNetCents": 56166
+          },
+          "recommend|recent": {
+            "contacts": 439,
+            "retained": 33,
+            "grossCents": 449500,
+            "retailNetCents": 9058
+          }
+        },
+        "validationScope": "Historical classifier metrics cover the full100-day training window. Development policy outcomes are known training markets, not future gains. Choose the model/routing recipe for the business objective, not accuracy alone. A retain decision keeps the exact existing model and routing."
+      },
+      "startedAt": "2026-11-01T13:08:10.137Z",
+      "output": {
+        "rationale": "The forest model offers superior predictive accuracy (AUC 0.67). The clarify_ambiguous recipe effectively segments high-intent product searches from inquiries, optimizing contact budget toward the most valuable conversion paths while maintaining strong platform and retailer returns.",
+        "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+        "recipe": "clarify_ambiguous",
+        "family": "forest",
+        "windowDays": "100",
+        "valuation": "pooled",
+        "decision": "train"
+      },
+      "provider": [
+        {
+          "reservationId": "e8b9a993-c322-407d-a1b0-8fb2226bcdb3",
+          "caseId": "ML scientist-30",
+          "trialId": "VALIDATION-1-C4",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1905,
+          "reservedMicros": 30000,
+          "inputTokens": 2586,
+          "outputTokens": 161,
+          "thinkingTokens": 678,
+          "cachedInputTokens": 0,
+          "responseId": "vTnnaqHSDdampt8P2tTe4AE",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 2749,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 30,
+      "finishedAt": "2026-11-01T13:08:15.931Z"
+    },
+    {
+      "role": "ML scientist",
+      "actor": "LOCAL_TRAINING_TOOL",
+      "day": 30,
+      "status": "COMPLETED",
+      "input": {
+        "family": "forest",
+        "recipe": "clarify_ambiguous",
+        "valuation": "pooled",
+        "windowDays": 100,
+        "rows": 7010,
+        "ownMatureRows": 0,
+        "cutoffDay": 30
+      },
+      "startedAt": "2026-11-01T13:08:15.936Z",
+      "output": {
+        "modelId": "INTENT-5f7ad618ab3c143e",
+        "family": "forest",
+        "recipe": "clarify_ambiguous",
+        "valuation": "pooled",
+        "inquiryPriorRows": 2499,
+        "metrics": {
+          "logLoss": 0.22125727304597825,
+          "brier": 0.05792385009087139,
+          "auc": 0.6729221186214007,
+          "averagePrecision": 0.16542539324111097
+        },
+        "coarse": {
+          "logLoss": 0.24071182238066735,
+          "brier": 0.060918446828162214,
+          "auc": 0.5346631622778883,
+          "averagePrecision": 0.07906629024620886
+        },
+        "validationPassed": true,
+        "runtimeSeconds": 2.563868708000882,
+        "scope": "Classifier validation and recorded training-market evidence; not proof of this campaign's future profit"
+      },
+      "completedDay": 30,
+      "finishedAt": "2026-11-01T13:08:21.023Z"
+    },
+    {
+      "role": "Commerce manager",
+      "actor": "GEMINI",
+      "day": 30,
+      "status": "VALIDATED",
+      "input": {
+        "day": 30,
+        "reason": "First campaign: inspect historical validation and current commerce signals.",
+        "remainingMarketDays": 70,
+        "contactBudgetCents": 5000,
+        "stock": {
+          "Stationery": 5,
+          "Electronics": 7,
+          "Furniture": 8,
+          "Office bundles": 8
+        },
+        "openFundedRequests": 1,
+        "urgentRequests": 0,
+        "recentContacts": 0,
+        "recentFundedResponses": 0,
+        "matureOwnResponses": 0,
+        "ownRetainedRate": null,
+        "matureOrders": 55,
+        "retainedPaymentVolumeCents": 573400,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "logistic": {
+            "logLoss": 0.2280026147419293,
+            "brier": 0.05914209271715025,
+            "auc": 0.6447440345861934,
+            "averagePrecision": 0.13403096929864852
+          },
+          "forest": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          }
+        },
+        "activeModel": null,
+        "activeCampaign": null,
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+        "analyst": {
+          "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+          "rationale": "Historical data indicates that users with specific search intent are more likely to convert and generate higher net value. Prioritizing contact efforts toward these high-intent users will optimize the limited contact budget and improve the settled modeled contribution.",
+          "focus": "conversion_quality",
+          "finding": "Product searches exhibit a significantly higher conversion rate (16.3%) and higher net value per retained order compared to product browsing (5.2%) and general inquiries (4.2%)."
+        },
+        "scientist": {
+          "rationale": "The forest model offers superior predictive accuracy (AUC 0.67). The clarify_ambiguous recipe effectively segments high-intent product searches from inquiries, optimizing contact budget toward the most valuable conversion paths while maintaining strong platform and retailer returns.",
+          "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+          "recipe": "clarify_ambiguous",
+          "family": "forest",
+          "windowDays": "100",
+          "valuation": "pooled",
+          "decision": "train"
+        },
+        "trainingResult": {
+          "modelId": "INTENT-5f7ad618ab3c143e",
+          "family": "forest",
+          "recipe": "clarify_ambiguous",
+          "valuation": "pooled",
+          "inquiryPriorRows": 2499,
+          "metrics": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          },
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "validationPassed": true,
+          "runtimeSeconds": 2.563868708000882,
+          "scope": "Classifier validation and recorded training-market evidence; not proof of this campaign's future profit"
+        },
+        "campaignPreviews": [
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 3,
+            "eligibleSelected": 3,
+            "recommendations": 3,
+            "generalInquiries": 0,
+            "expectedNetCents": 77,
+            "contactCostCents": 15,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 6,
+            "eligibleSelected": 6,
+            "recommendations": 6,
+            "generalInquiries": 0,
+            "expectedNetCents": 118,
+            "contactCostCents": 30,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 10,
+            "eligibleSelected": 10,
+            "recommendations": 10,
+            "generalInquiries": 0,
+            "expectedNetCents": 140,
+            "contactCostCents": 50,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 3,
+            "eligibleSelected": 3,
+            "recommendations": 0,
+            "generalInquiries": 3,
+            "expectedNetCents": 213,
+            "contactCostCents": 15,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 6,
+            "eligibleSelected": 6,
+            "recommendations": 0,
+            "generalInquiries": 6,
+            "expectedNetCents": 371,
+            "contactCostCents": 30,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 10,
+            "eligibleSelected": 10,
+            "recommendations": 1,
+            "generalInquiries": 9,
+            "expectedNetCents": 436,
+            "contactCostCents": 50,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          }
+        ],
+        "currentSupplyContract": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "developmentEvidence": {
+          "source": "Seven previously used synthetic development markets. Not future predictions or held-out results.",
+          "scope": "Same frozen economy and original strong fixed controller. All inputs and outcomes are available historical observations. Individual merchant tradeoffs remain visible.",
+          "candidates": [
+            {
+              "recipe": "unified",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.54,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8049.63,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 23,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.5042857142855155,
+                "MERCHANT-1": 146.7128571428575,
+                "MERCHANT-2": -13.332857142857165
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "unified",
+              "valuation": "contextual",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 701.5257142857142,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8031.431428571429,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.85714285714286,
+              "exactRecommendationPurchases": 22.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 14.347142857142899,
+                "MERCHANT-1": 119.67428571428627,
+                "MERCHANT-2": -13.335714285714289
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "inquiry_expert",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 706.2414285714286,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8094.357142857142,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.14285714285714,
+              "exactRecommendationPurchases": 19.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 38.695714285714416,
+                "MERCHANT-1": 179.20285714285728,
+                "MERCHANT-2": -34.28714285714295
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 708.3285714285714,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8093.4685714285715,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 19.142857142857142,
+              "merchantDeltas": {
+                "MERCHANT-0": 25.49714285714265,
+                "MERCHANT-1": 168.53857142857123,
+                "MERCHANT-2": -11.31285714285707
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            }
+          ]
+        },
+        "actionMeaning": {
+          "audience": "lapsed requires a previous purchase and at least14 days since it; recent_interest requires a product signal. all includes any eligible contact.",
+          "minimumNetCents": "Threshold on modeled expected retail payment contribution after contact cost; estimated from observed retained/failed outcomes.",
+          "routing": "fast uses modeled PayPal supplier settlement. auto can use bank settlement when deadlines permit. Neither changes retail captures.",
+          "modelRoles": "The model ranks eligible contacts locally; the campaign is automatically applied. A smaller contact limit can discard positive-value opportunities shown in the preview. Keep the existing stock and settlement settings unless fulfillment evidence justifies changing them; conservative is not by itself an economic reason."
+        }
+      },
+      "startedAt": "2026-11-01T13:08:21.031Z",
+      "output": {
+        "coverDays": "7",
+        "rationale": "The forest model (AUC 0.67) and 'clarify_ambiguous' recipe demonstrate optimal performance. Targeting 'recent_interest' users with both recommendations and inquiries at 10 contacts/day maximizes expected net contribution within budget.",
+        "contactsPerDay": "10",
+        "routing": "fast",
+        "contactKinds": "both",
+        "decision": "publish",
+        "forecast": "recent14",
+        "audience": "recent_interest",
+        "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+        "minimumNetCents": "0"
+      },
+      "provider": [
+        {
+          "reservationId": "4d8af9b5-b5f0-4db5-9bd7-f6525c9aafbc",
+          "caseId": "Commerce manager-30",
+          "trialId": "VALIDATION-1-C4",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 2221,
+          "reservedMicros": 30000,
+          "inputTokens": 3249,
+          "outputTokens": 186,
+          "thinkingTokens": 753,
+          "cachedInputTokens": 0,
+          "responseId": "xTnnaq7tDO2A1e8Po7CRsAo",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3391,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 30,
+      "finishedAt": "2026-11-01T13:08:24.450Z"
+    },
+    {
+      "role": "Coordinator",
+      "actor": "TRUSTED_PUBLISHER",
+      "day": 30,
+      "completedDay": 30,
+      "status": "COMPLETED",
+      "output": {
+        "decision": "publish",
+        "effectiveDay": 30,
+        "modelId": "INTENT-5f7ad618ab3c143e",
+        "campaign": {
+          "coverDays": "7",
+          "rationale": "The forest model (AUC 0.67) and 'clarify_ambiguous' recipe demonstrate optimal performance. Targeting 'recent_interest' users with both recommendations and inquiries at 10 contacts/day maximizes expected net contribution within budget.",
+          "contactsPerDay": "10",
+          "routing": "fast",
+          "contactKinds": "both",
+          "decision": "publish",
+          "forecast": "recent14",
+          "audience": "recent_interest",
+          "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+          "minimumNetCents": "0",
+          "stopped": false,
+          "modelId": "INTENT-5f7ad618ab3c143e",
+          "publishedDay": 30
+        },
+        "supply": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "automated": true,
+        "checks": [
+          "observed features only",
+          "validated model artifact",
+          "consent and contact budget",
+          "funded complete baskets",
+          "merchant margin floor",
+          "idempotent simulated payments"
+        ],
+        "nativePayments": false
+      }
+    },
+    {
+      "role": "Market analyst",
+      "actor": "GEMINI",
+      "day": 75,
+      "status": "VALIDATED",
+      "input": {
+        "day": 75,
+        "reason": "Periodic review: inspect matured campaign outcomes before deciding whether to retrain.",
+        "remainingMarketDays": 25,
+        "contactBudgetCents": 4025,
+        "stock": {
+          "Stationery": 16,
+          "Electronics": 9,
+          "Furniture": 15,
+          "Office bundles": 13
+        },
+        "openFundedRequests": 2,
+        "urgentRequests": 0,
+        "recentContacts": 20,
+        "recentFundedResponses": 1,
+        "matureOwnResponses": 83,
+        "ownRetainedRate": 0.024096385542168676,
+        "matureOrders": 161,
+        "retainedPaymentVolumeCents": 1847900,
+        "activeCampaign": {
+          "coverDays": "7",
+          "rationale": "The forest model (AUC 0.67) and 'clarify_ambiguous' recipe demonstrate optimal performance. Targeting 'recent_interest' users with both recommendations and inquiries at 10 contacts/day maximizes expected net contribution within budget.",
+          "contactsPerDay": "10",
+          "routing": "fast",
+          "contactKinds": "both",
+          "decision": "publish",
+          "forecast": "recent14",
+          "audience": "recent_interest",
+          "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+          "minimumNetCents": "0",
+          "stopped": false,
+          "modelId": "INTENT-5f7ad618ab3c143e",
+          "publishedDay": 30
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "c7d736a203838412e2964206b730fae0baf200bb3edf7b509dbb8543f2a1045d",
+        "historicalIntent": {
+          "product_browses": {
+            "contacts": 1945,
+            "retained": 101,
+            "netCents": 32180
+          },
+          "product_searches": {
+            "contacts": 1175,
+            "retained": 192,
+            "netCents": 63426
+          },
+          "general_inquiries": {
+            "contacts": 3890,
+            "retained": 164,
+            "netCents": 37764
+          }
+        },
+        "analysisTask": "Identify a specific commercial opportunity or failure from contact, conversion, funding and stock evidence. Model selection belongs to the scientist; do not substitute a model accuracy summary for market analysis."
+      },
+      "startedAt": "2026-11-01T13:08:26.724Z",
+      "output": {
+        "rationale": "The current broad 'recent_interest' campaign is yielding a low 2.41% retention rate. Concentrating contacts on high-intent 'product_searches' will improve conversion quality and optimize the remaining 4025 cents budget.",
+        "evidenceId": "c7d736a203838412e2964206b730fae0baf200bb3edf7b509dbb8543f2a1045d",
+        "finding": "Product searches demonstrate a 16.34% conversion rate, significantly outperforming product browses (5.19%) and general inquiries (4.22%).",
+        "focus": "conversion_quality"
+      },
+      "provider": [
+        {
+          "reservationId": "a0f99431-aad2-4548-bb51-8edd65915d61",
+          "caseId": "Market analyst-75",
+          "trialId": "VALIDATION-1-C4",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1701,
+          "reservedMicros": 30000,
+          "inputTokens": 933,
+          "outputTokens": 179,
+          "thinkingTokens": 799,
+          "cachedInputTokens": 0,
+          "responseId": "yznnap71COGXvr0Ps9LzwAE",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3403,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 75,
+      "finishedAt": "2026-11-01T13:08:30.466Z"
+    },
+    {
+      "role": "ML scientist",
+      "actor": "GEMINI",
+      "day": 75,
+      "status": "VALIDATED",
+      "input": {
+        "day": 75,
+        "reason": "Periodic review: inspect matured campaign outcomes before deciding whether to retrain.",
+        "remainingMarketDays": 25,
+        "contactBudgetCents": 4025,
+        "stock": {
+          "Stationery": 16,
+          "Electronics": 9,
+          "Furniture": 15,
+          "Office bundles": 13
+        },
+        "openFundedRequests": 2,
+        "urgentRequests": 0,
+        "recentContacts": 20,
+        "recentFundedResponses": 1,
+        "matureOwnResponses": 83,
+        "ownRetainedRate": 0.024096385542168676,
+        "matureOrders": 161,
+        "retainedPaymentVolumeCents": 1847900,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "logistic": {
+            "logLoss": 0.2280026147419293,
+            "brier": 0.05914209271715025,
+            "auc": 0.6447440345861934,
+            "averagePrecision": 0.13403096929864852
+          },
+          "forest": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          }
+        },
+        "activeModel": {
+          "id": "INTENT-5f7ad618ab3c143e",
+          "family": "forest",
+          "recipe": "clarify_ambiguous",
+          "valuation": "pooled",
+          "cutoffDay": 30,
+          "trainingRows": 7010
+        },
+        "activeCampaign": {
+          "coverDays": "7",
+          "rationale": "The forest model (AUC 0.67) and 'clarify_ambiguous' recipe demonstrate optimal performance. Targeting 'recent_interest' users with both recommendations and inquiries at 10 contacts/day maximizes expected net contribution within budget.",
+          "contactsPerDay": "10",
+          "routing": "fast",
+          "contactKinds": "both",
+          "decision": "publish",
+          "forecast": "recent14",
+          "audience": "recent_interest",
+          "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+          "minimumNetCents": "0",
+          "stopped": false,
+          "modelId": "INTENT-5f7ad618ab3c143e",
+          "publishedDay": 30
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "c7d736a203838412e2964206b730fae0baf200bb3edf7b509dbb8543f2a1045d",
+        "analyst": {
+          "rationale": "The current broad 'recent_interest' campaign is yielding a low 2.41% retention rate. Concentrating contacts on high-intent 'product_searches' will improve conversion quality and optimize the remaining 4025 cents budget.",
+          "evidenceId": "c7d736a203838412e2964206b730fae0baf200bb3edf7b509dbb8543f2a1045d",
+          "finding": "Product searches demonstrate a 16.34% conversion rate, significantly outperforming product browses (5.19%) and general inquiries (4.22%).",
+          "focus": "conversion_quality"
+        },
+        "developmentEvidence": {
+          "source": "Seven previously used synthetic development markets. Not future predictions or held-out results.",
+          "scope": "Same frozen economy and original strong fixed controller. All inputs and outcomes are available historical observations. Individual merchant tradeoffs remain visible.",
+          "candidates": [
+            {
+              "recipe": "unified",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.54,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8049.63,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 23,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.5042857142855155,
+                "MERCHANT-1": 146.7128571428575,
+                "MERCHANT-2": -13.332857142857165
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "unified",
+              "valuation": "contextual",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 701.5257142857142,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8031.431428571429,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.85714285714286,
+              "exactRecommendationPurchases": 22.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 14.347142857142899,
+                "MERCHANT-1": 119.67428571428627,
+                "MERCHANT-2": -13.335714285714289
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "inquiry_expert",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 706.2414285714286,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8094.357142857142,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.14285714285714,
+              "exactRecommendationPurchases": 19.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 38.695714285714416,
+                "MERCHANT-1": 179.20285714285728,
+                "MERCHANT-2": -34.28714285714295
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 708.3285714285714,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8093.4685714285715,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 19.142857142857142,
+              "merchantDeltas": {
+                "MERCHANT-0": 25.49714285714265,
+                "MERCHANT-1": 168.53857142857123,
+                "MERCHANT-2": -11.31285714285707
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            }
+          ]
+        },
+        "recipeMeaning": {
+          "unified": "Use the fitted classifier for both contact types.",
+          "inquiry_expert": "Use the fitted classifier for product recommendations and an observed intent-age reward posterior for inquiries.",
+          "clarify_ambiguous": "Use that inquiry expert for browsing ambiguity; explicit product searches keep product recommendations."
+        },
+        "valuationMeaning": {
+          "pooled": "Use measured average retained payment value by contact kind.",
+          "contextual": "Train a conditional payment-value forest on observed retained purchases."
+        },
+        "inquiryCalibration": {
+          "ask_need|fresh": {
+            "contacts": 93,
+            "retained": 18,
+            "grossCents": 285500,
+            "retailNetCents": 6597
+          },
+          "ask_need|cold": {
+            "contacts": 725,
+            "retained": 30,
+            "grossCents": 309700,
+            "retailNetCents": 4338
+          },
+          "ask_need|recent": {
+            "contacts": 326,
+            "retained": 23,
+            "grossCents": 282000,
+            "retailNetCents": 5400
+          },
+          "recommend|fresh": {
+            "contacts": 916,
+            "retained": 170,
+            "grossCents": 2453700,
+            "retailNetCents": 56166
+          },
+          "recommend|recent": {
+            "contacts": 439,
+            "retained": 33,
+            "grossCents": 449500,
+            "retailNetCents": 9058
+          }
+        },
+        "validationScope": "Historical classifier metrics cover the full100-day training window. Development policy outcomes are known training markets, not future gains. Choose the model/routing recipe for the business objective, not accuracy alone. A retain decision keeps the exact existing model and routing."
+      },
+      "startedAt": "2026-11-01T13:08:30.469Z",
+      "output": {
+        "evidenceId": "c7d736a203838412e2964206b730fae0baf200bb3edf7b509dbb8543f2a1045d",
+        "recipe": "clarify_ambiguous",
+        "valuation": "pooled",
+        "decision": "retain",
+        "rationale": "The forest model with the 'clarify_ambiguous' recipe remains the most effective configuration (AUC 0.67). Retaining this model while shifting campaign focus to high-intent 'product_searches' (16.34% conversion) will optimize the remaining budget and improve conversion quality.",
+        "family": "forest",
+        "windowDays": "100"
+      },
+      "provider": [
+        {
+          "reservationId": "6844ad8f-ae5c-4275-a646-eb32a569a5b4",
+          "caseId": "ML scientist-75",
+          "trialId": "VALIDATION-1-C4",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 2390,
+          "reservedMicros": 30000,
+          "inputTokens": 2868,
+          "outputTokens": 182,
+          "thinkingTokens": 933,
+          "cachedInputTokens": 0,
+          "responseId": "0TnnatSqCLG7vr0PqejcQQ",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 4076,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 75,
+      "finishedAt": "2026-11-01T13:08:37.147Z"
+    },
+    {
+      "role": "Commerce manager",
+      "actor": "GEMINI",
+      "day": 75,
+      "status": "VALIDATED",
+      "input": {
+        "day": 75,
+        "reason": "Periodic review: inspect matured campaign outcomes before deciding whether to retrain.",
+        "remainingMarketDays": 25,
+        "contactBudgetCents": 4025,
+        "stock": {
+          "Stationery": 16,
+          "Electronics": 9,
+          "Furniture": 15,
+          "Office bundles": 13
+        },
+        "openFundedRequests": 2,
+        "urgentRequests": 0,
+        "recentContacts": 20,
+        "recentFundedResponses": 1,
+        "matureOwnResponses": 83,
+        "ownRetainedRate": 0.024096385542168676,
+        "matureOrders": 161,
+        "retainedPaymentVolumeCents": 1847900,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "logistic": {
+            "logLoss": 0.2280026147419293,
+            "brier": 0.05914209271715025,
+            "auc": 0.6447440345861934,
+            "averagePrecision": 0.13403096929864852
+          },
+          "forest": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          }
+        },
+        "activeModel": {
+          "id": "INTENT-5f7ad618ab3c143e",
+          "family": "forest",
+          "recipe": "clarify_ambiguous",
+          "valuation": "pooled",
+          "cutoffDay": 30,
+          "trainingRows": 7010
+        },
+        "activeCampaign": {
+          "coverDays": "7",
+          "rationale": "The forest model (AUC 0.67) and 'clarify_ambiguous' recipe demonstrate optimal performance. Targeting 'recent_interest' users with both recommendations and inquiries at 10 contacts/day maximizes expected net contribution within budget.",
+          "contactsPerDay": "10",
+          "routing": "fast",
+          "contactKinds": "both",
+          "decision": "publish",
+          "forecast": "recent14",
+          "audience": "recent_interest",
+          "evidenceId": "2b486377312d712600c0cf3f969be6cc8fe5f0fcafb9dadfc02d3dede83ac093",
+          "minimumNetCents": "0",
+          "stopped": false,
+          "modelId": "INTENT-5f7ad618ab3c143e",
+          "publishedDay": 30
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "c7d736a203838412e2964206b730fae0baf200bb3edf7b509dbb8543f2a1045d",
+        "analyst": {
+          "rationale": "The current broad 'recent_interest' campaign is yielding a low 2.41% retention rate. Concentrating contacts on high-intent 'product_searches' will improve conversion quality and optimize the remaining 4025 cents budget.",
+          "evidenceId": "c7d736a203838412e2964206b730fae0baf200bb3edf7b509dbb8543f2a1045d",
+          "finding": "Product searches demonstrate a 16.34% conversion rate, significantly outperforming product browses (5.19%) and general inquiries (4.22%).",
+          "focus": "conversion_quality"
+        },
+        "scientist": {
+          "evidenceId": "c7d736a203838412e2964206b730fae0baf200bb3edf7b509dbb8543f2a1045d",
+          "recipe": "clarify_ambiguous",
+          "valuation": "pooled",
+          "decision": "retain",
+          "rationale": "The forest model with the 'clarify_ambiguous' recipe remains the most effective configuration (AUC 0.67). Retaining this model while shifting campaign focus to high-intent 'product_searches' (16.34% conversion) will optimize the remaining budget and improve conversion quality.",
+          "family": "forest",
+          "windowDays": "100"
+        },
+        "trainingResult": {
+          "retainedModel": "INTENT-5f7ad618ab3c143e",
+          "metrics": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          },
+          "validationPassed": true
+        },
+        "campaignPreviews": [
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 3,
+            "eligibleSelected": 3,
+            "recommendations": 3,
+            "generalInquiries": 0,
+            "expectedNetCents": 257,
+            "contactCostCents": 15,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 6,
+            "eligibleSelected": 6,
+            "recommendations": 6,
+            "generalInquiries": 0,
+            "expectedNetCents": 330,
+            "contactCostCents": 30,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 10,
+            "eligibleSelected": 7,
+            "recommendations": 7,
+            "generalInquiries": 0,
+            "expectedNetCents": 344,
+            "contactCostCents": 35,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 3,
+            "eligibleSelected": 3,
+            "recommendations": 3,
+            "generalInquiries": 0,
+            "expectedNetCents": 257,
+            "contactCostCents": 15,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 6,
+            "eligibleSelected": 6,
+            "recommendations": 6,
+            "generalInquiries": 0,
+            "expectedNetCents": 330,
+            "contactCostCents": 30,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 10,
+            "eligibleSelected": 10,
+            "recommendations": 7,
+            "generalInquiries": 3,
+            "expectedNetCents": 362,
+            "contactCostCents": 50,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          }
+        ],
+        "currentSupplyContract": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "developmentEvidence": {
+          "source": "Seven previously used synthetic development markets. Not future predictions or held-out results.",
+          "scope": "Same frozen economy and original strong fixed controller. All inputs and outcomes are available historical observations. Individual merchant tradeoffs remain visible.",
+          "candidates": [
+            {
+              "recipe": "unified",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.54,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8049.63,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 23,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.5042857142855155,
+                "MERCHANT-1": 146.7128571428575,
+                "MERCHANT-2": -13.332857142857165
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "unified",
+              "valuation": "contextual",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 701.5257142857142,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8031.431428571429,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.85714285714286,
+              "exactRecommendationPurchases": 22.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 14.347142857142899,
+                "MERCHANT-1": 119.67428571428627,
+                "MERCHANT-2": -13.335714285714289
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "inquiry_expert",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 706.2414285714286,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8094.357142857142,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.14285714285714,
+              "exactRecommendationPurchases": 19.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 38.695714285714416,
+                "MERCHANT-1": 179.20285714285728,
+                "MERCHANT-2": -34.28714285714295
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 708.3285714285714,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8093.4685714285715,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 19.142857142857142,
+              "merchantDeltas": {
+                "MERCHANT-0": 25.49714285714265,
+                "MERCHANT-1": 168.53857142857123,
+                "MERCHANT-2": -11.31285714285707
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              }
+            }
+          ]
+        },
+        "actionMeaning": {
+          "audience": "lapsed requires a previous purchase and at least14 days since it; recent_interest requires a product signal. all includes any eligible contact.",
+          "minimumNetCents": "Threshold on modeled expected retail payment contribution after contact cost; estimated from observed retained/failed outcomes.",
+          "routing": "fast uses modeled PayPal supplier settlement. auto can use bank settlement when deadlines permit. Neither changes retail captures.",
+          "modelRoles": "The model ranks eligible contacts locally; the campaign is automatically applied. A smaller contact limit can discard positive-value opportunities shown in the preview. Keep the existing stock and settlement settings unless fulfillment evidence justifies changing them; conservative is not by itself an economic reason."
+        }
+      },
+      "startedAt": "2026-11-01T13:08:37.156Z",
+      "output": {
+        "evidenceId": "c7d736a203838412e2964206b730fae0baf200bb3edf7b509dbb8543f2a1045d",
+        "coverDays": "7",
+        "minimumNetCents": "0",
+        "audience": "recent_interest",
+        "contactsPerDay": "10",
+        "decision": "publish",
+        "routing": "fast",
+        "rationale": "The forest model (AUC 0.67) with the 'clarify_ambiguous' recipe remains optimal. Continuing with 10 contacts/day using 'both' recommendations and inquiries maximizes expected net contribution while leveraging the model's ability to prioritize high-intent 'product_searches'.",
+        "contactKinds": "both",
+        "forecast": "recent14"
+      },
+      "provider": [
+        {
+          "reservationId": "859047d8-8360-43cf-9bc9-d5d340b228c2",
+          "caseId": "Commerce manager-75",
+          "trialId": "VALIDATION-1-C4",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 2025,
+          "reservedMicros": 30000,
+          "inputTokens": 3389,
+          "outputTokens": 203,
+          "thinkingTokens": 582,
+          "cachedInputTokens": 0,
+          "responseId": "1znnap-nCeqXvr0P0sSO4A4",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3034,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 75,
+      "finishedAt": "2026-11-01T13:08:42.110Z"
+    },
+    {
+      "role": "Coordinator",
+      "actor": "TRUSTED_PUBLISHER",
+      "day": 75,
+      "completedDay": 75,
+      "status": "COMPLETED",
+      "output": {
+        "decision": "publish",
+        "effectiveDay": 75,
+        "modelId": "INTENT-5f7ad618ab3c143e",
+        "campaign": {
+          "evidenceId": "c7d736a203838412e2964206b730fae0baf200bb3edf7b509dbb8543f2a1045d",
+          "coverDays": "7",
+          "minimumNetCents": "0",
+          "audience": "recent_interest",
+          "contactsPerDay": "10",
+          "decision": "publish",
+          "routing": "fast",
+          "rationale": "The forest model (AUC 0.67) with the 'clarify_ambiguous' recipe remains optimal. Continuing with 10 contacts/day using 'both' recommendations and inquiries maximizes expected net contribution while leveraging the model's ability to prioritize high-intent 'product_searches'.",
+          "contactKinds": "both",
+          "forecast": "recent14",
+          "stopped": false,
+          "modelId": "INTENT-5f7ad618ab3c143e",
+          "publishedDay": 75
+        },
+        "supply": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "automated": true,
+        "checks": [
+          "observed features only",
+          "validated model artifact",
+          "consent and contact budget",
+          "funded complete baskets",
+          "merchant margin floor",
+          "idempotent simulated payments"
+        ],
+        "nativePayments": false
+      }
+    }
+  ],
+  "modelCostUSD": 0.011561
+}

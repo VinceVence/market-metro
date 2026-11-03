@@ -1,0 +1,230 @@
+{
+  "createdAt": "2026-10-31T09:23:40.798Z",
+  "episodes": [
+    {
+      "seed": 640000,
+      "scenario": "steady",
+      "split": "train"
+    },
+    {
+      "seed": 640001,
+      "scenario": "rival_sale",
+      "split": "train"
+    },
+    {
+      "seed": 640002,
+      "scenario": "budget_squeeze",
+      "split": "train"
+    },
+    {
+      "seed": 640003,
+      "scenario": "returns_wave",
+      "split": "train"
+    },
+    {
+      "seed": 640004,
+      "scenario": "preference_shift",
+      "split": "train"
+    },
+    {
+      "seed": 640005,
+      "scenario": "supply_delay",
+      "split": "train"
+    },
+    {
+      "seed": 640006,
+      "scenario": "steady",
+      "split": "train"
+    },
+    {
+      "seed": 640007,
+      "scenario": "rival_sale",
+      "split": "train"
+    },
+    {
+      "seed": 640008,
+      "scenario": "budget_squeeze",
+      "split": "train"
+    },
+    {
+      "seed": 640009,
+      "scenario": "returns_wave",
+      "split": "train"
+    },
+    {
+      "seed": 640010,
+      "scenario": "preference_shift",
+      "split": "train"
+    },
+    {
+      "seed": 640011,
+      "scenario": "supply_delay",
+      "split": "train"
+    },
+    {
+      "seed": 640012,
+      "scenario": "steady",
+      "split": "model_validation"
+    },
+    {
+      "seed": 640013,
+      "scenario": "rival_sale",
+      "split": "model_validation"
+    },
+    {
+      "seed": 640014,
+      "scenario": "budget_squeeze",
+      "split": "model_validation"
+    },
+    {
+      "seed": 640015,
+      "scenario": "returns_wave",
+      "split": "model_validation"
+    },
+    {
+      "seed": 640016,
+      "scenario": "preference_shift",
+      "split": "model_validation"
+    },
+    {
+      "seed": 640017,
+      "scenario": "supply_delay",
+      "split": "model_validation"
+    }
+  ],
+  "businesses": {
+    "safe": {
+      "demand": {
+        "stockDays": [
+          14,
+          14,
+          14
+        ],
+        "windowDays": 14,
+        "useLostDemand": false,
+        "topK": 4,
+        "retrainDays": 28
+      },
+      "economics": {
+        "pricePct": [
+          0,
+          -10,
+          10
+        ],
+        "merchantRail": "auto",
+        "supplierRail": "paypal"
+      },
+      "lifecycle": {
+        "marketing": "weekly_featured",
+        "subscriptions": true,
+        "interval": "observed",
+        "minimumRepeat": 3,
+        "discountPct": 0
+      }
+    },
+    "fast": {
+      "demand": {
+        "stockDays": [
+          14,
+          14,
+          14
+        ],
+        "windowDays": 14,
+        "useLostDemand": false,
+        "topK": 4,
+        "retrainDays": 28
+      },
+      "economics": {
+        "pricePct": [
+          0,
+          -10,
+          10
+        ],
+        "merchantRail": "paypal",
+        "supplierRail": "paypal"
+      },
+      "lifecycle": {
+        "marketing": "weekly_featured",
+        "subscriptions": true,
+        "interval": "observed",
+        "minimumRepeat": 3,
+        "discountPct": 0
+      }
+    }
+  },
+  "settings": {
+    "customers": 100,
+    "days": 100,
+    "campaignStop": 90,
+    "budgetCents": 5000
+  },
+  "snapshots": [
+    30,
+    44,
+    58,
+    72
+  ],
+  "samplesPerSnapshot": 8,
+  "features": [
+    "recency",
+    "purchases7",
+    "purchases28",
+    "visits7",
+    "spend7",
+    "spend28",
+    "meanPaid",
+    "upperPaid",
+    "price",
+    "priceVsUpper",
+    "categoryShare",
+    "skuSeen",
+    "intentMatch",
+    "freshIntent",
+    "intentAge",
+    "familiarMerchant",
+    "observedReturns",
+    "contacts7",
+    "stock",
+    "unitMargin",
+    "unitPaymentContribution",
+    "payday",
+    "categoryStationery",
+    "categoryElectronics",
+    "categoryFurniture",
+    "categoryBundles",
+    "merchantMatureReturnRate",
+    "merchantMatureOrders",
+    "candidateVsOriginalList",
+    "recentCategoryViewShare",
+    "recentCategoryPurchaseShare",
+    "skuContactRecency",
+    "skuPurchaseRecency",
+    "longMeanPaid",
+    "longMaxPaid",
+    "totalPastPurchases",
+    "incumbentPresent",
+    "sameIncumbentCategory",
+    "priceDifferenceToIncumbent",
+    "incumbentCategoryShare",
+    "merchantRailBank",
+    "merchantRailAuto",
+    "merchantRailPayPal",
+    "supplierRailBank",
+    "supplierRailAuto",
+    "supplierRailPayPal"
+  ],
+  "maxPairs": 1152,
+  "outcomeDays": 14,
+  "refundFollowupDays": 14,
+  "economicHashes": {
+    "scripts/commerce-economy-v5/engine.mjs": "0f53b513cad90ba9a5bc0c389ac6d5a05318a74414a1fe5d622e2cff87695913",
+    "scripts/commerce-economy-v5/operations.mjs": "497d39303192b84bef382032f7b5643ff6c8042acf72cd3ca08a9f5a233b323e",
+    "scripts/commerce-economy-v5/network.mjs": "a80b225e6f6130656849a4ed881075eb1fdc5815b9a74fb24b1631eb51730c24",
+    "scripts/commerce-economy-v5/policies.mjs": "ac505ea2eba47972578587cbd87575886c2d2b7dc73776a723d6123b51e38ccb",
+    "scripts/commerce-economy-v5/learning/features.mjs": "758aa21dde0743b0969a818c4fe91801bb486316eedc96433f6bb16a53a26a3b",
+    "scripts/commerce-economy-v5/learning/pair-features.mjs": "d0d59d6917f94447f1625044b34c876a3b46a5dec8f3e7ed5d3579cc57585c2a",
+    "scripts/commerce-economy-v5/learning/generate-pairs.mjs": "dd10b52134f2ec27bcb4fb714a800bf43e6cd9f04d9f4d664c58a34bceb9d17b"
+  },
+  "scope": "Paired synthetic training experiments: one observed customer recommendation is changed; everything else follows the incumbent policy. Both cloned worlds use identical exogenous shocks. Label differences use settled14-day whole-market platform, aggregate-partner and retailer contribution. This privileged simulator supervision is available equally to all learning baselines, and cannot be queried on validation/test runtime states. No hidden state appears in X. Not real-world counterfactual data. No native/model API calls.",
+  "hash": "10c313595b63bb5e21db104ea65dc55e4a5f3e18391e432368911021fbd31bd6"
+}

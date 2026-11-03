@@ -1,0 +1,97 @@
+{
+  "createdAt": "2026-11-01T03:59:59.201Z",
+  "cases": [
+    {
+      "regime": "ordinary",
+      "seed": 980100
+    },
+    {
+      "regime": "discovery",
+      "seed": 980101
+    },
+    {
+      "regime": "reactivation",
+      "seed": 980102
+    },
+    {
+      "regime": "preference_shift",
+      "seed": 980103
+    },
+    {
+      "regime": "low_response",
+      "seed": 980104
+    },
+    {
+      "regime": "zero_response",
+      "seed": 980105
+    },
+    {
+      "regime": "well_served",
+      "seed": 980106
+    }
+  ],
+  "policies": [
+    {
+      "id": "fixed_original",
+      "config": {
+        "outreach": "legacy_stock",
+        "maxAge": 7,
+        "contactsPerDay": 10,
+        "arrivalDays": 2,
+        "coldContacts": 0,
+        "forecast": "legacy28",
+        "coverDays": 3,
+        "allocation": "scarcity",
+        "target": "preferred",
+        "routing": "fast"
+      }
+    },
+    {
+      "id": "fixed_fresh_joint",
+      "config": {
+        "outreach": "fresh_signal",
+        "maxAge": 2,
+        "contactsPerDay": 10,
+        "arrivalDays": 2,
+        "coldContacts": 0,
+        "forecast": "recent7",
+        "coverDays": 3,
+        "allocation": "joint",
+        "target": "cheap",
+        "routing": "fast"
+      }
+    },
+    {
+      "id": "fixed_cover_joint",
+      "config": {
+        "outreach": "fresh_signal",
+        "maxAge": 7,
+        "contactsPerDay": 10,
+        "arrivalDays": 5,
+        "coldContacts": 0,
+        "forecast": "recent14",
+        "coverDays": 7,
+        "allocation": "joint",
+        "target": "cheap",
+        "routing": "fast"
+      }
+    },
+    {
+      "id": "local_calibrated",
+      "config": {
+        "outreach": "calibrated",
+        "maxAge": 4,
+        "contactsPerDay": 10,
+        "arrivalDays": 5,
+        "coldContacts": 0,
+        "forecast": "adaptive",
+        "coverDays": 3,
+        "allocation": "joint",
+        "target": "cheap",
+        "routing": "fast"
+      }
+    }
+  ],
+  "priorHash": "fbdbcac76927758880e1ec7e1f63c8fb8a7678041695a4fd32f6e5c4ce469aa3",
+  "scope": "Controller and tool changes only. Original growth economy and all historical results retained. Stronger fixed workflows get the same joint fulfillment tools. No model calls or unseen seeds in this development selection."
+}

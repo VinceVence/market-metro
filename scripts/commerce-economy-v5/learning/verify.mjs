@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {loadResponseModel,predictResponse} from './policy.mjs';
+import {hash} from '../../commerce-design-v2/evaluate.mjs';
+const dir='docs/commerce-economy-v5/learning-1',read=path=>readFile(path,'utf8').then(JSON.parse),model=await loadResponseModel(),p=await read(dir+'/protocol.json'),d=await read(dir+'/dataset.json'),parity=await read(dir+'/parity.json');
+for(const [f,h] of Object.entries(p.economicHashes))assert.equal(hash(await readFile(f,'utf8')),h,f);
+assert.equal(model.trainingProtocolHash,p.hash);assert.equal(hash(await readFile(dir+'/dataset.json','utf8')),model.datasetHash);
+assert.equal(model.featureNames.some(n=>/seed|customer.?id|wallet|favorite|private|need|future|scenario/i.test(n)),false);
+assert.equal(model.trainingEpisodes.some(x=>model.validationEpisodes.includes(x)),false);
+assert.equal(d.rows.every(r=>r.propensity===.5&&[0,1].includes(r.assigned)&&r.x.length===model.featureNames.length&&r.x.every(Number.isFinite)&&r.y.every(Number.isFinite)),true);
+let maxError=0;for(let i=0;i<parity.x.length;i++){const actual=predictResponse(model,parity.x[i]);for(let j=0;j<2;j++)maxError=Math.max(maxError,Math.abs(actual[j]-parity.predictions[i][j]));}assert.ok(maxError<1e-7);
+const result={verifiedAt:new Date().toISOString(),passed:true,rows:d.rows.length,features:model.featureNames.length,trainingMarkets:model.trainingEpisodes.length,validationMarkets:model.validationEpisodes.length,modelRuntimeSeconds:model.runtimeSeconds,maxPythonJsPredictionError:maxError,privateFeatures:false,scope:'Data provenance, split and portable prediction checks only; no campaign profit or2x claim.'};await writeFile(dir+'/verification.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));

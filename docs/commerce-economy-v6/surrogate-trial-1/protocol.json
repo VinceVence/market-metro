@@ -1,0 +1,106 @@
+{
+  "createdAt": "2026-10-31T12:28:47.972Z",
+  "settings": {
+    "customers": 100,
+    "days": 100,
+    "campaignStop": 90,
+    "budgetCents": 5000
+  },
+  "training": [
+    {
+      "scenario": "steady",
+      "seed": 550100
+    },
+    {
+      "scenario": "rival_sale",
+      "seed": 550101
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 550102
+    },
+    {
+      "scenario": "returns_wave",
+      "seed": 550103
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 550104
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 550105
+    }
+  ],
+  "reference": {
+    "id": "fixed-uniform-1.1",
+    "kind": "discovery",
+    "business": {
+      "demand": {
+        "stockDays": [
+          14,
+          14,
+          14
+        ],
+        "windowDays": 14,
+        "useLostDemand": false,
+        "topK": 4,
+        "retrainDays": 14
+      },
+      "economics": {
+        "pricePct": [
+          0,
+          0,
+          0
+        ],
+        "merchantRail": "auto",
+        "supplierRail": "auto"
+      },
+      "lifecycle": {
+        "marketing": "weekly_featured",
+        "subscriptions": true,
+        "interval": "observed",
+        "minimumRepeat": 2,
+        "discountPct": 0
+      }
+    },
+    "discovery": "category_interest",
+    "intervalDays": 7,
+    "modelName": "ridge",
+    "thresholdCents": 0,
+    "expert": "catalog_rotation",
+    "quotePlan": {
+      "byCategory": {
+        "Stationery": 1.1,
+        "Electronics": 1.1,
+        "Furniture": 1.1,
+        "Office bundles": 1.1
+      },
+      "merchantAdjustPct": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "arms": [
+    "surrogate",
+    "random"
+  ],
+  "budgetPerArm": 12,
+  "candidatePoolPerStep": 384,
+  "searchSeed": 901803,
+  "initialCandidateCount": 30,
+  "initialDataHash": "d88957200578fb29681a630c817e180309231fc9f49ef0c635ce99d29bbe1ac3",
+  "goalCostUSD": 0.204728,
+  "hashes": {
+    "scripts/commerce-economy-v6/engine.mjs": "90f224a0e5e9277dae4dbd7dd4de79f43e2ee9782a93ae3274361de82d50764f",
+    "scripts/commerce-economy-v6/operations.mjs": "eacdde537f3cd136229b88933ee2400291b0ab2263b2628a010dbc2e7924bd18",
+    "scripts/commerce-economy-v6/quotes.mjs": "c8452d103c5431e9ad7465caba4626b339a7c04d0a9118ff515a720a7099d19f",
+    "scripts/commerce-economy-v6/runner.mjs": "6821cc95a7efe3919d8b84b4e8bdc35ebcc4898f3ad24ab8db2ad1e11bc0e6c8",
+    "scripts/commerce-economy-v6/propose-probe.py": "4f30ea043de85eb9e4fdbb4fbeb7449b830c5946307e2fc9aaee555e81b9c682",
+    "scripts/commerce-economy-v6/surrogate-trial.mjs": "426096df08d82b24694969528a5b6772dafd99ee4867322b391761ea7c710ffa"
+  },
+  "scope": "Local tool comparison only, with matched12-trial budgets and shared candidate-pool random streams. Both arms start from the same30 prior observed configurations. Gaussian-process constrained expected improvement selects experiments under approximate conditional-independence assumptions; exact simulated accounting and all counterparties control promotion. No paid models, native payments, new buyer behaviors or physics changes. No holdout access unless2x and all financial gates pass.",
+  "hash": "ca1695459b809bd13fbe1a2796429719a0544097cee07b7a8b8b0c88025bc938"
+}

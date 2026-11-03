@@ -1,0 +1,32 @@
+{
+  "datasetSha256": "0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece",
+  "dataset": "Hillstrom public randomized email challenge,2008",
+  "split": "SHA256(hillstrom-v1:row_index),60% train,20% validation,20% final test; no reshuffle",
+  "features": [
+    "recency",
+    "history",
+    "mens",
+    "womens",
+    "newbie",
+    "history_segment",
+    "zip_code",
+    "channel"
+  ],
+  "outcome": "two-week spend in USD",
+  "assignmentProbability": 0.3333333333333333,
+  "contactBudgetFraction": 0.25,
+  "models": {
+    "nuisance": "HistGradientBoostingRegressor(max_iter80,max_leaf_nodes7,min_samples_leaf100,l2_regularization10,random_state517)",
+    "incremental": "two-fold cross-fitted multi-arm DR pseudo-effects, Ridge(alpha10)"
+  },
+  "candidateSelection": "Choose response, direct-incremental or DR by validation DR revenue value only, then lock before final test",
+  "controlSelection": "Best of fixed random Mens, random Womens or high-history department message selected on validation only",
+  "evaluation": "Common train-only nuisance models; known randomization; paired DR policy value minus no email.95% normal-approximation interval conditional on fixed trained policy and target list.",
+  "limits": [
+    "Not PayPal data, not actual campaign deployment, no fees or profit inferred",
+    "One historical experiment; no modern-market calibration",
+    "Contact lists are chosen from pretreatment features only; heldout outcomes never select a policy",
+    "Inference does not include uncertainty from retraining or choosing a different dataset"
+  ],
+  "hash": "5cb3a02fd154a4a218645f0c992776d821a4a1a53d93af9bf5c34e49093c90d2"
+}

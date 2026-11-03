@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 1,
+  "id": "paypal-net-v1",
+  "status": "LOCKED",
+  "lockedAt": "2026-11-02T09:25:27.182Z",
+  "authorization": "User: lock this in as baseline; make the economy frozen.",
+  "selectedArm": "revised",
+  "decision": {
+    "evidenceId": "c523ccf3658b776a91ad0ba872ef06db0ced78d0bf4c0dc29c40f1524a6c0595",
+    "expectedMechanism": "Expanding the audience to positive EV inquiries increases outreach volume and potential conversions. Using funded_baskets fulfills these conversions efficiently without speculative inventory build-up, preserving partner cash while increasing platform and retailer USD.",
+    "risk": "Expanding the audience might increase outreach costs without proportional conversion gains if the positive EV threshold is miscalibrated. funded_baskets might miss some sales if speculative stock was actually needed for immediate fulfillment.",
+    "audience": "consented_positive_value",
+    "rationale": "The funded_baskets_interest fulfillment increased platform and retailer contribution but drained partner cash due to speculative interest-stock blending. By switching to funded_baskets, we plan complete authorized baskets using existing/incoming stock and shared cash before historical-demand buffer stock, protecting terminal cash. Using the consented_positive_value audience expands outreach to positive-expected-value inquiries, avoiding the failed pause policy. The existing model is retained as it outperformed the expert model in global campaign profit.",
+    "fulfillment": "funded_baskets",
+    "model": "existing"
+  },
+  "decisionHash": "f718b2a6da49a05fafdf9cae3d4f9992756e6f8068a4883e17e4254f4728e51a",
+  "designCostUSD": 0.025186,
+  "scorecard": {
+    "markets": 14,
+    "meanPlatformBeforeAIUSD": 751.6514285714286,
+    "meanNetAfterAIUSD": 751.6496295714286,
+    "meanNetVsFixedUSD": 16.239629571428566,
+    "meanRetailerUSD": 8823.18642857143,
+    "meanRetainedPurchases": 137.35714285714286,
+    "meanClosingPartnerCashUSD": 28241.84071428571,
+    "meanClosingInventoryUSD": 2836.9807142857144,
+    "netIntervals": {
+      "fixed": {
+        "low": 1.373915285714278,
+        "high": 33.17248671428571,
+        "method": "Paired market bootstrap, 10000 draws. Synthetic authored markets; not a production ROI interval."
+      },
+      "numerical": {
+        "low": -3.0389418571428632,
+        "high": 28.091058142857126,
+        "method": "Paired market bootstrap, 10000 draws. Synthetic authored markets; not a production ROI interval."
+      }
+    }
+  },
+  "regressionCases": [
+    {
+      "id": "C0",
+      "regime": "ordinary",
+      "panel": 0,
+      "seed": 998610
+    },
+    {
+      "id": "C1",
+      "regime": "ordinary",
+      "panel": 1,
+      "seed": 998611
+    },
+    {
+      "id": "C2",
+      "regime": "discovery",
+      "panel": 0,
+      "seed": 998612
+    },
+    {
+      "id": "C3",
+      "regime": "discovery",
+      "panel": 1,
+      "seed": 998613
+    },
+    {
+      "id": "C4",
+      "regime": "reactivation",
+      "panel": 0,
+      "seed": 998614
+    },
+    {
+      "id": "C5",
+      "regime": "reactivation",
+      "panel": 1,
+      "seed": 998615
+    },
+    {
+      "id": "C6",
+      "regime": "preference_shift",
+      "panel": 0,
+      "seed": 998616
+    },
+    {
+      "id": "C7",
+      "regime": "preference_shift",
+      "panel": 1,
+      "seed": 998617
+    },
+    {
+      "id": "C8",
+      "regime": "low_response",
+      "panel": 0,
+      "seed": 998618
+    },
+    {
+      "id": "C9",
+      "regime": "low_response",
+      "panel": 1,
+      "seed": 998619
+    },
+    {
+      "id": "C10",
+      "regime": "zero_response",
+      "panel": 0,
+      "seed": 998620
+    },
+    {
+      "id": "C11",
+      "regime": "zero_response",
+      "panel": 1,
+      "seed": 998621
+    },
+    {
+      "id": "C12",
+      "regime": "well_served",
+      "panel": 0,
+      "seed": 998622
+    },
+    {
+      "id": "C13",
+      "regime": "well_served",
+      "panel": 1,
+      "seed": 998623
+    }
+  ],
+  "benchmarkContract": {
+    "primary": "Paired settled modeled PayPal net after model cost.",
+    "comparison": "Rerun this frozen policy on the same newly registered seeds as each candidate; its recorded751.65USD is not a universal target.",
+    "preserve": [
+      "Aggregate retailer contribution",
+      "Closing partner cash",
+      "Original110% fixed-inventory safeguard",
+      "Zero unpaid liabilities",
+      "Consent, funding and contact constraints"
+    ],
+    "evidenceBoundary": "These14 seeds are now regression/development data. Preserve old losses. Confirm improvements on new seeds chosen before outcomes. Compare equally equipped single planner and team; ablate actual outputs.",
+    "costs": "Report runtime and design costs separately; amortize each design over the same number of evaluation markets.",
+    "claims": "Measured benefit from an LLM-selected campaign in an authored simulation. No established multi-agent superiority or production PayPal profit."
+  },
+  "runtime": {
+    "node": "v25.2.1",
+    "python": "3.12.14",
+    "numpy": "2.3.4",
+    "scipy": "1.18.1"
+  },
+  "economyHashes": {
+    "docs/commerce-growth/contract.json": "31b6c951ceb2028a387bd7ba57173394243843e11e9098fd9f6a87753dcdb09d",
+    "scripts/commerce-growth/kernel.mjs": "3ac01579b675c4a2162f11534d108082e386d4d037d451a4ce15d5bfb9aa0993",
+    "scripts/commerce-growth/environment.mjs": "2dd15576366e38741d6dde1f2cd1bd748a8da485e815bb0d7a02e310d552a0a3",
+    "scripts/commerce-growth/policies.mjs": "0d93abb0ac9f460989002aff9a12c7e8660d62f18b16095f221ee4faedb33603",
+    "scripts/commerce-growth/evaluate.mjs": "43777de48ffa7f1df2e819288b5dd4b97f972d01c716dcee8b4b51c7d2cf522e",
+    "scripts/commerce-growth/benchmark.mjs": "e5febd0e7039fecacd7e09cbcf17f5bb0255a43a4694039a211df1adca5fa0e6",
+    "scripts/commerce-deadlines/environment.mjs": "52af591f7a5b5454448d11248e86d2e4324d9504eccf7d9525773fbfac822cec",
+    "scripts/commerce-deadlines/suppliers.mjs": "fe8fb8c471383492ea8a28e77f4e73894b7d0a87ceb835246743337a11cba682",
+    "scripts/commerce-deadlines/policies.mjs": "c1df75eac6bc1388c337b0f44dd825343479833ffc52cc6b4b49841693c81d36",
+    "scripts/commerce-deadlines/evaluate.mjs": "44456586804dde0b4d7b2d446744400f6de2b8903a1a1679c72ad2de68bdd09b",
+    "scripts/behavior-v4/catalog.mjs": "d28989a7cf1e95ec751d74e3136574d0e30886f997cfada9a295a91588fd80a8",
+    "scripts/marketing/economy.mjs": "cefe444cda73462e32a5ba5f00a4fb58803b6584fd183f41a649fbcb2e9636a1"
+  },
+  "snapshotHashes": {
+    "demo/market/engine.mjs": "ac7d1e12ceae0920e5725f3d7eb9526ee00ca3fbd9d165178109ed97d78777fc",
+    "docs/commerce-growth/autonomy-1/funding-training/funding-prior.json": "1d697cf4d49bbf8ab9c054f07de4084cf9c3e35896d04c26034a034a2c383a2a",
+    "docs/commerce-growth/autonomy-1/shared-value-training-1/models.json": "21f4efff69087a4d3b8cf7b2d027950c6ed5346a3a9c7b288f39a1040aa8deb8",
+    "docs/commerce-growth/contract.json": "31b6c951ceb2028a387bd7ba57173394243843e11e9098fd9f6a87753dcdb09d",
+    "docs/commerce-growth/experiments-1/balanced-revision-1/revision-frozen.json": "b07403bd186cd891c53ff85c38bfc869986fd97406883772016c6f92e0950df9",
+    "docs/commerce-growth/experiments-1/bundled-1/protocol.json": "b6591ff6d884464c9d39942415faa27ece4380d3314648b89f94c28dda4ac404",
+    "docs/commerce-growth/roc-net-goal-1/NET-RESULT.md": "95dd671fdcd1f2a589c066143984e520a10dbd5a2652db81c293041c19e25465",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/customer-example.json": "9b789afa3c2108d1315cfc1c87149620890818da515f33fa1add346d42f13194",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/protocol.json": "757aec4e681015f362f11d900a824f30bdd7c64e1aa4293bfaf0ddfb92fa3f0f",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/results.json": "cf1569b180a96aca10047c382f49f00d5be0693b596533b1a76cbd78b1a07d2b",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/rows.json": "0dc6cecb98d0f3621a1883ce7bc36a5aeb3bc20a23227823c590752eca6c9c12",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-decision.json": "d32d3264096a45c6945fbd141082ff359f5e84b3859977543ac3ec1480f95575",
+    "docs/commerce-growth/roc-net-goal-1/pilot-2/team/fit-0/models.json": "159bfa93ed63a632dc9f29ecfa70f1efa0dcb533a19be2080aac4822908fdfae",
+    "docs/commerce-growth/team-1/development/results.json": "cd411af56293b675f5a54148587b43e21a941d923cbfd758a0d583f432c27a8d",
+    "docs/commerce-growth/team-1/training/model.json": "24ca6bb40717fddc516a7bd8047e00d5da19bc256b8fd8972c0424886d83929b",
+    "scripts/behavior-v4/catalog.mjs": "d28989a7cf1e95ec751d74e3136574d0e30886f997cfada9a295a91588fd80a8",
+    "scripts/commerce-deadlines/allocator.py": "901e0c66fb95ad7865b8a4b681f432d02280a59141a310e39fcd9f910108f168",
+    "scripts/commerce-deadlines/environment.mjs": "52af591f7a5b5454448d11248e86d2e4324d9504eccf7d9525773fbfac822cec",
+    "scripts/commerce-deadlines/evaluate.mjs": "44456586804dde0b4d7b2d446744400f6de2b8903a1a1679c72ad2de68bdd09b",
+    "scripts/commerce-deadlines/horizon.mjs": "a04dd13354b2144b9b13da4110545a31a9a2deeaf7cc0ea1cb10ddf948d8c0d9",
+    "scripts/commerce-deadlines/policies.mjs": "c1df75eac6bc1388c337b0f44dd825343479833ffc52cc6b4b49841693c81d36",
+    "scripts/commerce-deadlines/solver.mjs": "faf1e3627a30cb158f2f6f0a4bdcbf1265a5edbb09711509339e777d79d852c8",
+    "scripts/commerce-deadlines/suppliers.mjs": "fe8fb8c471383492ea8a28e77f4e73894b7d0a87ceb835246743337a11cba682",
+    "scripts/commerce-growth/autonomy/expert-stack.mjs": "a061a1ef4a5a85174bf98c05728e0e06a7b1b8fa7d60763fd7f8bb0e79c8d997",
+    "scripts/commerce-growth/autonomy/features.mjs": "deb12b29d9f534b2beee413d8f443ed5ed9ec194068665c0dcd4122795e14959",
+    "scripts/commerce-growth/autonomy/feedback-features.mjs": "15724cbd6e55e839fd206ea2c44bc18c0bb3538f9d5ead989e2c92277497356a",
+    "scripts/commerce-growth/autonomy/funding-calibration.mjs": "e70773433a1f47a2e9061cf07fb46dd442dd7efa718311a8d6cd8c86414a9b99",
+    "scripts/commerce-growth/autonomy/inquiry-expert.mjs": "d881f4ab2980598f51935adfe812c2e0a83ef3dd46970b013cecd916d3b1e68f",
+    "scripts/commerce-growth/autonomy/net-coordination.mjs": "eb6bac13a0702ac5e47a19e0f2eea5b421f08ed4013e6a5534afa69545f07e9b",
+    "scripts/commerce-growth/autonomy/net-revision-study.mjs": "97a8c98238260c7dae41c374c7ed07076c808f533bc663df2f04082b115d217b",
+    "scripts/commerce-growth/autonomy/policy-value.mjs": "42ed60330c45b2761d2a80261ab44ae7835ae7c551fddd1668f72e62c056728f",
+    "scripts/commerce-growth/autonomy/team-workbench-tools.mjs": "c66d719bc1784e082eff043a5fb5f420bdd93a0329dcfba2ab40cb11e635b1be",
+    "scripts/commerce-growth/baseline-replay.mjs": "4324f11b0cfd0415d17d82608b7ab941d4f6ce3b8c1e655c531dfc5b1eacc6b2",
+    "scripts/commerce-growth/benchmark.mjs": "e5febd0e7039fecacd7e09cbcf17f5bb0255a43a4694039a211df1adca5fa0e6",
+    "scripts/commerce-growth/environment.mjs": "2dd15576366e38741d6dde1f2cd1bd748a8da485e815bb0d7a02e310d552a0a3",
+    "scripts/commerce-growth/evaluate.mjs": "43777de48ffa7f1df2e819288b5dd4b97f972d01c716dcee8b4b51c7d2cf522e",
+    "scripts/commerce-growth/experiments/baskets.mjs": "eb95cc7725dcc9594aeadba17ff39be411430b231770877f0f3d22274b4dad91",
+    "scripts/commerce-growth/experiments/program.mjs": "fe09c3043fb9020fff3ebd57406b84cef662472e062f37fe363920735f9c354a",
+    "scripts/commerce-growth/kernel.mjs": "3ac01579b675c4a2162f11534d108082e386d4d037d451a4ce15d5bfb9aa0993",
+    "scripts/commerce-growth/policies.mjs": "0d93abb0ac9f460989002aff9a12c7e8660d62f18b16095f221ee4faedb33603",
+    "scripts/commerce-growth/team/control.mjs": "42dd9850fa430b928064c82250c1697f10d6cd3fc61b85ece8d5aa6fab09e184",
+    "scripts/commerce-growth/team/runner.mjs": "21013652b5aacb1e59d31b135bf54d9afe630dd5e26fbd23b842cbdb77f96509",
+    "scripts/marketing/contract.mjs": "47a2b2cbcb988dc6e4293b45b68b5a08a04778ac8343338c66ef81a52516b524",
+    "scripts/marketing/economy.mjs": "cefe444cda73462e32a5ba5f00a4fb58803b6584fd183f41a649fbcb2e9636a1",
+    "scripts/marketing/requirements.txt": "043f4adcc44c49d19700a30daf57dfefb240728069cf093cd4fed1f434c14ac9"
+  },
+  "evidenceHashes": {
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C0-fixed-trace.json": "042df3c0fe880a8303b9902904b5f02ac8289e500e78db18dfa88115bb335fe2",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C0-numerical-trace.json": "4dfe3d355b92e1394201ca7cb0180e0d54baee02492f38371f52759a993a12cf",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C0-revised-trace.json": "8ad1fd457fd47bef398c92774e63a8678f8952a87e486360007317105411e23d",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C0-without_fulfillment-trace.json": "553b8cb8ee98a60b90aec913d39a2a641fddbdc48fffb539533304208ce35eea",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C0-without_outreach-trace.json": "a4c55056463b000d15ec3d9522a7c56dd11306bfad9c909fc2b2a08f56ce74c9",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C1-fixed-trace.json": "77991d95a94995fb52b1d46c4284fb41bb70cb34edd21a2d112fe250fe1e1ab6",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C1-numerical-trace.json": "30ee75d2aa5710587b5eb827d1ea0687ee227fbe409350f078b9f3691f54774f",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C1-revised-trace.json": "5b89eafff788d4756df4d22ee9879fcb503cd9abfb4bbf6932020590a2f082b9",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C1-without_fulfillment-trace.json": "ebdd59a980b9ab12d10a59da379d9145a3386cad00ae77dad81ca225997037a2",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C1-without_outreach-trace.json": "736ec653375a759668bef8409b1c31507b97a9764999153e0afe0d3a79ae42e3",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C10-fixed-trace.json": "5e250cee854b37c259db1c090bf8d5a27f595e4f75453ff658af047387051a34",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C10-numerical-trace.json": "51bc0e4ae2df36d87ebe296014184ba1fa338e6cdc9c23bfd7475c6f74f716cf",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C10-revised-trace.json": "23f7bbd315d31ce3a8f8b0e77feb2df48d808d5af762d9398d3f446e2baa942d",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C10-without_fulfillment-trace.json": "308835f72bd49b363be36d3ee3870b7c5977123d2827fd765bb35d41fbd21592",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C10-without_outreach-trace.json": "e13cee2a0943ffed6e8f1ed6063c031823a3bdc4d6ce129fff6179bfefa93ae4",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C11-fixed-trace.json": "7d02f46185af9d248dca8f25299be043a3ab1347550a26926700f90249d12958",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C11-numerical-trace.json": "ce77caf8c097eec6abf65def67495fa9571b801db348e805b82b7bc898258062",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C11-revised-trace.json": "fa21d1a8f43ebe302c2a0835942c07cf00dccee42fff57fb9c3ed8c9f9e9eb72",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C11-without_fulfillment-trace.json": "79bdd606092087b6c73ec43a566512bcfbb724d8203865b62f4b9bb82ece9889",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C11-without_outreach-trace.json": "5e936fc4e1cb8cf312657ccd970727eedad801afd34e4f4770796dfde711304e",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C12-fixed-trace.json": "df2ff016587278b78466c1abd8931c3ed3966465e183ec7d6595cbfcadb0f261",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C12-numerical-trace.json": "4d87ff3afb34470e7b3f328ecd6e397d02253a8e3bf8150164332d45de691a81",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C12-revised-trace.json": "47f7eccd6c9a49736b6d60b6f93175a20dae3f7da67e594b82a2ef4585437bef",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C12-without_fulfillment-trace.json": "c54d1d485d303003728b86c4f7497130bb6e17fe9dc95059a4d64fc7c0cf8b1c",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C12-without_outreach-trace.json": "1192bc9a9b9a1e8c47b02da0e763f3cabfdceb106db6ae0716faa19ef8a73bdd",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C13-fixed-trace.json": "747155ff0d9b35a4aa755c0bdbdbf34fe1566a70f61e1a5167d7a6e51269fa0a",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C13-numerical-trace.json": "8974fd0750907e22e5e505516185419b815d3f480465ba7e6fbd26962202c94c",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C13-revised-trace.json": "cedce89f97afebbee057f43531c68ee7916488a31e0ef5c1c1084d5849243785",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C13-without_fulfillment-trace.json": "b51902fa248bd0a2af4276cad29c990f484d0dceeb65e409cac8adde474a00b8",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C13-without_outreach-trace.json": "541546daeed9e7df68e1a210d4d694fc1a590dc7bb79e08af4ed5bd5f236a9c1",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C2-fixed-trace.json": "dd293bf3652bde098ed85baee5a9d7d64275559b90d7d666d515f115ce0f80d5",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C2-numerical-trace.json": "4b29e13143e8e307cdc5f4d45f9090dbaa92b96000199c85d35658d046256987",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C2-revised-trace.json": "c67b6bcb12b7ec17d519a9464d9eaf7d2ea8da263e5aa106f2b1f90951f5fb78",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C2-without_fulfillment-trace.json": "f18a0b7122c81efb8d2afcbb34fb99a44cca4fbc114244ea53cf442cb19c892e",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C2-without_outreach-trace.json": "cdb7419623f64e37332297900eff3678a3e9f4d5258d329c35bf6787b9a5fc64",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C3-fixed-trace.json": "4a77e91633c53260ab8fd62755cb6f70f5dc83180e2cbb7c4de0af71422f0232",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C3-numerical-trace.json": "9eefb33d0bfa544bdb61d5b4e1cc7993d5eefc1160d7f343572ee8e26da1e683",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C3-revised-trace.json": "32ff52edde8a5bc1e06ed9101b233e01ab7c03560ae4f2236dede9c071b70f2a",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C3-without_fulfillment-trace.json": "fb204f808f0242261dceedd715693095cc027bc448393865d7f74e2bfd0a024d",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C3-without_outreach-trace.json": "f5a60c1b7be0ec5496a7ad7634f0c1188ed7ee55e74008c3d0c294c9f279b93a",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C4-fixed-trace.json": "2874fb802850e9a2069c481d51ef6242790fc4a4eb99e807cd7d7ad368ad4929",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C4-numerical-trace.json": "87bef9e82f0f7a13d91bfd0687b0fdf2f0bd6bbf4fa494ea6ea5bbe722af5347",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C4-revised-trace.json": "f2cd7c61208eb083bc6f5846ec7d9f68209cb92118a74edc5bac7ccb106d8555",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C4-without_fulfillment-trace.json": "2b8052364a97a38f96ef9cfec31d9b71b9efece90a68724273b7482ac4e46ce6",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C4-without_outreach-trace.json": "fa24e4358c74aed63f4f12bf9bdba7cbdafe4ca3499a173891e5927716d2dcab",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C5-fixed-trace.json": "662554f310f584b0b634b24fa74323f5de4554aefa90c3f2c033f46bb0734aca",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C5-numerical-trace.json": "b1c91d99ba1c825b371082082ed7979f95436940db57a204cd30d68bbfa027d4",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C5-revised-trace.json": "0888f2aab9477b550a4a9c615bea44692a48ef6ecfc14fe9b1781cd7ee1c1778",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C5-without_fulfillment-trace.json": "1e5203c62eafb83b78a5663e778d91f944966eb97042ca9c7bc4ff3b4567f3dd",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C5-without_outreach-trace.json": "5d5e737e10f712ce3f218ef6277f163ad5148e6d3191bd9b6024125d3d1d4536",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C6-fixed-trace.json": "c048bfd399209d70d6dbb9867b133e62ca8733904b598ffe1792d3c1a9e29f4d",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C6-numerical-trace.json": "8d96d5359418fabece8367fa713c3835358d861b9f38b5269619df871582f6a1",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C6-revised-trace.json": "32e865bdb6168938d703cb5332b47da2aed2291b8eff2db1ab06590d38fb8148",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C6-without_fulfillment-trace.json": "b8870c3a11277d827f7919e8f360e5630b7455afc4102bc11e1038ff2be32b67",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C6-without_outreach-trace.json": "803279d370f2e11b3ac8a7b3492ffe7584052a231fda0a5c178530424cb2ccbe",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C7-fixed-trace.json": "83556b855ac9e2b3069d4e82200967aae084cda2df0e57d638f27b09c43b1519",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C7-numerical-trace.json": "63a7852e0c10baf419ccc8ab9c8fbfcec0de80435799aec84716fd1532df2cdf",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C7-revised-trace.json": "e45a8b907bdf274642b66fcaec37e357d88d98aaa3b203bccf887682e32c4da7",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C7-without_fulfillment-trace.json": "804d2382524a6c44ef6104792c139d686f517a75988a20b5163acec5770633f3",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C7-without_outreach-trace.json": "4736693fb24b3624eb173510877d27e9b81238babe2d4663c0c79e317bcbb45d",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C8-fixed-trace.json": "d8d38ff18c350176cca938300a1515e531646dd33a632fdf5881b32ea931ef0d",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C8-numerical-trace.json": "a717367b4581a3da4b39cdffdb32ecc6fb7054d5992808a6df5da1237ce7cfa5",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C8-revised-trace.json": "bc836ac632813494e2df11a50637a382ee1a783f3c08dc9c1274a0bd75e32fda",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C8-without_fulfillment-trace.json": "0a58543050c581fdae16b7849b0a2b0b9b4462f80a903ee60f9bd9f467bac98e",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C8-without_outreach-trace.json": "8e4724d52ec3f11987550574b30114be3a6336dbc2ecc283256846fb0d1c6f4f",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C9-fixed-trace.json": "3f25532688dc22f742b19b61d3b1d082c70bd1d5003a0c0ce66685819e9a0cf5",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C9-numerical-trace.json": "8f07e061371db6eeeb7414f70293a1700e5bb7e204a27421cec54ac3374407f7",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C9-revised-trace.json": "50c94c1b6044b8857c97fffde4fb8bad1599b0c65322dacf27111247d672c1d0",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C9-without_fulfillment-trace.json": "9426e0984e9df335bb44aaf086653ecc519b3f8c960e09b8830e238faccb7a75",
+    "docs/commerce-growth/roc-net-goal-1/net-revision-confirmation-1/C9-without_outreach-trace.json": "7ef2bd1d6ce2f87281864e64d24c67e14feeccc496ead34318f206477b40a4de"
+  },
+  "source": "Exact confirmed full Gemini policy, not the retrospectively better ablation.",
+  "credentialsIncluded": false
+}

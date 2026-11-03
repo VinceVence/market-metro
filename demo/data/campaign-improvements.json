@@ -1,0 +1,4488 @@
+{
+  "version": 1,
+  "protocolHash": "46f8a5373b42dbaee6c6b4956984eefeb6b8a06b36e3496e31a141e2f56cf140",
+  "policy": {
+    "id": "exposed-lapsed",
+    "focus": true,
+    "requireLapsed": true
+  },
+  "policyHash": "66f8b8a4efde644c188dc59b4e8699f563c4363447750400d7ba2b7969081585",
+  "proof": {
+    "policyHash": "66f8b8a4efde644c188dc59b4e8699f563c4363447750400d7ba2b7969081585",
+    "source": "INDEPENDENT_PAIRED_SIMULATION",
+    "selectedBeforeTest": true,
+    "seeds": 12,
+    "scenarios": 5,
+    "shoppingDays": 400,
+    "lastCampaignDay": 199,
+    "mature": true,
+    "integrityPassed": true,
+    "platformAfterCost": {
+      "mean": -1.2694999999999999,
+      "low": -1.9720499999999996,
+      "high": -0.5154666666666669,
+      "seeds": 12,
+      "cases": 60,
+      "winRate": 0.2,
+      "worst": -12.629999999999999,
+      "worstDecileMean": -10.049999999999999,
+      "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+    },
+    "merchant": {
+      "mean": -2.2735000000000007,
+      "low": -17.0851875,
+      "high": 14.217983333333331,
+      "seeds": 12,
+      "cases": 60,
+      "winRate": 0.2,
+      "worst": -169.39,
+      "worstDecileMean": -107.21500000000002,
+      "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+    }
+  },
+  "gate": {
+    "status": "BLOCKED",
+    "issues": [
+      "The platform lower95% bound after all costs must be above zero.",
+      "The merchant lower95% bound must be nonnegative."
+    ],
+    "scope": "SIMULATION_SCALE_UP_ONLY",
+    "pilotAllowed": true,
+    "disclosure": "Conditional simulation evidence. This gate cannot establish real PayPal profit or authorize native payments."
+  },
+  "stats": {
+    "platform": {
+      "mean": -1.2694999999999999,
+      "low": -1.9720499999999996,
+      "high": -0.5154666666666669,
+      "seeds": 12,
+      "cases": 60,
+      "winRate": 0.2,
+      "worst": -12.629999999999999,
+      "worstDecileMean": -10.049999999999999,
+      "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+    },
+    "merchant": {
+      "mean": -2.2735000000000007,
+      "low": -17.0851875,
+      "high": 14.217983333333331,
+      "seeds": 12,
+      "cases": 60,
+      "winRate": 0.2,
+      "worst": -169.39,
+      "worstDecileMean": -107.21500000000002,
+      "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+    },
+    "volume": {
+      "mean": 18.217,
+      "low": -3.0840249999999996,
+      "high": 43.946,
+      "seeds": 12,
+      "cases": 60,
+      "winRate": 0.26666666666666666,
+      "worst": -164.06,
+      "worstDecileMean": -90.16166666666665,
+      "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+    },
+    "vsBroad": {
+      "mean": 3.5063333333333335,
+      "low": 2.137958333333333,
+      "high": 4.840516666666666,
+      "seeds": 12,
+      "cases": 60,
+      "winRate": 0.4,
+      "worst": -5.709999999999999,
+      "worstDecileMean": -2.57,
+      "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+    }
+  },
+  "policies": [
+    {
+      "id": "organic",
+      "platform": {
+        "mean": 0,
+        "low": 0,
+        "high": 0,
+        "seeds": 12,
+        "cases": 60,
+        "winRate": 0,
+        "worst": 0,
+        "worstDecileMean": 0,
+        "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+      },
+      "merchant": {
+        "mean": 0,
+        "low": 0,
+        "high": 0,
+        "seeds": 12,
+        "cases": 60,
+        "winRate": 0,
+        "worst": 0,
+        "worstDecileMean": 0,
+        "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+      },
+      "volume": {
+        "mean": 0,
+        "low": 0,
+        "high": 0,
+        "seeds": 12,
+        "cases": 60,
+        "winRate": 0,
+        "worst": 0,
+        "worstDecileMean": 0,
+        "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+      },
+      "meanRecommendations": 0,
+      "meanPurchases": 5935.75,
+      "bridge": {
+        "extraMarginUSD": 0,
+        "outreachUSD": 0,
+        "modelAllowanceUSD": 0,
+        "netUSD": 0
+      }
+    },
+    {
+      "id": "broad-quality-route",
+      "platform": {
+        "mean": -4.775833333333333,
+        "low": -5.864354166666665,
+        "high": -3.5747458333333335,
+        "seeds": 12,
+        "cases": 60,
+        "winRate": 0.1,
+        "worst": -36.56,
+        "worstDecileMean": -31.75,
+        "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+      },
+      "merchant": {
+        "mean": 36.653666666666666,
+        "low": 10.329854166666667,
+        "high": 62.24933333333333,
+        "seeds": 12,
+        "cases": 60,
+        "winRate": 0.35,
+        "worst": -232.8,
+        "worstDecileMean": -97.22166666666665,
+        "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+      },
+      "volume": {
+        "mean": 127.73683333333334,
+        "low": 81.725,
+        "high": 180.71222916666665,
+        "seeds": 12,
+        "cases": 60,
+        "winRate": 0.4166666666666667,
+        "worst": -154.23,
+        "worstDecileMean": -77.38333333333333,
+        "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+      },
+      "meanRecommendations": 454.25,
+      "meanPurchases": 5937.833333333333,
+      "bridge": {
+        "extraMarginUSD": 4.309166666666667,
+        "outreachUSD": 9.085,
+        "modelAllowanceUSD": 0,
+        "netUSD": -4.775833333333333
+      }
+    },
+    {
+      "id": "exposed-lapsed",
+      "platform": {
+        "mean": -1.2694999999999999,
+        "low": -1.9720499999999996,
+        "high": -0.5154666666666669,
+        "seeds": 12,
+        "cases": 60,
+        "winRate": 0.2,
+        "worst": -12.629999999999999,
+        "worstDecileMean": -10.049999999999999,
+        "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+      },
+      "merchant": {
+        "mean": -2.2735000000000007,
+        "low": -17.0851875,
+        "high": 14.217983333333331,
+        "seeds": 12,
+        "cases": 60,
+        "winRate": 0.2,
+        "worst": -169.39,
+        "worstDecileMean": -107.21500000000002,
+        "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+      },
+      "volume": {
+        "mean": 18.217,
+        "low": -3.0840249999999996,
+        "high": 43.946,
+        "seeds": 12,
+        "cases": 60,
+        "winRate": 0.26666666666666666,
+        "worst": -164.06,
+        "worstDecileMean": -90.16166666666665,
+        "interval": "95% percentile bootstrap over seed clusters; scenarios equally weighted; conditional on these five scenarios"
+      },
+      "meanRecommendations": 79.03333333333333,
+      "meanPurchases": 5935.916666666667,
+      "bridge": {
+        "extraMarginUSD": 0.4111666666666671,
+        "outreachUSD": 1.5806666666666667,
+        "modelAllowanceUSD": 0.1,
+        "netUSD": -1.2694999999999999
+      }
+    }
+  ],
+  "lossReductionPct": 73.41825161402897,
+  "marketCount": 60,
+  "seeds": 12,
+  "scenarios": [
+    "steady",
+    "rival_sale",
+    "budget_squeeze",
+    "supply_delay",
+    "returns_wave"
+  ],
+  "shoppingDays": 400,
+  "campaignDays": [
+    30,
+    199
+  ],
+  "planner": {
+    "actor": "CHAT_ASSISTANT",
+    "decision": "Test exposed-lapsed",
+    "rationale": "Use observed prior merchant exposure plus lapse, reducing irrelevant contacts. Development mean improved but confidence overlaps zero. Keep scaled deployment off until independent confirmation."
+  },
+  "trajectory": [
+    {
+      "day": 31,
+      "organic": 0,
+      "broad-quality-route": 0,
+      "exposed-lapsed": -0.1
+    },
+    {
+      "day": 32,
+      "organic": 0,
+      "broad-quality-route": 0,
+      "exposed-lapsed": -0.1
+    },
+    {
+      "day": 33,
+      "organic": 0,
+      "broad-quality-route": 0.06750000000000002,
+      "exposed-lapsed": -0.015833333333333338
+    },
+    {
+      "day": 34,
+      "organic": 0,
+      "broad-quality-route": 0.06750000000000002,
+      "exposed-lapsed": -0.015833333333333338
+    },
+    {
+      "day": 35,
+      "organic": 0,
+      "broad-quality-route": 0.06750000000000002,
+      "exposed-lapsed": -0.015833333333333338
+    },
+    {
+      "day": 36,
+      "organic": 0,
+      "broad-quality-route": 0.06750000000000002,
+      "exposed-lapsed": -0.015833333333333338
+    },
+    {
+      "day": 37,
+      "organic": 0,
+      "broad-quality-route": 0.06750000000000002,
+      "exposed-lapsed": -0.015833333333333338
+    },
+    {
+      "day": 38,
+      "organic": 0,
+      "broad-quality-route": 0.06750000000000002,
+      "exposed-lapsed": -0.015833333333333338
+    },
+    {
+      "day": 39,
+      "organic": 0,
+      "broad-quality-route": 0.06750000000000002,
+      "exposed-lapsed": -0.015833333333333338
+    },
+    {
+      "day": 40,
+      "organic": 0,
+      "broad-quality-route": 0.06750000000000002,
+      "exposed-lapsed": -0.015833333333333338
+    },
+    {
+      "day": 41,
+      "organic": 0,
+      "broad-quality-route": 0.06750000000000002,
+      "exposed-lapsed": -0.015833333333333338
+    },
+    {
+      "day": 42,
+      "organic": 0,
+      "broad-quality-route": 0.06750000000000002,
+      "exposed-lapsed": -0.015833333333333338
+    },
+    {
+      "day": 43,
+      "organic": 0,
+      "broad-quality-route": 0.06750000000000002,
+      "exposed-lapsed": -0.015833333333333338
+    },
+    {
+      "day": 44,
+      "organic": 0,
+      "broad-quality-route": 0.050333333333333334,
+      "exposed-lapsed": -0.033
+    },
+    {
+      "day": 45,
+      "organic": 0,
+      "broad-quality-route": 0.03316666666666667,
+      "exposed-lapsed": -0.033
+    },
+    {
+      "day": 46,
+      "organic": 0,
+      "broad-quality-route": 0.03316666666666667,
+      "exposed-lapsed": -0.033
+    },
+    {
+      "day": 47,
+      "organic": 0,
+      "broad-quality-route": 0.03316666666666667,
+      "exposed-lapsed": -0.033
+    },
+    {
+      "day": 48,
+      "organic": 0,
+      "broad-quality-route": 0.03316666666666667,
+      "exposed-lapsed": -0.033
+    },
+    {
+      "day": 49,
+      "organic": 0,
+      "broad-quality-route": 0.050333333333333334,
+      "exposed-lapsed": -0.033
+    },
+    {
+      "day": 50,
+      "organic": 0,
+      "broad-quality-route": 0.050333333333333334,
+      "exposed-lapsed": -0.033
+    },
+    {
+      "day": 51,
+      "organic": 0,
+      "broad-quality-route": 0.16783333333333336,
+      "exposed-lapsed": -0.03833333333333334
+    },
+    {
+      "day": 52,
+      "organic": 0,
+      "broad-quality-route": 0.6535000000000001,
+      "exposed-lapsed": -0.067
+    },
+    {
+      "day": 53,
+      "organic": 0,
+      "broad-quality-route": 1.1298333333333332,
+      "exposed-lapsed": -0.027000000000000024
+    },
+    {
+      "day": 54,
+      "organic": 0,
+      "broad-quality-route": 1.1941666666666666,
+      "exposed-lapsed": -0.028833333333333336
+    },
+    {
+      "day": 55,
+      "organic": 0,
+      "broad-quality-route": 1.0768333333333333,
+      "exposed-lapsed": 0.0013333333333333253
+    },
+    {
+      "day": 56,
+      "organic": 0,
+      "broad-quality-route": 1.0778333333333334,
+      "exposed-lapsed": -0.009833333333333333
+    },
+    {
+      "day": 57,
+      "organic": 0,
+      "broad-quality-route": 1.1239999999999999,
+      "exposed-lapsed": -0.08766666666666667
+    },
+    {
+      "day": 58,
+      "organic": 0,
+      "broad-quality-route": 1.0735,
+      "exposed-lapsed": -0.11616666666666667
+    },
+    {
+      "day": 59,
+      "organic": 0,
+      "broad-quality-route": 1.1625,
+      "exposed-lapsed": -0.10966666666666668
+    },
+    {
+      "day": 60,
+      "organic": 0,
+      "broad-quality-route": 1.0363333333333336,
+      "exposed-lapsed": -0.19233333333333333
+    },
+    {
+      "day": 61,
+      "organic": 0,
+      "broad-quality-route": 1.0415000000000003,
+      "exposed-lapsed": -0.192
+    },
+    {
+      "day": 62,
+      "organic": 0,
+      "broad-quality-route": 0.9533333333333336,
+      "exposed-lapsed": -0.15950000000000003
+    },
+    {
+      "day": 63,
+      "organic": 0,
+      "broad-quality-route": 0.8155,
+      "exposed-lapsed": -0.15066666666666667
+    },
+    {
+      "day": 64,
+      "organic": 0,
+      "broad-quality-route": 0.7701666666666668,
+      "exposed-lapsed": -0.15733333333333333
+    },
+    {
+      "day": 65,
+      "organic": 0,
+      "broad-quality-route": 0.7076666666666667,
+      "exposed-lapsed": -0.2095
+    },
+    {
+      "day": 66,
+      "organic": 0,
+      "broad-quality-route": 0.8745000000000002,
+      "exposed-lapsed": -0.16066666666666668
+    },
+    {
+      "day": 67,
+      "organic": 0,
+      "broad-quality-route": 0.9030000000000002,
+      "exposed-lapsed": -0.13933333333333336
+    },
+    {
+      "day": 68,
+      "organic": 0,
+      "broad-quality-route": 1.0850000000000004,
+      "exposed-lapsed": -0.09849999999999996
+    },
+    {
+      "day": 69,
+      "organic": 0,
+      "broad-quality-route": 0.9685000000000001,
+      "exposed-lapsed": -0.1518333333333333
+    },
+    {
+      "day": 70,
+      "organic": 0,
+      "broad-quality-route": 0.8710000000000001,
+      "exposed-lapsed": -0.06933333333333334
+    },
+    {
+      "day": 71,
+      "organic": 0,
+      "broad-quality-route": 0.8331666666666668,
+      "exposed-lapsed": -0.08900000000000002
+    },
+    {
+      "day": 72,
+      "organic": 0,
+      "broad-quality-route": 0.7736666666666667,
+      "exposed-lapsed": -0.1065
+    },
+    {
+      "day": 73,
+      "organic": 0,
+      "broad-quality-route": 1.0455,
+      "exposed-lapsed": -0.10733333333333336
+    },
+    {
+      "day": 74,
+      "organic": 0,
+      "broad-quality-route": 1.0941666666666667,
+      "exposed-lapsed": -0.138
+    },
+    {
+      "day": 75,
+      "organic": 0,
+      "broad-quality-route": 0.9918333333333336,
+      "exposed-lapsed": -0.17983333333333335
+    },
+    {
+      "day": 76,
+      "organic": 0,
+      "broad-quality-route": 0.8995,
+      "exposed-lapsed": -0.25449999999999995
+    },
+    {
+      "day": 77,
+      "organic": 0,
+      "broad-quality-route": 0.9306666666666668,
+      "exposed-lapsed": -0.28650000000000003
+    },
+    {
+      "day": 78,
+      "organic": 0,
+      "broad-quality-route": 1.1641666666666666,
+      "exposed-lapsed": -0.26416666666666666
+    },
+    {
+      "day": 79,
+      "organic": 0,
+      "broad-quality-route": 0.9401666666666666,
+      "exposed-lapsed": -0.2738333333333333
+    },
+    {
+      "day": 80,
+      "organic": 0,
+      "broad-quality-route": 1.1423333333333332,
+      "exposed-lapsed": -0.25249999999999995
+    },
+    {
+      "day": 81,
+      "organic": 0,
+      "broad-quality-route": 1.0615,
+      "exposed-lapsed": -0.22849999999999993
+    },
+    {
+      "day": 82,
+      "organic": 0,
+      "broad-quality-route": 0.9413333333333335,
+      "exposed-lapsed": -0.26916666666666667
+    },
+    {
+      "day": 83,
+      "organic": 0,
+      "broad-quality-route": 1.0245,
+      "exposed-lapsed": -0.27549999999999997
+    },
+    {
+      "day": 84,
+      "organic": 0,
+      "broad-quality-route": 0.9916666666666669,
+      "exposed-lapsed": -0.2485
+    },
+    {
+      "day": 85,
+      "organic": 0,
+      "broad-quality-route": 1.0703333333333334,
+      "exposed-lapsed": -0.29283333333333333
+    },
+    {
+      "day": 86,
+      "organic": 0,
+      "broad-quality-route": 1.148666666666667,
+      "exposed-lapsed": -0.3438333333333333
+    },
+    {
+      "day": 87,
+      "organic": 0,
+      "broad-quality-route": 1.1588333333333334,
+      "exposed-lapsed": -0.33166666666666667
+    },
+    {
+      "day": 88,
+      "organic": 0,
+      "broad-quality-route": 0.8940000000000001,
+      "exposed-lapsed": -0.37050000000000005
+    },
+    {
+      "day": 89,
+      "organic": 0,
+      "broad-quality-route": 0.5716666666666667,
+      "exposed-lapsed": -0.37849999999999995
+    },
+    {
+      "day": 90,
+      "organic": 0,
+      "broad-quality-route": 0.5525,
+      "exposed-lapsed": -0.4016666666666667
+    },
+    {
+      "day": 91,
+      "organic": 0,
+      "broad-quality-route": 0.5738333333333333,
+      "exposed-lapsed": -0.45633333333333337
+    },
+    {
+      "day": 92,
+      "organic": 0,
+      "broad-quality-route": 0.6650000000000001,
+      "exposed-lapsed": -0.42833333333333323
+    },
+    {
+      "day": 93,
+      "organic": 0,
+      "broad-quality-route": 0.4745,
+      "exposed-lapsed": -0.4475000000000001
+    },
+    {
+      "day": 94,
+      "organic": 0,
+      "broad-quality-route": 0.5175,
+      "exposed-lapsed": -0.41566666666666674
+    },
+    {
+      "day": 95,
+      "organic": 0,
+      "broad-quality-route": 0.2921666666666667,
+      "exposed-lapsed": -0.4311666666666667
+    },
+    {
+      "day": 96,
+      "organic": 0,
+      "broad-quality-route": 0.051000000000000094,
+      "exposed-lapsed": -0.45433333333333326
+    },
+    {
+      "day": 97,
+      "organic": 0,
+      "broad-quality-route": 0.15133333333333335,
+      "exposed-lapsed": -0.3448333333333334
+    },
+    {
+      "day": 98,
+      "organic": 0,
+      "broad-quality-route": 0.25599999999999995,
+      "exposed-lapsed": -0.3856666666666667
+    },
+    {
+      "day": 99,
+      "organic": 0,
+      "broad-quality-route": 0.7913333333333333,
+      "exposed-lapsed": -0.2695000000000001
+    },
+    {
+      "day": 100,
+      "organic": 0,
+      "broad-quality-route": 0.39216666666666655,
+      "exposed-lapsed": -0.3636666666666667
+    },
+    {
+      "day": 101,
+      "organic": 0,
+      "broad-quality-route": 0.19333333333333333,
+      "exposed-lapsed": -0.3016666666666667
+    },
+    {
+      "day": 102,
+      "organic": 0,
+      "broad-quality-route": -0.18016666666666664,
+      "exposed-lapsed": -0.3105000000000001
+    },
+    {
+      "day": 103,
+      "organic": 0,
+      "broad-quality-route": -0.44666666666666655,
+      "exposed-lapsed": -0.23383333333333337
+    },
+    {
+      "day": 104,
+      "organic": 0,
+      "broad-quality-route": -0.574,
+      "exposed-lapsed": -0.15266666666666673
+    },
+    {
+      "day": 105,
+      "organic": 0,
+      "broad-quality-route": -0.4526666666666666,
+      "exposed-lapsed": -0.14933333333333335
+    },
+    {
+      "day": 106,
+      "organic": 0,
+      "broad-quality-route": -0.48283333333333334,
+      "exposed-lapsed": -0.13950000000000012
+    },
+    {
+      "day": 107,
+      "organic": 0,
+      "broad-quality-route": -0.06416666666666657,
+      "exposed-lapsed": 0.010833333333333306
+    },
+    {
+      "day": 108,
+      "organic": 0,
+      "broad-quality-route": -0.026833333333333265,
+      "exposed-lapsed": -0.035166666666666666
+    },
+    {
+      "day": 109,
+      "organic": 0,
+      "broad-quality-route": -0.09449999999999997,
+      "exposed-lapsed": -0.08299999999999996
+    },
+    {
+      "day": 110,
+      "organic": 0,
+      "broad-quality-route": -0.3063333333333333,
+      "exposed-lapsed": -0.09349999999999997
+    },
+    {
+      "day": 111,
+      "organic": 0,
+      "broad-quality-route": -0.24633333333333335,
+      "exposed-lapsed": -0.24883333333333335
+    },
+    {
+      "day": 112,
+      "organic": 0,
+      "broad-quality-route": -0.08266666666666657,
+      "exposed-lapsed": -0.24216666666666672
+    },
+    {
+      "day": 113,
+      "organic": 0,
+      "broad-quality-route": -0.32183333333333314,
+      "exposed-lapsed": -0.23233333333333336
+    },
+    {
+      "day": 114,
+      "organic": 0,
+      "broad-quality-route": -0.5221666666666667,
+      "exposed-lapsed": -0.22883333333333333
+    },
+    {
+      "day": 115,
+      "organic": 0,
+      "broad-quality-route": -0.26099999999999995,
+      "exposed-lapsed": -0.29
+    },
+    {
+      "day": 116,
+      "organic": 0,
+      "broad-quality-route": -0.6530000000000001,
+      "exposed-lapsed": -0.45433333333333326
+    },
+    {
+      "day": 117,
+      "organic": 0,
+      "broad-quality-route": -0.8078333333333334,
+      "exposed-lapsed": -0.4983333333333335
+    },
+    {
+      "day": 118,
+      "organic": 0,
+      "broad-quality-route": -0.9275000000000004,
+      "exposed-lapsed": -0.5471666666666667
+    },
+    {
+      "day": 119,
+      "organic": 0,
+      "broad-quality-route": -0.8815000000000004,
+      "exposed-lapsed": -0.5211666666666669
+    },
+    {
+      "day": 120,
+      "organic": 0,
+      "broad-quality-route": -0.8123333333333336,
+      "exposed-lapsed": -0.6276666666666669
+    },
+    {
+      "day": 121,
+      "organic": 0,
+      "broad-quality-route": -0.9486666666666671,
+      "exposed-lapsed": -0.6195000000000003
+    },
+    {
+      "day": 122,
+      "organic": 0,
+      "broad-quality-route": -1.1036666666666666,
+      "exposed-lapsed": -0.652666666666667
+    },
+    {
+      "day": 123,
+      "organic": 0,
+      "broad-quality-route": -1.5006666666666666,
+      "exposed-lapsed": -0.6826666666666669
+    },
+    {
+      "day": 124,
+      "organic": 0,
+      "broad-quality-route": -1.6283333333333336,
+      "exposed-lapsed": -0.6480000000000001
+    },
+    {
+      "day": 125,
+      "organic": 0,
+      "broad-quality-route": -1.5173333333333334,
+      "exposed-lapsed": -0.5825000000000001
+    },
+    {
+      "day": 126,
+      "organic": 0,
+      "broad-quality-route": -1.5590000000000004,
+      "exposed-lapsed": -0.614
+    },
+    {
+      "day": 127,
+      "organic": 0,
+      "broad-quality-route": -1.0083333333333335,
+      "exposed-lapsed": -0.5285000000000001
+    },
+    {
+      "day": 128,
+      "organic": 0,
+      "broad-quality-route": -1.1880000000000004,
+      "exposed-lapsed": -0.5171666666666667
+    },
+    {
+      "day": 129,
+      "organic": 0,
+      "broad-quality-route": -0.9531666666666668,
+      "exposed-lapsed": -0.5496666666666665
+    },
+    {
+      "day": 130,
+      "organic": 0,
+      "broad-quality-route": -1.2926666666666666,
+      "exposed-lapsed": -0.513
+    },
+    {
+      "day": 131,
+      "organic": 0,
+      "broad-quality-route": -1.5681666666666667,
+      "exposed-lapsed": -0.48216666666666663
+    },
+    {
+      "day": 132,
+      "organic": 0,
+      "broad-quality-route": -1.6851666666666667,
+      "exposed-lapsed": -0.5301666666666667
+    },
+    {
+      "day": 133,
+      "organic": 0,
+      "broad-quality-route": -1.8254999999999997,
+      "exposed-lapsed": -0.6470000000000002
+    },
+    {
+      "day": 134,
+      "organic": 0,
+      "broad-quality-route": -1.8591666666666673,
+      "exposed-lapsed": -0.6016666666666668
+    },
+    {
+      "day": 135,
+      "organic": 0,
+      "broad-quality-route": -1.6120000000000003,
+      "exposed-lapsed": -0.5836666666666667
+    },
+    {
+      "day": 136,
+      "organic": 0,
+      "broad-quality-route": -1.6350000000000002,
+      "exposed-lapsed": -0.5658333333333333
+    },
+    {
+      "day": 137,
+      "organic": 0,
+      "broad-quality-route": -2.1213333333333333,
+      "exposed-lapsed": -0.5738333333333333
+    },
+    {
+      "day": 138,
+      "organic": 0,
+      "broad-quality-route": -2.1899999999999995,
+      "exposed-lapsed": -0.6021666666666665
+    },
+    {
+      "day": 139,
+      "organic": 0,
+      "broad-quality-route": -1.8265,
+      "exposed-lapsed": -0.4179999999999999
+    },
+    {
+      "day": 140,
+      "organic": 0,
+      "broad-quality-route": -1.7708333333333335,
+      "exposed-lapsed": -0.4108333333333334
+    },
+    {
+      "day": 141,
+      "organic": 0,
+      "broad-quality-route": -1.6565000000000003,
+      "exposed-lapsed": -0.4179999999999998
+    },
+    {
+      "day": 142,
+      "organic": 0,
+      "broad-quality-route": -1.5208333333333337,
+      "exposed-lapsed": -0.3371666666666666
+    },
+    {
+      "day": 143,
+      "organic": 0,
+      "broad-quality-route": -1.448666666666667,
+      "exposed-lapsed": -0.3746666666666667
+    },
+    {
+      "day": 144,
+      "organic": 0,
+      "broad-quality-route": -1.787666666666667,
+      "exposed-lapsed": -0.37883333333333324
+    },
+    {
+      "day": 145,
+      "organic": 0,
+      "broad-quality-route": -1.8780000000000001,
+      "exposed-lapsed": -0.4136666666666666
+    },
+    {
+      "day": 146,
+      "organic": 0,
+      "broad-quality-route": -1.5615,
+      "exposed-lapsed": -0.3633333333333333
+    },
+    {
+      "day": 147,
+      "organic": 0,
+      "broad-quality-route": -1.4818333333333338,
+      "exposed-lapsed": -0.32666666666666666
+    },
+    {
+      "day": 148,
+      "organic": 0,
+      "broad-quality-route": -1.336166666666667,
+      "exposed-lapsed": -0.39983333333333326
+    },
+    {
+      "day": 149,
+      "organic": 0,
+      "broad-quality-route": -1.675666666666667,
+      "exposed-lapsed": -0.4713333333333334
+    },
+    {
+      "day": 150,
+      "organic": 0,
+      "broad-quality-route": -1.746833333333334,
+      "exposed-lapsed": -0.43900000000000006
+    },
+    {
+      "day": 151,
+      "organic": 0,
+      "broad-quality-route": -2.0006666666666666,
+      "exposed-lapsed": -0.4525
+    },
+    {
+      "day": 152,
+      "organic": 0,
+      "broad-quality-route": -2.1465000000000005,
+      "exposed-lapsed": -0.4640000000000002
+    },
+    {
+      "day": 153,
+      "organic": 0,
+      "broad-quality-route": -1.987666666666667,
+      "exposed-lapsed": -0.4351666666666666
+    },
+    {
+      "day": 154,
+      "organic": 0,
+      "broad-quality-route": -1.9714999999999998,
+      "exposed-lapsed": -0.46783333333333343
+    },
+    {
+      "day": 155,
+      "organic": 0,
+      "broad-quality-route": -2.170833333333334,
+      "exposed-lapsed": -0.5328333333333335
+    },
+    {
+      "day": 156,
+      "organic": 0,
+      "broad-quality-route": -2.081166666666667,
+      "exposed-lapsed": -0.5593333333333333
+    },
+    {
+      "day": 157,
+      "organic": 0,
+      "broad-quality-route": -1.9005000000000005,
+      "exposed-lapsed": -0.556
+    },
+    {
+      "day": 158,
+      "organic": 0,
+      "broad-quality-route": -2.054333333333333,
+      "exposed-lapsed": -0.6388333333333335
+    },
+    {
+      "day": 159,
+      "organic": 0,
+      "broad-quality-route": -2.309,
+      "exposed-lapsed": -0.5918333333333333
+    },
+    {
+      "day": 160,
+      "organic": 0,
+      "broad-quality-route": -2.259,
+      "exposed-lapsed": -0.6238333333333334
+    },
+    {
+      "day": 161,
+      "organic": 0,
+      "broad-quality-route": -2.2861666666666673,
+      "exposed-lapsed": -0.6655000000000002
+    },
+    {
+      "day": 162,
+      "organic": 0,
+      "broad-quality-route": -1.8685000000000005,
+      "exposed-lapsed": -0.6398333333333336
+    },
+    {
+      "day": 163,
+      "organic": 0,
+      "broad-quality-route": -1.9835000000000003,
+      "exposed-lapsed": -0.6306666666666667
+    },
+    {
+      "day": 164,
+      "organic": 0,
+      "broad-quality-route": -2.264166666666668,
+      "exposed-lapsed": -0.5455
+    },
+    {
+      "day": 165,
+      "organic": 0,
+      "broad-quality-route": -2.224333333333335,
+      "exposed-lapsed": -0.5403333333333333
+    },
+    {
+      "day": 166,
+      "organic": 0,
+      "broad-quality-route": -2.3901666666666666,
+      "exposed-lapsed": -0.5308333333333333
+    },
+    {
+      "day": 167,
+      "organic": 0,
+      "broad-quality-route": -2.209166666666667,
+      "exposed-lapsed": -0.48649999999999993
+    },
+    {
+      "day": 168,
+      "organic": 0,
+      "broad-quality-route": -2.3856666666666673,
+      "exposed-lapsed": -0.5413333333333332
+    },
+    {
+      "day": 169,
+      "organic": 0,
+      "broad-quality-route": -2.314166666666667,
+      "exposed-lapsed": -0.5341666666666668
+    },
+    {
+      "day": 170,
+      "organic": 0,
+      "broad-quality-route": -2.434833333333333,
+      "exposed-lapsed": -0.6538333333333334
+    },
+    {
+      "day": 171,
+      "organic": 0,
+      "broad-quality-route": -2.4386666666666668,
+      "exposed-lapsed": -0.5551666666666667
+    },
+    {
+      "day": 172,
+      "organic": 0,
+      "broad-quality-route": -2.539666666666667,
+      "exposed-lapsed": -0.5638333333333332
+    },
+    {
+      "day": 173,
+      "organic": 0,
+      "broad-quality-route": -2.4963333333333337,
+      "exposed-lapsed": -0.5546666666666669
+    },
+    {
+      "day": 174,
+      "organic": 0,
+      "broad-quality-route": -2.5721666666666674,
+      "exposed-lapsed": -0.5811666666666667
+    },
+    {
+      "day": 175,
+      "organic": 0,
+      "broad-quality-route": -2.7283333333333335,
+      "exposed-lapsed": -0.5661666666666667
+    },
+    {
+      "day": 176,
+      "organic": 0,
+      "broad-quality-route": -2.8035,
+      "exposed-lapsed": -0.5399999999999997
+    },
+    {
+      "day": 177,
+      "organic": 0,
+      "broad-quality-route": -3.013333333333333,
+      "exposed-lapsed": -0.5439999999999999
+    },
+    {
+      "day": 178,
+      "organic": 0,
+      "broad-quality-route": -2.990166666666666,
+      "exposed-lapsed": -0.5385
+    },
+    {
+      "day": 179,
+      "organic": 0,
+      "broad-quality-route": -3.0300000000000002,
+      "exposed-lapsed": -0.6043333333333332
+    },
+    {
+      "day": 180,
+      "organic": 0,
+      "broad-quality-route": -3.0805000000000002,
+      "exposed-lapsed": -0.5903333333333332
+    },
+    {
+      "day": 181,
+      "organic": 0,
+      "broad-quality-route": -3.0863333333333336,
+      "exposed-lapsed": -0.6945
+    },
+    {
+      "day": 182,
+      "organic": 0,
+      "broad-quality-route": -3.283166666666666,
+      "exposed-lapsed": -0.7393333333333333
+    },
+    {
+      "day": 183,
+      "organic": 0,
+      "broad-quality-route": -3.2049999999999996,
+      "exposed-lapsed": -0.84
+    },
+    {
+      "day": 184,
+      "organic": 0,
+      "broad-quality-route": -3.32,
+      "exposed-lapsed": -0.8513333333333333
+    },
+    {
+      "day": 185,
+      "organic": 0,
+      "broad-quality-route": -2.9386666666666668,
+      "exposed-lapsed": -0.8006666666666664
+    },
+    {
+      "day": 186,
+      "organic": 0,
+      "broad-quality-route": -2.9036666666666657,
+      "exposed-lapsed": -0.7761666666666666
+    },
+    {
+      "day": 187,
+      "organic": 0,
+      "broad-quality-route": -3.0091666666666663,
+      "exposed-lapsed": -0.6756666666666666
+    },
+    {
+      "day": 188,
+      "organic": 0,
+      "broad-quality-route": -2.6966666666666663,
+      "exposed-lapsed": -0.7835
+    },
+    {
+      "day": 189,
+      "organic": 0,
+      "broad-quality-route": -2.8076666666666665,
+      "exposed-lapsed": -0.8319999999999999
+    },
+    {
+      "day": 190,
+      "organic": 0,
+      "broad-quality-route": -2.4551666666666656,
+      "exposed-lapsed": -0.8361666666666665
+    },
+    {
+      "day": 191,
+      "organic": 0,
+      "broad-quality-route": -2.718999999999999,
+      "exposed-lapsed": -0.7761666666666667
+    },
+    {
+      "day": 192,
+      "organic": 0,
+      "broad-quality-route": -3.062,
+      "exposed-lapsed": -0.9496666666666665
+    },
+    {
+      "day": 193,
+      "organic": 0,
+      "broad-quality-route": -3.4604999999999992,
+      "exposed-lapsed": -0.9381666666666665
+    },
+    {
+      "day": 194,
+      "organic": 0,
+      "broad-quality-route": -3.567999999999999,
+      "exposed-lapsed": -0.8753333333333331
+    },
+    {
+      "day": 195,
+      "organic": 0,
+      "broad-quality-route": -3.4463333333333326,
+      "exposed-lapsed": -0.9536666666666664
+    },
+    {
+      "day": 196,
+      "organic": 0,
+      "broad-quality-route": -3.576333333333332,
+      "exposed-lapsed": -0.9406666666666665
+    },
+    {
+      "day": 197,
+      "organic": 0,
+      "broad-quality-route": -3.5403333333333324,
+      "exposed-lapsed": -1.007
+    },
+    {
+      "day": 198,
+      "organic": 0,
+      "broad-quality-route": -3.5635,
+      "exposed-lapsed": -0.9404999999999999
+    },
+    {
+      "day": 199,
+      "organic": 0,
+      "broad-quality-route": -3.487833333333333,
+      "exposed-lapsed": -0.9173333333333332
+    },
+    {
+      "day": 200,
+      "organic": 0,
+      "broad-quality-route": -3.608166666666666,
+      "exposed-lapsed": -0.9963333333333331
+    },
+    {
+      "day": 201,
+      "organic": 0,
+      "broad-quality-route": -3.844833333333333,
+      "exposed-lapsed": -1.0306666666666666
+    },
+    {
+      "day": 202,
+      "organic": 0,
+      "broad-quality-route": -3.935833333333333,
+      "exposed-lapsed": -1.1164999999999998
+    },
+    {
+      "day": 203,
+      "organic": 0,
+      "broad-quality-route": -4.087166666666666,
+      "exposed-lapsed": -1.1164999999999998
+    },
+    {
+      "day": 204,
+      "organic": 0,
+      "broad-quality-route": -4.518000000000001,
+      "exposed-lapsed": -1.1725
+    },
+    {
+      "day": 205,
+      "organic": 0,
+      "broad-quality-route": -4.686000000000001,
+      "exposed-lapsed": -1.345
+    },
+    {
+      "day": 206,
+      "organic": 0,
+      "broad-quality-route": -4.827833333333333,
+      "exposed-lapsed": -1.3278333333333332
+    },
+    {
+      "day": 207,
+      "organic": 0,
+      "broad-quality-route": -4.840500000000001,
+      "exposed-lapsed": -1.333
+    },
+    {
+      "day": 208,
+      "organic": 0,
+      "broad-quality-route": -4.970166666666667,
+      "exposed-lapsed": -1.4193333333333333
+    },
+    {
+      "day": 209,
+      "organic": 0,
+      "broad-quality-route": -4.9334999999999996,
+      "exposed-lapsed": -1.4021666666666668
+    },
+    {
+      "day": 210,
+      "organic": 0,
+      "broad-quality-route": -4.882000000000001,
+      "exposed-lapsed": -1.4233333333333336
+    },
+    {
+      "day": 211,
+      "organic": 0,
+      "broad-quality-route": -4.938000000000001,
+      "exposed-lapsed": -1.3461666666666667
+    },
+    {
+      "day": 212,
+      "organic": 0,
+      "broad-quality-route": -4.994666666666666,
+      "exposed-lapsed": -1.373
+    },
+    {
+      "day": 213,
+      "organic": 0,
+      "broad-quality-route": -5.016333333333333,
+      "exposed-lapsed": -1.3729999999999998
+    },
+    {
+      "day": 214,
+      "organic": 0,
+      "broad-quality-route": -5.128333333333334,
+      "exposed-lapsed": -1.2781666666666665
+    },
+    {
+      "day": 215,
+      "organic": 0,
+      "broad-quality-route": -4.9215,
+      "exposed-lapsed": -1.1146666666666667
+    },
+    {
+      "day": 216,
+      "organic": 0,
+      "broad-quality-route": -4.871166666666668,
+      "exposed-lapsed": -1.1415000000000002
+    },
+    {
+      "day": 217,
+      "organic": 0,
+      "broad-quality-route": -4.922666666666666,
+      "exposed-lapsed": -1.1541666666666666
+    },
+    {
+      "day": 218,
+      "organic": 0,
+      "broad-quality-route": -4.912999999999999,
+      "exposed-lapsed": -1.1324999999999998
+    },
+    {
+      "day": 219,
+      "organic": 0,
+      "broad-quality-route": -4.8134999999999994,
+      "exposed-lapsed": -1.0381666666666667
+    },
+    {
+      "day": 220,
+      "organic": 0,
+      "broad-quality-route": -4.928499999999999,
+      "exposed-lapsed": -1.0593333333333335
+    },
+    {
+      "day": 221,
+      "organic": 0,
+      "broad-quality-route": -4.776999999999998,
+      "exposed-lapsed": -1.0078333333333334
+    },
+    {
+      "day": 222,
+      "organic": 0,
+      "broad-quality-route": -4.850166666666666,
+      "exposed-lapsed": -1.0250000000000001
+    },
+    {
+      "day": 223,
+      "organic": 0,
+      "broad-quality-route": -4.903166666666665,
+      "exposed-lapsed": -1.0810000000000002
+    },
+    {
+      "day": 224,
+      "organic": 0,
+      "broad-quality-route": -4.998666666666665,
+      "exposed-lapsed": -1.086166666666667
+    },
+    {
+      "day": 225,
+      "organic": 0,
+      "broad-quality-route": -5.054666666666666,
+      "exposed-lapsed": -1.1633333333333333
+    },
+    {
+      "day": 226,
+      "organic": 0,
+      "broad-quality-route": -5.054666666666666,
+      "exposed-lapsed": -1.1416666666666666
+    },
+    {
+      "day": 227,
+      "organic": 0,
+      "broad-quality-route": -5.080833333333332,
+      "exposed-lapsed": -1.1633333333333333
+    },
+    {
+      "day": 228,
+      "organic": 0,
+      "broad-quality-route": -5.0666666666666655,
+      "exposed-lapsed": -1.2021666666666666
+    },
+    {
+      "day": 229,
+      "organic": 0,
+      "broad-quality-route": -5.1615,
+      "exposed-lapsed": -1.2193333333333334
+    },
+    {
+      "day": 230,
+      "organic": 0,
+      "broad-quality-route": -5.074166666666666,
+      "exposed-lapsed": -1.2268333333333332
+    },
+    {
+      "day": 231,
+      "organic": 0,
+      "broad-quality-route": -5.048499999999999,
+      "exposed-lapsed": -1.1103333333333334
+    },
+    {
+      "day": 232,
+      "organic": 0,
+      "broad-quality-route": -5.0828333333333315,
+      "exposed-lapsed": -1.0498333333333334
+    },
+    {
+      "day": 233,
+      "organic": 0,
+      "broad-quality-route": -5.026833333333332,
+      "exposed-lapsed": -0.8733333333333333
+    },
+    {
+      "day": 234,
+      "organic": 0,
+      "broad-quality-route": -5.031333333333332,
+      "exposed-lapsed": -0.8561666666666669
+    },
+    {
+      "day": 235,
+      "organic": 0,
+      "broad-quality-route": -5.209,
+      "exposed-lapsed": -0.8441666666666666
+    },
+    {
+      "day": 236,
+      "organic": 0,
+      "broad-quality-route": -5.235166666666666,
+      "exposed-lapsed": -0.9001666666666666
+    },
+    {
+      "day": 237,
+      "organic": 0,
+      "broad-quality-route": -5.144833333333334,
+      "exposed-lapsed": -0.9218333333333334
+    },
+    {
+      "day": 238,
+      "organic": 0,
+      "broad-quality-route": -5.006666666666665,
+      "exposed-lapsed": -0.9390000000000001
+    },
+    {
+      "day": 239,
+      "organic": 0,
+      "broad-quality-route": -4.9855,
+      "exposed-lapsed": -0.9561666666666667
+    },
+    {
+      "day": 240,
+      "organic": 0,
+      "broad-quality-route": -4.834666666666665,
+      "exposed-lapsed": -0.9345000000000001
+    },
+    {
+      "day": 241,
+      "organic": 0,
+      "broad-quality-route": -4.830166666666667,
+      "exposed-lapsed": -0.9733333333333334
+    },
+    {
+      "day": 242,
+      "organic": 0,
+      "broad-quality-route": -4.736,
+      "exposed-lapsed": -1.0001666666666669
+    },
+    {
+      "day": 243,
+      "organic": 0,
+      "broad-quality-route": -4.800999999999999,
+      "exposed-lapsed": -1.0001666666666669
+    },
+    {
+      "day": 244,
+      "organic": 0,
+      "broad-quality-route": -4.662166666666666,
+      "exposed-lapsed": -1.007666666666667
+    },
+    {
+      "day": 245,
+      "organic": 0,
+      "broad-quality-route": -4.644999999999999,
+      "exposed-lapsed": -1.007666666666667
+    },
+    {
+      "day": 246,
+      "organic": 0,
+      "broad-quality-route": -4.6495,
+      "exposed-lapsed": -1.007666666666667
+    },
+    {
+      "day": 247,
+      "organic": 0,
+      "broad-quality-route": -4.567333333333333,
+      "exposed-lapsed": -1.0248333333333335
+    },
+    {
+      "day": 248,
+      "organic": 0,
+      "broad-quality-route": -4.640499999999999,
+      "exposed-lapsed": -1.042
+    },
+    {
+      "day": 249,
+      "organic": 0,
+      "broad-quality-route": -4.625666666666665,
+      "exposed-lapsed": -1.042
+    },
+    {
+      "day": 250,
+      "organic": 0,
+      "broad-quality-route": -4.630166666666665,
+      "exposed-lapsed": -1.0345000000000002
+    },
+    {
+      "day": 251,
+      "organic": 0,
+      "broad-quality-route": -4.659999999999998,
+      "exposed-lapsed": -1.0345000000000002
+    },
+    {
+      "day": 252,
+      "organic": 0,
+      "broad-quality-route": -4.610833333333332,
+      "exposed-lapsed": -1.0173333333333334
+    },
+    {
+      "day": 253,
+      "organic": 0,
+      "broad-quality-route": -4.705666666666667,
+      "exposed-lapsed": -0.9785000000000001
+    },
+    {
+      "day": 254,
+      "organic": 0,
+      "broad-quality-route": -4.722833333333332,
+      "exposed-lapsed": -0.9785000000000003
+    },
+    {
+      "day": 255,
+      "organic": 0,
+      "broad-quality-route": -4.761666666666666,
+      "exposed-lapsed": -1.0173333333333336
+    },
+    {
+      "day": 256,
+      "organic": 0,
+      "broad-quality-route": -4.778333333333332,
+      "exposed-lapsed": -1.0905000000000002
+    },
+    {
+      "day": 257,
+      "organic": 0,
+      "broad-quality-route": -4.773833333333332,
+      "exposed-lapsed": -1.051666666666667
+    },
+    {
+      "day": 258,
+      "organic": 0,
+      "broad-quality-route": -4.751499999999999,
+      "exposed-lapsed": -0.9785000000000003
+    },
+    {
+      "day": 259,
+      "organic": 0,
+      "broad-quality-route": -4.712666666666666,
+      "exposed-lapsed": -1.0128333333333335
+    },
+    {
+      "day": 260,
+      "organic": 0,
+      "broad-quality-route": -4.751499999999999,
+      "exposed-lapsed": -1.0128333333333335
+    },
+    {
+      "day": 261,
+      "organic": 0,
+      "broad-quality-route": -4.586999999999999,
+      "exposed-lapsed": -0.9083333333333334
+    },
+    {
+      "day": 262,
+      "organic": 0,
+      "broad-quality-route": -4.504833333333332,
+      "exposed-lapsed": -0.9598333333333335
+    },
+    {
+      "day": 263,
+      "organic": 0,
+      "broad-quality-route": -4.5683333333333325,
+      "exposed-lapsed": -0.9255000000000001
+    },
+    {
+      "day": 264,
+      "organic": 0,
+      "broad-quality-route": -4.684833333333334,
+      "exposed-lapsed": -0.9083333333333335
+    },
+    {
+      "day": 265,
+      "organic": 0,
+      "broad-quality-route": -4.607166666666668,
+      "exposed-lapsed": -0.8963333333333335
+    },
+    {
+      "day": 266,
+      "organic": 0,
+      "broad-quality-route": -4.702000000000001,
+      "exposed-lapsed": -0.9568333333333334
+    },
+    {
+      "day": 267,
+      "organic": 0,
+      "broad-quality-route": -4.702000000000001,
+      "exposed-lapsed": -0.9568333333333334
+    },
+    {
+      "day": 268,
+      "organic": 0,
+      "broad-quality-route": -4.645500000000001,
+      "exposed-lapsed": -0.9568333333333334
+    },
+    {
+      "day": 269,
+      "organic": 0,
+      "broad-quality-route": -4.7186666666666675,
+      "exposed-lapsed": -0.9396666666666667
+    },
+    {
+      "day": 270,
+      "organic": 0,
+      "broad-quality-route": -4.679833333333335,
+      "exposed-lapsed": -0.9568333333333334
+    },
+    {
+      "day": 271,
+      "organic": 0,
+      "broad-quality-route": -4.755166666666667,
+      "exposed-lapsed": -0.9396666666666667
+    },
+    {
+      "day": 272,
+      "organic": 0,
+      "broad-quality-route": -4.846,
+      "exposed-lapsed": -0.9396666666666667
+    },
+    {
+      "day": 273,
+      "organic": 0,
+      "broad-quality-route": -4.8803333333333345,
+      "exposed-lapsed": -0.9785
+    },
+    {
+      "day": 274,
+      "organic": 0,
+      "broad-quality-route": -4.746666666666668,
+      "exposed-lapsed": -0.9185000000000001
+    },
+    {
+      "day": 275,
+      "organic": 0,
+      "broad-quality-route": -4.7855,
+      "exposed-lapsed": -0.9476666666666668
+    },
+    {
+      "day": 276,
+      "organic": 0,
+      "broad-quality-route": -4.8758333333333335,
+      "exposed-lapsed": -0.9476666666666668
+    },
+    {
+      "day": 277,
+      "organic": 0,
+      "broad-quality-route": -4.9318333333333335,
+      "exposed-lapsed": -0.87
+    },
+    {
+      "day": 278,
+      "organic": 0,
+      "broad-quality-route": -4.953500000000002,
+      "exposed-lapsed": -0.8775000000000001
+    },
+    {
+      "day": 279,
+      "organic": 0,
+      "broad-quality-route": -4.958666666666668,
+      "exposed-lapsed": -0.9163333333333334
+    },
+    {
+      "day": 280,
+      "organic": 0,
+      "broad-quality-route": -4.961666666666667,
+      "exposed-lapsed": -0.8775000000000001
+    },
+    {
+      "day": 281,
+      "organic": 0,
+      "broad-quality-route": -5.0953333333333335,
+      "exposed-lapsed": -0.9506666666666668
+    },
+    {
+      "day": 282,
+      "organic": 0,
+      "broad-quality-route": -5.017666666666668,
+      "exposed-lapsed": -0.9678333333333334
+    },
+    {
+      "day": 283,
+      "organic": 0,
+      "broad-quality-route": -5.034333333333334,
+      "exposed-lapsed": -0.9850000000000001
+    },
+    {
+      "day": 284,
+      "organic": 0,
+      "broad-quality-route": -5.085833333333334,
+      "exposed-lapsed": -0.9850000000000001
+    },
+    {
+      "day": 285,
+      "organic": 0,
+      "broad-quality-route": -5.081333333333334,
+      "exposed-lapsed": -1.0021666666666669
+    },
+    {
+      "day": 286,
+      "organic": 0,
+      "broad-quality-route": -5.120166666666668,
+      "exposed-lapsed": -1.1358333333333335
+    },
+    {
+      "day": 287,
+      "organic": 0,
+      "broad-quality-route": -5.2075000000000005,
+      "exposed-lapsed": -1.1918333333333333
+    },
+    {
+      "day": 288,
+      "organic": 0,
+      "broad-quality-route": -5.095500000000001,
+      "exposed-lapsed": -1.1918333333333333
+    },
+    {
+      "day": 289,
+      "organic": 0,
+      "broad-quality-route": -5.022333333333334,
+      "exposed-lapsed": -1.1746666666666665
+    },
+    {
+      "day": 290,
+      "organic": 0,
+      "broad-quality-route": -5.017833333333334,
+      "exposed-lapsed": -1.153
+    },
+    {
+      "day": 291,
+      "organic": 0,
+      "broad-quality-route": -4.952166666666668,
+      "exposed-lapsed": -1.1530000000000002
+    },
+    {
+      "day": 292,
+      "organic": 0,
+      "broad-quality-route": -4.979,
+      "exposed-lapsed": -1.1873333333333336
+    },
+    {
+      "day": 293,
+      "organic": 0,
+      "broad-quality-route": -5.0395,
+      "exposed-lapsed": -1.2261666666666668
+    },
+    {
+      "day": 294,
+      "organic": 0,
+      "broad-quality-route": -4.999499999999999,
+      "exposed-lapsed": -1.1918333333333335
+    },
+    {
+      "day": 295,
+      "organic": 0,
+      "broad-quality-route": -5.055499999999999,
+      "exposed-lapsed": -1.1918333333333335
+    },
+    {
+      "day": 296,
+      "organic": 0,
+      "broad-quality-route": -5.16,
+      "exposed-lapsed": -1.2575
+    },
+    {
+      "day": 297,
+      "organic": 0,
+      "broad-quality-route": -5.104,
+      "exposed-lapsed": -1.2575
+    },
+    {
+      "day": 298,
+      "organic": 0,
+      "broad-quality-route": -5.121166666666667,
+      "exposed-lapsed": -1.2575
+    },
+    {
+      "day": 299,
+      "organic": 0,
+      "broad-quality-route": -5.029000000000001,
+      "exposed-lapsed": -1.2958333333333332
+    },
+    {
+      "day": 300,
+      "organic": 0,
+      "broad-quality-route": -5.046166666666667,
+      "exposed-lapsed": -1.2958333333333332
+    },
+    {
+      "day": 301,
+      "organic": 0,
+      "broad-quality-route": -5.085666666666667,
+      "exposed-lapsed": -1.313
+    },
+    {
+      "day": 302,
+      "organic": 0,
+      "broad-quality-route": -5.146166666666667,
+      "exposed-lapsed": -1.351833333333333
+    },
+    {
+      "day": 303,
+      "organic": 0,
+      "broad-quality-route": -5.094666666666667,
+      "exposed-lapsed": -1.356333333333333
+    },
+    {
+      "day": 304,
+      "organic": 0,
+      "broad-quality-route": -5.082666666666666,
+      "exposed-lapsed": -1.3175
+    },
+    {
+      "day": 305,
+      "organic": 0,
+      "broad-quality-route": -5.033,
+      "exposed-lapsed": -1.2690000000000001
+    },
+    {
+      "day": 306,
+      "organic": 0,
+      "broad-quality-route": -5.187833333333334,
+      "exposed-lapsed": -1.2735
+    },
+    {
+      "day": 307,
+      "organic": 0,
+      "broad-quality-route": -5.148999999999999,
+      "exposed-lapsed": -1.3078333333333332
+    },
+    {
+      "day": 308,
+      "organic": 0,
+      "broad-quality-route": -5.102666666666667,
+      "exposed-lapsed": -1.2735
+    },
+    {
+      "day": 309,
+      "organic": 0,
+      "broad-quality-route": -5.124333333333333,
+      "exposed-lapsed": -1.2735
+    },
+    {
+      "day": 310,
+      "organic": 0,
+      "broad-quality-route": -5.146,
+      "exposed-lapsed": -1.3294999999999997
+    },
+    {
+      "day": 311,
+      "organic": 0,
+      "broad-quality-route": -5.175166666666667,
+      "exposed-lapsed": -1.3391666666666664
+    },
+    {
+      "day": 312,
+      "organic": 0,
+      "broad-quality-route": -5.2655,
+      "exposed-lapsed": -1.3391666666666664
+    },
+    {
+      "day": 313,
+      "organic": 0,
+      "broad-quality-route": -5.233333333333333,
+      "exposed-lapsed": -1.3219999999999998
+    },
+    {
+      "day": 314,
+      "organic": 0,
+      "broad-quality-route": -5.2505,
+      "exposed-lapsed": -1.3219999999999998
+    },
+    {
+      "day": 315,
+      "organic": 0,
+      "broad-quality-route": -5.116833333333334,
+      "exposed-lapsed": -1.266
+    },
+    {
+      "day": 316,
+      "organic": 0,
+      "broad-quality-route": -5.116833333333334,
+      "exposed-lapsed": -1.266
+    },
+    {
+      "day": 317,
+      "organic": 0,
+      "broad-quality-route": -5.134000000000001,
+      "exposed-lapsed": -1.304833333333333
+    },
+    {
+      "day": 318,
+      "organic": 0,
+      "broad-quality-route": -5.328166666666666,
+      "exposed-lapsed": -1.304833333333333
+    },
+    {
+      "day": 319,
+      "organic": 0,
+      "broad-quality-route": -5.3035,
+      "exposed-lapsed": -1.266
+    },
+    {
+      "day": 320,
+      "organic": 0,
+      "broad-quality-route": -5.4079999999999995,
+      "exposed-lapsed": -1.2831666666666666
+    },
+    {
+      "day": 321,
+      "organic": 0,
+      "broad-quality-route": -5.317666666666667,
+      "exposed-lapsed": -1.3214999999999997
+    },
+    {
+      "day": 322,
+      "organic": 0,
+      "broad-quality-route": -5.282833333333333,
+      "exposed-lapsed": -1.291833333333333
+    },
+    {
+      "day": 323,
+      "organic": 0,
+      "broad-quality-route": -5.149166666666668,
+      "exposed-lapsed": -1.3306666666666664
+    },
+    {
+      "day": 324,
+      "organic": 0,
+      "broad-quality-route": -5.210833333333334,
+      "exposed-lapsed": -1.374666666666666
+    },
+    {
+      "day": 325,
+      "organic": 0,
+      "broad-quality-route": -5.154833333333334,
+      "exposed-lapsed": -1.2969999999999997
+    },
+    {
+      "day": 326,
+      "organic": 0,
+      "broad-quality-route": -5.2885,
+      "exposed-lapsed": -1.3358333333333328
+    },
+    {
+      "day": 327,
+      "organic": 0,
+      "broad-quality-route": -5.331833333333334,
+      "exposed-lapsed": -1.430666666666666
+    },
+    {
+      "day": 328,
+      "organic": 0,
+      "broad-quality-route": -5.410166666666667,
+      "exposed-lapsed": -1.4403333333333328
+    },
+    {
+      "day": 329,
+      "organic": 0,
+      "broad-quality-route": -5.431833333333334,
+      "exposed-lapsed": -1.4614999999999996
+    },
+    {
+      "day": 330,
+      "organic": 0,
+      "broad-quality-route": -5.491833333333334,
+      "exposed-lapsed": -1.5003333333333326
+    },
+    {
+      "day": 331,
+      "organic": 0,
+      "broad-quality-route": -5.436333333333335,
+      "exposed-lapsed": -1.4659999999999993
+    },
+    {
+      "day": 332,
+      "organic": 0,
+      "broad-quality-route": -5.419166666666667,
+      "exposed-lapsed": -1.4659999999999993
+    },
+    {
+      "day": 333,
+      "organic": 0,
+      "broad-quality-route": -5.3803333333333345,
+      "exposed-lapsed": -1.4099999999999995
+    },
+    {
+      "day": 334,
+      "organic": 0,
+      "broad-quality-route": -5.341500000000001,
+      "exposed-lapsed": -1.392833333333333
+    },
+    {
+      "day": 335,
+      "organic": 0,
+      "broad-quality-route": -5.302666666666667,
+      "exposed-lapsed": -1.4316666666666664
+    },
+    {
+      "day": 336,
+      "organic": 0,
+      "broad-quality-route": -5.281000000000001,
+      "exposed-lapsed": -1.4413333333333327
+    },
+    {
+      "day": 337,
+      "organic": 0,
+      "broad-quality-route": -5.242166666666667,
+      "exposed-lapsed": -1.4024999999999996
+    },
+    {
+      "day": 338,
+      "organic": 0,
+      "broad-quality-route": -5.186166666666667,
+      "exposed-lapsed": -1.4024999999999996
+    },
+    {
+      "day": 339,
+      "organic": 0,
+      "broad-quality-route": -5.207333333333334,
+      "exposed-lapsed": -1.423666666666666
+    },
+    {
+      "day": 340,
+      "organic": 0,
+      "broad-quality-route": -5.229,
+      "exposed-lapsed": -1.423666666666666
+    },
+    {
+      "day": 341,
+      "organic": 0,
+      "broad-quality-route": -5.173,
+      "exposed-lapsed": -1.4624999999999997
+    },
+    {
+      "day": 342,
+      "organic": 0,
+      "broad-quality-route": -5.1125,
+      "exposed-lapsed": -1.4796666666666662
+    },
+    {
+      "day": 343,
+      "organic": 0,
+      "broad-quality-route": -5.081666666666667,
+      "exposed-lapsed": -1.5184999999999995
+    },
+    {
+      "day": 344,
+      "organic": 0,
+      "broad-quality-route": -5.0605,
+      "exposed-lapsed": -1.479666666666666
+    },
+    {
+      "day": 345,
+      "organic": 0,
+      "broad-quality-route": -5.0089999999999995,
+      "exposed-lapsed": -1.4624999999999995
+    },
+    {
+      "day": 346,
+      "organic": 0,
+      "broad-quality-route": -4.991833333333332,
+      "exposed-lapsed": -1.479666666666666
+    },
+    {
+      "day": 347,
+      "organic": 0,
+      "broad-quality-route": -5.018000000000002,
+      "exposed-lapsed": -1.479666666666666
+    },
+    {
+      "day": 348,
+      "organic": 0,
+      "broad-quality-route": -5.114000000000001,
+      "exposed-lapsed": -1.479666666666666
+    },
+    {
+      "day": 349,
+      "organic": 0,
+      "broad-quality-route": -5.065500000000001,
+      "exposed-lapsed": -1.479666666666666
+    },
+    {
+      "day": 350,
+      "organic": 0,
+      "broad-quality-route": -5.194666666666666,
+      "exposed-lapsed": -1.479666666666666
+    },
+    {
+      "day": 351,
+      "organic": 0,
+      "broad-quality-route": -5.099833333333332,
+      "exposed-lapsed": -1.479666666666666
+    },
+    {
+      "day": 352,
+      "organic": 0,
+      "broad-quality-route": -5.1770000000000005,
+      "exposed-lapsed": -1.479666666666666
+    },
+    {
+      "day": 353,
+      "organic": 0,
+      "broad-quality-route": -5.128499999999999,
+      "exposed-lapsed": -1.4699999999999998
+    },
+    {
+      "day": 354,
+      "organic": 0,
+      "broad-quality-route": -5.145666666666666,
+      "exposed-lapsed": -1.431166666666666
+    },
+    {
+      "day": 355,
+      "organic": 0,
+      "broad-quality-route": -5.012,
+      "exposed-lapsed": -1.4751666666666658
+    },
+    {
+      "day": 356,
+      "organic": 0,
+      "broad-quality-route": -5.029166666666666,
+      "exposed-lapsed": -1.4751666666666658
+    },
+    {
+      "day": 357,
+      "organic": 0,
+      "broad-quality-route": -5.170333333333334,
+      "exposed-lapsed": -1.4579999999999993
+    },
+    {
+      "day": 358,
+      "organic": 0,
+      "broad-quality-route": -5.265166666666668,
+      "exposed-lapsed": -1.4579999999999993
+    },
+    {
+      "day": 359,
+      "organic": 0,
+      "broad-quality-route": -5.257666666666667,
+      "exposed-lapsed": -1.467666666666666
+    },
+    {
+      "day": 360,
+      "organic": 0,
+      "broad-quality-route": -5.206833333333334,
+      "exposed-lapsed": -1.4499999999999993
+    },
+    {
+      "day": 361,
+      "organic": 0,
+      "broad-quality-route": -5.155333333333333,
+      "exposed-lapsed": -1.4111666666666662
+    },
+    {
+      "day": 362,
+      "organic": 0,
+      "broad-quality-route": -5.103833333333335,
+      "exposed-lapsed": -1.4111666666666662
+    },
+    {
+      "day": 363,
+      "organic": 0,
+      "broad-quality-route": -5.181500000000001,
+      "exposed-lapsed": -1.4111666666666662
+    },
+    {
+      "day": 364,
+      "organic": 0,
+      "broad-quality-route": -5.125500000000001,
+      "exposed-lapsed": -1.372333333333333
+    },
+    {
+      "day": 365,
+      "organic": 0,
+      "broad-quality-route": -5.108333333333334,
+      "exposed-lapsed": -1.372333333333333
+    },
+    {
+      "day": 366,
+      "organic": 0,
+      "broad-quality-route": -5.086666666666667,
+      "exposed-lapsed": -1.3335
+    },
+    {
+      "day": 367,
+      "organic": 0,
+      "broad-quality-route": -5.103833333333332,
+      "exposed-lapsed": -1.3163333333333334
+    },
+    {
+      "day": 368,
+      "organic": 0,
+      "broad-quality-route": -5.103833333333332,
+      "exposed-lapsed": -1.2774999999999999
+    },
+    {
+      "day": 369,
+      "organic": 0,
+      "broad-quality-route": -5.104333333333333,
+      "exposed-lapsed": -1.2774999999999999
+    },
+    {
+      "day": 370,
+      "organic": 0,
+      "broad-quality-route": -5.082666666666667,
+      "exposed-lapsed": -1.2946666666666664
+    },
+    {
+      "day": 371,
+      "organic": 0,
+      "broad-quality-route": -5.070666666666667,
+      "exposed-lapsed": -1.2946666666666664
+    },
+    {
+      "day": 372,
+      "organic": 0,
+      "broad-quality-route": -4.966166666666666,
+      "exposed-lapsed": -1.2678333333333331
+    },
+    {
+      "day": 373,
+      "organic": 0,
+      "broad-quality-route": -4.949,
+      "exposed-lapsed": -1.3066666666666664
+    },
+    {
+      "day": 374,
+      "organic": 0,
+      "broad-quality-route": -4.9975000000000005,
+      "exposed-lapsed": -1.3551666666666664
+    },
+    {
+      "day": 375,
+      "organic": 0,
+      "broad-quality-route": -4.975833333333333,
+      "exposed-lapsed": -1.3551666666666664
+    },
+    {
+      "day": 376,
+      "organic": 0,
+      "broad-quality-route": -5.010666666666666,
+      "exposed-lapsed": -1.3551666666666664
+    },
+    {
+      "day": 377,
+      "organic": 0,
+      "broad-quality-route": -5.0495,
+      "exposed-lapsed": -1.3551666666666664
+    },
+    {
+      "day": 378,
+      "organic": 0,
+      "broad-quality-route": -5.010666666666666,
+      "exposed-lapsed": -1.3334999999999997
+    },
+    {
+      "day": 379,
+      "organic": 0,
+      "broad-quality-route": -4.9935,
+      "exposed-lapsed": -1.3334999999999997
+    },
+    {
+      "day": 380,
+      "organic": 0,
+      "broad-quality-route": -4.9860000000000015,
+      "exposed-lapsed": -1.3431666666666664
+    },
+    {
+      "day": 381,
+      "organic": 0,
+      "broad-quality-route": -4.968833333333334,
+      "exposed-lapsed": -1.3139999999999996
+    },
+    {
+      "day": 382,
+      "organic": 0,
+      "broad-quality-route": -4.951666666666667,
+      "exposed-lapsed": -1.3699999999999997
+    },
+    {
+      "day": 383,
+      "organic": 0,
+      "broad-quality-route": -4.83,
+      "exposed-lapsed": -1.3774999999999995
+    },
+    {
+      "day": 384,
+      "organic": 0,
+      "broad-quality-route": -4.895666666666667,
+      "exposed-lapsed": -1.3774999999999995
+    },
+    {
+      "day": 385,
+      "organic": 0,
+      "broad-quality-route": -4.895666666666666,
+      "exposed-lapsed": -1.3431666666666662
+    },
+    {
+      "day": 386,
+      "organic": 0,
+      "broad-quality-route": -4.912833333333333,
+      "exposed-lapsed": -1.3259999999999994
+    },
+    {
+      "day": 387,
+      "organic": 0,
+      "broad-quality-route": -4.852333333333333,
+      "exposed-lapsed": -1.3259999999999994
+    },
+    {
+      "day": 388,
+      "organic": 0,
+      "broad-quality-route": -4.886666666666667,
+      "exposed-lapsed": -1.3259999999999994
+    },
+    {
+      "day": 389,
+      "organic": 0,
+      "broad-quality-route": -4.8575,
+      "exposed-lapsed": -1.2871666666666663
+    },
+    {
+      "day": 390,
+      "organic": 0,
+      "broad-quality-route": -4.874666666666667,
+      "exposed-lapsed": -1.308333333333333
+    },
+    {
+      "day": 391,
+      "organic": 0,
+      "broad-quality-route": -4.874666666666667,
+      "exposed-lapsed": -1.308333333333333
+    },
+    {
+      "day": 392,
+      "organic": 0,
+      "broad-quality-route": -4.8575,
+      "exposed-lapsed": -1.308333333333333
+    },
+    {
+      "day": 393,
+      "organic": 0,
+      "broad-quality-route": -4.8575,
+      "exposed-lapsed": -1.2694999999999996
+    },
+    {
+      "day": 394,
+      "organic": 0,
+      "broad-quality-route": -4.797,
+      "exposed-lapsed": -1.2694999999999996
+    },
+    {
+      "day": 395,
+      "organic": 0,
+      "broad-quality-route": -4.797,
+      "exposed-lapsed": -1.2523333333333329
+    },
+    {
+      "day": 396,
+      "organic": 0,
+      "broad-quality-route": -4.823166666666666,
+      "exposed-lapsed": -1.2739999999999996
+    },
+    {
+      "day": 397,
+      "organic": 0,
+      "broad-quality-route": -4.840333333333333,
+      "exposed-lapsed": -1.2568333333333328
+    },
+    {
+      "day": 398,
+      "organic": 0,
+      "broad-quality-route": -4.8575,
+      "exposed-lapsed": -1.2911666666666664
+    },
+    {
+      "day": 399,
+      "organic": 0,
+      "broad-quality-route": -4.818666666666667,
+      "exposed-lapsed": -1.2694999999999996
+    },
+    {
+      "day": 400,
+      "organic": 0,
+      "broad-quality-route": -4.775833333333334,
+      "exposed-lapsed": -1.2694999999999996
+    }
+  ],
+  "cases": [
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119001,
+      "scenario": "steady",
+      "purchases": 6177,
+      "platformProxyCents": 781696,
+      "retainedCents": 27184389,
+      "merchantContributionCents": 9139699,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 38,
+      "reactivatedCustomers": 38,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119001,
+      "scenario": "rival_sale",
+      "purchases": 6199,
+      "platformProxyCents": 783046,
+      "retainedCents": 27224289,
+      "merchantContributionCents": 9163696,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 38,
+      "reactivatedCustomers": 38,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119001,
+      "scenario": "budget_squeeze",
+      "purchases": 4895,
+      "platformProxyCents": 582512,
+      "retainedCents": 19863922,
+      "merchantContributionCents": 6559853,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 38,
+      "reactivatedCustomers": 38,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119001,
+      "scenario": "supply_delay",
+      "purchases": 6159,
+      "platformProxyCents": 781135,
+      "retainedCents": 27178813,
+      "merchantContributionCents": 9143363,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 38,
+      "reactivatedCustomers": 38,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119001,
+      "scenario": "returns_wave",
+      "purchases": 6319,
+      "platformProxyCents": 734496,
+      "retainedCents": 26530685,
+      "merchantContributionCents": 8014134,
+      "outreachCents": 670,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 670,
+      "offers": 0,
+      "recommendations": 335,
+      "redemptions": 0,
+      "cohortLapsed": 38,
+      "reactivatedCustomers": 38,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -11.65,
+      "merchantDeltaUSD": -169.39,
+      "volumeDeltaUSD": 11.08,
+      "afterCostUSD": -11.75,
+      "vsBroadUSD": 24.810000000000002
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119002,
+      "scenario": "steady",
+      "purchases": 6157,
+      "platformProxyCents": 791285,
+      "retainedCents": 27619881,
+      "merchantContributionCents": 9466372,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 28,
+      "reactivatedCustomers": 28,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119002,
+      "scenario": "rival_sale",
+      "purchases": 6198,
+      "platformProxyCents": 794927,
+      "retainedCents": 27721760,
+      "merchantContributionCents": 9522164,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 28,
+      "reactivatedCustomers": 28,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119002,
+      "scenario": "budget_squeeze",
+      "purchases": 5019,
+      "platformProxyCents": 611406,
+      "retainedCents": 21035648,
+      "merchantContributionCents": 7081964,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 28,
+      "reactivatedCustomers": 28,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119002,
+      "scenario": "supply_delay",
+      "purchases": 6142,
+      "platformProxyCents": 790512,
+      "retainedCents": 27611803,
+      "merchantContributionCents": 9457186,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 28,
+      "reactivatedCustomers": 28,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119002,
+      "scenario": "returns_wave",
+      "purchases": 6285,
+      "platformProxyCents": 728816,
+      "retainedCents": 26615717,
+      "merchantContributionCents": 8002579,
+      "outreachCents": 690,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 690,
+      "offers": 0,
+      "recommendations": 345,
+      "redemptions": 0,
+      "cohortLapsed": 28,
+      "reactivatedCustomers": 28,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -11.36,
+      "merchantDeltaUSD": -118.78,
+      "volumeDeltaUSD": 175.14,
+      "afterCostUSD": -11.459999999999999,
+      "vsBroadUSD": -3.059999999999999
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119003,
+      "scenario": "steady",
+      "purchases": 6081,
+      "platformProxyCents": 773195,
+      "retainedCents": 26840738,
+      "merchantContributionCents": 9160180,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119003,
+      "scenario": "rival_sale",
+      "purchases": 6122,
+      "platformProxyCents": 776356,
+      "retainedCents": 26941245,
+      "merchantContributionCents": 9205338,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119003,
+      "scenario": "budget_squeeze",
+      "purchases": 4877,
+      "platformProxyCents": 588443,
+      "retainedCents": 20102667,
+      "merchantContributionCents": 6725533,
+      "outreachCents": 36,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 36,
+      "offers": 0,
+      "recommendations": 18,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -2.69,
+      "merchantDeltaUSD": -46.19,
+      "volumeDeltaUSD": -89,
+      "afterCostUSD": -2.79,
+      "vsBroadUSD": -5.709999999999999
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119003,
+      "scenario": "supply_delay",
+      "purchases": 6068,
+      "platformProxyCents": 772085,
+      "retainedCents": 26813055,
+      "merchantContributionCents": 9154337,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119003,
+      "scenario": "returns_wave",
+      "purchases": 6226,
+      "platformProxyCents": 718504,
+      "retainedCents": 26042668,
+      "merchantContributionCents": 7875374,
+      "outreachCents": 728,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 728,
+      "offers": 0,
+      "recommendations": 364,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -8.83,
+      "merchantDeltaUSD": -49.84,
+      "volumeDeltaUSD": -70.95,
+      "afterCostUSD": -8.93,
+      "vsBroadUSD": 13.18
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119004,
+      "scenario": "steady",
+      "purchases": 6268,
+      "platformProxyCents": 796586,
+      "retainedCents": 27709525,
+      "merchantContributionCents": 9417593,
+      "outreachCents": 60,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 60,
+      "offers": 0,
+      "recommendations": 30,
+      "redemptions": 0,
+      "cohortLapsed": 28,
+      "reactivatedCustomers": 28,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0.43,
+      "merchantDeltaUSD": -10.31,
+      "volumeDeltaUSD": 31.99,
+      "afterCostUSD": 0.32999999999999996,
+      "vsBroadUSD": -2.12
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119004,
+      "scenario": "rival_sale",
+      "purchases": 6310,
+      "platformProxyCents": 800170,
+      "retainedCents": 27796979,
+      "merchantContributionCents": 9462121,
+      "outreachCents": 30,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 30,
+      "offers": 0,
+      "recommendations": 15,
+      "redemptions": 0,
+      "cohortLapsed": 28,
+      "reactivatedCustomers": 28,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -0.3,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.4,
+      "vsBroadUSD": 0.65
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119004,
+      "scenario": "budget_squeeze",
+      "purchases": 4916,
+      "platformProxyCents": 590260,
+      "retainedCents": 20140519,
+      "merchantContributionCents": 6725708,
+      "outreachCents": 40,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 40,
+      "offers": 0,
+      "recommendations": 20,
+      "redemptions": 0,
+      "cohortLapsed": 28,
+      "reactivatedCustomers": 28,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 1.93,
+      "merchantDeltaUSD": 28.5,
+      "volumeDeltaUSD": 89,
+      "afterCostUSD": 1.8299999999999998,
+      "vsBroadUSD": 5.83
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119004,
+      "scenario": "supply_delay",
+      "purchases": 6247,
+      "platformProxyCents": 796273,
+      "retainedCents": 27693244,
+      "merchantContributionCents": 9435882,
+      "outreachCents": 56,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 56,
+      "offers": 0,
+      "recommendations": 28,
+      "redemptions": 0,
+      "cohortLapsed": 28,
+      "reactivatedCustomers": 28,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0.47,
+      "merchantDeltaUSD": -10.31,
+      "volumeDeltaUSD": 31.99,
+      "afterCostUSD": 0.37,
+      "vsBroadUSD": -1.32
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119004,
+      "scenario": "returns_wave",
+      "purchases": 6471,
+      "platformProxyCents": 741717,
+      "retainedCents": 26938191,
+      "merchantContributionCents": 8056014,
+      "outreachCents": 844,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 844,
+      "offers": 0,
+      "recommendations": 422,
+      "redemptions": 0,
+      "cohortLapsed": 28,
+      "reactivatedCustomers": 28,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -2.8,
+      "merchantDeltaUSD": -68.76,
+      "volumeDeltaUSD": 98.83,
+      "afterCostUSD": -2.9,
+      "vsBroadUSD": 22.959999999999997
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119005,
+      "scenario": "steady",
+      "purchases": 6091,
+      "platformProxyCents": 785700,
+      "retainedCents": 27418630,
+      "merchantContributionCents": 9327978,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119005,
+      "scenario": "rival_sale",
+      "purchases": 6151,
+      "platformProxyCents": 788817,
+      "retainedCents": 27537935,
+      "merchantContributionCents": 9362035,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119005,
+      "scenario": "budget_squeeze",
+      "purchases": 4905,
+      "platformProxyCents": 594669,
+      "retainedCents": 20404695,
+      "merchantContributionCents": 6767895,
+      "outreachCents": 68,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 68,
+      "offers": 0,
+      "recommendations": 34,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0.62,
+      "merchantDeltaUSD": 22.5,
+      "volumeDeltaUSD": 57.01,
+      "afterCostUSD": 0.52,
+      "vsBroadUSD": 4.34
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119005,
+      "scenario": "supply_delay",
+      "purchases": 6066,
+      "platformProxyCents": 783544,
+      "retainedCents": 27367160,
+      "merchantContributionCents": 9313216,
+      "outreachCents": 24,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 24,
+      "offers": 0,
+      "recommendations": 12,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -3.33,
+      "merchantDeltaUSD": -18.49,
+      "volumeDeltaUSD": -95.97,
+      "afterCostUSD": -3.43,
+      "vsBroadUSD": 2.1999999999999997
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119005,
+      "scenario": "returns_wave",
+      "purchases": 6237,
+      "platformProxyCents": 730202,
+      "retainedCents": 26543534,
+      "merchantContributionCents": 8018345,
+      "outreachCents": 770,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 770,
+      "offers": 0,
+      "recommendations": 385,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -10.26,
+      "merchantDeltaUSD": -103.94,
+      "volumeDeltaUSD": -164.06,
+      "afterCostUSD": -10.36,
+      "vsBroadUSD": 11.170000000000002
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119006,
+      "scenario": "steady",
+      "purchases": 6236,
+      "platformProxyCents": 799103,
+      "retainedCents": 27801277,
+      "merchantContributionCents": 9394757,
+      "outreachCents": 18,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 18,
+      "offers": 0,
+      "recommendations": 9,
+      "redemptions": 0,
+      "cohortLapsed": 39,
+      "reactivatedCustomers": 39,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0.85,
+      "merchantDeltaUSD": 5.13,
+      "volumeDeltaUSD": 31.99,
+      "afterCostUSD": 0.75,
+      "vsBroadUSD": 4.32
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119006,
+      "scenario": "rival_sale",
+      "purchases": 6272,
+      "platformProxyCents": 801198,
+      "retainedCents": 27870659,
+      "merchantContributionCents": 9418315,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 39,
+      "reactivatedCustomers": 39,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119006,
+      "scenario": "budget_squeeze",
+      "purchases": 4995,
+      "platformProxyCents": 601763,
+      "retainedCents": 20620708,
+      "merchantContributionCents": 6773988,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 39,
+      "reactivatedCustomers": 39,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119006,
+      "scenario": "supply_delay",
+      "purchases": 6195,
+      "platformProxyCents": 796604,
+      "retainedCents": 27752434,
+      "merchantContributionCents": 9389464,
+      "outreachCents": 14,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 14,
+      "offers": 0,
+      "recommendations": 7,
+      "redemptions": 0,
+      "cohortLapsed": 39,
+      "reactivatedCustomers": 39,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0.89,
+      "merchantDeltaUSD": 5.13,
+      "volumeDeltaUSD": 31.99,
+      "afterCostUSD": 0.79,
+      "vsBroadUSD": 4.36
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119006,
+      "scenario": "returns_wave",
+      "purchases": 6368,
+      "platformProxyCents": 741427,
+      "retainedCents": 26840666,
+      "merchantContributionCents": 8025153,
+      "outreachCents": 586,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 586,
+      "offers": 0,
+      "recommendations": 293,
+      "redemptions": 0,
+      "cohortLapsed": 39,
+      "reactivatedCustomers": 39,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -1.71,
+      "merchantDeltaUSD": 195.69,
+      "volumeDeltaUSD": 61.12,
+      "afterCostUSD": -1.81,
+      "vsBroadUSD": 2.52
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119007,
+      "scenario": "steady",
+      "purchases": 6240,
+      "platformProxyCents": 792788,
+      "retainedCents": 27516924,
+      "merchantContributionCents": 9402588,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 37,
+      "reactivatedCustomers": 37,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119007,
+      "scenario": "rival_sale",
+      "purchases": 6258,
+      "platformProxyCents": 794116,
+      "retainedCents": 27531512,
+      "merchantContributionCents": 9423365,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 37,
+      "reactivatedCustomers": 37,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119007,
+      "scenario": "budget_squeeze",
+      "purchases": 4896,
+      "platformProxyCents": 587645,
+      "retainedCents": 20028429,
+      "merchantContributionCents": 6722664,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 37,
+      "reactivatedCustomers": 37,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119007,
+      "scenario": "supply_delay",
+      "purchases": 6233,
+      "platformProxyCents": 790996,
+      "retainedCents": 27451425,
+      "merchantContributionCents": 9376714,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 37,
+      "reactivatedCustomers": 37,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119007,
+      "scenario": "returns_wave",
+      "purchases": 6406,
+      "platformProxyCents": 737599,
+      "retainedCents": 26708024,
+      "merchantContributionCents": 8067944,
+      "outreachCents": 656,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 656,
+      "offers": 0,
+      "recommendations": 328,
+      "redemptions": 0,
+      "cohortLapsed": 37,
+      "reactivatedCustomers": 37,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -2.89,
+      "merchantDeltaUSD": 23.42,
+      "volumeDeltaUSD": 95.97,
+      "afterCostUSD": -2.99,
+      "vsBroadUSD": 30.229999999999997
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119008,
+      "scenario": "steady",
+      "purchases": 6089,
+      "platformProxyCents": 777528,
+      "retainedCents": 27101304,
+      "merchantContributionCents": 9253033,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 34,
+      "reactivatedCustomers": 34,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119008,
+      "scenario": "rival_sale",
+      "purchases": 6139,
+      "platformProxyCents": 780965,
+      "retainedCents": 27213011,
+      "merchantContributionCents": 9277224,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 34,
+      "reactivatedCustomers": 34,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119008,
+      "scenario": "budget_squeeze",
+      "purchases": 4851,
+      "platformProxyCents": 578838,
+      "retainedCents": 19819797,
+      "merchantContributionCents": 6577066,
+      "outreachCents": 70,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 70,
+      "offers": 0,
+      "recommendations": 35,
+      "redemptions": 0,
+      "cohortLapsed": 34,
+      "reactivatedCustomers": 34,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -0.97,
+      "merchantDeltaUSD": -30.23,
+      "volumeDeltaUSD": -25.02,
+      "afterCostUSD": -1.07,
+      "vsBroadUSD": 1.8800000000000001
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119008,
+      "scenario": "supply_delay",
+      "purchases": 6084,
+      "platformProxyCents": 777013,
+      "retainedCents": 27085309,
+      "merchantContributionCents": 9245507,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 34,
+      "reactivatedCustomers": 34,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119008,
+      "scenario": "returns_wave",
+      "purchases": 6249,
+      "platformProxyCents": 729334,
+      "retainedCents": 26469707,
+      "merchantContributionCents": 8084649,
+      "outreachCents": 672,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 672,
+      "offers": 0,
+      "recommendations": 336,
+      "redemptions": 0,
+      "cohortLapsed": 34,
+      "reactivatedCustomers": 34,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -12.53,
+      "merchantDeltaUSD": -132.58,
+      "volumeDeltaUSD": -89,
+      "afterCostUSD": -12.629999999999999,
+      "vsBroadUSD": 15.45
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119009,
+      "scenario": "steady",
+      "purchases": 6059,
+      "platformProxyCents": 780527,
+      "retainedCents": 27187927,
+      "merchantContributionCents": 9321826,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 36,
+      "reactivatedCustomers": 36,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119009,
+      "scenario": "rival_sale",
+      "purchases": 6074,
+      "platformProxyCents": 783101,
+      "retainedCents": 27271005,
+      "merchantContributionCents": 9379316,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 36,
+      "reactivatedCustomers": 36,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119009,
+      "scenario": "budget_squeeze",
+      "purchases": 4782,
+      "platformProxyCents": 579718,
+      "retainedCents": 19846175,
+      "merchantContributionCents": 6655461,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 36,
+      "reactivatedCustomers": 36,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119009,
+      "scenario": "supply_delay",
+      "purchases": 6048,
+      "platformProxyCents": 778705,
+      "retainedCents": 27132436,
+      "merchantContributionCents": 9294951,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 36,
+      "reactivatedCustomers": 36,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119009,
+      "scenario": "returns_wave",
+      "purchases": 6228,
+      "platformProxyCents": 722926,
+      "retainedCents": 26373862,
+      "merchantContributionCents": 7943982,
+      "outreachCents": 820,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 820,
+      "offers": 0,
+      "recommendations": 410,
+      "redemptions": 0,
+      "cohortLapsed": 36,
+      "reactivatedCustomers": 36,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 5.79,
+      "merchantDeltaUSD": 109.45,
+      "volumeDeltaUSD": 579.93,
+      "afterCostUSD": 5.69,
+      "vsBroadUSD": 38.51
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119010,
+      "scenario": "steady",
+      "purchases": 5910,
+      "platformProxyCents": 756390,
+      "retainedCents": 26267992,
+      "merchantContributionCents": 8933312,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119010,
+      "scenario": "rival_sale",
+      "purchases": 5950,
+      "platformProxyCents": 759765,
+      "retainedCents": 26375986,
+      "merchantContributionCents": 8970394,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119010,
+      "scenario": "budget_squeeze",
+      "purchases": 4766,
+      "platformProxyCents": 576859,
+      "retainedCents": 19754387,
+      "merchantContributionCents": 6538833,
+      "outreachCents": 40,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 40,
+      "offers": 0,
+      "recommendations": 20,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -1.16,
+      "merchantDeltaUSD": -5.43,
+      "volumeDeltaUSD": -6.97,
+      "afterCostUSD": -1.26,
+      "vsBroadUSD": -1.83
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119010,
+      "scenario": "supply_delay",
+      "purchases": 5902,
+      "platformProxyCents": 755696,
+      "retainedCents": 26248101,
+      "merchantContributionCents": 8930651,
+      "outreachCents": 0,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 0,
+      "offers": 0,
+      "recommendations": 0,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -0.1,
+      "vsBroadUSD": -0.1
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119010,
+      "scenario": "returns_wave",
+      "purchases": 6035,
+      "platformProxyCents": 703725,
+      "retainedCents": 25441292,
+      "merchantContributionCents": 7705565,
+      "outreachCents": 756,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 756,
+      "offers": 0,
+      "recommendations": 378,
+      "redemptions": 0,
+      "cohortLapsed": 31,
+      "reactivatedCustomers": 31,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -5.07,
+      "merchantDeltaUSD": 43.6,
+      "volumeDeltaUSD": 114.02,
+      "afterCostUSD": -5.17,
+      "vsBroadUSD": 28.79
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119011,
+      "scenario": "steady",
+      "purchases": 6075,
+      "platformProxyCents": 783004,
+      "retainedCents": 27312938,
+      "merchantContributionCents": 9478799,
+      "outreachCents": 62,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 62,
+      "offers": 0,
+      "recommendations": 31,
+      "redemptions": 0,
+      "cohortLapsed": 27,
+      "reactivatedCustomers": 27,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -0.89,
+      "merchantDeltaUSD": -15.99,
+      "volumeDeltaUSD": -25.02,
+      "afterCostUSD": -0.99,
+      "vsBroadUSD": -1.3800000000000001
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119011,
+      "scenario": "rival_sale",
+      "purchases": 6112,
+      "platformProxyCents": 787077,
+      "retainedCents": 27457825,
+      "merchantContributionCents": 9541843,
+      "outreachCents": 50,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 50,
+      "offers": 0,
+      "recommendations": 25,
+      "redemptions": 0,
+      "cohortLapsed": 27,
+      "reactivatedCustomers": 27,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0.26,
+      "merchantDeltaUSD": -2.87,
+      "volumeDeltaUSD": 6.97,
+      "afterCostUSD": 0.16,
+      "vsBroadUSD": 0.8200000000000001
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119011,
+      "scenario": "budget_squeeze",
+      "purchases": 4824,
+      "platformProxyCents": 589341,
+      "retainedCents": 20241385,
+      "merchantContributionCents": 6882646,
+      "outreachCents": 92,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 92,
+      "offers": 0,
+      "recommendations": 46,
+      "redemptions": 0,
+      "cohortLapsed": 27,
+      "reactivatedCustomers": 27,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -1.5,
+      "merchantDeltaUSD": -22.69,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": -1.6,
+      "vsBroadUSD": 0.61
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119011,
+      "scenario": "supply_delay",
+      "purchases": 6062,
+      "platformProxyCents": 780984,
+      "retainedCents": 27245348,
+      "merchantContributionCents": 9442175,
+      "outreachCents": 62,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 62,
+      "offers": 0,
+      "recommendations": 31,
+      "redemptions": 0,
+      "cohortLapsed": 27,
+      "reactivatedCustomers": 27,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -0.89,
+      "merchantDeltaUSD": -15.99,
+      "volumeDeltaUSD": -25.02,
+      "afterCostUSD": -0.99,
+      "vsBroadUSD": -0.62
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119011,
+      "scenario": "returns_wave",
+      "purchases": 6241,
+      "platformProxyCents": 729564,
+      "retainedCents": 26529219,
+      "merchantContributionCents": 8179336,
+      "outreachCents": 726,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 726,
+      "offers": 0,
+      "recommendations": 363,
+      "redemptions": 0,
+      "cohortLapsed": 27,
+      "reactivatedCustomers": 27,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -4.86,
+      "merchantDeltaUSD": -24.54,
+      "volumeDeltaUSD": 95.97,
+      "afterCostUSD": -4.96,
+      "vsBroadUSD": 1.4499999999999997
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119012,
+      "scenario": "steady",
+      "purchases": 6414,
+      "platformProxyCents": 837326,
+      "retainedCents": 29358902,
+      "merchantContributionCents": 10028934,
+      "outreachCents": 24,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 24,
+      "offers": 0,
+      "recommendations": 12,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0.34,
+      "merchantDeltaUSD": 22.69,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": 0.24000000000000002,
+      "vsBroadUSD": 2.1199999999999997
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119012,
+      "scenario": "rival_sale",
+      "purchases": 6453,
+      "platformProxyCents": 839925,
+      "retainedCents": 29436804,
+      "merchantContributionCents": 10073890,
+      "outreachCents": 24,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 24,
+      "offers": 0,
+      "recommendations": 12,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 0.34,
+      "merchantDeltaUSD": 22.69,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": 0.24000000000000002,
+      "vsBroadUSD": 1.1199999999999999
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119012,
+      "scenario": "budget_squeeze",
+      "purchases": 5195,
+      "platformProxyCents": 644938,
+      "retainedCents": 22223566,
+      "merchantContributionCents": 7523027,
+      "outreachCents": 2,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 2,
+      "offers": 0,
+      "recommendations": 1,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 1.25,
+      "merchantDeltaUSD": 49.78,
+      "volumeDeltaUSD": 0,
+      "afterCostUSD": 1.15,
+      "vsBroadUSD": 0.09999999999999995
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119012,
+      "scenario": "supply_delay",
+      "purchases": 6386,
+      "platformProxyCents": 835153,
+      "retainedCents": 29303536,
+      "merchantContributionCents": 10017936,
+      "outreachCents": 24,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 24,
+      "offers": 0,
+      "recommendations": 12,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": -1.27,
+      "merchantDeltaUSD": -10.25,
+      "volumeDeltaUSD": -31.99,
+      "afterCostUSD": -1.37,
+      "vsBroadUSD": 1.85
+    },
+    {
+      "policy": "exposed-lapsed",
+      "seed": 119012,
+      "scenario": "returns_wave",
+      "purchases": 6542,
+      "platformProxyCents": 770900,
+      "retainedCents": 28245561,
+      "merchantContributionCents": 8511325,
+      "outreachCents": 770,
+      "platformSupportCents": 0,
+      "jointBudgetSpentCents": 770,
+      "offers": 0,
+      "recommendations": 385,
+      "redemptions": 0,
+      "cohortLapsed": 35,
+      "reactivatedCustomers": 35,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      },
+      "modelCalls": 0,
+      "allocatedModelUSD": 0,
+      "matureOutcomes": 37000,
+      "deltaUSD": 1.62,
+      "merchantDeltaUSD": 191.59,
+      "volumeDeltaUSD": 203.02,
+      "afterCostUSD": 1.52,
+      "vsBroadUSD": 10.049999999999999
+    }
+  ],
+  "oldShortWindow": {
+    "days100": 5.431888000000001,
+    "days200": -5.331612000000002
+  },
+  "cost": {
+    "focusedModelUSD": 0,
+    "iterationModelUSD": 0.193992,
+    "lifetimeUSD": 2.705993,
+    "costGroups": [
+      {
+        "prefix": "AGGRESSIVE8-",
+        "usd": 0.117138
+      },
+      {
+        "prefix": "RECOVERY9-",
+        "usd": 0.076854
+      }
+    ],
+    "prospectiveAllowanceUSD": 0.1,
+    "pending": 0,
+    "circuit": null
+  },
+  "assumptions": "Original closed-market behavioral and financial equations. Cached Channel3 prices; simulated customers, inventory, orders, returns, processing costs and fees. The outside-store variant was rejected in development and was not used here. No actual PayPal profit, native payments or merchant outcomes are claimed.",
+  "provenance": "The candidate was chosen here in chat after development, before60 fresh markets. No new Gemini calls for this candidate. These are60 deterministic executions, not60 LLM decisions. The $0.10 allowance is hypothetical per-deployment inference, not an incurred charge.",
+  "comparison": "The broad-quality-route baseline is the same recent-return-aware program with the same170-day authority, budget, merchant risk estimator and recommendation scorer, without the customer exposure/lapse filter. No-campaign remains the primary economic control.",
+  "sources": {
+    "contract": "/data/focused-validation-protocol.json",
+    "raw": "/data/focused-validation.json",
+    "earlier": "/aggressive-results.html",
+    "research": "/growth-lab.html"
+  }
+}

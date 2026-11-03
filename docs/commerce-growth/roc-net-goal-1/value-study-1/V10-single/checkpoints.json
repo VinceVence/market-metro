@@ -1,0 +1,493 @@
+{
+  "id": "VALUE-2c8efb1e257c52ff-V10-single",
+  "mode": "single",
+  "status": "COMPLETED",
+  "checkpoints": [
+    {
+      "role": "the commerce planner investigating its decision",
+      "stage": "inspect_policy_evidence",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "day": 45,
+        "observed": {
+          "response_rate": 0.012658227848101266,
+          "authorization_rate": 0.012658227848101266,
+          "contacts_log": 4.330733340286331,
+          "organic_order_ratio": 0.46153846153846156,
+          "interest_share": 0.4,
+          "stock_share": 0.5208333333333334,
+          "unresolved_authorized": 2,
+          "mean_paid_usd": 130.6470588235294,
+          "predicted_payment_net_usd": 0.31259841377430597,
+          "predicted_retention": 0.025706313663829715,
+          "observed_response_count": 0,
+          "observed_authorization_count": 0
+        },
+        "forecasts": [
+          {
+            "action": "continue_numerical",
+            "platformDeltaUSD": 0,
+            "retailerDeltaUSD": 0
+          },
+          {
+            "action": "fixed_recommendations",
+            "platformDeltaUSD": -3.9833333333333294,
+            "retailerDeltaUSD": -19.497500000000173
+          },
+          {
+            "action": "expert_discovery",
+            "platformDeltaUSD": -1.887499999999997,
+            "retailerDeltaUSD": -15.744000000000142
+          },
+          {
+            "action": "observe",
+            "platformDeltaUSD": -37.186363636363645,
+            "retailerDeltaUSD": -526.1490909090912
+          }
+        ],
+        "mechanicalChoice": "continue_numerical",
+        "learnedPauseRuleChoice": "observe",
+        "validation": {
+          "markets": 21,
+          "netGainUSD": 0.6185714285714344,
+          "retailerGainUSD": 6.68142857142859,
+          "positiveCases": 3,
+          "negativeCases": 0,
+          "scope": "Small historical leave-one-market-out validation, not guaranteed future value."
+        },
+        "actions": {
+          "continue_numerical": "Keep the existing numerical recommendations/inquiries; organic shopping and fulfillment continue.",
+          "fixed_recommendations": "Switch outreach to the unchanged strong fresh-interest rule; fulfillment unchanged.",
+          "expert_discovery": "Use the high-ROC expert model to choose product recommendations or needs inquiries.",
+          "observe": "Pause NEW outreach for the rest of this simulated market. Organic shopping, pending orders and delivery/refunds continue."
+        },
+        "scope": "Current public day45 observations only. The model forecasts paired incremental full-horizon net and aggregate merchant contribution versus continuing the numerical policy. Forecasts may be wrong. No seed, regime, future shopper needs or wallets are available.",
+        "task": "Choose the historical evidence needed to resolve the conflict between the value forecast and the learned pause rule.",
+        "queries": {
+          "response": "Prior outreach response, funding and organic-demand context.",
+          "demand": "Demand, interest, payment size and conversion forecasts.",
+          "supply": "Inventory, unresolved funded demand and expected contribution.",
+          "balanced": "All observed dimensions."
+        }
+      },
+      "evidenceId": "fbbb06fb320feeab0bf622ac3691f4d7365b2d617deac2b8affe129c33566f4a",
+      "output": {
+        "query": "supply",
+        "hypothesis": "The learned pause rule is triggered by unresolved authorized demand, suggesting that continuing outreach may be inefficient despite positive validation forecasts.",
+        "evidenceId": "fbbb06fb320feeab0bf622ac3691f4d7365b2d617deac2b8affe129c33566f4a",
+        "rationale": "The conflict between the positive validation of 'continue_numerical' and the 'observe' rule suggests a potential bottleneck in fulfillment or inventory. Investigating supply metrics will clarify if the pause rule is a necessary safeguard against unresolved demand."
+      },
+      "provider": [
+        {
+          "reservationId": "951d8648-af06-414e-bd4b-98fcdd4a4ceb",
+          "caseId": "inspect_policy_evidence",
+          "trialId": "VALUE-2c8efb1e257c52ff-V10-single",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1445,
+          "reservedMicros": 30000,
+          "inputTokens": 968,
+          "outputTokens": 154,
+          "thinkingTokens": 648,
+          "cachedInputTokens": 0,
+          "responseId": "NTToasX4LsSY0-kPvKSuyAI",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 4419,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ]
+    },
+    {
+      "role": "Historical experiment tool",
+      "actor": "LOCAL_TOOL",
+      "status": "COMPLETED",
+      "input": {
+        "query": "supply"
+      },
+      "output": [
+        {
+          "caseId": "H10",
+          "context": {
+            "response_rate": 0.0963855421686747,
+            "authorization_rate": 0.060240963855421686,
+            "contacts_log": 4.382026634673881,
+            "organic_order_ratio": 0.6923076923076923,
+            "interest_share": 0.34,
+            "stock_share": 0.4791666666666667,
+            "unresolved_authorized": 2,
+            "mean_paid_usd": 142.375,
+            "predicted_payment_net_usd": 1.882682492816931,
+            "predicted_retention": 0.09840696422822176,
+            "observed_response_count": 7,
+            "observed_authorization_count": 4
+          },
+          "contrasts": [
+            {
+              "action": "continue_numerical",
+              "platformDeltaUSD": 0,
+              "retailerDeltaUSD": 0,
+              "purchaseDelta": 0
+            },
+            {
+              "action": "fixed_recommendations",
+              "platformDeltaUSD": -4.779999999999973,
+              "retailerDeltaUSD": -55.30999999999949,
+              "purchaseDelta": 0
+            },
+            {
+              "action": "expert_discovery",
+              "platformDeltaUSD": -6.279999999999973,
+              "retailerDeltaUSD": -95.51999999999953,
+              "purchaseDelta": -1
+            },
+            {
+              "action": "observe",
+              "platformDeltaUSD": -35.01999999999998,
+              "retailerDeltaUSD": -512.5100000000002,
+              "purchaseDelta": -8
+            }
+          ],
+          "distance": 0.9743066658182482,
+          "scope": "Completed historical paired interventions. Similarity does not make these exact future outcomes for the current market."
+        },
+        {
+          "caseId": "H09",
+          "context": {
+            "response_rate": 0.06060606060606061,
+            "authorization_rate": 0.030303030303030304,
+            "contacts_log": 4.143134726391533,
+            "organic_order_ratio": 0.4897959183673469,
+            "interest_share": 0.26,
+            "stock_share": 0.5,
+            "unresolved_authorized": 3,
+            "mean_paid_usd": 146.2,
+            "predicted_payment_net_usd": 0.707532527199387,
+            "predicted_retention": 0.0432968243416413,
+            "observed_response_count": 3,
+            "observed_authorization_count": 1
+          },
+          "contrasts": [
+            {
+              "action": "continue_numerical",
+              "platformDeltaUSD": 0,
+              "retailerDeltaUSD": 0,
+              "purchaseDelta": 0
+            },
+            {
+              "action": "fixed_recommendations",
+              "platformDeltaUSD": -1.7999999999999545,
+              "retailerDeltaUSD": 0,
+              "purchaseDelta": 0
+            },
+            {
+              "action": "expert_discovery",
+              "platformDeltaUSD": 13.07000000000005,
+              "retailerDeltaUSD": 133.96999999999935,
+              "purchaseDelta": 1
+            },
+            {
+              "action": "observe",
+              "platformDeltaUSD": -7.589999999999918,
+              "retailerDeltaUSD": -190.32999999999993,
+              "purchaseDelta": -4
+            }
+          ],
+          "distance": 1.109246514246997,
+          "scope": "Completed historical paired interventions. Similarity does not make these exact future outcomes for the current market."
+        },
+        {
+          "caseId": "H16",
+          "context": {
+            "response_rate": 0.2112676056338028,
+            "authorization_rate": 0.11267605633802817,
+            "contacts_log": 4.219507705176107,
+            "organic_order_ratio": 0.2564102564102564,
+            "interest_share": 0.31,
+            "stock_share": 0.4166666666666667,
+            "unresolved_authorized": 1,
+            "mean_paid_usd": 132.45454545454547,
+            "predicted_payment_net_usd": 1.5703724558864487,
+            "predicted_retention": 0.22088140492870312,
+            "observed_response_count": 14,
+            "observed_authorization_count": 7
+          },
+          "contrasts": [
+            {
+              "action": "continue_numerical",
+              "platformDeltaUSD": 0,
+              "retailerDeltaUSD": 0,
+              "purchaseDelta": 0,
+              "unpaidLiabilities": 0
+            },
+            {
+              "action": "fixed_recommendations",
+              "platformDeltaUSD": -20.730000000000018,
+              "retailerDeltaUSD": -176.19999999999982,
+              "purchaseDelta": -1,
+              "unpaidLiabilities": 0
+            },
+            {
+              "action": "expert_discovery",
+              "platformDeltaUSD": -16.029999999999973,
+              "retailerDeltaUSD": -186.19999999999982,
+              "purchaseDelta": -3,
+              "unpaidLiabilities": 0
+            },
+            {
+              "action": "observe",
+              "platformDeltaUSD": -432.26000000000005,
+              "retailerDeltaUSD": -4983.99,
+              "purchaseDelta": -76,
+              "unpaidLiabilities": 0
+            }
+          ],
+          "distance": 1.134802308921886,
+          "scope": "Completed historical paired interventions. Similarity does not make these exact future outcomes for the current market."
+        }
+      ]
+    },
+    {
+      "role": "the same commerce planner reviewing and committing its decision",
+      "stage": "select_economic_policy",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "day": 45,
+        "observed": {
+          "response_rate": 0.012658227848101266,
+          "authorization_rate": 0.012658227848101266,
+          "contacts_log": 4.330733340286331,
+          "organic_order_ratio": 0.46153846153846156,
+          "interest_share": 0.4,
+          "stock_share": 0.5208333333333334,
+          "unresolved_authorized": 2,
+          "mean_paid_usd": 130.6470588235294,
+          "predicted_payment_net_usd": 0.31259841377430597,
+          "predicted_retention": 0.025706313663829715,
+          "observed_response_count": 0,
+          "observed_authorization_count": 0
+        },
+        "forecasts": [
+          {
+            "action": "continue_numerical",
+            "platformDeltaUSD": 0,
+            "retailerDeltaUSD": 0
+          },
+          {
+            "action": "fixed_recommendations",
+            "platformDeltaUSD": -3.9833333333333294,
+            "retailerDeltaUSD": -19.497500000000173
+          },
+          {
+            "action": "expert_discovery",
+            "platformDeltaUSD": -1.887499999999997,
+            "retailerDeltaUSD": -15.744000000000142
+          },
+          {
+            "action": "observe",
+            "platformDeltaUSD": -37.186363636363645,
+            "retailerDeltaUSD": -526.1490909090912
+          }
+        ],
+        "mechanicalChoice": "continue_numerical",
+        "learnedPauseRuleChoice": "observe",
+        "validation": {
+          "markets": 21,
+          "netGainUSD": 0.6185714285714344,
+          "retailerGainUSD": 6.68142857142859,
+          "positiveCases": 3,
+          "negativeCases": 0,
+          "scope": "Small historical leave-one-market-out validation, not guaranteed future value."
+        },
+        "actions": {
+          "continue_numerical": "Keep the existing numerical recommendations/inquiries; organic shopping and fulfillment continue.",
+          "fixed_recommendations": "Switch outreach to the unchanged strong fresh-interest rule; fulfillment unchanged.",
+          "expert_discovery": "Use the high-ROC expert model to choose product recommendations or needs inquiries.",
+          "observe": "Pause NEW outreach for the rest of this simulated market. Organic shopping, pending orders and delivery/refunds continue."
+        },
+        "scope": "Current public day45 observations only. The model forecasts paired incremental full-horizon net and aggregate merchant contribution versus continuing the numerical policy. Forecasts may be wrong. No seed, regime, future shopper needs or wallets are available.",
+        "analyst": {
+          "query": "supply",
+          "hypothesis": "The learned pause rule is triggered by unresolved authorized demand, suggesting that continuing outreach may be inefficient despite positive validation forecasts.",
+          "evidenceId": "fbbb06fb320feeab0bf622ac3691f4d7365b2d617deac2b8affe129c33566f4a",
+          "rationale": "The conflict between the positive validation of 'continue_numerical' and the 'observe' rule suggests a potential bottleneck in fulfillment or inventory. Investigating supply metrics will clarify if the pause rule is a necessary safeguard against unresolved demand."
+        },
+        "examples": [
+          {
+            "caseId": "H10",
+            "context": {
+              "response_rate": 0.0963855421686747,
+              "authorization_rate": 0.060240963855421686,
+              "contacts_log": 4.382026634673881,
+              "organic_order_ratio": 0.6923076923076923,
+              "interest_share": 0.34,
+              "stock_share": 0.4791666666666667,
+              "unresolved_authorized": 2,
+              "mean_paid_usd": 142.375,
+              "predicted_payment_net_usd": 1.882682492816931,
+              "predicted_retention": 0.09840696422822176,
+              "observed_response_count": 7,
+              "observed_authorization_count": 4
+            },
+            "contrasts": [
+              {
+                "action": "continue_numerical",
+                "platformDeltaUSD": 0,
+                "retailerDeltaUSD": 0,
+                "purchaseDelta": 0
+              },
+              {
+                "action": "fixed_recommendations",
+                "platformDeltaUSD": -4.779999999999973,
+                "retailerDeltaUSD": -55.30999999999949,
+                "purchaseDelta": 0
+              },
+              {
+                "action": "expert_discovery",
+                "platformDeltaUSD": -6.279999999999973,
+                "retailerDeltaUSD": -95.51999999999953,
+                "purchaseDelta": -1
+              },
+              {
+                "action": "observe",
+                "platformDeltaUSD": -35.01999999999998,
+                "retailerDeltaUSD": -512.5100000000002,
+                "purchaseDelta": -8
+              }
+            ],
+            "distance": 0.9743066658182482,
+            "scope": "Completed historical paired interventions. Similarity does not make these exact future outcomes for the current market."
+          },
+          {
+            "caseId": "H09",
+            "context": {
+              "response_rate": 0.06060606060606061,
+              "authorization_rate": 0.030303030303030304,
+              "contacts_log": 4.143134726391533,
+              "organic_order_ratio": 0.4897959183673469,
+              "interest_share": 0.26,
+              "stock_share": 0.5,
+              "unresolved_authorized": 3,
+              "mean_paid_usd": 146.2,
+              "predicted_payment_net_usd": 0.707532527199387,
+              "predicted_retention": 0.0432968243416413,
+              "observed_response_count": 3,
+              "observed_authorization_count": 1
+            },
+            "contrasts": [
+              {
+                "action": "continue_numerical",
+                "platformDeltaUSD": 0,
+                "retailerDeltaUSD": 0,
+                "purchaseDelta": 0
+              },
+              {
+                "action": "fixed_recommendations",
+                "platformDeltaUSD": -1.7999999999999545,
+                "retailerDeltaUSD": 0,
+                "purchaseDelta": 0
+              },
+              {
+                "action": "expert_discovery",
+                "platformDeltaUSD": 13.07000000000005,
+                "retailerDeltaUSD": 133.96999999999935,
+                "purchaseDelta": 1
+              },
+              {
+                "action": "observe",
+                "platformDeltaUSD": -7.589999999999918,
+                "retailerDeltaUSD": -190.32999999999993,
+                "purchaseDelta": -4
+              }
+            ],
+            "distance": 1.109246514246997,
+            "scope": "Completed historical paired interventions. Similarity does not make these exact future outcomes for the current market."
+          },
+          {
+            "caseId": "H16",
+            "context": {
+              "response_rate": 0.2112676056338028,
+              "authorization_rate": 0.11267605633802817,
+              "contacts_log": 4.219507705176107,
+              "organic_order_ratio": 0.2564102564102564,
+              "interest_share": 0.31,
+              "stock_share": 0.4166666666666667,
+              "unresolved_authorized": 1,
+              "mean_paid_usd": 132.45454545454547,
+              "predicted_payment_net_usd": 1.5703724558864487,
+              "predicted_retention": 0.22088140492870312,
+              "observed_response_count": 14,
+              "observed_authorization_count": 7
+            },
+            "contrasts": [
+              {
+                "action": "continue_numerical",
+                "platformDeltaUSD": 0,
+                "retailerDeltaUSD": 0,
+                "purchaseDelta": 0,
+                "unpaidLiabilities": 0
+              },
+              {
+                "action": "fixed_recommendations",
+                "platformDeltaUSD": -20.730000000000018,
+                "retailerDeltaUSD": -176.19999999999982,
+                "purchaseDelta": -1,
+                "unpaidLiabilities": 0
+              },
+              {
+                "action": "expert_discovery",
+                "platformDeltaUSD": -16.029999999999973,
+                "retailerDeltaUSD": -186.19999999999982,
+                "purchaseDelta": -3,
+                "unpaidLiabilities": 0
+              },
+              {
+                "action": "observe",
+                "platformDeltaUSD": -432.26000000000005,
+                "retailerDeltaUSD": -4983.99,
+                "purchaseDelta": -76,
+                "unpaidLiabilities": 0
+              }
+            ],
+            "distance": 1.134802308921886,
+            "scope": "Completed historical paired interventions. Similarity does not make these exact future outcomes for the current market."
+          }
+        ],
+        "task": "Commit one action. Resolve differences between the forecast, the learned rule and historical contrasts. Consider contact cost, organic demand and merchant impact, not merely observed purchase likelihood. Explain why this context supports the choice. If evidence for a change is weak, continue the incumbent."
+      },
+      "evidenceId": "8c505d5d9a93b09d5ea390b4da34b098b4091e4773d2e205d8f1e83d806424d2",
+      "output": {
+        "rationale": "The forecasts and historical validation strongly support continuing the numerical policy. The 'observe' action is projected to cause significant losses for both the platform and the retailer. Historical examples like H10 and H16 also show that continuing the numerical policy outperforms other options in similar contexts.",
+        "evidenceId": "8c505d5d9a93b09d5ea390b4da34b098b4091e4773d2e205d8f1e83d806424d2",
+        "basis": "forecast_supported",
+        "action": "continue_numerical"
+      },
+      "provider": [
+        {
+          "reservationId": "673ed7fd-a128-4cf4-9eb9-dd84bef7dec6",
+          "caseId": "select_economic_policy",
+          "trialId": "VALUE-2c8efb1e257c52ff-V10-single",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 13622,
+          "reservedMicros": 150000,
+          "inputTokens": 2545,
+          "outputTokens": 157,
+          "thinkingTokens": 554,
+          "cachedInputTokens": 0,
+          "responseId": "QDToapWBL5SY0-kPmpuTgQk",
+          "modelVersion": "gemini-3.1-pro-preview",
+          "latencyMs": 11133,
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    }
+  ],
+  "action": "continue_numerical",
+  "costUSD": 0.015067
+}

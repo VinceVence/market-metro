@@ -23,7 +23,7 @@ const simulationSettings=mountSimulationSettings({
   onLegacy:async()=>{setPlaying(false);await refreshStatus();plannerChoice();$('brief').showModal();},
   onVisibility:open=>garden.setPaused(open||liveMarketOpen)
 });
-$('run-demo').onclick=async()=>{await judgeDemo.close();liveMarket.close();await policyLab.open(frame?.policyLab?.branch==='mesh'?frame.runId:undefined);};
+$('run-demo').onclick=()=>{location.href='/behavior-lab.html';};
 $('recorded-demo').onclick=()=>{simulationSettings.close();liveMarket.close();judgeDemo.open();};
 function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,8000);}
 function setPlaying(value){
@@ -33,7 +33,7 @@ function setPlaying(value){
   if(value)timer=setInterval(()=>tick(1),Math.max(150,1050/speed));
 }
 function sourceStatus(){
-  $('catalog-status').textContent=status?.catalog?.mode==='SAMPLE'?'Authored sample catalog':(status?.catalog?.productCount||22)+' Channel3 products · cached';
+  $('catalog-status').textContent=status?.catalog?.mode==='AUTHORED'?(status.catalog.productCount+' fictional products · authored'):status?.catalog?.mode==='SAMPLE'?'Authored sample catalog':(status?.catalog?.productCount||22)+' archived catalog products';
   $('trainer-status').textContent=status?.trainer?.ready?'Local CPU trainer ready':'Local Python setup required';
   $('native-sample-limit').disabled=!status?.funding?.ready;
   $('native-sample-limit').value=status?.funding?.ready?'3':'0';
@@ -96,7 +96,7 @@ function renderInspector(){
   if(type==='customer'){
     const u=frame.customers.find(u=>u.id===id);if(!u)return;
     const score=u.scores,coupon=u.coupon;
-    $('inspector').innerHTML='<article class="inspector-card"><h3>'+esc(u.name)+'</h3><span class="tag">'+esc(u.segment)+' · '+(u.arm==='HOLDOUT'?'RANDOMIZED HOLDOUT':'TREATMENT-ELIGIBLE')+'</span><div class="tiny-stats"><div><strong>'+u.purchases+'</strong><small>PURCHASES</small></div><div><strong>'+u.offers+'</strong><small>OFFERS</small></div><div><strong>'+u.redemptions+'</strong><small>REDEEMED</small></div></div>'+(coupon?'<div class="coupon-stamp">'+coupon.pct+'% coupon · day '+(coupon.day+1)+' · '+esc(coupon.status==='REDEEMED'?'redeemed':coupon.day<frame.tick-1?'expired unused':'delivered')+'</div>':'')+(score?'<p class="micro">Predicted purchase probability for today’s candidate product:</p><div class="probabilities"><div><b>'+pct(score.p0)+'</b><small>NO OFFER</small></div><div><b>'+pct(score.p5)+'</b><small>5% OFFER</small></div><div><b>'+pct(score.p10)+'</b><small>10% OFFER</small></div></div><p class="micro">'+esc(score.reason)+'. Model '+esc(score.modelId.split('-MODEL-').at(-1))+'.</p>':'<p class="micro">Predictions appear after a model is trained and promoted.</p>')+'<p class="micro">These are model estimates for a simulated customer, not Channel3 customer scores or an individual claim of prevented churn.</p>'+(frame.workflowId?'<a class="primary" href="/workflow.html?id='+encodeURIComponent(frame.workflowId)+'&customer='+encodeURIComponent(u.id)+'">Open complete customer trace →</a>':'')+'</article>';
+    $('inspector').innerHTML='<article class="inspector-card"><h3>'+esc(u.name)+'</h3><span class="tag">'+esc(u.segment)+' · '+(u.arm==='HOLDOUT'?'RANDOMIZED HOLDOUT':'TREATMENT-ELIGIBLE')+'</span><div class="tiny-stats"><div><strong>'+u.purchases+'</strong><small>PURCHASES</small></div><div><strong>'+u.offers+'</strong><small>OFFERS</small></div><div><strong>'+u.redemptions+'</strong><small>REDEEMED</small></div></div>'+(coupon?'<div class="coupon-stamp">'+coupon.pct+'% coupon · day '+(coupon.day+1)+' · '+esc(coupon.status==='REDEEMED'?'redeemed':coupon.day<frame.tick-1?'expired unused':'delivered')+'</div>':'')+(score?'<p class="micro">Predicted purchase probability for today’s candidate product:</p><div class="probabilities"><div><b>'+pct(score.p0)+'</b><small>NO OFFER</small></div><div><b>'+pct(score.p5)+'</b><small>5% OFFER</small></div><div><b>'+pct(score.p10)+'</b><small>10% OFFER</small></div></div><p class="micro">'+esc(score.reason)+'. Model '+esc(score.modelId.split('-MODEL-').at(-1))+'.</p>':'<p class="micro">Predictions appear after a model is trained and promoted.</p>')+'<p class="micro">These are model estimates for a simulated customer, not observed customer data or an individual claim of prevented churn.</p>'+(frame.workflowId?'<a class="primary" href="/workflow.html?id='+encodeURIComponent(frame.workflowId)+'&customer='+encodeURIComponent(u.id)+'">Open complete customer trace →</a>':'')+'</article>';
   }else{
     const m=frame.merchants.find(m=>m.merchant_id===id);if(!m)return;
     $('inspector').innerHTML='<article class="inspector-card"><h3>'+esc(m.name)+'</h3><span class="tag">FICTIONAL MERCHANT · '+esc(m.district)+'</span><div class="tiny-stats"><div><strong>'+m.sold+'</strong><small>UNITS SOLD</small></div><div><strong>'+m.stock+'</strong><small>ON HAND</small></div></div>'+frame.products.filter(p=>p.merchant_id===id).map(p=>'<div class="product">'+esc(p.title)+'<small>'+money(p.price_cents)+' · '+p.stock+' available · '+esc(p.source)+'</small></div>').join('')+'</article>';

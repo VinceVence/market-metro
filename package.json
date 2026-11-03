@@ -21,12 +21,19 @@
     "research:plot": ".local/research-venv/bin/python scripts/plot-research-lab.py",
     "trusted:benchmark": "node scripts/trusted-workflow/confirm.mjs --run",
     "trusted:verify": "node scripts/trusted-workflow/verify.mjs",
-    "trusted:plot": ".local/research-venv/bin/python scripts/plot-trusted-workflow.py"
+    "trusted:plot": ".local/research-venv/bin/python scripts/plot-trusted-workflow.py",
+    "demo:owned": "node scripts/behavior-v4/build-demo.mjs",
+    "test:studio": "node --test tests/studio.test.mjs",
+    "baseline:verify": "node scripts/commerce-growth/baseline.mjs",
+    "baseline:replay": "node scripts/commerce-growth/baseline.mjs --replay",
+    "workflow:economic": "node scripts/commerce-growth/autonomy/run-economic-workflow.mjs",
+    "test:economic": "node --test tests/economic-harness.test.mjs"
   },
   "engines": {
     "node": ">=22.16"
   },
   "dependencies": {
+    "ag-studio": "3.0.0",
     "phaser": "^3.90.0",
     "three": "^0.180.0"
   },

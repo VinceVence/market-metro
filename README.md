@@ -1,12 +1,39 @@
 # Market Metro: the learning market
 
-**Latest:** [Trusted commerce workflow](docs/policy-lab/benchmarks/v4-1/README.md) — source-grounded Gemini requests, tested data/model workers, durable checkpoints and fresh confirmation results. Open [`/trusted.html`](http://127.0.0.1:4173/trusted.html) with the local server running to inspect recorded runs without model credentials or a saved private economy, or submit a bounded live mission.
+**Final PayPal scorecard:** [14 fresh markets](docs/commerce-growth/economic-final-1/README.md): reviewed workflow $765.47 versus fixed $738.79, **+$26.68 / +3.61%** modeled net after allocated AI cost. The workflow retained v1; the new overlay did not beat it. Fresh Gemini cost $0.058668. All losses, partner safeguards and the planner's rationale errors are disclosed. Open **Economic workflow** for results and checkpoints.
+
+**Economic workflow:** [a planner-led extension of v1](docs/commerce-growth/economic-workflow/README.md) can inspect demand, inventory, liquidity, supply and payment economics, fit a forecast, compose a temporary conditional policy, and request a historical trial. Open **Economic workflow** in the sidebar to inspect a real Gemini tool trace. The demonstrated proposal failed its historical comparison and v1 was retained; the capability is implemented, but no new profit advantage is claimed.
+
+**Locked comparison baseline:** [PayPal net v1](docs/commerce-growth/baselines/paypal-net-v1/README.md). Exact confirmed Gemini policy, model artifacts and results are archived; the economy is hash-frozen. `npm run baseline:verify` enforces the lock. Future agent architectures must beat this policy on matching new seeds, not alter the economy or overwrite its results.
+
+**Fresh challenger study:** [Model training, campaign auditing and checkpointed repair](docs/commerce-growth/baseline-v1-challenger-5/README.md) did **not** beat v1. On 14 new shadow-test markets, the strongest fresh team proposal averaged $735.06 net versus v1's $735.86; its single-planner counterpart produced the same commercial outcomes. The actual agent decisions, source-data choices, contribution ablations and losses are in **Performance → Team vs locked v1 · fresh decisions**. All attempts cost $0.513690 in recorded model usage. V1 remains locked; no candidate was promoted to the live controller.
+
+**Current verified demo: [Intent & conversion team](docs/commerce-growth/autonomy-1/completion-1/README.md).** Open [`/studio.html`](http://127.0.0.1:4173/studio.html) for the market, live agent decisions, campaigns, base tables and PayPal receipts in one workspace. It uses DM Sans and a PayPal-inspired navy/blue palette. AG Studio supplies grids and analytics; the catalog is independently authored.
+
+```sh
+npm ci
+npm run dev
+```
+
+**New live run** executes a bounded three-role workflow: observed commerce data → analyst → local model training → campaign decisions → funded purchases → feedback updates. Shoppers keep trading during reviews. The verified live run used six Gemini calls, one local model fit and 58 feedback updates; prediction error fell 6.8% on 247 issued recommendations. Model usage was $0.011666. Profit is reported separately. **Replay** starts at day 1 using saved checkpoints, with no new calls.
+
+**Fresh decision study:** [Matched single-planner / specialist-team trial](docs/commerce-growth/autonomy-1/decision-study-1/README.md). Six new Gemini calls proposed, tested, revised and selected campaigns before seven unseen seeds. Both approaches chose the same numerical policy: +1.61% modeled payment contribution versus fixed, but no demonstrated multi-agent advantage. Cost: $0.017326. Inspect **Performance → Campaign decisions · equal-budget comparison** for every handoff and result. This study does not replace the live controller.
+
+**Demand → models → campaigns:** the [new research-team workbench](docs/commerce-growth/team-workbench-1/README.md) gives agents demand queries, executable dataset contracts, real model-training jobs and campaign trials. Twelve fresh calls and four local fits completed for $0.023950 estimated. Component removals identify positive contributions from model training and campaign choice, and a negative contribution from the added features. The team beats fixed in mean modeled net, while the matched single planner remains slightly ahead. See **Performance → Demand, models and campaigns · role contributions**.
+
+**PayPal-net revision:** [one fresh Gemini plan on 14 unseen markets](docs/commerce-growth/roc-net-goal-1/NET-RESULT.md) expanded consented needs inquiries and coordinated funded baskets. Mean modeled net improved **$16.24 (+2.21%) versus fixed**, total retailer contribution **$337.02**, and partner cash **$525.78**; closing inventory fell. The $11.14 mean gain over the existing learned workflow remains uncertain (95% interval −$3.04 to +$28.09). Broader inquiries helped; the additional fulfillment component slightly hurt. Cost: $0.025186. See **Performance → PayPal net · coordinated campaign** for the actual decision, customer trace, component removals and every losing market. This measured plan does not replace the live controller or establish multi-agent superiority.
+
+**Earlier workspace run:** the [original commerce guide](docs/commerce-room/README.md) records the previous coupon campaign, 7 redemptions and an $18 native Sandbox capture. Those are archived results, not the current run’s figures.
+
+The earlier authored-catalog replay remains at `/behavior-lab.html`; its analytics view is `/reports.html`. Previous Channel3-derived results below are archives and are not current-catalog performance claims. Channel3 importing remains disabled in the active server. AG Studio remains in local evaluation mode; hosted judging needs suitable license coverage.
+
+**Earlier:** [Trusted commerce workflow](docs/policy-lab/benchmarks/v4-1/README.md) — source-grounded Gemini requests, tested data/model workers, durable checkpoints and fresh confirmation results. Open [`/trusted.html`](http://127.0.0.1:4173/trusted.html) to inspect that earlier experiment.
 
 **Earlier live POC: [Commerce Policy Lab](docs/policy-lab/README.md).** Click **Run demo** for three Gemini reasoning roles, competing merchant policies, a real local contextual bandit, paired controls, delayed financial outcomes and customer traces. The first completed trial and its limitations are recorded in the [measured report](docs/policy-lab/runs/GARDEN-LAB-df43cd08499c0c0a/summary.md). New trials default to no additional sandbox payment and retain the $0.25 model cap beneath the $50 hackathon ceiling.
 
 The earlier simulation modes remain available:
 
-A local 3D commerce tycoon with an orbitable camera, hover inspection and DM Sans throughout the interface. A seeded population browses cached Channel3 products, receives product recommendations or merchant coupons, buys, returns and becomes inactive. A six-role **scripted** marketing workflow defines a business brief, validates observed data, trains real CPU models, launches controlled offers, and measures results. Ordinary scripted seasons invoke no LLM or catalog search. The optional **Gemini 3.1 Flash-Lite** workflow runs an autonomous planner with a $0.25 application cap per campaign; tools and model fitting stay local. Optional native PayPal Sandbox samples use a saved test wallet: up to three selected field-test orders per season, with fictitious funds and no repeated checkout.
+A local 3D commerce tycoon with an orbitable camera, hover inspection and DM Sans throughout the interface. Historical runs used cached Channel3 products; new active runs use the authored catalog. Shoppers receive product recommendations or merchant coupons, buy, return and become inactive. A six-role **scripted** marketing workflow defines a business brief, validates observed data, trains real CPU models, launches controlled offers, and measures results. Ordinary scripted seasons invoke no LLM or catalog search. The optional **Gemini 3.1 Flash-Lite** workflow runs an autonomous planner with a $0.25 application cap per campaign; tools and model fitting stay local. Optional native PayPal Sandbox samples use a saved test wallet: up to three selected field-test orders per season, with fictitious funds and no repeated checkout.
 
 ![Market Metro commerce district](docs/screenshots/commerce-district-overview.jpg)
 
@@ -31,7 +58,7 @@ Open http://127.0.0.1:4173/. The server binds to loopback only. `npm test` runs 
 
 1. Copy `.env.example` to `.env` if `.env` does not already exist.
 2. For PayPal, set `PAYPAL_CLIENT_ID` and `PAYPAL_CLIENT_SECRET` from a **sandbox** REST app in the [Developer Dashboard](https://developer.paypal.com/dashboard/). Keep `PAYPAL_ENVIRONMENT=SANDBOX`, restart the server, and open `/sandbox-buyer.html` for the one-time test-buyer consent described below.
-3. For Channel3, set `CHANNEL3_API_KEY` and set `CHANNEL3_FREE_CREDITS_CONFIRMED=true` only when using your sponsor/free-credit allocation. Open `/metropolis.html` and explicitly select **Sync Channel3**, then create a new learning season to use the cached products. No automatic catalog search runs during a season.
+3. Channel3 settings are retained for historical compatibility but are not read by the active catalog service. Do not enable training from imported catalog responses without applicable permission; see the [provenance review](docs/data-provenance-review-2026-10-26.md).
 
 Your credentials, wallet consent and generated database remain under ignored local paths. The repository includes source and validation reports, not a reusable copy of the developer's accounts.
 
@@ -95,7 +122,7 @@ The feedback path is **city events → observed warehouse → models → review 
 
 ## Data and capability boundaries
 
-- **Real catalog:** 22 Channel3 products imported on October 21, 2026, preserving IDs, prices and source URLs. New seasons reuse the cached snapshot. Without a cache, explicitly labeled authored products are used.
+- **Historical catalog:** 22 Channel3 products imported on October 21, 2026. These remain in archived runs. Active new runs use independently authored fixtures, with no external product IDs, prices or images.
 - **Real local ML:** scikit-learn fits each season's observed rows. Saved JSON artifacts contain actual coefficients/scales or tree thresholds/probabilities. JavaScript predictions must match Python predictions before use.
 - **Coordinator source:** ordinary seasons use scripts, earlier workflow runs use the assistant in chat, and Gemini campaigns use a metered app-owned planner. Attribution and token receipts are saved; no general LLM-agent advantage is claimed.
 - **Simulated economy:** customers, merchants, inventory, coupons, payments, delivery, returns and market changes are fictional.

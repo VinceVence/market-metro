@@ -1,0 +1,127 @@
+{
+  "version": "market-behavior-v3.0",
+  "code": {
+    "engine.mjs": "70f8962b38d990eb02ba1faf6b6f9669eb0cb7361773507564828f43450d9407",
+    "catalog.mjs": "0ed629c8492f529e403f06266eca1d5e6b8bde1e442c1915f78e05e2a29e9443",
+    "policies.mjs": "c39310acc7504e0455763101bc1c38ed11e85b9885e332eadfed9b5988c2caa9",
+    "runner.mjs": "27f3bdc9ce01d4f54ab671fb68e97972083d766752906ceb94f7448373e8574b",
+    "benchmark.mjs": "073ac13ec9c5ab695f78143c5d33e59ba6a123f72e0d90994507355dd25516c3"
+  },
+  "catalogHash": "02479257e3121d0398370f2bb14beed7bb6de638a8a73841004c6f6aed8b2571",
+  "assumptions": {
+    "warmupDays": 30,
+    "returnWindow": 14,
+    "contactGap": 7,
+    "outreachCents": 2,
+    "walletCeilingCents": 50000,
+    "feeRate": 0.0349,
+    "feeFixed": 49,
+    "processingRate": 0.012,
+    "processingFixed": 20,
+    "deliveryCents": 350,
+    "platformSubsidyShare": 0.2,
+    "minMerchantMargin": 0.2,
+    "readBase": 0.7,
+    "fatigueDecay": 0.84,
+    "fatigueVisitPenalty": 0.018,
+    "readContactFatigue": 0.04,
+    "unreadContactFatigue": 0.005,
+    "irrelevantFatigue": 0.12,
+    "awarenessDays": 45,
+    "organicDiscovery": 0.35,
+    "reminderVisitBoost": 0.16,
+    "qualityWeight": 0.3,
+    "dormancyAfter": 21,
+    "dormancyHazard": 0.035,
+    "returnDormancyChance": 0.3,
+    "needRefillMin": 0.025,
+    "needRefillRange": 0.025,
+    "externalUtility": 0.55,
+    "baseNoBuyUtility": 0.7,
+    "readPriceSensitivity": 1.8
+  },
+  "developmentSeeds": [
+    121001,
+    121002,
+    121003
+  ],
+  "evaluationSeeds": [
+    122001,
+    122002,
+    122003,
+    122004,
+    122005,
+    122006,
+    122007,
+    122008
+  ],
+  "developmentScenarios": [
+    "steady",
+    "rival_sale",
+    "budget_squeeze",
+    "supply_delay",
+    "returns_wave"
+  ],
+  "evaluationScenarios": [
+    "steady",
+    "rival_sale",
+    "budget_squeeze",
+    "supply_delay",
+    "returns_wave",
+    "preference_shift"
+  ],
+  "policies": [
+    {
+      "id": "none",
+      "label": "No campaign"
+    },
+    {
+      "id": "legacy_weekly",
+      "label": "Earlier high-value weekly policy"
+    },
+    {
+      "id": "strong_rules",
+      "label": "Rules with the same fitted ranker"
+    },
+    {
+      "id": "personalized",
+      "label": "Full-price discovery recommendations"
+    },
+    {
+      "id": "reactivate",
+      "label": "Targeted reactivation coupons"
+    },
+    {
+      "id": "portfolio",
+      "label": "Discovery + reactivation portfolio"
+    }
+  ],
+  "customers": 100,
+  "shoppingDays": 230,
+  "campaignStop": 130,
+  "budgetCents": 5000,
+  "modelAllowanceUSD": 0.25,
+  "sensitivity": {
+    "seeds": [
+      123001,
+      123002
+    ],
+    "scenarios": [
+      "steady",
+      "preference_shift"
+    ],
+    "response": [
+      0.5,
+      0
+    ]
+  },
+  "demo": {
+    "seed": 124001,
+    "scenario": "preference_shift"
+  },
+  "scope": "NEW authored behavioral model, not an improvement on the old identical environment. Test ongoing commerce throughday130 and post-campaign persistence throughday230 separately. All refunds mature. No response coefficient is tuned using evaluation results.",
+  "selection": "Choose a policy using only development data before opening evaluation. Numerical best is a reference; an optional fresh LLM planner/reviewer may choose a different allowed program. Both use the same local fitted ranker and constraints as strong rules. No tuning after test.",
+  "negativeControl": "At response0, after shared history, campaigns change no private behavior or purchase pathways. They incur outreach cost only. This must not be presented as a failed integrity check or tuned away.",
+  "claimBoundary": "Behavior/financial assumptions are uncalibrated. Channel3 supplies listings, not customer preferences, inventory or campaign response. Numerical execution is not a fresh LLM decision for every market. No real PayPal profit is measured.",
+  "hash": "43ee36e824bb7729197654197fb2f843a7bc249932d5c4730cb2404cef2e85d0"
+}

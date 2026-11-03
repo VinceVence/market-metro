@@ -1,5 +1,7 @@
 import {createLearningMarket,learningFrame,POLICIES} from './marketing/economy.mjs';
 import {createLearningRunner} from './marketing/orchestrator.mjs';
+import {frame as behaviorFrame} from './behavior-v3/engine.mjs';
+import {frame as ownFrame} from './behavior-v4/engine.mjs';
 import { randomUUID } from 'node:crypto';
 import { createMarket, advanceMarket, marketFrame, eventDate } from '../demo/market/engine.mjs';
 import { SandboxError, moneyCents } from './paypal-sandbox.mjs';
@@ -13,6 +15,7 @@ export function createMarketService({store,catalog,paypal,trainImpl,funding=null
   const lookup=id=>{const w=store.state(id);if(!w)throw new SandboxError(404,'RUN_NOT_FOUND','Market run not found.');return w;};
   function receiptRows(id){return store.table('paypal_receipts',id,{limit:100}).rows;}
   function nativeLimit(w){
+    if(w.commerceWorkflow)return 1;
     if(w.policyLab)return w.policyLab.branch==='mesh'?1:0;
     if(w.continuous)return 1;
     if(!w.workflowId)return NATIVE_SAMPLE_LIMIT;
@@ -20,7 +23,7 @@ export function createMarketService({store,catalog,paypal,trainImpl,funding=null
     return f?Math.min(NATIVE_SAMPLE_LIMIT,JSON.parse(f.state_json).goal.nativeSamples):0;
   }
   function frame(id,activities=[]){
-    const w=lookup(id),base=w.kind==='LEARNING_MARKET_V2'?learningFrame(w):marketFrame(w);
+    const w=lookup(id),base=w.autonomyFrame|| (w.behavior?.version?.startsWith('market-owned-')?ownFrame(w):w.behavior?.version?behaviorFrame(w):w.kind==='LEARNING_MARKET_V2'?learningFrame(w):marketFrame(w));
     const recentActivity=store.db.prepare("SELECT o.order_id AS orderId,o.merchant_id AS merchantId,m.name AS merchant,o.total_cents AS amount,p.title AS product,'purchase' AS type FROM orders o JOIN merchants m USING(merchant_id) JOIN order_items i USING(order_id) JOIN products p USING(product_id) WHERE o.run_id=? ORDER BY o.event_ts DESC,o.rowid DESC LIMIT 4").all(id).reverse();
     if(w.policyLab){
       base.phase=w.tick<30?'LEARNING_HISTORY':'FIELD_TEST';

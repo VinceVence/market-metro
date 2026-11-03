@@ -1,0 +1,110 @@
+{
+  "createdAt": "2026-10-31T07:27:09.751Z",
+  "settings": {
+    "customers": 100,
+    "days": 100,
+    "campaignStop": 90,
+    "budgetCents": 5000
+  },
+  "training": [
+    {
+      "scenario": "steady",
+      "seed": 550100
+    },
+    {
+      "scenario": "rival_sale",
+      "seed": 550101
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 550102
+    },
+    {
+      "scenario": "returns_wave",
+      "seed": 550103
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 550104
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 550105
+    },
+    {
+      "scenario": "steady",
+      "seed": 550200
+    },
+    {
+      "scenario": "rival_sale",
+      "seed": 550201
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 550202
+    },
+    {
+      "scenario": "returns_wave",
+      "seed": 550203
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 550204
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 550205
+    }
+  ],
+  "validation": [
+    {
+      "scenario": "steady",
+      "seed": 570200
+    },
+    {
+      "scenario": "rival_sale",
+      "seed": 570201
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 570202
+    },
+    {
+      "scenario": "returns_wave",
+      "seed": 570203
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 570204
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 570205
+    }
+  ],
+  "searchSeed": 770001,
+  "candidateBudgetPerArm": 64,
+  "arms": [
+    "numerical",
+    "single",
+    "multi"
+  ],
+  "hashes": {
+    "scripts/commerce-economy-v5/engine.mjs": "0f53b513cad90ba9a5bc0c389ac6d5a05318a74414a1fe5d622e2cff87695913",
+    "scripts/commerce-economy-v5/operations.mjs": "497d39303192b84bef382032f7b5643ff6c8042acf72cd3ca08a9f5a233b323e",
+    "scripts/commerce-economy-v5/network.mjs": "a80b225e6f6130656849a4ed881075eb1fdc5815b9a74fb24b1631eb51730c24",
+    "scripts/commerce-economy-v5/policies.mjs": "ac505ea2eba47972578587cbd87575886c2d2b7dc73776a723d6123b51e38ccb",
+    "scripts/commerce-economy-v5/runner.mjs": "3e06712b135e138c62cefd69bfa3f432ca73d6b78c685170cab87a304d76c067",
+    "scripts/commerce-economy-v5/search.mjs": "71ec91df1d892ef45e337cb65c4619b539754a96020260b2378541a8ae1861d6",
+    "scripts/behavior-v4/engine.mjs": "49105bb8b7e2af6ddadfc279a811ca073172f6a980b76d0779884ece83d1afc0",
+    "scripts/behavior-v4/policies.mjs": "d4c29c157d3eecbb2f05bf74bc604ed965d0683e6ab9858736e1dce984b386dc",
+    "scripts/behavior-v4/catalog.mjs": "d28989a7cf1e95ec751d74e3136574d0e30886f997cfada9a295a91588fd80a8",
+    "scripts/marketing/recommender.mjs": "7052cdfe948a62431f66f727ef2359ce9389a9d9f68eb39050ab481752c06901",
+    "scripts/marketing/economy.mjs": "cefe444cda73462e32a5ba5f00a4fb58803b6584fd183f41a649fbcb2e9636a1",
+    "scripts/policy-lab/wallet-corrected.mjs": "b90e66fcb129680f74be3f56616d04283a9a2a78e9fe57290c4d1bf9a1348d21",
+    "demo/market/engine.mjs": "ac7d1e12ceae0920e5725f3d7eb9526ee00ca3fbd9d165178109ed97d78777fc"
+  },
+  "scope": "Previously opened validation seeds become training data. New validation remains unopened until every arm finishes search and freezes four finalists. This reuses prior agent decisions; it is not a fresh-agent benchmark. Same64 total candidate evaluations per arm, same local optimizer and allowed controls. Model costs remain assigned to their originating arm. No additional paid calls. Economic simulator frozen.",
+  "selection": "Hard guards for all-partner contribution, retailer contribution, terminal cash and excess inventory. Training fitness = platform contribution minus2 times summed constraint violations. New validation chooses among four frozen feasible finalists plus incumbent. >=2x after full model cost and all guards is required to open held-out tests.",
+  "hash": "8a6f94570a4b72c84cf8326575324d00102b8383ca7b13c3c50ecc7480ddd037"
+}

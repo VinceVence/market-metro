@@ -1,0 +1,253 @@
+{
+  "scope": "Post-hoc explanatory development replay, not a new unseen test or native PayPal payment.",
+  "actorOrigin": "DEVELOPMENT_ASSISTANT_AUTHORED_PROGRAM_NOT_APPLICATION_LLM",
+  "seed": 980102,
+  "regime": "reactivation",
+  "replayParityPassed": true,
+  "before": {
+    "platformUSD": 650.83,
+    "retainedPurchases": 112
+  },
+  "after": {
+    "platformUSD": 657.19,
+    "retainedPurchases": 113
+  },
+  "examples": [
+    {
+      "requestId": "REQUEST-89-7",
+      "customerId": "BUYER-0007",
+      "beforeRequest": {
+        "id": "REQUEST-89-7",
+        "customerId": "BUYER-0007",
+        "createdDay": 89,
+        "deadlineDay": 95,
+        "budgetCents": 28797,
+        "lines": [
+          {
+            "id": "LINE-0",
+            "category": "Furniture",
+            "preferredCatalogId": "MM-SPACE-01",
+            "acceptableCatalogIds": [
+              "MM-SPACE-01"
+            ],
+            "quantity": 1
+          },
+          {
+            "id": "LINE-1",
+            "category": "Office bundles",
+            "preferredCatalogId": "MM-PACK-03",
+            "acceptableCatalogIds": [
+              "MM-PACK-01",
+              "MM-PACK-02",
+              "MM-PACK-03",
+              "MM-PACK-04"
+            ],
+            "quantity": 1
+          }
+        ],
+        "status": "EXPIRED",
+        "authorizationId": "AUTH-REQUEST-89-7",
+        "allocatedItems": [],
+        "source": "SIMULATED_CUSTOMER_CONDITIONAL_REQUEST",
+        "discoveredDay": 89,
+        "discovery": "ORGANIC",
+        "contactId": null,
+        "recommendedCatalogId": null,
+        "authorizedCents": 18033,
+        "authorizedDay": 91,
+        "outsideCents": 16000
+      },
+      "afterRequest": {
+        "id": "REQUEST-89-7",
+        "customerId": "BUYER-0007",
+        "createdDay": 89,
+        "deadlineDay": 95,
+        "budgetCents": 28797,
+        "lines": [
+          {
+            "id": "LINE-0",
+            "category": "Furniture",
+            "preferredCatalogId": "MM-SPACE-01",
+            "acceptableCatalogIds": [
+              "MM-SPACE-01"
+            ],
+            "quantity": 1
+          },
+          {
+            "id": "LINE-1",
+            "category": "Office bundles",
+            "preferredCatalogId": "MM-PACK-03",
+            "acceptableCatalogIds": [
+              "MM-PACK-01",
+              "MM-PACK-02",
+              "MM-PACK-03",
+              "MM-PACK-04"
+            ],
+            "quantity": 1
+          }
+        ],
+        "status": "FULFILLED",
+        "authorizationId": "AUTH-REQUEST-89-7",
+        "allocatedItems": [],
+        "source": "SIMULATED_CUSTOMER_CONDITIONAL_REQUEST",
+        "discoveredDay": 89,
+        "discovery": "ORGANIC",
+        "contactId": null,
+        "recommendedCatalogId": null,
+        "authorizedCents": 18033,
+        "authorizedDay": 91,
+        "quote": {
+          "requestId": "REQUEST-89-7",
+          "grossCents": 16000,
+          "feeCents": 607,
+          "processingCents": 212,
+          "items": [
+            {
+              "lineId": "LINE-0",
+              "productId": "MERCHANT-1-MM-SPACE-01",
+              "quantity": 1,
+              "merchantId": "MERCHANT-1",
+              "unitPriceCents": 9600,
+              "unitCostCents": 4128
+            },
+            {
+              "lineId": "LINE-1",
+              "productId": "MERCHANT-1-MM-PACK-01",
+              "quantity": 1,
+              "merchantId": "MERCHANT-1",
+              "unitPriceCents": 6400,
+              "unitCostCents": 2752
+            }
+          ],
+          "merchants": [
+            {
+              "id": "MERCHANT-1",
+              "grossCents": 16000,
+              "feeCents": 607,
+              "costCents": 6880,
+              "deliveryCents": 350
+            }
+          ],
+          "expiresDay": 93,
+          "latestDeliveryDay": 95,
+          "source": "SIMULATED_QUOTE"
+        },
+        "captureId": "SIM-CAPTURE-226"
+      },
+      "order": {
+        "id": "SIM-CAPTURE-226",
+        "requestId": "REQUEST-89-7",
+        "customerId": "BUYER-0007",
+        "day": 91,
+        "requestDay": 89,
+        "grossCents": 16000,
+        "feeCents": 607,
+        "processingCents": 212,
+        "items": [
+          {
+            "lineId": "LINE-0",
+            "productId": "MERCHANT-1-MM-SPACE-01",
+            "quantity": 1,
+            "merchantId": "MERCHANT-1",
+            "unitPriceCents": 9600,
+            "unitCostCents": 4128
+          },
+          {
+            "lineId": "LINE-1",
+            "productId": "MERCHANT-1-MM-PACK-01",
+            "quantity": 1,
+            "merchantId": "MERCHANT-1",
+            "unitPriceCents": 6400,
+            "unitCostCents": 2752
+          }
+        ],
+        "merchants": [
+          {
+            "id": "MERCHANT-1",
+            "grossCents": 16000,
+            "feeCents": 607,
+            "costCents": 6880,
+            "deliveryCents": 350
+          }
+        ],
+        "deliveryDueDay": 92,
+        "status": "DELIVERED",
+        "refundStatus": null,
+        "refundCents": 0,
+        "source": "SIMULATED_NOT_PAYPAL_RECEIPT"
+      },
+      "delivery": {
+        "id": "DELIVERY-SIM-CAPTURE-226",
+        "orderId": "SIM-CAPTURE-226",
+        "requestId": "REQUEST-89-7",
+        "day": 92,
+        "onTime": true
+      },
+      "planning": [],
+      "paymentLedger": [
+        {
+          "id": "ENTRY-5958",
+          "day": 91,
+          "from": "BUYER-0007",
+          "to": "AUTH-REQUEST-89-7",
+          "cents": 18033,
+          "kind": "AUTHORIZE",
+          "reference": "REQUEST-89-7",
+          "source": "SIMULATED_DEADLINE_LEDGER"
+        },
+        {
+          "id": "ENTRY-5970",
+          "day": 91,
+          "from": "AUTH-REQUEST-89-7",
+          "to": "MERCHANT-1",
+          "cents": 16000,
+          "kind": "CAPTURE_GROSS",
+          "reference": "SIM-CAPTURE-226",
+          "source": "SIMULATED_DEADLINE_LEDGER"
+        },
+        {
+          "id": "ENTRY-5971",
+          "day": 91,
+          "from": "MERCHANT-1",
+          "to": "platform",
+          "cents": 607,
+          "kind": "PAYMENT_FEE",
+          "reference": "SIM-CAPTURE-226",
+          "source": "SIMULATED_DEADLINE_LEDGER"
+        },
+        {
+          "id": "ENTRY-5972",
+          "day": 91,
+          "from": "MERCHANT-1",
+          "to": "logistics",
+          "cents": 350,
+          "kind": "DELIVERY_EXPENSE",
+          "reference": "SIM-CAPTURE-226",
+          "source": "SIMULATED_DEADLINE_LEDGER"
+        },
+        {
+          "id": "ENTRY-5973",
+          "day": 91,
+          "from": "platform",
+          "to": "processor",
+          "cents": 212,
+          "kind": "PAYMENT_PROCESSING",
+          "reference": "SIM-CAPTURE-226",
+          "source": "SIMULATED_DEADLINE_LEDGER"
+        },
+        {
+          "id": "ENTRY-5974",
+          "day": 91,
+          "from": "AUTH-REQUEST-89-7",
+          "to": "BUYER-0007",
+          "cents": 2033,
+          "kind": "AUTHORIZATION_RELEASE",
+          "reference": "REQUEST-89-7",
+          "source": "SIMULATED_DEADLINE_LEDGER"
+        }
+      ]
+    }
+  ],
+  "newModelCalls": 0,
+  "nativePaymentCalls": 0
+}

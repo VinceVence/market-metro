@@ -1,0 +1,53 @@
+{
+  "status": "COMPLETED",
+  "decision": {
+    "decision": "keep_v1",
+    "measured_delta_usd": 0,
+    "candidate_id": "v1",
+    "reason": "The candidate policy was not tested on the historical market, so keeping v1 is required to ensure safety.",
+    "status": "BASELINE_RETAINED",
+    "promoted": false,
+    "scope": "Research recommendation only. A wider fresh-seed comparison is required for a financial improvement claim."
+  },
+  "modelCalls": 6,
+  "modelCostUSD": 0.05636,
+  "toolSequence": [
+    {
+      "tool": "inspect_indicators",
+      "status": "COMPLETED",
+      "reason": "Initial inspection of market indicators to understand demand, inventory, liquidity, supply, and payments over the last 14 days."
+    },
+    {
+      "tool": "fit_demand_model",
+      "status": "COMPLETED",
+      "reason": "Fit a demand model to enable forecast cover, which is required for deadline settlement to handle the 6-day supplier lead time."
+    },
+    {
+      "tool": "preview_policy",
+      "status": "ERROR",
+      "reason": "Demand is dropping and supplier lead times are high (6 days). We will use reactivation to stimulate demand, forecast cover to handle stockouts, and deadline settlement to manage the long lead times."
+    },
+    {
+      "tool": "inspect_indicators",
+      "status": "COMPLETED",
+      "reason": "Need outreach evidence to support the reactivation campaign in the policy preview."
+    },
+    {
+      "tool": "preview_policy",
+      "status": "COMPLETED",
+      "reason": "Previewing policy with outreach evidence included to support reactivation campaign."
+    },
+    {
+      "tool": "select_economic_policy",
+      "status": "COMPLETED",
+      "reason": "The candidate policy was not tested on the historical market, so keeping v1 is required to ensure safety."
+    }
+  ],
+  "modelFits": 1,
+  "proposals": 1,
+  "historicalTrials": 0,
+  "economyUnchanged": true,
+  "nativePayments": 0,
+  "promoted": false,
+  "lifetimeRecordedUSD": 4.587434
+}

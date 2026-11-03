@@ -1,0 +1,171 @@
+{
+  "id": "construct-v1",
+  "createdAt": "2026-10-31T03:28:12.190Z",
+  "settings": {
+    "customers": 100,
+    "days": 100,
+    "campaignStop": 90,
+    "budgetCents": 5000
+  },
+  "blocks": [
+    {
+      "id": "block-1",
+      "development": [
+        {
+          "scenario": "steady",
+          "seed": 420100
+        },
+        {
+          "scenario": "budget_squeeze",
+          "seed": 420101
+        }
+      ],
+      "validation": [
+        {
+          "scenario": "steady",
+          "seed": 420200
+        },
+        {
+          "scenario": "budget_squeeze",
+          "seed": 420201
+        }
+      ],
+      "test": [
+        {
+          "scenario": "steady",
+          "seed": 420300
+        },
+        {
+          "scenario": "steady",
+          "seed": 420301
+        },
+        {
+          "scenario": "budget_squeeze",
+          "seed": 420310
+        },
+        {
+          "scenario": "budget_squeeze",
+          "seed": 420311
+        }
+      ]
+    },
+    {
+      "id": "block-2",
+      "development": [
+        {
+          "scenario": "rival_sale",
+          "seed": 420110
+        },
+        {
+          "scenario": "returns_wave",
+          "seed": 420111
+        }
+      ],
+      "validation": [
+        {
+          "scenario": "rival_sale",
+          "seed": 420210
+        },
+        {
+          "scenario": "returns_wave",
+          "seed": 420211
+        }
+      ],
+      "test": [
+        {
+          "scenario": "rival_sale",
+          "seed": 420400
+        },
+        {
+          "scenario": "rival_sale",
+          "seed": 420401
+        },
+        {
+          "scenario": "returns_wave",
+          "seed": 420410
+        },
+        {
+          "scenario": "returns_wave",
+          "seed": 420411
+        }
+      ]
+    },
+    {
+      "id": "block-3",
+      "development": [
+        {
+          "scenario": "preference_shift",
+          "seed": 420120
+        },
+        {
+          "scenario": "supply_delay",
+          "seed": 420121
+        }
+      ],
+      "validation": [
+        {
+          "scenario": "preference_shift",
+          "seed": 420220
+        },
+        {
+          "scenario": "supply_delay",
+          "seed": 420221
+        }
+      ],
+      "test": [
+        {
+          "scenario": "preference_shift",
+          "seed": 420500
+        },
+        {
+          "scenario": "preference_shift",
+          "seed": 420501
+        },
+        {
+          "scenario": "supply_delay",
+          "seed": 420510
+        },
+        {
+          "scenario": "supply_delay",
+          "seed": 420511
+        }
+      ]
+    }
+  ],
+  "hashes": {
+    "scripts/behavior-v4/engine.mjs": "49105bb8b7e2af6ddadfc279a811ca073172f6a980b76d0779884ece83d1afc0",
+    "scripts/behavior-v4/catalog.mjs": "d28989a7cf1e95ec751d74e3136574d0e30886f997cfada9a295a91588fd80a8",
+    "scripts/behavior-v4/policies.mjs": "d4c29c157d3eecbb2f05bf74bc604ed965d0683e6ab9858736e1dce984b386dc",
+    "scripts/marketing/recommender.mjs": "7052cdfe948a62431f66f727ef2359ce9389a9d9f68eb39050ab481752c06901",
+    "scripts/marketing/economy.mjs": "cefe444cda73462e32a5ba5f00a4fb58803b6584fd183f41a649fbcb2e9636a1",
+    "scripts/policy-lab/wallet-corrected.mjs": "b90e66fcb129680f74be3f56616d04283a9a2a78e9fe57290c4d1bf9a1348d21",
+    "demo/market/engine.mjs": "ac7d1e12ceae0920e5725f3d7eb9526ee00ca3fbd9d165178109ed97d78777fc",
+    "scripts/commerce-design-v2/policy.mjs": "6479ad0e9ffe073883514cd092e577addddafd90317363c5a09199d3cc211efd",
+    "scripts/commerce-design-v2/evaluate.mjs": "6931ff8f26d7c613a34219ce314b396dc35747853eacdacce2bf9dceb63da01e",
+    "scripts/commerce-design-v2/benchmark.mjs": "b91de4bdf7541187af99261dcc2e019a254f3cbce688f54e411c7e43d83875af",
+    "scripts/agent-mesh/model-client.mjs": "94cbe0998bd4559e64a35d88ca0eecf2791b0315e78ccaf59fab56fbd80d0222",
+    "benchmark/vertex.mjs": "f2837cdf2aacef1a50cb6cb662f9cd7b5f97809e0308d20c8b3c942b23634a6d"
+  },
+  "frozenSimulator": true,
+  "backbone": "Gemini 3.1 Pro MEDIUM for every LLM role and single-agent call",
+  "maxCalls": 18,
+  "maxIncrementalUSD": 2,
+  "lifetimeBeforeUSD": 2.946493,
+  "perDesignCapUSD": 0.25,
+  "design": "Three construction sessions, two observed development markets each. Independent recommendation and campaign specialists propose two candidates each; coordinator sees four measured trials and proposes one. Single agent gets sequential 2+2+1 candidates and the same three calls. Numerical search evaluates five predefined diverse configurations in the same representation. Fixed winner and no campaign are shared fallbacks.",
+  "selection": "Choose among five proposals plus common fixed/no-campaign fallbacks by validation mean settled platform contribution, requiring validation mean merchant contribution >= fixed. Validation scores withheld from model calls. Held-out markets are opened only after all policies and selections are frozen.",
+  "ranking": "Day30 snapshot evaluated against days31-37 no-campaign future purchases; canonical SKU Recall@3 and NDCG@3, plus merchant-offer Recall@3. Count-affinity and popularity controls share canonical mapping. No future labels in model fit.",
+  "economics": "Paired same seeds, 30-day shared warmup, 60 contact days, 100 total shopping days plus14 return tail. Exact offered-item purchase attribution. Frozen wallet, fatigue, returns, fees, subsidy and outreach assumptions. Report each full construction cost and subtract it once per design block, evenly across its four test markets; also show conservative full-cost-per-market results.",
+  "primary": "Paired net modeled platform contribution versus fixed, numerical search and matched single agent. Also merchant contribution, recommendation-attributed orders, total orders, retained volume, coupon redemption, ranking, diversity, validation failures, latency and token cost.",
+  "advancement": {
+    "meanNetPlatformVsFixedPositive": true,
+    "meanMerchantVsFixedNonnegative": true,
+    "meanNetVsNumericalPositive": true,
+    "meanNetVsSinglePositive": true,
+    "atLeastTestMarketsBetterThanFixed": 8,
+    "testMarkets": 12
+  },
+  "limits": "Three design sessions and twelve synthetic markets are a pilot, not production profit or proof of general multi-agent superiority. Markets within a design block share a learned policy. No native PayPal calls or external catalog calls.",
+  "amendment": "Before any model call or held-out evaluation: changed numeric schema enums to bounded numeric fields with runtime exact-set validation for Vertex compatibility.",
+  "hash": "0f6dbdbe4199e75cd6fdfbb341451b5e5f84cd4ec67bc79b85c697ea3d9551e4"
+}

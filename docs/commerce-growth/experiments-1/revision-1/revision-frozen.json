@@ -1,0 +1,195 @@
+{
+  "createdAt": "2026-11-01T06:50:25.431Z",
+  "original": {
+    "id": "response_value",
+    "hypothesis": "Rank complete economic response estimates; admit a general inquiry only when its observed expected value is positive.",
+    "program": {
+      "historyDays": 7,
+      "cashFraction": 0.5,
+      "rail": "fast",
+      "contactGate": {
+        "op": "gt",
+        "args": [
+          {
+            "field": "expected_net_usd"
+          },
+          0
+        ]
+      },
+      "contactScore": {
+        "op": "div",
+        "args": [
+          {
+            "field": "expected_net_usd"
+          },
+          {
+            "op": "add",
+            "args": [
+              1,
+              {
+                "op": "mul",
+                "args": [
+                  0.15,
+                  {
+                    "field": "age"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "basketScore": {
+        "op": "add",
+        "args": [
+          {
+            "field": "platform_usd"
+          },
+          {
+            "op": "mul",
+            "args": [
+              0.001,
+              {
+                "field": "retailer_usd"
+              }
+            ]
+          }
+        ]
+      },
+      "stockTarget": {
+        "op": "add",
+        "args": [
+          {
+            "field": "funded_units"
+          },
+          {
+            "op": "mul",
+            "args": [
+              {
+                "field": "rate14"
+              },
+              {
+                "op": "min",
+                "args": [
+                  10,
+                  {
+                    "field": "days_remaining"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "stockPriority": {
+        "op": "div",
+        "args": [
+          {
+            "op": "add",
+            "args": [
+              {
+                "field": "funded_units"
+              },
+              {
+                "field": "rate14"
+              }
+            ]
+          },
+          {
+            "field": "unit_cost_usd"
+          }
+        ]
+      }
+    }
+  },
+  "revision": {
+    "id": "neutral_merchant_revision",
+    "hypothesis": "Remove the margin-ranking tie-break that concentrates traffic at the lowest-cost retailer, while keeping the response-value outreach policy.",
+    "program": {
+      "historyDays": 7,
+      "cashFraction": 0.5,
+      "rail": "fast",
+      "contactGate": {
+        "op": "gt",
+        "args": [
+          {
+            "field": "expected_net_usd"
+          },
+          0
+        ]
+      },
+      "contactScore": {
+        "op": "div",
+        "args": [
+          {
+            "field": "expected_net_usd"
+          },
+          {
+            "op": "add",
+            "args": [
+              1,
+              {
+                "op": "mul",
+                "args": [
+                  0.15,
+                  {
+                    "field": "age"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "basketScore": {
+        "field": "platform_usd"
+      },
+      "stockTarget": {
+        "op": "add",
+        "args": [
+          {
+            "field": "funded_units"
+          },
+          {
+            "op": "mul",
+            "args": [
+              {
+                "field": "rate14"
+              },
+              {
+                "op": "min",
+                "args": [
+                  10,
+                  {
+                    "field": "days_remaining"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "stockPriority": {
+        "op": "div",
+        "args": [
+          {
+            "op": "add",
+            "args": [
+              {
+                "field": "funded_units"
+              },
+              {
+                "field": "rate14"
+              }
+            ]
+          },
+          {
+            "field": "unit_cost_usd"
+          }
+        ]
+      }
+    }
+  },
+  "source": "DEVELOPMENT_ASSISTANT_AUTHORED_NO_APPLICATION_LLM_CALLS",
+  "modelHash": "fbdbcac76927758880e1ec7e1f63c8fb8a7678041695a4fd32f6e5c4ce469aa3"
+}

@@ -1,0 +1,1548 @@
+{
+  "current": {
+    "outreach": "fresh_signal",
+    "maxAge": 7,
+    "contactsPerDay": 10,
+    "arrivalDays": 5,
+    "coldContacts": 0,
+    "forecast": "legacy28",
+    "coverDays": 7,
+    "allocation": "joint",
+    "target": "cheap",
+    "routing": "fast"
+  },
+  "checkpoints": [
+    {
+      "role": "planner",
+      "day": 30,
+      "status": "VALIDATED",
+      "input": {
+        "role": "planner",
+        "evidence": {
+          "day": 30,
+          "marketDays": 100,
+          "snapshotHash": "916dd1bc766fdaa23eb66e9c29e0e95e10896beae4b67a74653439bf24eaeacd",
+          "openFundedRequests": 2,
+          "feasibleCurrentBaskets": 5,
+          "stock": {
+            "Stationery": {
+              "available": 22,
+              "products": 12
+            },
+            "Electronics": {
+              "available": 46,
+              "products": 12
+            },
+            "Furniture": {
+              "available": 59,
+              "products": 12
+            },
+            "Office bundles": {
+              "available": 45,
+              "products": 12
+            }
+          },
+          "merchantCash": [
+            {
+              "id": "MERCHANT-0",
+              "spendableCents": 240582
+            },
+            {
+              "id": "MERCHANT-1",
+              "spendableCents": 630398
+            },
+            {
+              "id": "MERCHANT-2",
+              "spendableCents": 343837
+            }
+          ],
+          "demandModel": {
+            "chosenByPastOnlyValidation": "legacy28",
+            "validationLoss": {
+              "legacy28": 0.37022571478870187,
+              "recent7": 0.38636997767857145,
+              "recent14": 0.38146825396825396
+            },
+            "highestRates": [
+              [
+                "MM-PAPER-02",
+                0.4642857142857143
+              ],
+              [
+                "MM-PAPER-04",
+                0.40714285714285714
+              ],
+              [
+                "MM-PAPER-01",
+                0.37857142857142856
+              ],
+              [
+                "MM-PACK-02",
+                0.32142857142857145
+              ],
+              [
+                "MM-DEVICE-03",
+                0.2642857142857143
+              ]
+            ]
+          },
+          "marketing": {
+            "budgetRemainingCents": 5000,
+            "contacts": 0,
+            "matureResponseGroups": {},
+            "developmentCalibration": {
+              "ask_need|fresh": {
+                "contacts": 93,
+                "retained": 18,
+                "grossCents": 285500,
+                "retailNetCents": 6597
+              },
+              "ask_need|cold": {
+                "contacts": 725,
+                "retained": 30,
+                "grossCents": 309700,
+                "retailNetCents": 4338
+              },
+              "ask_need|recent": {
+                "contacts": 326,
+                "retained": 23,
+                "grossCents": 282000,
+                "retailNetCents": 5400
+              },
+              "recommend|fresh": {
+                "contacts": 916,
+                "retained": 170,
+                "grossCents": 2453700,
+                "retailNetCents": 56166
+              },
+              "recommend|recent": {
+                "contacts": 439,
+                "retained": 33,
+                "grossCents": 449500,
+                "retailNetCents": 9058
+              }
+            },
+            "topObservedChoices": [
+              {
+                "customerId": "BUYER-0047",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 100.53957894736843,
+                "signalAge": 2
+              },
+              {
+                "customerId": "BUYER-0008",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 94.29631578947368,
+                "signalAge": 0
+              },
+              {
+                "customerId": "BUYER-0001",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 50.59347368421053,
+                "signalAge": 1
+              },
+              {
+                "customerId": "BUYER-0007",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 43.45831578947369,
+                "signalAge": 2
+              },
+              {
+                "customerId": "BUYER-0025",
+                "kind": "recommend",
+                "probability": 0.07596371882086168,
+                "expectedScoreCents": 29.38497732426304,
+                "signalAge": 4
+              }
+            ]
+          },
+          "maturedOutcome": {
+            "orders": 44,
+            "retained": 44,
+            "retailNetCents": 11311
+          },
+          "limits": "Current observed data only. Demand validation is retrospective; future needs, response draws, wallets, seed and regime are unavailable. Predicted scores are not causal lift or future profit."
+        },
+        "currentContract": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "upstream": [],
+        "developmentSummary": [
+          {
+            "policy": {
+              "id": "fixed_original",
+              "config": {
+                "outreach": "legacy_stock",
+                "maxAge": 7,
+                "contactsPerDay": 10,
+                "arrivalDays": 2,
+                "coldContacts": 0,
+                "forecast": "legacy28",
+                "coverDays": 3,
+                "allocation": "scarcity",
+                "target": "preferred",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 604.0514285714286,
+              "retailerUSD": 7268.918571428571,
+              "wholesalerUSD": 1232.7428571428572,
+              "manufacturerUSD": 1187.5257142857142,
+              "allPartnerUSD": 9689.187142857143,
+              "terminalCashUSD": 26269.924285714285,
+              "terminalInventoryUSD": 2582.9671428571432,
+              "recommendationPurchases": 15.857142857142858,
+              "retainedPurchases": 115.42857142857143,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "fixed_fresh_joint",
+              "config": {
+                "outreach": "fresh_signal",
+                "maxAge": 2,
+                "contactsPerDay": 10,
+                "arrivalDays": 2,
+                "coldContacts": 0,
+                "forecast": "recent7",
+                "coverDays": 3,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 658.8271428571428,
+              "retailerUSD": 7601.345714285714,
+              "wholesalerUSD": 1454.7385714285713,
+              "manufacturerUSD": 1401.5171428571427,
+              "allPartnerUSD": 10457.601428571428,
+              "terminalCashUSD": 26780.59857142857,
+              "terminalInventoryUSD": 2840.707142857143,
+              "recommendationPurchases": 21,
+              "retainedPurchases": 120.85714285714286,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "fixed_cover_joint",
+              "config": {
+                "outreach": "fresh_signal",
+                "maxAge": 7,
+                "contactsPerDay": 10,
+                "arrivalDays": 5,
+                "coldContacts": 0,
+                "forecast": "recent14",
+                "coverDays": 7,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 690.3642857142858,
+              "retailerUSD": 7910.745714285715,
+              "wholesalerUSD": 1602.597142857143,
+              "manufacturerUSD": 1544.0028571428572,
+              "allPartnerUSD": 11057.345714285717,
+              "terminalCashUSD": 27074.765714285713,
+              "terminalInventoryUSD": 3146.2842857142864,
+              "recommendationPurchases": 23.142857142857142,
+              "retainedPurchases": 123.57142857142857,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "local_calibrated",
+              "config": {
+                "outreach": "calibrated",
+                "maxAge": 4,
+                "contactsPerDay": 10,
+                "arrivalDays": 5,
+                "coldContacts": 0,
+                "forecast": "adaptive",
+                "coverDays": 3,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 646.5042857142856,
+              "retailerUSD": 7587.2414285714285,
+              "wholesalerUSD": 1390.017142857143,
+              "manufacturerUSD": 1339.1485714285716,
+              "allPartnerUSD": 10316.407142857144,
+              "terminalCashUSD": 26843.139999999996,
+              "terminalInventoryUSD": 2636.971428571429,
+              "recommendationPurchases": 13.142857142857142,
+              "retainedPurchases": 120.14285714285714,
+              "unpaidLiabilities": 0
+            }
+          }
+        ],
+        "contractSemantics": {
+          "outreach": "legacy_stock reproduces the old fixed workflow; fresh_signal ranks specific recent interest; calibrated uses pooled settled-response estimates plus mature local updates; none stops contacts.",
+          "maxAge": "Maximum observed signal age; no latent intent is exposed.",
+          "arrivalDays": "Expected inbound stock window accepted by targeting.",
+          "coldContacts": "At most this many general inquiries without recent specific interest per day.",
+          "forecast": "Past-only temporal validation compares Poisson forecasts. adaptive selects the lowest observed error.",
+          "coverDays": "Extra forecast inventory cover; orders still need actual cash and the frozen procurement limits.",
+          "allocation": "joint uses the shared local mixed-integer basket allocator; scarcity is the original greedy rule.",
+          "target": "Preferred or cheaper customer-approved product alternatives for replenishment.",
+          "routing": "fast uses modeled PayPal settlement; auto uses cheaper bank settlement when observed deadlines permit it."
+        }
+      },
+      "startedAt": "2026-11-01T04:11:53.820Z",
+      "output": {
+        "configuration": {
+          "contactsPerDay": 10,
+          "routing": "fast",
+          "coverDays": 7,
+          "forecast": "recent14",
+          "allocation": "joint",
+          "coldContacts": 0,
+          "outreach": "fresh_signal",
+          "arrivalDays": 5,
+          "target": "cheap",
+          "maxAge": 7
+        },
+        "rationale": "The current policy (fixed_cover_joint) yields the highest platform and partner contributions. Evidence supports maintaining these parameters as they effectively leverage recent signal data and joint allocation to maximize modeled platform outcomes."
+      },
+      "provider": {
+        "reservationId": "ecb7cd78-a77f-4fda-93ad-fe27e1b966be",
+        "caseId": "T00-single",
+        "trialId": "growth-team-unseen-1",
+        "stage": "planner",
+        "status": "settled",
+        "modelCostMicros": 1226,
+        "reservedMicros": 30000,
+        "inputTokens": 2821,
+        "outputTokens": 119,
+        "thinkingTokens": 228,
+        "cachedInputTokens": 0,
+        "responseId": "CrzmarSkBrvApt8Py6jMkQ0",
+        "modelVersion": "gemini-3.1-flash-lite",
+        "latencyMs": 1957,
+        "profile": "flash_lite",
+        "configuredModel": "gemini-3.1-flash-lite",
+        "proEndpoint": null
+      },
+      "changedFields": [],
+      "toolChecks": {
+        "type": "Trusted current-evidence checks, not future simulation outcomes",
+        "candidateOutreach": 10,
+        "forecast": "recent14",
+        "maximumDailyContacts": 10,
+        "ledgerAuthority": "No direct money or SQL operations"
+      },
+      "finishedAt": "2026-11-01T04:11:55.796Z"
+    },
+    {
+      "role": "planner",
+      "day": 30,
+      "status": "VALIDATED",
+      "input": {
+        "role": "planner",
+        "evidence": {
+          "day": 30,
+          "marketDays": 100,
+          "snapshotHash": "916dd1bc766fdaa23eb66e9c29e0e95e10896beae4b67a74653439bf24eaeacd",
+          "openFundedRequests": 2,
+          "feasibleCurrentBaskets": 5,
+          "stock": {
+            "Stationery": {
+              "available": 22,
+              "products": 12
+            },
+            "Electronics": {
+              "available": 46,
+              "products": 12
+            },
+            "Furniture": {
+              "available": 59,
+              "products": 12
+            },
+            "Office bundles": {
+              "available": 45,
+              "products": 12
+            }
+          },
+          "merchantCash": [
+            {
+              "id": "MERCHANT-0",
+              "spendableCents": 240582
+            },
+            {
+              "id": "MERCHANT-1",
+              "spendableCents": 630398
+            },
+            {
+              "id": "MERCHANT-2",
+              "spendableCents": 343837
+            }
+          ],
+          "demandModel": {
+            "chosenByPastOnlyValidation": "legacy28",
+            "validationLoss": {
+              "legacy28": 0.37022571478870187,
+              "recent7": 0.38636997767857145,
+              "recent14": 0.38146825396825396
+            },
+            "highestRates": [
+              [
+                "MM-PAPER-02",
+                0.4642857142857143
+              ],
+              [
+                "MM-PAPER-04",
+                0.40714285714285714
+              ],
+              [
+                "MM-PAPER-01",
+                0.37857142857142856
+              ],
+              [
+                "MM-PACK-02",
+                0.32142857142857145
+              ],
+              [
+                "MM-DEVICE-03",
+                0.2642857142857143
+              ]
+            ]
+          },
+          "marketing": {
+            "budgetRemainingCents": 5000,
+            "contacts": 0,
+            "matureResponseGroups": {},
+            "developmentCalibration": {
+              "ask_need|fresh": {
+                "contacts": 93,
+                "retained": 18,
+                "grossCents": 285500,
+                "retailNetCents": 6597
+              },
+              "ask_need|cold": {
+                "contacts": 725,
+                "retained": 30,
+                "grossCents": 309700,
+                "retailNetCents": 4338
+              },
+              "ask_need|recent": {
+                "contacts": 326,
+                "retained": 23,
+                "grossCents": 282000,
+                "retailNetCents": 5400
+              },
+              "recommend|fresh": {
+                "contacts": 916,
+                "retained": 170,
+                "grossCents": 2453700,
+                "retailNetCents": 56166
+              },
+              "recommend|recent": {
+                "contacts": 439,
+                "retained": 33,
+                "grossCents": 449500,
+                "retailNetCents": 9058
+              }
+            },
+            "topObservedChoices": [
+              {
+                "customerId": "BUYER-0047",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 100.53957894736843,
+                "signalAge": 2
+              },
+              {
+                "customerId": "BUYER-0008",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 94.29631578947368,
+                "signalAge": 0
+              },
+              {
+                "customerId": "BUYER-0001",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 50.59347368421053,
+                "signalAge": 1
+              },
+              {
+                "customerId": "BUYER-0007",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 43.45831578947369,
+                "signalAge": 2
+              },
+              {
+                "customerId": "BUYER-0025",
+                "kind": "recommend",
+                "probability": 0.07596371882086168,
+                "expectedScoreCents": 29.38497732426304,
+                "signalAge": 4
+              }
+            ]
+          },
+          "maturedOutcome": {
+            "orders": 44,
+            "retained": 44,
+            "retailNetCents": 11311
+          },
+          "limits": "Current observed data only. Demand validation is retrospective; future needs, response draws, wallets, seed and regime are unavailable. Predicted scores are not causal lift or future profit."
+        },
+        "currentContract": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "upstream": [
+          {
+            "role": "planner",
+            "output": {
+              "configuration": {
+                "contactsPerDay": 10,
+                "routing": "fast",
+                "coverDays": 7,
+                "forecast": "recent14",
+                "allocation": "joint",
+                "coldContacts": 0,
+                "outreach": "fresh_signal",
+                "arrivalDays": 5,
+                "target": "cheap",
+                "maxAge": 7
+              },
+              "rationale": "The current policy (fixed_cover_joint) yields the highest platform and partner contributions. Evidence supports maintaining these parameters as they effectively leverage recent signal data and joint allocation to maximize modeled platform outcomes."
+            },
+            "checks": {
+              "type": "Trusted current-evidence checks, not future simulation outcomes",
+              "candidateOutreach": 10,
+              "forecast": "recent14",
+              "maximumDailyContacts": 10,
+              "ledgerAuthority": "No direct money or SQL operations"
+            }
+          }
+        ],
+        "developmentSummary": [
+          {
+            "policy": {
+              "id": "fixed_original",
+              "config": {
+                "outreach": "legacy_stock",
+                "maxAge": 7,
+                "contactsPerDay": 10,
+                "arrivalDays": 2,
+                "coldContacts": 0,
+                "forecast": "legacy28",
+                "coverDays": 3,
+                "allocation": "scarcity",
+                "target": "preferred",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 604.0514285714286,
+              "retailerUSD": 7268.918571428571,
+              "wholesalerUSD": 1232.7428571428572,
+              "manufacturerUSD": 1187.5257142857142,
+              "allPartnerUSD": 9689.187142857143,
+              "terminalCashUSD": 26269.924285714285,
+              "terminalInventoryUSD": 2582.9671428571432,
+              "recommendationPurchases": 15.857142857142858,
+              "retainedPurchases": 115.42857142857143,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "fixed_fresh_joint",
+              "config": {
+                "outreach": "fresh_signal",
+                "maxAge": 2,
+                "contactsPerDay": 10,
+                "arrivalDays": 2,
+                "coldContacts": 0,
+                "forecast": "recent7",
+                "coverDays": 3,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 658.8271428571428,
+              "retailerUSD": 7601.345714285714,
+              "wholesalerUSD": 1454.7385714285713,
+              "manufacturerUSD": 1401.5171428571427,
+              "allPartnerUSD": 10457.601428571428,
+              "terminalCashUSD": 26780.59857142857,
+              "terminalInventoryUSD": 2840.707142857143,
+              "recommendationPurchases": 21,
+              "retainedPurchases": 120.85714285714286,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "fixed_cover_joint",
+              "config": {
+                "outreach": "fresh_signal",
+                "maxAge": 7,
+                "contactsPerDay": 10,
+                "arrivalDays": 5,
+                "coldContacts": 0,
+                "forecast": "recent14",
+                "coverDays": 7,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 690.3642857142858,
+              "retailerUSD": 7910.745714285715,
+              "wholesalerUSD": 1602.597142857143,
+              "manufacturerUSD": 1544.0028571428572,
+              "allPartnerUSD": 11057.345714285717,
+              "terminalCashUSD": 27074.765714285713,
+              "terminalInventoryUSD": 3146.2842857142864,
+              "recommendationPurchases": 23.142857142857142,
+              "retainedPurchases": 123.57142857142857,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "local_calibrated",
+              "config": {
+                "outreach": "calibrated",
+                "maxAge": 4,
+                "contactsPerDay": 10,
+                "arrivalDays": 5,
+                "coldContacts": 0,
+                "forecast": "adaptive",
+                "coverDays": 3,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 646.5042857142856,
+              "retailerUSD": 7587.2414285714285,
+              "wholesalerUSD": 1390.017142857143,
+              "manufacturerUSD": 1339.1485714285716,
+              "allPartnerUSD": 10316.407142857144,
+              "terminalCashUSD": 26843.139999999996,
+              "terminalInventoryUSD": 2636.971428571429,
+              "recommendationPurchases": 13.142857142857142,
+              "retainedPurchases": 120.14285714285714,
+              "unpaidLiabilities": 0
+            }
+          }
+        ],
+        "contractSemantics": {
+          "outreach": "legacy_stock reproduces the old fixed workflow; fresh_signal ranks specific recent interest; calibrated uses pooled settled-response estimates plus mature local updates; none stops contacts.",
+          "maxAge": "Maximum observed signal age; no latent intent is exposed.",
+          "arrivalDays": "Expected inbound stock window accepted by targeting.",
+          "coldContacts": "At most this many general inquiries without recent specific interest per day.",
+          "forecast": "Past-only temporal validation compares Poisson forecasts. adaptive selects the lowest observed error.",
+          "coverDays": "Extra forecast inventory cover; orders still need actual cash and the frozen procurement limits.",
+          "allocation": "joint uses the shared local mixed-integer basket allocator; scarcity is the original greedy rule.",
+          "target": "Preferred or cheaper customer-approved product alternatives for replenishment.",
+          "routing": "fast uses modeled PayPal settlement; auto uses cheaper bank settlement when observed deadlines permit it."
+        }
+      },
+      "startedAt": "2026-11-01T04:11:55.802Z",
+      "output": {
+        "rationale": "The fixed_cover_joint policy consistently yields the highest platform and partner contributions. Evidence supports maintaining these parameters as they effectively leverage recent signal data and joint allocation to maximize modeled platform outcomes.",
+        "configuration": {
+          "forecast": "recent14",
+          "outreach": "fresh_signal",
+          "routing": "fast",
+          "coverDays": 7,
+          "maxAge": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "coldContacts": 0,
+          "contactsPerDay": 10,
+          "arrivalDays": 5
+        }
+      },
+      "provider": {
+        "reservationId": "a3363263-1e7f-4377-9f00-cbbf75dcc652",
+        "caseId": "T00-single",
+        "trialId": "growth-team-unseen-1",
+        "stage": "planner",
+        "status": "settled",
+        "modelCostMicros": 1536,
+        "reservedMicros": 30000,
+        "inputTokens": 2969,
+        "outputTokens": 117,
+        "thinkingTokens": 412,
+        "cachedInputTokens": 0,
+        "responseId": "ELzmaqnzBqT6pt8PvfysuAY",
+        "modelVersion": "gemini-3.1-flash-lite",
+        "latencyMs": 2426,
+        "profile": "flash_lite",
+        "configuredModel": "gemini-3.1-flash-lite",
+        "proEndpoint": null
+      },
+      "changedFields": [],
+      "toolChecks": {
+        "type": "Trusted current-evidence checks, not future simulation outcomes",
+        "candidateOutreach": 10,
+        "forecast": "recent14",
+        "maximumDailyContacts": 10,
+        "ledgerAuthority": "No direct money or SQL operations"
+      },
+      "finishedAt": "2026-11-01T04:12:02.284Z"
+    },
+    {
+      "role": "planner",
+      "day": 30,
+      "status": "VALIDATED",
+      "input": {
+        "role": "planner",
+        "evidence": {
+          "day": 30,
+          "marketDays": 100,
+          "snapshotHash": "916dd1bc766fdaa23eb66e9c29e0e95e10896beae4b67a74653439bf24eaeacd",
+          "openFundedRequests": 2,
+          "feasibleCurrentBaskets": 5,
+          "stock": {
+            "Stationery": {
+              "available": 22,
+              "products": 12
+            },
+            "Electronics": {
+              "available": 46,
+              "products": 12
+            },
+            "Furniture": {
+              "available": 59,
+              "products": 12
+            },
+            "Office bundles": {
+              "available": 45,
+              "products": 12
+            }
+          },
+          "merchantCash": [
+            {
+              "id": "MERCHANT-0",
+              "spendableCents": 240582
+            },
+            {
+              "id": "MERCHANT-1",
+              "spendableCents": 630398
+            },
+            {
+              "id": "MERCHANT-2",
+              "spendableCents": 343837
+            }
+          ],
+          "demandModel": {
+            "chosenByPastOnlyValidation": "legacy28",
+            "validationLoss": {
+              "legacy28": 0.37022571478870187,
+              "recent7": 0.38636997767857145,
+              "recent14": 0.38146825396825396
+            },
+            "highestRates": [
+              [
+                "MM-PAPER-02",
+                0.4642857142857143
+              ],
+              [
+                "MM-PAPER-04",
+                0.40714285714285714
+              ],
+              [
+                "MM-PAPER-01",
+                0.37857142857142856
+              ],
+              [
+                "MM-PACK-02",
+                0.32142857142857145
+              ],
+              [
+                "MM-DEVICE-03",
+                0.2642857142857143
+              ]
+            ]
+          },
+          "marketing": {
+            "budgetRemainingCents": 5000,
+            "contacts": 0,
+            "matureResponseGroups": {},
+            "developmentCalibration": {
+              "ask_need|fresh": {
+                "contacts": 93,
+                "retained": 18,
+                "grossCents": 285500,
+                "retailNetCents": 6597
+              },
+              "ask_need|cold": {
+                "contacts": 725,
+                "retained": 30,
+                "grossCents": 309700,
+                "retailNetCents": 4338
+              },
+              "ask_need|recent": {
+                "contacts": 326,
+                "retained": 23,
+                "grossCents": 282000,
+                "retailNetCents": 5400
+              },
+              "recommend|fresh": {
+                "contacts": 916,
+                "retained": 170,
+                "grossCents": 2453700,
+                "retailNetCents": 56166
+              },
+              "recommend|recent": {
+                "contacts": 439,
+                "retained": 33,
+                "grossCents": 449500,
+                "retailNetCents": 9058
+              }
+            },
+            "topObservedChoices": [
+              {
+                "customerId": "BUYER-0047",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 100.53957894736843,
+                "signalAge": 2
+              },
+              {
+                "customerId": "BUYER-0008",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 94.29631578947368,
+                "signalAge": 0
+              },
+              {
+                "customerId": "BUYER-0001",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 50.59347368421053,
+                "signalAge": 1
+              },
+              {
+                "customerId": "BUYER-0007",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 43.45831578947369,
+                "signalAge": 2
+              },
+              {
+                "customerId": "BUYER-0025",
+                "kind": "recommend",
+                "probability": 0.07596371882086168,
+                "expectedScoreCents": 29.38497732426304,
+                "signalAge": 4
+              }
+            ]
+          },
+          "maturedOutcome": {
+            "orders": 44,
+            "retained": 44,
+            "retailNetCents": 11311
+          },
+          "limits": "Current observed data only. Demand validation is retrospective; future needs, response draws, wallets, seed and regime are unavailable. Predicted scores are not causal lift or future profit."
+        },
+        "currentContract": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "upstream": [
+          {
+            "role": "planner",
+            "output": {
+              "configuration": {
+                "contactsPerDay": 10,
+                "routing": "fast",
+                "coverDays": 7,
+                "forecast": "recent14",
+                "allocation": "joint",
+                "coldContacts": 0,
+                "outreach": "fresh_signal",
+                "arrivalDays": 5,
+                "target": "cheap",
+                "maxAge": 7
+              },
+              "rationale": "The current policy (fixed_cover_joint) yields the highest platform and partner contributions. Evidence supports maintaining these parameters as they effectively leverage recent signal data and joint allocation to maximize modeled platform outcomes."
+            },
+            "checks": {
+              "type": "Trusted current-evidence checks, not future simulation outcomes",
+              "candidateOutreach": 10,
+              "forecast": "recent14",
+              "maximumDailyContacts": 10,
+              "ledgerAuthority": "No direct money or SQL operations"
+            }
+          },
+          {
+            "role": "planner",
+            "output": {
+              "rationale": "The fixed_cover_joint policy consistently yields the highest platform and partner contributions. Evidence supports maintaining these parameters as they effectively leverage recent signal data and joint allocation to maximize modeled platform outcomes.",
+              "configuration": {
+                "forecast": "recent14",
+                "outreach": "fresh_signal",
+                "routing": "fast",
+                "coverDays": 7,
+                "maxAge": 7,
+                "allocation": "joint",
+                "target": "cheap",
+                "coldContacts": 0,
+                "contactsPerDay": 10,
+                "arrivalDays": 5
+              }
+            },
+            "checks": {
+              "type": "Trusted current-evidence checks, not future simulation outcomes",
+              "candidateOutreach": 10,
+              "forecast": "recent14",
+              "maximumDailyContacts": 10,
+              "ledgerAuthority": "No direct money or SQL operations"
+            }
+          }
+        ],
+        "developmentSummary": [
+          {
+            "policy": {
+              "id": "fixed_original",
+              "config": {
+                "outreach": "legacy_stock",
+                "maxAge": 7,
+                "contactsPerDay": 10,
+                "arrivalDays": 2,
+                "coldContacts": 0,
+                "forecast": "legacy28",
+                "coverDays": 3,
+                "allocation": "scarcity",
+                "target": "preferred",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 604.0514285714286,
+              "retailerUSD": 7268.918571428571,
+              "wholesalerUSD": 1232.7428571428572,
+              "manufacturerUSD": 1187.5257142857142,
+              "allPartnerUSD": 9689.187142857143,
+              "terminalCashUSD": 26269.924285714285,
+              "terminalInventoryUSD": 2582.9671428571432,
+              "recommendationPurchases": 15.857142857142858,
+              "retainedPurchases": 115.42857142857143,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "fixed_fresh_joint",
+              "config": {
+                "outreach": "fresh_signal",
+                "maxAge": 2,
+                "contactsPerDay": 10,
+                "arrivalDays": 2,
+                "coldContacts": 0,
+                "forecast": "recent7",
+                "coverDays": 3,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 658.8271428571428,
+              "retailerUSD": 7601.345714285714,
+              "wholesalerUSD": 1454.7385714285713,
+              "manufacturerUSD": 1401.5171428571427,
+              "allPartnerUSD": 10457.601428571428,
+              "terminalCashUSD": 26780.59857142857,
+              "terminalInventoryUSD": 2840.707142857143,
+              "recommendationPurchases": 21,
+              "retainedPurchases": 120.85714285714286,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "fixed_cover_joint",
+              "config": {
+                "outreach": "fresh_signal",
+                "maxAge": 7,
+                "contactsPerDay": 10,
+                "arrivalDays": 5,
+                "coldContacts": 0,
+                "forecast": "recent14",
+                "coverDays": 7,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 690.3642857142858,
+              "retailerUSD": 7910.745714285715,
+              "wholesalerUSD": 1602.597142857143,
+              "manufacturerUSD": 1544.0028571428572,
+              "allPartnerUSD": 11057.345714285717,
+              "terminalCashUSD": 27074.765714285713,
+              "terminalInventoryUSD": 3146.2842857142864,
+              "recommendationPurchases": 23.142857142857142,
+              "retainedPurchases": 123.57142857142857,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "local_calibrated",
+              "config": {
+                "outreach": "calibrated",
+                "maxAge": 4,
+                "contactsPerDay": 10,
+                "arrivalDays": 5,
+                "coldContacts": 0,
+                "forecast": "adaptive",
+                "coverDays": 3,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 646.5042857142856,
+              "retailerUSD": 7587.2414285714285,
+              "wholesalerUSD": 1390.017142857143,
+              "manufacturerUSD": 1339.1485714285716,
+              "allPartnerUSD": 10316.407142857144,
+              "terminalCashUSD": 26843.139999999996,
+              "terminalInventoryUSD": 2636.971428571429,
+              "recommendationPurchases": 13.142857142857142,
+              "retainedPurchases": 120.14285714285714,
+              "unpaidLiabilities": 0
+            }
+          }
+        ],
+        "contractSemantics": {
+          "outreach": "legacy_stock reproduces the old fixed workflow; fresh_signal ranks specific recent interest; calibrated uses pooled settled-response estimates plus mature local updates; none stops contacts.",
+          "maxAge": "Maximum observed signal age; no latent intent is exposed.",
+          "arrivalDays": "Expected inbound stock window accepted by targeting.",
+          "coldContacts": "At most this many general inquiries without recent specific interest per day.",
+          "forecast": "Past-only temporal validation compares Poisson forecasts. adaptive selects the lowest observed error.",
+          "coverDays": "Extra forecast inventory cover; orders still need actual cash and the frozen procurement limits.",
+          "allocation": "joint uses the shared local mixed-integer basket allocator; scarcity is the original greedy rule.",
+          "target": "Preferred or cheaper customer-approved product alternatives for replenishment.",
+          "routing": "fast uses modeled PayPal settlement; auto uses cheaper bank settlement when observed deadlines permit it."
+        }
+      },
+      "startedAt": "2026-11-01T04:12:02.293Z",
+      "output": {
+        "rationale": "The fixed_cover_joint policy consistently yields the highest platform and partner contributions. Evidence supports maintaining these parameters as they effectively leverage recent signal data and joint allocation to maximize modeled platform outcomes.",
+        "configuration": {
+          "target": "cheap",
+          "routing": "fast",
+          "maxAge": 7,
+          "allocation": "joint",
+          "forecast": "recent14",
+          "coldContacts": 0,
+          "arrivalDays": 5,
+          "coverDays": 7,
+          "contactsPerDay": 10,
+          "outreach": "fresh_signal"
+        }
+      },
+      "provider": {
+        "reservationId": "d0e01542-f02d-49e2-9b5f-d593191a5396",
+        "caseId": "T00-single",
+        "trialId": "growth-team-unseen-1",
+        "stage": "planner",
+        "status": "settled",
+        "modelCostMicros": 1609,
+        "reservedMicros": 30000,
+        "inputTokens": 3118,
+        "outputTokens": 117,
+        "thinkingTokens": 436,
+        "cachedInputTokens": 0,
+        "responseId": "Fbzmaq3nOpWlpt8P67jsUA",
+        "modelVersion": "gemini-3.1-flash-lite",
+        "latencyMs": 1807,
+        "profile": "flash_lite",
+        "configuredModel": "gemini-3.1-flash-lite",
+        "proEndpoint": null
+      },
+      "changedFields": [],
+      "toolChecks": {
+        "type": "Trusted current-evidence checks, not future simulation outcomes",
+        "candidateOutreach": 10,
+        "forecast": "recent14",
+        "maximumDailyContacts": 10,
+        "ledgerAuthority": "No direct money or SQL operations"
+      },
+      "finishedAt": "2026-11-01T04:12:07.685Z"
+    },
+    {
+      "role": "planner",
+      "day": 60,
+      "status": "VALIDATED",
+      "input": {
+        "role": "planner",
+        "evidence": {
+          "day": 60,
+          "marketDays": 100,
+          "snapshotHash": "1c3cafb5da708db6c9d820766bca15ee17db5ae3a0bf6971134a67bb406a4af9",
+          "openFundedRequests": 1,
+          "feasibleCurrentBaskets": 1,
+          "stock": {
+            "Stationery": {
+              "available": 17,
+              "products": 12
+            },
+            "Electronics": {
+              "available": 31,
+              "products": 12
+            },
+            "Furniture": {
+              "available": 29,
+              "products": 12
+            },
+            "Office bundles": {
+              "available": 31,
+              "products": 12
+            }
+          },
+          "merchantCash": [
+            {
+              "id": "MERCHANT-0",
+              "spendableCents": 750608
+            },
+            {
+              "id": "MERCHANT-1",
+              "spendableCents": 723094
+            },
+            {
+              "id": "MERCHANT-2",
+              "spendableCents": 489963
+            }
+          ],
+          "demandModel": {
+            "chosenByPastOnlyValidation": "legacy28",
+            "validationLoss": {
+              "legacy28": 0.3015925655976673,
+              "recent7": 0.32017299107142855,
+              "recent14": 0.3155158730158728
+            },
+            "highestRates": [
+              [
+                "MM-PACK-01",
+                0.32142857142857145
+              ],
+              [
+                "MM-PAPER-03",
+                0.29285714285714287
+              ],
+              [
+                "MM-PAPER-01",
+                0.2642857142857143
+              ],
+              [
+                "MM-SPACE-03",
+                0.2642857142857143
+              ],
+              [
+                "MM-DEVICE-02",
+                0.2357142857142857
+              ]
+            ]
+          },
+          "marketing": {
+            "budgetRemainingCents": 4195,
+            "contacts": 161,
+            "matureResponseGroups": {
+              "recommend|fresh": {
+                "contacts": 15,
+                "retained": 1
+              },
+              "recommend|recent": {
+                "contacts": 13,
+                "retained": 0
+              }
+            },
+            "developmentCalibration": {
+              "ask_need|fresh": {
+                "contacts": 93,
+                "retained": 18,
+                "grossCents": 285500,
+                "retailNetCents": 6597
+              },
+              "ask_need|cold": {
+                "contacts": 725,
+                "retained": 30,
+                "grossCents": 309700,
+                "retailNetCents": 4338
+              },
+              "ask_need|recent": {
+                "contacts": 326,
+                "retained": 23,
+                "grossCents": 282000,
+                "retailNetCents": 5400
+              },
+              "recommend|fresh": {
+                "contacts": 916,
+                "retained": 170,
+                "grossCents": 2453700,
+                "retailNetCents": 56166
+              },
+              "recommend|recent": {
+                "contacts": 439,
+                "retained": 33,
+                "grossCents": 449500,
+                "retailNetCents": 9058
+              }
+            },
+            "topObservedChoices": [
+              {
+                "customerId": "BUYER-0054",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 100.53957894736843,
+                "signalAge": 0
+              },
+              {
+                "customerId": "BUYER-0096",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 100.53957894736843,
+                "signalAge": 0
+              },
+              {
+                "customerId": "BUYER-0051",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 43.45831578947369,
+                "signalAge": 2
+              },
+              {
+                "customerId": "BUYER-0059",
+                "kind": "ask_need",
+                "probability": 0.19473684210526315,
+                "expectedScoreCents": 12.241999999999997,
+                "signalAge": 2
+              }
+            ]
+          },
+          "maturedOutcome": {
+            "orders": 54,
+            "retained": 51,
+            "retailNetCents": 15924
+          },
+          "limits": "Current observed data only. Demand validation is retrospective; future needs, response draws, wallets, seed and regime are unavailable. Predicted scores are not causal lift or future profit."
+        },
+        "currentContract": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "upstream": [
+          {
+            "role": "planner",
+            "day": 30,
+            "output": {
+              "configuration": {
+                "contactsPerDay": 10,
+                "routing": "fast",
+                "coverDays": 7,
+                "forecast": "recent14",
+                "allocation": "joint",
+                "coldContacts": 0,
+                "outreach": "fresh_signal",
+                "arrivalDays": 5,
+                "target": "cheap",
+                "maxAge": 7
+              },
+              "rationale": "The current policy (fixed_cover_joint) yields the highest platform and partner contributions. Evidence supports maintaining these parameters as they effectively leverage recent signal data and joint allocation to maximize modeled platform outcomes."
+            },
+            "checks": {
+              "type": "Trusted current-evidence checks, not future simulation outcomes",
+              "candidateOutreach": 10,
+              "forecast": "recent14",
+              "maximumDailyContacts": 10,
+              "ledgerAuthority": "No direct money or SQL operations"
+            }
+          },
+          {
+            "role": "planner",
+            "day": 30,
+            "output": {
+              "rationale": "The fixed_cover_joint policy consistently yields the highest platform and partner contributions. Evidence supports maintaining these parameters as they effectively leverage recent signal data and joint allocation to maximize modeled platform outcomes.",
+              "configuration": {
+                "forecast": "recent14",
+                "outreach": "fresh_signal",
+                "routing": "fast",
+                "coverDays": 7,
+                "maxAge": 7,
+                "allocation": "joint",
+                "target": "cheap",
+                "coldContacts": 0,
+                "contactsPerDay": 10,
+                "arrivalDays": 5
+              }
+            },
+            "checks": {
+              "type": "Trusted current-evidence checks, not future simulation outcomes",
+              "candidateOutreach": 10,
+              "forecast": "recent14",
+              "maximumDailyContacts": 10,
+              "ledgerAuthority": "No direct money or SQL operations"
+            }
+          },
+          {
+            "role": "planner",
+            "day": 30,
+            "output": {
+              "rationale": "The fixed_cover_joint policy consistently yields the highest platform and partner contributions. Evidence supports maintaining these parameters as they effectively leverage recent signal data and joint allocation to maximize modeled platform outcomes.",
+              "configuration": {
+                "target": "cheap",
+                "routing": "fast",
+                "maxAge": 7,
+                "allocation": "joint",
+                "forecast": "recent14",
+                "coldContacts": 0,
+                "arrivalDays": 5,
+                "coverDays": 7,
+                "contactsPerDay": 10,
+                "outreach": "fresh_signal"
+              }
+            },
+            "checks": {
+              "type": "Trusted current-evidence checks, not future simulation outcomes",
+              "candidateOutreach": 10,
+              "forecast": "recent14",
+              "maximumDailyContacts": 10,
+              "ledgerAuthority": "No direct money or SQL operations"
+            }
+          }
+        ],
+        "developmentSummary": [
+          {
+            "policy": {
+              "id": "fixed_original",
+              "config": {
+                "outreach": "legacy_stock",
+                "maxAge": 7,
+                "contactsPerDay": 10,
+                "arrivalDays": 2,
+                "coldContacts": 0,
+                "forecast": "legacy28",
+                "coverDays": 3,
+                "allocation": "scarcity",
+                "target": "preferred",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 604.0514285714286,
+              "retailerUSD": 7268.918571428571,
+              "wholesalerUSD": 1232.7428571428572,
+              "manufacturerUSD": 1187.5257142857142,
+              "allPartnerUSD": 9689.187142857143,
+              "terminalCashUSD": 26269.924285714285,
+              "terminalInventoryUSD": 2582.9671428571432,
+              "recommendationPurchases": 15.857142857142858,
+              "retainedPurchases": 115.42857142857143,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "fixed_fresh_joint",
+              "config": {
+                "outreach": "fresh_signal",
+                "maxAge": 2,
+                "contactsPerDay": 10,
+                "arrivalDays": 2,
+                "coldContacts": 0,
+                "forecast": "recent7",
+                "coverDays": 3,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 658.8271428571428,
+              "retailerUSD": 7601.345714285714,
+              "wholesalerUSD": 1454.7385714285713,
+              "manufacturerUSD": 1401.5171428571427,
+              "allPartnerUSD": 10457.601428571428,
+              "terminalCashUSD": 26780.59857142857,
+              "terminalInventoryUSD": 2840.707142857143,
+              "recommendationPurchases": 21,
+              "retainedPurchases": 120.85714285714286,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "fixed_cover_joint",
+              "config": {
+                "outreach": "fresh_signal",
+                "maxAge": 7,
+                "contactsPerDay": 10,
+                "arrivalDays": 5,
+                "coldContacts": 0,
+                "forecast": "recent14",
+                "coverDays": 7,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 690.3642857142858,
+              "retailerUSD": 7910.745714285715,
+              "wholesalerUSD": 1602.597142857143,
+              "manufacturerUSD": 1544.0028571428572,
+              "allPartnerUSD": 11057.345714285717,
+              "terminalCashUSD": 27074.765714285713,
+              "terminalInventoryUSD": 3146.2842857142864,
+              "recommendationPurchases": 23.142857142857142,
+              "retainedPurchases": 123.57142857142857,
+              "unpaidLiabilities": 0
+            }
+          },
+          {
+            "policy": {
+              "id": "local_calibrated",
+              "config": {
+                "outreach": "calibrated",
+                "maxAge": 4,
+                "contactsPerDay": 10,
+                "arrivalDays": 5,
+                "coldContacts": 0,
+                "forecast": "adaptive",
+                "coverDays": 3,
+                "allocation": "joint",
+                "target": "cheap",
+                "routing": "fast"
+              }
+            },
+            "means": {
+              "platformUSD": 646.5042857142856,
+              "retailerUSD": 7587.2414285714285,
+              "wholesalerUSD": 1390.017142857143,
+              "manufacturerUSD": 1339.1485714285716,
+              "allPartnerUSD": 10316.407142857144,
+              "terminalCashUSD": 26843.139999999996,
+              "terminalInventoryUSD": 2636.971428571429,
+              "recommendationPurchases": 13.142857142857142,
+              "retainedPurchases": 120.14285714285714,
+              "unpaidLiabilities": 0
+            }
+          }
+        ],
+        "contractSemantics": {
+          "outreach": "legacy_stock reproduces the old fixed workflow; fresh_signal ranks specific recent interest; calibrated uses pooled settled-response estimates plus mature local updates; none stops contacts.",
+          "maxAge": "Maximum observed signal age; no latent intent is exposed.",
+          "arrivalDays": "Expected inbound stock window accepted by targeting.",
+          "coldContacts": "At most this many general inquiries without recent specific interest per day.",
+          "forecast": "Past-only temporal validation compares Poisson forecasts. adaptive selects the lowest observed error.",
+          "coverDays": "Extra forecast inventory cover; orders still need actual cash and the frozen procurement limits.",
+          "allocation": "joint uses the shared local mixed-integer basket allocator; scarcity is the original greedy rule.",
+          "target": "Preferred or cheaper customer-approved product alternatives for replenishment.",
+          "routing": "fast uses modeled PayPal settlement; auto uses cheaper bank settlement when observed deadlines permit it."
+        }
+      },
+      "startedAt": "2026-11-01T04:12:08.921Z",
+      "output": {
+        "configuration": {
+          "target": "cheap",
+          "outreach": "fresh_signal",
+          "coldContacts": 0,
+          "arrivalDays": 5,
+          "routing": "fast",
+          "allocation": "joint",
+          "forecast": "legacy28",
+          "coverDays": 7,
+          "maxAge": 7,
+          "contactsPerDay": 10
+        },
+        "rationale": "The fixed_cover_joint policy remains the most effective. I am updating the forecast to legacy28 as it currently exhibits lower validation loss than recent14, while maintaining the successful outreach and allocation parameters to maximize platform and partner contributions."
+      },
+      "provider": {
+        "reservationId": "11969022-b51c-4020-88d0-2eaa26bd485c",
+        "caseId": "T00-single",
+        "trialId": "growth-team-unseen-1",
+        "stage": "planner",
+        "status": "settled",
+        "modelCostMicros": 1772,
+        "reservedMicros": 30000,
+        "inputTokens": 3248,
+        "outputTokens": 128,
+        "thinkingTokens": 512,
+        "cachedInputTokens": 0,
+        "responseId": "HLzmaqeyArXFpt8P95_9gAY",
+        "modelVersion": "gemini-3.1-flash-lite",
+        "latencyMs": 2756,
+        "profile": "flash_lite",
+        "configuredModel": "gemini-3.1-flash-lite",
+        "proEndpoint": null
+      },
+      "changedFields": [
+        "forecast"
+      ],
+      "toolChecks": {
+        "type": "Trusted current-evidence checks, not future simulation outcomes",
+        "candidateOutreach": 7,
+        "forecast": "legacy28",
+        "maximumDailyContacts": 10,
+        "ledgerAuthority": "No direct money or SQL operations"
+      },
+      "finishedAt": "2026-11-01T04:12:14.636Z"
+    }
+  ]
+}

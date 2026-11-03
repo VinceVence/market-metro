@@ -1,0 +1,348 @@
+{
+  "createdAt": "2026-10-31T15:04:18.232Z",
+  "version": "deadline-commerce-1",
+  "stage": "Frozen development audit; no held-out performance test",
+  "markets": 6,
+  "reference": {
+    "policy": {
+      "id": "fixed_fast",
+      "allocation": "scarcity",
+      "coverDays": 3,
+      "routing": "fast",
+      "target": "preferred"
+    },
+    "mean": {
+      "platformUSD": 1243.0733333333335,
+      "retailerUSD": 14833.980000000001,
+      "wholesalerUSD": 2956.816666666666,
+      "manufacturerUSD": 2912.318333333333,
+      "allPartnerUSD": 20703.114999999998,
+      "terminalCashUSD": 36525.95333333333,
+      "terminalInventoryUSD": 1967.1483333333333,
+      "fulfilledRequests": 245.33333333333334,
+      "retainedRequests": 236.5,
+      "retainedVolumeUSD": 32127.666666666668,
+      "unpaidLiabilities": 0
+    },
+    "ratio": 1,
+    "feasible": true,
+    "label": "Fixed rules + fast settlement"
+  },
+  "joint": {
+    "policy": {
+      "id": "joint_fast",
+      "allocation": "joint",
+      "coverDays": 3,
+      "routing": "fast",
+      "target": "preferred"
+    },
+    "mean": {
+      "platformUSD": 1242.2250000000001,
+      "retailerUSD": 14723.099999999999,
+      "wholesalerUSD": 2968.1516666666666,
+      "manufacturerUSD": 2923.206666666667,
+      "allPartnerUSD": 20614.458333333332,
+      "terminalCashUSD": 36476.33833333334,
+      "terminalInventoryUSD": 1928.1066666666666,
+      "fulfilledRequests": 242.5,
+      "retainedRequests": 233.5,
+      "retainedVolumeUSD": 32075.333333333332,
+      "unpaidLiabilities": 0
+    },
+    "ratio": 0.9993175516595963,
+    "feasible": false,
+    "label": "Joint allocation + fast settlement"
+  },
+  "comparators": [
+    {
+      "policy": {
+        "id": "fixed_deadline",
+        "allocation": "deadline",
+        "coverDays": 7,
+        "routing": "auto",
+        "target": "cheap"
+      },
+      "mean": {
+        "platformUSD": 823.9916666666667,
+        "retailerUSD": 14133.048333333334,
+        "wholesalerUSD": 3505.351666666667,
+        "manufacturerUSD": 3306.8716666666664,
+        "allPartnerUSD": 20945.271666666667,
+        "terminalCashUSD": 35017.39333333334,
+        "terminalInventoryUSD": 3717.8650000000002,
+        "fulfilledRequests": 255.33333333333334,
+        "retainedRequests": 246.33333333333334,
+        "retainedVolumeUSD": 30325.166666666668,
+        "unpaidLiabilities": 0
+      },
+      "ratio": 0.6628664975517667,
+      "feasible": false,
+      "label": "Deadline-first rules"
+    },
+    {
+      "policy": {
+        "id": "fixed_scarcity",
+        "allocation": "scarcity",
+        "coverDays": 7,
+        "routing": "auto",
+        "target": "preferred"
+      },
+      "mean": {
+        "platformUSD": 834.4666666666666,
+        "retailerUSD": 14633.343333333332,
+        "wholesalerUSD": 3488.2533333333326,
+        "manufacturerUSD": 3306.86,
+        "allPartnerUSD": 21428.45666666667,
+        "terminalCashUSD": 36423.695,
+        "terminalInventoryUSD": 2794.7483333333334,
+        "fulfilledRequests": 242,
+        "retainedRequests": 232.83333333333334,
+        "retainedVolumeUSD": 31679.833333333332,
+        "unpaidLiabilities": 0
+      },
+      "ratio": 0.6712931926783615,
+      "feasible": false,
+      "label": "Scarcity-aware rules"
+    },
+    {
+      "policy": {
+        "id": "fixed_margin",
+        "allocation": "margin",
+        "coverDays": 3,
+        "routing": "auto",
+        "target": "preferred"
+      },
+      "mean": {
+        "platformUSD": 848.195,
+        "retailerUSD": 14577.673333333334,
+        "wholesalerUSD": 3335.3350000000005,
+        "manufacturerUSD": 3153.0533333333333,
+        "allPartnerUSD": 21066.06166666667,
+        "terminalCashUSD": 36368.835,
+        "terminalInventoryUSD": 2487.213333333333,
+        "fulfilledRequests": 238.16666666666666,
+        "retainedRequests": 229.33333333333334,
+        "retainedVolumeUSD": 31416,
+        "unpaidLiabilities": 0
+      },
+      "ratio": 0.6823370570789602,
+      "feasible": false,
+      "label": "Margin-first rules"
+    },
+    {
+      "policy": {
+        "id": "fixed_preference",
+        "allocation": "preference",
+        "coverDays": 7,
+        "routing": "auto",
+        "target": "preferred"
+      },
+      "mean": {
+        "platformUSD": 844.5083333333332,
+        "retailerUSD": 14716.565,
+        "wholesalerUSD": 3521.1750000000006,
+        "manufacturerUSD": 3335.981666666667,
+        "allPartnerUSD": 21573.721666666665,
+        "terminalCashUSD": 36403.431666666664,
+        "terminalInventoryUSD": 2960.2766666666666,
+        "fulfilledRequests": 245.33333333333334,
+        "retainedRequests": 236.16666666666666,
+        "retainedVolumeUSD": 31736.333333333332,
+        "unpaidLiabilities": 0
+      },
+      "ratio": 0.679371289438542,
+      "feasible": false,
+      "label": "Preference-first rules"
+    },
+    {
+      "policy": {
+        "id": "fixed_fast",
+        "allocation": "scarcity",
+        "coverDays": 3,
+        "routing": "fast",
+        "target": "preferred"
+      },
+      "mean": {
+        "platformUSD": 1243.0733333333335,
+        "retailerUSD": 14833.980000000001,
+        "wholesalerUSD": 2956.816666666666,
+        "manufacturerUSD": 2912.318333333333,
+        "allPartnerUSD": 20703.114999999998,
+        "terminalCashUSD": 36525.95333333333,
+        "terminalInventoryUSD": 1967.1483333333333,
+        "fulfilledRequests": 245.33333333333334,
+        "retainedRequests": 236.5,
+        "retainedVolumeUSD": 32127.666666666668,
+        "unpaidLiabilities": 0
+      },
+      "ratio": 1,
+      "feasible": true,
+      "label": "Fixed rules + fast settlement"
+    },
+    {
+      "policy": {
+        "id": "joint_auto",
+        "allocation": "joint",
+        "coverDays": 7,
+        "routing": "auto",
+        "target": "preferred"
+      },
+      "mean": {
+        "platformUSD": 830.2383333333332,
+        "retailerUSD": 14582.298333333332,
+        "wholesalerUSD": 3510.42,
+        "manufacturerUSD": 3327.2516666666666,
+        "allPartnerUSD": 21419.97,
+        "terminalCashUSD": 36573.420000000006,
+        "terminalInventoryUSD": 2636.5366666666664,
+        "fulfilledRequests": 239.83333333333334,
+        "retainedRequests": 230.66666666666666,
+        "retainedVolumeUSD": 31836.666666666668,
+        "unpaidLiabilities": 0
+      },
+      "ratio": 0.6678916770799254,
+      "feasible": false,
+      "label": "Joint allocation + auto settlement"
+    },
+    {
+      "policy": {
+        "id": "joint_lean",
+        "allocation": "joint",
+        "coverDays": 0,
+        "routing": "auto",
+        "target": "cheap"
+      },
+      "mean": {
+        "platformUSD": 823.5516666666666,
+        "retailerUSD": 13797.888333333334,
+        "wholesalerUSD": 3096.4533333333334,
+        "manufacturerUSD": 2929.0816666666665,
+        "allPartnerUSD": 19823.423333333332,
+        "terminalCashUSD": 35571.236666666664,
+        "terminalInventoryUSD": 2042.1733333333332,
+        "fulfilledRequests": 232.33333333333334,
+        "retainedRequests": 223.66666666666666,
+        "retainedVolumeUSD": 30216.666666666668,
+        "unpaidLiabilities": 0
+      },
+      "ratio": 0.6625125361335613,
+      "feasible": false,
+      "label": "Joint allocation + lean stock"
+    },
+    {
+      "policy": {
+        "id": "joint_fast",
+        "allocation": "joint",
+        "coverDays": 3,
+        "routing": "fast",
+        "target": "preferred"
+      },
+      "mean": {
+        "platformUSD": 1242.2250000000001,
+        "retailerUSD": 14723.099999999999,
+        "wholesalerUSD": 2968.1516666666666,
+        "manufacturerUSD": 2923.206666666667,
+        "allPartnerUSD": 20614.458333333332,
+        "terminalCashUSD": 36476.33833333334,
+        "terminalInventoryUSD": 1928.1066666666666,
+        "fulfilledRequests": 242.5,
+        "retainedRequests": 233.5,
+        "retainedVolumeUSD": 32075.333333333332,
+        "unpaidLiabilities": 0
+      },
+      "ratio": 0.9993175516595963,
+      "feasible": false,
+      "label": "Joint allocation + fast settlement"
+    }
+  ],
+  "bound": {
+    "ratio": 1.5761472908543877,
+    "meanUSD": 1959.2666666666667,
+    "totalUSD": 11755.6,
+    "targetMeanUSD": 2486.146666666667,
+    "certificateVerified": true,
+    "witnessVerified": true,
+    "roundingChecks": 10000
+  },
+  "cases": [
+    {
+      "scenario": "ordinary",
+      "seed": 970100,
+      "fixedUSD": 1039.55,
+      "jointUSD": 1044.49,
+      "retailerDeltaUSD": -266.8000000000011,
+      "sameInitialState": true,
+      "sameRequests": true,
+      "sameIncome": true
+    },
+    {
+      "scenario": "scarce_stock",
+      "seed": 970101,
+      "fixedUSD": 1352.8,
+      "jointUSD": 1333.99,
+      "retailerDeltaUSD": -289.9400000000005,
+      "sameInitialState": true,
+      "sameRequests": true,
+      "sameIncome": true
+    },
+    {
+      "scenario": "concentrated_needs",
+      "seed": 970102,
+      "fixedUSD": 1308.28,
+      "jointUSD": 1283.75,
+      "retailerDeltaUSD": -344.90999999999985,
+      "sameInitialState": true,
+      "sameRequests": true,
+      "sameIncome": true
+    },
+    {
+      "scenario": "mixed_deadlines",
+      "seed": 970103,
+      "fixedUSD": 1327.38,
+      "jointUSD": 1339.59,
+      "retailerDeltaUSD": 105.1299999999992,
+      "sameInitialState": true,
+      "sameRequests": true,
+      "sameIncome": true
+    },
+    {
+      "scenario": "supplier_delay",
+      "seed": 970104,
+      "fixedUSD": 1165.71,
+      "jointUSD": 1167.14,
+      "retailerDeltaUSD": -12.43999999999869,
+      "sameInitialState": true,
+      "sameRequests": true,
+      "sameIncome": true
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 970105,
+      "fixedUSD": 1264.72,
+      "jointUSD": 1284.39,
+      "retailerDeltaUSD": 143.6800000000003,
+      "sameInitialState": true,
+      "sameRequests": true,
+      "sameIncome": true
+    }
+  ],
+  "reliability": {
+    "allRuns": 48,
+    "allInvariantsPassed": true,
+    "unpaidLiabilities": 0,
+    "solverNonoptimal": 0,
+    "jointMeanP95DecisionMs": 7.996014166665948
+  },
+  "figure": "/data/deadline-headroom.png",
+  "newModelCalls": 0,
+  "nativePaymentCalls": 0,
+  "goalAchieved": false,
+  "source": "AUTHORED_SIMULATION",
+  "scope": [
+    "The2x development gate is unreachable in this registered six-market case set with the current actions and safeguards. This is not a statement about all commerce or PayPal production economics.",
+    "The ceiling is an optimistic financial relaxation with perfect future knowledge and no stock/merchant-financing/shipping restrictions. Buyer resources, declared needs and financial safeguards still apply. It is not a deployable policy or observed agent performance.",
+    "Every fixed and numerical policy receives the same basket generator, funded requests, Gamma-Poisson demand estimates and payment tools. Five fixed policies were measured; the highest-net solvent fixed policy is the reference.",
+    "The numerical allocator solves a mixed-integer problem over a shared bounded basket list. It is not an LLM and is not an unrestricted global optimum.",
+    "All48 runs completed with matched starting states, exogenous request streams and income. No new LLM or native PayPal call occurred. The original UI and earlier benchmark artifacts remain available."
+  ]
+}

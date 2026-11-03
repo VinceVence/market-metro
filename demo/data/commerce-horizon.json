@@ -1,0 +1,542 @@
+{
+  "status": "COMPLETED",
+  "ratio": 0.9881557001195959,
+  "summary": [
+    {
+      "policy": "fixed_fast",
+      "mean": {
+        "platformUSD": 1243.0733333333335,
+        "retailerUSD": 14833.980000000001,
+        "wholesalerUSD": 2956.816666666666,
+        "manufacturerUSD": 2912.318333333333,
+        "allPartnerUSD": 20703.114999999998,
+        "terminalCashUSD": 36525.95333333333,
+        "terminalInventoryUSD": 1967.1483333333333,
+        "fulfilledRequests": 245.33333333333334,
+        "retainedRequests": 236.5,
+        "retainedVolumeUSD": 32127.666666666668,
+        "unpaidLiabilities": 0
+      },
+      "reliability": {
+        "invariantsPassed": true,
+        "solverNonoptimal": 0,
+        "meanP95DecisionMs": 0.08440283333304895
+      }
+    },
+    {
+      "policy": "joint_funded_horizon_v1_1",
+      "mean": {
+        "platformUSD": 1228.35,
+        "retailerUSD": 15006.281666666668,
+        "wholesalerUSD": 2963.86,
+        "manufacturerUSD": 2908.818333333334,
+        "allPartnerUSD": 20878.96,
+        "terminalCashUSD": 36770.49333333333,
+        "terminalInventoryUSD": 1898.4533333333331,
+        "fulfilledRequests": 241.66666666666666,
+        "retainedRequests": 232.83333333333334,
+        "retainedVolumeUSD": 32313,
+        "unpaidLiabilities": 0
+      },
+      "reliability": {
+        "invariantsPassed": true,
+        "solverNonoptimal": 0,
+        "meanP95DecisionMs": 44.46011833333447
+      }
+    }
+  ],
+  "gates": {
+    "platform2x": false,
+    "retailer": true,
+    "wholesaler": true,
+    "manufacturer": false,
+    "terminalCash": true,
+    "inventory": true,
+    "noUnpaidLiabilities": true
+  },
+  "advanceToValidation": false,
+  "targetAchieved": false,
+  "newModelCalls": 0,
+  "nativePaymentCalls": 0,
+  "source": "LOCAL_NUMERICAL_PLANNER_NOT_LLM",
+  "baselineReproducedExactly": true,
+  "createdAt": "2026-11-01T02:44:41.281Z",
+  "fixed": {
+    "policy": "fixed_fast",
+    "mean": {
+      "platformUSD": 1243.0733333333335,
+      "retailerUSD": 14833.980000000001,
+      "wholesalerUSD": 2956.816666666666,
+      "manufacturerUSD": 2912.318333333333,
+      "allPartnerUSD": 20703.114999999998,
+      "terminalCashUSD": 36525.95333333333,
+      "terminalInventoryUSD": 1967.1483333333333,
+      "fulfilledRequests": 245.33333333333334,
+      "retainedRequests": 236.5,
+      "retainedVolumeUSD": 32127.666666666668,
+      "unpaidLiabilities": 0
+    },
+    "reliability": {
+      "invariantsPassed": true,
+      "solverNonoptimal": 0,
+      "meanP95DecisionMs": 0.08440283333304895
+    }
+  },
+  "joint": {
+    "policy": "joint_funded_horizon_v1_1",
+    "mean": {
+      "platformUSD": 1228.35,
+      "retailerUSD": 15006.281666666668,
+      "wholesalerUSD": 2963.86,
+      "manufacturerUSD": 2908.818333333334,
+      "allPartnerUSD": 20878.96,
+      "terminalCashUSD": 36770.49333333333,
+      "terminalInventoryUSD": 1898.4533333333331,
+      "fulfilledRequests": 241.66666666666666,
+      "retainedRequests": 232.83333333333334,
+      "retainedVolumeUSD": 32313,
+      "unpaidLiabilities": 0
+    },
+    "reliability": {
+      "invariantsPassed": true,
+      "solverNonoptimal": 0,
+      "meanP95DecisionMs": 44.46011833333447
+    }
+  },
+  "markets": 6,
+  "days": 100,
+  "followupDays": 26,
+  "completedRuns": 12,
+  "example": {
+    "case": {
+      "seed": 970100,
+      "scenario": "ordinary"
+    },
+    "decision": {
+      "day": 30,
+      "policy": "joint_funded_horizon_v1_1",
+      "asOfDay": 30,
+      "source": "NUMERICAL_ROLLING_HORIZON",
+      "captured": 3,
+      "procuredUnits": 1,
+      "forecast": {
+        "type": "Gamma-Poisson rolling28-day demand",
+        "cutoffDay": 30,
+        "exposureDays": 28,
+        "shapePrior": 0.25,
+        "ratePrior": 7,
+        "byCatalog": {
+          "MM-PAPER-01": {
+            "count": 15,
+            "meanPerDay": 0.4357142857142857
+          },
+          "MM-PAPER-02": {
+            "count": 8,
+            "meanPerDay": 0.2357142857142857
+          },
+          "MM-PAPER-03": {
+            "count": 13,
+            "meanPerDay": 0.37857142857142856
+          },
+          "MM-PAPER-04": {
+            "count": 9,
+            "meanPerDay": 0.2642857142857143
+          },
+          "MM-DEVICE-01": {
+            "count": 12,
+            "meanPerDay": 0.35
+          },
+          "MM-DEVICE-02": {
+            "count": 13,
+            "meanPerDay": 0.37857142857142856
+          },
+          "MM-DEVICE-03": {
+            "count": 5,
+            "meanPerDay": 0.15
+          },
+          "MM-DEVICE-04": {
+            "count": 5,
+            "meanPerDay": 0.15
+          },
+          "MM-SPACE-01": {
+            "count": 6,
+            "meanPerDay": 0.17857142857142858
+          },
+          "MM-SPACE-02": {
+            "count": 9,
+            "meanPerDay": 0.2642857142857143
+          },
+          "MM-SPACE-03": {
+            "count": 3,
+            "meanPerDay": 0.09285714285714286
+          },
+          "MM-SPACE-04": {
+            "count": 5,
+            "meanPerDay": 0.15
+          },
+          "MM-PACK-01": {
+            "count": 11,
+            "meanPerDay": 0.32142857142857145
+          },
+          "MM-PACK-02": {
+            "count": 5,
+            "meanPerDay": 0.15
+          },
+          "MM-PACK-03": {
+            "count": 4,
+            "meanPerDay": 0.12142857142857143
+          },
+          "MM-PACK-04": {
+            "count": 4,
+            "meanPerDay": 0.12142857142857143
+          }
+        },
+        "scope": "Fits observed funded request lines; no future demand, personal income or latent preferences."
+      },
+      "solver": {
+        "status": 0,
+        "gap": 0,
+        "runtimeSeconds": 0.014873332999968625
+      },
+      "checkpoints": [
+        {
+          "stage": "OBSERVE",
+          "day": 30,
+          "snapshotHash": "3a145c3a61dd18100ba17fb7394483b8c722a4ab685bb020f7b108dd0a7c015b",
+          "fundedRequests": 5
+        },
+        {
+          "stage": "DEMAND_MODEL",
+          "type": "Gamma-Poisson rolling28-day demand",
+          "cutoffDay": 30,
+          "source": "LOCAL_ANALYTIC_FIT"
+        },
+        {
+          "stage": "PROPOSE",
+          "role": "Basket and supply planning tools",
+          "basketSchedules": 170,
+          "procurementOptions": 132
+        },
+        {
+          "stage": "COORDINATE",
+          "role": "Joint numerical optimizer",
+          "captureNow": [
+            "REQUEST-30-21",
+            "REQUEST-30-64",
+            "REQUEST-30-18"
+          ],
+          "scheduled": [
+            {
+              "requestId": "REQUEST-30-82",
+              "captureDay": 33
+            },
+            {
+              "requestId": "REQUEST-30-49",
+              "captureDay": 33
+            }
+          ],
+          "procurementUnits": 1
+        },
+        {
+          "stage": "VERIFY",
+          "status": "PASSED",
+          "checks": [
+            "funded quotes",
+            "one basket per request",
+            "time-indexed stock",
+            "merchant cash",
+            "procurement limits"
+          ],
+          "futurePlansArePromises": false
+        },
+        {
+          "stage": "COMMIT",
+          "status": "PASSED",
+          "captured": 3,
+          "procuredUnits": 1,
+          "source": "SIMULATED_NOT_PAYPAL_RECEIPT"
+        }
+      ],
+      "future": [
+        {
+          "requestId": "REQUEST-30-82",
+          "captureDay": 33
+        },
+        {
+          "requestId": "REQUEST-30-49",
+          "captureDay": 33
+        }
+      ]
+    },
+    "following": [
+      {
+        "day": 31,
+        "captured": 2,
+        "procuredUnits": 0,
+        "source": "NUMERICAL_ROLLING_HORIZON"
+      },
+      {
+        "day": 32,
+        "captured": 1,
+        "procuredUnits": 0,
+        "source": "NUMERICAL_ROLLING_HORIZON"
+      },
+      {
+        "day": 33,
+        "captured": 2,
+        "procuredUnits": 0,
+        "source": "NUMERICAL_ROLLING_HORIZON"
+      },
+      {
+        "day": 34,
+        "captured": 3,
+        "procuredUnits": 3,
+        "source": "NUMERICAL_ROLLING_HORIZON"
+      },
+      {
+        "day": 35,
+        "captured": 10,
+        "procuredUnits": 2,
+        "source": "NUMERICAL_ROLLING_HORIZON"
+      },
+      {
+        "day": 36,
+        "captured": 7,
+        "procuredUnits": 4,
+        "source": "NUMERICAL_ROLLING_HORIZON"
+      },
+      {
+        "day": 37,
+        "captured": 2,
+        "procuredUnits": 0,
+        "source": "NUMERICAL_ROLLING_HORIZON"
+      }
+    ],
+    "scheduledRequestOutcomes": [
+      {
+        "requestId": "REQUEST-30-82",
+        "plannedCaptureDay": 33,
+        "actualOrder": {
+          "id": "SIM-CAPTURE-90",
+          "requestId": "REQUEST-30-82",
+          "customerId": "BUYER-0082",
+          "day": 33,
+          "requestDay": 30,
+          "grossCents": 2600,
+          "feeCents": 140,
+          "processingCents": 51,
+          "items": [
+            {
+              "lineId": "LINE-0",
+              "productId": "MERCHANT-1-MM-PAPER-02",
+              "quantity": 1,
+              "merchantId": "MERCHANT-1",
+              "unitPriceCents": 2600,
+              "unitCostCents": 1118
+            }
+          ],
+          "merchants": [
+            {
+              "id": "MERCHANT-1",
+              "grossCents": 2600,
+              "feeCents": 140,
+              "costCents": 1118,
+              "deliveryCents": 350
+            }
+          ],
+          "deliveryDueDay": 35,
+          "status": "DELIVERED",
+          "refundStatus": null,
+          "refundCents": 0,
+          "source": "SIMULATED_NOT_PAYPAL_RECEIPT"
+        }
+      },
+      {
+        "requestId": "REQUEST-30-49",
+        "plannedCaptureDay": 33,
+        "actualOrder": {
+          "id": "SIM-CAPTURE-91",
+          "requestId": "REQUEST-30-49",
+          "customerId": "BUYER-0049",
+          "day": 33,
+          "requestDay": 30,
+          "grossCents": 14400,
+          "feeCents": 552,
+          "processingCents": 193,
+          "items": [
+            {
+              "lineId": "LINE-0",
+              "productId": "MERCHANT-1-MM-SPACE-01",
+              "quantity": 1,
+              "merchantId": "MERCHANT-1",
+              "unitPriceCents": 9600,
+              "unitCostCents": 4128
+            },
+            {
+              "lineId": "LINE-1",
+              "productId": "MERCHANT-1-MM-PAPER-04",
+              "quantity": 1,
+              "merchantId": "MERCHANT-1",
+              "unitPriceCents": 4800,
+              "unitCostCents": 2064
+            }
+          ],
+          "merchants": [
+            {
+              "id": "MERCHANT-1",
+              "grossCents": 14400,
+              "feeCents": 552,
+              "costCents": 6192,
+              "deliveryCents": 350
+            }
+          ],
+          "deliveryDueDay": 35,
+          "status": "DELIVERED",
+          "refundStatus": null,
+          "refundCents": 0,
+          "source": "SIMULATED_NOT_PAYPAL_RECEIPT"
+        }
+      }
+    ]
+  },
+  "stage": "Development comparison; no held-out agent performance claim",
+  "delta": {
+    "platformUSD": -14.723333333333585,
+    "retailerUSD": 172.30166666666628,
+    "wholesalerUSD": 7.043333333333976,
+    "manufacturerUSD": -3.4999999999990905,
+    "allPartnerUSD": 175.84500000000116,
+    "terminalCashUSD": 244.54000000000087,
+    "terminalInventoryUSD": -68.69500000000016,
+    "fulfilledRequests": -3.6666666666666856,
+    "retainedRequests": -3.666666666666657,
+    "retainedVolumeUSD": 185.33333333333212,
+    "unpaidLiabilities": 0
+  },
+  "cases": [
+    {
+      "scenario": "ordinary",
+      "seed": 970100,
+      "fixedUSD": 1039.55,
+      "jointUSD": 1015.04,
+      "retailerDeltaUSD": 234.70999999999913,
+      "manufacturerDeltaUSD": -64.11999999999989,
+      "solverCalls": 96,
+      "replans": 0,
+      "wallMs": 5580,
+      "sameState": true,
+      "sameRequests": true
+    },
+    {
+      "scenario": "scarce_stock",
+      "seed": 970101,
+      "fixedUSD": 1352.8,
+      "jointUSD": 1321.33,
+      "retailerDeltaUSD": -126.43000000000029,
+      "manufacturerDeltaUSD": -54.289999999999964,
+      "solverCalls": 96,
+      "replans": 0,
+      "wallMs": 6526,
+      "sameState": true,
+      "sameRequests": true
+    },
+    {
+      "scenario": "concentrated_needs",
+      "seed": 970102,
+      "fixedUSD": 1308.28,
+      "jointUSD": 1283.67,
+      "retailerDeltaUSD": 170,
+      "manufacturerDeltaUSD": -27.050000000000182,
+      "solverCalls": 96,
+      "replans": 0,
+      "wallMs": 6437,
+      "sameState": true,
+      "sameRequests": true
+    },
+    {
+      "scenario": "mixed_deadlines",
+      "seed": 970103,
+      "fixedUSD": 1327.38,
+      "jointUSD": 1314.24,
+      "retailerDeltaUSD": 176.38999999999942,
+      "manufacturerDeltaUSD": 32.16000000000031,
+      "solverCalls": 96,
+      "replans": 0,
+      "wallMs": 6346,
+      "sameState": true,
+      "sameRequests": true
+    },
+    {
+      "scenario": "supplier_delay",
+      "seed": 970104,
+      "fixedUSD": 1165.71,
+      "jointUSD": 1159.87,
+      "retailerDeltaUSD": 20.06000000000131,
+      "manufacturerDeltaUSD": -2.730000000000018,
+      "solverCalls": 96,
+      "replans": 0,
+      "wallMs": 5945,
+      "sameState": true,
+      "sameRequests": true
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 970105,
+      "fixedUSD": 1264.72,
+      "jointUSD": 1275.95,
+      "retailerDeltaUSD": 559.0799999999999,
+      "manufacturerDeltaUSD": 95.0300000000002,
+      "solverCalls": 96,
+      "replans": 0,
+      "wallMs": 6174,
+      "sameState": true,
+      "sameRequests": true
+    }
+  ],
+  "sensitivity": [
+    {
+      "id": "registered",
+      "scope": "No changes: reproduce the registered ceiling",
+      "ratio": 1.5761472908543877
+    },
+    {
+      "id": "inventory_cap_2x",
+      "scope": "DIAGNOSTIC ONLY: allow closing inventory twice the fixed reference",
+      "ratio": 1.6316146540027134
+    },
+    {
+      "id": "inventory_cap_5x",
+      "scope": "DIAGNOSTIC ONLY: allow closing inventory five times the fixed reference",
+      "ratio": 1.816503182971238
+    },
+    {
+      "id": "no_partner_floors",
+      "scope": "DIAGNOSTIC ONLY: remove partner contribution floors; preserve inventory cap",
+      "ratio": 1.6191026541743312
+    },
+    {
+      "id": "unfunded_requests",
+      "scope": "INVALID BUSINESS MODEL diagnostic: remove buyer funding constraints",
+      "ratio": 3.276004097371568
+    },
+    {
+      "id": "price_envelope_25pct",
+      "scope": "Optimistic price-action envelope: up to25% higher quotes, unchanged buyer resources; still bounded by the declared budgets in the supplement",
+      "ratio": 1.6124095655391741
+    }
+  ],
+  "research": [
+    {
+      "title": "Model predictive control",
+      "url": "https://web.stanford.edu/class/ee364b/lectures/mpc_slides.pdf"
+    },
+    {
+      "title": "LLMPC",
+      "url": "https://arxiv.org/pdf/2501.02486"
+    },
+    {
+      "title": "Planning with formal verification tools",
+      "url": "https://arxiv.org/pdf/2404.11891"
+    }
+  ]
+}

@@ -1,0 +1,1064 @@
+{
+  "id": "AUTONOMY-272a791d4860b5ca",
+  "status": "READY",
+  "rounds": 2,
+  "calls": 6,
+  "background": true,
+  "pending": false,
+  "lastDay": 125,
+  "activeModel": "INTENT-617b45528453cd36",
+  "campaign": {
+    "evidenceId": "193bc5de2b864f71e136ee223bbec24977ddeebb9ba43f1d81d22d068c88baf3",
+    "forecast": "recent14",
+    "minimumNetCents": "10",
+    "rationale": "The retrained forest model (AUC 0.677) improves identification of high-intent product searchers. Targeting recent_interest with both recommendations and inquiries at 10 contacts/day maximizes expected net contribution for the final 25 days.",
+    "routing": "fast",
+    "audience": "recent_interest",
+    "coverDays": "7",
+    "decision": "publish",
+    "contactsPerDay": "10",
+    "contactKinds": "both",
+    "stopped": false,
+    "modelId": "INTENT-617b45528453cd36",
+    "publishedDay": 87
+  },
+  "supply": {
+    "outreach": "fresh_signal",
+    "maxAge": 7,
+    "contactsPerDay": 10,
+    "arrivalDays": 5,
+    "coldContacts": 0,
+    "forecast": "recent14",
+    "coverDays": 7,
+    "allocation": "joint",
+    "target": "cheap",
+    "routing": "fast"
+  },
+  "checkpoints": [
+    {
+      "role": "Market analyst",
+      "actor": "GEMINI",
+      "day": 30,
+      "status": "VALIDATED",
+      "input": {
+        "day": 30,
+        "reason": "First campaign: inspect historical validation and current commerce signals.",
+        "remainingMarketDays": 70,
+        "contactBudgetCents": 5000,
+        "stock": {
+          "Stationery": 4,
+          "Electronics": 10,
+          "Furniture": 9,
+          "Office bundles": 6
+        },
+        "openFundedRequests": 1,
+        "urgentRequests": 0,
+        "recentContacts": 0,
+        "recentFundedResponses": 0,
+        "matureOwnResponses": 0,
+        "ownRetainedRate": null,
+        "matureOrders": 55,
+        "retainedPaymentVolumeCents": 572500,
+        "activeCampaign": null,
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+        "historicalIntent": {
+          "product_browses": {
+            "contacts": 1945,
+            "retained": 101,
+            "netCents": 32180
+          },
+          "product_searches": {
+            "contacts": 1175,
+            "retained": 192,
+            "netCents": 63426
+          },
+          "general_inquiries": {
+            "contacts": 3890,
+            "retained": 164,
+            "netCents": 37764
+          }
+        },
+        "analysisTask": "Identify a specific commercial opportunity or failure from contact, conversion, funding and stock evidence. Model selection belongs to the scientist; do not substitute a model accuracy summary for market analysis."
+      },
+      "startedAt": "2026-11-01T09:23:02.193Z",
+      "output": {
+        "focus": "conversion_quality",
+        "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+        "finding": "Product searches exhibit a 16.3% conversion rate, significantly outperforming product browses (5.2%) and general inquiries (4.2%).",
+        "rationale": "Historical data indicates that users performing product searches have a higher intent to purchase, leading to better conversion quality and higher net cents per retained order compared to broader browsing or general inquiry behaviors."
+      },
+      "provider": [
+        {
+          "reservationId": "d62ca5ec-c623-4e89-a905-a25ef784513e",
+          "caseId": "Market analyst-30",
+          "trialId": "AUTONOMY-272a791d4860b5ca",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1140,
+          "reservedMicros": 30000,
+          "inputTokens": 720,
+          "outputTokens": 160,
+          "thinkingTokens": 480,
+          "cachedInputTokens": 0,
+          "responseId": "-ATnatGVMNeipt8P6PuKiAk",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3356,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 33,
+      "finishedAt": "2026-11-01T09:23:07.922Z"
+    },
+    {
+      "role": "ML scientist",
+      "actor": "GEMINI",
+      "day": 30,
+      "status": "VALIDATED",
+      "input": {
+        "day": 30,
+        "reason": "First campaign: inspect historical validation and current commerce signals.",
+        "remainingMarketDays": 70,
+        "contactBudgetCents": 5000,
+        "stock": {
+          "Stationery": 4,
+          "Electronics": 10,
+          "Furniture": 9,
+          "Office bundles": 6
+        },
+        "openFundedRequests": 1,
+        "urgentRequests": 0,
+        "recentContacts": 0,
+        "recentFundedResponses": 0,
+        "matureOwnResponses": 0,
+        "ownRetainedRate": null,
+        "matureOrders": 55,
+        "retainedPaymentVolumeCents": 572500,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "logistic": {
+            "logLoss": 0.2280026147419293,
+            "brier": 0.05914209271715025,
+            "auc": 0.6447440345861934,
+            "averagePrecision": 0.13403096929864852
+          },
+          "forest": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          }
+        },
+        "activeModel": null,
+        "activeCampaign": null,
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+        "analyst": {
+          "focus": "conversion_quality",
+          "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+          "finding": "Product searches exhibit a 16.3% conversion rate, significantly outperforming product browses (5.2%) and general inquiries (4.2%).",
+          "rationale": "Historical data indicates that users performing product searches have a higher intent to purchase, leading to better conversion quality and higher net cents per retained order compared to broader browsing or general inquiry behaviors."
+        },
+        "validationScope": "The historical model summary used the full100-day historical training window. Do not assume it measures a shorter window. Train a candidate only on observed data; retain the current model when retraining is unsupported."
+      },
+      "startedAt": "2026-11-01T09:23:07.924Z",
+      "output": {
+        "decision": "train",
+        "rationale": "The forest model demonstrates superior predictive performance (AUC 0.6729, AP 0.1654) compared to logistic and coarse models, providing the most effective basis for targeting high-intent product searches.",
+        "windowDays": "100",
+        "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+        "family": "forest"
+      },
+      "provider": [
+        {
+          "reservationId": "a0709141-b7ce-4007-bf2d-aa9c57ab0436",
+          "caseId": "ML scientist-30",
+          "trialId": "AUTONOMY-272a791d4860b5ca",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1370,
+          "reservedMicros": 30000,
+          "inputTokens": 1079,
+          "outputTokens": 148,
+          "thinkingTokens": 585,
+          "cachedInputTokens": 0,
+          "responseId": "_gTnauv6Jq21pt8PoLfFiAM",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3333,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 37,
+      "finishedAt": "2026-11-01T09:23:13.903Z"
+    },
+    {
+      "role": "ML scientist",
+      "actor": "LOCAL_TRAINING_TOOL",
+      "day": 30,
+      "status": "COMPLETED",
+      "input": {
+        "family": "forest",
+        "windowDays": 100,
+        "rows": 7010,
+        "ownMatureRows": 0,
+        "cutoffDay": 30
+      },
+      "startedAt": "2026-11-01T09:23:13.907Z",
+      "output": {
+        "modelId": "INTENT-88613badfc908c57",
+        "family": "forest",
+        "metrics": {
+          "logLoss": 0.22125727304597825,
+          "brier": 0.05792385009087139,
+          "auc": 0.6729221186214007,
+          "averagePrecision": 0.16542539324111097
+        },
+        "coarse": {
+          "logLoss": 0.24071182238066735,
+          "brier": 0.060918446828162214,
+          "auc": 0.5346631622778883,
+          "averagePrecision": 0.07906629024620886
+        },
+        "validationPassed": true,
+        "runtimeSeconds": 2.781680083000083,
+        "scope": "Prediction validation, not proof of campaign profit"
+      },
+      "completedDay": 40,
+      "finishedAt": "2026-11-01T09:23:19.517Z"
+    },
+    {
+      "role": "Commerce manager",
+      "actor": "GEMINI",
+      "day": 30,
+      "status": "VALIDATED",
+      "input": {
+        "day": 30,
+        "reason": "First campaign: inspect historical validation and current commerce signals.",
+        "remainingMarketDays": 70,
+        "contactBudgetCents": 5000,
+        "stock": {
+          "Stationery": 4,
+          "Electronics": 10,
+          "Furniture": 9,
+          "Office bundles": 6
+        },
+        "openFundedRequests": 1,
+        "urgentRequests": 0,
+        "recentContacts": 0,
+        "recentFundedResponses": 0,
+        "matureOwnResponses": 0,
+        "ownRetainedRate": null,
+        "matureOrders": 55,
+        "retainedPaymentVolumeCents": 572500,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "logistic": {
+            "logLoss": 0.2280026147419293,
+            "brier": 0.05914209271715025,
+            "auc": 0.6447440345861934,
+            "averagePrecision": 0.13403096929864852
+          },
+          "forest": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          }
+        },
+        "activeModel": null,
+        "activeCampaign": null,
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+        "analyst": {
+          "focus": "conversion_quality",
+          "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+          "finding": "Product searches exhibit a 16.3% conversion rate, significantly outperforming product browses (5.2%) and general inquiries (4.2%).",
+          "rationale": "Historical data indicates that users performing product searches have a higher intent to purchase, leading to better conversion quality and higher net cents per retained order compared to broader browsing or general inquiry behaviors."
+        },
+        "scientist": {
+          "decision": "train",
+          "rationale": "The forest model demonstrates superior predictive performance (AUC 0.6729, AP 0.1654) compared to logistic and coarse models, providing the most effective basis for targeting high-intent product searches.",
+          "windowDays": "100",
+          "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+          "family": "forest"
+        },
+        "trainingResult": {
+          "modelId": "INTENT-88613badfc908c57",
+          "family": "forest",
+          "metrics": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          },
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "validationPassed": true,
+          "runtimeSeconds": 2.781680083000083,
+          "scope": "Prediction validation, not proof of campaign profit"
+        },
+        "campaignPreviews": [
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 3,
+            "eligibleSelected": 3,
+            "recommendations": 3,
+            "generalInquiries": 0,
+            "expectedNetCents": 167,
+            "contactCostCents": 15,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 6,
+            "eligibleSelected": 6,
+            "recommendations": 6,
+            "generalInquiries": 0,
+            "expectedNetCents": 234,
+            "contactCostCents": 30,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 10,
+            "eligibleSelected": 10,
+            "recommendations": 10,
+            "generalInquiries": 0,
+            "expectedNetCents": 291,
+            "contactCostCents": 50,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 3,
+            "eligibleSelected": 3,
+            "recommendations": 3,
+            "generalInquiries": 0,
+            "expectedNetCents": 167,
+            "contactCostCents": 15,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 6,
+            "eligibleSelected": 6,
+            "recommendations": 6,
+            "generalInquiries": 0,
+            "expectedNetCents": 234,
+            "contactCostCents": 30,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 10,
+            "eligibleSelected": 10,
+            "recommendations": 10,
+            "generalInquiries": 0,
+            "expectedNetCents": 291,
+            "contactCostCents": 50,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          }
+        ],
+        "currentSupplyContract": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "actionMeaning": {
+          "audience": "lapsed requires a previous purchase and at least14 days since it; recent_interest requires a product signal. all includes any eligible contact.",
+          "minimumNetCents": "Threshold on modeled expected retail payment contribution after contact cost; estimated from observed retained/failed outcomes.",
+          "routing": "fast uses modeled PayPal supplier settlement. auto can use bank settlement when deadlines permit. Neither changes retail captures.",
+          "modelRoles": "The model ranks eligible contacts locally; the campaign is automatically applied. A smaller contact limit can discard positive-value opportunities shown in the preview. Keep the existing stock and settlement settings unless fulfillment evidence justifies changing them; conservative is not by itself an economic reason."
+        }
+      },
+      "startedAt": "2026-11-01T09:23:19.529Z",
+      "output": {
+        "rationale": "The forest model (AUC 0.6729) effectively identifies high-intent product searchers. Targeting recent_interest with recommendations at 10 contacts/day maximizes expected net contribution while maintaining margin thresholds.",
+        "minimumNetCents": "10",
+        "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+        "contactsPerDay": "10",
+        "routing": "fast",
+        "contactKinds": "recommend",
+        "decision": "publish",
+        "coverDays": "7",
+        "forecast": "recent14",
+        "audience": "recent_interest"
+      },
+      "provider": [
+        {
+          "reservationId": "9ac90c32-adb6-470c-80cc-993a77db7bcc",
+          "caseId": "Commerce manager-30",
+          "trialId": "AUTONOMY-272a791d4860b5ca",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1788,
+          "reservedMicros": 30000,
+          "inputTokens": 2026,
+          "outputTokens": 186,
+          "thinkingTokens": 668,
+          "cachedInputTokens": 0,
+          "responseId": "BwXnasLPK82f1e8Prr3o6Ac",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3489,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 42,
+      "finishedAt": "2026-11-01T09:23:23.041Z"
+    },
+    {
+      "role": "Coordinator",
+      "actor": "TRUSTED_PUBLISHER",
+      "day": 30,
+      "completedDay": 42,
+      "status": "COMPLETED",
+      "output": {
+        "decision": "publish",
+        "effectiveDay": 43,
+        "modelId": "INTENT-88613badfc908c57",
+        "campaign": {
+          "rationale": "The forest model (AUC 0.6729) effectively identifies high-intent product searchers. Targeting recent_interest with recommendations at 10 contacts/day maximizes expected net contribution while maintaining margin thresholds.",
+          "minimumNetCents": "10",
+          "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+          "contactsPerDay": "10",
+          "routing": "fast",
+          "contactKinds": "recommend",
+          "decision": "publish",
+          "coverDays": "7",
+          "forecast": "recent14",
+          "audience": "recent_interest",
+          "stopped": false,
+          "modelId": "INTENT-88613badfc908c57",
+          "publishedDay": 43
+        },
+        "supply": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "automated": true,
+        "checks": [
+          "observed features only",
+          "validated model artifact",
+          "consent and contact budget",
+          "funded complete baskets",
+          "merchant margin floor",
+          "idempotent simulated payments"
+        ],
+        "nativePayments": false
+      }
+    },
+    {
+      "role": "Market analyst",
+      "actor": "GEMINI",
+      "day": 75,
+      "status": "VALIDATED",
+      "input": {
+        "day": 75,
+        "reason": "Periodic review: inspect matured campaign outcomes before deciding whether to retrain.",
+        "remainingMarketDays": 25,
+        "contactBudgetCents": 3935,
+        "stock": {
+          "Stationery": 15,
+          "Electronics": 10,
+          "Furniture": 8,
+          "Office bundles": 14
+        },
+        "openFundedRequests": 2,
+        "urgentRequests": 0,
+        "recentContacts": 20,
+        "recentFundedResponses": 6,
+        "matureOwnResponses": 111,
+        "ownRetainedRate": 0.25225225225225223,
+        "matureOrders": 183,
+        "retainedPaymentVolumeCents": 2086000,
+        "activeCampaign": {
+          "rationale": "The forest model (AUC 0.6729) effectively identifies high-intent product searchers. Targeting recent_interest with recommendations at 10 contacts/day maximizes expected net contribution while maintaining margin thresholds.",
+          "minimumNetCents": "10",
+          "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+          "contactsPerDay": "10",
+          "routing": "fast",
+          "contactKinds": "recommend",
+          "decision": "publish",
+          "coverDays": "7",
+          "forecast": "recent14",
+          "audience": "recent_interest",
+          "stopped": false,
+          "modelId": "INTENT-88613badfc908c57",
+          "publishedDay": 43
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "193bc5de2b864f71e136ee223bbec24977ddeebb9ba43f1d81d22d068c88baf3",
+        "historicalIntent": {
+          "product_browses": {
+            "contacts": 1945,
+            "retained": 101,
+            "netCents": 32180
+          },
+          "product_searches": {
+            "contacts": 1175,
+            "retained": 192,
+            "netCents": 63426
+          },
+          "general_inquiries": {
+            "contacts": 3890,
+            "retained": 164,
+            "netCents": 37764
+          }
+        },
+        "analysisTask": "Identify a specific commercial opportunity or failure from contact, conversion, funding and stock evidence. Model selection belongs to the scientist; do not substitute a model accuracy summary for market analysis."
+      },
+      "startedAt": "2026-11-01T09:24:15.425Z",
+      "output": {
+        "rationale": "Shifting the audience from general recent interest to product searches will improve the net contribution per contact, optimizing the remaining contact budget and stock utilization for the final 25 days.",
+        "finding": "Product searches demonstrate significantly higher retention (16.3%) and net contribution per contact (54 cents) compared to product browses (5.2%, 16.5 cents) and general inquiries (4.2%, 9.7 cents).",
+        "evidenceId": "193bc5de2b864f71e136ee223bbec24977ddeebb9ba43f1d81d22d068c88baf3",
+        "focus": "conversion_quality"
+      },
+      "provider": [
+        {
+          "reservationId": "3bc8bef6-e330-400a-a0b5-a73300c0182c",
+          "caseId": "Market analyst-75",
+          "trialId": "AUTONOMY-272a791d4860b5ca",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1797,
+          "reservedMicros": 30000,
+          "inputTokens": 922,
+          "outputTokens": 176,
+          "thinkingTokens": 868,
+          "cachedInputTokens": 0,
+          "responseId": "PwXnaoyeLZWlpt8P67jsUA",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 4150,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 77,
+      "finishedAt": "2026-11-01T09:24:19.733Z"
+    },
+    {
+      "role": "ML scientist",
+      "actor": "GEMINI",
+      "day": 75,
+      "status": "VALIDATED",
+      "input": {
+        "day": 75,
+        "reason": "Periodic review: inspect matured campaign outcomes before deciding whether to retrain.",
+        "remainingMarketDays": 25,
+        "contactBudgetCents": 3935,
+        "stock": {
+          "Stationery": 15,
+          "Electronics": 10,
+          "Furniture": 8,
+          "Office bundles": 14
+        },
+        "openFundedRequests": 2,
+        "urgentRequests": 0,
+        "recentContacts": 20,
+        "recentFundedResponses": 6,
+        "matureOwnResponses": 111,
+        "ownRetainedRate": 0.25225225225225223,
+        "matureOrders": 183,
+        "retainedPaymentVolumeCents": 2086000,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "logistic": {
+            "logLoss": 0.2280026147419293,
+            "brier": 0.05914209271715025,
+            "auc": 0.6447440345861934,
+            "averagePrecision": 0.13403096929864852
+          },
+          "forest": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          }
+        },
+        "activeModel": {
+          "id": "INTENT-88613badfc908c57",
+          "family": "forest",
+          "cutoffDay": 30,
+          "trainingRows": 7010
+        },
+        "activeCampaign": {
+          "rationale": "The forest model (AUC 0.6729) effectively identifies high-intent product searchers. Targeting recent_interest with recommendations at 10 contacts/day maximizes expected net contribution while maintaining margin thresholds.",
+          "minimumNetCents": "10",
+          "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+          "contactsPerDay": "10",
+          "routing": "fast",
+          "contactKinds": "recommend",
+          "decision": "publish",
+          "coverDays": "7",
+          "forecast": "recent14",
+          "audience": "recent_interest",
+          "stopped": false,
+          "modelId": "INTENT-88613badfc908c57",
+          "publishedDay": 43
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "193bc5de2b864f71e136ee223bbec24977ddeebb9ba43f1d81d22d068c88baf3",
+        "analyst": {
+          "rationale": "Shifting the audience from general recent interest to product searches will improve the net contribution per contact, optimizing the remaining contact budget and stock utilization for the final 25 days.",
+          "finding": "Product searches demonstrate significantly higher retention (16.3%) and net contribution per contact (54 cents) compared to product browses (5.2%, 16.5 cents) and general inquiries (4.2%, 9.7 cents).",
+          "evidenceId": "193bc5de2b864f71e136ee223bbec24977ddeebb9ba43f1d81d22d068c88baf3",
+          "focus": "conversion_quality"
+        },
+        "validationScope": "The historical model summary used the full100-day historical training window. Do not assume it measures a shorter window. Train a candidate only on observed data; retain the current model when retraining is unsupported."
+      },
+      "startedAt": "2026-11-01T09:24:19.735Z",
+      "output": {
+        "family": "forest",
+        "decision": "train",
+        "evidenceId": "193bc5de2b864f71e136ee223bbec24977ddeebb9ba43f1d81d22d068c88baf3",
+        "windowDays": "56",
+        "rationale": "The forest model remains the most predictive architecture. Retraining on the most recent 56 days will incorporate the high-intent product search patterns identified by the analyst, optimizing the final 25 days of the simulation."
+      },
+      "provider": [
+        {
+          "reservationId": "e6dcb63f-f8b2-4c12-be09-ca68504587a5",
+          "caseId": "ML scientist-75",
+          "trialId": "AUTONOMY-272a791d4860b5ca",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1862,
+          "reservedMicros": 30000,
+          "inputTokens": 1333,
+          "outputTokens": 141,
+          "thinkingTokens": 878,
+          "cachedInputTokens": 0,
+          "responseId": "RQXnasz2KLvApt8Py6jMkQ0",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3435,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 80,
+      "finishedAt": "2026-11-01T09:24:25.028Z"
+    },
+    {
+      "role": "ML scientist",
+      "actor": "LOCAL_TRAINING_TOOL",
+      "day": 75,
+      "status": "COMPLETED",
+      "input": {
+        "family": "forest",
+        "windowDays": 56,
+        "rows": 5674,
+        "ownMatureRows": 111,
+        "cutoffDay": 75
+      },
+      "startedAt": "2026-11-01T09:24:25.032Z",
+      "output": {
+        "modelId": "INTENT-617b45528453cd36",
+        "family": "forest",
+        "metrics": {
+          "logLoss": 0.23706477022819045,
+          "brier": 0.06334584663137759,
+          "auc": 0.6773366925633927,
+          "averagePrecision": 0.19487779568619007
+        },
+        "coarse": {
+          "logLoss": 0.2600335681266697,
+          "brier": 0.06772849720336302,
+          "auc": 0.5648955440935438,
+          "averagePrecision": 0.09337346368545564
+        },
+        "validationPassed": true,
+        "runtimeSeconds": 2.730730291999862,
+        "scope": "Prediction validation, not proof of campaign profit"
+      },
+      "completedDay": 84,
+      "finishedAt": "2026-11-01T09:24:30.609Z"
+    },
+    {
+      "role": "Commerce manager",
+      "actor": "GEMINI",
+      "day": 75,
+      "status": "VALIDATED",
+      "input": {
+        "day": 75,
+        "reason": "Periodic review: inspect matured campaign outcomes before deciding whether to retrain.",
+        "remainingMarketDays": 25,
+        "contactBudgetCents": 3935,
+        "stock": {
+          "Stationery": 15,
+          "Electronics": 10,
+          "Furniture": 8,
+          "Office bundles": 14
+        },
+        "openFundedRequests": 2,
+        "urgentRequests": 0,
+        "recentContacts": 20,
+        "recentFundedResponses": 6,
+        "matureOwnResponses": 111,
+        "ownRetainedRate": 0.25225225225225223,
+        "matureOrders": 183,
+        "retainedPaymentVolumeCents": 2086000,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "logistic": {
+            "logLoss": 0.2280026147419293,
+            "brier": 0.05914209271715025,
+            "auc": 0.6447440345861934,
+            "averagePrecision": 0.13403096929864852
+          },
+          "forest": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          }
+        },
+        "activeModel": {
+          "id": "INTENT-88613badfc908c57",
+          "family": "forest",
+          "cutoffDay": 30,
+          "trainingRows": 7010
+        },
+        "activeCampaign": {
+          "rationale": "The forest model (AUC 0.6729) effectively identifies high-intent product searchers. Targeting recent_interest with recommendations at 10 contacts/day maximizes expected net contribution while maintaining margin thresholds.",
+          "minimumNetCents": "10",
+          "evidenceId": "dc6f2f9d537d34ead2493956d9b369f96a5803646736242f6ffa2d77bdbe6d64",
+          "contactsPerDay": "10",
+          "routing": "fast",
+          "contactKinds": "recommend",
+          "decision": "publish",
+          "coverDays": "7",
+          "forecast": "recent14",
+          "audience": "recent_interest",
+          "stopped": false,
+          "modelId": "INTENT-88613badfc908c57",
+          "publishedDay": 43
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "193bc5de2b864f71e136ee223bbec24977ddeebb9ba43f1d81d22d068c88baf3",
+        "analyst": {
+          "rationale": "Shifting the audience from general recent interest to product searches will improve the net contribution per contact, optimizing the remaining contact budget and stock utilization for the final 25 days.",
+          "finding": "Product searches demonstrate significantly higher retention (16.3%) and net contribution per contact (54 cents) compared to product browses (5.2%, 16.5 cents) and general inquiries (4.2%, 9.7 cents).",
+          "evidenceId": "193bc5de2b864f71e136ee223bbec24977ddeebb9ba43f1d81d22d068c88baf3",
+          "focus": "conversion_quality"
+        },
+        "scientist": {
+          "family": "forest",
+          "decision": "train",
+          "evidenceId": "193bc5de2b864f71e136ee223bbec24977ddeebb9ba43f1d81d22d068c88baf3",
+          "windowDays": "56",
+          "rationale": "The forest model remains the most predictive architecture. Retraining on the most recent 56 days will incorporate the high-intent product search patterns identified by the analyst, optimizing the final 25 days of the simulation."
+        },
+        "trainingResult": {
+          "modelId": "INTENT-617b45528453cd36",
+          "family": "forest",
+          "metrics": {
+            "logLoss": 0.23706477022819045,
+            "brier": 0.06334584663137759,
+            "auc": 0.6773366925633927,
+            "averagePrecision": 0.19487779568619007
+          },
+          "coarse": {
+            "logLoss": 0.2600335681266697,
+            "brier": 0.06772849720336302,
+            "auc": 0.5648955440935438,
+            "averagePrecision": 0.09337346368545564
+          },
+          "validationPassed": true,
+          "runtimeSeconds": 2.730730291999862,
+          "scope": "Prediction validation, not proof of campaign profit"
+        },
+        "campaignPreviews": [
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 3,
+            "eligibleSelected": 3,
+            "recommendations": 3,
+            "generalInquiries": 0,
+            "expectedNetCents": 383,
+            "contactCostCents": 15,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 6,
+            "eligibleSelected": 6,
+            "recommendations": 6,
+            "generalInquiries": 0,
+            "expectedNetCents": 470,
+            "contactCostCents": 30,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 10,
+            "eligibleSelected": 9,
+            "recommendations": 9,
+            "generalInquiries": 0,
+            "expectedNetCents": 483,
+            "contactCostCents": 45,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 3,
+            "eligibleSelected": 3,
+            "recommendations": 3,
+            "generalInquiries": 0,
+            "expectedNetCents": 383,
+            "contactCostCents": 15,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 6,
+            "eligibleSelected": 6,
+            "recommendations": 6,
+            "generalInquiries": 0,
+            "expectedNetCents": 470,
+            "contactCostCents": 30,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 10,
+            "eligibleSelected": 10,
+            "recommendations": 6,
+            "generalInquiries": 4,
+            "expectedNetCents": 519,
+            "contactCostCents": 50,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          }
+        ],
+        "currentSupplyContract": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "actionMeaning": {
+          "audience": "lapsed requires a previous purchase and at least14 days since it; recent_interest requires a product signal. all includes any eligible contact.",
+          "minimumNetCents": "Threshold on modeled expected retail payment contribution after contact cost; estimated from observed retained/failed outcomes.",
+          "routing": "fast uses modeled PayPal supplier settlement. auto can use bank settlement when deadlines permit. Neither changes retail captures.",
+          "modelRoles": "The model ranks eligible contacts locally; the campaign is automatically applied. A smaller contact limit can discard positive-value opportunities shown in the preview. Keep the existing stock and settlement settings unless fulfillment evidence justifies changing them; conservative is not by itself an economic reason."
+        }
+      },
+      "startedAt": "2026-11-01T09:24:30.621Z",
+      "output": {
+        "evidenceId": "193bc5de2b864f71e136ee223bbec24977ddeebb9ba43f1d81d22d068c88baf3",
+        "forecast": "recent14",
+        "minimumNetCents": "10",
+        "rationale": "The retrained forest model (AUC 0.677) improves identification of high-intent product searchers. Targeting recent_interest with both recommendations and inquiries at 10 contacts/day maximizes expected net contribution for the final 25 days.",
+        "routing": "fast",
+        "audience": "recent_interest",
+        "coverDays": "7",
+        "decision": "publish",
+        "contactsPerDay": "10",
+        "contactKinds": "both"
+      },
+      "provider": [
+        {
+          "reservationId": "632b34af-3ae4-4613-8aff-3d844d540d39",
+          "caseId": "Commerce manager-75",
+          "trialId": "AUTONOMY-272a791d4860b5ca",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 2017,
+          "reservedMicros": 30000,
+          "inputTokens": 2269,
+          "outputTokens": 190,
+          "thinkingTokens": 776,
+          "cachedInputTokens": 0,
+          "responseId": "TgXnaseDMZed0-kP2bqFsQk",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3752,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ],
+      "completedDay": 86,
+      "finishedAt": "2026-11-01T09:24:34.394Z"
+    },
+    {
+      "role": "Coordinator",
+      "actor": "TRUSTED_PUBLISHER",
+      "day": 75,
+      "completedDay": 86,
+      "status": "COMPLETED",
+      "output": {
+        "decision": "publish",
+        "effectiveDay": 87,
+        "modelId": "INTENT-617b45528453cd36",
+        "campaign": {
+          "evidenceId": "193bc5de2b864f71e136ee223bbec24977ddeebb9ba43f1d81d22d068c88baf3",
+          "forecast": "recent14",
+          "minimumNetCents": "10",
+          "rationale": "The retrained forest model (AUC 0.677) improves identification of high-intent product searchers. Targeting recent_interest with both recommendations and inquiries at 10 contacts/day maximizes expected net contribution for the final 25 days.",
+          "routing": "fast",
+          "audience": "recent_interest",
+          "coverDays": "7",
+          "decision": "publish",
+          "contactsPerDay": "10",
+          "contactKinds": "both",
+          "stopped": false,
+          "modelId": "INTENT-617b45528453cd36",
+          "publishedDay": 87
+        },
+        "supply": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "automated": true,
+        "checks": [
+          "observed features only",
+          "validated model artifact",
+          "consent and contact budget",
+          "funded complete baskets",
+          "merchant margin floor",
+          "idempotent simulated payments"
+        ],
+        "nativePayments": false
+      }
+    }
+  ],
+  "modelCostUSD": 0.009974,
+  "failed": false,
+  "modelCalls": 6,
+  "providerLatencyMs": 21515,
+  "trainingJobs": 2,
+  "publications": 2,
+  "nativePayments": 0
+}

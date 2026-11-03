@@ -34,7 +34,8 @@ test('a full seeded market produces coherent normalized tables, views, stocks an
   while(a.status!=='COMPLETED'){const first=advanceMarket(a),second=advanceMarket(b);assert.deepEqual(first,second);store.commit(a,first);}
   assert(a.stats.orders>500);assert.equal(a.pending.length,0);assert.equal(a.stats.deliveries,a.stats.orders);
   assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
-  assert.equal(TABLES.length,41);assert.equal(VIEWS.length,14);
+  assert.ok(TABLES.includes('behavior_actions'));assert.ok(VIEWS.includes('v_behavior_financials'));
+  assert.equal(store.db.prepare('SELECT COUNT(*) n FROM v_behavior_financials').get().n,0,'Legacy worlds are not interpreted as V3 financial records');
   const tx=store.db.prepare('SELECT SUM(gross_cents) gross,SUM(net_cents) net,SUM(fee_cents) fee,COUNT(*) n FROM transactions').get();
   assert.equal(tx.gross,a.stats.revenueCents);assert.equal(tx.gross,tx.net+tx.fee);assert.equal(tx.n,a.stats.orders);
   assert.equal(store.db.prepare('SELECT COUNT(*) n FROM v_marketing_transactions').get().n,tx.n);

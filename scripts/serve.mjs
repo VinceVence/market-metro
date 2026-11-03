@@ -1,4 +1,9 @@
 import {continuousReport} from './marketing/continuous-report.mjs';
+import {createCommerceRoom} from './commerce-room/service.mjs';
+import {createAutonomyRoom} from './commerce-growth/autonomy/live.mjs';
+import {createOwnMarketService} from './behavior-v4/service.mjs';
+import {createAuthoredCatalogService} from './behavior-v4/catalog.mjs';
+import {createStudioService} from './studio/service.mjs';
 import {createTrustedWorkflowService} from './trusted-workflow/service.mjs';
 import {policySpendStatus} from './policy-lab/service.mjs';
 import {createAgentMesh} from './agent-mesh/integration.mjs';
@@ -17,7 +22,6 @@ import {createSandboxFunding} from './paypal-funding.mjs';
 import {createPayPalCommerce} from './paypal-commerce.mjs';
 import { createBenchmarkService, BenchmarkError } from '../benchmark/service.mjs';
 import { createMarketStore, SCHEMA, csv } from './market-store.mjs';
-import { createMarketCatalog } from './market-catalog.mjs';
 import { createMarketService } from './market-service.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -43,6 +47,10 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
   const commerce=market?createPayPalCommerce({store:market.store,market,paypal,funding}):null;
   const liveMarket=market?createContinuousMarket({store:market.store,market,commerce}):null;
   const policyLab=market?createAgentMesh({store:market.store,market}):null;
+  const behavior=market?createOwnMarketService({store:market.store}):null;
+  const studio=market?createStudioService({store:market.store}):null;
+  const room=market?createCommerceRoom({store:market.store,market}):null;
+  const autonomy=market?createAutonomyRoom({store:market.store,market}):null;
   const trustedWorkflow=market?createTrustedWorkflowService():null;
   const server = http.createServer(async (req, res) => {
     try {
@@ -52,6 +60,19 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
       const origin = `http://${req.headers.host}`;
       const url = new URL(req.url, origin), path = decodeURIComponent(url.pathname);
       if (path.startsWith('/api/')) {
+        if(req.method==='GET'&&path==='/api/market/autonomy/latest'&&autonomy)return json(res,200,{session:autonomy.latest()});
+        const autonomyRead=path.match(/^\/api\/market\/autonomy\/(AUTONOMY-[a-f0-9]{16})(?:\/(trace))?$/);
+        if(req.method==='GET'&&autonomyRead&&autonomy)return json(res,200,autonomyRead[2]?autonomy.trace(autonomyRead[1],url.searchParams.get('customer'),url.searchParams.has('day')?url.searchParams.get('day'):undefined):autonomy.snapshot(autonomyRead[1],url.searchParams.has('day')?url.searchParams.get('day'):undefined));
+        if(req.method==='GET'&&path==='/api/market/room/latest'&&room)return json(res,200,{session:room.latest()});
+        if(req.method==='GET'&&path==='/api/market/room/preview'&&room)return json(res,200,{frame:room.preview()});
+        const roomRead=path.match(/^\/api\/market\/room\/(COMMERCE-[a-f0-9]{16})$/);
+        if(req.method==='GET'&&roomRead&&room)return json(res,200,room.snapshot(roomRead[1],url.searchParams.has('day')?url.searchParams.get('day'):undefined));
+        if(req.method==='GET'&&path==='/api/market/studio/snapshot'&&studio)return json(res,200,studio.snapshot(url.searchParams.get('run'),url.searchParams.get('day')));
+        if(req.method==='GET'&&path==='/api/market/studio/report'&&studio)return json(res,200,studio.report(url.searchParams.get('run'),url.searchParams.get('day')));
+        if(req.method==='GET'&&path==='/api/market/studio/steps'&&studio)return json(res,200,studio.steps(url.searchParams.get('run')));
+        if(req.method==='GET'&&path==='/api/market/behavior/status'&&behavior)return json(res,200,await behavior.status());
+        const behaviorRead=path.match(/^\/api\/market\/behavior\/(GARDEN-(?:BEHAVIOR|OWN)-[a-f0-9]{16})(?:\/(trace))?$/);
+        if(req.method==='GET'&&behaviorRead&&behavior)return json(res,200,behaviorRead[2]?behavior.trace(behaviorRead[1],url.searchParams.get('customer')):await behavior.get(behaviorRead[1]));
         if(path.startsWith('/api/workflows')&&!workflow)return json(res,503,{error:{code:'WORKFLOW_UNAVAILABLE',message:'Campaign workflow is not initialized.'}});
         if(req.method==='GET'&&path==='/api/market/planner')return json(res,200,planner?.status()||{available:false});
         if(req.method==='GET'&&path==='/api/market/policy-lab/budget')return json(res,200,await policySpendStatus());
@@ -104,8 +125,14 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
             || req.headers['content-type']?.split(';')[0] !== 'application/json') {
           return json(res, 403, { error: { code: 'SAME_ORIGIN_REQUIRED', message: 'Use the sandbox controls in this local app.' } });
         }
-        const input = await body(req,path.startsWith('/api/workflows')?32768:4096);
+        const input = await body(req,path.startsWith('/api/market/studio/')?131072:path.startsWith('/api/workflows')?32768:4096);
         if (!input || Array.isArray(input) || typeof input !== 'object') throw new SandboxError(400, 'INVALID_JSON', 'Expected a JSON object.');
+        if(path==='/api/market/autonomy/start'&&autonomy)return json(res,202,await autonomy.start(input));
+        if(path==='/api/market/room/start'&&room)return json(res,202,room.start(input));
+        if(path==='/api/market/studio/analyze'&&studio)return json(res,200,await studio.analyze(input));
+        if(path==='/api/market/studio/design'&&studio)return json(res,200,await studio.design(input));
+        if(path==='/api/market/studio/save'&&studio)return json(res,200,studio.saveReport(input));
+        if(path==='/api/market/behavior/start'&&behavior)return json(res,200,await behavior.start(input));
         if(path==='/api/market/trusted-workflow/start'&&trustedWorkflow){try{return json(res,202,await trustedWorkflow.start(input));}catch(e){throw new SandboxError(400,'TRUSTED_MISSION_REJECTED',e.message);}}
         const trustedResume=path.match(/^\/api\/market\/trusted-workflow\/(TW4-LIVE-[a-f0-9]{16})\/resume$/);
         if(trustedResume&&trustedWorkflow){if(Object.keys(input).length)throw new SandboxError(400,'INVALID_RESUME','Resume uses the saved mission unchanged.');return json(res,202,await trustedWorkflow.resume(trustedResume[1]));}
@@ -161,6 +188,7 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
         return json(res, 404, { error: { code: 'NOT_FOUND', message: 'Unknown API route.' } });
       }
       if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405); res.end(); return; }
+      if(path==='/vendor/ag-studio-3.0.0.js'){const content=await readFile(resolve(root,'node_modules/ag-studio/dist/umd/ag-studio.min.js'));res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=3600'});res.end(content);return;}
       if(path.startsWith('/vendor/three/')||path.startsWith('/vendor/three-addons/')){
         const addon=path.startsWith('/vendor/three-addons/');
         const base=resolve(root,addon?'node_modules/three/examples/jsm':'node_modules/three/build');
@@ -184,21 +212,26 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
     }
   });
   server.planner=planner;
+  server.room=room;
+  server.autonomy=autonomy;
   server.liveMarket=liveMarket;
   server.commerce=commerce;
   server.policyLab=policyLab;
-  server.on('close',()=>{void liveMarket?.close();void commerce?.close();void policyLab?.close();});
+  server.on('close',()=>{void autonomy?.close();void liveMarket?.close();void commerce?.close();void policyLab?.close();});
   return server;
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   if (existsSync(resolve(root, '.env'))) process.loadEnvFile(resolve(root, '.env'));
   const paypal = await createPayPalSandbox({ storePath: resolve(root, '.local/paypal-sandbox.json') });
-  const catalog=await createMarketCatalog({path:resolve(root,'.local/market-catalog.json'),envFile:resolve(root,'.env')});
+  const catalog=createAuthoredCatalogService();
   const store=createMarketStore(resolve(root,'.local/market-metro.sqlite'));
   const funding=await createSandboxFunding({paypal,path:resolve(root,'.local/paypal-vault-setup.json')});
   const market=createMarketService({paypal,catalog,store,funding});
   const server = createSupplyYardServer(paypal,undefined,market,funding);
-  server.listen(Number(process.env.PORT || 4173), '127.0.0.1', () => {console.log(`Market Metro: http://127.0.0.1:${server.address().port}`);server.planner?.recover();server.policyLab?.recover();});
-  process.once('SIGINT',async()=>{await server.liveMarket?.close();await server.planner?.close();await server.commerce?.close();await server.policyLab?.close();server.close(()=>process.exit(0));});
+  server.listen(Number(process.env.PORT || 4173), '127.0.0.1', () => {
+    console.log(`Market Metro: http://127.0.0.1:${server.address().port}`);
+    if(!process.argv.includes('--no-recover')){server.planner?.recover();server.policyLab?.recover();server.room?.recover();server.autonomy?.recover();}
+  });
+  process.once('SIGINT',async()=>{await server.autonomy?.close();await server.room?.close();await server.liveMarket?.close();await server.planner?.close();await server.commerce?.close();await server.policyLab?.close();server.close(()=>process.exit(0));});
 }

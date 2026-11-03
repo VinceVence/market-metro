@@ -1,0 +1,134 @@
+{
+  "createdAt": "2026-10-31T11:41:01.453Z",
+  "cases": [
+    {
+      "scenario": "steady",
+      "seed": 550100
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 550102
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 550105
+    }
+  ],
+  "regimes": [
+    {
+      "id": "100_days_50USD",
+      "days": 100,
+      "budgetCents": 5000
+    },
+    {
+      "id": "365_days_50USD",
+      "days": 365,
+      "budgetCents": 5000
+    },
+    {
+      "id": "365_days_equal_daily_budget",
+      "days": 365,
+      "budgetCents": 23929
+    }
+  ],
+  "experts": [
+    "incumbent",
+    "catalog_rotation",
+    "adjacent_bundle"
+  ],
+  "baseline": {
+    "id": "fixed-category_interest",
+    "kind": "discovery",
+    "business": {
+      "demand": {
+        "stockDays": [
+          14,
+          14,
+          14
+        ],
+        "windowDays": 14,
+        "useLostDemand": false,
+        "topK": 4,
+        "retrainDays": 14
+      },
+      "economics": {
+        "pricePct": [
+          0,
+          0,
+          0
+        ],
+        "merchantRail": "auto",
+        "supplierRail": "auto"
+      },
+      "lifecycle": {
+        "marketing": "weekly_featured",
+        "subscriptions": true,
+        "interval": "observed",
+        "minimumRepeat": 2,
+        "discountPct": 0
+      }
+    },
+    "discovery": "category_interest",
+    "intervalDays": 7,
+    "modelName": "ridge",
+    "thresholdCents": 0
+  },
+  "candidate": {
+    "kind": "discovery",
+    "business": {
+      "demand": {
+        "stockDays": [
+          14,
+          28,
+          14
+        ],
+        "windowDays": 14,
+        "useLostDemand": true,
+        "topK": 4,
+        "retrainDays": 28
+      },
+      "economics": {
+        "pricePct": [
+          10,
+          0,
+          0
+        ],
+        "merchantRail": "paypal",
+        "supplierRail": "paypal"
+      },
+      "lifecycle": {
+        "marketing": "weekly_featured",
+        "subscriptions": false,
+        "interval": 7,
+        "minimumRepeat": 3,
+        "discountPct": 0
+      }
+    },
+    "modelName": "ridge",
+    "thresholdCents": 0,
+    "id": "observed_value-7",
+    "discovery": "observed_value",
+    "intervalDays": 7,
+    "cashSchedule": {
+      "day": 70,
+      "stockDays": [
+        7,
+        7,
+        7
+      ]
+    }
+  },
+  "hashes": {
+    "scripts/commerce-economy-v5/engine.mjs": "0f53b513cad90ba9a5bc0c389ac6d5a05318a74414a1fe5d622e2cff87695913",
+    "scripts/commerce-economy-v5/operations.mjs": "497d39303192b84bef382032f7b5643ff6c8042acf72cd3ca08a9f5a233b323e",
+    "scripts/commerce-economy-v5/network.mjs": "a80b225e6f6130656849a4ed881075eb1fdc5815b9a74fb24b1631eb51730c24",
+    "scripts/commerce-economy-v5/policies.mjs": "ac505ea2eba47972578587cbd87575886c2d2b7dc73776a723d6123b51e38ccb",
+    "scripts/commerce-economy-v5/learning/evaluation.mjs": "ed603e83a6fed173b65b1f05877079a5570c9cdeab1ab38274187181f1d7f5ce",
+    "scripts/commerce-economy-v5/learning/experts.mjs": "5e65571b6ea98fbaeebf83c02f5937aef18d6b4c86dce1b3e7bc7498d128905b",
+    "scripts/commerce-economy-v5/learning/action-policy.mjs": "a61b1775e2baa6f923931e32f9908a6e28e150852ffcc5973443a4de81cc1ab8",
+    "scripts/commerce-economy-v5/learning/discovery-policy.mjs": "17d1cb2cdd3c9f2e2e80aa1e8fd78e794145cfef2bac03af2a42798d582806f3",
+    "scripts/commerce-economy-v5/learning/horizon-audit.mjs": "512bf84bcd7e6361a335ec893da3d479f8eb5988975fa102d71a9d63e48be002"
+  },
+  "scope": "Predeclared100-day and365-day development audit; never search a horizon until a desired ratio appears. Every regime gives all arms identical wallets, economic rules, budget and return followup. The annual variants retain either the same50USD marketing cap or the same daily budget. LLM spend is separate and unchanged. Inventory reduction stays30days before the announced campaign horizon. The learned action model retains its original day77 coverage gate; subsequent behavior uses its documented fallback. No final test and no target achievement claim.",
+  "hash": "371b128216d741a3dc38a6e80c47395d0b2ca9889b442c35c961f420930e3b7f"
+}

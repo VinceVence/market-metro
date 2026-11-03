@@ -1,0 +1,1112 @@
+{
+  "createdAt": "2026-10-31T06:52:41.370Z",
+  "version": "commerce-network-design-1",
+  "settings": {
+    "customers": 100,
+    "days": 100,
+    "campaignStop": 90,
+    "budgetCents": 5000
+  },
+  "business": {
+    "version": "commerce-operations-v5.2",
+    "openingStock": 6,
+    "openingMerchantCashCents": 150000,
+    "leadDays": 3,
+    "holdingRatePerDay": 0.0002,
+    "consentBase": 0.12,
+    "consentRepeatBonus": 0.2,
+    "subscriptionNeedThreshold": 0.65,
+    "subscriptionCategories": [
+      "Stationery",
+      "Office bundles"
+    ],
+    "priceChangesPct": [
+      -10,
+      -5,
+      0,
+      5,
+      10
+    ],
+    "stockDayOptions": [
+      7,
+      14,
+      28
+    ],
+    "intervalDayOptions": [
+      7,
+      14,
+      28
+    ]
+  },
+  "network": {
+    "version": "supplier-network-v1",
+    "bankLagDays": 2,
+    "bankFeeCents": 25,
+    "feeRate": 0.0349,
+    "feeFixedCents": 49,
+    "processingRate": 0.012,
+    "processingFixedCents": 20,
+    "upstreamCostShare": 0.7,
+    "rawMaterialShare": 0.6
+  },
+  "cases": [
+    {
+      "scenario": "steady",
+      "seed": 550100
+    },
+    {
+      "scenario": "rival_sale",
+      "seed": 550101
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 550102
+    },
+    {
+      "scenario": "returns_wave",
+      "seed": 550103
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 550104
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 550105
+    }
+  ],
+  "validation": [
+    {
+      "scenario": "steady",
+      "seed": 550200
+    },
+    {
+      "scenario": "rival_sale",
+      "seed": 550201
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 550202
+    },
+    {
+      "scenario": "returns_wave",
+      "seed": 550203
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 550204
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 550205
+    }
+  ],
+  "hashes": {
+    "scripts/commerce-economy-v5/engine.mjs": "0f53b513cad90ba9a5bc0c389ac6d5a05318a74414a1fe5d622e2cff87695913",
+    "scripts/commerce-economy-v5/operations.mjs": "497d39303192b84bef382032f7b5643ff6c8042acf72cd3ca08a9f5a233b323e",
+    "scripts/commerce-economy-v5/network.mjs": "a80b225e6f6130656849a4ed881075eb1fdc5815b9a74fb24b1631eb51730c24",
+    "scripts/commerce-economy-v5/policies.mjs": "ac505ea2eba47972578587cbd87575886c2d2b7dc73776a723d6123b51e38ccb",
+    "scripts/commerce-economy-v5/runner.mjs": "3e06712b135e138c62cefd69bfa3f432ca73d6b78c685170cab87a304d76c067",
+    "scripts/commerce-economy-v5/agent-network.mjs": "ddafffd717aa28c5d775c2891f07d10b574ce4ea7f6bdfc9efbd84933a5284de",
+    "scripts/behavior-v4/policies.mjs": "d4c29c157d3eecbb2f05bf74bc604ed965d0683e6ab9858736e1dce984b386dc",
+    "scripts/marketing/recommender.mjs": "7052cdfe948a62431f66f727ef2359ce9389a9d9f68eb39050ab481752c06901",
+    "scripts/agent-mesh/model-client.mjs": "94cbe0998bd4559e64a35d88ca0eecf2791b0315e78ccaf59fab56fbd80d0222",
+    "benchmark/vertex.mjs": "f2837cdf2aacef1a50cb6cb662f9cd7b5f97809e0308d20c8b3c942b23634a6d"
+  },
+  "budget": {
+    "maxCalls": 6,
+    "maxIncrementalUSD": 0.5,
+    "lifetimeBeforeUSD": 3.221607,
+    "perArmUSD": 0.25
+  },
+  "fixed": {
+    "platformUSD": 741.21,
+    "allPartnerUSD": 16428.094999999998,
+    "retailerUSD": 9770.035,
+    "terminalCashUSD": 31720.74166666667,
+    "terminalInventoryUSD": 11840.908333333335,
+    "purchases": 420,
+    "recommendationsBought": 3.1666666666666665
+  },
+  "fastFixed": {
+    "platformUSD": 1192.861666666667,
+    "allPartnerUSD": 15419.44,
+    "retailerUSD": 9823.95,
+    "terminalCashUSD": 31412.175000000003,
+    "terminalInventoryUSD": 11133.966666666667,
+    "purchases": 419.8333333333333,
+    "recommendationsBought": 2.8333333333333335
+  },
+  "evidence": [
+    {
+      "scenario": "steady",
+      "day": 30,
+      "evidence": {
+        "asOfDay": 30,
+        "customers": 100,
+        "recentOrders": 76,
+        "previousOrders": 63,
+        "observedLapsed": 19,
+        "observedProspects": 19,
+        "recentInterests": [
+          {
+            "topic": "Electronics",
+            "n": 3
+          },
+          {
+            "topic": "Office bundles",
+            "n": 5
+          },
+          {
+            "topic": "Furniture",
+            "n": 6
+          },
+          {
+            "topic": "Stationery",
+            "n": 2
+          }
+        ],
+        "matureMerchantRisk": [
+          {
+            "merchantIndex": 0,
+            "orders": 31,
+            "returns": 0,
+            "returnRate": 0.0196078431372549,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 1,
+            "orders": 28,
+            "returns": 0,
+            "returnRate": 0.020833333333333332,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 2,
+            "orders": 28,
+            "returns": 0,
+            "returnRate": 0.020833333333333332,
+            "exclude": false
+          }
+        ],
+        "model": {
+          "id": "ECONOMY5-550100-V3MODEL-30",
+          "cutoff": 30,
+          "split": 23,
+          "trainingRows": 436,
+          "validationPurchases": 41,
+          "candidateRecall": 0.3902439024390244,
+          "baselineRecall": 0.14634146341463414,
+          "type": "affinity_popularity",
+          "datasetHash": "77e50cb7e9312b50a2d8f47971acbff287f149c178d86c143d4f410af348dfd7",
+          "runtimeMs": 2,
+          "reason": "Chronological last7-day rank validation; this predicts ranking, not causal profit."
+        },
+        "remainingBudgetCents": 5000,
+        "scope": "Observed partner events only. True relationship state, unmet need, preferences, outside spending and future returns are excluded."
+      },
+      "merchantCashCents": [
+        286176,
+        361389,
+        326456
+      ],
+      "products": [
+        {
+          "id": "MM-PAPER-01",
+          "category": "Stationery",
+          "priceCents": 1800
+        },
+        {
+          "id": "MM-PAPER-02",
+          "category": "Stationery",
+          "priceCents": 2600
+        },
+        {
+          "id": "MM-PAPER-03",
+          "category": "Stationery",
+          "priceCents": 3400
+        },
+        {
+          "id": "MM-PAPER-04",
+          "category": "Stationery",
+          "priceCents": 4800
+        },
+        {
+          "id": "MM-DEVICE-01",
+          "category": "Electronics",
+          "priceCents": 4200
+        },
+        {
+          "id": "MM-DEVICE-02",
+          "category": "Electronics",
+          "priceCents": 7600
+        },
+        {
+          "id": "MM-DEVICE-03",
+          "category": "Electronics",
+          "priceCents": 14000
+        },
+        {
+          "id": "MM-DEVICE-04",
+          "category": "Electronics",
+          "priceCents": 21000
+        },
+        {
+          "id": "MM-SPACE-01",
+          "category": "Furniture",
+          "priceCents": 9600
+        },
+        {
+          "id": "MM-SPACE-02",
+          "category": "Furniture",
+          "priceCents": 12500
+        },
+        {
+          "id": "MM-SPACE-03",
+          "category": "Furniture",
+          "priceCents": 18500
+        },
+        {
+          "id": "MM-SPACE-04",
+          "category": "Furniture",
+          "priceCents": 27500
+        },
+        {
+          "id": "MM-PACK-01",
+          "category": "Office bundles",
+          "priceCents": 6400
+        },
+        {
+          "id": "MM-PACK-02",
+          "category": "Office bundles",
+          "priceCents": 11200
+        },
+        {
+          "id": "MM-PACK-03",
+          "category": "Office bundles",
+          "priceCents": 16800
+        },
+        {
+          "id": "MM-PACK-04",
+          "category": "Office bundles",
+          "priceCents": 22400
+        }
+      ],
+      "business": {
+        "consents": 0,
+        "procurements": 53,
+        "networkPayments": 50
+      },
+      "scope": "Completed observed history. The scenario name describes the known development test regime, not a hidden evaluation seed. No private tastes, needs, wallets or future draws."
+    },
+    {
+      "scenario": "rival_sale",
+      "day": 30,
+      "evidence": {
+        "asOfDay": 30,
+        "customers": 100,
+        "recentOrders": 86,
+        "previousOrders": 60,
+        "observedLapsed": 8,
+        "observedProspects": 23,
+        "recentInterests": [
+          {
+            "topic": "Office bundles",
+            "n": 10
+          },
+          {
+            "topic": "Furniture",
+            "n": 6
+          },
+          {
+            "topic": "Stationery",
+            "n": 2
+          },
+          {
+            "topic": "Electronics",
+            "n": 4
+          }
+        ],
+        "matureMerchantRisk": [
+          {
+            "merchantIndex": 0,
+            "orders": 29,
+            "returns": 2,
+            "returnRate": 0.061224489795918366,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 1,
+            "orders": 29,
+            "returns": 1,
+            "returnRate": 0.04081632653061224,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 2,
+            "orders": 25,
+            "returns": 0,
+            "returnRate": 0.022222222222222223,
+            "exclude": false
+          }
+        ],
+        "model": {
+          "id": "ECONOMY5-550101-V3MODEL-30",
+          "cutoff": 30,
+          "split": 23,
+          "trainingRows": 440,
+          "validationPurchases": 39,
+          "candidateRecall": 0.1794871794871795,
+          "baselineRecall": 0.07692307692307693,
+          "type": "affinity_popularity",
+          "datasetHash": "eb3be25c210d239c842a8e3edfffa99ba2601d9a252d4d73c3b1c0cb5951d4ce",
+          "runtimeMs": 2,
+          "reason": "Chronological last7-day rank validation; this predicts ranking, not causal profit."
+        },
+        "remainingBudgetCents": 5000,
+        "scope": "Observed partner events only. True relationship state, unmet need, preferences, outside spending and future returns are excluded."
+      },
+      "merchantCashCents": [
+        355127,
+        327976,
+        342096
+      ],
+      "products": [
+        {
+          "id": "MM-PAPER-01",
+          "category": "Stationery",
+          "priceCents": 1800
+        },
+        {
+          "id": "MM-PAPER-02",
+          "category": "Stationery",
+          "priceCents": 2600
+        },
+        {
+          "id": "MM-PAPER-03",
+          "category": "Stationery",
+          "priceCents": 3400
+        },
+        {
+          "id": "MM-PAPER-04",
+          "category": "Stationery",
+          "priceCents": 4800
+        },
+        {
+          "id": "MM-DEVICE-01",
+          "category": "Electronics",
+          "priceCents": 4200
+        },
+        {
+          "id": "MM-DEVICE-02",
+          "category": "Electronics",
+          "priceCents": 7600
+        },
+        {
+          "id": "MM-DEVICE-03",
+          "category": "Electronics",
+          "priceCents": 14000
+        },
+        {
+          "id": "MM-DEVICE-04",
+          "category": "Electronics",
+          "priceCents": 21000
+        },
+        {
+          "id": "MM-SPACE-01",
+          "category": "Furniture",
+          "priceCents": 9600
+        },
+        {
+          "id": "MM-SPACE-02",
+          "category": "Furniture",
+          "priceCents": 12500
+        },
+        {
+          "id": "MM-SPACE-03",
+          "category": "Furniture",
+          "priceCents": 18500
+        },
+        {
+          "id": "MM-SPACE-04",
+          "category": "Furniture",
+          "priceCents": 27500
+        },
+        {
+          "id": "MM-PACK-01",
+          "category": "Office bundles",
+          "priceCents": 6400
+        },
+        {
+          "id": "MM-PACK-02",
+          "category": "Office bundles",
+          "priceCents": 11200
+        },
+        {
+          "id": "MM-PACK-03",
+          "category": "Office bundles",
+          "priceCents": 16800
+        },
+        {
+          "id": "MM-PACK-04",
+          "category": "Office bundles",
+          "priceCents": 22400
+        }
+      ],
+      "business": {
+        "consents": 0,
+        "procurements": 65,
+        "networkPayments": 60
+      },
+      "scope": "Completed observed history. The scenario name describes the known development test regime, not a hidden evaluation seed. No private tastes, needs, wallets or future draws."
+    },
+    {
+      "scenario": "budget_squeeze",
+      "day": 30,
+      "evidence": {
+        "asOfDay": 30,
+        "customers": 100,
+        "recentOrders": 77,
+        "previousOrders": 68,
+        "observedLapsed": 17,
+        "observedProspects": 22,
+        "recentInterests": [
+          {
+            "topic": "Electronics",
+            "n": 7
+          },
+          {
+            "topic": "Furniture",
+            "n": 10
+          },
+          {
+            "topic": "Office bundles",
+            "n": 10
+          },
+          {
+            "topic": "Stationery",
+            "n": 7
+          }
+        ],
+        "matureMerchantRisk": [
+          {
+            "merchantIndex": 0,
+            "orders": 29,
+            "returns": 2,
+            "returnRate": 0.061224489795918366,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 1,
+            "orders": 30,
+            "returns": 1,
+            "returnRate": 0.04,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 2,
+            "orders": 27,
+            "returns": 1,
+            "returnRate": 0.0425531914893617,
+            "exclude": false
+          }
+        ],
+        "model": {
+          "id": "ECONOMY5-550102-V3MODEL-30",
+          "cutoff": 30,
+          "split": 23,
+          "trainingRows": 433,
+          "validationPurchases": 38,
+          "candidateRecall": 0.3684210526315789,
+          "baselineRecall": 0.10526315789473684,
+          "type": "affinity_popularity",
+          "datasetHash": "28a2fa6425618e8157eb36083798c77965ad3ebfcbe641a465806545374db0c9",
+          "runtimeMs": 2,
+          "reason": "Chronological last7-day rank validation; this predicts ranking, not causal profit."
+        },
+        "remainingBudgetCents": 5000,
+        "scope": "Observed partner events only. True relationship state, unmet need, preferences, outside spending and future returns are excluded."
+      },
+      "merchantCashCents": [
+        324343,
+        352350,
+        380742
+      ],
+      "products": [
+        {
+          "id": "MM-PAPER-01",
+          "category": "Stationery",
+          "priceCents": 1800
+        },
+        {
+          "id": "MM-PAPER-02",
+          "category": "Stationery",
+          "priceCents": 2600
+        },
+        {
+          "id": "MM-PAPER-03",
+          "category": "Stationery",
+          "priceCents": 3400
+        },
+        {
+          "id": "MM-PAPER-04",
+          "category": "Stationery",
+          "priceCents": 4800
+        },
+        {
+          "id": "MM-DEVICE-01",
+          "category": "Electronics",
+          "priceCents": 4200
+        },
+        {
+          "id": "MM-DEVICE-02",
+          "category": "Electronics",
+          "priceCents": 7600
+        },
+        {
+          "id": "MM-DEVICE-03",
+          "category": "Electronics",
+          "priceCents": 14000
+        },
+        {
+          "id": "MM-DEVICE-04",
+          "category": "Electronics",
+          "priceCents": 21000
+        },
+        {
+          "id": "MM-SPACE-01",
+          "category": "Furniture",
+          "priceCents": 9600
+        },
+        {
+          "id": "MM-SPACE-02",
+          "category": "Furniture",
+          "priceCents": 12500
+        },
+        {
+          "id": "MM-SPACE-03",
+          "category": "Furniture",
+          "priceCents": 18500
+        },
+        {
+          "id": "MM-SPACE-04",
+          "category": "Furniture",
+          "priceCents": 27500
+        },
+        {
+          "id": "MM-PACK-01",
+          "category": "Office bundles",
+          "priceCents": 6400
+        },
+        {
+          "id": "MM-PACK-02",
+          "category": "Office bundles",
+          "priceCents": 11200
+        },
+        {
+          "id": "MM-PACK-03",
+          "category": "Office bundles",
+          "priceCents": 16800
+        },
+        {
+          "id": "MM-PACK-04",
+          "category": "Office bundles",
+          "priceCents": 22400
+        }
+      ],
+      "business": {
+        "consents": 0,
+        "procurements": 59,
+        "networkPayments": 61
+      },
+      "scope": "Completed observed history. The scenario name describes the known development test regime, not a hidden evaluation seed. No private tastes, needs, wallets or future draws."
+    },
+    {
+      "scenario": "returns_wave",
+      "day": 30,
+      "evidence": {
+        "asOfDay": 30,
+        "customers": 100,
+        "recentOrders": 75,
+        "previousOrders": 62,
+        "observedLapsed": 16,
+        "observedProspects": 24,
+        "recentInterests": [
+          {
+            "topic": "Electronics",
+            "n": 6
+          },
+          {
+            "topic": "Furniture",
+            "n": 5
+          },
+          {
+            "topic": "Office bundles",
+            "n": 9
+          },
+          {
+            "topic": "Stationery",
+            "n": 4
+          }
+        ],
+        "matureMerchantRisk": [
+          {
+            "merchantIndex": 0,
+            "orders": 30,
+            "returns": 1,
+            "returnRate": 0.04,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 1,
+            "orders": 32,
+            "returns": 4,
+            "returnRate": 0.09615384615384616,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 2,
+            "orders": 22,
+            "returns": 1,
+            "returnRate": 0.047619047619047616,
+            "exclude": false
+          }
+        ],
+        "model": {
+          "id": "ECONOMY5-550103-V3MODEL-30",
+          "cutoff": 30,
+          "split": 23,
+          "trainingRows": 428,
+          "validationPurchases": 36,
+          "candidateRecall": 0.3888888888888889,
+          "baselineRecall": 0.16666666666666666,
+          "type": "affinity_popularity",
+          "datasetHash": "af381a9100e97ff318ebcd53872ab3e31fb5ac0b85bd7b4000c809a71a0ea868",
+          "runtimeMs": 2,
+          "reason": "Chronological last7-day rank validation; this predicts ranking, not causal profit."
+        },
+        "remainingBudgetCents": 5000,
+        "scope": "Observed partner events only. True relationship state, unmet need, preferences, outside spending and future returns are excluded."
+      },
+      "merchantCashCents": [
+        316177,
+        326060,
+        299260
+      ],
+      "products": [
+        {
+          "id": "MM-PAPER-01",
+          "category": "Stationery",
+          "priceCents": 1800
+        },
+        {
+          "id": "MM-PAPER-02",
+          "category": "Stationery",
+          "priceCents": 2600
+        },
+        {
+          "id": "MM-PAPER-03",
+          "category": "Stationery",
+          "priceCents": 3400
+        },
+        {
+          "id": "MM-PAPER-04",
+          "category": "Stationery",
+          "priceCents": 4800
+        },
+        {
+          "id": "MM-DEVICE-01",
+          "category": "Electronics",
+          "priceCents": 4200
+        },
+        {
+          "id": "MM-DEVICE-02",
+          "category": "Electronics",
+          "priceCents": 7600
+        },
+        {
+          "id": "MM-DEVICE-03",
+          "category": "Electronics",
+          "priceCents": 14000
+        },
+        {
+          "id": "MM-DEVICE-04",
+          "category": "Electronics",
+          "priceCents": 21000
+        },
+        {
+          "id": "MM-SPACE-01",
+          "category": "Furniture",
+          "priceCents": 9600
+        },
+        {
+          "id": "MM-SPACE-02",
+          "category": "Furniture",
+          "priceCents": 12500
+        },
+        {
+          "id": "MM-SPACE-03",
+          "category": "Furniture",
+          "priceCents": 18500
+        },
+        {
+          "id": "MM-SPACE-04",
+          "category": "Furniture",
+          "priceCents": 27500
+        },
+        {
+          "id": "MM-PACK-01",
+          "category": "Office bundles",
+          "priceCents": 6400
+        },
+        {
+          "id": "MM-PACK-02",
+          "category": "Office bundles",
+          "priceCents": 11200
+        },
+        {
+          "id": "MM-PACK-03",
+          "category": "Office bundles",
+          "priceCents": 16800
+        },
+        {
+          "id": "MM-PACK-04",
+          "category": "Office bundles",
+          "priceCents": 22400
+        }
+      ],
+      "business": {
+        "consents": 0,
+        "procurements": 56,
+        "networkPayments": 60
+      },
+      "scope": "Completed observed history. The scenario name describes the known development test regime, not a hidden evaluation seed. No private tastes, needs, wallets or future draws."
+    },
+    {
+      "scenario": "preference_shift",
+      "day": 30,
+      "evidence": {
+        "asOfDay": 30,
+        "customers": 100,
+        "recentOrders": 68,
+        "previousOrders": 77,
+        "observedLapsed": 28,
+        "observedProspects": 16,
+        "recentInterests": [
+          {
+            "topic": "Office bundles",
+            "n": 9
+          },
+          {
+            "topic": "Stationery",
+            "n": 3
+          },
+          {
+            "topic": "Electronics",
+            "n": 4
+          },
+          {
+            "topic": "Furniture",
+            "n": 3
+          }
+        ],
+        "matureMerchantRisk": [
+          {
+            "merchantIndex": 0,
+            "orders": 35,
+            "returns": 3,
+            "returnRate": 0.07272727272727272,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 1,
+            "orders": 33,
+            "returns": 1,
+            "returnRate": 0.03773584905660377,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 2,
+            "orders": 31,
+            "returns": 1,
+            "returnRate": 0.0392156862745098,
+            "exclude": false
+          }
+        ],
+        "model": {
+          "id": "ECONOMY5-550104-V3MODEL-30",
+          "cutoff": 30,
+          "split": 23,
+          "trainingRows": 447,
+          "validationPurchases": 33,
+          "candidateRecall": 0.2727272727272727,
+          "baselineRecall": 0.18181818181818182,
+          "type": "affinity_popularity",
+          "datasetHash": "201001d64fc646dd50f188bae518a905d5003cd65b2fa1ee0fd3bdd70c3f1a38",
+          "runtimeMs": 1,
+          "reason": "Chronological last7-day rank validation; this predicts ranking, not causal profit."
+        },
+        "remainingBudgetCents": 5000,
+        "scope": "Observed partner events only. True relationship state, unmet need, preferences, outside spending and future returns are excluded."
+      },
+      "merchantCashCents": [
+        310609,
+        406164,
+        316606
+      ],
+      "products": [
+        {
+          "id": "MM-PAPER-01",
+          "category": "Stationery",
+          "priceCents": 1800
+        },
+        {
+          "id": "MM-PAPER-02",
+          "category": "Stationery",
+          "priceCents": 2600
+        },
+        {
+          "id": "MM-PAPER-03",
+          "category": "Stationery",
+          "priceCents": 3400
+        },
+        {
+          "id": "MM-PAPER-04",
+          "category": "Stationery",
+          "priceCents": 4800
+        },
+        {
+          "id": "MM-DEVICE-01",
+          "category": "Electronics",
+          "priceCents": 4200
+        },
+        {
+          "id": "MM-DEVICE-02",
+          "category": "Electronics",
+          "priceCents": 7600
+        },
+        {
+          "id": "MM-DEVICE-03",
+          "category": "Electronics",
+          "priceCents": 14000
+        },
+        {
+          "id": "MM-DEVICE-04",
+          "category": "Electronics",
+          "priceCents": 21000
+        },
+        {
+          "id": "MM-SPACE-01",
+          "category": "Furniture",
+          "priceCents": 9600
+        },
+        {
+          "id": "MM-SPACE-02",
+          "category": "Furniture",
+          "priceCents": 12500
+        },
+        {
+          "id": "MM-SPACE-03",
+          "category": "Furniture",
+          "priceCents": 18500
+        },
+        {
+          "id": "MM-SPACE-04",
+          "category": "Furniture",
+          "priceCents": 27500
+        },
+        {
+          "id": "MM-PACK-01",
+          "category": "Office bundles",
+          "priceCents": 6400
+        },
+        {
+          "id": "MM-PACK-02",
+          "category": "Office bundles",
+          "priceCents": 11200
+        },
+        {
+          "id": "MM-PACK-03",
+          "category": "Office bundles",
+          "priceCents": 16800
+        },
+        {
+          "id": "MM-PACK-04",
+          "category": "Office bundles",
+          "priceCents": 22400
+        }
+      ],
+      "business": {
+        "consents": 0,
+        "procurements": 63,
+        "networkPayments": 63
+      },
+      "scope": "Completed observed history. The scenario name describes the known development test regime, not a hidden evaluation seed. No private tastes, needs, wallets or future draws."
+    },
+    {
+      "scenario": "supply_delay",
+      "day": 30,
+      "evidence": {
+        "asOfDay": 30,
+        "customers": 100,
+        "recentOrders": 68,
+        "previousOrders": 66,
+        "observedLapsed": 22,
+        "observedProspects": 19,
+        "recentInterests": [
+          {
+            "topic": "Electronics",
+            "n": 4
+          },
+          {
+            "topic": "Furniture",
+            "n": 6
+          },
+          {
+            "topic": "Office bundles",
+            "n": 6
+          },
+          {
+            "topic": "Stationery",
+            "n": 5
+          }
+        ],
+        "matureMerchantRisk": [
+          {
+            "merchantIndex": 0,
+            "orders": 30,
+            "returns": 0,
+            "returnRate": 0.02,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 1,
+            "orders": 32,
+            "returns": 2,
+            "returnRate": 0.057692307692307696,
+            "exclude": false
+          },
+          {
+            "merchantIndex": 2,
+            "orders": 29,
+            "returns": 1,
+            "returnRate": 0.04081632653061224,
+            "exclude": false
+          }
+        ],
+        "model": {
+          "id": "ECONOMY5-550105-V3MODEL-30",
+          "cutoff": 30,
+          "split": 23,
+          "trainingRows": 454,
+          "validationPurchases": 30,
+          "candidateRecall": 0.3333333333333333,
+          "baselineRecall": 0.13333333333333333,
+          "type": "affinity_popularity",
+          "datasetHash": "56ed7735262f93f06e2e3fea5125d525ba06700aa2124cefa21228c2ca1e024b",
+          "runtimeMs": 3,
+          "reason": "Chronological last7-day rank validation; this predicts ranking, not causal profit."
+        },
+        "remainingBudgetCents": 5000,
+        "scope": "Observed partner events only. True relationship state, unmet need, preferences, outside spending and future returns are excluded."
+      },
+      "merchantCashCents": [
+        330164,
+        347253,
+        377639
+      ],
+      "products": [
+        {
+          "id": "MM-PAPER-01",
+          "category": "Stationery",
+          "priceCents": 1800
+        },
+        {
+          "id": "MM-PAPER-02",
+          "category": "Stationery",
+          "priceCents": 2600
+        },
+        {
+          "id": "MM-PAPER-03",
+          "category": "Stationery",
+          "priceCents": 3400
+        },
+        {
+          "id": "MM-PAPER-04",
+          "category": "Stationery",
+          "priceCents": 4800
+        },
+        {
+          "id": "MM-DEVICE-01",
+          "category": "Electronics",
+          "priceCents": 4200
+        },
+        {
+          "id": "MM-DEVICE-02",
+          "category": "Electronics",
+          "priceCents": 7600
+        },
+        {
+          "id": "MM-DEVICE-03",
+          "category": "Electronics",
+          "priceCents": 14000
+        },
+        {
+          "id": "MM-DEVICE-04",
+          "category": "Electronics",
+          "priceCents": 21000
+        },
+        {
+          "id": "MM-SPACE-01",
+          "category": "Furniture",
+          "priceCents": 9600
+        },
+        {
+          "id": "MM-SPACE-02",
+          "category": "Furniture",
+          "priceCents": 12500
+        },
+        {
+          "id": "MM-SPACE-03",
+          "category": "Furniture",
+          "priceCents": 18500
+        },
+        {
+          "id": "MM-SPACE-04",
+          "category": "Furniture",
+          "priceCents": 27500
+        },
+        {
+          "id": "MM-PACK-01",
+          "category": "Office bundles",
+          "priceCents": 6400
+        },
+        {
+          "id": "MM-PACK-02",
+          "category": "Office bundles",
+          "priceCents": 11200
+        },
+        {
+          "id": "MM-PACK-03",
+          "category": "Office bundles",
+          "priceCents": 16800
+        },
+        {
+          "id": "MM-PACK-04",
+          "category": "Office bundles",
+          "priceCents": 22400
+        }
+      ],
+      "business": {
+        "consents": 0,
+        "procurements": 53,
+        "networkPayments": 57
+      },
+      "scope": "Completed observed history. The scenario name describes the known development test regime, not a hidden evaluation seed. No private tastes, needs, wallets or future draws."
+    }
+  ],
+  "design": "Three sequential component decisions with a common observed evidence packet and upstream artifacts. Multi-agent roles specialize; a generalist performs the same three tasks with the same Pro model, schema, tools and2-option budget. Both get8 composed development evaluations. No paid reviewer or coordinator.",
+  "acceptance": "Validation requires >=2x absolute fixed modeled platform net after full design cost, nonnegative aggregate partner and retailer contribution deltas, terminal cash not below fixed, terminal inventory <= fixed+10%. Only a passing design can open a new held-out test set; validation alone is not target achievement.",
+  "scope": "Development construction pilot. Prior private-information probes and failed static changes are diagnostics, not deployable policies.",
+  "hash": "b48c1ba8d119d8dc6596419733332f8032fb25d9f10e3d37e07abcf8524c3b4a"
+}

@@ -1,0 +1,126 @@
+{
+  "createdAt": "2026-10-31T01:41:12.352Z",
+  "version": 1,
+  "settings": {
+    "customers": 100,
+    "days": 100,
+    "campaignStop": 90,
+    "budgetCents": 5000
+  },
+  "goal": "Increase settled retained purchases and modeled payment contribution after marketing and AI costs, while protecting merchant contribution. Choose the most suitable bounded campaign program from observed evidence; recommendations, coupons and no campaign are all valid. Retrain only when new evidence warrants it. Do not default to reactivation merely because it exists.",
+  "cases": [
+    {
+      "seed": 310701,
+      "scenario": "steady",
+      "id": "case-1",
+      "requestId": "confirmation-v1-310701-steady"
+    },
+    {
+      "seed": 310702,
+      "scenario": "rival_sale",
+      "id": "case-2",
+      "requestId": "confirmation-v1-310702-rival_sale"
+    },
+    {
+      "seed": 310703,
+      "scenario": "budget_squeeze",
+      "id": "case-3",
+      "requestId": "confirmation-v1-310703-budget_squeeze"
+    },
+    {
+      "seed": 310704,
+      "scenario": "returns_wave",
+      "id": "case-4",
+      "requestId": "confirmation-v1-310704-returns_wave"
+    }
+  ],
+  "developmentMarkets": [
+    {
+      "seed": 150001,
+      "scenario": "steady"
+    },
+    {
+      "seed": 150002,
+      "scenario": "rival_sale"
+    },
+    {
+      "seed": 150003,
+      "scenario": "preference_shift"
+    }
+  ],
+  "development": [
+    {
+      "policy": "none",
+      "label": "No campaign",
+      "meanPlatformUSD": 672.7433333333333,
+      "meanMerchantDeltaUSD": 0,
+      "meanOrders": 374.3333333333333
+    },
+    {
+      "policy": "weekly_featured",
+      "label": "Weekly featured-pack recommendations",
+      "meanPlatformUSD": 751.2199999999999,
+      "meanMerchantDeltaUSD": 1597.7333333333336,
+      "meanOrders": 402
+    },
+    {
+      "policy": "strong_rules",
+      "label": "Rules with the same fitted ranker",
+      "meanPlatformUSD": 732.0833333333334,
+      "meanMerchantDeltaUSD": 774.5933333333336,
+      "meanOrders": 429
+    },
+    {
+      "policy": "personalized",
+      "label": "Full-price discovery recommendations",
+      "meanPlatformUSD": 747.3666666666668,
+      "meanMerchantDeltaUSD": 915.5066666666668,
+      "meanOrders": 443
+    },
+    {
+      "policy": "reactivate",
+      "label": "Targeted reactivation coupons",
+      "meanPlatformUSD": 721.0766666666667,
+      "meanMerchantDeltaUSD": 718.2233333333334,
+      "meanOrders": 426.3333333333333
+    },
+    {
+      "policy": "portfolio",
+      "label": "Discovery + reactivation portfolio",
+      "meanPlatformUSD": 742.8733333333333,
+      "meanMerchantDeltaUSD": 909.986666666667,
+      "meanOrders": 443.3333333333333
+    }
+  ],
+  "baseline": "weekly_featured",
+  "budget": {
+    "maxProviderCalls": 20,
+    "maxIncrementalUSD": 1,
+    "perCaseUSD": 0.25,
+    "lifetimeBeforeUSD": 2.809565
+  },
+  "scheduling": "Controlled virtual-time decisions at completed days30 and60. Both fixed and agent programs take effect at the same boundary. Wall-clock latency is recorded separately. Live app trading is unchanged.",
+  "evidence": "Identical initial observed history and allowed inputs. After interventions, each branch observes its own resulting data. No private preferences, future outcomes, evaluator profits or held-out control scores enter agent prompts.",
+  "primary": "Mean paired modeled platform contribution after actual AI cost versus the independently selected fixed baseline.",
+  "advanceGate": {
+    "minimumMeanRelativeGain": 0.02,
+    "minimumWins": 3,
+    "minimumMeanMerchantDeltaUSD": 0,
+    "allFourCasesValid": true
+  },
+  "scope": "Four fresh decisions per market are NOT assumed; the existing team makes five provider calls per market over two rounds. This is a small pilot, not statistical confirmation or a multi-agent-versus-single-agent test.",
+  "hashes": {
+    "scripts/behavior-v4/engine.mjs": "49105bb8b7e2af6ddadfc279a811ca073172f6a980b76d0779884ece83d1afc0",
+    "scripts/behavior-v4/catalog.mjs": "d28989a7cf1e95ec751d74e3136574d0e30886f997cfada9a295a91588fd80a8",
+    "scripts/behavior-v4/policies.mjs": "d4c29c157d3eecbb2f05bf74bc604ed965d0683e6ab9858736e1dce984b386dc",
+    "scripts/marketing/recommender.mjs": "7052cdfe948a62431f66f727ef2359ce9389a9d9f68eb39050ab481752c06901",
+    "scripts/marketing/economy.mjs": "cefe444cda73462e32a5ba5f00a4fb58803b6584fd183f41a649fbcb2e9636a1",
+    "scripts/policy-lab/wallet-corrected.mjs": "b90e66fcb129680f74be3f56616d04283a9a2a78e9fe57290c4d1bf9a1348d21",
+    "demo/market/engine.mjs": "ac7d1e12ceae0920e5725f3d7eb9526ee00ca3fbd9d165178109ed97d78777fc",
+    "scripts/commerce-room/service.mjs": "ba361c4cda7e7afac5b133d22d77a83d1081edb8b7dcf34cc13ba3e00501892f",
+    "scripts/agent-mesh/model-client.mjs": "94cbe0998bd4559e64a35d88ca0eecf2791b0315e78ccaf59fab56fbd80d0222",
+    "benchmark/vertex.mjs": "f2837cdf2aacef1a50cb6cb662f9cd7b5f97809e0308d20c8b3c942b23634a6d",
+    "scripts/commerce-room/confirmation.mjs": "8840731d2a6cd05e40c5d5028917cdde9e87dba4074bbd40a2996359e794de83"
+  },
+  "hash": "6a5e2bd60e71e73728436a7ddb896d194dde5ecb7afa32cee09821448c114192"
+}

@@ -1,0 +1,1268 @@
+{
+  "mode": "team",
+  "status": "FAILED",
+  "checkpoints": [
+    {
+      "role": "Demand scientist",
+      "stage": "science",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "audit": {
+          "historicalContacts": 7010,
+          "sourceMarkets": 7,
+          "groups": {
+            "cold|returning": {
+              "contacts": 2628,
+              "responses": 96,
+              "retained": 68,
+              "lateFundedRetained": 4,
+              "netUSD": 85.72999999999742
+            },
+            "cold|new": {
+              "contacts": 531,
+              "responses": 16,
+              "retained": 14,
+              "lateFundedRetained": 0,
+              "netUSD": 31.07000000000092
+            },
+            "fresh|returning": {
+              "contacts": 279,
+              "responses": 55,
+              "retained": 33,
+              "lateFundedRetained": 4,
+              "netUSD": 94.97000000000057
+            },
+            "recent|returning": {
+              "contacts": 354,
+              "responses": 58,
+              "retained": 35,
+              "lateFundedRetained": 2,
+              "netUSD": 108.96000000000073
+            },
+            "recent|new": {
+              "contacts": 52,
+              "responses": 5,
+              "retained": 4,
+              "lateFundedRetained": 0,
+              "netUSD": 14.999999999999972
+            },
+            "fresh|new": {
+              "contacts": 46,
+              "responses": 13,
+              "retained": 10,
+              "lateFundedRetained": 0,
+              "netUSD": 41.910000000000075
+            }
+          },
+          "timing": {
+            "response": "Response or no response is observed after contact; only prior-day records may be used.",
+            "purchase": "Keep responders unresolved until26 days have passed. Some retained purchases were not funded immediately.",
+            "baseline": "Baseline inquiry learning waits26 days for every contact, including known nonresponses."
+          },
+          "scope": "Completed historical synthetic observations. No current test seeds, private needs or future outcomes are available."
+        },
+        "earlierEvidence": {
+          "baselineDevelopment": {
+            "platformUSD": 769.7785714285714,
+            "retailerUSD": 9104.994285714285,
+            "terminalCashUSD": 28746.835714285717,
+            "terminalInventoryUSD": 2741.4114285714286,
+            "retainedPurchases": 144,
+            "retainedVolumeUSD": 20519.85714285714,
+            "outreachCostUSD": 28.321428571428573,
+            "unpaidLiabilities": 0
+          },
+          "fixedDevelopment": {
+            "platformUSD": 741.2757142857142,
+            "retailerUSD": 8604.188571428573,
+            "terminalCashUSD": 27943.25714285715,
+            "terminalInventoryUSD": 2851.575714285714,
+            "retainedPurchases": 136.42857142857142,
+            "retainedVolumeUSD": 19465.571428571428,
+            "outreachCostUSD": 15.87142857142857,
+            "unpaidLiabilities": 0
+          },
+          "baselineDesignCostUSD": 0.025186,
+          "knownFindings": {
+            "baseline": "Broader inquiries raised held-out PayPal net and merchant contribution; all14markets are now development evidence.",
+            "fulfillment": "Removing complete-basket coordination increased mean platform contribution1.48USD on that earlier14market cohort. It remains part of lockedv1.",
+            "risk": "Some markets lost under broader inquiries, including no-response markets. A previous day45 permanent pause lost66.96USD by missing later demand. Do not repeat permanent stopping on short silent histories."
+          }
+        },
+        "objective": "Improve settled modeled PayPal net after AI costs over locked baseline v1, protect total retailer contribution and partner cash, keep inventory <=110% original fixed and zero unpaid liabilities. Economy unchanged.",
+        "limits": "Same four calls, two local fits and two measured seven-market trials for team and single planner. No seed/regime/private wallet or future label predictors.",
+        "task": "Choose two different local model jobs for inquiries. The baseline forest still handles exact-product recommendations. The trusted trainer fits priors and selects shrinkage8/32/128 using whole-market cross-validation.",
+        "recipes": {
+          "response_hurdle": "Learn P(response) from all previous contacts, and P(retained purchase | response) plus value from matured responders. This avoids treating unresolved positives as negatives.",
+          "mature_reward": "Learn retained probability and payment reward from settled contacts only, using the same26-day horizon as baseline but trained cohort structure and shrinkage."
+        },
+        "grouping": {
+          "intent": "Pool by fresh/recent/cold observed interest.",
+          "intent_status": "Also distinguish new and returning shoppers. More specific but sparser."
+        }
+      },
+      "evidenceId": "f2e92087984f7153e2075ff5b058ff589c88afa412102134a122402e78143a98",
+      "output": {
+        "hypothesis": "Using intent_status with response_hurdle captures the distinct behaviors of new vs returning shoppers while leveraging early response signals, and intent with mature_reward provides a robust baseline for settled contacts.",
+        "first": {
+          "grouping": "intent_status",
+          "recipe": "response_hurdle"
+        },
+        "second": {
+          "grouping": "intent",
+          "recipe": "mature_reward"
+        },
+        "rationale": "The data shows significant differences in response rates and netUSD between new and returning shoppers within the same intent levels. The 26-day delay for purchases makes response_hurdle advantageous for utilizing recent data.",
+        "evidenceId": "f2e92087984f7153e2075ff5b058ff589c88afa412102134a122402e78143a98"
+      },
+      "provider": [
+        {
+          "reservationId": "91ece5f8-6a49-478d-8675-b0b291663b68",
+          "caseId": "team-science",
+          "trialId": "docs/commerce-growth/baseline-v1-challenger-1/team",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 15236,
+          "reservedMicros": 150000,
+          "inputTokens": 1372,
+          "outputTokens": 206,
+          "thinkingTokens": 835,
+          "cachedInputTokens": 0,
+          "responseId": "fmDoapOTK4WEpt8P-IGjkQg",
+          "modelVersion": "gemini-3.1-pro-preview",
+          "latencyMs": 12983,
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    },
+    {
+      "role": "Demand scientist",
+      "stage": "local_fit",
+      "actor": "LOCAL_MODEL_TRAINING",
+      "status": "COMPLETED",
+      "input": {
+        "grouping": "intent_status",
+        "recipe": "response_hurdle"
+      },
+      "output": {
+        "id": "MATURITY-9df66c35a7be5697",
+        "modelHash": "9df66c35a7be56972a9ab3a15ce8ca195bd9648338ab1dcf752d272d86feaa90",
+        "report": {
+          "spec": {
+            "grouping": "intent_status",
+            "recipe": "response_hurdle"
+          },
+          "selectedStrength": 8,
+          "trainingRows": 3890,
+          "markets": 7,
+          "metrics": {
+            "auc": 0.7695331421913253,
+            "brier": 0.038627222334590525,
+            "logLoss": 0.1552092942416837,
+            "averagePrecision": 0.12028805623132709
+          },
+          "trials": [
+            {
+              "strength": 8,
+              "metrics": {
+                "auc": 0.7695331421913253,
+                "brier": 0.038627222334590525,
+                "logLoss": 0.1552092942416837
+              }
+            },
+            {
+              "strength": 32,
+              "metrics": {
+                "auc": 0.7603098857075528,
+                "brier": 0.03878069527674212,
+                "logLoss": 0.1563613809161334
+              }
+            },
+            {
+              "strength": 128,
+              "metrics": {
+                "auc": 0.7423526831886677,
+                "brier": 0.039158724981241094,
+                "logLoss": 0.16009082362157318
+              }
+            }
+          ],
+          "scope": "Whole-source-market validation; each held-out collection trajectory learns only prior-day responses and matured financial outcomes. Conditional prediction, not causal uplift."
+        }
+      }
+    },
+    {
+      "role": "Demand scientist",
+      "stage": "local_fit",
+      "actor": "LOCAL_MODEL_TRAINING",
+      "status": "COMPLETED",
+      "input": {
+        "grouping": "intent",
+        "recipe": "mature_reward"
+      },
+      "output": {
+        "id": "MATURITY-600433f68536661a",
+        "modelHash": "600433f68536661a143db453aab9ca5ccad804bf24eb019e48f4837fac85c6a6",
+        "report": {
+          "spec": {
+            "grouping": "intent",
+            "recipe": "mature_reward"
+          },
+          "selectedStrength": 32,
+          "trainingRows": 3890,
+          "markets": 7,
+          "metrics": {
+            "auc": 0.704407394315489,
+            "brier": 0.03923218280525592,
+            "logLoss": 0.16267213646155526,
+            "averagePrecision": 0.09564764130642428
+          },
+          "trials": [
+            {
+              "strength": 8,
+              "metrics": {
+                "auc": 0.7120890774125133,
+                "brier": 0.03928463651095098,
+                "logLoss": 0.16434638349520644
+              }
+            },
+            {
+              "strength": 32,
+              "metrics": {
+                "auc": 0.704407394315489,
+                "brier": 0.03923218280525592,
+                "logLoss": 0.16267213646155526
+              }
+            },
+            {
+              "strength": 128,
+              "metrics": {
+                "auc": 0.6866072948169095,
+                "brier": 0.03943528415241455,
+                "logLoss": 0.16399649420088727
+              }
+            }
+          ],
+          "scope": "Whole-source-market validation; each held-out collection trajectory learns only prior-day responses and matured financial outcomes. Conditional prediction, not causal uplift."
+        }
+      }
+    },
+    {
+      "role": "Campaign strategist",
+      "stage": "campaign",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "audit": {
+          "historicalContacts": 7010,
+          "sourceMarkets": 7,
+          "groups": {
+            "cold|returning": {
+              "contacts": 2628,
+              "responses": 96,
+              "retained": 68,
+              "lateFundedRetained": 4,
+              "netUSD": 85.72999999999742
+            },
+            "cold|new": {
+              "contacts": 531,
+              "responses": 16,
+              "retained": 14,
+              "lateFundedRetained": 0,
+              "netUSD": 31.07000000000092
+            },
+            "fresh|returning": {
+              "contacts": 279,
+              "responses": 55,
+              "retained": 33,
+              "lateFundedRetained": 4,
+              "netUSD": 94.97000000000057
+            },
+            "recent|returning": {
+              "contacts": 354,
+              "responses": 58,
+              "retained": 35,
+              "lateFundedRetained": 2,
+              "netUSD": 108.96000000000073
+            },
+            "recent|new": {
+              "contacts": 52,
+              "responses": 5,
+              "retained": 4,
+              "lateFundedRetained": 0,
+              "netUSD": 14.999999999999972
+            },
+            "fresh|new": {
+              "contacts": 46,
+              "responses": 13,
+              "retained": 10,
+              "lateFundedRetained": 0,
+              "netUSD": 41.910000000000075
+            }
+          },
+          "timing": {
+            "response": "Response or no response is observed after contact; only prior-day records may be used.",
+            "purchase": "Keep responders unresolved until26 days have passed. Some retained purchases were not funded immediately.",
+            "baseline": "Baseline inquiry learning waits26 days for every contact, including known nonresponses."
+          },
+          "scope": "Completed historical synthetic observations. No current test seeds, private needs or future outcomes are available."
+        },
+        "earlierEvidence": {
+          "baselineDevelopment": {
+            "platformUSD": 769.7785714285714,
+            "retailerUSD": 9104.994285714285,
+            "terminalCashUSD": 28746.835714285717,
+            "terminalInventoryUSD": 2741.4114285714286,
+            "retainedPurchases": 144,
+            "retainedVolumeUSD": 20519.85714285714,
+            "outreachCostUSD": 28.321428571428573,
+            "unpaidLiabilities": 0
+          },
+          "fixedDevelopment": {
+            "platformUSD": 741.2757142857142,
+            "retailerUSD": 8604.188571428573,
+            "terminalCashUSD": 27943.25714285715,
+            "terminalInventoryUSD": 2851.575714285714,
+            "retainedPurchases": 136.42857142857142,
+            "retainedVolumeUSD": 19465.571428571428,
+            "outreachCostUSD": 15.87142857142857,
+            "unpaidLiabilities": 0
+          },
+          "baselineDesignCostUSD": 0.025186,
+          "knownFindings": {
+            "baseline": "Broader inquiries raised held-out PayPal net and merchant contribution; all14markets are now development evidence.",
+            "fulfillment": "Removing complete-basket coordination increased mean platform contribution1.48USD on that earlier14market cohort. It remains part of lockedv1.",
+            "risk": "Some markets lost under broader inquiries, including no-response markets. A previous day45 permanent pause lost66.96USD by missing later demand. Do not repeat permanent stopping on short silent histories."
+          }
+        },
+        "objective": "Improve settled modeled PayPal net after AI costs over locked baseline v1, protect total retailer contribution and partner cash, keep inventory <=110% original fixed and zero unpaid liabilities. Economy unchanged.",
+        "limits": "Same four calls, two local fits and two measured seven-market trials for team and single planner. No seed/regime/private wallet or future label predictors.",
+        "science": {
+          "hypothesis": "Using intent_status with response_hurdle captures the distinct behaviors of new vs returning shoppers while leveraging early response signals, and intent with mature_reward provides a robust baseline for settled contacts.",
+          "first": {
+            "grouping": "intent_status",
+            "recipe": "response_hurdle"
+          },
+          "second": {
+            "grouping": "intent",
+            "recipe": "mature_reward"
+          },
+          "rationale": "The data shows significant differences in response rates and netUSD between new and returning shoppers within the same intent levels. The 26-day delay for purchases makes response_hurdle advantageous for utilizing recent data.",
+          "evidenceId": "f2e92087984f7153e2075ff5b058ff589c88afa412102134a122402e78143a98"
+        },
+        "trainedModels": [
+          {
+            "id": "MATURITY-9df66c35a7be5697",
+            "modelHash": "9df66c35a7be56972a9ab3a15ce8ca195bd9648338ab1dcf752d272d86feaa90",
+            "report": {
+              "spec": {
+                "grouping": "intent_status",
+                "recipe": "response_hurdle"
+              },
+              "selectedStrength": 8,
+              "trainingRows": 3890,
+              "markets": 7,
+              "metrics": {
+                "auc": 0.7695331421913253,
+                "brier": 0.038627222334590525,
+                "logLoss": 0.1552092942416837,
+                "averagePrecision": 0.12028805623132709
+              },
+              "trials": [
+                {
+                  "strength": 8,
+                  "metrics": {
+                    "auc": 0.7695331421913253,
+                    "brier": 0.038627222334590525,
+                    "logLoss": 0.1552092942416837
+                  }
+                },
+                {
+                  "strength": 32,
+                  "metrics": {
+                    "auc": 0.7603098857075528,
+                    "brier": 0.03878069527674212,
+                    "logLoss": 0.1563613809161334
+                  }
+                },
+                {
+                  "strength": 128,
+                  "metrics": {
+                    "auc": 0.7423526831886677,
+                    "brier": 0.039158724981241094,
+                    "logLoss": 0.16009082362157318
+                  }
+                }
+              ],
+              "scope": "Whole-source-market validation; each held-out collection trajectory learns only prior-day responses and matured financial outcomes. Conditional prediction, not causal uplift."
+            }
+          },
+          {
+            "id": "MATURITY-600433f68536661a",
+            "modelHash": "600433f68536661a143db453aab9ca5ccad804bf24eb019e48f4837fac85c6a6",
+            "report": {
+              "spec": {
+                "grouping": "intent",
+                "recipe": "mature_reward"
+              },
+              "selectedStrength": 32,
+              "trainingRows": 3890,
+              "markets": 7,
+              "metrics": {
+                "auc": 0.704407394315489,
+                "brier": 0.03923218280525592,
+                "logLoss": 0.16267213646155526,
+                "averagePrecision": 0.09564764130642428
+              },
+              "trials": [
+                {
+                  "strength": 8,
+                  "metrics": {
+                    "auc": 0.7120890774125133,
+                    "brier": 0.03928463651095098,
+                    "logLoss": 0.16434638349520644
+                  }
+                },
+                {
+                  "strength": 32,
+                  "metrics": {
+                    "auc": 0.704407394315489,
+                    "brier": 0.03923218280525592,
+                    "logLoss": 0.16267213646155526
+                  }
+                },
+                {
+                  "strength": 128,
+                  "metrics": {
+                    "auc": 0.6866072948169095,
+                    "brier": 0.03943528415241455,
+                    "logLoss": 0.16399649420088727
+                  }
+                }
+              ],
+              "scope": "Whole-source-market validation; each held-out collection trajectory learns only prior-day responses and matured financial outcomes. Conditional prediction, not causal uplift."
+            }
+          }
+        ],
+        "task": "Select model + campaign for two different proposed portfolios A and B. We will measure both. Keep baseline as an available fallback. Prediction scores alone are not profit.",
+        "campaigns": {
+          "open_discovery": "Positive-value needs inquiries can reach consenting shoppers without recent browsing. Recommendations still require current interest.",
+          "intent_assistance": "Only recent interest; inquiry after ambiguous browsing, exact product after explicit search.",
+          "reactivation": "Prior buyers inactive for14days; same consent and funds guards."
+        },
+        "objectives": {
+          "joint": "Rank payment plus retailer expected value.",
+          "paypal": "Rank expected payment contribution, still require positive retailer expected value."
+        },
+        "weeklyProbe": "If every candidate is rejected, at most one needs inquiry every7days whose one-standard-deviation response upper bound has positive payment value. Does not change normal limits or budget."
+      },
+      "evidenceId": "57aca0e0e27ebd0e0caf371552ed26fd7f8314b741abdfb1f0927b63d1f76ef6",
+      "output": {
+        "evidenceId": "57aca0e0e27ebd0e0caf371552ed26fd7f8314b741abdfb1f0927b63d1f76ef6",
+        "rationale": "MATURITY-9df66c35a7be5697 shows superior AUC and logLoss compared to the mature_reward model, indicating that response_hurdle with intent_status effectively captures the distinct behaviors of new vs returning shoppers. We will test open_discovery with joint objective and weekly probing to maximize overall value, and intent_assistance with paypal objective to focus on high-intent recent interest.",
+        "second": {
+          "modelId": "MATURITY-9df66c35a7be5697",
+          "kind": "intent_assistance",
+          "objective": "paypal",
+          "weeklyProbe": false
+        },
+        "first": {
+          "weeklyProbe": true,
+          "kind": "open_discovery",
+          "modelId": "MATURITY-9df66c35a7be5697",
+          "objective": "joint"
+        }
+      },
+      "provider": [
+        {
+          "reservationId": "f5fd766d-5ee6-4aa8-83c2-1fd91691baef",
+          "caseId": "team-campaign",
+          "trialId": "docs/commerce-growth/baseline-v1-challenger-1/team",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 15922,
+          "reservedMicros": 150000,
+          "inputTokens": 2591,
+          "outputTokens": 251,
+          "thinkingTokens": 644,
+          "cachedInputTokens": 0,
+          "responseId": "jWDoaujiKuXNpt8P8bq7oQg",
+          "modelVersion": "gemini-3.1-pro-preview",
+          "latencyMs": 11273,
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    },
+    {
+      "role": "PayPal operations reviewer",
+      "stage": "payment_plan",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "audit": {
+          "historicalContacts": 7010,
+          "sourceMarkets": 7,
+          "groups": {
+            "cold|returning": {
+              "contacts": 2628,
+              "responses": 96,
+              "retained": 68,
+              "lateFundedRetained": 4,
+              "netUSD": 85.72999999999742
+            },
+            "cold|new": {
+              "contacts": 531,
+              "responses": 16,
+              "retained": 14,
+              "lateFundedRetained": 0,
+              "netUSD": 31.07000000000092
+            },
+            "fresh|returning": {
+              "contacts": 279,
+              "responses": 55,
+              "retained": 33,
+              "lateFundedRetained": 4,
+              "netUSD": 94.97000000000057
+            },
+            "recent|returning": {
+              "contacts": 354,
+              "responses": 58,
+              "retained": 35,
+              "lateFundedRetained": 2,
+              "netUSD": 108.96000000000073
+            },
+            "recent|new": {
+              "contacts": 52,
+              "responses": 5,
+              "retained": 4,
+              "lateFundedRetained": 0,
+              "netUSD": 14.999999999999972
+            },
+            "fresh|new": {
+              "contacts": 46,
+              "responses": 13,
+              "retained": 10,
+              "lateFundedRetained": 0,
+              "netUSD": 41.910000000000075
+            }
+          },
+          "timing": {
+            "response": "Response or no response is observed after contact; only prior-day records may be used.",
+            "purchase": "Keep responders unresolved until26 days have passed. Some retained purchases were not funded immediately.",
+            "baseline": "Baseline inquiry learning waits26 days for every contact, including known nonresponses."
+          },
+          "scope": "Completed historical synthetic observations. No current test seeds, private needs or future outcomes are available."
+        },
+        "earlierEvidence": {
+          "baselineDevelopment": {
+            "platformUSD": 769.7785714285714,
+            "retailerUSD": 9104.994285714285,
+            "terminalCashUSD": 28746.835714285717,
+            "terminalInventoryUSD": 2741.4114285714286,
+            "retainedPurchases": 144,
+            "retainedVolumeUSD": 20519.85714285714,
+            "outreachCostUSD": 28.321428571428573,
+            "unpaidLiabilities": 0
+          },
+          "fixedDevelopment": {
+            "platformUSD": 741.2757142857142,
+            "retailerUSD": 8604.188571428573,
+            "terminalCashUSD": 27943.25714285715,
+            "terminalInventoryUSD": 2851.575714285714,
+            "retainedPurchases": 136.42857142857142,
+            "retainedVolumeUSD": 19465.571428571428,
+            "outreachCostUSD": 15.87142857142857,
+            "unpaidLiabilities": 0
+          },
+          "baselineDesignCostUSD": 0.025186,
+          "knownFindings": {
+            "baseline": "Broader inquiries raised held-out PayPal net and merchant contribution; all14markets are now development evidence.",
+            "fulfillment": "Removing complete-basket coordination increased mean platform contribution1.48USD on that earlier14market cohort. It remains part of lockedv1.",
+            "risk": "Some markets lost under broader inquiries, including no-response markets. A previous day45 permanent pause lost66.96USD by missing later demand. Do not repeat permanent stopping on short silent histories."
+          }
+        },
+        "objective": "Improve settled modeled PayPal net after AI costs over locked baseline v1, protect total retailer contribution and partner cash, keep inventory <=110% original fixed and zero unpaid liabilities. Economy unchanged.",
+        "limits": "Same four calls, two local fits and two measured seven-market trials for team and single planner. No seed/regime/private wallet or future label predictors.",
+        "science": {
+          "hypothesis": "Using intent_status with response_hurdle captures the distinct behaviors of new vs returning shoppers while leveraging early response signals, and intent with mature_reward provides a robust baseline for settled contacts.",
+          "first": {
+            "grouping": "intent_status",
+            "recipe": "response_hurdle"
+          },
+          "second": {
+            "grouping": "intent",
+            "recipe": "mature_reward"
+          },
+          "rationale": "The data shows significant differences in response rates and netUSD between new and returning shoppers within the same intent levels. The 26-day delay for purchases makes response_hurdle advantageous for utilizing recent data.",
+          "evidenceId": "f2e92087984f7153e2075ff5b058ff589c88afa412102134a122402e78143a98"
+        },
+        "trainedModels": [
+          {
+            "id": "MATURITY-9df66c35a7be5697",
+            "modelHash": "9df66c35a7be56972a9ab3a15ce8ca195bd9648338ab1dcf752d272d86feaa90",
+            "report": {
+              "spec": {
+                "grouping": "intent_status",
+                "recipe": "response_hurdle"
+              },
+              "selectedStrength": 8,
+              "trainingRows": 3890,
+              "markets": 7,
+              "metrics": {
+                "auc": 0.7695331421913253,
+                "brier": 0.038627222334590525,
+                "logLoss": 0.1552092942416837,
+                "averagePrecision": 0.12028805623132709
+              },
+              "trials": [
+                {
+                  "strength": 8,
+                  "metrics": {
+                    "auc": 0.7695331421913253,
+                    "brier": 0.038627222334590525,
+                    "logLoss": 0.1552092942416837
+                  }
+                },
+                {
+                  "strength": 32,
+                  "metrics": {
+                    "auc": 0.7603098857075528,
+                    "brier": 0.03878069527674212,
+                    "logLoss": 0.1563613809161334
+                  }
+                },
+                {
+                  "strength": 128,
+                  "metrics": {
+                    "auc": 0.7423526831886677,
+                    "brier": 0.039158724981241094,
+                    "logLoss": 0.16009082362157318
+                  }
+                }
+              ],
+              "scope": "Whole-source-market validation; each held-out collection trajectory learns only prior-day responses and matured financial outcomes. Conditional prediction, not causal uplift."
+            }
+          },
+          {
+            "id": "MATURITY-600433f68536661a",
+            "modelHash": "600433f68536661a143db453aab9ca5ccad804bf24eb019e48f4837fac85c6a6",
+            "report": {
+              "spec": {
+                "grouping": "intent",
+                "recipe": "mature_reward"
+              },
+              "selectedStrength": 32,
+              "trainingRows": 3890,
+              "markets": 7,
+              "metrics": {
+                "auc": 0.704407394315489,
+                "brier": 0.03923218280525592,
+                "logLoss": 0.16267213646155526,
+                "averagePrecision": 0.09564764130642428
+              },
+              "trials": [
+                {
+                  "strength": 8,
+                  "metrics": {
+                    "auc": 0.7120890774125133,
+                    "brier": 0.03928463651095098,
+                    "logLoss": 0.16434638349520644
+                  }
+                },
+                {
+                  "strength": 32,
+                  "metrics": {
+                    "auc": 0.704407394315489,
+                    "brier": 0.03923218280525592,
+                    "logLoss": 0.16267213646155526
+                  }
+                },
+                {
+                  "strength": 128,
+                  "metrics": {
+                    "auc": 0.6866072948169095,
+                    "brier": 0.03943528415241455,
+                    "logLoss": 0.16399649420088727
+                  }
+                }
+              ],
+              "scope": "Whole-source-market validation; each held-out collection trajectory learns only prior-day responses and matured financial outcomes. Conditional prediction, not causal uplift."
+            }
+          }
+        ],
+        "campaign": {
+          "evidenceId": "57aca0e0e27ebd0e0caf371552ed26fd7f8314b741abdfb1f0927b63d1f76ef6",
+          "rationale": "MATURITY-9df66c35a7be5697 shows superior AUC and logLoss compared to the mature_reward model, indicating that response_hurdle with intent_status effectively captures the distinct behaviors of new vs returning shoppers. We will test open_discovery with joint objective and weekly probing to maximize overall value, and intent_assistance with paypal objective to focus on high-intent recent interest.",
+          "second": {
+            "modelId": "MATURITY-9df66c35a7be5697",
+            "kind": "intent_assistance",
+            "objective": "paypal",
+            "weeklyProbe": false
+          },
+          "first": {
+            "weeklyProbe": true,
+            "kind": "open_discovery",
+            "modelId": "MATURITY-9df66c35a7be5697",
+            "objective": "joint"
+          }
+        },
+        "task": "Choose execution for each proposed campaign. The prior full plan lost1.48USD versus removing its complete-basket component on the earlier14markets, but effects were uneven. This is now development evidence, not proof on the upcoming test.",
+        "fulfillment": {
+          "funded_baskets": "Locked v1 complete funded-basket planning, approved substitutions, incoming stock and shared cash, then historical cover.",
+          "fixed": "Strong fixed joint in-stock allocation plus recent14 seven-day stock cover. The baseline-v1 removal trial used this executor."
+        }
+      },
+      "evidenceId": "2f383a43c5d1c57f14cbcd714bfa932052e90d77c2bdf821cc9d07ec5ede006c",
+      "output": {
+        "second": "fixed",
+        "evidenceId": "2f383a43c5d1c57f14cbcd714bfa932052e90d77c2bdf821cc9d07ec5ede006c",
+        "first": "fixed",
+        "tradeoff": "While fixed execution avoids the 1.48 USD loss from complete-basket coordination, it may miss out on some multi-item purchase synergies that funded_baskets could capture.",
+        "rationale": "The baseline-v1 removal trial demonstrated that removing complete-basket coordination and using the fixed executor increased mean platform contribution by 1.48 USD. Applying fixed execution to both campaigns aligns with this finding to maximize PayPal net."
+      },
+      "provider": [
+        {
+          "reservationId": "46e36e4d-e98e-4dc6-9af6-df248b8e4958",
+          "caseId": "team-payment_plan",
+          "trialId": "docs/commerce-growth/baseline-v1-challenger-1/team",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 14092,
+          "reservedMicros": 150000,
+          "inputTokens": 2642,
+          "outputTokens": 181,
+          "thinkingTokens": 553,
+          "cachedInputTokens": 0,
+          "responseId": "mWDoasqbK8GXpt8PmJjXmQ0",
+          "modelVersion": "gemini-3.1-pro-preview",
+          "latencyMs": 8294,
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    },
+    {
+      "role": "Evaluation tool",
+      "stage": "development_trial",
+      "actor": "LOCAL_SIMULATOR",
+      "status": "COMPLETED",
+      "input": {
+        "weeklyProbe": true,
+        "kind": "open_discovery",
+        "modelId": "MATURITY-9df66c35a7be5697",
+        "objective": "joint",
+        "fulfillment": "fixed"
+      },
+      "output": {
+        "platformUSD": 749.5742857142857,
+        "retailerUSD": 8735.925714285715,
+        "terminalCashUSD": 28183.58142857143,
+        "terminalInventoryUSD": 2813.9700000000003,
+        "retainedPurchases": 138.28571428571428,
+        "retainedVolumeUSD": 19792,
+        "outreachCostUSD": 20.707142857142856,
+        "unpaidLiabilities": 0,
+        "policyHash": "9fa25ffd022e5a551938104cd0ab87880284ba1985f015820542163aa0c2a9a5",
+        "rowsHash": "54e2aa56d508b2541938a7bad2d81355d26dbddf61bef45323b3e7356f39ca66",
+        "markets": 7
+      }
+    },
+    {
+      "role": "Evaluation tool",
+      "stage": "development_trial",
+      "actor": "LOCAL_SIMULATOR",
+      "status": "COMPLETED",
+      "input": {
+        "modelId": "MATURITY-9df66c35a7be5697",
+        "kind": "intent_assistance",
+        "objective": "paypal",
+        "weeklyProbe": false,
+        "fulfillment": "fixed"
+      },
+      "output": {
+        "platformUSD": 740.9714285714284,
+        "retailerUSD": 8577.52142857143,
+        "terminalCashUSD": 27920.635714285716,
+        "terminalInventoryUSD": 2841.8457142857146,
+        "retainedPurchases": 136.28571428571428,
+        "retainedVolumeUSD": 19435.85714285714,
+        "outreachCostUSD": 14.442857142857141,
+        "unpaidLiabilities": 0,
+        "policyHash": "b4ee276d1a99cd456194fe5dd2d8be517eef520866cec50d00a041a74c516243",
+        "rowsHash": "a29a517ecaa26c767f28c5d2c328adb04b89f9aff1e216564af1eab870e4a4d0",
+        "markets": 7
+      }
+    },
+    {
+      "role": "PayPal operations reviewer",
+      "stage": "publication",
+      "actor": "GEMINI",
+      "status": "FAILED",
+      "input": {
+        "audit": {
+          "historicalContacts": 7010,
+          "sourceMarkets": 7,
+          "groups": {
+            "cold|returning": {
+              "contacts": 2628,
+              "responses": 96,
+              "retained": 68,
+              "lateFundedRetained": 4,
+              "netUSD": 85.72999999999742
+            },
+            "cold|new": {
+              "contacts": 531,
+              "responses": 16,
+              "retained": 14,
+              "lateFundedRetained": 0,
+              "netUSD": 31.07000000000092
+            },
+            "fresh|returning": {
+              "contacts": 279,
+              "responses": 55,
+              "retained": 33,
+              "lateFundedRetained": 4,
+              "netUSD": 94.97000000000057
+            },
+            "recent|returning": {
+              "contacts": 354,
+              "responses": 58,
+              "retained": 35,
+              "lateFundedRetained": 2,
+              "netUSD": 108.96000000000073
+            },
+            "recent|new": {
+              "contacts": 52,
+              "responses": 5,
+              "retained": 4,
+              "lateFundedRetained": 0,
+              "netUSD": 14.999999999999972
+            },
+            "fresh|new": {
+              "contacts": 46,
+              "responses": 13,
+              "retained": 10,
+              "lateFundedRetained": 0,
+              "netUSD": 41.910000000000075
+            }
+          },
+          "timing": {
+            "response": "Response or no response is observed after contact; only prior-day records may be used.",
+            "purchase": "Keep responders unresolved until26 days have passed. Some retained purchases were not funded immediately.",
+            "baseline": "Baseline inquiry learning waits26 days for every contact, including known nonresponses."
+          },
+          "scope": "Completed historical synthetic observations. No current test seeds, private needs or future outcomes are available."
+        },
+        "earlierEvidence": {
+          "baselineDevelopment": {
+            "platformUSD": 769.7785714285714,
+            "retailerUSD": 9104.994285714285,
+            "terminalCashUSD": 28746.835714285717,
+            "terminalInventoryUSD": 2741.4114285714286,
+            "retainedPurchases": 144,
+            "retainedVolumeUSD": 20519.85714285714,
+            "outreachCostUSD": 28.321428571428573,
+            "unpaidLiabilities": 0
+          },
+          "fixedDevelopment": {
+            "platformUSD": 741.2757142857142,
+            "retailerUSD": 8604.188571428573,
+            "terminalCashUSD": 27943.25714285715,
+            "terminalInventoryUSD": 2851.575714285714,
+            "retainedPurchases": 136.42857142857142,
+            "retainedVolumeUSD": 19465.571428571428,
+            "outreachCostUSD": 15.87142857142857,
+            "unpaidLiabilities": 0
+          },
+          "baselineDesignCostUSD": 0.025186,
+          "knownFindings": {
+            "baseline": "Broader inquiries raised held-out PayPal net and merchant contribution; all14markets are now development evidence.",
+            "fulfillment": "Removing complete-basket coordination increased mean platform contribution1.48USD on that earlier14market cohort. It remains part of lockedv1.",
+            "risk": "Some markets lost under broader inquiries, including no-response markets. A previous day45 permanent pause lost66.96USD by missing later demand. Do not repeat permanent stopping on short silent histories."
+          }
+        },
+        "objective": "Improve settled modeled PayPal net after AI costs over locked baseline v1, protect total retailer contribution and partner cash, keep inventory <=110% original fixed and zero unpaid liabilities. Economy unchanged.",
+        "limits": "Same four calls, two local fits and two measured seven-market trials for team and single planner. No seed/regime/private wallet or future label predictors.",
+        "science": {
+          "hypothesis": "Using intent_status with response_hurdle captures the distinct behaviors of new vs returning shoppers while leveraging early response signals, and intent with mature_reward provides a robust baseline for settled contacts.",
+          "first": {
+            "grouping": "intent_status",
+            "recipe": "response_hurdle"
+          },
+          "second": {
+            "grouping": "intent",
+            "recipe": "mature_reward"
+          },
+          "rationale": "The data shows significant differences in response rates and netUSD between new and returning shoppers within the same intent levels. The 26-day delay for purchases makes response_hurdle advantageous for utilizing recent data.",
+          "evidenceId": "f2e92087984f7153e2075ff5b058ff589c88afa412102134a122402e78143a98"
+        },
+        "trainedModels": [
+          {
+            "id": "MATURITY-9df66c35a7be5697",
+            "modelHash": "9df66c35a7be56972a9ab3a15ce8ca195bd9648338ab1dcf752d272d86feaa90",
+            "report": {
+              "spec": {
+                "grouping": "intent_status",
+                "recipe": "response_hurdle"
+              },
+              "selectedStrength": 8,
+              "trainingRows": 3890,
+              "markets": 7,
+              "metrics": {
+                "auc": 0.7695331421913253,
+                "brier": 0.038627222334590525,
+                "logLoss": 0.1552092942416837,
+                "averagePrecision": 0.12028805623132709
+              },
+              "trials": [
+                {
+                  "strength": 8,
+                  "metrics": {
+                    "auc": 0.7695331421913253,
+                    "brier": 0.038627222334590525,
+                    "logLoss": 0.1552092942416837
+                  }
+                },
+                {
+                  "strength": 32,
+                  "metrics": {
+                    "auc": 0.7603098857075528,
+                    "brier": 0.03878069527674212,
+                    "logLoss": 0.1563613809161334
+                  }
+                },
+                {
+                  "strength": 128,
+                  "metrics": {
+                    "auc": 0.7423526831886677,
+                    "brier": 0.039158724981241094,
+                    "logLoss": 0.16009082362157318
+                  }
+                }
+              ],
+              "scope": "Whole-source-market validation; each held-out collection trajectory learns only prior-day responses and matured financial outcomes. Conditional prediction, not causal uplift."
+            }
+          },
+          {
+            "id": "MATURITY-600433f68536661a",
+            "modelHash": "600433f68536661a143db453aab9ca5ccad804bf24eb019e48f4837fac85c6a6",
+            "report": {
+              "spec": {
+                "grouping": "intent",
+                "recipe": "mature_reward"
+              },
+              "selectedStrength": 32,
+              "trainingRows": 3890,
+              "markets": 7,
+              "metrics": {
+                "auc": 0.704407394315489,
+                "brier": 0.03923218280525592,
+                "logLoss": 0.16267213646155526,
+                "averagePrecision": 0.09564764130642428
+              },
+              "trials": [
+                {
+                  "strength": 8,
+                  "metrics": {
+                    "auc": 0.7120890774125133,
+                    "brier": 0.03928463651095098,
+                    "logLoss": 0.16434638349520644
+                  }
+                },
+                {
+                  "strength": 32,
+                  "metrics": {
+                    "auc": 0.704407394315489,
+                    "brier": 0.03923218280525592,
+                    "logLoss": 0.16267213646155526
+                  }
+                },
+                {
+                  "strength": 128,
+                  "metrics": {
+                    "auc": 0.6866072948169095,
+                    "brier": 0.03943528415241455,
+                    "logLoss": 0.16399649420088727
+                  }
+                }
+              ],
+              "scope": "Whole-source-market validation; each held-out collection trajectory learns only prior-day responses and matured financial outcomes. Conditional prediction, not causal uplift."
+            }
+          }
+        ],
+        "campaign": {
+          "evidenceId": "57aca0e0e27ebd0e0caf371552ed26fd7f8314b741abdfb1f0927b63d1f76ef6",
+          "rationale": "MATURITY-9df66c35a7be5697 shows superior AUC and logLoss compared to the mature_reward model, indicating that response_hurdle with intent_status effectively captures the distinct behaviors of new vs returning shoppers. We will test open_discovery with joint objective and weekly probing to maximize overall value, and intent_assistance with paypal objective to focus on high-intent recent interest.",
+          "second": {
+            "modelId": "MATURITY-9df66c35a7be5697",
+            "kind": "intent_assistance",
+            "objective": "paypal",
+            "weeklyProbe": false
+          },
+          "first": {
+            "weeklyProbe": true,
+            "kind": "open_discovery",
+            "modelId": "MATURITY-9df66c35a7be5697",
+            "objective": "joint"
+          }
+        },
+        "payment": {
+          "second": "fixed",
+          "evidenceId": "2f383a43c5d1c57f14cbcd714bfa932052e90d77c2bdf821cc9d07ec5ede006c",
+          "first": "fixed",
+          "tradeoff": "While fixed execution avoids the 1.48 USD loss from complete-basket coordination, it may miss out on some multi-item purchase synergies that funded_baskets could capture.",
+          "rationale": "The baseline-v1 removal trial demonstrated that removing complete-basket coordination and using the fixed executor increased mean platform contribution by 1.48 USD. Applying fixed execution to both campaigns aligns with this finding to maximize PayPal net."
+        },
+        "candidates": {
+          "baseline": {
+            "policy": {
+              "modelId": "baseline",
+              "kind": "open_discovery",
+              "objective": "joint",
+              "weeklyProbe": false,
+              "fulfillment": "funded_baskets"
+            },
+            "measurement": {
+              "platformUSD": 769.7785714285714,
+              "retailerUSD": 9104.994285714285,
+              "terminalCashUSD": 28746.835714285717,
+              "terminalInventoryUSD": 2741.4114285714286,
+              "retainedPurchases": 144,
+              "retainedVolumeUSD": 20519.85714285714,
+              "outreachCostUSD": 28.321428571428573,
+              "unpaidLiabilities": 0
+            }
+          },
+          "A": {
+            "policy": {
+              "weeklyProbe": true,
+              "kind": "open_discovery",
+              "modelId": "MATURITY-9df66c35a7be5697",
+              "objective": "joint",
+              "fulfillment": "fixed"
+            },
+            "measurement": {
+              "platformUSD": 749.5742857142857,
+              "retailerUSD": 8735.925714285715,
+              "terminalCashUSD": 28183.58142857143,
+              "terminalInventoryUSD": 2813.9700000000003,
+              "retainedPurchases": 138.28571428571428,
+              "retainedVolumeUSD": 19792,
+              "outreachCostUSD": 20.707142857142856,
+              "unpaidLiabilities": 0,
+              "policyHash": "9fa25ffd022e5a551938104cd0ab87880284ba1985f015820542163aa0c2a9a5",
+              "rowsHash": "54e2aa56d508b2541938a7bad2d81355d26dbddf61bef45323b3e7356f39ca66",
+              "markets": 7
+            },
+            "policyHash": "9fa25ffd022e5a551938104cd0ab87880284ba1985f015820542163aa0c2a9a5"
+          },
+          "B": {
+            "policy": {
+              "modelId": "MATURITY-9df66c35a7be5697",
+              "kind": "intent_assistance",
+              "objective": "paypal",
+              "weeklyProbe": false,
+              "fulfillment": "fixed"
+            },
+            "measurement": {
+              "platformUSD": 740.9714285714284,
+              "retailerUSD": 8577.52142857143,
+              "terminalCashUSD": 27920.635714285716,
+              "terminalInventoryUSD": 2841.8457142857146,
+              "retainedPurchases": 136.28571428571428,
+              "retainedVolumeUSD": 19435.85714285714,
+              "outreachCostUSD": 14.442857142857141,
+              "unpaidLiabilities": 0,
+              "policyHash": "b4ee276d1a99cd456194fe5dd2d8be517eef520866cec50d00a041a74c516243",
+              "rowsHash": "a29a517ecaa26c767f28c5d2c328adb04b89f9aff1e216564af1eab870e4a4d0",
+              "markets": 7
+            },
+            "policyHash": "b4ee276d1a99cd456194fe5dd2d8be517eef520866cec50d00a041a74c516243"
+          }
+        },
+        "task": "Publish the exact measured plan A, B or baseline. Compare against baseline v1, not only original fixed. Reject a net improvement obtained by reducing total retailer contribution or partner cash. Report useful and harmful role outputs honestly. No additional tuning after selection."
+      },
+      "evidenceId": "5dee3555f0327fdaff9fb60e99b51d4c227134b999a259c0f569b57822ea6e18",
+      "error": "VERTEX_HTTP_429",
+      "provider": [
+        {
+          "reservationId": "327231b7-02fc-4e44-a08e-82d7c5d80058",
+          "caseId": "team-publication",
+          "trialId": "docs/commerce-growth/baseline-v1-challenger-1/team",
+          "stage": "planner",
+          "status": "rejected",
+          "modelCostMicros": 0,
+          "reservedMicros": 150000,
+          "httpStatus": 429,
+          "providerError": {
+            "status": "RESOURCE_EXHAUSTED",
+            "message": "Resource exhausted. Please try again later. Please refer to https://cloud.google.com/vertex-ai/generative-ai/docs/error-code-429 for more details."
+          },
+          "error": "VERTEX_HTTP_429",
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    }
+  ],
+  "models": [
+    {
+      "id": "MATURITY-9df66c35a7be5697",
+      "modelHash": "9df66c35a7be56972a9ab3a15ce8ca195bd9648338ab1dcf752d272d86feaa90",
+      "report": {
+        "spec": {
+          "grouping": "intent_status",
+          "recipe": "response_hurdle"
+        },
+        "selectedStrength": 8,
+        "trainingRows": 3890,
+        "markets": 7,
+        "metrics": {
+          "auc": 0.7695331421913253,
+          "brier": 0.038627222334590525,
+          "logLoss": 0.1552092942416837,
+          "averagePrecision": 0.12028805623132709
+        },
+        "trials": [
+          {
+            "strength": 8,
+            "metrics": {
+              "auc": 0.7695331421913253,
+              "brier": 0.038627222334590525,
+              "logLoss": 0.1552092942416837
+            }
+          },
+          {
+            "strength": 32,
+            "metrics": {
+              "auc": 0.7603098857075528,
+              "brier": 0.03878069527674212,
+              "logLoss": 0.1563613809161334
+            }
+          },
+          {
+            "strength": 128,
+            "metrics": {
+              "auc": 0.7423526831886677,
+              "brier": 0.039158724981241094,
+              "logLoss": 0.16009082362157318
+            }
+          }
+        ],
+        "scope": "Whole-source-market validation; each held-out collection trajectory learns only prior-day responses and matured financial outcomes. Conditional prediction, not causal uplift."
+      }
+    },
+    {
+      "id": "MATURITY-600433f68536661a",
+      "modelHash": "600433f68536661a143db453aab9ca5ccad804bf24eb019e48f4837fac85c6a6",
+      "report": {
+        "spec": {
+          "grouping": "intent",
+          "recipe": "mature_reward"
+        },
+        "selectedStrength": 32,
+        "trainingRows": 3890,
+        "markets": 7,
+        "metrics": {
+          "auc": 0.704407394315489,
+          "brier": 0.03923218280525592,
+          "logLoss": 0.16267213646155526,
+          "averagePrecision": 0.09564764130642428
+        },
+        "trials": [
+          {
+            "strength": 8,
+            "metrics": {
+              "auc": 0.7120890774125133,
+              "brier": 0.03928463651095098,
+              "logLoss": 0.16434638349520644
+            }
+          },
+          {
+            "strength": 32,
+            "metrics": {
+              "auc": 0.704407394315489,
+              "brier": 0.03923218280525592,
+              "logLoss": 0.16267213646155526
+            }
+          },
+          {
+            "strength": 128,
+            "metrics": {
+              "auc": 0.6866072948169095,
+              "brier": 0.03943528415241455,
+              "logLoss": 0.16399649420088727
+            }
+          }
+        ],
+        "scope": "Whole-source-market validation; each held-out collection trajectory learns only prior-day responses and matured financial outcomes. Conditional prediction, not causal uplift."
+      }
+    }
+  ],
+  "trials": [
+    {
+      "id": "A",
+      "policy": {
+        "weeklyProbe": true,
+        "kind": "open_discovery",
+        "modelId": "MATURITY-9df66c35a7be5697",
+        "objective": "joint",
+        "fulfillment": "fixed"
+      },
+      "measurement": {
+        "platformUSD": 749.5742857142857,
+        "retailerUSD": 8735.925714285715,
+        "terminalCashUSD": 28183.58142857143,
+        "terminalInventoryUSD": 2813.9700000000003,
+        "retainedPurchases": 138.28571428571428,
+        "retainedVolumeUSD": 19792,
+        "outreachCostUSD": 20.707142857142856,
+        "unpaidLiabilities": 0,
+        "policyHash": "9fa25ffd022e5a551938104cd0ab87880284ba1985f015820542163aa0c2a9a5",
+        "rowsHash": "54e2aa56d508b2541938a7bad2d81355d26dbddf61bef45323b3e7356f39ca66",
+        "markets": 7
+      },
+      "policyHash": "9fa25ffd022e5a551938104cd0ab87880284ba1985f015820542163aa0c2a9a5"
+    },
+    {
+      "id": "B",
+      "policy": {
+        "modelId": "MATURITY-9df66c35a7be5697",
+        "kind": "intent_assistance",
+        "objective": "paypal",
+        "weeklyProbe": false,
+        "fulfillment": "fixed"
+      },
+      "measurement": {
+        "platformUSD": 740.9714285714284,
+        "retailerUSD": 8577.52142857143,
+        "terminalCashUSD": 27920.635714285716,
+        "terminalInventoryUSD": 2841.8457142857146,
+        "retainedPurchases": 136.28571428571428,
+        "retainedVolumeUSD": 19435.85714285714,
+        "outreachCostUSD": 14.442857142857141,
+        "unpaidLiabilities": 0,
+        "policyHash": "b4ee276d1a99cd456194fe5dd2d8be517eef520866cec50d00a041a74c516243",
+        "rowsHash": "a29a517ecaa26c767f28c5d2c328adb04b89f9aff1e216564af1eab870e4a4d0",
+        "markets": 7
+      },
+      "policyHash": "b4ee276d1a99cd456194fe5dd2d8be517eef520866cec50d00a041a74c516243"
+    }
+  ],
+  "error": "VERTEX_HTTP_429",
+  "selected": {
+    "modelId": "baseline",
+    "kind": "open_discovery",
+    "objective": "joint",
+    "weeklyProbe": false,
+    "fulfillment": "funded_baskets"
+  },
+  "costUSD": 0.04525
+}

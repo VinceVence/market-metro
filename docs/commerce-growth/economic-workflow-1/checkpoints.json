@@ -1,0 +1,2539 @@
+{
+  "version": 1,
+  "status": "COMPLETED",
+  "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+  "day": 45,
+  "baseline": "paypal-net-v1",
+  "limits": {
+    "modelCalls": 6,
+    "proposals": 2,
+    "modelFits": 2,
+    "trials": 1
+  },
+  "models": {
+    "F-c7f105a5044e3c05ea60": {
+      "id": "F-c7f105a5044e3c05ea60",
+      "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+      "asOfDay": 45,
+      "recipe": "adaptive",
+      "selected": "recent7",
+      "validationMSE": {
+        "legacy28": 0.21420553935860048,
+        "recent7": 0.20807756696428573,
+        "recent14": 0.22888888888888884
+      },
+      "rates": {
+        "MM-PAPER-01": 0.28125,
+        "MM-PAPER-02": 0.03125,
+        "MM-PAPER-03": 0.15625,
+        "MM-PAPER-04": 0.40625,
+        "MM-DEVICE-01": 0.40625,
+        "MM-DEVICE-02": 0.03125,
+        "MM-DEVICE-03": 0.03125,
+        "MM-DEVICE-04": 0.03125,
+        "MM-SPACE-01": 0.28125,
+        "MM-SPACE-02": 0.28125,
+        "MM-SPACE-03": 0.28125,
+        "MM-SPACE-04": 0.15625,
+        "MM-PACK-01": 0.15625,
+        "MM-PACK-02": 0.03125,
+        "MM-PACK-03": 0.15625,
+        "MM-PACK-04": 0.28125
+      },
+      "trainingRows": 133,
+      "scope": "Local rolling Poisson rate fit with past-only temporal window selection. Future demand is not observed."
+    }
+  },
+  "evidence": {
+    "E-6aeb786cbb8e65800119": {
+      "asOfDay": 45,
+      "historyThroughDay": 44,
+      "windowDays": 14,
+      "domains": [
+        "demand",
+        "inventory",
+        "liquidity",
+        "supply",
+        "payments"
+      ],
+      "values": {
+        "request_growth_ratio": 0.36363636363636365,
+        "funded_fill_rate": 1,
+        "stockout_share": 0.5208333333333334,
+        "spendable_cash_usd": 13093.82,
+        "cash_to_replenishment_ratio": null,
+        "supplier_lead_days": 6,
+        "payment_cash_margin_usd": 139.51000000000005,
+        "mature_refund_rate": 0
+      },
+      "details": {
+        "demand": {
+          "requests": 28,
+          "previousRequests": 77,
+          "currentRequestsPerDay": 2,
+          "previousRequestsPerDay": 5.5,
+          "observedUnitsByCategory": {
+            "Office bundles": 10,
+            "Furniture": 24,
+            "Stationery": 10,
+            "Electronics": 6
+          },
+          "fundingEvents": 23,
+          "scope": "Counted when the request was discovered, not its earlier latent-need creation date. Undiscovered needs are unavailable."
+        },
+        "inventory": {
+          "fundedRequests": 2,
+          "individuallyFillable": 2,
+          "authorizedUSD": 123.62,
+          "urgentRequests": 0,
+          "stockCostUSD": 3420.61,
+          "inboundLines": 9,
+          "scope": "Urgent means new supplier stock cannot be guaranteed before the required delivery deadline."
+        },
+        "liquidity": {
+          "merchants": [
+            {
+              "merchantId": "MERCHANT-0",
+              "spendableUSD": 3476.13,
+              "balanceUSD": 3515.02
+            },
+            {
+              "merchantId": "MERCHANT-1",
+              "spendableUSD": 5846.96,
+              "balanceUSD": 6095.34
+            },
+            {
+              "merchantId": "MERCHANT-2",
+              "spendableUSD": 3770.73,
+              "balanceUSD": 3793.26
+            }
+          ],
+          "fundedPlanCashUSD": 0,
+          "fundedPlans": 2,
+          "scope": "Known spendable balances and a feasible current replenishment plan; not household money or a macroeconomic liquidity forecast."
+        },
+        "supply": {
+          "normalLeadDays": 3,
+          "quotedMaximumLeadDays": 6,
+          "bankSettlementDaysPerStage": 2,
+          "incomingWithinSevenDays": 13,
+          "scope": "Quoted lead times and currently announced arrivals, not future realized disruptions."
+        },
+        "payments": {
+          "retailCaptures": 24,
+          "retailCapturedUSD": 3750,
+          "supplierPaidVolumeUSD": 2089.93,
+          "cashMovementsUSD": {
+            "OUTREACH_EXPENSE": -6.999999999999983,
+            "PAYMENT_FEE": 142.64000000000001,
+            "PAYMENT_PROCESSING": -49.779999999999994,
+            "SUPPLIER_PAYMENT_FEE": 82.72,
+            "SUPPLIER_PROCESSING": -29.07
+          },
+          "knownPlatformObligationsUSD": 0,
+          "matureCohort": {
+            "firstCaptureDay": 17,
+            "lastCaptureDay": 30,
+            "orders": 48,
+            "refunds": 0
+          },
+          "scope": "Cash margin is observed, not a promise of future settled profit. Retail and supplier volumes are separate payment legs."
+        }
+      },
+      "evidenceId": "E-6aeb786cbb8e65800119",
+      "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2"
+    },
+    "F-c7f105a5044e3c05ea60": {
+      "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+      "domains": [
+        "demand"
+      ],
+      "output": {
+        "id": "F-c7f105a5044e3c05ea60",
+        "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+        "asOfDay": 45,
+        "recipe": "adaptive",
+        "selected": "recent7",
+        "validationMSE": {
+          "legacy28": 0.21420553935860048,
+          "recent7": 0.20807756696428573,
+          "recent14": 0.22888888888888884
+        },
+        "rates": {
+          "MM-PAPER-01": 0.28125,
+          "MM-PAPER-02": 0.03125,
+          "MM-PAPER-03": 0.15625,
+          "MM-PAPER-04": 0.40625,
+          "MM-DEVICE-01": 0.40625,
+          "MM-DEVICE-02": 0.03125,
+          "MM-DEVICE-03": 0.03125,
+          "MM-DEVICE-04": 0.03125,
+          "MM-SPACE-01": 0.28125,
+          "MM-SPACE-02": 0.28125,
+          "MM-SPACE-03": 0.28125,
+          "MM-SPACE-04": 0.15625,
+          "MM-PACK-01": 0.15625,
+          "MM-PACK-02": 0.03125,
+          "MM-PACK-03": 0.15625,
+          "MM-PACK-04": 0.28125
+        },
+        "trainingRows": 133,
+        "scope": "Local rolling Poisson rate fit with past-only temporal window selection. Future demand is not observed.",
+        "evidenceId": "F-c7f105a5044e3c05ea60",
+        "domains": [
+          "demand"
+        ]
+      }
+    },
+    "E-ac0545e84e3feb83a2b7": {
+      "asOfDay": 45,
+      "historyThroughDay": 44,
+      "windowDays": 14,
+      "domains": [
+        "outreach"
+      ],
+      "values": {
+        "response_rate": 0
+      },
+      "details": {
+        "outreach": {
+          "contacts": 140,
+          "responses": 0,
+          "immediatelyAuthorized": 0,
+          "costUSD": 7,
+          "remainingBudgetUSD": 42.5,
+          "scope": "Immediate funding is not a retained purchase. No nonresponse is assumed to imply a permanent inactive market."
+        }
+      },
+      "evidenceId": "E-ac0545e84e3feb83a2b7",
+      "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2"
+    }
+  },
+  "candidates": {
+    "P-50d430b3f3d4e08f9860": {
+      "id": "P-50d430b3f3d4e08f9860",
+      "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+      "reviewDay": 45,
+      "policy": {
+        "conditions": [
+          {
+            "value": 5,
+            "indicator": "supplier_lead_days",
+            "operator": "above"
+          },
+          {
+            "value": 0.5,
+            "indicator": "request_growth_ratio",
+            "operator": "below"
+          }
+        ],
+        "objective": "joint",
+        "campaign": "reactivation",
+        "inventory": "forecast_cover",
+        "cover_days": 7,
+        "duration_days": 7,
+        "forecast_id": "F-c7f105a5044e3c05ea60",
+        "settlement": "deadline"
+      },
+      "forecast": {
+        "id": "F-c7f105a5044e3c05ea60",
+        "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+        "asOfDay": 45,
+        "recipe": "adaptive",
+        "selected": "recent7",
+        "validationMSE": {
+          "legacy28": 0.21420553935860048,
+          "recent7": 0.20807756696428573,
+          "recent14": 0.22888888888888884
+        },
+        "rates": {
+          "MM-PAPER-01": 0.28125,
+          "MM-PAPER-02": 0.03125,
+          "MM-PAPER-03": 0.15625,
+          "MM-PAPER-04": 0.40625,
+          "MM-DEVICE-01": 0.40625,
+          "MM-DEVICE-02": 0.03125,
+          "MM-DEVICE-03": 0.03125,
+          "MM-DEVICE-04": 0.03125,
+          "MM-SPACE-01": 0.28125,
+          "MM-SPACE-02": 0.28125,
+          "MM-SPACE-03": 0.28125,
+          "MM-SPACE-04": 0.15625,
+          "MM-PACK-01": 0.15625,
+          "MM-PACK-02": 0.03125,
+          "MM-PACK-03": 0.15625,
+          "MM-PACK-04": 0.28125
+        },
+        "trainingRows": 133,
+        "scope": "Local rolling Poisson rate fit with past-only temporal window selection. Future demand is not observed."
+      },
+      "evidenceIds": [
+        "E-6aeb786cbb8e65800119",
+        "F-c7f105a5044e3c05ea60",
+        "E-ac0545e84e3feb83a2b7"
+      ]
+    }
+  },
+  "trials": {},
+  "cache": {
+    "6cacd540acb9fe41e195f78e1ed5e507ec697d8ebc4e62e3109e7defee13583d": {
+      "asOfDay": 45,
+      "historyThroughDay": 44,
+      "windowDays": 14,
+      "domains": [
+        "demand",
+        "inventory",
+        "liquidity",
+        "supply",
+        "payments"
+      ],
+      "values": {
+        "request_growth_ratio": 0.36363636363636365,
+        "funded_fill_rate": 1,
+        "stockout_share": 0.5208333333333334,
+        "spendable_cash_usd": 13093.82,
+        "cash_to_replenishment_ratio": null,
+        "supplier_lead_days": 6,
+        "payment_cash_margin_usd": 139.51000000000005,
+        "mature_refund_rate": 0
+      },
+      "details": {
+        "demand": {
+          "requests": 28,
+          "previousRequests": 77,
+          "currentRequestsPerDay": 2,
+          "previousRequestsPerDay": 5.5,
+          "observedUnitsByCategory": {
+            "Office bundles": 10,
+            "Furniture": 24,
+            "Stationery": 10,
+            "Electronics": 6
+          },
+          "fundingEvents": 23,
+          "scope": "Counted when the request was discovered, not its earlier latent-need creation date. Undiscovered needs are unavailable."
+        },
+        "inventory": {
+          "fundedRequests": 2,
+          "individuallyFillable": 2,
+          "authorizedUSD": 123.62,
+          "urgentRequests": 0,
+          "stockCostUSD": 3420.61,
+          "inboundLines": 9,
+          "scope": "Urgent means new supplier stock cannot be guaranteed before the required delivery deadline."
+        },
+        "liquidity": {
+          "merchants": [
+            {
+              "merchantId": "MERCHANT-0",
+              "spendableUSD": 3476.13,
+              "balanceUSD": 3515.02
+            },
+            {
+              "merchantId": "MERCHANT-1",
+              "spendableUSD": 5846.96,
+              "balanceUSD": 6095.34
+            },
+            {
+              "merchantId": "MERCHANT-2",
+              "spendableUSD": 3770.73,
+              "balanceUSD": 3793.26
+            }
+          ],
+          "fundedPlanCashUSD": 0,
+          "fundedPlans": 2,
+          "scope": "Known spendable balances and a feasible current replenishment plan; not household money or a macroeconomic liquidity forecast."
+        },
+        "supply": {
+          "normalLeadDays": 3,
+          "quotedMaximumLeadDays": 6,
+          "bankSettlementDaysPerStage": 2,
+          "incomingWithinSevenDays": 13,
+          "scope": "Quoted lead times and currently announced arrivals, not future realized disruptions."
+        },
+        "payments": {
+          "retailCaptures": 24,
+          "retailCapturedUSD": 3750,
+          "supplierPaidVolumeUSD": 2089.93,
+          "cashMovementsUSD": {
+            "OUTREACH_EXPENSE": -6.999999999999983,
+            "PAYMENT_FEE": 142.64000000000001,
+            "PAYMENT_PROCESSING": -49.779999999999994,
+            "SUPPLIER_PAYMENT_FEE": 82.72,
+            "SUPPLIER_PROCESSING": -29.07
+          },
+          "knownPlatformObligationsUSD": 0,
+          "matureCohort": {
+            "firstCaptureDay": 17,
+            "lastCaptureDay": 30,
+            "orders": 48,
+            "refunds": 0
+          },
+          "scope": "Cash margin is observed, not a promise of future settled profit. Retail and supplier volumes are separate payment legs."
+        }
+      },
+      "evidenceId": "E-6aeb786cbb8e65800119"
+    },
+    "d2c2707a7dc56e73a5a7a6ceabb15a42601438fb97e4aaa5e4f1ae2e0cb5d658": {
+      "id": "F-c7f105a5044e3c05ea60",
+      "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+      "asOfDay": 45,
+      "recipe": "adaptive",
+      "selected": "recent7",
+      "validationMSE": {
+        "legacy28": 0.21420553935860048,
+        "recent7": 0.20807756696428573,
+        "recent14": 0.22888888888888884
+      },
+      "rates": {
+        "MM-PAPER-01": 0.28125,
+        "MM-PAPER-02": 0.03125,
+        "MM-PAPER-03": 0.15625,
+        "MM-PAPER-04": 0.40625,
+        "MM-DEVICE-01": 0.40625,
+        "MM-DEVICE-02": 0.03125,
+        "MM-DEVICE-03": 0.03125,
+        "MM-DEVICE-04": 0.03125,
+        "MM-SPACE-01": 0.28125,
+        "MM-SPACE-02": 0.28125,
+        "MM-SPACE-03": 0.28125,
+        "MM-SPACE-04": 0.15625,
+        "MM-PACK-01": 0.15625,
+        "MM-PACK-02": 0.03125,
+        "MM-PACK-03": 0.15625,
+        "MM-PACK-04": 0.28125
+      },
+      "trainingRows": 133,
+      "scope": "Local rolling Poisson rate fit with past-only temporal window selection. Future demand is not observed.",
+      "evidenceId": "F-c7f105a5044e3c05ea60",
+      "domains": [
+        "demand"
+      ]
+    },
+    "ad558773fa99563e383d15d9117999c05b0d2508f6d5ffb57e3790398456d089": {
+      "asOfDay": 45,
+      "historyThroughDay": 44,
+      "windowDays": 14,
+      "domains": [
+        "outreach"
+      ],
+      "values": {
+        "response_rate": 0
+      },
+      "details": {
+        "outreach": {
+          "contacts": 140,
+          "responses": 0,
+          "immediatelyAuthorized": 0,
+          "costUSD": 7,
+          "remainingBudgetUSD": 42.5,
+          "scope": "Immediate funding is not a retained purchase. No nonresponse is assumed to imply a permanent inactive market."
+        }
+      },
+      "evidenceId": "E-ac0545e84e3feb83a2b7"
+    },
+    "6c4770d5f5f8648356f91f84234ed628a932c2024e230de84931bef42c003d6d": {
+      "candidate_id": "P-50d430b3f3d4e08f9860",
+      "policy": {
+        "conditions": [
+          {
+            "value": 5,
+            "indicator": "supplier_lead_days",
+            "operator": "above"
+          },
+          {
+            "value": 0.5,
+            "indicator": "request_growth_ratio",
+            "operator": "below"
+          }
+        ],
+        "objective": "joint",
+        "campaign": "reactivation",
+        "inventory": "forecast_cover",
+        "cover_days": 7,
+        "duration_days": 7,
+        "forecast_id": "F-c7f105a5044e3c05ea60",
+        "settlement": "deadline"
+      },
+      "appliesNow": false,
+      "expiresBeforeDay": 52,
+      "preview": {
+        "selectedContacts": 10,
+        "baselineContacts": 10,
+        "expectedRetailPaymentNetUSD": 0.8099642056272477,
+        "baselineExpectedRetailPaymentNetUSD": 0.8099642056272477,
+        "feasibleFundedPlans": 2,
+        "fundedRestockUnits": 0
+      },
+      "scope": "Current read-only preview. Predicted contact value is not causal profit. Funded plan counts describe the existing trusted complete-basket tool; actual policy stock changes are tested in the historical trial."
+    },
+    "68fec7ecc0e69c2291e373185c5e41f6c974d4a33731ff8e30f6857199d252a5": {
+      "decision": "keep_v1",
+      "measured_delta_usd": 0,
+      "candidate_id": "v1",
+      "reason": "The candidate policy was not tested on the historical market, so keeping v1 is required to ensure safety.",
+      "status": "BASELINE_RETAINED",
+      "promoted": false,
+      "scope": "Research recommendation only. A wider fresh-seed comparison is required for a financial improvement claim."
+    }
+  },
+  "checkpoints": [
+    {
+      "id": "MODEL-0",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "task": "Review this observed market. Choose which economic data to inspect, fit a model if useful, compose a bounded commerce intervention, and test one defensible candidate on a different historical market. Investigate conflicting indicators. You can keep v1. Do not invent economic variables or make unconditional/permanent interventions.",
+        "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+        "currentDay": 45,
+        "historyThroughDay": 44,
+        "customers": 100,
+        "merchants": 3,
+        "indicatorCatalog": {
+          "request_growth_ratio": {
+            "domain": "demand",
+            "unit": "ratio",
+            "meaning": "Observed request rate in this window divided by the preceding window. Null if there was no prior demand."
+          },
+          "response_rate": {
+            "domain": "outreach",
+            "unit": "fraction",
+            "meaning": "Observed replies / contacts in the window; not retained purchases."
+          },
+          "funded_fill_rate": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Share of currently funded requests individually fillable from current stock. Not a promise that all can be filled jointly."
+          },
+          "stockout_share": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Merchant/product listings with no currently available units."
+          },
+          "spendable_cash_usd": {
+            "domain": "liquidity",
+            "unit": "USD",
+            "meaning": "Merchant-authorized spendable balances after existing refund/holding safeguards."
+          },
+          "cash_to_replenishment_ratio": {
+            "domain": "liquidity",
+            "unit": "ratio",
+            "meaning": "Spendable merchant cash / the current complete-funded-basket replenishment plan. Null when no purchase is needed."
+          },
+          "supplier_lead_days": {
+            "domain": "supply",
+            "unit": "days",
+            "meaning": "Currently quoted maximum physical supplier lead time. Payment settlement delays are additional."
+          },
+          "payment_cash_margin_usd": {
+            "domain": "payments",
+            "unit": "USD",
+            "meaning": "Observed platform ledger cash inflows minus outflows during the window, including processing, returns and outreach. Future refunds remain unknown."
+          },
+          "mature_refund_rate": {
+            "domain": "payments",
+            "unit": "fraction",
+            "meaning": "Refunded captured orders in the latest fully matured cohort. Null for an empty cohort."
+          }
+        },
+        "historicalComparison": {
+          "id": "H1",
+          "description": "A different completed market from the locked-v1 archive. It had an announced supplier delay during this operating period. Counterfactual tools replay this historical market, never the current target."
+        },
+        "baseline": "v1 uses broad positive-value inquiries, a local model, complete funded baskets and fast supplier settlement.",
+        "actionGrounding": {
+          "campaign": [
+            "outreach",
+            "demand",
+            "payments"
+          ],
+          "inventory": [
+            "inventory",
+            "liquidity"
+          ],
+          "settlement": [
+            "supply",
+            "payments"
+          ]
+        },
+        "remainingModelCalls": 6,
+        "remainingTrials": 1,
+        "outputs": [],
+        "lastTurn": "You choose the next tool; no fixed role sequence."
+      },
+      "output": {
+        "name": "inspect_indicators",
+        "args": {
+          "domains": [
+            "demand",
+            "inventory",
+            "liquidity",
+            "supply",
+            "payments"
+          ],
+          "reason": "Initial inspection of market indicators to understand demand, inventory, liquidity, supply, and payments over the last 14 days.",
+          "window_days": 14
+        },
+        "id": "call_110477"
+      },
+      "provider": [
+        {
+          "reservationId": "7ae83c52-69a3-462f-823c-2ef6867ee802",
+          "caseId": "MODEL-0",
+          "trialId": "docs/commerce-growth/economic-workflow-1/checkpoints.json",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 3424,
+          "reservedMicros": 150000,
+          "inputTokens": 902,
+          "outputTokens": 70,
+          "thinkingTokens": 65,
+          "cachedInputTokens": 0,
+          "responseId": "JIvoavHoFsGXpt8PmJjXmQ0",
+          "modelVersion": "gemini-3.1-pro-preview",
+          "latencyMs": 6189,
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    },
+    {
+      "id": "TOOL-1",
+      "actor": "TRUSTED_TOOL",
+      "tool": "inspect_indicators",
+      "status": "COMPLETED",
+      "input": {
+        "domains": [
+          "demand",
+          "inventory",
+          "liquidity",
+          "supply",
+          "payments"
+        ],
+        "reason": "Initial inspection of market indicators to understand demand, inventory, liquidity, supply, and payments over the last 14 days.",
+        "window_days": 14
+      },
+      "output": {
+        "asOfDay": 45,
+        "historyThroughDay": 44,
+        "windowDays": 14,
+        "domains": [
+          "demand",
+          "inventory",
+          "liquidity",
+          "supply",
+          "payments"
+        ],
+        "values": {
+          "request_growth_ratio": 0.36363636363636365,
+          "funded_fill_rate": 1,
+          "stockout_share": 0.5208333333333334,
+          "spendable_cash_usd": 13093.82,
+          "cash_to_replenishment_ratio": null,
+          "supplier_lead_days": 6,
+          "payment_cash_margin_usd": 139.51000000000005,
+          "mature_refund_rate": 0
+        },
+        "details": {
+          "demand": {
+            "requests": 28,
+            "previousRequests": 77,
+            "currentRequestsPerDay": 2,
+            "previousRequestsPerDay": 5.5,
+            "observedUnitsByCategory": {
+              "Office bundles": 10,
+              "Furniture": 24,
+              "Stationery": 10,
+              "Electronics": 6
+            },
+            "fundingEvents": 23,
+            "scope": "Counted when the request was discovered, not its earlier latent-need creation date. Undiscovered needs are unavailable."
+          },
+          "inventory": {
+            "fundedRequests": 2,
+            "individuallyFillable": 2,
+            "authorizedUSD": 123.62,
+            "urgentRequests": 0,
+            "stockCostUSD": 3420.61,
+            "inboundLines": 9,
+            "scope": "Urgent means new supplier stock cannot be guaranteed before the required delivery deadline."
+          },
+          "liquidity": {
+            "merchants": [
+              {
+                "merchantId": "MERCHANT-0",
+                "spendableUSD": 3476.13,
+                "balanceUSD": 3515.02
+              },
+              {
+                "merchantId": "MERCHANT-1",
+                "spendableUSD": 5846.96,
+                "balanceUSD": 6095.34
+              },
+              {
+                "merchantId": "MERCHANT-2",
+                "spendableUSD": 3770.73,
+                "balanceUSD": 3793.26
+              }
+            ],
+            "fundedPlanCashUSD": 0,
+            "fundedPlans": 2,
+            "scope": "Known spendable balances and a feasible current replenishment plan; not household money or a macroeconomic liquidity forecast."
+          },
+          "supply": {
+            "normalLeadDays": 3,
+            "quotedMaximumLeadDays": 6,
+            "bankSettlementDaysPerStage": 2,
+            "incomingWithinSevenDays": 13,
+            "scope": "Quoted lead times and currently announced arrivals, not future realized disruptions."
+          },
+          "payments": {
+            "retailCaptures": 24,
+            "retailCapturedUSD": 3750,
+            "supplierPaidVolumeUSD": 2089.93,
+            "cashMovementsUSD": {
+              "OUTREACH_EXPENSE": -6.999999999999983,
+              "PAYMENT_FEE": 142.64000000000001,
+              "PAYMENT_PROCESSING": -49.779999999999994,
+              "SUPPLIER_PAYMENT_FEE": 82.72,
+              "SUPPLIER_PROCESSING": -29.07
+            },
+            "knownPlatformObligationsUSD": 0,
+            "matureCohort": {
+              "firstCaptureDay": 17,
+              "lastCaptureDay": 30,
+              "orders": 48,
+              "refunds": 0
+            },
+            "scope": "Cash margin is observed, not a promise of future settled profit. Retail and supplier volumes are separate payment legs."
+          }
+        },
+        "evidenceId": "E-6aeb786cbb8e65800119"
+      }
+    },
+    {
+      "id": "MODEL-1",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "task": "Review this observed market. Choose which economic data to inspect, fit a model if useful, compose a bounded commerce intervention, and test one defensible candidate on a different historical market. Investigate conflicting indicators. You can keep v1. Do not invent economic variables or make unconditional/permanent interventions.",
+        "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+        "currentDay": 45,
+        "historyThroughDay": 44,
+        "customers": 100,
+        "merchants": 3,
+        "indicatorCatalog": {
+          "request_growth_ratio": {
+            "domain": "demand",
+            "unit": "ratio",
+            "meaning": "Observed request rate in this window divided by the preceding window. Null if there was no prior demand."
+          },
+          "response_rate": {
+            "domain": "outreach",
+            "unit": "fraction",
+            "meaning": "Observed replies / contacts in the window; not retained purchases."
+          },
+          "funded_fill_rate": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Share of currently funded requests individually fillable from current stock. Not a promise that all can be filled jointly."
+          },
+          "stockout_share": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Merchant/product listings with no currently available units."
+          },
+          "spendable_cash_usd": {
+            "domain": "liquidity",
+            "unit": "USD",
+            "meaning": "Merchant-authorized spendable balances after existing refund/holding safeguards."
+          },
+          "cash_to_replenishment_ratio": {
+            "domain": "liquidity",
+            "unit": "ratio",
+            "meaning": "Spendable merchant cash / the current complete-funded-basket replenishment plan. Null when no purchase is needed."
+          },
+          "supplier_lead_days": {
+            "domain": "supply",
+            "unit": "days",
+            "meaning": "Currently quoted maximum physical supplier lead time. Payment settlement delays are additional."
+          },
+          "payment_cash_margin_usd": {
+            "domain": "payments",
+            "unit": "USD",
+            "meaning": "Observed platform ledger cash inflows minus outflows during the window, including processing, returns and outreach. Future refunds remain unknown."
+          },
+          "mature_refund_rate": {
+            "domain": "payments",
+            "unit": "fraction",
+            "meaning": "Refunded captured orders in the latest fully matured cohort. Null for an empty cohort."
+          }
+        },
+        "historicalComparison": {
+          "id": "H1",
+          "description": "A different completed market from the locked-v1 archive. It had an announced supplier delay during this operating period. Counterfactual tools replay this historical market, never the current target."
+        },
+        "baseline": "v1 uses broad positive-value inquiries, a local model, complete funded baskets and fast supplier settlement.",
+        "actionGrounding": {
+          "campaign": [
+            "outreach",
+            "demand",
+            "payments"
+          ],
+          "inventory": [
+            "inventory",
+            "liquidity"
+          ],
+          "settlement": [
+            "supply",
+            "payments"
+          ]
+        },
+        "remainingModelCalls": 5,
+        "remainingTrials": 1,
+        "outputs": [
+          {
+            "tool": "inspect_indicators",
+            "input": {
+              "domains": [
+                "demand",
+                "inventory",
+                "liquidity",
+                "supply",
+                "payments"
+              ],
+              "reason": "Initial inspection of market indicators to understand demand, inventory, liquidity, supply, and payments over the last 14 days.",
+              "window_days": 14
+            },
+            "output": {
+              "asOfDay": 45,
+              "historyThroughDay": 44,
+              "windowDays": 14,
+              "domains": [
+                "demand",
+                "inventory",
+                "liquidity",
+                "supply",
+                "payments"
+              ],
+              "values": {
+                "request_growth_ratio": 0.36363636363636365,
+                "funded_fill_rate": 1,
+                "stockout_share": 0.5208333333333334,
+                "spendable_cash_usd": 13093.82,
+                "cash_to_replenishment_ratio": null,
+                "supplier_lead_days": 6,
+                "payment_cash_margin_usd": 139.51000000000005,
+                "mature_refund_rate": 0
+              },
+              "details": {
+                "demand": {
+                  "requests": 28,
+                  "previousRequests": 77,
+                  "currentRequestsPerDay": 2,
+                  "previousRequestsPerDay": 5.5,
+                  "observedUnitsByCategory": {
+                    "Office bundles": 10,
+                    "Furniture": 24,
+                    "Stationery": 10,
+                    "Electronics": 6
+                  },
+                  "fundingEvents": 23,
+                  "scope": "Counted when the request was discovered, not its earlier latent-need creation date. Undiscovered needs are unavailable."
+                },
+                "inventory": {
+                  "fundedRequests": 2,
+                  "individuallyFillable": 2,
+                  "authorizedUSD": 123.62,
+                  "urgentRequests": 0,
+                  "stockCostUSD": 3420.61,
+                  "inboundLines": 9,
+                  "scope": "Urgent means new supplier stock cannot be guaranteed before the required delivery deadline."
+                },
+                "liquidity": {
+                  "merchants": [
+                    {
+                      "merchantId": "MERCHANT-0",
+                      "spendableUSD": 3476.13,
+                      "balanceUSD": 3515.02
+                    },
+                    {
+                      "merchantId": "MERCHANT-1",
+                      "spendableUSD": 5846.96,
+                      "balanceUSD": 6095.34
+                    },
+                    {
+                      "merchantId": "MERCHANT-2",
+                      "spendableUSD": 3770.73,
+                      "balanceUSD": 3793.26
+                    }
+                  ],
+                  "fundedPlanCashUSD": 0,
+                  "fundedPlans": 2,
+                  "scope": "Known spendable balances and a feasible current replenishment plan; not household money or a macroeconomic liquidity forecast."
+                },
+                "supply": {
+                  "normalLeadDays": 3,
+                  "quotedMaximumLeadDays": 6,
+                  "bankSettlementDaysPerStage": 2,
+                  "incomingWithinSevenDays": 13,
+                  "scope": "Quoted lead times and currently announced arrivals, not future realized disruptions."
+                },
+                "payments": {
+                  "retailCaptures": 24,
+                  "retailCapturedUSD": 3750,
+                  "supplierPaidVolumeUSD": 2089.93,
+                  "cashMovementsUSD": {
+                    "OUTREACH_EXPENSE": -6.999999999999983,
+                    "PAYMENT_FEE": 142.64000000000001,
+                    "PAYMENT_PROCESSING": -49.779999999999994,
+                    "SUPPLIER_PAYMENT_FEE": 82.72,
+                    "SUPPLIER_PROCESSING": -29.07
+                  },
+                  "knownPlatformObligationsUSD": 0,
+                  "matureCohort": {
+                    "firstCaptureDay": 17,
+                    "lastCaptureDay": 30,
+                    "orders": 48,
+                    "refunds": 0
+                  },
+                  "scope": "Cash margin is observed, not a promise of future settled profit. Retail and supplier volumes are separate payment legs."
+                }
+              },
+              "evidenceId": "E-6aeb786cbb8e65800119"
+            },
+            "status": "COMPLETED"
+          }
+        ],
+        "lastTurn": "You choose the next tool; no fixed role sequence."
+      },
+      "output": {
+        "name": "fit_demand_model",
+        "args": {
+          "reason": "Fit a demand model to enable forecast cover, which is required for deadline settlement to handle the 6-day supplier lead time.",
+          "method": "adaptive"
+        },
+        "id": "call_421976"
+      },
+      "provider": [
+        {
+          "reservationId": "aa06b0aa-d348-42a4-80b1-ffa5a6acd088",
+          "caseId": "MODEL-1",
+          "trialId": "docs/commerce-growth/economic-workflow-1/checkpoints.json",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 7064,
+          "reservedMicros": 150000,
+          "inputTokens": 1948,
+          "outputTokens": 49,
+          "thinkingTokens": 215,
+          "cachedInputTokens": 0,
+          "responseId": "MIvoap_4FOXNpt8P8bq7oQg",
+          "modelVersion": "gemini-3.1-pro-preview",
+          "latencyMs": 6040,
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    },
+    {
+      "id": "TOOL-3",
+      "actor": "TRUSTED_TOOL",
+      "tool": "fit_demand_model",
+      "status": "COMPLETED",
+      "input": {
+        "reason": "Fit a demand model to enable forecast cover, which is required for deadline settlement to handle the 6-day supplier lead time.",
+        "method": "adaptive"
+      },
+      "output": {
+        "id": "F-c7f105a5044e3c05ea60",
+        "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+        "asOfDay": 45,
+        "recipe": "adaptive",
+        "selected": "recent7",
+        "validationMSE": {
+          "legacy28": 0.21420553935860048,
+          "recent7": 0.20807756696428573,
+          "recent14": 0.22888888888888884
+        },
+        "rates": {
+          "MM-PAPER-01": 0.28125,
+          "MM-PAPER-02": 0.03125,
+          "MM-PAPER-03": 0.15625,
+          "MM-PAPER-04": 0.40625,
+          "MM-DEVICE-01": 0.40625,
+          "MM-DEVICE-02": 0.03125,
+          "MM-DEVICE-03": 0.03125,
+          "MM-DEVICE-04": 0.03125,
+          "MM-SPACE-01": 0.28125,
+          "MM-SPACE-02": 0.28125,
+          "MM-SPACE-03": 0.28125,
+          "MM-SPACE-04": 0.15625,
+          "MM-PACK-01": 0.15625,
+          "MM-PACK-02": 0.03125,
+          "MM-PACK-03": 0.15625,
+          "MM-PACK-04": 0.28125
+        },
+        "trainingRows": 133,
+        "scope": "Local rolling Poisson rate fit with past-only temporal window selection. Future demand is not observed.",
+        "evidenceId": "F-c7f105a5044e3c05ea60",
+        "domains": [
+          "demand"
+        ]
+      }
+    },
+    {
+      "id": "MODEL-2",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "task": "Review this observed market. Choose which economic data to inspect, fit a model if useful, compose a bounded commerce intervention, and test one defensible candidate on a different historical market. Investigate conflicting indicators. You can keep v1. Do not invent economic variables or make unconditional/permanent interventions.",
+        "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+        "currentDay": 45,
+        "historyThroughDay": 44,
+        "customers": 100,
+        "merchants": 3,
+        "indicatorCatalog": {
+          "request_growth_ratio": {
+            "domain": "demand",
+            "unit": "ratio",
+            "meaning": "Observed request rate in this window divided by the preceding window. Null if there was no prior demand."
+          },
+          "response_rate": {
+            "domain": "outreach",
+            "unit": "fraction",
+            "meaning": "Observed replies / contacts in the window; not retained purchases."
+          },
+          "funded_fill_rate": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Share of currently funded requests individually fillable from current stock. Not a promise that all can be filled jointly."
+          },
+          "stockout_share": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Merchant/product listings with no currently available units."
+          },
+          "spendable_cash_usd": {
+            "domain": "liquidity",
+            "unit": "USD",
+            "meaning": "Merchant-authorized spendable balances after existing refund/holding safeguards."
+          },
+          "cash_to_replenishment_ratio": {
+            "domain": "liquidity",
+            "unit": "ratio",
+            "meaning": "Spendable merchant cash / the current complete-funded-basket replenishment plan. Null when no purchase is needed."
+          },
+          "supplier_lead_days": {
+            "domain": "supply",
+            "unit": "days",
+            "meaning": "Currently quoted maximum physical supplier lead time. Payment settlement delays are additional."
+          },
+          "payment_cash_margin_usd": {
+            "domain": "payments",
+            "unit": "USD",
+            "meaning": "Observed platform ledger cash inflows minus outflows during the window, including processing, returns and outreach. Future refunds remain unknown."
+          },
+          "mature_refund_rate": {
+            "domain": "payments",
+            "unit": "fraction",
+            "meaning": "Refunded captured orders in the latest fully matured cohort. Null for an empty cohort."
+          }
+        },
+        "historicalComparison": {
+          "id": "H1",
+          "description": "A different completed market from the locked-v1 archive. It had an announced supplier delay during this operating period. Counterfactual tools replay this historical market, never the current target."
+        },
+        "baseline": "v1 uses broad positive-value inquiries, a local model, complete funded baskets and fast supplier settlement.",
+        "actionGrounding": {
+          "campaign": [
+            "outreach",
+            "demand",
+            "payments"
+          ],
+          "inventory": [
+            "inventory",
+            "liquidity"
+          ],
+          "settlement": [
+            "supply",
+            "payments"
+          ]
+        },
+        "remainingModelCalls": 4,
+        "remainingTrials": 1,
+        "outputs": [
+          {
+            "tool": "inspect_indicators",
+            "input": {
+              "domains": [
+                "demand",
+                "inventory",
+                "liquidity",
+                "supply",
+                "payments"
+              ],
+              "reason": "Initial inspection of market indicators to understand demand, inventory, liquidity, supply, and payments over the last 14 days.",
+              "window_days": 14
+            },
+            "output": {
+              "asOfDay": 45,
+              "historyThroughDay": 44,
+              "windowDays": 14,
+              "domains": [
+                "demand",
+                "inventory",
+                "liquidity",
+                "supply",
+                "payments"
+              ],
+              "values": {
+                "request_growth_ratio": 0.36363636363636365,
+                "funded_fill_rate": 1,
+                "stockout_share": 0.5208333333333334,
+                "spendable_cash_usd": 13093.82,
+                "cash_to_replenishment_ratio": null,
+                "supplier_lead_days": 6,
+                "payment_cash_margin_usd": 139.51000000000005,
+                "mature_refund_rate": 0
+              },
+              "details": {
+                "demand": {
+                  "requests": 28,
+                  "previousRequests": 77,
+                  "currentRequestsPerDay": 2,
+                  "previousRequestsPerDay": 5.5,
+                  "observedUnitsByCategory": {
+                    "Office bundles": 10,
+                    "Furniture": 24,
+                    "Stationery": 10,
+                    "Electronics": 6
+                  },
+                  "fundingEvents": 23,
+                  "scope": "Counted when the request was discovered, not its earlier latent-need creation date. Undiscovered needs are unavailable."
+                },
+                "inventory": {
+                  "fundedRequests": 2,
+                  "individuallyFillable": 2,
+                  "authorizedUSD": 123.62,
+                  "urgentRequests": 0,
+                  "stockCostUSD": 3420.61,
+                  "inboundLines": 9,
+                  "scope": "Urgent means new supplier stock cannot be guaranteed before the required delivery deadline."
+                },
+                "liquidity": {
+                  "merchants": [
+                    {
+                      "merchantId": "MERCHANT-0",
+                      "spendableUSD": 3476.13,
+                      "balanceUSD": 3515.02
+                    },
+                    {
+                      "merchantId": "MERCHANT-1",
+                      "spendableUSD": 5846.96,
+                      "balanceUSD": 6095.34
+                    },
+                    {
+                      "merchantId": "MERCHANT-2",
+                      "spendableUSD": 3770.73,
+                      "balanceUSD": 3793.26
+                    }
+                  ],
+                  "fundedPlanCashUSD": 0,
+                  "fundedPlans": 2,
+                  "scope": "Known spendable balances and a feasible current replenishment plan; not household money or a macroeconomic liquidity forecast."
+                },
+                "supply": {
+                  "normalLeadDays": 3,
+                  "quotedMaximumLeadDays": 6,
+                  "bankSettlementDaysPerStage": 2,
+                  "incomingWithinSevenDays": 13,
+                  "scope": "Quoted lead times and currently announced arrivals, not future realized disruptions."
+                },
+                "payments": {
+                  "retailCaptures": 24,
+                  "retailCapturedUSD": 3750,
+                  "supplierPaidVolumeUSD": 2089.93,
+                  "cashMovementsUSD": {
+                    "OUTREACH_EXPENSE": -6.999999999999983,
+                    "PAYMENT_FEE": 142.64000000000001,
+                    "PAYMENT_PROCESSING": -49.779999999999994,
+                    "SUPPLIER_PAYMENT_FEE": 82.72,
+                    "SUPPLIER_PROCESSING": -29.07
+                  },
+                  "knownPlatformObligationsUSD": 0,
+                  "matureCohort": {
+                    "firstCaptureDay": 17,
+                    "lastCaptureDay": 30,
+                    "orders": 48,
+                    "refunds": 0
+                  },
+                  "scope": "Cash margin is observed, not a promise of future settled profit. Retail and supplier volumes are separate payment legs."
+                }
+              },
+              "evidenceId": "E-6aeb786cbb8e65800119"
+            },
+            "status": "COMPLETED"
+          },
+          {
+            "tool": "fit_demand_model",
+            "input": {
+              "reason": "Fit a demand model to enable forecast cover, which is required for deadline settlement to handle the 6-day supplier lead time.",
+              "method": "adaptive"
+            },
+            "output": {
+              "id": "F-c7f105a5044e3c05ea60",
+              "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+              "asOfDay": 45,
+              "recipe": "adaptive",
+              "selected": "recent7",
+              "validationMSE": {
+                "legacy28": 0.21420553935860048,
+                "recent7": 0.20807756696428573,
+                "recent14": 0.22888888888888884
+              },
+              "rates": {
+                "MM-PAPER-01": 0.28125,
+                "MM-PAPER-02": 0.03125,
+                "MM-PAPER-03": 0.15625,
+                "MM-PAPER-04": 0.40625,
+                "MM-DEVICE-01": 0.40625,
+                "MM-DEVICE-02": 0.03125,
+                "MM-DEVICE-03": 0.03125,
+                "MM-DEVICE-04": 0.03125,
+                "MM-SPACE-01": 0.28125,
+                "MM-SPACE-02": 0.28125,
+                "MM-SPACE-03": 0.28125,
+                "MM-SPACE-04": 0.15625,
+                "MM-PACK-01": 0.15625,
+                "MM-PACK-02": 0.03125,
+                "MM-PACK-03": 0.15625,
+                "MM-PACK-04": 0.28125
+              },
+              "trainingRows": 133,
+              "scope": "Local rolling Poisson rate fit with past-only temporal window selection. Future demand is not observed.",
+              "evidenceId": "F-c7f105a5044e3c05ea60",
+              "domains": [
+                "demand"
+              ]
+            },
+            "status": "COMPLETED"
+          }
+        ],
+        "lastTurn": "You choose the next tool; no fixed role sequence."
+      },
+      "output": {
+        "name": "preview_policy",
+        "args": {
+          "policy": {
+            "campaign": "reactivation",
+            "objective": "joint",
+            "inventory": "forecast_cover",
+            "conditions": [
+              {
+                "indicator": "supplier_lead_days",
+                "operator": "above",
+                "value": 5
+              },
+              {
+                "operator": "below",
+                "value": 0.5,
+                "indicator": "request_growth_ratio"
+              }
+            ],
+            "duration_days": 7,
+            "forecast_id": "F-c7f105a5044e3c05ea60",
+            "cover_days": 7,
+            "settlement": "deadline"
+          },
+          "evidence_ids": [
+            "E-6aeb786cbb8e65800119",
+            "F-c7f105a5044e3c05ea60"
+          ],
+          "reason": "Demand is dropping and supplier lead times are high (6 days). We will use reactivation to stimulate demand, forecast cover to handle stockouts, and deadline settlement to manage the long lead times."
+        },
+        "id": "call_207615"
+      },
+      "provider": [
+        {
+          "reservationId": "e007db35-708f-419f-8cf1-9cf6418af230",
+          "caseId": "MODEL-2",
+          "trialId": "docs/commerce-growth/economic-workflow-1/checkpoints.json",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 12560,
+          "reservedMicros": 150000,
+          "inputTokens": 2494,
+          "outputTokens": 219,
+          "thinkingTokens": 412,
+          "cachedInputTokens": 0,
+          "responseId": "PIvoaqeVFrHapt8PmtT6sAk",
+          "modelVersion": "gemini-3.1-pro-preview",
+          "latencyMs": 14092,
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    },
+    {
+      "id": "TOOL-5",
+      "actor": "TRUSTED_TOOL",
+      "tool": "preview_policy",
+      "status": "ERROR",
+      "input": {
+        "policy": {
+          "campaign": "reactivation",
+          "objective": "joint",
+          "inventory": "forecast_cover",
+          "conditions": [
+            {
+              "indicator": "supplier_lead_days",
+              "operator": "above",
+              "value": 5
+            },
+            {
+              "operator": "below",
+              "value": 0.5,
+              "indicator": "request_growth_ratio"
+            }
+          ],
+          "duration_days": 7,
+          "forecast_id": "F-c7f105a5044e3c05ea60",
+          "cover_days": 7,
+          "settlement": "deadline"
+        },
+        "evidence_ids": [
+          "E-6aeb786cbb8e65800119",
+          "F-c7f105a5044e3c05ea60"
+        ],
+        "reason": "Demand is dropping and supplier lead times are high (6 days). We will use reactivation to stimulate demand, forecast cover to handle stockouts, and deadline settlement to manage the long lead times."
+      },
+      "output": {
+        "error": "MISSING_EVIDENCE: outreach",
+        "scope": "No live mutation occurred. Choose a valid tool or keep v1."
+      }
+    },
+    {
+      "id": "MODEL-3",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "task": "Review this observed market. Choose which economic data to inspect, fit a model if useful, compose a bounded commerce intervention, and test one defensible candidate on a different historical market. Investigate conflicting indicators. You can keep v1. Do not invent economic variables or make unconditional/permanent interventions.",
+        "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+        "currentDay": 45,
+        "historyThroughDay": 44,
+        "customers": 100,
+        "merchants": 3,
+        "indicatorCatalog": {
+          "request_growth_ratio": {
+            "domain": "demand",
+            "unit": "ratio",
+            "meaning": "Observed request rate in this window divided by the preceding window. Null if there was no prior demand."
+          },
+          "response_rate": {
+            "domain": "outreach",
+            "unit": "fraction",
+            "meaning": "Observed replies / contacts in the window; not retained purchases."
+          },
+          "funded_fill_rate": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Share of currently funded requests individually fillable from current stock. Not a promise that all can be filled jointly."
+          },
+          "stockout_share": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Merchant/product listings with no currently available units."
+          },
+          "spendable_cash_usd": {
+            "domain": "liquidity",
+            "unit": "USD",
+            "meaning": "Merchant-authorized spendable balances after existing refund/holding safeguards."
+          },
+          "cash_to_replenishment_ratio": {
+            "domain": "liquidity",
+            "unit": "ratio",
+            "meaning": "Spendable merchant cash / the current complete-funded-basket replenishment plan. Null when no purchase is needed."
+          },
+          "supplier_lead_days": {
+            "domain": "supply",
+            "unit": "days",
+            "meaning": "Currently quoted maximum physical supplier lead time. Payment settlement delays are additional."
+          },
+          "payment_cash_margin_usd": {
+            "domain": "payments",
+            "unit": "USD",
+            "meaning": "Observed platform ledger cash inflows minus outflows during the window, including processing, returns and outreach. Future refunds remain unknown."
+          },
+          "mature_refund_rate": {
+            "domain": "payments",
+            "unit": "fraction",
+            "meaning": "Refunded captured orders in the latest fully matured cohort. Null for an empty cohort."
+          }
+        },
+        "historicalComparison": {
+          "id": "H1",
+          "description": "A different completed market from the locked-v1 archive. It had an announced supplier delay during this operating period. Counterfactual tools replay this historical market, never the current target."
+        },
+        "baseline": "v1 uses broad positive-value inquiries, a local model, complete funded baskets and fast supplier settlement.",
+        "actionGrounding": {
+          "campaign": [
+            "outreach",
+            "demand",
+            "payments"
+          ],
+          "inventory": [
+            "inventory",
+            "liquidity"
+          ],
+          "settlement": [
+            "supply",
+            "payments"
+          ]
+        },
+        "remainingModelCalls": 3,
+        "remainingTrials": 1,
+        "outputs": [
+          {
+            "tool": "inspect_indicators",
+            "input": {
+              "domains": [
+                "demand",
+                "inventory",
+                "liquidity",
+                "supply",
+                "payments"
+              ],
+              "reason": "Initial inspection of market indicators to understand demand, inventory, liquidity, supply, and payments over the last 14 days.",
+              "window_days": 14
+            },
+            "output": {
+              "asOfDay": 45,
+              "historyThroughDay": 44,
+              "windowDays": 14,
+              "domains": [
+                "demand",
+                "inventory",
+                "liquidity",
+                "supply",
+                "payments"
+              ],
+              "values": {
+                "request_growth_ratio": 0.36363636363636365,
+                "funded_fill_rate": 1,
+                "stockout_share": 0.5208333333333334,
+                "spendable_cash_usd": 13093.82,
+                "cash_to_replenishment_ratio": null,
+                "supplier_lead_days": 6,
+                "payment_cash_margin_usd": 139.51000000000005,
+                "mature_refund_rate": 0
+              },
+              "details": {
+                "demand": {
+                  "requests": 28,
+                  "previousRequests": 77,
+                  "currentRequestsPerDay": 2,
+                  "previousRequestsPerDay": 5.5,
+                  "observedUnitsByCategory": {
+                    "Office bundles": 10,
+                    "Furniture": 24,
+                    "Stationery": 10,
+                    "Electronics": 6
+                  },
+                  "fundingEvents": 23,
+                  "scope": "Counted when the request was discovered, not its earlier latent-need creation date. Undiscovered needs are unavailable."
+                },
+                "inventory": {
+                  "fundedRequests": 2,
+                  "individuallyFillable": 2,
+                  "authorizedUSD": 123.62,
+                  "urgentRequests": 0,
+                  "stockCostUSD": 3420.61,
+                  "inboundLines": 9,
+                  "scope": "Urgent means new supplier stock cannot be guaranteed before the required delivery deadline."
+                },
+                "liquidity": {
+                  "merchants": [
+                    {
+                      "merchantId": "MERCHANT-0",
+                      "spendableUSD": 3476.13,
+                      "balanceUSD": 3515.02
+                    },
+                    {
+                      "merchantId": "MERCHANT-1",
+                      "spendableUSD": 5846.96,
+                      "balanceUSD": 6095.34
+                    },
+                    {
+                      "merchantId": "MERCHANT-2",
+                      "spendableUSD": 3770.73,
+                      "balanceUSD": 3793.26
+                    }
+                  ],
+                  "fundedPlanCashUSD": 0,
+                  "fundedPlans": 2,
+                  "scope": "Known spendable balances and a feasible current replenishment plan; not household money or a macroeconomic liquidity forecast."
+                },
+                "supply": {
+                  "normalLeadDays": 3,
+                  "quotedMaximumLeadDays": 6,
+                  "bankSettlementDaysPerStage": 2,
+                  "incomingWithinSevenDays": 13,
+                  "scope": "Quoted lead times and currently announced arrivals, not future realized disruptions."
+                },
+                "payments": {
+                  "retailCaptures": 24,
+                  "retailCapturedUSD": 3750,
+                  "supplierPaidVolumeUSD": 2089.93,
+                  "cashMovementsUSD": {
+                    "OUTREACH_EXPENSE": -6.999999999999983,
+                    "PAYMENT_FEE": 142.64000000000001,
+                    "PAYMENT_PROCESSING": -49.779999999999994,
+                    "SUPPLIER_PAYMENT_FEE": 82.72,
+                    "SUPPLIER_PROCESSING": -29.07
+                  },
+                  "knownPlatformObligationsUSD": 0,
+                  "matureCohort": {
+                    "firstCaptureDay": 17,
+                    "lastCaptureDay": 30,
+                    "orders": 48,
+                    "refunds": 0
+                  },
+                  "scope": "Cash margin is observed, not a promise of future settled profit. Retail and supplier volumes are separate payment legs."
+                }
+              },
+              "evidenceId": "E-6aeb786cbb8e65800119"
+            },
+            "status": "COMPLETED"
+          },
+          {
+            "tool": "fit_demand_model",
+            "input": {
+              "reason": "Fit a demand model to enable forecast cover, which is required for deadline settlement to handle the 6-day supplier lead time.",
+              "method": "adaptive"
+            },
+            "output": {
+              "id": "F-c7f105a5044e3c05ea60",
+              "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+              "asOfDay": 45,
+              "recipe": "adaptive",
+              "selected": "recent7",
+              "validationMSE": {
+                "legacy28": 0.21420553935860048,
+                "recent7": 0.20807756696428573,
+                "recent14": 0.22888888888888884
+              },
+              "rates": {
+                "MM-PAPER-01": 0.28125,
+                "MM-PAPER-02": 0.03125,
+                "MM-PAPER-03": 0.15625,
+                "MM-PAPER-04": 0.40625,
+                "MM-DEVICE-01": 0.40625,
+                "MM-DEVICE-02": 0.03125,
+                "MM-DEVICE-03": 0.03125,
+                "MM-DEVICE-04": 0.03125,
+                "MM-SPACE-01": 0.28125,
+                "MM-SPACE-02": 0.28125,
+                "MM-SPACE-03": 0.28125,
+                "MM-SPACE-04": 0.15625,
+                "MM-PACK-01": 0.15625,
+                "MM-PACK-02": 0.03125,
+                "MM-PACK-03": 0.15625,
+                "MM-PACK-04": 0.28125
+              },
+              "trainingRows": 133,
+              "scope": "Local rolling Poisson rate fit with past-only temporal window selection. Future demand is not observed.",
+              "evidenceId": "F-c7f105a5044e3c05ea60",
+              "domains": [
+                "demand"
+              ]
+            },
+            "status": "COMPLETED"
+          },
+          {
+            "tool": "preview_policy",
+            "input": {
+              "policy": {
+                "campaign": "reactivation",
+                "objective": "joint",
+                "inventory": "forecast_cover",
+                "conditions": [
+                  {
+                    "indicator": "supplier_lead_days",
+                    "operator": "above",
+                    "value": 5
+                  },
+                  {
+                    "operator": "below",
+                    "value": 0.5,
+                    "indicator": "request_growth_ratio"
+                  }
+                ],
+                "duration_days": 7,
+                "forecast_id": "F-c7f105a5044e3c05ea60",
+                "cover_days": 7,
+                "settlement": "deadline"
+              },
+              "evidence_ids": [
+                "E-6aeb786cbb8e65800119",
+                "F-c7f105a5044e3c05ea60"
+              ],
+              "reason": "Demand is dropping and supplier lead times are high (6 days). We will use reactivation to stimulate demand, forecast cover to handle stockouts, and deadline settlement to manage the long lead times."
+            },
+            "output": {
+              "error": "MISSING_EVIDENCE: outreach",
+              "scope": "No live mutation occurred. Choose a valid tool or keep v1."
+            },
+            "status": "ERROR"
+          }
+        ],
+        "lastTurn": "You choose the next tool; no fixed role sequence."
+      },
+      "output": {
+        "name": "inspect_indicators",
+        "args": {
+          "reason": "Need outreach evidence to support the reactivation campaign in the policy preview.",
+          "domains": [
+            "outreach"
+          ],
+          "window_days": 14
+        },
+        "id": "call_298962"
+      },
+      "provider": [
+        {
+          "reservationId": "45b0a0ae-bb25-4ecc-84cb-5b9b25d13759",
+          "caseId": "MODEL-3",
+          "trialId": "docs/commerce-growth/economic-workflow-1/checkpoints.json",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 7866,
+          "reservedMicros": 150000,
+          "inputTokens": 2721,
+          "outputTokens": 42,
+          "thinkingTokens": 160,
+          "cachedInputTokens": 0,
+          "responseId": "SovoasrBG8CfrfcPnIGc4QI",
+          "modelVersion": "gemini-3.1-pro-preview",
+          "latencyMs": 6220,
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    },
+    {
+      "id": "TOOL-7",
+      "actor": "TRUSTED_TOOL",
+      "tool": "inspect_indicators",
+      "status": "COMPLETED",
+      "input": {
+        "reason": "Need outreach evidence to support the reactivation campaign in the policy preview.",
+        "domains": [
+          "outreach"
+        ],
+        "window_days": 14
+      },
+      "output": {
+        "asOfDay": 45,
+        "historyThroughDay": 44,
+        "windowDays": 14,
+        "domains": [
+          "outreach"
+        ],
+        "values": {
+          "response_rate": 0
+        },
+        "details": {
+          "outreach": {
+            "contacts": 140,
+            "responses": 0,
+            "immediatelyAuthorized": 0,
+            "costUSD": 7,
+            "remainingBudgetUSD": 42.5,
+            "scope": "Immediate funding is not a retained purchase. No nonresponse is assumed to imply a permanent inactive market."
+          }
+        },
+        "evidenceId": "E-ac0545e84e3feb83a2b7"
+      }
+    },
+    {
+      "id": "MODEL-4",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "task": "Review this observed market. Choose which economic data to inspect, fit a model if useful, compose a bounded commerce intervention, and test one defensible candidate on a different historical market. Investigate conflicting indicators. You can keep v1. Do not invent economic variables or make unconditional/permanent interventions.",
+        "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+        "currentDay": 45,
+        "historyThroughDay": 44,
+        "customers": 100,
+        "merchants": 3,
+        "indicatorCatalog": {
+          "request_growth_ratio": {
+            "domain": "demand",
+            "unit": "ratio",
+            "meaning": "Observed request rate in this window divided by the preceding window. Null if there was no prior demand."
+          },
+          "response_rate": {
+            "domain": "outreach",
+            "unit": "fraction",
+            "meaning": "Observed replies / contacts in the window; not retained purchases."
+          },
+          "funded_fill_rate": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Share of currently funded requests individually fillable from current stock. Not a promise that all can be filled jointly."
+          },
+          "stockout_share": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Merchant/product listings with no currently available units."
+          },
+          "spendable_cash_usd": {
+            "domain": "liquidity",
+            "unit": "USD",
+            "meaning": "Merchant-authorized spendable balances after existing refund/holding safeguards."
+          },
+          "cash_to_replenishment_ratio": {
+            "domain": "liquidity",
+            "unit": "ratio",
+            "meaning": "Spendable merchant cash / the current complete-funded-basket replenishment plan. Null when no purchase is needed."
+          },
+          "supplier_lead_days": {
+            "domain": "supply",
+            "unit": "days",
+            "meaning": "Currently quoted maximum physical supplier lead time. Payment settlement delays are additional."
+          },
+          "payment_cash_margin_usd": {
+            "domain": "payments",
+            "unit": "USD",
+            "meaning": "Observed platform ledger cash inflows minus outflows during the window, including processing, returns and outreach. Future refunds remain unknown."
+          },
+          "mature_refund_rate": {
+            "domain": "payments",
+            "unit": "fraction",
+            "meaning": "Refunded captured orders in the latest fully matured cohort. Null for an empty cohort."
+          }
+        },
+        "historicalComparison": {
+          "id": "H1",
+          "description": "A different completed market from the locked-v1 archive. It had an announced supplier delay during this operating period. Counterfactual tools replay this historical market, never the current target."
+        },
+        "baseline": "v1 uses broad positive-value inquiries, a local model, complete funded baskets and fast supplier settlement.",
+        "actionGrounding": {
+          "campaign": [
+            "outreach",
+            "demand",
+            "payments"
+          ],
+          "inventory": [
+            "inventory",
+            "liquidity"
+          ],
+          "settlement": [
+            "supply",
+            "payments"
+          ]
+        },
+        "remainingModelCalls": 2,
+        "remainingTrials": 1,
+        "outputs": [
+          {
+            "tool": "inspect_indicators",
+            "input": {
+              "domains": [
+                "demand",
+                "inventory",
+                "liquidity",
+                "supply",
+                "payments"
+              ],
+              "reason": "Initial inspection of market indicators to understand demand, inventory, liquidity, supply, and payments over the last 14 days.",
+              "window_days": 14
+            },
+            "output": {
+              "asOfDay": 45,
+              "historyThroughDay": 44,
+              "windowDays": 14,
+              "domains": [
+                "demand",
+                "inventory",
+                "liquidity",
+                "supply",
+                "payments"
+              ],
+              "values": {
+                "request_growth_ratio": 0.36363636363636365,
+                "funded_fill_rate": 1,
+                "stockout_share": 0.5208333333333334,
+                "spendable_cash_usd": 13093.82,
+                "cash_to_replenishment_ratio": null,
+                "supplier_lead_days": 6,
+                "payment_cash_margin_usd": 139.51000000000005,
+                "mature_refund_rate": 0
+              },
+              "details": {
+                "demand": {
+                  "requests": 28,
+                  "previousRequests": 77,
+                  "currentRequestsPerDay": 2,
+                  "previousRequestsPerDay": 5.5,
+                  "observedUnitsByCategory": {
+                    "Office bundles": 10,
+                    "Furniture": 24,
+                    "Stationery": 10,
+                    "Electronics": 6
+                  },
+                  "fundingEvents": 23,
+                  "scope": "Counted when the request was discovered, not its earlier latent-need creation date. Undiscovered needs are unavailable."
+                },
+                "inventory": {
+                  "fundedRequests": 2,
+                  "individuallyFillable": 2,
+                  "authorizedUSD": 123.62,
+                  "urgentRequests": 0,
+                  "stockCostUSD": 3420.61,
+                  "inboundLines": 9,
+                  "scope": "Urgent means new supplier stock cannot be guaranteed before the required delivery deadline."
+                },
+                "liquidity": {
+                  "merchants": [
+                    {
+                      "merchantId": "MERCHANT-0",
+                      "spendableUSD": 3476.13,
+                      "balanceUSD": 3515.02
+                    },
+                    {
+                      "merchantId": "MERCHANT-1",
+                      "spendableUSD": 5846.96,
+                      "balanceUSD": 6095.34
+                    },
+                    {
+                      "merchantId": "MERCHANT-2",
+                      "spendableUSD": 3770.73,
+                      "balanceUSD": 3793.26
+                    }
+                  ],
+                  "fundedPlanCashUSD": 0,
+                  "fundedPlans": 2,
+                  "scope": "Known spendable balances and a feasible current replenishment plan; not household money or a macroeconomic liquidity forecast."
+                },
+                "supply": {
+                  "normalLeadDays": 3,
+                  "quotedMaximumLeadDays": 6,
+                  "bankSettlementDaysPerStage": 2,
+                  "incomingWithinSevenDays": 13,
+                  "scope": "Quoted lead times and currently announced arrivals, not future realized disruptions."
+                },
+                "payments": {
+                  "retailCaptures": 24,
+                  "retailCapturedUSD": 3750,
+                  "supplierPaidVolumeUSD": 2089.93,
+                  "cashMovementsUSD": {
+                    "OUTREACH_EXPENSE": -6.999999999999983,
+                    "PAYMENT_FEE": 142.64000000000001,
+                    "PAYMENT_PROCESSING": -49.779999999999994,
+                    "SUPPLIER_PAYMENT_FEE": 82.72,
+                    "SUPPLIER_PROCESSING": -29.07
+                  },
+                  "knownPlatformObligationsUSD": 0,
+                  "matureCohort": {
+                    "firstCaptureDay": 17,
+                    "lastCaptureDay": 30,
+                    "orders": 48,
+                    "refunds": 0
+                  },
+                  "scope": "Cash margin is observed, not a promise of future settled profit. Retail and supplier volumes are separate payment legs."
+                }
+              },
+              "evidenceId": "E-6aeb786cbb8e65800119"
+            },
+            "status": "COMPLETED"
+          },
+          {
+            "tool": "fit_demand_model",
+            "input": {
+              "reason": "Fit a demand model to enable forecast cover, which is required for deadline settlement to handle the 6-day supplier lead time.",
+              "method": "adaptive"
+            },
+            "output": {
+              "id": "F-c7f105a5044e3c05ea60",
+              "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+              "asOfDay": 45,
+              "recipe": "adaptive",
+              "selected": "recent7",
+              "validationMSE": {
+                "legacy28": 0.21420553935860048,
+                "recent7": 0.20807756696428573,
+                "recent14": 0.22888888888888884
+              },
+              "rates": {
+                "MM-PAPER-01": 0.28125,
+                "MM-PAPER-02": 0.03125,
+                "MM-PAPER-03": 0.15625,
+                "MM-PAPER-04": 0.40625,
+                "MM-DEVICE-01": 0.40625,
+                "MM-DEVICE-02": 0.03125,
+                "MM-DEVICE-03": 0.03125,
+                "MM-DEVICE-04": 0.03125,
+                "MM-SPACE-01": 0.28125,
+                "MM-SPACE-02": 0.28125,
+                "MM-SPACE-03": 0.28125,
+                "MM-SPACE-04": 0.15625,
+                "MM-PACK-01": 0.15625,
+                "MM-PACK-02": 0.03125,
+                "MM-PACK-03": 0.15625,
+                "MM-PACK-04": 0.28125
+              },
+              "trainingRows": 133,
+              "scope": "Local rolling Poisson rate fit with past-only temporal window selection. Future demand is not observed.",
+              "evidenceId": "F-c7f105a5044e3c05ea60",
+              "domains": [
+                "demand"
+              ]
+            },
+            "status": "COMPLETED"
+          },
+          {
+            "tool": "preview_policy",
+            "input": {
+              "policy": {
+                "campaign": "reactivation",
+                "objective": "joint",
+                "inventory": "forecast_cover",
+                "conditions": [
+                  {
+                    "indicator": "supplier_lead_days",
+                    "operator": "above",
+                    "value": 5
+                  },
+                  {
+                    "operator": "below",
+                    "value": 0.5,
+                    "indicator": "request_growth_ratio"
+                  }
+                ],
+                "duration_days": 7,
+                "forecast_id": "F-c7f105a5044e3c05ea60",
+                "cover_days": 7,
+                "settlement": "deadline"
+              },
+              "evidence_ids": [
+                "E-6aeb786cbb8e65800119",
+                "F-c7f105a5044e3c05ea60"
+              ],
+              "reason": "Demand is dropping and supplier lead times are high (6 days). We will use reactivation to stimulate demand, forecast cover to handle stockouts, and deadline settlement to manage the long lead times."
+            },
+            "output": {
+              "error": "MISSING_EVIDENCE: outreach",
+              "scope": "No live mutation occurred. Choose a valid tool or keep v1."
+            },
+            "status": "ERROR"
+          },
+          {
+            "tool": "inspect_indicators",
+            "input": {
+              "reason": "Need outreach evidence to support the reactivation campaign in the policy preview.",
+              "domains": [
+                "outreach"
+              ],
+              "window_days": 14
+            },
+            "output": {
+              "asOfDay": 45,
+              "historyThroughDay": 44,
+              "windowDays": 14,
+              "domains": [
+                "outreach"
+              ],
+              "values": {
+                "response_rate": 0
+              },
+              "details": {
+                "outreach": {
+                  "contacts": 140,
+                  "responses": 0,
+                  "immediatelyAuthorized": 0,
+                  "costUSD": 7,
+                  "remainingBudgetUSD": 42.5,
+                  "scope": "Immediate funding is not a retained purchase. No nonresponse is assumed to imply a permanent inactive market."
+                }
+              },
+              "evidenceId": "E-ac0545e84e3feb83a2b7"
+            },
+            "status": "COMPLETED"
+          }
+        ],
+        "lastTurn": "You choose the next tool; no fixed role sequence."
+      },
+      "output": {
+        "name": "preview_policy",
+        "args": {
+          "policy": {
+            "conditions": [
+              {
+                "value": 5,
+                "indicator": "supplier_lead_days",
+                "operator": "above"
+              },
+              {
+                "value": 0.5,
+                "indicator": "request_growth_ratio",
+                "operator": "below"
+              }
+            ],
+            "objective": "joint",
+            "campaign": "reactivation",
+            "inventory": "forecast_cover",
+            "cover_days": 7,
+            "duration_days": 7,
+            "forecast_id": "F-c7f105a5044e3c05ea60",
+            "settlement": "deadline"
+          },
+          "evidence_ids": [
+            "E-6aeb786cbb8e65800119",
+            "F-c7f105a5044e3c05ea60",
+            "E-ac0545e84e3feb83a2b7"
+          ],
+          "reason": "Previewing policy with outreach evidence included to support reactivation campaign."
+        },
+        "id": "call_204616"
+      },
+      "provider": [
+        {
+          "reservationId": "2639de30-61ba-4d4d-b75a-a9e43940b4fc",
+          "caseId": "MODEL-4",
+          "trialId": "docs/commerce-growth/economic-workflow-1/checkpoints.json",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 12944,
+          "reservedMicros": 150000,
+          "inputTokens": 2878,
+          "outputTokens": 215,
+          "thinkingTokens": 384,
+          "cachedInputTokens": 0,
+          "responseId": "Vovoaq_jHpSY0-kPmpuTgQk",
+          "modelVersion": "gemini-3.1-pro-preview",
+          "latencyMs": 7043,
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    },
+    {
+      "id": "TOOL-9",
+      "actor": "TRUSTED_TOOL",
+      "tool": "preview_policy",
+      "status": "COMPLETED",
+      "input": {
+        "policy": {
+          "conditions": [
+            {
+              "value": 5,
+              "indicator": "supplier_lead_days",
+              "operator": "above"
+            },
+            {
+              "value": 0.5,
+              "indicator": "request_growth_ratio",
+              "operator": "below"
+            }
+          ],
+          "objective": "joint",
+          "campaign": "reactivation",
+          "inventory": "forecast_cover",
+          "cover_days": 7,
+          "duration_days": 7,
+          "forecast_id": "F-c7f105a5044e3c05ea60",
+          "settlement": "deadline"
+        },
+        "evidence_ids": [
+          "E-6aeb786cbb8e65800119",
+          "F-c7f105a5044e3c05ea60",
+          "E-ac0545e84e3feb83a2b7"
+        ],
+        "reason": "Previewing policy with outreach evidence included to support reactivation campaign."
+      },
+      "output": {
+        "candidate_id": "P-50d430b3f3d4e08f9860",
+        "policy": {
+          "conditions": [
+            {
+              "value": 5,
+              "indicator": "supplier_lead_days",
+              "operator": "above"
+            },
+            {
+              "value": 0.5,
+              "indicator": "request_growth_ratio",
+              "operator": "below"
+            }
+          ],
+          "objective": "joint",
+          "campaign": "reactivation",
+          "inventory": "forecast_cover",
+          "cover_days": 7,
+          "duration_days": 7,
+          "forecast_id": "F-c7f105a5044e3c05ea60",
+          "settlement": "deadline"
+        },
+        "appliesNow": false,
+        "expiresBeforeDay": 52,
+        "preview": {
+          "selectedContacts": 10,
+          "baselineContacts": 10,
+          "expectedRetailPaymentNetUSD": 0.8099642056272477,
+          "baselineExpectedRetailPaymentNetUSD": 0.8099642056272477,
+          "feasibleFundedPlans": 2,
+          "fundedRestockUnits": 0
+        },
+        "scope": "Current read-only preview. Predicted contact value is not causal profit. Funded plan counts describe the existing trusted complete-basket tool; actual policy stock changes are tested in the historical trial."
+      }
+    },
+    {
+      "id": "MODEL-5",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "input": {
+        "task": "Review this observed market. Choose which economic data to inspect, fit a model if useful, compose a bounded commerce intervention, and test one defensible candidate on a different historical market. Investigate conflicting indicators. You can keep v1. Do not invent economic variables or make unconditional/permanent interventions.",
+        "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+        "currentDay": 45,
+        "historyThroughDay": 44,
+        "customers": 100,
+        "merchants": 3,
+        "indicatorCatalog": {
+          "request_growth_ratio": {
+            "domain": "demand",
+            "unit": "ratio",
+            "meaning": "Observed request rate in this window divided by the preceding window. Null if there was no prior demand."
+          },
+          "response_rate": {
+            "domain": "outreach",
+            "unit": "fraction",
+            "meaning": "Observed replies / contacts in the window; not retained purchases."
+          },
+          "funded_fill_rate": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Share of currently funded requests individually fillable from current stock. Not a promise that all can be filled jointly."
+          },
+          "stockout_share": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Merchant/product listings with no currently available units."
+          },
+          "spendable_cash_usd": {
+            "domain": "liquidity",
+            "unit": "USD",
+            "meaning": "Merchant-authorized spendable balances after existing refund/holding safeguards."
+          },
+          "cash_to_replenishment_ratio": {
+            "domain": "liquidity",
+            "unit": "ratio",
+            "meaning": "Spendable merchant cash / the current complete-funded-basket replenishment plan. Null when no purchase is needed."
+          },
+          "supplier_lead_days": {
+            "domain": "supply",
+            "unit": "days",
+            "meaning": "Currently quoted maximum physical supplier lead time. Payment settlement delays are additional."
+          },
+          "payment_cash_margin_usd": {
+            "domain": "payments",
+            "unit": "USD",
+            "meaning": "Observed platform ledger cash inflows minus outflows during the window, including processing, returns and outreach. Future refunds remain unknown."
+          },
+          "mature_refund_rate": {
+            "domain": "payments",
+            "unit": "fraction",
+            "meaning": "Refunded captured orders in the latest fully matured cohort. Null for an empty cohort."
+          }
+        },
+        "historicalComparison": {
+          "id": "H1",
+          "description": "A different completed market from the locked-v1 archive. It had an announced supplier delay during this operating period. Counterfactual tools replay this historical market, never the current target."
+        },
+        "baseline": "v1 uses broad positive-value inquiries, a local model, complete funded baskets and fast supplier settlement.",
+        "actionGrounding": {
+          "campaign": [
+            "outreach",
+            "demand",
+            "payments"
+          ],
+          "inventory": [
+            "inventory",
+            "liquidity"
+          ],
+          "settlement": [
+            "supply",
+            "payments"
+          ]
+        },
+        "remainingModelCalls": 1,
+        "remainingTrials": 1,
+        "outputs": [
+          {
+            "tool": "inspect_indicators",
+            "input": {
+              "domains": [
+                "demand",
+                "inventory",
+                "liquidity",
+                "supply",
+                "payments"
+              ],
+              "reason": "Initial inspection of market indicators to understand demand, inventory, liquidity, supply, and payments over the last 14 days.",
+              "window_days": 14
+            },
+            "output": {
+              "asOfDay": 45,
+              "historyThroughDay": 44,
+              "windowDays": 14,
+              "domains": [
+                "demand",
+                "inventory",
+                "liquidity",
+                "supply",
+                "payments"
+              ],
+              "values": {
+                "request_growth_ratio": 0.36363636363636365,
+                "funded_fill_rate": 1,
+                "stockout_share": 0.5208333333333334,
+                "spendable_cash_usd": 13093.82,
+                "cash_to_replenishment_ratio": null,
+                "supplier_lead_days": 6,
+                "payment_cash_margin_usd": 139.51000000000005,
+                "mature_refund_rate": 0
+              },
+              "details": {
+                "demand": {
+                  "requests": 28,
+                  "previousRequests": 77,
+                  "currentRequestsPerDay": 2,
+                  "previousRequestsPerDay": 5.5,
+                  "observedUnitsByCategory": {
+                    "Office bundles": 10,
+                    "Furniture": 24,
+                    "Stationery": 10,
+                    "Electronics": 6
+                  },
+                  "fundingEvents": 23,
+                  "scope": "Counted when the request was discovered, not its earlier latent-need creation date. Undiscovered needs are unavailable."
+                },
+                "inventory": {
+                  "fundedRequests": 2,
+                  "individuallyFillable": 2,
+                  "authorizedUSD": 123.62,
+                  "urgentRequests": 0,
+                  "stockCostUSD": 3420.61,
+                  "inboundLines": 9,
+                  "scope": "Urgent means new supplier stock cannot be guaranteed before the required delivery deadline."
+                },
+                "liquidity": {
+                  "merchants": [
+                    {
+                      "merchantId": "MERCHANT-0",
+                      "spendableUSD": 3476.13,
+                      "balanceUSD": 3515.02
+                    },
+                    {
+                      "merchantId": "MERCHANT-1",
+                      "spendableUSD": 5846.96,
+                      "balanceUSD": 6095.34
+                    },
+                    {
+                      "merchantId": "MERCHANT-2",
+                      "spendableUSD": 3770.73,
+                      "balanceUSD": 3793.26
+                    }
+                  ],
+                  "fundedPlanCashUSD": 0,
+                  "fundedPlans": 2,
+                  "scope": "Known spendable balances and a feasible current replenishment plan; not household money or a macroeconomic liquidity forecast."
+                },
+                "supply": {
+                  "normalLeadDays": 3,
+                  "quotedMaximumLeadDays": 6,
+                  "bankSettlementDaysPerStage": 2,
+                  "incomingWithinSevenDays": 13,
+                  "scope": "Quoted lead times and currently announced arrivals, not future realized disruptions."
+                },
+                "payments": {
+                  "retailCaptures": 24,
+                  "retailCapturedUSD": 3750,
+                  "supplierPaidVolumeUSD": 2089.93,
+                  "cashMovementsUSD": {
+                    "OUTREACH_EXPENSE": -6.999999999999983,
+                    "PAYMENT_FEE": 142.64000000000001,
+                    "PAYMENT_PROCESSING": -49.779999999999994,
+                    "SUPPLIER_PAYMENT_FEE": 82.72,
+                    "SUPPLIER_PROCESSING": -29.07
+                  },
+                  "knownPlatformObligationsUSD": 0,
+                  "matureCohort": {
+                    "firstCaptureDay": 17,
+                    "lastCaptureDay": 30,
+                    "orders": 48,
+                    "refunds": 0
+                  },
+                  "scope": "Cash margin is observed, not a promise of future settled profit. Retail and supplier volumes are separate payment legs."
+                }
+              },
+              "evidenceId": "E-6aeb786cbb8e65800119"
+            },
+            "status": "COMPLETED"
+          },
+          {
+            "tool": "fit_demand_model",
+            "input": {
+              "reason": "Fit a demand model to enable forecast cover, which is required for deadline settlement to handle the 6-day supplier lead time.",
+              "method": "adaptive"
+            },
+            "output": {
+              "id": "F-c7f105a5044e3c05ea60",
+              "snapshotId": "fc30be6f383cd50c69b126b0ef1267237b5ca39dd78942f2c5f2ec0030ad04c2",
+              "asOfDay": 45,
+              "recipe": "adaptive",
+              "selected": "recent7",
+              "validationMSE": {
+                "legacy28": 0.21420553935860048,
+                "recent7": 0.20807756696428573,
+                "recent14": 0.22888888888888884
+              },
+              "rates": {
+                "MM-PAPER-01": 0.28125,
+                "MM-PAPER-02": 0.03125,
+                "MM-PAPER-03": 0.15625,
+                "MM-PAPER-04": 0.40625,
+                "MM-DEVICE-01": 0.40625,
+                "MM-DEVICE-02": 0.03125,
+                "MM-DEVICE-03": 0.03125,
+                "MM-DEVICE-04": 0.03125,
+                "MM-SPACE-01": 0.28125,
+                "MM-SPACE-02": 0.28125,
+                "MM-SPACE-03": 0.28125,
+                "MM-SPACE-04": 0.15625,
+                "MM-PACK-01": 0.15625,
+                "MM-PACK-02": 0.03125,
+                "MM-PACK-03": 0.15625,
+                "MM-PACK-04": 0.28125
+              },
+              "trainingRows": 133,
+              "scope": "Local rolling Poisson rate fit with past-only temporal window selection. Future demand is not observed.",
+              "evidenceId": "F-c7f105a5044e3c05ea60",
+              "domains": [
+                "demand"
+              ]
+            },
+            "status": "COMPLETED"
+          },
+          {
+            "tool": "preview_policy",
+            "input": {
+              "policy": {
+                "campaign": "reactivation",
+                "objective": "joint",
+                "inventory": "forecast_cover",
+                "conditions": [
+                  {
+                    "indicator": "supplier_lead_days",
+                    "operator": "above",
+                    "value": 5
+                  },
+                  {
+                    "operator": "below",
+                    "value": 0.5,
+                    "indicator": "request_growth_ratio"
+                  }
+                ],
+                "duration_days": 7,
+                "forecast_id": "F-c7f105a5044e3c05ea60",
+                "cover_days": 7,
+                "settlement": "deadline"
+              },
+              "evidence_ids": [
+                "E-6aeb786cbb8e65800119",
+                "F-c7f105a5044e3c05ea60"
+              ],
+              "reason": "Demand is dropping and supplier lead times are high (6 days). We will use reactivation to stimulate demand, forecast cover to handle stockouts, and deadline settlement to manage the long lead times."
+            },
+            "output": {
+              "error": "MISSING_EVIDENCE: outreach",
+              "scope": "No live mutation occurred. Choose a valid tool or keep v1."
+            },
+            "status": "ERROR"
+          },
+          {
+            "tool": "inspect_indicators",
+            "input": {
+              "reason": "Need outreach evidence to support the reactivation campaign in the policy preview.",
+              "domains": [
+                "outreach"
+              ],
+              "window_days": 14
+            },
+            "output": {
+              "asOfDay": 45,
+              "historyThroughDay": 44,
+              "windowDays": 14,
+              "domains": [
+                "outreach"
+              ],
+              "values": {
+                "response_rate": 0
+              },
+              "details": {
+                "outreach": {
+                  "contacts": 140,
+                  "responses": 0,
+                  "immediatelyAuthorized": 0,
+                  "costUSD": 7,
+                  "remainingBudgetUSD": 42.5,
+                  "scope": "Immediate funding is not a retained purchase. No nonresponse is assumed to imply a permanent inactive market."
+                }
+              },
+              "evidenceId": "E-ac0545e84e3feb83a2b7"
+            },
+            "status": "COMPLETED"
+          },
+          {
+            "tool": "preview_policy",
+            "input": {
+              "policy": {
+                "conditions": [
+                  {
+                    "value": 5,
+                    "indicator": "supplier_lead_days",
+                    "operator": "above"
+                  },
+                  {
+                    "value": 0.5,
+                    "indicator": "request_growth_ratio",
+                    "operator": "below"
+                  }
+                ],
+                "objective": "joint",
+                "campaign": "reactivation",
+                "inventory": "forecast_cover",
+                "cover_days": 7,
+                "duration_days": 7,
+                "forecast_id": "F-c7f105a5044e3c05ea60",
+                "settlement": "deadline"
+              },
+              "evidence_ids": [
+                "E-6aeb786cbb8e65800119",
+                "F-c7f105a5044e3c05ea60",
+                "E-ac0545e84e3feb83a2b7"
+              ],
+              "reason": "Previewing policy with outreach evidence included to support reactivation campaign."
+            },
+            "output": {
+              "candidate_id": "P-50d430b3f3d4e08f9860",
+              "policy": {
+                "conditions": [
+                  {
+                    "value": 5,
+                    "indicator": "supplier_lead_days",
+                    "operator": "above"
+                  },
+                  {
+                    "value": 0.5,
+                    "indicator": "request_growth_ratio",
+                    "operator": "below"
+                  }
+                ],
+                "objective": "joint",
+                "campaign": "reactivation",
+                "inventory": "forecast_cover",
+                "cover_days": 7,
+                "duration_days": 7,
+                "forecast_id": "F-c7f105a5044e3c05ea60",
+                "settlement": "deadline"
+              },
+              "appliesNow": false,
+              "expiresBeforeDay": 52,
+              "preview": {
+                "selectedContacts": 10,
+                "baselineContacts": 10,
+                "expectedRetailPaymentNetUSD": 0.8099642056272477,
+                "baselineExpectedRetailPaymentNetUSD": 0.8099642056272477,
+                "feasibleFundedPlans": 2,
+                "fundedRestockUnits": 0
+              },
+              "scope": "Current read-only preview. Predicted contact value is not causal profit. Funded plan counts describe the existing trusted complete-basket tool; actual policy stock changes are tested in the historical trial."
+            },
+            "status": "COMPLETED"
+          }
+        ],
+        "lastTurn": "Finish now using select_economic_policy."
+      },
+      "output": {
+        "name": "select_economic_policy",
+        "args": {
+          "decision": "keep_v1",
+          "measured_delta_usd": 0,
+          "candidate_id": "v1",
+          "reason": "The candidate policy was not tested on the historical market, so keeping v1 is required to ensure safety."
+        },
+        "id": "call_155753"
+      },
+      "provider": [
+        {
+          "reservationId": "5f42193b-6cd0-4b55-b7ab-abdc0eb4f5f2",
+          "caseId": "MODEL-5",
+          "trialId": "docs/commerce-growth/economic-workflow-1/checkpoints.json",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 12502,
+          "reservedMicros": 150000,
+          "inputTokens": 2945,
+          "outputTokens": 64,
+          "thinkingTokens": 487,
+          "cachedInputTokens": 0,
+          "responseId": "YovoaoGGH8CfrfcPnIGc4QI",
+          "modelVersion": "gemini-3.1-pro-preview",
+          "latencyMs": 10252,
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    },
+    {
+      "id": "TOOL-11",
+      "actor": "TRUSTED_TOOL",
+      "tool": "select_economic_policy",
+      "status": "COMPLETED",
+      "input": {
+        "decision": "keep_v1",
+        "measured_delta_usd": 0,
+        "candidate_id": "v1",
+        "reason": "The candidate policy was not tested on the historical market, so keeping v1 is required to ensure safety."
+      },
+      "output": {
+        "decision": "keep_v1",
+        "measured_delta_usd": 0,
+        "candidate_id": "v1",
+        "reason": "The candidate policy was not tested on the historical market, so keeping v1 is required to ensure safety.",
+        "status": "BASELINE_RETAINED",
+        "promoted": false,
+        "scope": "Research recommendation only. A wider fresh-seed comparison is required for a financial improvement claim."
+      }
+    }
+  ],
+  "providerCalls": 6,
+  "pending": null,
+  "recommendation": {
+    "decision": "keep_v1",
+    "measured_delta_usd": 0,
+    "candidate_id": "v1",
+    "reason": "The candidate policy was not tested on the historical market, so keeping v1 is required to ensure safety.",
+    "status": "BASELINE_RETAINED",
+    "promoted": false,
+    "scope": "Research recommendation only. A wider fresh-seed comparison is required for a financial improvement claim."
+  },
+  "costUSD": 0.05636
+}

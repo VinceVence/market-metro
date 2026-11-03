@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "config": {
+    "priorSeeds": [
+      106001,
+      106002,
+      106003
+    ],
+    "developmentSeeds": [
+      107001,
+      107002
+    ],
+    "probeSeeds": [
+      108001,
+      108002,
+      108003
+    ],
+    "testSeeds": [
+      109001,
+      109002,
+      109003,
+      109004,
+      109005,
+      109006,
+      109007,
+      109008
+    ],
+    "agentSeeds": [
+      109001,
+      109002
+    ],
+    "developmentScenarios": [
+      "steady",
+      "rival_sale",
+      "budget_squeeze",
+      "supply_delay"
+    ],
+    "heldOutScenario": "returns_wave",
+    "cutoff": 45,
+    "days": 100,
+    "customers": 100,
+    "probeBudget": 2,
+    "modelBudgetUSD": 1
+  },
+  "code": {
+    "growth-lab": "4b55d45445067cd010eacaee4f50cca8d01738b6f0f5ed68fff26edcfc1963bc",
+    "incremental": "a1e283998e71f6966aed0d66f487670d4b667f392b1c84967436922910f28e2e"
+  },
+  "engineHash": "a414246ce78e0fec05ece95b711d46532bf384c1026fa54cb27ac45446602b27",
+  "catalogHash": "5a2ed6057e2e24d31079a9aa9ce8fba66500502dff7775ee9aca6cc3b85e95dd",
+  "priorHash": "cd9612ec75c712d306a119a1908150e5f4fc7d34f18518abfc429cda11db9dcd",
+  "recipes": [
+    {
+      "name": "reward-recommend",
+      "family": "reward",
+      "audience": "all",
+      "maxOfferPct": 0,
+      "merchantIndices": [
+        0,
+        1,
+        2
+      ],
+      "durationDays": 7,
+      "penaltyUSD": 0
+    },
+    {
+      "name": "eligible-recommend",
+      "family": "eligible",
+      "audience": "all",
+      "maxOfferPct": 0,
+      "merchantIndices": [
+        0,
+        1,
+        2
+      ],
+      "durationDays": 7,
+      "penaltyUSD": 0
+    },
+    {
+      "name": "incremental-recommend",
+      "family": "incremental",
+      "audience": "all",
+      "maxOfferPct": 0,
+      "merchantIndices": [
+        0,
+        1,
+        2
+      ],
+      "durationDays": 7,
+      "penaltyUSD": 0
+    },
+    {
+      "name": "incremental-reactivate",
+      "family": "incremental",
+      "audience": "lapsed",
+      "maxOfferPct": 0,
+      "merchantIndices": [
+        0,
+        1,
+        2
+      ],
+      "durationDays": 7,
+      "penaltyUSD": 0
+    },
+    {
+      "name": "incremental-coupon",
+      "family": "incremental",
+      "audience": "lapsed",
+      "maxOfferPct": 5,
+      "merchantIndices": [
+        0,
+        1,
+        2
+      ],
+      "durationDays": 7,
+      "penaltyUSD": 0
+    },
+    {
+      "name": "eligible-coupon",
+      "family": "eligible",
+      "audience": "lapsed",
+      "maxOfferPct": 5,
+      "merchantIndices": [
+        0,
+        1,
+        2
+      ],
+      "durationDays": 7,
+      "penaltyUSD": 0
+    }
+  ],
+  "primaryMetric": "Paired modeled platform contribution after inference versus no campaign; not actual PayPal profit.",
+  "materialGrowthTargetPct": 10,
+  "positiveGate": "Mean and lower95 seed-cluster interval above zero; merchant lower95 not below zero. Ten-percent target reported separately.",
+  "fairness": "Same frozen economics, exogenous draws,100 shoppers,100 shopping days,14-day tail,45-day evidence,one-day publication delay and$5/7-day campaign envelope. Prior and current mature randomized training only. Agents and numeric selector get at most2 probes of3 independent seeds. No arbitrary SQL or hidden evaluation outcomes.",
+  "scenarioTransfer": "returns_wave excluded from human development/tuning. During evaluation, runtime agents may test their proposal on separate probe seeds in the current scenario; this is adaptation, not zero-shot transfer.",
+  "phases": "One six-recipe development pass; freeze before40 numerical holdout cases and10 fresh-agent cases. No tuning after opening test outcomes.",
+  "modelCost": "At most$1 new model usage for this study, within existing$8 local/$50 user ceiling; no native payments.",
+  "hash": "27ed35e1473342b7443e165b058a50a9a9d03f80adec3ac2fc4f91845c2566ae"
+}

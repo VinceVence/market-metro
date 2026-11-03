@@ -1,0 +1,850 @@
+{
+  "createdAt": "2026-10-31T11:02:11.252Z",
+  "development": [
+    {
+      "scenario": "steady",
+      "seed": 550100
+    },
+    {
+      "scenario": "rival_sale",
+      "seed": 550101
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 550102
+    },
+    {
+      "scenario": "returns_wave",
+      "seed": 550103
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 550104
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 550105
+    }
+  ],
+  "validation": [
+    {
+      "scenario": "steady",
+      "seed": 735200
+    },
+    {
+      "scenario": "rival_sale",
+      "seed": 735201
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 735202
+    },
+    {
+      "scenario": "returns_wave",
+      "seed": 735203
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 735204
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 735205
+    }
+  ],
+  "settings": {
+    "customers": 100,
+    "days": 100,
+    "campaignStop": 90,
+    "budgetCents": 5000
+  },
+  "configs": [
+    {
+      "id": "fixed_coupon",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            14,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": false,
+          "topK": 4,
+          "retrainDays": 14
+        },
+        "economics": {
+          "pricePct": [
+            0,
+            0,
+            0
+          ],
+          "merchantRail": "auto",
+          "supplierRail": "auto"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": true,
+          "interval": "observed",
+          "minimumRepeat": 2,
+          "discountPct": 0
+        }
+      },
+      "kind": "coupon"
+    },
+    {
+      "kind": "learned",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "30fa7cae750a6cab-cash-60",
+      "cashSchedule": {
+        "day": 60,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "learned",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "30fa7cae750a6cab-cash-70",
+      "cashSchedule": {
+        "day": 70,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "learned",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "30fa7cae750a6cab-cash-80",
+      "cashSchedule": {
+        "day": 80,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "learned",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": false,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": "observed",
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "86ac30347258a9bf-cash-60",
+      "cashSchedule": {
+        "day": 60,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "learned",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": false,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": "observed",
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "86ac30347258a9bf-cash-70",
+      "cashSchedule": {
+        "day": 70,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "learned",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": false,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": "observed",
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "86ac30347258a9bf-cash-80",
+      "cashSchedule": {
+        "day": 80,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "observed_price-7",
+      "discovery": "observed_price",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 70,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "observed_price-14",
+      "discovery": "observed_price",
+      "intervalDays": 14,
+      "cashSchedule": {
+        "day": 70,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "observed_price-28",
+      "discovery": "observed_price",
+      "intervalDays": 28,
+      "cashSchedule": {
+        "day": 70,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "observed_value-7",
+      "discovery": "observed_value",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 70,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "observed_value-14",
+      "discovery": "observed_value",
+      "intervalDays": 14,
+      "cashSchedule": {
+        "day": 70,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "observed_value-28",
+      "discovery": "observed_value",
+      "intervalDays": 28,
+      "cashSchedule": {
+        "day": 70,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "category_interest-7",
+      "discovery": "category_interest",
+      "intervalDays": 7,
+      "cashSchedule": {
+        "day": 70,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "category_interest-14",
+      "discovery": "category_interest",
+      "intervalDays": 14,
+      "cashSchedule": {
+        "day": 70,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            28,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": true,
+          "topK": 4,
+          "retrainDays": 28
+        },
+        "economics": {
+          "pricePct": [
+            10,
+            0,
+            0
+          ],
+          "merchantRail": "paypal",
+          "supplierRail": "paypal"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": false,
+          "interval": 7,
+          "minimumRepeat": 3,
+          "discountPct": 0
+        }
+      },
+      "modelName": "ridge",
+      "thresholdCents": 0,
+      "id": "category_interest-28",
+      "discovery": "category_interest",
+      "intervalDays": 28,
+      "cashSchedule": {
+        "day": 70,
+        "stockDays": [
+          7,
+          7,
+          7
+        ]
+      }
+    },
+    {
+      "id": "fixed-observed_price",
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            14,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": false,
+          "topK": 4,
+          "retrainDays": 14
+        },
+        "economics": {
+          "pricePct": [
+            0,
+            0,
+            0
+          ],
+          "merchantRail": "auto",
+          "supplierRail": "auto"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": true,
+          "interval": "observed",
+          "minimumRepeat": 2,
+          "discountPct": 0
+        }
+      },
+      "discovery": "observed_price",
+      "intervalDays": 7,
+      "modelName": "ridge",
+      "thresholdCents": 0
+    },
+    {
+      "id": "fixed-category_interest",
+      "kind": "discovery",
+      "business": {
+        "demand": {
+          "stockDays": [
+            14,
+            14,
+            14
+          ],
+          "windowDays": 14,
+          "useLostDemand": false,
+          "topK": 4,
+          "retrainDays": 14
+        },
+        "economics": {
+          "pricePct": [
+            0,
+            0,
+            0
+          ],
+          "merchantRail": "auto",
+          "supplierRail": "auto"
+        },
+        "lifecycle": {
+          "marketing": "weekly_featured",
+          "subscriptions": true,
+          "interval": "observed",
+          "minimumRepeat": 2,
+          "discountPct": 0
+        }
+      },
+      "discovery": "category_interest",
+      "intervalDays": 7,
+      "modelName": "ridge",
+      "thresholdCents": 0
+    }
+  ],
+  "designCostUSD": 0.140734,
+  "hashes": {
+    "scripts/commerce-economy-v5/engine.mjs": "0f53b513cad90ba9a5bc0c389ac6d5a05318a74414a1fe5d622e2cff87695913",
+    "scripts/commerce-economy-v5/operations.mjs": "497d39303192b84bef382032f7b5643ff6c8042acf72cd3ca08a9f5a233b323e",
+    "scripts/commerce-economy-v5/network.mjs": "a80b225e6f6130656849a4ed881075eb1fdc5815b9a74fb24b1631eb51730c24",
+    "scripts/commerce-economy-v5/policies.mjs": "ac505ea2eba47972578587cbd87575886c2d2b7dc73776a723d6123b51e38ccb",
+    "scripts/commerce-economy-v5/learning/features.mjs": "758aa21dde0743b0969a818c4fe91801bb486316eedc96433f6bb16a53a26a3b",
+    "scripts/commerce-economy-v5/learning/pair-features.mjs": "d0d59d6917f94447f1625044b34c876a3b46a5dec8f3e7ed5d3579cc57585c2a",
+    "scripts/commerce-economy-v5/learning/actions.mjs": "570291c51ddb8a3e743bd99260303c47f1d84ca3f3fba11badf051f496143837",
+    "scripts/commerce-economy-v5/learning/action-policy.mjs": "a61b1775e2baa6f923931e32f9908a6e28e150852ffcc5973443a4de81cc1ab8",
+    "scripts/commerce-economy-v5/learning/discovery-policy.mjs": "17d1cb2cdd3c9f2e2e80aa1e8fd78e794145cfef2bac03af2a42798d582806f3",
+    "scripts/commerce-economy-v5/learning/evaluation.mjs": "8bc43364c4a18190d652cac7fc6f7c6a20c4c90c1c0e9247d5ecc11b292e3463",
+    "scripts/commerce-economy-v5/learning/liquidity-trial.mjs": "063f3f41259832e1769b35ab7ed9e8d489e67d076e0d5ad8645b39b069513b7e"
+  },
+  "scope": "Controller-only test. Frozen economic rules. Cash schedule reduces planned cover in the final30 days of a known100-day campaign; this must be disclosed and is not evidence for an unlimited-horizon business. New invitation choices require observed interest and existing simulated consent. No API calls.",
+  "selection": "Select strongest financially feasible fixed comparator on development. Freeze3 feasible joint finalists before new validation. No test opening below2x after design cost and all four financial gates.",
+  "hash": "eaca5325cbe4525e559d0a533835f494e919e2f0386e0b988774539aeb78d638"
+}

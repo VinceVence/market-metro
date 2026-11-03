@@ -1,0 +1,661 @@
+{
+  "status": "COMPLETE",
+  "sourceRun": "GARDEN-LAB-34d3bea264e0c053",
+  "seed": 104001,
+  "scenario": "rival_sale",
+  "newCostUSD": 0.136596,
+  "paidCalls": 12,
+  "sharedHistoricalAnalystCostUSD": 0.003519,
+  "rows": [
+    {
+      "method": "lite",
+      "valid": true,
+      "purchases": 1193,
+      "coupons": 7,
+      "redemptions": 3,
+      "recommendations": 210,
+      "platformUSD": 1513.46179,
+      "deltaUSD": -6.33820999999989,
+      "merchantDeltaUSD": -6.82,
+      "newModelUSD": 0.00821,
+      "jointPromotionUSD": 11.99,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      }
+    },
+    {
+      "method": "hybrid",
+      "valid": true,
+      "purchases": 1194,
+      "coupons": 14,
+      "redemptions": 1,
+      "recommendations": 24,
+      "platformUSD": 1519.581614,
+      "deltaUSD": -0.21838600000000952,
+      "merchantDeltaUSD": 9.34,
+      "newModelUSD": 0.128386,
+      "jointPromotionUSD": 2.36,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      }
+    },
+    {
+      "method": "rules_harness",
+      "valid": true,
+      "purchases": 1193,
+      "coupons": 0,
+      "redemptions": 0,
+      "recommendations": 108,
+      "platformUSD": 1517.69,
+      "deltaUSD": -2.1099999999999,
+      "merchantDeltaUSD": 15.41,
+      "newModelUSD": 0.0,
+      "jointPromotionUSD": 2.16,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      }
+    },
+    {
+      "method": "recommend_all",
+      "valid": true,
+      "purchases": 1189,
+      "coupons": 0,
+      "redemptions": 0,
+      "recommendations": 200,
+      "platformUSD": 1511.2,
+      "deltaUSD": -8.599999999999909,
+      "merchantDeltaUSD": -30.31,
+      "newModelUSD": 0.0,
+      "jointPromotionUSD": 4.0,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      }
+    },
+    {
+      "method": "recommend_lapsed",
+      "valid": true,
+      "purchases": 1193,
+      "coupons": 0,
+      "redemptions": 0,
+      "recommendations": 108,
+      "platformUSD": 1517.69,
+      "deltaUSD": -2.1099999999999,
+      "merchantDeltaUSD": 15.41,
+      "newModelUSD": 0.0,
+      "jointPromotionUSD": 2.16,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      }
+    },
+    {
+      "method": "organic",
+      "valid": true,
+      "purchases": 1193,
+      "coupons": 0,
+      "redemptions": 0,
+      "recommendations": 0,
+      "platformUSD": 1519.8,
+      "deltaUSD": 0,
+      "merchantDeltaUSD": 0,
+      "newModelUSD": 0.0,
+      "jointPromotionUSD": 0.0,
+      "checks": {
+        "accounting": 0,
+        "eligibility": 0,
+        "propensity": 0,
+        "inventory": 0,
+        "budget": 0,
+        "maturity": 0
+      }
+    }
+  ],
+  "cases": [
+    {
+      "day": 30,
+      "trend": {
+        "id": "demand-trend",
+        "recent": 106,
+        "previous": 126,
+        "difference": -20,
+        "direction": "DOWN",
+        "percentageChange": -15.873015873015873,
+        "scope": "Observed purchase counts in adjacent seven-day windows, not a causal campaign effect."
+      },
+      "merchants": [
+        {
+          "index": 0,
+          "name": "Willow Goods",
+          "stock": 73,
+          "maxOfferPct": 5
+        },
+        {
+          "index": 1,
+          "name": "Oak & Ink",
+          "stock": 62,
+          "maxOfferPct": 10
+        },
+        {
+          "index": 2,
+          "name": "Corner Supply",
+          "stock": 63,
+          "maxOfferPct": 10
+        }
+      ],
+      "variants": {
+        "lite": {
+          "proposal": {
+            "epsilon": 0.1,
+            "rationale": "Randomized history shows positive direct reward differences and conversion lift for 5% coupons at Willow Goods (0) and Corner Supply (2). These merchants have sufficient stock and margin capacity for a 5% offer, which may help mitigate the observed 15.9% decline in purchase volume.",
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-SCIENCE-VERIFIED-FACTS"
+            ],
+            "asOfDay": 30,
+            "retrain": true,
+            "strategy": "mixed",
+            "maxOfferPct": 5,
+            "windowDays": 28,
+            "merchantIndices": [
+              0,
+              2
+            ],
+            "audience": "all"
+          },
+          "review": {
+            "epsilon": 0.1,
+            "decision": "approve",
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-SCIENCE-VERIFIED-FACTS",
+              "COMPARE-D30-lite-FACTS",
+              "COMPARE-D30-lite-MODEL"
+            ],
+            "merchantIndices": [
+              0,
+              2
+            ],
+            "rationale": "The proposal meets the screening criteria for coupon actions, with mature randomized-history differences exceeding the 20-treated/20-control threshold for the selected merchants (Willow Goods [index 0] and Corner Supply [index 2]). The 5% discount is within the permitted bounds for both merchants. While the model did not beat its constant predictor, the randomized history provides sufficient evidence for a limited seven-day pilot to test the intervention's impact on demand.",
+            "asOfDay": 30,
+            "maxOfferPct": 5
+          },
+          "plan": {
+            "epsilon": 0.1,
+            "rationale": "Randomized history shows positive direct reward differences and conversion lift for 5% coupons at Willow Goods (0) and Corner Supply (2). These merchants have sufficient stock and margin capacity for a 5% offer, which may help mitigate the observed 15.9% decline in purchase volume.",
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-SCIENCE-VERIFIED-FACTS"
+            ],
+            "asOfDay": 30,
+            "retrain": true,
+            "strategy": "mixed",
+            "maxOfferPct": 5,
+            "windowDays": 28,
+            "merchantIndices": [
+              0,
+              2
+            ],
+            "audience": "all"
+          },
+          "model": {
+            "modelId": "COMPARE-D30-lite-MODEL",
+            "cutoff": 30,
+            "trainingRows": 1500,
+            "validationRows": 300,
+            "mse": 0.3625257012757937,
+            "baselineMse": 0.34183970138888886
+          },
+          "providerModels": [
+            "gemini-3.1-flash-lite"
+          ],
+          "usageUSD": 0.002664
+        },
+        "hybrid": {
+          "proposal": {
+            "epsilon": 0.1,
+            "windowDays": 28,
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-SCIENCE-VERIFIED-FACTS"
+            ],
+            "retrain": true,
+            "merchantIndices": [
+              0,
+              2
+            ],
+            "strategy": "mixed",
+            "asOfDay": 30,
+            "maxOfferPct": 5,
+            "audience": "all",
+            "rationale": "Randomized history shows that 5% coupons for merchants 0 and 2 have positive direct reward differences and sufficient sample sizes (treatedN >= 20, controlN >= 20) on the 'all' audience, which could mitigate the recent demand downturn."
+          },
+          "review": {
+            "asOfDay": 30,
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-1-SCIENCE-VERIFIED-FACTS",
+              "COMPARE-D30-hybrid-FACTS",
+              "COMPARE-D30-hybrid-MODEL"
+            ],
+            "maxOfferPct": 5,
+            "merchantIndices": [
+              0,
+              2
+            ],
+            "decision": "reject",
+            "rationale": "The proposed model did not beat its constant predictor (MSE 0.3625 vs baseline 0.3418). Although randomized history shows positive direct reward differences for 5% coupons on merchants 0 and 2 with sufficient sample sizes (>20 treated and control), the model's poor performance makes the mixed strategy unsupported. Rejecting until a model that beats the constant predictor is available, or a non-model strategy is proposed.",
+            "epsilon": 0.1
+          },
+          "plan": {
+            "strategy": "observe",
+            "audience": "all",
+            "merchantIndices": [],
+            "maxOfferPct": 0,
+            "windowDays": 42,
+            "epsilon": 0,
+            "retrain": false,
+            "asOfDay": 30
+          },
+          "model": {
+            "modelId": "COMPARE-D30-hybrid-MODEL",
+            "cutoff": 30,
+            "trainingRows": 1500,
+            "validationRows": 300,
+            "mse": 0.3625257012757937,
+            "baselineMse": 0.34183970138888886
+          },
+          "providerModels": [
+            "gemini-3.1-pro-preview-customtools"
+          ],
+          "usageUSD": 0.04667
+        }
+      }
+    },
+    {
+      "day": 55,
+      "trend": {
+        "id": "demand-trend",
+        "recent": 133,
+        "previous": 116,
+        "difference": 17,
+        "direction": "UP",
+        "percentageChange": 14.655172413793103,
+        "scope": "Observed purchase counts in adjacent seven-day windows, not a causal campaign effect."
+      },
+      "merchants": [
+        {
+          "index": 0,
+          "name": "Willow Goods",
+          "stock": 96,
+          "maxOfferPct": 5
+        },
+        {
+          "index": 1,
+          "name": "Oak & Ink",
+          "stock": 81,
+          "maxOfferPct": 10
+        },
+        {
+          "index": 2,
+          "name": "Corner Supply",
+          "stock": 94,
+          "maxOfferPct": 10
+        }
+      ],
+      "variants": {
+        "lite": {
+          "proposal": {
+            "asOfDay": 55,
+            "audience": "all",
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-SCIENCE-VERIFIED-FACTS"
+            ],
+            "retrain": true,
+            "maxOfferPct": 0,
+            "windowDays": 28,
+            "rationale": "The model failed to beat its constant predictor, and recent demand growth is likely driven by an external competitor's sale. Randomized history shows inconsistent results for coupons. Given the uncertainty and the need for further investigation, I am initiating a recommendation-only pilot to gather more data on offer response without committing to subsidies.",
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "epsilon": 0.05,
+            "strategy": "recommendations"
+          },
+          "review": {
+            "epsilon": 0.05,
+            "decision": "approve",
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "maxOfferPct": 0,
+            "rationale": "The proposal to use recommendations is supported by the model's performance (beating the constant predictor) and positive randomized-history outcomes for recommendation actions across the merchants. The policy respects individual merchant constraints (maxOfferPct 5% for Willow Goods, 10% for others) and the global ceiling of 0% for this specific recommendation-only strategy. The pilot is bounded by the seven-day duration and existing budget.",
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-SCIENCE-VERIFIED-FACTS",
+              "COMPARE-D55-lite-FACTS",
+              "COMPARE-D55-lite-MODEL"
+            ],
+            "asOfDay": 55
+          },
+          "plan": {
+            "asOfDay": 55,
+            "audience": "all",
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-SCIENCE-VERIFIED-FACTS"
+            ],
+            "retrain": true,
+            "maxOfferPct": 0,
+            "windowDays": 28,
+            "rationale": "The model failed to beat its constant predictor, and recent demand growth is likely driven by an external competitor's sale. Randomized history shows inconsistent results for coupons. Given the uncertainty and the need for further investigation, I am initiating a recommendation-only pilot to gather more data on offer response without committing to subsidies.",
+            "merchantIndices": [
+              0,
+              1,
+              2
+            ],
+            "epsilon": 0.05,
+            "strategy": "recommendations"
+          },
+          "model": {
+            "modelId": "COMPARE-D55-lite-MODEL",
+            "cutoff": 55,
+            "trainingRows": 1500,
+            "validationRows": 300,
+            "mse": 0.3105741374969213,
+            "baselineMse": 0.3147133322916662
+          },
+          "providerModels": [
+            "gemini-3.1-flash-lite"
+          ],
+          "usageUSD": 0.002838
+        },
+        "hybrid": {
+          "proposal": {
+            "retrain": false,
+            "rationale": "The model failed to beat the constant predictor and the recent demand increase is likely due to a competitor's sale. We will observe without interventions to gather more baseline data.",
+            "asOfDay": 55,
+            "epsilon": 0,
+            "merchantIndices": [],
+            "strategy": "observe",
+            "maxOfferPct": 0,
+            "windowDays": 28,
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-SCIENCE-VERIFIED-FACTS"
+            ],
+            "audience": "all"
+          },
+          "review": {
+            "decision": "approve",
+            "epsilon": 0,
+            "maxOfferPct": 0,
+            "rationale": "The model did not beat the constant predictor (MSE 0.3625 vs baseline 0.3418). A no-outreach observe strategy is valid when value is unsupported.",
+            "merchantIndices": [],
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-SCIENCE-VERIFIED-FACTS",
+              "COMPARE-D55-hybrid-FACTS",
+              "COMPARE-D55-hybrid-MODEL"
+            ],
+            "asOfDay": 55
+          },
+          "plan": {
+            "retrain": false,
+            "rationale": "The model failed to beat the constant predictor and the recent demand increase is likely due to a competitor's sale. We will observe without interventions to gather more baseline data.",
+            "asOfDay": 55,
+            "epsilon": 0,
+            "merchantIndices": [],
+            "strategy": "observe",
+            "maxOfferPct": 0,
+            "windowDays": 28,
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-2-SCIENCE-VERIFIED-FACTS"
+            ],
+            "audience": "all"
+          },
+          "model": {
+            "modelId": "COMPARE-D55-hybrid-MODEL",
+            "cutoff": 30,
+            "trainingRows": 1500,
+            "validationRows": 300,
+            "mse": 0.3625257012757937,
+            "baselineMse": 0.34183970138888886
+          },
+          "providerModels": [
+            "gemini-3.1-pro-preview-customtools"
+          ],
+          "usageUSD": 0.042398
+        }
+      }
+    },
+    {
+      "day": 80,
+      "trend": {
+        "id": "demand-trend",
+        "recent": 104,
+        "previous": 106,
+        "difference": -2,
+        "direction": "DOWN",
+        "percentageChange": -1.8867924528301887,
+        "scope": "Observed purchase counts in adjacent seven-day windows, not a causal campaign effect."
+      },
+      "merchants": [
+        {
+          "index": 0,
+          "name": "Willow Goods",
+          "stock": 40,
+          "maxOfferPct": 5
+        },
+        {
+          "index": 1,
+          "name": "Oak & Ink",
+          "stock": 73,
+          "maxOfferPct": 10
+        },
+        {
+          "index": 2,
+          "name": "Corner Supply",
+          "stock": 106,
+          "maxOfferPct": 10
+        }
+      ],
+      "variants": {
+        "lite": {
+          "proposal": {
+            "audience": "all",
+            "strategy": "mixed",
+            "rationale": "Randomized history shows a positive direct reward difference for 5% coupons applied to Willow Goods (merchant 0). Given the recent 1.89% decline in purchase volume and the merchant's 5% max offer limit, a targeted 5% coupon intervention for merchant 0 is appropriate to stabilize demand.",
+            "epsilon": 0.05,
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-SCIENCE-VERIFIED-FACTS"
+            ],
+            "maxOfferPct": 5,
+            "merchantIndices": [
+              0
+            ],
+            "retrain": false,
+            "windowDays": 28,
+            "asOfDay": 80
+          },
+          "review": {
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-SCIENCE-VERIFIED-FACTS",
+              "COMPARE-D80-lite-FACTS",
+              "COMPARE-D80-lite-MODEL"
+            ],
+            "rationale": "The proposal for Willow Goods (merchant 0) at 5% discount is supported by the randomized history (coupon5:0 shows positive direct reward difference) and respects the merchant's 5% max offer constraint. The model beats the constant predictor, and the pilot is within the remaining budget.",
+            "decision": "approve",
+            "epsilon": 0.05,
+            "maxOfferPct": 5,
+            "merchantIndices": [
+              0
+            ],
+            "asOfDay": 80
+          },
+          "plan": {
+            "audience": "all",
+            "strategy": "mixed",
+            "rationale": "Randomized history shows a positive direct reward difference for 5% coupons applied to Willow Goods (merchant 0). Given the recent 1.89% decline in purchase volume and the merchant's 5% max offer limit, a targeted 5% coupon intervention for merchant 0 is appropriate to stabilize demand.",
+            "epsilon": 0.05,
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-SCIENCE-VERIFIED-FACTS"
+            ],
+            "maxOfferPct": 5,
+            "merchantIndices": [
+              0
+            ],
+            "retrain": false,
+            "windowDays": 28,
+            "asOfDay": 80
+          },
+          "model": {
+            "modelId": "COMPARE-D80-lite-MODEL",
+            "cutoff": 55,
+            "trainingRows": 1500,
+            "validationRows": 300,
+            "mse": 0.3105741374969213,
+            "baselineMse": 0.3147133322916662
+          },
+          "providerModels": [
+            "gemini-3.1-flash-lite"
+          ],
+          "usageUSD": 0.002708
+        },
+        "hybrid": {
+          "proposal": {
+            "merchantIndices": [
+              0
+            ],
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-SCIENCE-VERIFIED-FACTS"
+            ],
+            "audience": "all",
+            "asOfDay": 80,
+            "rationale": "A competitor's sale ended on day 60, and purchase counts have dropped. Randomized history shows a positive direct reward difference for 5% coupons on merchant 0 (Willow Goods) with sufficient sample size. Retraining the model to capture the post-sale environment.",
+            "retrain": true,
+            "windowDays": 28,
+            "maxOfferPct": 5,
+            "strategy": "mixed",
+            "epsilon": 0.1
+          },
+          "review": {
+            "epsilon": 0.1,
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-SCIENCE-VERIFIED-FACTS",
+              "COMPARE-D80-hybrid-FACTS",
+              "COMPARE-D80-hybrid-MODEL"
+            ],
+            "rationale": "The proposal is supported by mature randomized history showing a positive direct reward difference for coupon5:0 on the 'all' audience with sufficient sample sizes (Treated N=62, Control N=76). The model beats the constant predictor and there are no new market announcements.",
+            "merchantIndices": [
+              0
+            ],
+            "decision": "approve",
+            "maxOfferPct": 5,
+            "asOfDay": 80
+          },
+          "plan": {
+            "merchantIndices": [
+              0
+            ],
+            "evidenceIds": [
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-EVIDENCE",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-INVESTIGATION",
+              "GARDEN-LAB-34d3bea264e0c053-REVIEW-3-SCIENCE-VERIFIED-FACTS"
+            ],
+            "audience": "all",
+            "asOfDay": 80,
+            "rationale": "A competitor's sale ended on day 60, and purchase counts have dropped. Randomized history shows a positive direct reward difference for 5% coupons on merchant 0 (Willow Goods) with sufficient sample size. Retraining the model to capture the post-sale environment.",
+            "retrain": true,
+            "windowDays": 28,
+            "maxOfferPct": 5,
+            "strategy": "mixed",
+            "epsilon": 0.1
+          },
+          "model": {
+            "modelId": "COMPARE-D80-hybrid-MODEL",
+            "cutoff": 80,
+            "trainingRows": 1500,
+            "validationRows": 300,
+            "mse": 0.30575041766744676,
+            "baselineMse": 0.306740469166668
+          },
+          "providerModels": [
+            "gemini-3.1-pro-preview-customtools"
+          ],
+          "usageUSD": 0.039318
+        }
+      }
+    }
+  ],
+  "catalog": [
+    {
+      "title": "JAM Paper Desk Supply Assortment Pack, Red, 1 Rubber Bands 1 Binder Clips 1 Coloured Staples 1 Regular Paperclips (3345REASRTD)",
+      "channel3Id": "w7qtfaR",
+      "priceCents": 3199
+    },
+    {
+      "title": "JAM Paper Desk Essentials Office Supply Kit",
+      "channel3Id": "oPnCNpb",
+      "priceCents": 3199
+    },
+    {
+      "title": "Starter Bundles",
+      "channel3Id": "8IbOPfD",
+      "priceCents": 8900
+    }
+  ],
+  "scope": "One known development seed, identical recorded evidence, six fresh generated decisions per model. MEDIUM reasoning. Same campaign limits and one-day publication delay. No new payments.",
+  "disclosure": "Platform values are modeled under simulator assumptions. No-campaign wins. Recorded analyst cost is reported separately; adding it to both teams lowers each result equally. The Pro endpoint is the officially supported custom-tools variant. Two standard-Pro requests were rejected at zero cost.",
+  "budget": "Actual new model usage estimate, not invoice. Total trial limit$0.50. Pro admission reserve cap reallocated to$0.30; app campaigns remain$0.25.",
+  "replayCorrection": "A resumed model artifact was initially missing. Corrected using saved training rows; MSE, baseline MSE, row counts and cutoff match every actual reviewer input. No decisions or model costs changed. Superseded result retained."
+}

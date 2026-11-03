@@ -1,0 +1,18 @@
+export const TABLES=['behavior_actions','behavior_lifecycle','behavior_outside','behavior_daily'];
+export const VIEWS=['v_behavior_financials'];
+export const DICTIONARY={behavior_actions:'Version3 executed campaign actions and no-actions. Customer intent and campaign rationale are observable; private preferences are excluded.',behavior_lifecycle:'Evaluator/visualization truth for synthetic acquisition, dormancy and reactivation. Never sent to the agent as input.',behavior_outside:'Evaluator-only cash leaving the PayPal network: competing retailer purchases and household spending. No native financial transactions.',behavior_daily:'Day-level version3 shopper states and activity, for visualization and evaluation.',v_behavior_financials:'Modeled version3 sales-cohort fees less credited refund fees, processing, support and outreach. Not actual PayPal profit.'};
+export const SCHEMA=`
+CREATE TABLE IF NOT EXISTS behavior_actions(action_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),day INTEGER,customer_id TEXT REFERENCES customers(customer_id),product_id TEXT REFERENCES products(product_id),kind TEXT,offered_pct INTEGER,outreach_cents INTEGER,platform_support_cents INTEGER,order_id TEXT REFERENCES orders(order_id),reason TEXT,source TEXT);
+CREATE TABLE IF NOT EXISTS behavior_lifecycle(transition_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),day INTEGER,customer_id TEXT REFERENCES customers(customer_id),previous_state TEXT,next_state TEXT,reason TEXT,order_id TEXT REFERENCES orders(order_id),source TEXT);
+CREATE TABLE IF NOT EXISTS behavior_outside(outside_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),day INTEGER,customer_id TEXT REFERENCES customers(customer_id),kind TEXT,gross_cents INTEGER,refund_cents INTEGER,source TEXT);
+CREATE TABLE IF NOT EXISTS behavior_daily(daily_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),day INTEGER,orders INTEGER,gross_cents INTEGER,active INTEGER,dormant INTEGER,prospects INTEGER,recommendations INTEGER,coupons INTEGER,redemptions INTEGER,source TEXT);
+CREATE INDEX IF NOT EXISTS behavior_actions_run ON behavior_actions(run_id,day);
+CREATE INDEX IF NOT EXISTS behavior_lifecycle_run ON behavior_lifecycle(run_id,day);
+CREATE INDEX IF NOT EXISTS behavior_daily_run ON behavior_daily(run_id,day);
+CREATE INDEX IF NOT EXISTS behavior_outside_run ON behavior_outside(run_id,day);
+CREATE VIEW IF NOT EXISTS v_behavior_financials AS
+WITH sales AS (SELECT o.run_id,o.event_date,COUNT(*) purchases,SUM(o.total_cents-COALESCE(r.amount_cents,0)) retained_cents,SUM(CASE WHEN r.refund_id IS NULL THEN t.fee_cents ELSE 0 END-ROUND(o.total_cents*.012)-20) margin_before_campaign_cents FROM orders o JOIN transactions t USING(order_id) LEFT JOIN refunds r USING(order_id) WHERE EXISTS(SELECT1 FROM behavior_daily b WHERE b.run_id=o.run_id) GROUP BY o.run_id,o.event_date),
+spend AS(SELECT a.run_id,date(s.started_at,'+'||a.day||' days','+8 hours') event_date,SUM(a.outreach_cents+a.platform_support_cents) campaign_cents FROM behavior_actions a JOIN simulation_runs s USING(run_id) GROUP BY a.run_id,a.day),
+keys AS(SELECT run_id,event_date FROM sales UNION SELECT run_id,event_date FROM spend)
+SELECT k.run_id,k.event_date,COALESCE(s.purchases,0) purchases,COALESCE(s.retained_cents,0) retained_cents,COALESCE(s.margin_before_campaign_cents,0) margin_before_campaign_cents,COALESCE(p.campaign_cents,0) campaign_cents,COALESCE(s.margin_before_campaign_cents,0)-COALESCE(p.campaign_cents,0) platform_proxy_cents FROM keys k LEFT JOIN sales s USING(run_id,event_date) LEFT JOIN spend p USING(run_id,event_date);
+`.replace('SELECT1','SELECT 1');

@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "code": {
+    "scripts/focused-recovery/economy.mjs": "7735ce5d288774016a14247b5f8684148e8e8e8f38e3e19ee84747a6987abb57",
+    "scripts/focused-recovery/world.mjs": "c21d36e7c0fbc72d4e6de54bcb3dc9dc0ba70cee3a2fbb2c3c17c62e2968d474",
+    "scripts/focused-recovery/benchmark.mjs": "bfc211d56dca2bd68602893aef41a5fb10f2e93a3ad2e4739e6801b0c1be3d15",
+    "scripts/agent-mesh/recovery-policy.mjs": "42086a73beb188844a4e437448a755997c848f4b789aab34e447d4e67b5b2045",
+    "scripts/agent-mesh/aggressive-policy.mjs": "c81e4a6cc26f8b31850d22ba41719d039ad0e1f1a53d078285e77fd177a7cbbd"
+  },
+  "originalBenchmarkHash": "a414246ce78e0fec05ece95b711d46532bf384c1026fa54cb27ac45446602b27",
+  "catalogHash": "5a2ed6057e2e24d31079a9aa9ce8fba66500502dff7775ee9aca6cc3b85e95dd",
+  "developmentSeeds": [
+    114001,
+    114002,
+    114003
+  ],
+  "confirmationSeeds": [
+    117001,
+    117002,
+    117003,
+    117004,
+    117005,
+    117006,
+    117007,
+    117008
+  ],
+  "scenarios": [
+    "steady",
+    "rival_sale",
+    "budget_squeeze",
+    "supply_delay",
+    "returns_wave"
+  ],
+  "policies": [
+    {
+      "id": "organic",
+      "focus": false
+    },
+    {
+      "id": "broad-quality-route",
+      "focus": false
+    },
+    {
+      "id": "exposed-customers",
+      "focus": true
+    },
+    {
+      "id": "exposed-high-value",
+      "focus": true,
+      "floor": 0.5
+    },
+    {
+      "id": "exposed-refunded",
+      "focus": true,
+      "requireRefund": true
+    },
+    {
+      "id": "exposed-lapsed",
+      "focus": true,
+      "requireLapsed": true
+    }
+  ],
+  "days": 400,
+  "campaignDays": [
+    30,
+    199
+  ],
+  "customers": 100,
+  "budgetCents": 5000,
+  "allocatedInferenceUSD": 0.1,
+  "selection": "Select highest mean400-day paired platform value, requiring positive lower95% and nonnegative merchant lower95% in development. Then lock. No confirmation tuning.",
+  "scope": "Original closed-market economics. New observable policy condition: last merchant is in the current high-return group. Same recent40 mature-order risk estimator for all policies. Expand campaign authority equally from70 to170days, then200days without new outreach. No changed fees, response, demand, price, latent traits or inventory.",
+  "observations": "Prior merchant identity, past observed refund count, recency, public product price, matured merchant return rates. No future refunds or hidden preferences.",
+  "demo": {
+    "seed": 118001,
+    "scenario": "returns_wave"
+  },
+  "cloudCalls": 0,
+  "hash": "30a85b4b4cb5ca2b2e259f49596665d44d81f407cec05bfd4799037d556a5da6"
+}

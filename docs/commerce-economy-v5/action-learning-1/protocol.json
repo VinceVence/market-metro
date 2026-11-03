@@ -1,0 +1,239 @@
+{
+  "createdAt": "2026-10-31T10:32:39.954Z",
+  "episodes": [
+    {
+      "seed": 650000,
+      "scenario": "steady",
+      "split": "train"
+    },
+    {
+      "seed": 650001,
+      "scenario": "rival_sale",
+      "split": "train"
+    },
+    {
+      "seed": 650002,
+      "scenario": "budget_squeeze",
+      "split": "train"
+    },
+    {
+      "seed": 650003,
+      "scenario": "returns_wave",
+      "split": "train"
+    },
+    {
+      "seed": 650004,
+      "scenario": "preference_shift",
+      "split": "train"
+    },
+    {
+      "seed": 650005,
+      "scenario": "supply_delay",
+      "split": "train"
+    },
+    {
+      "seed": 650006,
+      "scenario": "steady",
+      "split": "train"
+    },
+    {
+      "seed": 650007,
+      "scenario": "rival_sale",
+      "split": "train"
+    },
+    {
+      "seed": 650008,
+      "scenario": "budget_squeeze",
+      "split": "train"
+    },
+    {
+      "seed": 650009,
+      "scenario": "returns_wave",
+      "split": "train"
+    },
+    {
+      "seed": 650010,
+      "scenario": "preference_shift",
+      "split": "train"
+    },
+    {
+      "seed": 650011,
+      "scenario": "supply_delay",
+      "split": "train"
+    },
+    {
+      "seed": 650012,
+      "scenario": "steady",
+      "split": "model_validation"
+    },
+    {
+      "seed": 650013,
+      "scenario": "rival_sale",
+      "split": "model_validation"
+    },
+    {
+      "seed": 650014,
+      "scenario": "budget_squeeze",
+      "split": "model_validation"
+    },
+    {
+      "seed": 650015,
+      "scenario": "returns_wave",
+      "split": "model_validation"
+    },
+    {
+      "seed": 650016,
+      "scenario": "preference_shift",
+      "split": "model_validation"
+    },
+    {
+      "seed": 650017,
+      "scenario": "supply_delay",
+      "split": "model_validation"
+    }
+  ],
+  "businesses": {
+    "commercial": {
+      "demand": {
+        "stockDays": [
+          14,
+          14,
+          14
+        ],
+        "windowDays": 14,
+        "useLostDemand": false,
+        "topK": 4,
+        "retrainDays": 28
+      },
+      "economics": {
+        "pricePct": [
+          0,
+          -10,
+          10
+        ],
+        "merchantRail": "auto",
+        "supplierRail": "paypal"
+      },
+      "lifecycle": {
+        "marketing": "weekly_featured",
+        "subscriptions": true,
+        "interval": "observed",
+        "minimumRepeat": 3,
+        "discountPct": 0
+      }
+    },
+    "fast": {
+      "demand": {
+        "stockDays": [
+          14,
+          14,
+          14
+        ],
+        "windowDays": 14,
+        "useLostDemand": false,
+        "topK": 4,
+        "retrainDays": 28
+      },
+      "economics": {
+        "pricePct": [
+          0,
+          -10,
+          10
+        ],
+        "merchantRail": "paypal",
+        "supplierRail": "paypal"
+      },
+      "lifecycle": {
+        "marketing": "weekly_featured",
+        "subscriptions": true,
+        "interval": "observed",
+        "minimumRepeat": 3,
+        "discountPct": 0
+      }
+    }
+  },
+  "settings": {
+    "customers": 100,
+    "days": 100,
+    "campaignStop": 90,
+    "budgetCents": 5000
+  },
+  "snapshotDays": [
+    30,
+    35,
+    49,
+    63
+  ],
+  "customersPerSnapshot": 4,
+  "actionsPerCustomer": 4,
+  "features": [
+    "recency",
+    "purchases7",
+    "purchases28",
+    "visits7",
+    "spend7",
+    "spend28",
+    "meanPaid",
+    "upperPaid",
+    "price",
+    "priceVsUpper",
+    "categoryShare",
+    "skuSeen",
+    "intentMatch",
+    "freshIntent",
+    "intentAge",
+    "familiarMerchant",
+    "observedReturns",
+    "contacts7",
+    "stock",
+    "unitMargin",
+    "unitPaymentContribution",
+    "payday",
+    "categoryStationery",
+    "categoryElectronics",
+    "categoryFurniture",
+    "categoryBundles",
+    "merchantMatureReturnRate",
+    "merchantMatureOrders",
+    "candidateVsOriginalList",
+    "recentCategoryViewShare",
+    "recentCategoryPurchaseShare",
+    "skuContactRecency",
+    "skuPurchaseRecency",
+    "longMeanPaid",
+    "longMaxPaid",
+    "totalPastPurchases",
+    "incumbentPresent",
+    "sameIncumbentCategory",
+    "priceDifferenceToIncumbent",
+    "incumbentCategoryShare",
+    "merchantRailBank",
+    "merchantRailAuto",
+    "merchantRailPayPal",
+    "supplierRailBank",
+    "supplierRailAuto",
+    "supplierRailPayPal",
+    "suppress",
+    "coupon",
+    "subscription",
+    "intervalDays",
+    "discountPct",
+    "incumbentSubscription",
+    "incumbentDiscount",
+    "remainingOutcomeDays"
+  ],
+  "labelHorizonDays": 28,
+  "returnFollowupDays": 14,
+  "scope": "Paired simulator training experiments over recommendation, suppression, bounded coupon and optional replenishment invitations. One customer action changes; other decisions follow the incumbent. Models receive observed features, per-customer28-day retained retail contribution advantages and auxiliary global outcomes. No new economic dynamics, oracle access at inference, native payments or model API calls. Active mandates are never overwritten; replenishment invitations use previously purchased consumables at at most110% of their observed prior payment.",
+  "hashes": {
+    "scripts/commerce-economy-v5/engine.mjs": "0f53b513cad90ba9a5bc0c389ac6d5a05318a74414a1fe5d622e2cff87695913",
+    "scripts/commerce-economy-v5/operations.mjs": "497d39303192b84bef382032f7b5643ff6c8042acf72cd3ca08a9f5a233b323e",
+    "scripts/commerce-economy-v5/network.mjs": "a80b225e6f6130656849a4ed881075eb1fdc5815b9a74fb24b1631eb51730c24",
+    "scripts/commerce-economy-v5/policies.mjs": "ac505ea2eba47972578587cbd87575886c2d2b7dc73776a723d6123b51e38ccb",
+    "scripts/commerce-economy-v5/learning/features.mjs": "758aa21dde0743b0969a818c4fe91801bb486316eedc96433f6bb16a53a26a3b",
+    "scripts/commerce-economy-v5/learning/pair-features.mjs": "d0d59d6917f94447f1625044b34c876a3b46a5dec8f3e7ed5d3579cc57585c2a",
+    "scripts/commerce-economy-v5/learning/actions.mjs": "570291c51ddb8a3e743bd99260303c47f1d84ca3f3fba11badf051f496143837",
+    "scripts/commerce-economy-v5/learning/generate-actions.mjs": "928395b5339465793ee70a05af4d87054f465cda7f98ba2c191a639d2ce4fab4"
+  },
+  "hash": "2cdaf89611cf90f771ec118c2a96fd447e432abcbf7d7a4b12c69b372fcd305d"
+}

@@ -1,0 +1,19 @@
+// Offline, paired historical policy interventions. This tool is not exposed to
+// agents during fresh evaluation; only the resulting fitted value model is.
+import {readFile,writeFile,mkdir,copyFile} from 'node:fs/promises';import {createHash} from 'node:crypto';
+import {observeGrowthWorld,CONTRACT} from '../environment.mjs';import {openAllocator} from '../../commerce-deadlines/solver.mjs';
+import {VALUE_ACTIONS,valueResources,policyPrefix,contextFeatures,finishPolicy} from './policy-value.mjs';
+const additional=process.argv.includes('--additional'),dir='docs/commerce-growth/roc-net-goal-1/policy-value-training-'+(additional?'2':'1'),read=async p=>JSON.parse(await readFile(p,'utf8'));await mkdir(dir);
+const resources=await valueResources(),core=await read('docs/commerce-growth/development-1/protocol.json'),earlier=await read('docs/commerce-growth/roc-net-goal-1/pilot-2/protocol.json'),reference=(await read('docs/commerce-growth/roc-net-goal-1/pilot-2/confirmation-rows.json')).numerical,rows=[],allocator=openAllocator();
+const decision=additional?await read('docs/commerce-growth/roc-net-goal-1/policy-research-decision.json'):null,cases=additional?Object.keys(CONTRACT.regimes).map((regime,i)=>({regime,seed:995610+i})):earlier.confirmation;
+if(additional&&(decision.status!=='COMPLETED'||decision.output.target!=='fit_policy_value'||decision.output.collection!=='add_seven_markets'))throw Error('ADDITIONAL_DATA_NOT_SELECTED_BY_RESEARCH_AGENT');
+async function verify(){for(const [p,h]of Object.entries(core.sourceHashes))if(createHash('sha256').update(await readFile(p)).digest('hex')!==h)throw Error('ECONOMY_CHANGED');}
+await verify();await writeFile(dir+'/protocol.json',JSON.stringify({source:'OFFLINE_PAIRED_HISTORICAL_POLICY_INTERVENTIONS',cases,reviewDay:45,actions:VALUE_ACTIONS,reference:'continue_numerical',economyHashes:core.sourceHashes,modelCalls:0,freshConfirmation:false,researchDecision:decision?.evidenceId||null,scope:'Training only. Same day45 state and common future shocks for all four continuations. Only public observations become features. Outcomes are training labels, never runtime-agent observations.'},null,2)+'\n');
+await copyFile('scripts/commerce-growth/autonomy/policy-value.mjs',dir+'/policy-value.mjs');await copyFile('scripts/commerce-growth/autonomy/collect-policy-value.mjs',dir+'/collect-policy-value.mjs');
+try{for(const settings of cases){const prefix=await policyPrefix(settings,resources,allocator),features=contextFeatures(observeGrowthWorld(prefix.w),resources),group=[];
+ for(const action of VALUE_ACTIONS){const result=await finishPolicy(prefix,action,resources,allocator);if(action==='continue_numerical'&&!additional){const saved=reference.find(r=>r.seed===settings.seed);for(const k of ['platformUSD','retailerUSD','retainedPurchases','retainedVolumeUSD','contactCount'])if(Math.abs(result[k]-saved[k])>.000001)throw Error('CONTINUATION_PARITY_FAILED_'+k);}
+  group.push({market:settings.seed,regime:settings.regime,features,result});console.log(JSON.stringify({seed:settings.seed,action,net:result.platformUSD,retailer:result.retailerUSD}));
+ }
+ const base=group[0].result;for(const row of group)rows.push({...row,target:{platformDeltaUSD:row.result.platformUSD-base.platformUSD,retailerDeltaUSD:row.result.retailerUSD-base.retailerUSD,purchaseDelta:row.result.retainedPurchases-base.retainedPurchases,unpaidLiabilities:row.result.unpaidLiabilities}});
+ await writeFile(dir+'/dataset.json',JSON.stringify({rows},null,2)+'\n');await writeFile(dir+'/progress.json',JSON.stringify({status:'RUNNING',markets:rows.length/VALUE_ACTIONS.length,rows:rows.length},null,2)+'\n');
+}await verify();await writeFile(dir+'/progress.json',JSON.stringify({status:'COMPLETED',markets:rows.length/VALUE_ACTIONS.length,rows:rows.length,continuationParityPassed:additional?'Established by original14-market audit':true,economyUnchanged:true,modelCalls:0},null,2)+'\n');}finally{allocator.close();}

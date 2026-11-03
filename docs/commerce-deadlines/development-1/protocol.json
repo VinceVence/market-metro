@@ -1,0 +1,165 @@
+{
+  "createdAt": "2026-10-31T13:42:41.930Z",
+  "version": "deadline-commerce-1",
+  "rules": {
+    "customers": 100,
+    "days": 100,
+    "warmupDays": 30,
+    "followupDays": 26,
+    "merchantCashCents": 150000,
+    "feeRate": 0.0349,
+    "feeFixedCents": 49,
+    "processingRate": 0.012,
+    "processingFixedCents": 20,
+    "deliveryCents": 350,
+    "bankFeeCents": 25,
+    "bankLagDays": 2,
+    "physicalLeadDays": 3,
+    "returnProbability": 0.035,
+    "returnWindowDays": 14,
+    "holdingRatePerDay": 0.0002,
+    "minimumReturnCashBuffer": 0.1
+  },
+  "scenarios": {
+    "ordinary": {
+      "requestsPerDay": 4,
+      "initialStock": 6,
+      "minDeadline": 8,
+      "maxDeadline": 12,
+      "maxLines": 2
+    },
+    "scarce_stock": {
+      "requestsPerDay": 6,
+      "initialStock": 1,
+      "minDeadline": 6,
+      "maxDeadline": 12,
+      "maxLines": 2
+    },
+    "concentrated_needs": {
+      "requestsPerDay": 6,
+      "initialStock": 2,
+      "minDeadline": 5,
+      "maxDeadline": 10,
+      "maxLines": 2
+    },
+    "mixed_deadlines": {
+      "requestsPerDay": 6,
+      "initialStock": 2,
+      "minDeadline": 3,
+      "maxDeadline": 12,
+      "maxLines": 3
+    },
+    "supplier_delay": {
+      "requestsPerDay": 5,
+      "initialStock": 2,
+      "minDeadline": 6,
+      "maxDeadline": 12,
+      "maxLines": 2
+    },
+    "preference_shift": {
+      "requestsPerDay": 5,
+      "initialStock": 2,
+      "minDeadline": 5,
+      "maxDeadline": 10,
+      "maxLines": 3
+    }
+  },
+  "cases": [
+    {
+      "seed": 970100,
+      "scenario": "ordinary"
+    },
+    {
+      "seed": 970101,
+      "scenario": "scarce_stock"
+    },
+    {
+      "seed": 970102,
+      "scenario": "concentrated_needs"
+    },
+    {
+      "seed": 970103,
+      "scenario": "mixed_deadlines"
+    },
+    {
+      "seed": 970104,
+      "scenario": "supplier_delay"
+    },
+    {
+      "seed": 970105,
+      "scenario": "preference_shift"
+    }
+  ],
+  "fixed": [
+    {
+      "id": "fixed_deadline",
+      "allocation": "deadline",
+      "coverDays": 7,
+      "routing": "auto",
+      "target": "cheap"
+    },
+    {
+      "id": "fixed_scarcity",
+      "allocation": "scarcity",
+      "coverDays": 7,
+      "routing": "auto",
+      "target": "preferred"
+    },
+    {
+      "id": "fixed_margin",
+      "allocation": "margin",
+      "coverDays": 3,
+      "routing": "auto",
+      "target": "preferred"
+    },
+    {
+      "id": "fixed_preference",
+      "allocation": "preference",
+      "coverDays": 7,
+      "routing": "auto",
+      "target": "preferred"
+    },
+    {
+      "id": "fixed_fast",
+      "allocation": "scarcity",
+      "coverDays": 3,
+      "routing": "fast",
+      "target": "preferred"
+    }
+  ],
+  "joint": [
+    {
+      "id": "joint_auto",
+      "allocation": "joint",
+      "coverDays": 7,
+      "routing": "auto",
+      "target": "preferred"
+    },
+    {
+      "id": "joint_lean",
+      "allocation": "joint",
+      "coverDays": 0,
+      "routing": "auto",
+      "target": "cheap"
+    },
+    {
+      "id": "joint_fast",
+      "allocation": "joint",
+      "coverDays": 3,
+      "routing": "fast",
+      "target": "preferred"
+    }
+  ],
+  "hashes": {
+    "scripts/commerce-deadlines/environment.mjs": "52af591f7a5b5454448d11248e86d2e4324d9504eccf7d9525773fbfac822cec",
+    "scripts/commerce-deadlines/suppliers.mjs": "fe8fb8c471383492ea8a28e77f4e73894b7d0a87ceb835246743337a11cba682",
+    "scripts/commerce-deadlines/policies.mjs": "c1df75eac6bc1388c337b0f44dd825343479833ffc52cc6b4b49841693c81d36",
+    "scripts/commerce-deadlines/allocator.py": "901e0c66fb95ad7865b8a4b681f432d02280a59141a310e39fcd9f910108f168",
+    "scripts/commerce-deadlines/solver.mjs": "faf1e3627a30cb158f2f6f0a4bdcbf1265a5edbb09711509339e777d79d852c8",
+    "scripts/commerce-deadlines/evaluate.mjs": "86eb61c7844cafab523a9cf4647a9518140a6ee10023dd50750f3f0005d21c0b",
+    "scripts/commerce-deadlines/development.mjs": "fdc5c6fafe53f4a4abc6e0535d176cd151f2346f7fc57a144c65c1c1d444b5ea"
+  },
+  "scope": "First complete development audit only. No hidden validation or final test seeds. Both fixed and numerical planners get the same bounded basket generator, rolling Gamma-Poisson demand model, observed funding, stock, supplier quotes and legal payment tools. They start from identical30-day fixed-workflow history.100 market days plus26 days to cover late deadlines and refunds; no new wages/requests during followup. All results and negative outcomes retained. No LLM calls or native PayPal operations.",
+  "advancement": "Choose the strongest fixed workflow on development. A candidate needs >=2x platform contribution, nonnegative retailer and supplier contribution changes, terminal cash not below fixed, inventory <=110% fixed, no unpaid liabilities and no invariant failures before fresh validation. Numerical headroom does not prove multi-agent or LLM value.",
+  "hash": "59677d2c4afdd4c07a4c6c0438c7ab6c38bd26b970c6ce5042976aa639e19894"
+}

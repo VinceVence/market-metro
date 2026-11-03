@@ -1,0 +1,297 @@
+{
+  "createdAt": "2026-11-01T07:12:18.012Z",
+  "first": {
+    "id": "complete_baskets",
+    "hypothesis": "Commit cash to complete funded baskets using existing or arriving approved alternatives, before speculative stock.",
+    "program": {
+      "historyDays": 7,
+      "cashFraction": 0.5,
+      "rail": "fast",
+      "contactGate": {
+        "op": "gt",
+        "args": [
+          {
+            "field": "expected_net_usd"
+          },
+          0
+        ]
+      },
+      "contactScore": {
+        "op": "div",
+        "args": [
+          {
+            "field": "expected_net_usd"
+          },
+          {
+            "op": "add",
+            "args": [
+              1,
+              {
+                "op": "mul",
+                "args": [
+                  0.15,
+                  {
+                    "field": "age"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "basketScore": {
+        "field": "platform_usd"
+      },
+      "stockTarget": {
+        "op": "add",
+        "args": [
+          {
+            "field": "funded_units"
+          },
+          {
+            "op": "mul",
+            "args": [
+              {
+                "field": "rate14"
+              },
+              {
+                "op": "min",
+                "args": [
+                  10,
+                  {
+                    "field": "days_remaining"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "stockPriority": {
+        "op": "div",
+        "args": [
+          {
+            "op": "add",
+            "args": [
+              {
+                "field": "funded_units"
+              },
+              {
+                "field": "rate14"
+              }
+            ]
+          },
+          {
+            "field": "unit_cost_usd"
+          }
+        ]
+      },
+      "fulfillment": "funded_baskets"
+    }
+  },
+  "revision": {
+    "id": "balanced_complete_baskets",
+    "hypothesis": "Blend historical and intent stock targets at48% intent weight: the two measured endpoints harm different retailers, and the inventory guard limits the admissible mixture.",
+    "program": {
+      "historyDays": 7,
+      "cashFraction": 0.5,
+      "rail": "fast",
+      "contactGate": {
+        "op": "gt",
+        "args": [
+          {
+            "field": "expected_net_usd"
+          },
+          0
+        ]
+      },
+      "contactScore": {
+        "op": "div",
+        "args": [
+          {
+            "field": "expected_net_usd"
+          },
+          {
+            "op": "add",
+            "args": [
+              1,
+              {
+                "op": "mul",
+                "args": [
+                  0.15,
+                  {
+                    "field": "age"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "basketScore": {
+        "field": "platform_usd"
+      },
+      "stockTarget": {
+        "op": "add",
+        "args": [
+          {
+            "op": "mul",
+            "args": [
+              0.52,
+              {
+                "op": "add",
+                "args": [
+                  {
+                    "field": "funded_units"
+                  },
+                  {
+                    "op": "mul",
+                    "args": [
+                      {
+                        "field": "rate14"
+                      },
+                      {
+                        "op": "min",
+                        "args": [
+                          10,
+                          {
+                            "field": "days_remaining"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "mul",
+            "args": [
+              0.48,
+              {
+                "op": "add",
+                "args": [
+                  {
+                    "field": "funded_units"
+                  },
+                  {
+                    "op": "max",
+                    "args": [
+                      {
+                        "op": "mul",
+                        "args": [
+                          {
+                            "field": "rate7"
+                          },
+                          {
+                            "op": "min",
+                            "args": [
+                              10,
+                              {
+                                "field": "days_remaining"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "op": "mul",
+                        "args": [
+                          {
+                            "field": "recent_interest"
+                          },
+                          {
+                            "field": "response_rate"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "stockPriority": {
+        "op": "div",
+        "args": [
+          {
+            "op": "add",
+            "args": [
+              {
+                "field": "funded_units"
+              },
+              {
+                "field": "rate14"
+              }
+            ]
+          },
+          {
+            "field": "unit_cost_usd"
+          }
+        ]
+      },
+      "fulfillment": "funded_baskets"
+    }
+  },
+  "actorOrigin": "DEVELOPMENT_ASSISTANT_IN_CHAT_NO_APPLICATION_LLM",
+  "evidence": [
+    {
+      "id": "complete_baskets",
+      "programHash": "cd0f1305e4e848723e8b3ba40d391578615910562dbfd0eda0b3d6b94dd8270a",
+      "mean": {
+        "platformUSD": 714.54,
+        "retailerUSD": 8306.227142857142,
+        "wholesalerUSD": 1704.5800000000002,
+        "manufacturerUSD": 1642.2957142857144,
+        "allPartnerUSD": 11653.102857142856,
+        "terminalCashUSD": 27623.07285714286,
+        "terminalInventoryUSD": 3193.7342857142858,
+        "retainedPurchases": 128.14285714285714,
+        "retainedVolumeUSD": 18738.85714285714,
+        "recommendationPurchases": 17.571428571428573,
+        "outreachCostUSD": 27.592857142857145,
+        "unpaidLiabilities": 0
+      },
+      "merchantDeltas": {
+        "MERCHANT-0": -23.990000000000123,
+        "MERCHANT-1": 390.3299999999999,
+        "MERCHANT-2": 29.14142857142849
+      },
+      "ratio": 1.0350187789055467,
+      "deltaVsSameOutreachSKUPlannerUSD": 1.0628571428571831,
+      "cashContributionPassed": false,
+      "originalInventoryPassed": true
+    },
+    {
+      "id": "complete_baskets_with_intent",
+      "programHash": "57ee263190645108a6feaffe5fcb77494660395e4276083d67e25526f28f5878",
+      "mean": {
+        "platformUSD": 733.9971428571429,
+        "retailerUSD": 8315.542857142858,
+        "wholesalerUSD": 1858.3071428571427,
+        "manufacturerUSD": 1790.6342857142859,
+        "allPartnerUSD": 11964.484285714283,
+        "terminalCashUSD": 27399.64857142857,
+        "terminalInventoryUSD": 3728.54,
+        "retainedPurchases": 128.57142857142858,
+        "retainedVolumeUSD": 18794,
+        "recommendationPurchases": 18.142857142857142,
+        "outreachCostUSD": 27.61428571428571,
+        "unpaidLiabilities": 0
+      },
+      "merchantDeltas": {
+        "MERCHANT-0": 28.78714285714284,
+        "MERCHANT-1": 394.2728571428579,
+        "MERCHANT-2": -18.26285714285723
+      },
+      "ratio": 1.0632026569823385,
+      "deltaVsSameOutreachSKUPlannerUSD": 20.520000000000095,
+      "cashContributionPassed": false,
+      "originalInventoryPassed": false
+    }
+  ],
+  "warning": "Interpolating measured outcomes proposes an experiment; nonlinear simulation outcomes are not assumed to interpolate."
+}

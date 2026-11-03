@@ -1,0 +1,167 @@
+{
+  "createdAt": "2026-10-31T11:14:11.693Z",
+  "roles": [
+    "Commercial Systems Strategist",
+    "Lifecycle and Liquidity Scientist"
+  ],
+  "maxProviderCalls": 2,
+  "capUSD": 0.25,
+  "project": "supply-yard-pilot-261021",
+  "settings": {
+    "customers": 100,
+    "days": 100,
+    "campaignStop": 90,
+    "budgetCents": 5000
+  },
+  "training": [
+    {
+      "scenario": "steady",
+      "seed": 550100
+    },
+    {
+      "scenario": "rival_sale",
+      "seed": 550101
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 550102
+    },
+    {
+      "scenario": "returns_wave",
+      "seed": 550103
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 550104
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 550105
+    }
+  ],
+  "validation": [
+    {
+      "scenario": "steady",
+      "seed": 746200
+    },
+    {
+      "scenario": "rival_sale",
+      "seed": 746201
+    },
+    {
+      "scenario": "budget_squeeze",
+      "seed": 746202
+    },
+    {
+      "scenario": "returns_wave",
+      "seed": 746203
+    },
+    {
+      "scenario": "preference_shift",
+      "seed": 746204
+    },
+    {
+      "scenario": "supply_delay",
+      "seed": 746205
+    }
+  ],
+  "reference": {
+    "id": "fixed-category_interest",
+    "kind": "discovery",
+    "business": {
+      "demand": {
+        "stockDays": [
+          14,
+          14,
+          14
+        ],
+        "windowDays": 14,
+        "useLostDemand": false,
+        "topK": 4,
+        "retrainDays": 14
+      },
+      "economics": {
+        "pricePct": [
+          0,
+          0,
+          0
+        ],
+        "merchantRail": "auto",
+        "supplierRail": "auto"
+      },
+      "lifecycle": {
+        "marketing": "weekly_featured",
+        "subscriptions": true,
+        "interval": "observed",
+        "minimumRepeat": 2,
+        "discountPct": 0
+      }
+    },
+    "discovery": "category_interest",
+    "intervalDays": 7,
+    "modelName": "ridge",
+    "thresholdCents": 0
+  },
+  "incumbent": {
+    "kind": "discovery",
+    "business": {
+      "demand": {
+        "stockDays": [
+          14,
+          28,
+          14
+        ],
+        "windowDays": 14,
+        "useLostDemand": true,
+        "topK": 4,
+        "retrainDays": 28
+      },
+      "economics": {
+        "pricePct": [
+          10,
+          0,
+          0
+        ],
+        "merchantRail": "paypal",
+        "supplierRail": "paypal"
+      },
+      "lifecycle": {
+        "marketing": "weekly_featured",
+        "subscriptions": false,
+        "interval": 7,
+        "minimumRepeat": 3,
+        "discountPct": 0
+      }
+    },
+    "modelName": "ridge",
+    "thresholdCents": 0,
+    "id": "observed_value-7",
+    "discovery": "observed_value",
+    "intervalDays": 7,
+    "cashSchedule": {
+      "day": 70,
+      "stockDays": [
+        7,
+        7,
+        7
+      ]
+    }
+  },
+  "modelHash": "f12531d5844442f91c84cc0e76b2eb3d720a34198213c985f9d57a923b2bed37",
+  "hashes": {
+    "scripts/commerce-economy-v5/engine.mjs": "0f53b513cad90ba9a5bc0c389ac6d5a05318a74414a1fe5d622e2cff87695913",
+    "scripts/commerce-economy-v5/operations.mjs": "497d39303192b84bef382032f7b5643ff6c8042acf72cd3ca08a9f5a233b323e",
+    "scripts/commerce-economy-v5/network.mjs": "a80b225e6f6130656849a4ed881075eb1fdc5815b9a74fb24b1631eb51730c24",
+    "scripts/commerce-economy-v5/policies.mjs": "ac505ea2eba47972578587cbd87575886c2d2b7dc73776a723d6123b51e38ccb",
+    "scripts/commerce-economy-v5/learning/features.mjs": "758aa21dde0743b0969a818c4fe91801bb486316eedc96433f6bb16a53a26a3b",
+    "scripts/commerce-economy-v5/learning/pair-features.mjs": "d0d59d6917f94447f1625044b34c876a3b46a5dec8f3e7ed5d3579cc57585c2a",
+    "scripts/commerce-economy-v5/learning/actions.mjs": "570291c51ddb8a3e743bd99260303c47f1d84ca3f3fba11badf051f496143837",
+    "scripts/commerce-economy-v5/learning/action-policy.mjs": "a61b1775e2baa6f923931e32f9908a6e28e150852ffcc5973443a4de81cc1ab8",
+    "scripts/commerce-economy-v5/learning/discovery-policy.mjs": "17d1cb2cdd3c9f2e2e80aa1e8fd78e794145cfef2bac03af2a42798d582806f3",
+    "scripts/commerce-economy-v5/learning/evaluation.mjs": "8bc43364c4a18190d652cac7fc6f7c6a20c4c90c1c0e9247d5ecc11b292e3463",
+    "scripts/commerce-economy-v5/learning/agent-revision.mjs": "0c8126f31d1f606e08b10a44076398e797e370372e101ea9b1fd71103ef552c2"
+  },
+  "scope": "Two fresh sequential specialist decisions, identical typed controls, two proposals each. A trusted local executor measures each proposal on development markets before the next role sees the handoff. All proposals plus incumbent frozen before fresh validation. No final target test, native payments or APAC changes. All historical goal design cost is charged conservatively to every candidate market.",
+  "selection": "2x total modeled platform net after design cost, all existing financial guards, and explicit individual supplier disclosure. Do not promote an all-partner win when any party loses.",
+  "hash": "73c50b511a237f8c238ef308f4cb72c41164eb1514a1b4e305c9b8d300977eeb"
+}
