@@ -41,11 +41,18 @@ export function compileProgram(raw){
 }
 const groupRate=(prior,kind,age)=>{const g=prior.groups[kind+'|'+(age<=2?'fresh':age<=7?'recent':'cold')]||{contacts:0,retained:0};return (g.retained+.5)/(g.contacts+2);};
 
-export function contactFeatures(view,prior,historyDays){
+export function canFollowUnfundedIntent(view,person){
+ const signal=person.signal,requests=view.requests.filter(r=>r.customerId===person.customerId),catalog=new Map(view.products.map(p=>[p.catalogId,p]));
+ if(!person.hasOpenRequest||!signal||signal.day>view.day||view.day-signal.day>2||!requests.length||requests.some(r=>r.status!=='REQUESTED'||r.authorizedCents>0))return false;
+ if(signal.day<=Math.max(...requests.map(r=>r.createdDay))||requests.some(r=>r.lines.some(l=>l.acceptableCatalogIds.includes(signal.catalogId))))return false;
+ const product=catalog.get(signal.catalogId),minimum=Math.min(...requests.map(r=>r.lines.reduce((s,l)=>s+Math.min(...l.acceptableCatalogIds.map(id=>catalog.get(id)?.priceCents??Infinity))*l.quantity,0)));
+ return !!product&&Number.isFinite(minimum)&&product.priceCents<minimum;
+}
+export function contactFeatures(view,prior,historyDays,{allowUnfundedIntent=false}={}){
  const result=[],catalog=new Map(),local={},ordersByRequest=new Map(view.pastOrders.map(o=>[o.requestId,o]));for(const p of view.products)if(!catalog.has(p.catalogId))catalog.set(p.catalogId,p);
  for(const c of view.outreach.history)if(c.day+26<view.day){const k=c.kind+'|'+c.observedBucket.split('|')[2],r=local[k]??={n:0,k:0},order=ordersByRequest.get(c.requestId);r.n++;r.k+=Number(!!order&&!['SETTLED','PENDING_FUNDS'].includes(order.refundStatus));}
  for(const person of view.audience){
-  if(!person.marketingConsent||person.hasOpenRequest||person.lastContactDay!=null&&view.day-person.lastContactDay<view.outreach.rules.customerContactGapDays)continue;
+  if(!person.marketingConsent||person.hasOpenRequest&&!(allowUnfundedIntent&&canFollowUnfundedIntent(view,person))||person.lastContactDay!=null&&view.day-person.lastContactDay<view.outreach.rules.customerContactGapDays)continue;
   const signals=view.signals.filter(s=>s.customerId===person.customerId&&view.day-s.day<=historyDays),bySku=new Map();
   if(person.signal&&view.day-person.signal.day<=historyDays&&!signals.some(s=>s.catalogId===person.signal.catalogId&&s.day===person.signal.day))signals.push(person.signal);
   for(const s of signals){const rows=bySku.get(s.catalogId)||[];rows.push(s);bySku.set(s.catalogId,rows);}

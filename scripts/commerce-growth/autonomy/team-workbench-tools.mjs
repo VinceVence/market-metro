@@ -53,10 +53,10 @@ export async function trainWorkbench(dir,rows,contract,family,expertResources=nu
  return {id:'MODEL-'+digest(artifact).slice(0,16),artifact,report,datasetHash:artifact.datasetHash,modelHash:digest(artifact)};
 }
 export function validateCampaign(c){
- if(!c||Object.keys(c).sort().join()!=='kind,objective'||!CAMPAIGNS.includes(c.kind)||!['paypal','joint'].includes(c.objective))throw Error('INVALID_CAMPAIGN_JOB');
+ if(!c||Object.keys(c).sort().join()!=='kind,objective'||!CAMPAIGNS.includes(c.kind)||!['paypal','joint','purchases'].includes(c.objective))throw Error('INVALID_CAMPAIGN_JOB');
  return Object.freeze({...c});
 }
-export function workbenchPlan(view,{model,campaign,prior,fundingPrior,configuration,inquiryPredictor=inquiryEstimate,weeklyProbe=false,recommendationJob=null,candidateMode='latest'}){
+export function workbenchPlan(view,{model,campaign,prior,fundingPrior,configuration,inquiryPredictor=inquiryEstimate,weeklyProbe=false,recommendationJob=null,candidateMode='latest',allowUnfundedIntent=false}){
  if(!['latest','multiple'].includes(candidateMode))throw Error('INVALID_PRODUCT_CANDIDATE_MODE');
  validateCampaign(campaign);if(view.day<30||view.day>=view.marketDays)return {actions:[],ranking:[],configuration};
  if(recommendationJob&&(!['latest_interest','multiple_interests','trend_aware'].includes(recommendationJob.mode)||!['all','new','active','lapsed'].includes(recommendationJob.segment)||!['all',...new Set(view.products.map(p=>p.category))].includes(recommendationJob.category)||Object.values(recommendationJob.trendWeights||{}).some(w=>!Number.isFinite(w)||w<.5||w>1.5)))throw Error('INVALID_RECOMMENDATION_JOB');
@@ -65,7 +65,7 @@ export function workbenchPlan(view,{model,campaign,prior,fundingPrior,configurat
  const people=new Map(view.audience.map(p=>[p.customerId,p])),calibration=fitFundingCalibration(view,fundingPrior),artifact=model.artifact,legacy=model.incumbent===true,
   usesFeedback=artifact.featureNames.some(k=>MARKET_FEEDBACK_FIELDS.includes(k)||SHOPPER_FEEDBACK_FIELDS.includes(k)),history=usesFeedback?observedFeedbackHistory(view):null;
  if(!Object.values(FEATURE_VIEWS).some(fields=>JSON.stringify(fields)===JSON.stringify(artifact.featureNames)))throw Error('UNKNOWN_MODEL_FEATURE_CONTRACT');
- const ranked=contactFeatures(view,prior,7).filter(c=>{
+ const ranked=contactFeatures(view,prior,7,{allowUnfundedIntent}).filter(c=>{
   const person=people.get(c.action.customerId),signal=person.signal,age=signal?view.day-signal.day:99;
   if(recommendationJob){const segment=!person.purchaseCount?'new':person.lastPurchaseDay!=null&&view.day-person.lastPurchaseDay>=14?'lapsed':'active';if(c.action.kind!=='recommend'||recommendationJob.segment!=='all'&&segment!==recommendationJob.segment||recommendationJob.category!=='all'&&c.action.category!==recommendationJob.category)return false;}
   if(campaign.kind==='reactivation'&&(person.purchaseCount===0||person.lastPurchaseDay==null||view.day-person.lastPurchaseDay<14))return false;
@@ -82,7 +82,7 @@ export function workbenchPlan(view,{model,campaign,prior,fundingPrior,configurat
   if(c.action.kind==='recommend'&&!usesFeedback)estimate=adjustForFunding(estimate,calibration,fundingCohort(view,c.action),artifact.valueMeans[c.action.kind].failedNetCents);
   const joint=predictSharedContribution(artifact,estimate.probability,x,c.action.kind,artifact.featureNames).expectedSharedNetCents;
   const trendWeight=recommendationJob?.mode==='trend_aware'?recommendationJob.trendWeights[c.action.category]??1:1;
-  return {...c,...estimate,expectedSharedNetCents:joint,score:(campaign.objective==='paypal'?estimate.expectedNetCents:joint)*trendWeight,...(recommendationJob?{trendWeight}:{})};
+  return {...c,...estimate,expectedSharedNetCents:joint,score:(campaign.objective==='paypal'?estimate.expectedNetCents:campaign.objective==='purchases'?estimate.probability:joint)*trendWeight,...(recommendationJob?{trendWeight}:{})};
  });
  let eligible=ranked.filter(c=>c.expectedNetCents>0&&c.expectedSharedNetCents>c.expectedNetCents).sort((a,b)=>b.score-a.score||a.action.customerId.localeCompare(b.action.customerId));
  // A bounded probe can detect recovery when the current posterior rejects all
