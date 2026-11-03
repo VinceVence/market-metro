@@ -56,7 +56,8 @@ export function validateCampaign(c){
  if(!c||Object.keys(c).sort().join()!=='kind,objective'||!CAMPAIGNS.includes(c.kind)||!['paypal','joint'].includes(c.objective))throw Error('INVALID_CAMPAIGN_JOB');
  return Object.freeze({...c});
 }
-export function workbenchPlan(view,{model,campaign,prior,fundingPrior,configuration,inquiryPredictor=inquiryEstimate,weeklyProbe=false,recommendationJob=null}){
+export function workbenchPlan(view,{model,campaign,prior,fundingPrior,configuration,inquiryPredictor=inquiryEstimate,weeklyProbe=false,recommendationJob=null,candidateMode='latest'}){
+ if(!['latest','multiple'].includes(candidateMode))throw Error('INVALID_PRODUCT_CANDIDATE_MODE');
  validateCampaign(campaign);if(view.day<30||view.day>=view.marketDays)return {actions:[],ranking:[],configuration};
  if(recommendationJob&&(!['latest_interest','multiple_interests','trend_aware'].includes(recommendationJob.mode)||!['all','new','active','lapsed'].includes(recommendationJob.segment)||!['all',...new Set(view.products.map(p=>p.category))].includes(recommendationJob.category)||Object.values(recommendationJob.trendWeights||{}).some(w=>!Number.isFinite(w)||w<.5||w>1.5)))throw Error('INVALID_RECOMMENDATION_JOB');
  const limit=Math.min(view.outreach.rules.dailyContactLimit-view.outreach.contactsToday,Math.floor(Math.min(view.outreach.remainingBudgetCents,view.outreach.availablePlatformCashCents)/view.outreach.rules.outreachCostCents));
@@ -69,7 +70,7 @@ export function workbenchPlan(view,{model,campaign,prior,fundingPrior,configurat
   if(recommendationJob){const segment=!person.purchaseCount?'new':person.lastPurchaseDay!=null&&view.day-person.lastPurchaseDay>=14?'lapsed':'active';if(c.action.kind!=='recommend'||recommendationJob.segment!=='all'&&segment!==recommendationJob.segment||recommendationJob.category!=='all'&&c.action.category!==recommendationJob.category)return false;}
   if(campaign.kind==='reactivation'&&(person.purchaseCount===0||person.lastPurchaseDay==null||view.day-person.lastPurchaseDay<14))return false;
   if(campaign.kind!=='reactivation'&&age>7&&!(campaign.kind==='open_discovery'&&c.action.kind==='ask_need'))return false;
-  if(c.action.kind==='recommend')return (recommendationJob&&recommendationJob.mode!=='latest_interest'?c.features.age<=7:c.action.catalogId===signal?.catalogId)&&(c.features.stock>0||c.features.arrival_days<=5);
+  if(c.action.kind==='recommend')return (candidateMode==='multiple'||recommendationJob&&recommendationJob.mode!=='latest_interest'?c.features.age<=7:c.action.catalogId===signal?.catalogId)&&(c.features.stock>0||c.features.arrival_days<=5);
   return campaign.kind!=='product_recommendations'&&(campaign.kind!=='intent_assistance'||signal?.kind!=='SEARCH');
  }).map(c=>{
   const person=people.get(c.action.customerId),age=person.signal?view.day-person.signal.day:99,base=responseFeatures(view,c),values={...Object.fromEntries(RESPONSE_FIELDS.map((k,i)=>[k,base[i]])),customer_intent_fresh:Number(age<=2),customer_intent_recent:Number(age>2&&age<=7),...(usesFeedback?feedbackFeatures(history,view.day,c.action.customerId,c.action.kind):{})};

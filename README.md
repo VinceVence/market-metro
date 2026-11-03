@@ -1,5 +1,7 @@
 # Market Metro: the learning market
 
+**Latest net evaluation:** [Response-aware budget control](docs/commerce-growth/response-budget-shadow-1/README.md) measured **+$2.25 modeled PayPal net per market** beyond v1 on14 fixed shadow cases, after costs. It reduced outreach expense; purchases were unchanged. Retailer contribution fell$6.42, and the95% interval [−$0.12,+$5.10] includes zero. It is not promoted. Open **Economic workflow → Measured net** for the complete comparison and budget checkpoints.
+
 **New analyst capabilities:** [EDA, market trends and grounded recommendations](docs/commerce-growth/economic-analysis/README.md). The workflow can investigate category/merchant/shopper data, compare time windows and choose product/audience strategies. A fresh Gemini revision selected two reachable lapsed shoppers for Stationery; the shortlist is a preview, not a new profit claim. Open **Economic workflow → EDA, trends & recommendations**.
 
 **Final PayPal scorecard:** [14 fresh markets](docs/commerce-growth/economic-final-1/README.md): reviewed workflow $765.47 versus fixed $738.79, **+$26.68 / +3.61%** modeled net after allocated AI cost. The workflow retained v1; the new overlay did not beat it. Fresh Gemini cost $0.058668. All losses, partner safeguards and the planner's rationale errors are disclosed. Open **Economic workflow** for results and checkpoints.

@@ -1,0 +1,85 @@
+{
+  "status": "COMPLETED",
+  "input": {
+    "task": "Nominate one commerce policy for the registered shadow research. Use completed development outcomes to decide which extension is defensible. This nomination does not authorize deployment. Explain any financial tradeoff, including cash tied up in inventory; never count model score gain as profit.",
+    "policies": {
+      "response_budget": "Keep v1 recommendations, current audience logic and fulfillment. Suppress routine general inquiries only when there have been no observed marketing replies and a learned response-hurdle prior gives nonpositive optimistic inquiry value. Keep every product recommendation and allow one recovery inquiry per existing7-day contact gap; any observed reply immediately restores v1. The bound is a modeling heuristic, not a guaranteed confidence bound.",
+      "baseline_v1": "Retain locked v1."
+    },
+    "development": {
+      "status": "COMPLETED",
+      "baseline": {
+        "platformUSD": 769.7785714285714,
+        "retailerUSD": 9104.994285714285,
+        "terminalCashUSD": 28746.835714285717,
+        "terminalInventoryUSD": 2741.4114285714286,
+        "retainedPurchases": 144,
+        "retainedVolumeUSD": 20519.85714285714,
+        "outreachCostUSD": 28.321428571428573,
+        "unpaidLiabilities": 0
+      },
+      "candidate": {
+        "platformUSD": 773.3757142857141,
+        "retailerUSD": 9103.021428571428,
+        "terminalCashUSD": 28746.531428571434,
+        "terminalInventoryUSD": 2739.491428571429,
+        "retainedPurchases": 144,
+        "retainedVolumeUSD": 20518.714285714286,
+        "outreachCostUSD": 24.67142857142857,
+        "unpaidLiabilities": 0
+      },
+      "delta": {
+        "platformUSD": 3.597142857142785,
+        "retailerUSD": -1.9728571428568102,
+        "terminalCashUSD": -0.30428571428274154,
+        "terminalInventoryUSD": -1.919999999999618,
+        "retainedPurchases": 0,
+        "retainedVolumeUSD": -1.142857142855064,
+        "outreachCostUSD": -3.650000000000002,
+        "unpaidLiabilities": 0
+      },
+      "gates": {
+        "positivePayPalNet": true,
+        "retailerValue": false,
+        "partnerCash": false,
+        "retainedVolume": false,
+        "inventory": true,
+        "allLiabilitiesSettled": true
+      },
+      "modelCostUSD": 0,
+      "newProviderCalls": 0
+    },
+    "previousProblem": "The product-choice extension did not improve net in its14-case confirmation. This new candidate targets paid outreach waste; it changes neither product choice nor fulfillment. All partner tradeoffs must remain visible.",
+    "scope": "No confirmation outcomes, seed values or latent shopper state are provided. Local trained models continue to rank from current observations."
+  },
+  "evidenceId": "37db6da730439837863d7465085893f9add674a58dddb7ed64c628da71a12413",
+  "output": {
+    "evidenceId": "37db6da730439837863d7465085893f9add674a58dddb7ed64c628da71a12413",
+    "mode": "baseline_v1",
+    "reason": "The candidate policy increased PayPal net by $3.60 but decreased retailer value by $1.97, failing the retailer value gate. Therefore, the baseline is nominated.",
+    "tradeoff": "The candidate policy reduced outreach costs by $3.65 and inventory by $1.92, but resulted in a $0.30 decrease in terminal cash and a $1.14 decrease in retained volume. Model score gains are not counted as profit."
+  },
+  "decisionHash": "539e33ca201c67045f0693e91b5fa2c90fb364935e84f769e01c885e92ebdf1c",
+  "provider": [
+    {
+      "reservationId": "f575cd87-58d4-4d77-85bb-3bdc3968b31d",
+      "caseId": "nominate",
+      "trialId": "response-budget-confirmation-1",
+      "stage": "planner",
+      "status": "settled",
+      "modelCostMicros": 15196,
+      "reservedMicros": 150000,
+      "inputTokens": 950,
+      "outputTokens": 185,
+      "thinkingTokens": 923,
+      "cachedInputTokens": 0,
+      "responseId": "5YjpauKfMZyTpt8P6rOOoQU",
+      "modelVersion": "gemini-3.1-pro-preview",
+      "latencyMs": 15054,
+      "profile": "pro",
+      "configuredModel": "gemini-3.1-pro-preview",
+      "proEndpoint": "standard"
+    }
+  ],
+  "costUSD": 0.015196
+}

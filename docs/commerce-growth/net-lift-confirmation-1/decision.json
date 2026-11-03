@@ -1,0 +1,124 @@
+{
+  "status": "COMPLETED",
+  "input": {
+    "task": "Nominate one commerce policy for the registered shadow research. Use completed development outcomes to decide which extension is defensible. This nomination does not authorize deployment. Explain any financial tradeoff, including cash tied up in inventory; never count model score gain as profit.",
+    "policies": {
+      "preserve_audience": "On each current observed state, keep v1 selected customers, timing and every general needs inquiry. For a selected product recommendation only, consider the same shopper other observed interests within7 days; substitute only when the same trained model predicts strictly higher PayPal value and no lower retailer value. Fulfillment stays identical.",
+      "pooled": "Keep general inquiries in the candidate pool, add all observed product interests from the last7 days, and jointly rerank within the same contact budget. This can change which shoppers are contacted.",
+      "baseline_v1": "Retain the exact locked v1 policy."
+    },
+    "development": {
+      "status": "COMPLETED",
+      "summary": {
+        "baseline_v1": {
+          "platformUSD": 769.7785714285714,
+          "retailerUSD": 9104.994285714285,
+          "terminalCashUSD": 28746.835714285717,
+          "terminalInventoryUSD": 2741.4114285714286,
+          "retainedPurchases": 144,
+          "retainedVolumeUSD": 20519.85714285714,
+          "outreachCostUSD": 28.321428571428573,
+          "unpaidLiabilities": 0
+        },
+        "preserve_audience": {
+          "platformUSD": 772.5757142857144,
+          "retailerUSD": 9119.34142857143,
+          "terminalCashUSD": 28738.91428571429,
+          "terminalInventoryUSD": 2787.9742857142855,
+          "retainedPurchases": 144.14285714285714,
+          "retainedVolumeUSD": 20536.285714285714,
+          "outreachCostUSD": 28.321428571428573,
+          "unpaidLiabilities": 0
+        },
+        "pooled": {
+          "platformUSD": 771.4800000000001,
+          "retailerUSD": 9101.477142857144,
+          "terminalCashUSD": 28727.79857142857,
+          "terminalInventoryUSD": 2775.715714285714,
+          "retainedPurchases": 143.57142857142858,
+          "retainedVolumeUSD": 20518.85714285714,
+          "outreachCostUSD": 28.32857142857143,
+          "unpaidLiabilities": 0
+        }
+      },
+      "differences": {
+        "preserve_audience": {
+          "delta": {
+            "platformUSD": 2.797142857143058,
+            "retailerUSD": 14.347142857144718,
+            "terminalCashUSD": -7.921428571426077,
+            "terminalInventoryUSD": 46.562857142856956,
+            "retainedPurchases": 0.1428571428571388,
+            "retainedVolumeUSD": 16.428571428572468,
+            "outreachCostUSD": 0,
+            "unpaidLiabilities": 0
+          },
+          "gates": {
+            "positivePayPalNet": true,
+            "retailerValue": true,
+            "partnerCash": false,
+            "retainedVolume": true,
+            "inventory": true,
+            "allLiabilitiesSettled": true
+          },
+          "changedContacts": 18
+        },
+        "pooled": {
+          "delta": {
+            "platformUSD": 1.701428571428778,
+            "retailerUSD": -3.5171428571411525,
+            "terminalCashUSD": -19.037142857145227,
+            "terminalInventoryUSD": 34.30428571428547,
+            "retainedPurchases": -0.4285714285714164,
+            "retainedVolumeUSD": -1,
+            "outreachCostUSD": 0.007142857142856229,
+            "unpaidLiabilities": 0
+          },
+          "gates": {
+            "positivePayPalNet": true,
+            "retailerValue": false,
+            "partnerCash": false,
+            "retainedVolume": false,
+            "inventory": true,
+            "allLiabilitiesSettled": true
+          },
+          "changedContacts": 54
+        }
+      },
+      "newModelCalls": 0,
+      "economyUnchanged": true
+    },
+    "previousProblem": "A product-only campaign displaced existing needs inquiries and damaged merchant outcomes. The new tools preserve those inquiries or keep them in the shared pool.",
+    "scope": "No confirmation outcomes, seed values or latent shopper state are provided. Local trained models continue to rank from current observations."
+  },
+  "evidenceId": "699e30d618d41304586e6ed53edda77e39e3de39c3387739b604b642eced99d3",
+  "output": {
+    "evidenceId": "699e30d618d41304586e6ed53edda77e39e3de39c3387739b604b642eced99d3",
+    "reason": "The preserve_audience policy successfully increases both PayPal platform value (+$2.80) and retailer value (+$14.35) while retaining more purchase volume. The pooled policy, on the other hand, decreases retailer value.",
+    "tradeoff": "The financial tradeoff for the preserve_audience policy is a decrease in terminal cash by $7.92 and an increase in terminal inventory by $46.56, meaning more of the retailer's cash is tied up in inventory.",
+    "mode": "preserve_audience"
+  },
+  "decisionHash": "c6aee37440e9b5c3c600dfa1a91b0c49cceedee45fd84a7e2b72c993d2857e6e",
+  "provider": [
+    {
+      "reservationId": "75fd33f6-9421-4bc7-9983-72d95626da0d",
+      "caseId": "nominate",
+      "trialId": "net-lift-confirmation-1",
+      "stage": "planner",
+      "status": "settled",
+      "modelCostMicros": 11870,
+      "reservedMicros": 150000,
+      "inputTokens": 1369,
+      "outputTokens": 191,
+      "thinkingTokens": 570,
+      "cachedInputTokens": 0,
+      "responseId": "0ITpatHKN-GVpt8Ppe_f-As",
+      "modelVersion": "gemini-3.1-pro-preview",
+      "latencyMs": 10341,
+      "profile": "pro",
+      "configuredModel": "gemini-3.1-pro-preview",
+      "proEndpoint": "standard"
+    }
+  ],
+  "costUSD": 0.01187
+}
