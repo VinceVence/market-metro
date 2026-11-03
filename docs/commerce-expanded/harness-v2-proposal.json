@@ -1,0 +1,101 @@
+{
+  "status": "PROPOSED_NOT_RUN",
+  "economyVersion": "commerce-expanded-1",
+  "economyMutationsAllowed": false,
+  "clockModes": {
+    "decision_quality": "checkpoint and await all decision work before advancing economic events; equal schedule in every arm",
+    "operational_latency": "previous published policy keeps trading; log evidence age and publication lag separately",
+    "replay": "saved events only; no provider calls"
+  },
+  "roles": {
+    "demand_analyst": {
+      "tools": [
+        "query_funnel",
+        "compare_cohorts",
+        "inspect_stock_coverage"
+      ],
+      "artifact": "opportunity_contract"
+    },
+    "modeling_scientist": {
+      "tools": [
+        "build_dataset",
+        "fit_model",
+        "ablate_features",
+        "validate_temporal_slices"
+      ],
+      "artifact": "model_contract"
+    },
+    "campaign_fulfillment_strategist": {
+      "tools": [
+        "compile_campaign",
+        "evaluate_campaign",
+        "compare_contracts",
+        "request_revision"
+      ],
+      "artifact": "campaign_contract"
+    },
+    "trusted_executor": {
+      "isLLM": false,
+      "tools": [
+        "validate_contract",
+        "publish_campaign",
+        "execute_approved_payments",
+        "reconcile_receipts"
+      ]
+    }
+  },
+  "toolBoundaries": {
+    "queries": "registered metrics/dimensions/time windows; no arbitrary SQL writes",
+    "datasets": "shared train/serve feature plans; no latent needs, hidden wallets, future outcomes or seeds",
+    "trials": "completed development markets only; never probe active confirmation future",
+    "nativePayments": "existing saved sandbox adapter, separate from simulation revenue; off in research"
+  },
+  "publicationRequirements": [
+    "same tested and deployed contract hash",
+    "observation cutoff valid for clock mode",
+    "maturity and feature parity checks pass",
+    "bounded consent/contact/cash/stock checks pass",
+    "compare merchant and platform outcomes, not classifier loss alone"
+  ],
+  "labelHeads": [
+    "funding before request expiry, with pending authorization censored",
+    "capture conditional on funding and fulfillment state",
+    "retention after capture/return maturity",
+    "immediate funding as auxiliary only"
+  ],
+  "limits": {
+    "maxAgentCallsPerReview": 6,
+    "maxReviews": 2,
+    "maxModelRecipesPerReview": 2,
+    "maxCampaignCandidatesPerReview": 2,
+    "maxRevisionsPerReview": 1,
+    "modelCapUSDPerRun": 0.25,
+    "proposedPilotMaxUSD": 2,
+    "preserveExistingTighterLedgerCap": true
+  },
+  "evaluationArms": [
+    "strong_fixed",
+    "numerical_workbench",
+    "one_planner_equal_tools_budget",
+    "three_role_team_equal_tools_budget"
+  ],
+  "pilotRegimes": [
+    "discovery",
+    "reactivation",
+    "low_response",
+    "zero_response"
+  ],
+  "futureConfirmationSeeds": "register after implementation is frozen; not opened in this research",
+  "outcomeMetrics": [
+    "retained customer purchases",
+    "retained payment volume",
+    "modeled platform net after model cost",
+    "aggregate/per-merchant contribution",
+    "cash and ending inventory",
+    "unpaid liabilities",
+    "calibration/log loss by funnel stage",
+    "valid artifact handoffs, revisions, recovery, model calls and latency"
+  ],
+  "currentEvidence": "timing-diagnostic-1/result.json",
+  "noveltyClaim": "Local integration proposal; not a claim that this architecture is unprecedented or already profitable."
+}
