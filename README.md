@@ -15,15 +15,17 @@ npm run dev -- --no-recover
 
 Open [the workspace](http://127.0.0.1:4173/studio.html). **New live run** opens settings. The default is **V2, 12 merchants and 600 shoppers**. Existing V1 sessions and the original 3-store economy remain available.
 
-## V2 workflow
+## V2.1 workflow
+
+[Typed execution contracts](docs/commerce-expanded/harness-v2/typed-execution.md) validate every proposal. The LLM chooses experiments; deterministic code owns the final publish/retain decision. No new runtime dependency is required.
 
 At days 31 and 61, economic dates pause while the team:
 
 1. Chooses an investigation and reads observed demand, inventory and payment-funnel data.
 2. Chooses a dataset/feature recipe and trains two local models.
 3. Tests an exact campaign and fulfillment contract on separate development markets.
-4. Revises once or retains the current policy.
-5. Publishes only a tested contract that passes model, money, merchant and purchase checks.
+4. Proposes one optional revision or finishes the search.
+5. Deterministically selects the best eligible tested contract, or retains the incumbent.
 
 The analyst, scientist and commerce manager make fresh Gemini decisions. Data queries, training, trial execution and financial checks are deterministic tools. Each review has six model calls; each run permits two reviews and at most **$0.25** in model usage. A single-planner comparator receives the same tools and allowance.
 

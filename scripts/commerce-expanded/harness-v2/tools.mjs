@@ -8,12 +8,13 @@ import {RESPONSE_FIELDS,responseFeatures,predictResponse,predictContribution,pre
 import {prepareTraining,FEATURE_VIEWS,datasetOverview,inspectDemand} from '../../commerce-growth/autonomy/team-workbench-tools.mjs';
 import {observedFeedbackHistory,feedbackFeatures} from '../../commerce-growth/autonomy/feedback-features.mjs';
 import {validateConfig} from '../../commerce-growth/team/control.mjs';
+import {VERSION,campaignSchema,contextSchema,validate,freeze,canonicalHash,marketProfileFor} from './contracts.mjs';
 
 export {digest,datasetOverview,inspectDemand};
 export const read=async p=>JSON.parse(await readFile(p,'utf8'));
 export const FEATURES=['existing','intent_context','market_feedback'];
 export const FAMILIES=['forest','logistic','response_hurdle'];
-export const KINDS=['product_recommendations','intent_assistance','ranked_discovery','reactivation','open_discovery','hold'];
+export const KINDS=campaignSchema.properties.kind.enum;
 
 export function inputFeatures(view,c,fields,history=null){
  const person=view.audience.find(p=>p.customerId===c.action.customerId),age=person.signal?view.day-person.signal.day:99;
@@ -23,16 +24,17 @@ export function inputFeatures(view,c,fields,history=null){
  const x=fields.map(k=>values[k]);if(x.some(n=>!Number.isFinite(n)))throw Error('V2_INVALID_FEATURES');return x;
 }
 
-export function inspectCurrent(view,lens){
- if(!['category','intent','payment_funnel','recency'].includes(lens))throw Error('V2_INVALID_QUERY');
- const contacts=view.outreach.history.filter(c=>c.day<view.day),orders=new Map(view.pastOrders.map(o=>[o.requestId,o])),groups={};
+export function inspectCurrent(view,lens,windowDays=28){
+ if(!['category','intent','payment_funnel','recency'].includes(lens)||![28,56,100].includes(windowDays))throw Error('V2_INVALID_QUERY');
+ const contacts=view.outreach.history.filter(c=>c.day<view.day&&c.day>=view.day-windowDays),orders=new Map(view.pastOrders.map(o=>[o.requestId,o])),groups={};
  for(const c of contacts){const o=orders.get(c.requestId),mature=c.day+26<view.day,retained=mature&&!!o&&!['SETTLED','PENDING_FUNDS'].includes(o.refundStatus),person=view.audience.find(p=>p.customerId===c.customerId),key=lens==='category'?c.category:lens==='intent'?c.kind+'|'+c.observedBucket.split('|')[2]:lens==='recency'?(person?.purchaseCount?'returning':'new'):c.kind;
   const g=groups[key]??={contacts:0,responded:0,immediateFunding:0,mature:0,retained:0,pending:0,lateFundedRetained:0};g.contacts++;g.responded+=Number(c.responded);g.immediateFunding+=Number(c.authorized);g.mature+=Number(mature);g.pending+=Number(!mature);g.retained+=Number(retained);g.lateFundedRetained+=Number(retained&&!c.authorized);
  }
  const categories={};for(const p of view.products){const g=categories[p.category]??={available:0,interest7:0,fundedUnits:0};g.available+=p.available;}
  for(const s of view.signals)if(s.day>=view.day-7&&s.day<=view.day)categories[s.category].interest7++;
  for(const r of view.requests)if(r.status==='AUTHORIZED')for(const l of r.lines)categories[l.category].fundedUnits+=l.quantity;
- return {day:view.day,lens,groups,categories,openFundedRequests:view.requests.filter(r=>r.status==='AUTHORIZED').length,scope:'Observed past contacts and orders; final labels withheld until day+26. Recency grouping uses current observed customer status. No latent needs or household wallets.'};
+ for(const g of Object.values(groups)){g.matureRetentionRate=g.mature?g.retained/g.mature:null;g.immediateFundingRate=g.contacts?g.immediateFunding/g.contacts:null;}
+ return {day:view.day,lens,windowDays,groups,categories,openFundedRequests:view.requests.filter(r=>r.status==='AUTHORIZED').length,scope:'Retention denominator is mature contacts only; null means insufficient labels. Pending outcomes are not failures. Recency grouping uses current observed status. No latent needs or household wallets.'};
 }
 
 export function matureOwnRows(observed,view){
@@ -52,17 +54,24 @@ export async function fitModel(dir,historical,own,contract,day){
  await writeFile(dir+'/model.json',JSON.stringify(result));return result;
 }
 
-export function compileCampaign(raw,model,incumbent,day){
- const allowed=['kind','objective','contactsPer100','forecast','coverDays','routing','target'];
- if(!raw||Object.keys(raw).sort().join()!==allowed.sort().join()||!KINDS.includes(raw.kind)||!['paypal','joint'].includes(raw.objective)||![3,6,10].includes(Number(raw.contactsPer100))||!['recent7','recent14','adaptive'].includes(raw.forecast)||![0,3,7].includes(Number(raw.coverDays))||!['fast','auto'].includes(raw.routing)||!['cheap','preferred'].includes(raw.target))throw Error('V2_INVALID_CAMPAIGN');
+export function compileCampaign(raw,model,incumbent,context){
+ validate(raw,campaignSchema);validate(context,contextSchema);
  if(!model?.modelHash||model.modelHash!==digest(model.artifact))throw Error('V2_MODEL_HASH_MISMATCH');
- const campaign={kind:raw.kind,objective:raw.objective,contactsPer100:Number(raw.contactsPer100),forecast:raw.forecast,coverDays:Number(raw.coverDays),routing:raw.routing,target:raw.target},configuration=validateConfig({...incumbent,forecast:raw.forecast,coverDays:campaign.coverDays,routing:raw.routing,target:raw.target});
- const bound={version:'commerce-harness-v2',modelHash:model.modelHash,campaign,configuration,activationDay:day};return Object.freeze({...bound,hash:digest(bound)});
+ const campaign={...raw,contactsPer100:Number(raw.contactsPer100),coverDays:Number(raw.coverDays)},configuration=validateConfig({...incumbent,forecast:raw.forecast,coverDays:campaign.coverDays,routing:raw.supplierSettlement==='paypal_fast'?'fast':'auto',target:raw.productPreference==='lowest_acceptable_price'?'cheap':'preferred'});
+ const bound={version:VERSION,modelHash:model.modelHash,campaign,configuration,context:{...context},activationDay:context.day};return freeze({...bound,hash:canonicalHash(bound)});
 }
-export function assertBinding(contract,model){const {hash,...bound}=contract;if(digest(bound)!==hash||contract.modelHash!==model.modelHash||digest(model.artifact)!==model.modelHash)throw Error('V2_UNBOUND_CAMPAIGN');}
+export function assertBinding(contract,model){
+ if(!contract||Object.keys(contract).sort().join()!=='activationDay,campaign,configuration,context,hash,modelHash,version')throw Error('V2_UNBOUND_CAMPAIGN');
+ const {hash,...bound}=contract;validate(contract.context,contextSchema);
+ validate(contract.campaign.contactsPer100,{type:'INTEGER'});validate(contract.campaign.coverDays,{type:'INTEGER'});
+ validate({...contract.campaign,contactsPer100:String(contract.campaign.contactsPer100),coverDays:String(contract.campaign.coverDays)},campaignSchema);validateConfig(contract.configuration);
+ if(contract.configuration.target!==(contract.campaign.productPreference==='lowest_acceptable_price'?'cheap':'preferred')||contract.configuration.routing!==(contract.campaign.supplierSettlement==='paypal_fast'?'fast':'auto')||contract.configuration.forecast!==contract.campaign.forecast||contract.configuration.coverDays!==contract.campaign.coverDays)throw Error('V2_EXECUTION_PLAN_MISMATCH');
+ if(contract.version!==VERSION||canonicalHash(bound)!==hash||contract.modelHash!==model?.modelHash||digest(model.artifact)!==model.modelHash||contract.activationDay!==contract.context.day)throw Error('V2_UNBOUND_CAMPAIGN');
+}
 
 export function scoreCampaign(view,{contract,model,prior}){
  assertBinding(contract,model);const {campaign,configuration}=contract;
+ if(contract.context.marketProfile!==marketProfileFor(view))throw Error('V2_EXECUTION_MARKET_MISMATCH');
  if(campaign.kind==='hold'||view.day<30||view.day>=view.marketDays)return {actions:[],ranking:[],configuration,agentCampaign:true,reason:'Retain organic shopping and fulfillment; no campaign contacts.'};
  const limit=Math.min(campaign.contactsPer100*(view.scale?.contactMultiplier||1),view.outreach.rules.dailyContactLimit-view.outreach.contactsToday,Math.floor(Math.min(view.outreach.remainingBudgetCents,view.outreach.availablePlatformCashCents)/view.outreach.rules.outreachCostCents));
  if(limit<=0)return {actions:[],ranking:[],configuration};

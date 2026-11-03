@@ -1,5 +1,7 @@
 # Commerce harness V2
 
+**Current implementation: [V2.1 typed execution](typed-execution.md).** Strict shared schemas and deterministic final selection replace the LLM's publish/retain choice. New development trials match the live market size. The historical comparison below predates these changes; it has not been rerun or relabeled.
+
 V2 is implemented in the live app. Economic dates pause at review boundaries; the analyst can query demand, the scientist trains two local candidates, and the commerce manager tests and revises a hash-bound campaign. The verifier retains the existing policy if financial or model checks fail.
 
 ## Four unseen markets
