@@ -39,7 +39,7 @@ export function outreachPlan(view,raw,prior){
  const config=validateConfig(raw);
  if(config.outreach==='legacy_stock')return proposeOutreach(view,{mode:'stock'});
  if(config.outreach==='none'||view.day<30||view.day>=view.marketDays)return {actions:[],ranking:[]};
- const limit=Math.min(config.contactsPerDay,view.outreach.rules.dailyContactLimit-view.outreach.contactsToday,Math.floor(Math.min(view.outreach.availablePlatformCashCents,view.outreach.remainingBudgetCents)/view.outreach.rules.outreachCostCents));
+ const limit=Math.min(config.contactsPerDay*(view.scale?.contactMultiplier||1),view.outreach.rules.dailyContactLimit-view.outreach.contactsToday,Math.floor(Math.min(view.outreach.availablePlatformCashCents,view.outreach.remainingBudgetCents)/view.outreach.rules.outreachCostCents));
  if(limit<=0)return {actions:[],ranking:[]};
  const local={};for(const c of view.outreach.history)if(c.day+26<view.day){
   const order=view.pastOrders.find(o=>o.requestId===c.requestId),yes=!!order&&!['SETTLED','PENDING_FUNDS'].includes(order.refundStatus),parts=c.observedBucket.split('|'),key=c.kind+'|'+parts[2];
@@ -61,7 +61,7 @@ export function outreachPlan(view,raw,prior){
   reason:config.outreach==='calibrated'?'Use calibrated observed response rates; evaluate cold inquiries without assuming another expensive purchase.':'Prioritize recent specific shopping interest with available or incoming stock.'};
 }
 
-function restock(view,config,forecast){
+export function restock(view,config,forecast){
  const catalog=new Map();for(const p of view.products)if(!catalog.has(p.catalogId))catalog.set(p.catalogId,p);
  const demand={},deadlines={};for(const r of view.requests.filter(r=>r.status==='AUTHORIZED')){
   if(r.deadlineDay<view.day+view.paymentRules.physicalLeadMaxDays+2)continue;

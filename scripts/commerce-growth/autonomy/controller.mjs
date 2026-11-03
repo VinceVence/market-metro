@@ -27,7 +27,7 @@ export async function openAutonomousCommerce({id,dir,prior,incumbent,providerFac
  function evidence(view,reason){
   const recent=view.outreach.history.filter(c=>c.day<view.day).slice(-20),labels=matured(view),orders=view.pastOrders.filter(o=>o.day+14<view.day),stock={};
   for(const p of view.products)stock[p.category]=(stock[p.category]||0)+p.available;
-  const e={day:view.day,reason,remainingMarketDays:view.marketDays-view.day,contactBudgetCents:view.outreach.remainingBudgetCents,stock,
+  const e={day:view.day,reason,remainingMarketDays:view.marketDays-view.day,contactBudgetCents:view.outreach.remainingBudgetCents,stock,...(view.scale?{marketScale:view.scale,contactQuotaMeaning:'Campaign contactsPerDay is per 100 shoppers; multiply by contactMultiplier for the total daily cap. Model previews already show total contacts. Virtual outreach money is separate from the real $0.25 model cap.'}:{}),
    openFundedRequests:view.requests.filter(r=>r.status==='AUTHORIZED').length,urgentRequests:view.requests.filter(r=>r.status==='AUTHORIZED'&&r.deadlineDay-view.day<=5).length,
    recentContacts:recent.length,recentFundedResponses:recent.filter(c=>c.authorized).length,matureOwnResponses:labels.length,ownRetainedRate:labels.length?labels.reduce((s,r)=>s+r.retained,0)/labels.length:null,
    matureOrders:orders.length,retainedPaymentVolumeCents:orders.filter(o=>!['SETTLED','PENDING_FUNDS'].includes(o.refundStatus)).reduce((s,o)=>s+o.grossCents,0),
@@ -82,7 +82,7 @@ export async function openAutonomousCommerce({id,dir,prior,incumbent,providerFac
    const trained=science.decision==='train'||!model?await train(view,science):{summary:{retainedModel:model.id,metrics:model.report.summary[model.family],validationPassed:true},candidate:model},candidateModel=trained.candidate||model;
    const previews=[];if(candidateModel)for(const contactKinds of ['recommend','both'])for(const contactsPerDay of ['3','6','10']){
     const c={audience:'all',contactKinds,contactsPerDay,minimumNetCents:'0',stopped:false},p=scoreLearnedContacts(view,{prior,model:candidateModel,campaign:c,supply}),expected=p.ranking?.reduce((s,r)=>s+r.expectedNetCents,0)||0;
-    previews.push({contactKinds,contactsPerDay:Number(contactsPerDay),eligibleSelected:p.actions.length,recommendations:p.actions.filter(a=>a.kind==='recommend').length,generalInquiries:p.actions.filter(a=>a.kind==='ask_need').length,expectedNetCents:Math.round(expected),contactCostCents:p.actions.length*view.outreach.rules.outreachCostCents,scope:'Current-snapshot model estimate, not measured future campaign profit.'});
+    previews.push({contactKinds,contactsPerDay:Number(contactsPerDay),totalDailyCap:Number(contactsPerDay)*(view.scale?.contactMultiplier||1),eligibleSelected:p.actions.length,recommendations:p.actions.filter(a=>a.kind==='recommend').length,generalInquiries:p.actions.filter(a=>a.kind==='ask_need').length,expectedNetCents:Math.round(expected),contactCostCents:p.actions.length*view.outreach.rules.outreachCostCents,scope:'Current-snapshot model estimate, not measured future campaign profit.'});
    }
    const proposal=await ask('Commerce manager','publish_commerce_policy',{...evidence(view,reason),analyst:analysis,scientist:science,trainingResult:trained.summary,campaignPreviews:previews,currentSupplyContract:supply,developmentEvidence,
     actionMeaning:{audience:'lapsed requires a previous purchase and at least14 days since it; recent_interest requires a product signal. all includes any eligible contact.',minimumNetCents:'Threshold on modeled expected retail payment contribution after contact cost; estimated from observed retained/failed outcomes.',routing:'fast uses modeled PayPal supplier settlement. auto can use bank settlement when deadlines permit. Neither changes retail captures.',modelRoles:'The model ranks eligible contacts locally; the campaign is automatically applied. A smaller contact limit can discard positive-value opportunities shown in the preview. Keep the existing stock and settlement settings unless fulfillment evidence justifies changing them; conservative is not by itself an economic reason.'}},
@@ -124,7 +124,7 @@ export async function openAutonomousCommerce({id,dir,prior,incumbent,providerFac
 // not be mislabeled as a benefit of additional LLM roles.
 export function scoreLearnedContacts(view,{prior,model,campaign,supply}){
   if(campaign.stopped||view.day<30||view.day>=view.marketDays)return {actions:[],ranking:[],configuration:supply,reason:'No new outreach; existing orders still settle.'};
-  const limit=Math.min(Number(campaign.contactsPerDay),view.outreach.rules.dailyContactLimit-view.outreach.contactsToday,Math.floor(Math.min(view.outreach.remainingBudgetCents,view.outreach.availablePlatformCashCents)/view.outreach.rules.outreachCostCents));
+  const limit=Math.min(Number(campaign.contactsPerDay)*(view.scale?.contactMultiplier||1),view.outreach.rules.dailyContactLimit-view.outreach.contactsToday,Math.floor(Math.min(view.outreach.remainingBudgetCents,view.outreach.availablePlatformCashCents)/view.outreach.rules.outreachCostCents));
   if(limit<=0)return {actions:[],configuration:supply};
   // An audience qualifies shoppers, not action kinds. A shopper with recent
   // interest can receive an inquiry when the agent explicitly permits both.

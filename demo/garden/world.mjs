@@ -131,7 +131,16 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
   }
   function resize(fit=false){
     if(!renderer)return;const width=parent.clientWidth,height=parent.clientHeight;if(width<1||height<1)return;
-    renderer.setSize(width,height,false);const aspect=width/height,vertical=fit||autoFit?Math.max(35,(layout.width+8)/(aspect*2.0)):camera.userData.vertical||38;
+    renderer.setSize(width,height,false);const aspect=width/height;let vertical=fit||autoFit?Math.max(35,(layout.width+8)/(aspect*2.0)):camera.userData.vertical||38;
+    if((fit||autoFit)&&frame?.merchantCount>8&&world){
+      // Fit the expanded district's projected width AND depth on a narrow panel.
+      world.updateWorldMatrix(true,true);camera.updateMatrixWorld(true);
+      const bounds=new THREE.Box3().setFromObject(world);let extent=0;
+      for(const x of [bounds.min.x,bounds.max.x])for(const y of [bounds.min.y,bounds.max.y])for(const z of [bounds.min.z,bounds.max.z]){
+        const p=new THREE.Vector3(x,y,z).applyMatrix4(camera.matrixWorldInverse);extent=Math.max(extent,Math.abs(p.x)/aspect,Math.abs(p.y));
+      }
+      vertical=extent*1.06;
+    }
     camera.userData.vertical=vertical;camera.left=-vertical*aspect;camera.right=vertical*aspect;camera.top=vertical;camera.bottom=-vertical;camera.updateProjectionMatrix();
   }
   function ring(color){const g=new THREE.PlaneGeometry(1,1),m=new THREE.MeshBasicMaterial({color,transparent:true,opacity:.30,side:THREE.DoubleSide,depthWrite:false});const mesh=new THREE.Mesh(g,m);mesh.rotation.x=-Math.PI/2;mesh.visible=false;scene.add(mesh);return mesh;}
@@ -163,7 +172,9 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     if(!renderer||parent.dataset.renderState!=='ready')return;
     if(changed){clearWorld();layout=createLayout(next.merchantCount);environment();cameraHome();lastRun=next.runId;}
     // A fixed representative population prevents same-day polling or new events from popping people in/out.
-    const sampleCount=Math.min(32,next.customers.length);
+    const sampleCount=Math.min(next.visibleCustomerLimit||32,next.customers.length);
+    parent.dataset.simulatedCustomers=String(next.customers.length);
+    parent.dataset.representativeCustomers=String(sampleCount);
     const ids=new Set(Array.from({length:sampleCount},(_,i)=>next.customers[Math.floor(i*next.customers.length/sampleCount)].id));
     for(const id of (next.featuredIds||[]).slice(0,8))ids.add(id);
     if(selected?.type==='customer')ids.add(selected.id);

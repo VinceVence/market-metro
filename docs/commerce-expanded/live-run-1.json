@@ -1,0 +1,2792 @@
+{
+  "id": "AUTONOMY-e8dbdeebec59428a",
+  "runId": "GARDEN-AUTO-e8dbdeebec59428a",
+  "status": "COMPLETED",
+  "settings": {
+    "seed": 20261103,
+    "regime": "discovery",
+    "marketProfile": "expanded-12x600",
+    "marketVersion": "commerce-expanded-1",
+    "merchantCount": 12,
+    "customerCount": 600,
+    "campaignBudgetUSD": 300,
+    "dailyContactLimit": 60,
+    "sandbox": false,
+    "modelCapUSD": 0.25,
+    "autonomy": true,
+    "goal": "Autonomous analysis, local training, campaign publication and funded commerce."
+  },
+  "day": 126,
+  "costUSD": 0.013447,
+  "statistics": {
+    "orders": 1596,
+    "units": 2364,
+    "revenueCents": 19272800,
+    "refundsCents": 723400,
+    "feesCents": 750890,
+    "spendCents": 10435,
+    "deliveries": 1596,
+    "impressions": 3667
+  },
+  "outcomes": {
+    "recommendations": 1478,
+    "fundedResponses": 448,
+    "calibrationUpdates": 29,
+    "agentCaptures": 400,
+    "coupons": 0,
+    "redemptions": 0,
+    "purchases": 901,
+    "retainedPurchases": 875,
+    "recommendationPurchases": 335,
+    "retainedCents": 11108100,
+    "platformCents": 437340,
+    "modelCostCents": 1.3447
+  },
+  "comparison": {
+    "fixed": {
+      "seed": 20261103,
+      "regime": "discovery",
+      "policy": "fixed_cover_joint",
+      "initialHash": "fe2a02b1a4e6b2a20fa37533288e9c493463201d5746d41b480b1042ee94f99b",
+      "opportunityHash": "a7e3078b5fb0b6312ab5397e8416de8753cdcec3f234a6b23002cff17db7906f",
+      "consentHash": "4884a86a383f30beb82262353c83ce599137b8029f4258792ad0bb33dac5b5fc",
+      "incomeCents": 49931014,
+      "platformUSD": 4364.26,
+      "retailerUSD": 51763.38,
+      "wholesalerUSD": 11694.11,
+      "manufacturerUSD": 11272.93,
+      "allPartnerUSD": 74730.42,
+      "terminalCashUSD": 163031.07,
+      "terminalInventoryUSD": 4041.57,
+      "merchantContributions": {
+        "MERCHANT-0": 0,
+        "MERCHANT-1": 5752.32,
+        "MERCHANT-2": 46.04,
+        "MERCHANT-3": 72.59,
+        "MERCHANT-4": 13761.4,
+        "MERCHANT-5": 117.92,
+        "MERCHANT-6": 574.74,
+        "MERCHANT-7": 14743.63,
+        "MERCHANT-8": 586.22,
+        "MERCHANT-9": 232.89,
+        "MERCHANT-10": 15779.85,
+        "MERCHANT-11": 95.78
+      },
+      "purchases": 898,
+      "retainedPurchases": 871,
+      "retainedVolumeUSD": 111200,
+      "fulfilledRequests": 898,
+      "contactCount": 2255,
+      "recommendationsSent": 2255,
+      "fundedResponses": 447,
+      "attributedPurchases": 477,
+      "recommendationPurchases": 373,
+      "outreachCostUSD": 112.75,
+      "requestCount": 1218,
+      "needCount": 2494,
+      "outsidePurchases": 843,
+      "unpaidLiabilities": 0,
+      "unpaidLiabilityUSD": 0,
+      "reliability": {
+        "invariantsPassed": true,
+        "learnedPosteriorUpdates": 1,
+        "calibrationUpdates": 0,
+        "p95DecisionMs": 501.0740419999929,
+        "totalWallMs": 39507
+      },
+      "modelCostUSD": 0,
+      "marketVersion": "commerce-expanded-1",
+      "merchants": 12,
+      "shoppers": 600,
+      "normalized": {
+        "platformPer100ShoppersUSD": 727.3766666666667,
+        "retainedPurchasesPer100": 145.16666666666666,
+        "merchantContributionPerMerchantUSD": 4313.615
+      },
+      "source": "EXPANDED_AUTHORED_GROWTH_SIMULATION"
+    },
+    "team": {
+      "platformUSD": 4373.386552999999,
+      "retailerUSD": 51741,
+      "retainedPurchases": 875,
+      "retainedVolumeUSD": 111081,
+      "modelCostUSD": 0.013447,
+      "modelCalls": 6,
+      "unpaidLiabilities": 0,
+      "marketVersion": "commerce-expanded-1",
+      "merchants": 12,
+      "shoppers": 600,
+      "source": "SIMULATED_COMMERCE_AFTER_MODEL_COST",
+      "normalized": {
+        "platformPer100ShoppersUSD": 728.8977588333332,
+        "retainedPurchasesPer100": 145.83333333333334,
+        "merchantContributionPerMerchantUSD": 4311.75
+      }
+    },
+    "platformDeltaUSD": 9.126552999999149,
+    "scope": "One paired live run at identical market size, need pool, consent and income; original benchmark unchanged. Background review latency affects publication timing. Not proof of generalization."
+  },
+  "steps": [
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-0",
+      "role": "Market analyst",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "day": 31,
+      "finishedDay": 34,
+      "input": {
+        "day": 30,
+        "reason": "First campaign: inspect historical validation and current commerce signals.",
+        "remainingMarketDays": 70,
+        "contactBudgetCents": 30000,
+        "stock": {
+          "Stationery": 27,
+          "Electronics": 18,
+          "Furniture": 27,
+          "Office bundles": 20
+        },
+        "marketScale": {
+          "version": "commerce-expanded-1",
+          "shoppers": 600,
+          "merchants": 12,
+          "contactMultiplier": 6,
+          "contactUnit": "per 100 shoppers",
+          "virtualCampaignBudgetCents": 30000
+        },
+        "contactQuotaMeaning": "Campaign contactsPerDay is per 100 shoppers; multiply by contactMultiplier for the total daily cap. Model previews already show total contacts. Virtual outreach money is separate from the real $0.25 model cap.",
+        "openFundedRequests": 29,
+        "urgentRequests": 7,
+        "recentContacts": 0,
+        "recentFundedResponses": 0,
+        "matureOwnResponses": 0,
+        "ownRetainedRate": null,
+        "matureOrders": 354,
+        "retainedPaymentVolumeCents": 3510800,
+        "activeCampaign": null,
+        "fundingEvidence": {
+          "priorVersion": "observed-funding-1",
+          "asOfDay": 30,
+          "windowDays": 28,
+          "strength": 8,
+          "rows": 0,
+          "groups": {
+            "recommend|fresh": {
+              "historicalContacts": 1679,
+              "historicalRate": 0.11220238095238096,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.11220238095238096
+            },
+            "recommend|recent": {
+              "historicalContacts": 1441,
+              "historicalRate": 0.05651872399445215,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.05651872399445215
+            },
+            "ask_need|cold": {
+              "historicalContacts": 3159,
+              "historicalRate": 0.025474683544303798,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.025474683544303798
+            },
+            "ask_need|fresh": {
+              "historicalContacts": 325,
+              "historicalRate": 0.12116564417177914,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.12116564417177914
+            },
+            "ask_need|recent": {
+              "historicalContacts": 406,
+              "historicalRate": 0.0945945945945946,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.0945945945945946
+            }
+          },
+          "scope": "Prior-day observed funding outcomes. Funding is an earlier signal than retained payment; the odds adjustment is a modeling assumption, not a causal effect.",
+          "id": "FUNDING-283b4f3dba219195"
+        },
+        "outcomeDefinitions": {
+          "funded": "Buyer approved existing funds for the request. Available immediately after contact.",
+          "retained": "Captured purchase with no refund after the observation horizon. Available only after maturation.",
+          "comparison": "Compare rates only with the same outcome definition and cohort. Historical pooled rates are not the current market rate."
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+        "historicalIntent": {
+          "product_browses": {
+            "contacts": 1945,
+            "retained": 101,
+            "netCents": 32180
+          },
+          "product_searches": {
+            "contacts": 1175,
+            "retained": 192,
+            "netCents": 63426
+          },
+          "general_inquiries": {
+            "contacts": 3890,
+            "retained": 164,
+            "netCents": 37764
+          }
+        },
+        "analysisTask": "Identify a specific commercial opportunity or failure from contact, conversion, funding and stock evidence. Model selection belongs to the scientist; do not substitute a model accuracy summary for market analysis.",
+        "observed": {
+          "asOfDay": 30
+        }
+      },
+      "output": {
+        "rationale": "Prioritizing the 'ask_need|fresh' segment for outreach maximizes the probability of securing funded requests, which acts as a leading indicator for conversion, while aligning with high-intent search behavior to improve overall retained purchase volume.",
+        "finding": "The 'ask_need|fresh' cohort demonstrates the highest funding rate (12.12%), while historical data indicates that 'product_searches' yield the highest retained conversion rate (16.34%).",
+        "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+        "focus": "conversion_quality"
+      },
+      "costMicros": 1445,
+      "provider": [
+        {
+          "reservationId": "1c822ca2-4ff1-40c6-ae03-4432a72323f4",
+          "caseId": "Market analyst-30",
+          "trialId": "AUTONOMY-e8dbdeebec59428a",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1445,
+          "reservedMicros": 30000,
+          "inputTokens": 1344,
+          "outputTokens": 182,
+          "thinkingTokens": 557,
+          "cachedInputTokens": 0,
+          "responseId": "FtzpaonxCtvapt8P8q6a4Qk",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 4252,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ]
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-1",
+      "role": "ML scientist",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "day": 31,
+      "finishedDay": 37,
+      "input": {
+        "day": 30,
+        "reason": "First campaign: inspect historical validation and current commerce signals.",
+        "remainingMarketDays": 70,
+        "contactBudgetCents": 30000,
+        "stock": {
+          "Stationery": 27,
+          "Electronics": 18,
+          "Furniture": 27,
+          "Office bundles": 20
+        },
+        "marketScale": {
+          "version": "commerce-expanded-1",
+          "shoppers": 600,
+          "merchants": 12,
+          "contactMultiplier": 6,
+          "contactUnit": "per 100 shoppers",
+          "virtualCampaignBudgetCents": 30000
+        },
+        "contactQuotaMeaning": "Campaign contactsPerDay is per 100 shoppers; multiply by contactMultiplier for the total daily cap. Model previews already show total contacts. Virtual outreach money is separate from the real $0.25 model cap.",
+        "openFundedRequests": 29,
+        "urgentRequests": 7,
+        "recentContacts": 0,
+        "recentFundedResponses": 0,
+        "matureOwnResponses": 0,
+        "ownRetainedRate": null,
+        "matureOrders": 354,
+        "retainedPaymentVolumeCents": 3510800,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "logistic": {
+            "logLoss": 0.2280026147419293,
+            "brier": 0.05914209271715025,
+            "auc": 0.6447440345861934,
+            "averagePrecision": 0.13403096929864852
+          },
+          "forest": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          }
+        },
+        "activeModel": null,
+        "activeCampaign": null,
+        "fundingEvidence": {
+          "priorVersion": "observed-funding-1",
+          "asOfDay": 30,
+          "windowDays": 28,
+          "strength": 8,
+          "rows": 0,
+          "groups": {
+            "recommend|fresh": {
+              "historicalContacts": 1679,
+              "historicalRate": 0.11220238095238096,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.11220238095238096
+            },
+            "recommend|recent": {
+              "historicalContacts": 1441,
+              "historicalRate": 0.05651872399445215,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.05651872399445215
+            },
+            "ask_need|cold": {
+              "historicalContacts": 3159,
+              "historicalRate": 0.025474683544303798,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.025474683544303798
+            },
+            "ask_need|fresh": {
+              "historicalContacts": 325,
+              "historicalRate": 0.12116564417177914,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.12116564417177914
+            },
+            "ask_need|recent": {
+              "historicalContacts": 406,
+              "historicalRate": 0.0945945945945946,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.0945945945945946
+            }
+          },
+          "scope": "Prior-day observed funding outcomes. Funding is an earlier signal than retained payment; the odds adjustment is a modeling assumption, not a causal effect.",
+          "id": "FUNDING-283b4f3dba219195"
+        },
+        "outcomeDefinitions": {
+          "funded": "Buyer approved existing funds for the request. Available immediately after contact.",
+          "retained": "Captured purchase with no refund after the observation horizon. Available only after maturation.",
+          "comparison": "Compare rates only with the same outcome definition and cohort. Historical pooled rates are not the current market rate."
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+        "analyst": {
+          "rationale": "Prioritizing the 'ask_need|fresh' segment for outreach maximizes the probability of securing funded requests, which acts as a leading indicator for conversion, while aligning with high-intent search behavior to improve overall retained purchase volume.",
+          "finding": "The 'ask_need|fresh' cohort demonstrates the highest funding rate (12.12%), while historical data indicates that 'product_searches' yield the highest retained conversion rate (16.34%).",
+          "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+          "focus": "conversion_quality"
+        },
+        "developmentEvidence": {
+          "source": "Seven previously used synthetic development markets. Not future predictions or held-out results.",
+          "scope": "Same frozen economy and original strong fixed controller. All inputs and outcomes are available historical observations. Individual merchant tradeoffs remain visible.",
+          "candidates": [
+            {
+              "recipe": "unified",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.54,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8049.63,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 23,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.5042857142855155,
+                "MERCHANT-1": 146.7128571428575,
+                "MERCHANT-2": -13.332857142857165
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "unified",
+              "valuation": "contextual",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 701.5257142857142,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8031.431428571429,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.85714285714286,
+              "exactRecommendationPurchases": 22.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 14.347142857142899,
+                "MERCHANT-1": 119.67428571428627,
+                "MERCHANT-2": -13.335714285714289
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "inquiry_expert",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 706.2414285714286,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8094.357142857142,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.14285714285714,
+              "exactRecommendationPurchases": 19.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 38.695714285714416,
+                "MERCHANT-1": 179.20285714285728,
+                "MERCHANT-2": -34.28714285714295
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 708.3285714285714,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8093.4685714285715,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 19.142857142857142,
+              "merchantDeltas": {
+                "MERCHANT-0": 25.49714285714265,
+                "MERCHANT-1": 168.53857142857123,
+                "MERCHANT-2": -11.31285714285707
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "adaptation": "adaptive_funding",
+              "intentScope": "latest",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.1542857142857,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8014.954285714286,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.14285714285714,
+              "exactRecommendationPurchases": 21.857142857142858,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.598571428571404,
+                "MERCHANT-1": 99.84428571428543,
+                "MERCHANT-2": -1.2342857142856474
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "scope": "Development evidence only. Adaptation improves merchant balance relative to the uncalibrated recipe, but the individual merchant guard is still not fully met."
+            }
+          ]
+        },
+        "recipeMeaning": {
+          "unified": "Use the fitted classifier for both contact types.",
+          "inquiry_expert": "Use the fitted classifier for product recommendations and an observed intent-age reward posterior for inquiries.",
+          "clarify_ambiguous": "Use that inquiry expert for browsing ambiguity; explicit product searches keep product recommendations."
+        },
+        "valuationMeaning": {
+          "pooled": "Use measured average retained payment value by contact kind.",
+          "contextual": "Train a conditional payment-value forest on observed retained purchases."
+        },
+        "inquiryCalibration": {
+          "ask_need|fresh": {
+            "contacts": 93,
+            "retained": 18,
+            "grossCents": 285500,
+            "retailNetCents": 6597
+          },
+          "ask_need|cold": {
+            "contacts": 725,
+            "retained": 30,
+            "grossCents": 309700,
+            "retailNetCents": 4338
+          },
+          "ask_need|recent": {
+            "contacts": 326,
+            "retained": 23,
+            "grossCents": 282000,
+            "retailNetCents": 5400
+          },
+          "recommend|fresh": {
+            "contacts": 916,
+            "retained": 170,
+            "grossCents": 2453700,
+            "retailNetCents": 56166
+          },
+          "recommend|recent": {
+            "contacts": 439,
+            "retained": 33,
+            "grossCents": 449500,
+            "retailNetCents": 9058
+          }
+        },
+        "adaptationMeaning": {
+          "historical": "Use the fitted historical classifier directly. Appending a few local rows can leave historical behavior dominant.",
+          "adaptive_funding": "Adjust recommendation odds each day from prior-day observed funding response, using an eight-contact historical prior and a rolling28-day window. No paid calls for these local updates. Inquiry reward already has its own local update."
+        },
+        "intentScopeMeaning": {
+          "latest": "Only recommend the latest expressed product. Inquiries may clarify uncertain browsing.",
+          "all_recent": "The model may choose any product with observed interest in the past seven days."
+        },
+        "validationScope": "Historical classifier metrics cover the full100-day training window. Development policy outcomes are known training markets, not future gains. Choose the model/routing recipe for the business objective, not accuracy alone. A retain decision keeps the exact existing model, adaptation and routing.",
+        "observed": {
+          "asOfDay": 30
+        }
+      },
+      "output": {
+        "intentScope": "all_recent",
+        "valuation": "pooled",
+        "rationale": "The forest model demonstrates superior predictive performance (AUC 0.67, AP 0.165). Combining this with the clarify_ambiguous recipe and all_recent intent scope provides a robust framework for balancing high-intent product recommendations with inquiry-based browsing, optimizing for retained purchases.",
+        "family": "forest",
+        "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+        "decision": "train",
+        "windowDays": "28",
+        "recipe": "clarify_ambiguous",
+        "adaptation": "historical"
+      },
+      "costMicros": 2237,
+      "provider": [
+        {
+          "reservationId": "9d962e64-43b7-4e72-a690-8f8784e65a26",
+          "caseId": "ML scientist-30",
+          "trialId": "AUTONOMY-e8dbdeebec59428a",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 2237,
+          "reservedMicros": 30000,
+          "inputTokens": 3746,
+          "outputTokens": 191,
+          "thinkingTokens": 676,
+          "cachedInputTokens": 0,
+          "responseId": "HNzpatacJbKipt8P7PSSwQc",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 4072,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ]
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-2",
+      "role": "ML scientist",
+      "actor": "LOCAL_MODEL",
+      "status": "COMPLETED",
+      "day": 31,
+      "finishedDay": 39,
+      "input": {
+        "family": "forest",
+        "recipe": "clarify_ambiguous",
+        "valuation": "pooled",
+        "windowDays": 28,
+        "rows": 2762,
+        "ownMatureRows": 0,
+        "cutoffDay": 30,
+        "observed": {
+          "asOfDay": 30
+        }
+      },
+      "output": {
+        "modelId": "INTENT-46479a0314cea43c",
+        "family": "forest",
+        "recipe": "clarify_ambiguous",
+        "valuation": "pooled",
+        "adaptation": "historical",
+        "intentScope": "all_recent",
+        "inquiryPriorRows": 2499,
+        "metrics": {
+          "logLoss": 0.2254726007241737,
+          "brier": 0.05868753877173019,
+          "auc": 0.6652663642727026,
+          "averagePrecision": 0.15383508211549132
+        },
+        "coarse": {
+          "logLoss": 0.24133364189711792,
+          "brier": 0.061094631559625794,
+          "auc": 0.5498661061175911,
+          "averagePrecision": 0.08169669336709434
+        },
+        "validationPassed": true,
+        "runtimeSeconds": 2.2428992499990272,
+        "scope": "Classifier validation and recorded training-market evidence; not proof of this campaign's future profit. Funding adjustment is evaluated separately.",
+        "title": "Response model trained",
+        "body": "2,762 observed contacts · forest · clarify ambiguous · 2.2 seconds. Prediction validation passed; campaign profit is evaluated after settlement."
+      },
+      "costMicros": 0,
+      "provider": []
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-3",
+      "role": "Commerce manager",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "day": 31,
+      "finishedDay": 41,
+      "input": {
+        "day": 30,
+        "reason": "First campaign: inspect historical validation and current commerce signals.",
+        "remainingMarketDays": 70,
+        "contactBudgetCents": 30000,
+        "stock": {
+          "Stationery": 27,
+          "Electronics": 18,
+          "Furniture": 27,
+          "Office bundles": 20
+        },
+        "marketScale": {
+          "version": "commerce-expanded-1",
+          "shoppers": 600,
+          "merchants": 12,
+          "contactMultiplier": 6,
+          "contactUnit": "per 100 shoppers",
+          "virtualCampaignBudgetCents": 30000
+        },
+        "contactQuotaMeaning": "Campaign contactsPerDay is per 100 shoppers; multiply by contactMultiplier for the total daily cap. Model previews already show total contacts. Virtual outreach money is separate from the real $0.25 model cap.",
+        "openFundedRequests": 29,
+        "urgentRequests": 7,
+        "recentContacts": 0,
+        "recentFundedResponses": 0,
+        "matureOwnResponses": 0,
+        "ownRetainedRate": null,
+        "matureOrders": 354,
+        "retainedPaymentVolumeCents": 3510800,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24071182238066735,
+            "brier": 0.060918446828162214,
+            "auc": 0.5346631622778883,
+            "averagePrecision": 0.07906629024620886
+          },
+          "logistic": {
+            "logLoss": 0.2280026147419293,
+            "brier": 0.05914209271715025,
+            "auc": 0.6447440345861934,
+            "averagePrecision": 0.13403096929864852
+          },
+          "forest": {
+            "logLoss": 0.22125727304597825,
+            "brier": 0.05792385009087139,
+            "auc": 0.6729221186214007,
+            "averagePrecision": 0.16542539324111097
+          }
+        },
+        "activeModel": null,
+        "activeCampaign": null,
+        "fundingEvidence": {
+          "priorVersion": "observed-funding-1",
+          "asOfDay": 30,
+          "windowDays": 28,
+          "strength": 8,
+          "rows": 0,
+          "groups": {
+            "recommend|fresh": {
+              "historicalContacts": 1679,
+              "historicalRate": 0.11220238095238096,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.11220238095238096
+            },
+            "recommend|recent": {
+              "historicalContacts": 1441,
+              "historicalRate": 0.05651872399445215,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.05651872399445215
+            },
+            "ask_need|cold": {
+              "historicalContacts": 3159,
+              "historicalRate": 0.025474683544303798,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.025474683544303798
+            },
+            "ask_need|fresh": {
+              "historicalContacts": 325,
+              "historicalRate": 0.12116564417177914,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.12116564417177914
+            },
+            "ask_need|recent": {
+              "historicalContacts": 406,
+              "historicalRate": 0.0945945945945946,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.0945945945945946
+            }
+          },
+          "scope": "Prior-day observed funding outcomes. Funding is an earlier signal than retained payment; the odds adjustment is a modeling assumption, not a causal effect.",
+          "id": "FUNDING-283b4f3dba219195"
+        },
+        "outcomeDefinitions": {
+          "funded": "Buyer approved existing funds for the request. Available immediately after contact.",
+          "retained": "Captured purchase with no refund after the observation horizon. Available only after maturation.",
+          "comparison": "Compare rates only with the same outcome definition and cohort. Historical pooled rates are not the current market rate."
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+        "analyst": {
+          "rationale": "Prioritizing the 'ask_need|fresh' segment for outreach maximizes the probability of securing funded requests, which acts as a leading indicator for conversion, while aligning with high-intent search behavior to improve overall retained purchase volume.",
+          "finding": "The 'ask_need|fresh' cohort demonstrates the highest funding rate (12.12%), while historical data indicates that 'product_searches' yield the highest retained conversion rate (16.34%).",
+          "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+          "focus": "conversion_quality"
+        },
+        "scientist": {
+          "intentScope": "all_recent",
+          "valuation": "pooled",
+          "rationale": "The forest model demonstrates superior predictive performance (AUC 0.67, AP 0.165). Combining this with the clarify_ambiguous recipe and all_recent intent scope provides a robust framework for balancing high-intent product recommendations with inquiry-based browsing, optimizing for retained purchases.",
+          "family": "forest",
+          "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+          "decision": "train",
+          "windowDays": "28",
+          "recipe": "clarify_ambiguous",
+          "adaptation": "historical"
+        },
+        "trainingResult": {
+          "modelId": "INTENT-46479a0314cea43c",
+          "family": "forest",
+          "recipe": "clarify_ambiguous",
+          "valuation": "pooled",
+          "adaptation": "historical",
+          "intentScope": "all_recent",
+          "inquiryPriorRows": 2499,
+          "metrics": {
+            "logLoss": 0.2254726007241737,
+            "brier": 0.05868753877173019,
+            "auc": 0.6652663642727026,
+            "averagePrecision": 0.15383508211549132
+          },
+          "coarse": {
+            "logLoss": 0.24133364189711792,
+            "brier": 0.061094631559625794,
+            "auc": 0.5498661061175911,
+            "averagePrecision": 0.08169669336709434
+          },
+          "validationPassed": true,
+          "runtimeSeconds": 2.2428992499990272,
+          "scope": "Classifier validation and recorded training-market evidence; not proof of this campaign's future profit. Funding adjustment is evaluated separately."
+        },
+        "campaignPreviews": [
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 3,
+            "totalDailyCap": 18,
+            "eligibleSelected": 18,
+            "recommendations": 18,
+            "generalInquiries": 0,
+            "expectedNetCents": 1191,
+            "contactCostCents": 90,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 6,
+            "totalDailyCap": 36,
+            "eligibleSelected": 36,
+            "recommendations": 36,
+            "generalInquiries": 0,
+            "expectedNetCents": 1454,
+            "contactCostCents": 180,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 10,
+            "totalDailyCap": 60,
+            "eligibleSelected": 60,
+            "recommendations": 60,
+            "generalInquiries": 0,
+            "expectedNetCents": 1687,
+            "contactCostCents": 300,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 3,
+            "totalDailyCap": 18,
+            "eligibleSelected": 18,
+            "recommendations": 6,
+            "generalInquiries": 12,
+            "expectedNetCents": 1561,
+            "contactCostCents": 90,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 6,
+            "totalDailyCap": 36,
+            "eligibleSelected": 36,
+            "recommendations": 6,
+            "generalInquiries": 30,
+            "expectedNetCents": 2838,
+            "contactCostCents": 180,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 10,
+            "totalDailyCap": 60,
+            "eligibleSelected": 60,
+            "recommendations": 13,
+            "generalInquiries": 47,
+            "expectedNetCents": 3323,
+            "contactCostCents": 300,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          }
+        ],
+        "currentSupplyContract": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "developmentEvidence": {
+          "source": "Seven previously used synthetic development markets. Not future predictions or held-out results.",
+          "scope": "Same frozen economy and original strong fixed controller. All inputs and outcomes are available historical observations. Individual merchant tradeoffs remain visible.",
+          "candidates": [
+            {
+              "recipe": "unified",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.54,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8049.63,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 23,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.5042857142855155,
+                "MERCHANT-1": 146.7128571428575,
+                "MERCHANT-2": -13.332857142857165
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "unified",
+              "valuation": "contextual",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 701.5257142857142,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8031.431428571429,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.85714285714286,
+              "exactRecommendationPurchases": 22.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 14.347142857142899,
+                "MERCHANT-1": 119.67428571428627,
+                "MERCHANT-2": -13.335714285714289
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "inquiry_expert",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 706.2414285714286,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8094.357142857142,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.14285714285714,
+              "exactRecommendationPurchases": 19.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 38.695714285714416,
+                "MERCHANT-1": 179.20285714285728,
+                "MERCHANT-2": -34.28714285714295
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 708.3285714285714,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8093.4685714285715,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 19.142857142857142,
+              "merchantDeltas": {
+                "MERCHANT-0": 25.49714285714265,
+                "MERCHANT-1": 168.53857142857123,
+                "MERCHANT-2": -11.31285714285707
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "adaptation": "adaptive_funding",
+              "intentScope": "latest",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.1542857142857,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8014.954285714286,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.14285714285714,
+              "exactRecommendationPurchases": 21.857142857142858,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.598571428571404,
+                "MERCHANT-1": 99.84428571428543,
+                "MERCHANT-2": -1.2342857142856474
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "scope": "Development evidence only. Adaptation improves merchant balance relative to the uncalibrated recipe, but the individual merchant guard is still not fully met."
+            }
+          ]
+        },
+        "actionMeaning": {
+          "audience": "lapsed requires a previous purchase and at least14 days since it; recent_interest requires a product signal. all includes any eligible contact.",
+          "minimumNetCents": "Threshold on modeled expected retail payment contribution after contact cost; estimated from observed retained/failed outcomes.",
+          "routing": "fast uses modeled PayPal supplier settlement. auto can use bank settlement when deadlines permit. Neither changes retail captures.",
+          "modelRoles": "The model ranks eligible contacts locally; the campaign is automatically applied. A smaller contact limit can discard positive-value opportunities shown in the preview. Keep the existing stock and settlement settings unless fulfillment evidence justifies changing them; conservative is not by itself an economic reason."
+        },
+        "observed": {
+          "asOfDay": 30
+        }
+      },
+      "output": {
+        "routing": "fast",
+        "contactsPerDay": "10",
+        "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+        "audience": "recent_interest",
+        "forecast": "recent14",
+        "coverDays": "7",
+        "minimumNetCents": "10",
+        "rationale": "The 'clarify_ambiguous' recipe with 'both' contact kinds at 10 contacts/day maximizes expected net contribution (3323 cents) and aligns with the forest model's predictive strength for 'recent_interest' shoppers.",
+        "contactKinds": "both",
+        "decision": "publish"
+      },
+      "costMicros": 2455,
+      "provider": [
+        {
+          "reservationId": "ec18fe21-7e7d-4daa-92b3-380244bcdacd",
+          "caseId": "Commerce manager-30",
+          "trialId": "AUTONOMY-e8dbdeebec59428a",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 2455,
+          "reservedMicros": 30000,
+          "inputTokens": 4376,
+          "outputTokens": 192,
+          "thinkingTokens": 715,
+          "cachedInputTokens": 0,
+          "responseId": "JtzpauiuKq7Ept8PhKWQqAQ",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3340,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ]
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-4",
+      "role": "Coordinator",
+      "actor": "TRUSTED_PUBLISHER",
+      "status": "COMPLETED",
+      "day": 31,
+      "finishedDay": 41,
+      "input": {
+        "observed": {
+          "asOfDay": 30
+        }
+      },
+      "output": {
+        "decision": "publish",
+        "effectiveDay": 41,
+        "modelId": "INTENT-46479a0314cea43c",
+        "campaign": {
+          "routing": "fast",
+          "contactsPerDay": "10",
+          "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+          "audience": "recent_interest",
+          "forecast": "recent14",
+          "coverDays": "7",
+          "minimumNetCents": "10",
+          "rationale": "The 'clarify_ambiguous' recipe with 'both' contact kinds at 10 contacts/day maximizes expected net contribution (3323 cents) and aligns with the forest model's predictive strength for 'recent_interest' shoppers.",
+          "contactKinds": "both",
+          "decision": "publish",
+          "stopped": false,
+          "modelId": "INTENT-46479a0314cea43c",
+          "publishedDay": 41
+        },
+        "supply": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "automated": true,
+        "checks": [
+          "observed features only",
+          "validated model artifact",
+          "consent and contact budget",
+          "funded complete baskets",
+          "merchant margin floor",
+          "idempotent simulated payments"
+        ],
+        "nativePayments": false,
+        "title": "Campaign published",
+        "body": "recent interest · up to 60 contacts/day. Effective day 42."
+      },
+      "costMicros": 0,
+      "provider": []
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-5",
+      "role": "Market analyst",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "day": 62,
+      "finishedDay": 63,
+      "input": {
+        "day": 61,
+        "reason": "Observed funded-response rate changed by more than10 percentage points.",
+        "remainingMarketDays": 39,
+        "contactBudgetCents": 25105,
+        "stock": {
+          "Stationery": 48,
+          "Electronics": 38,
+          "Furniture": 34,
+          "Office bundles": 43
+        },
+        "marketScale": {
+          "version": "commerce-expanded-1",
+          "shoppers": 600,
+          "merchants": 12,
+          "contactMultiplier": 6,
+          "contactUnit": "per 100 shoppers",
+          "virtualCampaignBudgetCents": 30000
+        },
+        "contactQuotaMeaning": "Campaign contactsPerDay is per 100 shoppers; multiply by contactMultiplier for the total daily cap. Model previews already show total contacts. Virtual outreach money is separate from the real $0.25 model cap.",
+        "openFundedRequests": 4,
+        "urgentRequests": 0,
+        "recentContacts": 20,
+        "recentFundedResponses": 5,
+        "matureOwnResponses": 197,
+        "ownRetainedRate": 0.12690355329949238,
+        "matureOrders": 917,
+        "retainedPaymentVolumeCents": 9878000,
+        "activeCampaign": {
+          "routing": "fast",
+          "contactsPerDay": "10",
+          "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+          "audience": "recent_interest",
+          "forecast": "recent14",
+          "coverDays": "7",
+          "minimumNetCents": "10",
+          "rationale": "The 'clarify_ambiguous' recipe with 'both' contact kinds at 10 contacts/day maximizes expected net contribution (3323 cents) and aligns with the forest model's predictive strength for 'recent_interest' shoppers.",
+          "contactKinds": "both",
+          "decision": "publish",
+          "stopped": false,
+          "modelId": "INTENT-46479a0314cea43c",
+          "publishedDay": 41
+        },
+        "fundingEvidence": {
+          "priorVersion": "observed-funding-1",
+          "asOfDay": 61,
+          "windowDays": 28,
+          "strength": 8,
+          "rows": 826,
+          "groups": {
+            "recommend|fresh": {
+              "historicalContacts": 1679,
+              "historicalRate": 0.11220238095238096,
+              "contacts": 324,
+              "funded": 121,
+              "fundingRate": 0.3671615031554791
+            },
+            "recommend|recent": {
+              "historicalContacts": 1441,
+              "historicalRate": 0.05651872399445215,
+              "contacts": 151,
+              "funded": 27,
+              "fundingRate": 0.17265503013808564
+            },
+            "ask_need|cold": {
+              "historicalContacts": 3159,
+              "historicalRate": 0.025474683544303798,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.025474683544303798
+            },
+            "ask_need|fresh": {
+              "historicalContacts": 325,
+              "historicalRate": 0.12116564417177914,
+              "contacts": 192,
+              "funded": 29,
+              "fundingRate": 0.14984662576687116
+            },
+            "ask_need|recent": {
+              "historicalContacts": 406,
+              "historicalRate": 0.0945945945945946,
+              "contacts": 159,
+              "funded": 9,
+              "fundingRate": 0.05842369315423207
+            }
+          },
+          "scope": "Prior-day observed funding outcomes. Funding is an earlier signal than retained payment; the odds adjustment is a modeling assumption, not a causal effect.",
+          "id": "FUNDING-1dd7a32ec82c6602"
+        },
+        "outcomeDefinitions": {
+          "funded": "Buyer approved existing funds for the request. Available immediately after contact.",
+          "retained": "Captured purchase with no refund after the observation horizon. Available only after maturation.",
+          "comparison": "Compare rates only with the same outcome definition and cohort. Historical pooled rates are not the current market rate."
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "242a115e07c9beb4da4430ff33085bd85ffc18e152f1c2c615ab3ea246d20d5d",
+        "historicalIntent": {
+          "product_browses": {
+            "contacts": 1945,
+            "retained": 101,
+            "netCents": 32180
+          },
+          "product_searches": {
+            "contacts": 1175,
+            "retained": 192,
+            "netCents": 63426
+          },
+          "general_inquiries": {
+            "contacts": 3890,
+            "retained": 164,
+            "netCents": 37764
+          }
+        },
+        "analysisTask": "Identify a specific commercial opportunity or failure from contact, conversion, funding and stock evidence. Model selection belongs to the scientist; do not substitute a model accuracy summary for market analysis.",
+        "observed": {
+          "asOfDay": 61
+        }
+      },
+      "output": {
+        "finding": "The 'recommend|fresh' segment exhibits a 36.7% funding rate, which is significantly higher than the 'recent' segments (17.3% for 'recommend|recent' and 5.8% for 'ask_need|recent').",
+        "rationale": "The 'recommend|fresh' segment shows the highest funding efficiency. Shifting the campaign focus to 'fresh' shoppers will likely improve the funded-response rate and increase the volume of retained purchases compared to the current 'recent_interest' focus.",
+        "focus": "fresh_intent",
+        "evidenceId": "242a115e07c9beb4da4430ff33085bd85ffc18e152f1c2c615ab3ea246d20d5d"
+      },
+      "costMicros": 1578,
+      "provider": [
+        {
+          "reservationId": "4e7134fa-b930-474d-bf4b-e0c40e29d1d0",
+          "caseId": "Market analyst-61",
+          "trialId": "AUTONOMY-e8dbdeebec59428a",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 1578,
+          "reservedMicros": 30000,
+          "inputTokens": 1571,
+          "outputTokens": 194,
+          "thinkingTokens": 596,
+          "cachedInputTokens": 0,
+          "responseId": "V9zpavL_IuGVpt8Ppe_f-As",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 3283,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ]
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-6",
+      "role": "ML scientist",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "day": 62,
+      "finishedDay": 67,
+      "input": {
+        "day": 61,
+        "reason": "Observed funded-response rate changed by more than10 percentage points.",
+        "remainingMarketDays": 39,
+        "contactBudgetCents": 25105,
+        "stock": {
+          "Stationery": 48,
+          "Electronics": 38,
+          "Furniture": 34,
+          "Office bundles": 43
+        },
+        "marketScale": {
+          "version": "commerce-expanded-1",
+          "shoppers": 600,
+          "merchants": 12,
+          "contactMultiplier": 6,
+          "contactUnit": "per 100 shoppers",
+          "virtualCampaignBudgetCents": 30000
+        },
+        "contactQuotaMeaning": "Campaign contactsPerDay is per 100 shoppers; multiply by contactMultiplier for the total daily cap. Model previews already show total contacts. Virtual outreach money is separate from the real $0.25 model cap.",
+        "openFundedRequests": 4,
+        "urgentRequests": 0,
+        "recentContacts": 20,
+        "recentFundedResponses": 5,
+        "matureOwnResponses": 197,
+        "ownRetainedRate": 0.12690355329949238,
+        "matureOrders": 917,
+        "retainedPaymentVolumeCents": 9878000,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24133364189711792,
+            "brier": 0.061094631559625794,
+            "auc": 0.5498661061175911,
+            "averagePrecision": 0.08169669336709434
+          },
+          "logistic": {
+            "logLoss": 0.23348543528021548,
+            "brier": 0.05999885648825999,
+            "auc": 0.625913764205488,
+            "averagePrecision": 0.12960749292019427
+          },
+          "forest": {
+            "logLoss": 0.2254726007241737,
+            "brier": 0.05868753877173019,
+            "auc": 0.6652663642727026,
+            "averagePrecision": 0.15383508211549132
+          }
+        },
+        "activeModel": {
+          "id": "INTENT-46479a0314cea43c",
+          "family": "forest",
+          "recipe": "clarify_ambiguous",
+          "valuation": "pooled",
+          "adaptation": "historical",
+          "intentScope": "all_recent",
+          "cutoffDay": 30,
+          "trainingRows": 2762
+        },
+        "activeCampaign": {
+          "routing": "fast",
+          "contactsPerDay": "10",
+          "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+          "audience": "recent_interest",
+          "forecast": "recent14",
+          "coverDays": "7",
+          "minimumNetCents": "10",
+          "rationale": "The 'clarify_ambiguous' recipe with 'both' contact kinds at 10 contacts/day maximizes expected net contribution (3323 cents) and aligns with the forest model's predictive strength for 'recent_interest' shoppers.",
+          "contactKinds": "both",
+          "decision": "publish",
+          "stopped": false,
+          "modelId": "INTENT-46479a0314cea43c",
+          "publishedDay": 41
+        },
+        "fundingEvidence": {
+          "priorVersion": "observed-funding-1",
+          "asOfDay": 61,
+          "windowDays": 28,
+          "strength": 8,
+          "rows": 826,
+          "groups": {
+            "recommend|fresh": {
+              "historicalContacts": 1679,
+              "historicalRate": 0.11220238095238096,
+              "contacts": 324,
+              "funded": 121,
+              "fundingRate": 0.3671615031554791
+            },
+            "recommend|recent": {
+              "historicalContacts": 1441,
+              "historicalRate": 0.05651872399445215,
+              "contacts": 151,
+              "funded": 27,
+              "fundingRate": 0.17265503013808564
+            },
+            "ask_need|cold": {
+              "historicalContacts": 3159,
+              "historicalRate": 0.025474683544303798,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.025474683544303798
+            },
+            "ask_need|fresh": {
+              "historicalContacts": 325,
+              "historicalRate": 0.12116564417177914,
+              "contacts": 192,
+              "funded": 29,
+              "fundingRate": 0.14984662576687116
+            },
+            "ask_need|recent": {
+              "historicalContacts": 406,
+              "historicalRate": 0.0945945945945946,
+              "contacts": 159,
+              "funded": 9,
+              "fundingRate": 0.05842369315423207
+            }
+          },
+          "scope": "Prior-day observed funding outcomes. Funding is an earlier signal than retained payment; the odds adjustment is a modeling assumption, not a causal effect.",
+          "id": "FUNDING-1dd7a32ec82c6602"
+        },
+        "outcomeDefinitions": {
+          "funded": "Buyer approved existing funds for the request. Available immediately after contact.",
+          "retained": "Captured purchase with no refund after the observation horizon. Available only after maturation.",
+          "comparison": "Compare rates only with the same outcome definition and cohort. Historical pooled rates are not the current market rate."
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "242a115e07c9beb4da4430ff33085bd85ffc18e152f1c2c615ab3ea246d20d5d",
+        "analyst": {
+          "finding": "The 'recommend|fresh' segment exhibits a 36.7% funding rate, which is significantly higher than the 'recent' segments (17.3% for 'recommend|recent' and 5.8% for 'ask_need|recent').",
+          "rationale": "The 'recommend|fresh' segment shows the highest funding efficiency. Shifting the campaign focus to 'fresh' shoppers will likely improve the funded-response rate and increase the volume of retained purchases compared to the current 'recent_interest' focus.",
+          "focus": "fresh_intent",
+          "evidenceId": "242a115e07c9beb4da4430ff33085bd85ffc18e152f1c2c615ab3ea246d20d5d"
+        },
+        "developmentEvidence": {
+          "source": "Seven previously used synthetic development markets. Not future predictions or held-out results.",
+          "scope": "Same frozen economy and original strong fixed controller. All inputs and outcomes are available historical observations. Individual merchant tradeoffs remain visible.",
+          "candidates": [
+            {
+              "recipe": "unified",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.54,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8049.63,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 23,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.5042857142855155,
+                "MERCHANT-1": 146.7128571428575,
+                "MERCHANT-2": -13.332857142857165
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "unified",
+              "valuation": "contextual",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 701.5257142857142,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8031.431428571429,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.85714285714286,
+              "exactRecommendationPurchases": 22.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 14.347142857142899,
+                "MERCHANT-1": 119.67428571428627,
+                "MERCHANT-2": -13.335714285714289
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "inquiry_expert",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 706.2414285714286,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8094.357142857142,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.14285714285714,
+              "exactRecommendationPurchases": 19.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 38.695714285714416,
+                "MERCHANT-1": 179.20285714285728,
+                "MERCHANT-2": -34.28714285714295
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 708.3285714285714,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8093.4685714285715,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 19.142857142857142,
+              "merchantDeltas": {
+                "MERCHANT-0": 25.49714285714265,
+                "MERCHANT-1": 168.53857142857123,
+                "MERCHANT-2": -11.31285714285707
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "adaptation": "adaptive_funding",
+              "intentScope": "latest",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.1542857142857,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8014.954285714286,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.14285714285714,
+              "exactRecommendationPurchases": 21.857142857142858,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.598571428571404,
+                "MERCHANT-1": 99.84428571428543,
+                "MERCHANT-2": -1.2342857142856474
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "scope": "Development evidence only. Adaptation improves merchant balance relative to the uncalibrated recipe, but the individual merchant guard is still not fully met."
+            }
+          ]
+        },
+        "recipeMeaning": {
+          "unified": "Use the fitted classifier for both contact types.",
+          "inquiry_expert": "Use the fitted classifier for product recommendations and an observed intent-age reward posterior for inquiries.",
+          "clarify_ambiguous": "Use that inquiry expert for browsing ambiguity; explicit product searches keep product recommendations."
+        },
+        "valuationMeaning": {
+          "pooled": "Use measured average retained payment value by contact kind.",
+          "contextual": "Train a conditional payment-value forest on observed retained purchases."
+        },
+        "inquiryCalibration": {
+          "ask_need|fresh": {
+            "contacts": 93,
+            "retained": 18,
+            "grossCents": 285500,
+            "retailNetCents": 6597
+          },
+          "ask_need|cold": {
+            "contacts": 725,
+            "retained": 30,
+            "grossCents": 309700,
+            "retailNetCents": 4338
+          },
+          "ask_need|recent": {
+            "contacts": 326,
+            "retained": 23,
+            "grossCents": 282000,
+            "retailNetCents": 5400
+          },
+          "recommend|fresh": {
+            "contacts": 916,
+            "retained": 170,
+            "grossCents": 2453700,
+            "retailNetCents": 56166
+          },
+          "recommend|recent": {
+            "contacts": 439,
+            "retained": 33,
+            "grossCents": 449500,
+            "retailNetCents": 9058
+          }
+        },
+        "adaptationMeaning": {
+          "historical": "Use the fitted historical classifier directly. Appending a few local rows can leave historical behavior dominant.",
+          "adaptive_funding": "Adjust recommendation odds each day from prior-day observed funding response, using an eight-contact historical prior and a rolling28-day window. No paid calls for these local updates. Inquiry reward already has its own local update."
+        },
+        "intentScopeMeaning": {
+          "latest": "Only recommend the latest expressed product. Inquiries may clarify uncertain browsing.",
+          "all_recent": "The model may choose any product with observed interest in the past seven days."
+        },
+        "validationScope": "Historical classifier metrics cover the full100-day training window. Development policy outcomes are known training markets, not future gains. Choose the model/routing recipe for the business objective, not accuracy alone. A retain decision keeps the exact existing model, adaptation and routing.",
+        "observed": {
+          "asOfDay": 61
+        }
+      },
+      "output": {
+        "recipe": "clarify_ambiguous",
+        "evidenceId": "242a115e07c9beb4da4430ff33085bd85ffc18e152f1c2c615ab3ea246d20d5d",
+        "decision": "train",
+        "adaptation": "adaptive_funding",
+        "intentScope": "all_recent",
+        "windowDays": "28",
+        "valuation": "pooled",
+        "family": "forest",
+        "rationale": "The 'recommend|fresh' segment shows a 36.7% funding rate, significantly outperforming 'recent' segments. Shifting to 'adaptive_funding' will allow the model to dynamically adjust to these observed funding responses, improving efficiency."
+      },
+      "costMicros": 2723,
+      "provider": [
+        {
+          "reservationId": "71c52310-86d2-4371-9b5c-8c6cded912f7",
+          "caseId": "ML scientist-61",
+          "trialId": "AUTONOMY-e8dbdeebec59428a",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 2723,
+          "reservedMicros": 30000,
+          "inputTokens": 4043,
+          "outputTokens": 183,
+          "thinkingTokens": 958,
+          "cachedInputTokens": 0,
+          "responseId": "XdzpaqajJtvapt8P8q6a4Qk",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 5876,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ]
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-7",
+      "role": "ML scientist",
+      "actor": "LOCAL_MODEL",
+      "status": "COMPLETED",
+      "day": 62,
+      "finishedDay": 69,
+      "input": {
+        "family": "forest",
+        "recipe": "clarify_ambiguous",
+        "valuation": "pooled",
+        "windowDays": 28,
+        "rows": 2959,
+        "ownMatureRows": 197,
+        "cutoffDay": 61,
+        "observed": {
+          "asOfDay": 61
+        }
+      },
+      "output": {
+        "modelId": "INTENT-b24689c0ce2322c1",
+        "family": "forest",
+        "recipe": "clarify_ambiguous",
+        "valuation": "pooled",
+        "adaptation": "adaptive_funding",
+        "intentScope": "all_recent",
+        "inquiryPriorRows": 2499,
+        "metrics": {
+          "logLoss": 0.22769165405898367,
+          "brier": 0.05995664376566606,
+          "auc": 0.687479501620474,
+          "averagePrecision": 0.19030449602736096
+        },
+        "coarse": {
+          "logLoss": 0.24856346933579102,
+          "brier": 0.06404683302658268,
+          "auc": 0.5367718887427309,
+          "averagePrecision": 0.08566572981423315
+        },
+        "validationPassed": true,
+        "runtimeSeconds": 2.1748408330022357,
+        "scope": "Classifier validation and recorded training-market evidence; not proof of this campaign's future profit. Funding adjustment is evaluated separately.",
+        "title": "Response model trained",
+        "body": "2,959 observed contacts · forest · clarify ambiguous · 2.2 seconds. Prediction validation passed; campaign profit is evaluated after settlement."
+      },
+      "costMicros": 0,
+      "provider": []
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-8",
+      "role": "Commerce manager",
+      "actor": "GEMINI",
+      "status": "COMPLETED",
+      "day": 62,
+      "finishedDay": 71,
+      "input": {
+        "day": 61,
+        "reason": "Observed funded-response rate changed by more than10 percentage points.",
+        "remainingMarketDays": 39,
+        "contactBudgetCents": 25105,
+        "stock": {
+          "Stationery": 48,
+          "Electronics": 38,
+          "Furniture": 34,
+          "Office bundles": 43
+        },
+        "marketScale": {
+          "version": "commerce-expanded-1",
+          "shoppers": 600,
+          "merchants": 12,
+          "contactMultiplier": 6,
+          "contactUnit": "per 100 shoppers",
+          "virtualCampaignBudgetCents": 30000
+        },
+        "contactQuotaMeaning": "Campaign contactsPerDay is per 100 shoppers; multiply by contactMultiplier for the total daily cap. Model previews already show total contacts. Virtual outreach money is separate from the real $0.25 model cap.",
+        "openFundedRequests": 4,
+        "urgentRequests": 0,
+        "recentContacts": 20,
+        "recentFundedResponses": 5,
+        "matureOwnResponses": 197,
+        "ownRetainedRate": 0.12690355329949238,
+        "matureOrders": 917,
+        "retainedPaymentVolumeCents": 9878000,
+        "modelValidation": {
+          "coarse": {
+            "logLoss": 0.24133364189711792,
+            "brier": 0.061094631559625794,
+            "auc": 0.5498661061175911,
+            "averagePrecision": 0.08169669336709434
+          },
+          "logistic": {
+            "logLoss": 0.23348543528021548,
+            "brier": 0.05999885648825999,
+            "auc": 0.625913764205488,
+            "averagePrecision": 0.12960749292019427
+          },
+          "forest": {
+            "logLoss": 0.2254726007241737,
+            "brier": 0.05868753877173019,
+            "auc": 0.6652663642727026,
+            "averagePrecision": 0.15383508211549132
+          }
+        },
+        "activeModel": {
+          "id": "INTENT-46479a0314cea43c",
+          "family": "forest",
+          "recipe": "clarify_ambiguous",
+          "valuation": "pooled",
+          "adaptation": "historical",
+          "intentScope": "all_recent",
+          "cutoffDay": 30,
+          "trainingRows": 2762
+        },
+        "activeCampaign": {
+          "routing": "fast",
+          "contactsPerDay": "10",
+          "evidenceId": "72a752aa06465de56a5ebd7e2bc64efa7f5dca2190a4b095a9a16e2426c58c69",
+          "audience": "recent_interest",
+          "forecast": "recent14",
+          "coverDays": "7",
+          "minimumNetCents": "10",
+          "rationale": "The 'clarify_ambiguous' recipe with 'both' contact kinds at 10 contacts/day maximizes expected net contribution (3323 cents) and aligns with the forest model's predictive strength for 'recent_interest' shoppers.",
+          "contactKinds": "both",
+          "decision": "publish",
+          "stopped": false,
+          "modelId": "INTENT-46479a0314cea43c",
+          "publishedDay": 41
+        },
+        "fundingEvidence": {
+          "priorVersion": "observed-funding-1",
+          "asOfDay": 61,
+          "windowDays": 28,
+          "strength": 8,
+          "rows": 826,
+          "groups": {
+            "recommend|fresh": {
+              "historicalContacts": 1679,
+              "historicalRate": 0.11220238095238096,
+              "contacts": 324,
+              "funded": 121,
+              "fundingRate": 0.3671615031554791
+            },
+            "recommend|recent": {
+              "historicalContacts": 1441,
+              "historicalRate": 0.05651872399445215,
+              "contacts": 151,
+              "funded": 27,
+              "fundingRate": 0.17265503013808564
+            },
+            "ask_need|cold": {
+              "historicalContacts": 3159,
+              "historicalRate": 0.025474683544303798,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.025474683544303798
+            },
+            "ask_need|fresh": {
+              "historicalContacts": 325,
+              "historicalRate": 0.12116564417177914,
+              "contacts": 192,
+              "funded": 29,
+              "fundingRate": 0.14984662576687116
+            },
+            "ask_need|recent": {
+              "historicalContacts": 406,
+              "historicalRate": 0.0945945945945946,
+              "contacts": 159,
+              "funded": 9,
+              "fundingRate": 0.05842369315423207
+            }
+          },
+          "scope": "Prior-day observed funding outcomes. Funding is an earlier signal than retained payment; the odds adjustment is a modeling assumption, not a causal effect.",
+          "id": "FUNDING-1dd7a32ec82c6602"
+        },
+        "outcomeDefinitions": {
+          "funded": "Buyer approved existing funds for the request. Available immediately after contact.",
+          "retained": "Captured purchase with no refund after the observation horizon. Available only after maturation.",
+          "comparison": "Compare rates only with the same outcome definition and cohort. Historical pooled rates are not the current market rate."
+        },
+        "paypal": {
+          "mode": "MODELED_PAYMENTS_NATIVE_CALLS_DISABLED",
+          "capture": "Only existing authorized buyer funds can be captured for a complete in-stock basket.",
+          "supplierSettlement": "PayPal is modeled as immediate; bank settlement adds two days per stage. Physical delivery still takes time.",
+          "fees": {
+            "retailRate": 0.0349,
+            "fixedCents": 49,
+            "processingRate": 0.012,
+            "processingFixedCents": 20
+          },
+          "refunds": "Refunds and processing/outreach costs reduce settled modeled contribution; a response is not a sale."
+        },
+        "scope": "Current observed data and completed historical training markets. No hidden needs, future response draws, buyer wallets, regime labels or simulation seed.",
+        "evidenceId": "242a115e07c9beb4da4430ff33085bd85ffc18e152f1c2c615ab3ea246d20d5d",
+        "analyst": {
+          "finding": "The 'recommend|fresh' segment exhibits a 36.7% funding rate, which is significantly higher than the 'recent' segments (17.3% for 'recommend|recent' and 5.8% for 'ask_need|recent').",
+          "rationale": "The 'recommend|fresh' segment shows the highest funding efficiency. Shifting the campaign focus to 'fresh' shoppers will likely improve the funded-response rate and increase the volume of retained purchases compared to the current 'recent_interest' focus.",
+          "focus": "fresh_intent",
+          "evidenceId": "242a115e07c9beb4da4430ff33085bd85ffc18e152f1c2c615ab3ea246d20d5d"
+        },
+        "scientist": {
+          "recipe": "clarify_ambiguous",
+          "evidenceId": "242a115e07c9beb4da4430ff33085bd85ffc18e152f1c2c615ab3ea246d20d5d",
+          "decision": "train",
+          "adaptation": "adaptive_funding",
+          "intentScope": "all_recent",
+          "windowDays": "28",
+          "valuation": "pooled",
+          "family": "forest",
+          "rationale": "The 'recommend|fresh' segment shows a 36.7% funding rate, significantly outperforming 'recent' segments. Shifting to 'adaptive_funding' will allow the model to dynamically adjust to these observed funding responses, improving efficiency."
+        },
+        "trainingResult": {
+          "modelId": "INTENT-b24689c0ce2322c1",
+          "family": "forest",
+          "recipe": "clarify_ambiguous",
+          "valuation": "pooled",
+          "adaptation": "adaptive_funding",
+          "intentScope": "all_recent",
+          "inquiryPriorRows": 2499,
+          "metrics": {
+            "logLoss": 0.22769165405898367,
+            "brier": 0.05995664376566606,
+            "auc": 0.687479501620474,
+            "averagePrecision": 0.19030449602736096
+          },
+          "coarse": {
+            "logLoss": 0.24856346933579102,
+            "brier": 0.06404683302658268,
+            "auc": 0.5367718887427309,
+            "averagePrecision": 0.08566572981423315
+          },
+          "validationPassed": true,
+          "runtimeSeconds": 2.1748408330022357,
+          "scope": "Classifier validation and recorded training-market evidence; not proof of this campaign's future profit. Funding adjustment is evaluated separately."
+        },
+        "campaignPreviews": [
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 3,
+            "totalDailyCap": 18,
+            "eligibleSelected": 18,
+            "recommendations": 18,
+            "generalInquiries": 0,
+            "expectedNetCents": 4216,
+            "contactCostCents": 90,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 6,
+            "totalDailyCap": 36,
+            "eligibleSelected": 35,
+            "recommendations": 35,
+            "generalInquiries": 0,
+            "expectedNetCents": 4886,
+            "contactCostCents": 175,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "recommend",
+            "contactsPerDay": 10,
+            "totalDailyCap": 60,
+            "eligibleSelected": 35,
+            "recommendations": 35,
+            "generalInquiries": 0,
+            "expectedNetCents": 4886,
+            "contactCostCents": 175,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 3,
+            "totalDailyCap": 18,
+            "eligibleSelected": 18,
+            "recommendations": 18,
+            "generalInquiries": 0,
+            "expectedNetCents": 4216,
+            "contactCostCents": 90,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 6,
+            "totalDailyCap": 36,
+            "eligibleSelected": 36,
+            "recommendations": 30,
+            "generalInquiries": 6,
+            "expectedNetCents": 4983,
+            "contactCostCents": 180,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          },
+          {
+            "contactKinds": "both",
+            "contactsPerDay": 10,
+            "totalDailyCap": 60,
+            "eligibleSelected": 60,
+            "recommendations": 30,
+            "generalInquiries": 30,
+            "expectedNetCents": 5127,
+            "contactCostCents": 300,
+            "scope": "Current-snapshot model estimate, not measured future campaign profit."
+          }
+        ],
+        "currentSupplyContract": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "developmentEvidence": {
+          "source": "Seven previously used synthetic development markets. Not future predictions or held-out results.",
+          "scope": "Same frozen economy and original strong fixed controller. All inputs and outcomes are available historical observations. Individual merchant tradeoffs remain visible.",
+          "candidates": [
+            {
+              "recipe": "unified",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.54,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8049.63,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 23,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.5042857142855155,
+                "MERCHANT-1": 146.7128571428575,
+                "MERCHANT-2": -13.332857142857165
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "unified",
+              "valuation": "contextual",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 701.5257142857142,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8031.431428571429,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.85714285714286,
+              "exactRecommendationPurchases": 22.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 14.347142857142899,
+                "MERCHANT-1": 119.67428571428627,
+                "MERCHANT-2": -13.335714285714289
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "inquiry_expert",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 706.2414285714286,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8094.357142857142,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.14285714285714,
+              "exactRecommendationPurchases": 19.428571428571427,
+              "merchantDeltas": {
+                "MERCHANT-0": 38.695714285714416,
+                "MERCHANT-1": 179.20285714285728,
+                "MERCHANT-2": -34.28714285714295
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 708.3285714285714,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8093.4685714285715,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 126.28571428571429,
+              "exactRecommendationPurchases": 19.142857142857142,
+              "merchantDeltas": {
+                "MERCHANT-0": 25.49714285714265,
+                "MERCHANT-1": 168.53857142857123,
+                "MERCHANT-2": -11.31285714285707
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "adaptation": "historical",
+              "intentScope": "all_recent"
+            },
+            {
+              "recipe": "clarify_ambiguous",
+              "valuation": "pooled",
+              "adaptation": "adaptive_funding",
+              "intentScope": "latest",
+              "campaign": {
+                "audience": "recent_interest",
+                "contactKinds": "both",
+                "contactsPerDay": "10",
+                "minimumNetCents": "0",
+                "stopped": false
+              },
+              "platformUSD": 702.1542857142857,
+              "fixedPlatformUSD": 690.3642857142858,
+              "retailerUSD": 8014.954285714286,
+              "fixedRetailerUSD": 7910.745714285715,
+              "retainedPurchases": 125.14285714285714,
+              "exactRecommendationPurchases": 21.857142857142858,
+              "merchantDeltas": {
+                "MERCHANT-0": 5.598571428571404,
+                "MERCHANT-1": 99.84428571428543,
+                "MERCHANT-2": -1.2342857142856474
+              },
+              "gates": {
+                "positivePlatform": true,
+                "aggregateRetailer": true,
+                "eachRetailer": false,
+                "suppliers": true,
+                "cash": true,
+                "inventory": true,
+                "noLiabilities": true
+              },
+              "scope": "Development evidence only. Adaptation improves merchant balance relative to the uncalibrated recipe, but the individual merchant guard is still not fully met."
+            }
+          ]
+        },
+        "actionMeaning": {
+          "audience": "lapsed requires a previous purchase and at least14 days since it; recent_interest requires a product signal. all includes any eligible contact.",
+          "minimumNetCents": "Threshold on modeled expected retail payment contribution after contact cost; estimated from observed retained/failed outcomes.",
+          "routing": "fast uses modeled PayPal supplier settlement. auto can use bank settlement when deadlines permit. Neither changes retail captures.",
+          "modelRoles": "The model ranks eligible contacts locally; the campaign is automatically applied. A smaller contact limit can discard positive-value opportunities shown in the preview. Keep the existing stock and settlement settings unless fulfillment evidence justifies changing them; conservative is not by itself an economic reason."
+        },
+        "observed": {
+          "asOfDay": 61
+        }
+      },
+      "output": {
+        "minimumNetCents": "10",
+        "coverDays": "7",
+        "evidenceId": "242a115e07c9beb4da4430ff33085bd85ffc18e152f1c2c615ab3ea246d20d5d",
+        "contactKinds": "both",
+        "routing": "fast",
+        "audience": "all",
+        "decision": "publish",
+        "rationale": "The 'recommend|fresh' segment shows a 36.7% funding rate. Shifting to 'all' audience with the 'adaptive_funding' model (INTENT-b24689c0ce2322c1) prioritizes high-efficiency shoppers, maximizing expected net contribution (5127 cents).",
+        "forecast": "recent14",
+        "contactsPerDay": "10"
+      },
+      "costMicros": 3009,
+      "provider": [
+        {
+          "reservationId": "b4b009a9-bdab-4c50-9169-0011a90a480b",
+          "caseId": "Commerce manager-61",
+          "trialId": "AUTONOMY-e8dbdeebec59428a",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 3009,
+          "reservedMicros": 30000,
+          "inputTokens": 4666,
+          "outputTokens": 210,
+          "thinkingTokens": 1018,
+          "cachedInputTokens": 0,
+          "responseId": "atzpatGrLPWRpt8P94_TuQY",
+          "modelVersion": "gemini-3.1-flash-lite",
+          "latencyMs": 4919,
+          "profile": "flash_lite",
+          "configuredModel": "gemini-3.1-flash-lite",
+          "proEndpoint": null
+        }
+      ]
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-9",
+      "role": "Coordinator",
+      "actor": "TRUSTED_PUBLISHER",
+      "status": "COMPLETED",
+      "day": 62,
+      "finishedDay": 71,
+      "input": {
+        "observed": {
+          "asOfDay": 61
+        }
+      },
+      "output": {
+        "decision": "publish",
+        "effectiveDay": 71,
+        "modelId": "INTENT-b24689c0ce2322c1",
+        "campaign": {
+          "minimumNetCents": "10",
+          "coverDays": "7",
+          "evidenceId": "242a115e07c9beb4da4430ff33085bd85ffc18e152f1c2c615ab3ea246d20d5d",
+          "contactKinds": "both",
+          "routing": "fast",
+          "audience": "all",
+          "decision": "publish",
+          "rationale": "The 'recommend|fresh' segment shows a 36.7% funding rate. Shifting to 'all' audience with the 'adaptive_funding' model (INTENT-b24689c0ce2322c1) prioritizes high-efficiency shoppers, maximizing expected net contribution (5127 cents).",
+          "forecast": "recent14",
+          "contactsPerDay": "10",
+          "stopped": false,
+          "modelId": "INTENT-b24689c0ce2322c1",
+          "publishedDay": 71
+        },
+        "supply": {
+          "outreach": "fresh_signal",
+          "maxAge": 7,
+          "contactsPerDay": 10,
+          "arrivalDays": 5,
+          "coldContacts": 0,
+          "forecast": "recent14",
+          "coverDays": 7,
+          "allocation": "joint",
+          "target": "cheap",
+          "routing": "fast"
+        },
+        "automated": true,
+        "checks": [
+          "observed features only",
+          "validated model artifact",
+          "consent and contact budget",
+          "funded complete baskets",
+          "merchant margin floor",
+          "idempotent simulated payments"
+        ],
+        "nativePayments": false,
+        "title": "Campaign published",
+        "body": "all · up to 60 contacts/day. Effective day 72."
+      },
+      "costMicros": 0,
+      "provider": []
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-10",
+      "role": "ML scientist",
+      "actor": "LOCAL_CALIBRATION",
+      "status": "COMPLETED",
+      "day": 72,
+      "finishedDay": 72,
+      "input": {
+        "modelId": "INTENT-b24689c0ce2322c1",
+        "windowDays": 28,
+        "throughDay": 70,
+        "observed": {
+          "asOfDay": 71
+        }
+      },
+      "output": {
+        "title": "Market response updated",
+        "body": "120 of 332 recent recommendation contacts produced funded requests. The local model updated its response estimates before choosing the next contacts.",
+        "calibration": {
+          "priorVersion": "observed-funding-1",
+          "asOfDay": 71,
+          "windowDays": 28,
+          "strength": 8,
+          "rows": 782,
+          "groups": {
+            "recommend|fresh": {
+              "historicalContacts": 1679,
+              "historicalRate": 0.11220238095238096,
+              "contacts": 248,
+              "funded": 105,
+              "fundingRate": 0.4136625744047619
+            },
+            "recommend|recent": {
+              "historicalContacts": 1441,
+              "historicalRate": 0.05651872399445215,
+              "contacts": 84,
+              "funded": 15,
+              "fundingRate": 0.16795814991256106
+            },
+            "ask_need|cold": {
+              "historicalContacts": 3159,
+              "historicalRate": 0.025474683544303798,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.025474683544303798
+            },
+            "ask_need|fresh": {
+              "historicalContacts": 325,
+              "historicalRate": 0.12116564417177914,
+              "contacts": 254,
+              "funded": 42,
+              "fundingRate": 0.16400505783730623
+            },
+            "ask_need|recent": {
+              "historicalContacts": 406,
+              "historicalRate": 0.0945945945945946,
+              "contacts": 196,
+              "funded": 13,
+              "fundingRate": 0.0674350821409645
+            }
+          },
+          "scope": "Prior-day observed funding outcomes. Funding is an earlier signal than retained payment; the odds adjustment is a modeling assumption, not a causal effect.",
+          "id": "FUNDING-0e6c122b20d4417d"
+        }
+      },
+      "costMicros": 0,
+      "provider": []
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-11",
+      "role": "ML scientist",
+      "actor": "LOCAL_CALIBRATION",
+      "status": "COMPLETED",
+      "day": 79,
+      "finishedDay": 79,
+      "input": {
+        "modelId": "INTENT-b24689c0ce2322c1",
+        "windowDays": 28,
+        "throughDay": 77,
+        "observed": {
+          "asOfDay": 78
+        }
+      },
+      "output": {
+        "title": "Market response updated",
+        "body": "137 of 459 recent recommendation contacts produced funded requests. The local model updated its response estimates before choosing the next contacts.",
+        "calibration": {
+          "priorVersion": "observed-funding-1",
+          "asOfDay": 78,
+          "windowDays": 28,
+          "strength": 8,
+          "rows": 795,
+          "groups": {
+            "recommend|fresh": {
+              "historicalContacts": 1679,
+              "historicalRate": 0.11220238095238096,
+              "contacts": 325,
+              "funded": 121,
+              "fundingRate": 0.36605891605891605
+            },
+            "recommend|recent": {
+              "historicalContacts": 1441,
+              "historicalRate": 0.05651872399445215,
+              "contacts": 134,
+              "funded": 16,
+              "fundingRate": 0.11586020980250433
+            },
+            "ask_need|cold": {
+              "historicalContacts": 3159,
+              "historicalRate": 0.025474683544303798,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.025474683544303798
+            },
+            "ask_need|fresh": {
+              "historicalContacts": 325,
+              "historicalRate": 0.12116564417177914,
+              "contacts": 198,
+              "funded": 33,
+              "fundingRate": 0.16489963666686522
+            },
+            "ask_need|recent": {
+              "historicalContacts": 406,
+              "historicalRate": 0.0945945945945946,
+              "contacts": 138,
+              "funded": 8,
+              "fundingRate": 0.05997778600518326
+            }
+          },
+          "scope": "Prior-day observed funding outcomes. Funding is an earlier signal than retained payment; the odds adjustment is a modeling assumption, not a causal effect.",
+          "id": "FUNDING-357008a989dd0672"
+        }
+      },
+      "costMicros": 0,
+      "provider": []
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-12",
+      "role": "ML scientist",
+      "actor": "LOCAL_CALIBRATION",
+      "status": "COMPLETED",
+      "day": 86,
+      "finishedDay": 86,
+      "input": {
+        "modelId": "INTENT-b24689c0ce2322c1",
+        "windowDays": 28,
+        "throughDay": 84,
+        "observed": {
+          "asOfDay": 85
+        }
+      },
+      "output": {
+        "title": "Market response updated",
+        "body": "144 of 530 recent recommendation contacts produced funded requests. The local model updated its response estimates before choosing the next contacts.",
+        "calibration": {
+          "priorVersion": "observed-funding-1",
+          "asOfDay": 85,
+          "windowDays": 28,
+          "strength": 8,
+          "rows": 779,
+          "groups": {
+            "recommend|fresh": {
+              "historicalContacts": 1679,
+              "historicalRate": 0.11220238095238096,
+              "contacts": 362,
+              "funded": 122,
+              "fundingRate": 0.33215572715572717
+            },
+            "recommend|recent": {
+              "historicalContacts": 1441,
+              "historicalRate": 0.05651872399445215,
+              "contacts": 168,
+              "funded": 22,
+              "fundingRate": 0.12756903290883873
+            },
+            "ask_need|cold": {
+              "historicalContacts": 3159,
+              "historicalRate": 0.025474683544303798,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.025474683544303798
+            },
+            "ask_need|fresh": {
+              "historicalContacts": 325,
+              "historicalRate": 0.12116564417177914,
+              "contacts": 129,
+              "funded": 21,
+              "fundingRate": 0.1603600376158703
+            },
+            "ask_need|recent": {
+              "historicalContacts": 406,
+              "historicalRate": 0.0945945945945946,
+              "contacts": 120,
+              "funded": 7,
+              "fundingRate": 0.060599662162162164
+            }
+          },
+          "scope": "Prior-day observed funding outcomes. Funding is an earlier signal than retained payment; the odds adjustment is a modeling assumption, not a causal effect.",
+          "id": "FUNDING-803c4332d878e504"
+        }
+      },
+      "costMicros": 0,
+      "provider": []
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-13",
+      "role": "ML scientist",
+      "actor": "LOCAL_CALIBRATION",
+      "status": "COMPLETED",
+      "day": 93,
+      "finishedDay": 93,
+      "input": {
+        "modelId": "INTENT-b24689c0ce2322c1",
+        "windowDays": 28,
+        "throughDay": 91,
+        "observed": {
+          "asOfDay": 92
+        }
+      },
+      "output": {
+        "title": "Market response updated",
+        "body": "160 of 631 recent recommendation contacts produced funded requests. The local model updated its response estimates before choosing the next contacts.",
+        "calibration": {
+          "priorVersion": "observed-funding-1",
+          "asOfDay": 92,
+          "windowDays": 28,
+          "strength": 8,
+          "rows": 798,
+          "groups": {
+            "recommend|fresh": {
+              "historicalContacts": 1679,
+              "historicalRate": 0.11220238095238096,
+              "contacts": 431,
+              "funded": 134,
+              "fundingRate": 0.307283870267925
+            },
+            "recommend|recent": {
+              "historicalContacts": 1441,
+              "historicalRate": 0.05651872399445215,
+              "contacts": 200,
+              "funded": 26,
+              "fundingRate": 0.1271737970767097
+            },
+            "ask_need|cold": {
+              "historicalContacts": 3159,
+              "historicalRate": 0.025474683544303798,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.025474683544303798
+            },
+            "ask_need|fresh": {
+              "historicalContacts": 325,
+              "historicalRate": 0.12116564417177914,
+              "contacts": 70,
+              "funded": 10,
+              "fundingRate": 0.14063237376120813
+            },
+            "ask_need|recent": {
+              "historicalContacts": 406,
+              "historicalRate": 0.0945945945945946,
+              "contacts": 97,
+              "funded": 10,
+              "fundingRate": 0.10244530244530244
+            }
+          },
+          "scope": "Prior-day observed funding outcomes. Funding is an earlier signal than retained payment; the odds adjustment is a modeling assumption, not a causal effect.",
+          "id": "FUNDING-dff60611018941bd"
+        }
+      },
+      "costMicros": 0,
+      "provider": []
+    },
+    {
+      "id": "AUTONOMY-e8dbdeebec59428a-STEP-14",
+      "role": "ML scientist",
+      "actor": "LOCAL_CALIBRATION",
+      "status": "COMPLETED",
+      "day": 100,
+      "finishedDay": 100,
+      "input": {
+        "modelId": "INTENT-b24689c0ce2322c1",
+        "windowDays": 28,
+        "throughDay": 98,
+        "observed": {
+          "asOfDay": 99
+        }
+      },
+      "output": {
+        "title": "Market response updated",
+        "body": "165 of 695 recent recommendation contacts produced funded requests. The local model updated its response estimates before choosing the next contacts.",
+        "calibration": {
+          "priorVersion": "observed-funding-1",
+          "asOfDay": 99,
+          "windowDays": 28,
+          "strength": 8,
+          "rows": 820,
+          "groups": {
+            "recommend|fresh": {
+              "historicalContacts": 1679,
+              "historicalRate": 0.11220238095238096,
+              "contacts": 468,
+              "funded": 137,
+              "fundingRate": 0.28970088035214087
+            },
+            "recommend|recent": {
+              "historicalContacts": 1441,
+              "historicalRate": 0.05651872399445215,
+              "contacts": 227,
+              "funded": 28,
+              "fundingRate": 0.12107297783810901
+            },
+            "ask_need|cold": {
+              "historicalContacts": 3159,
+              "historicalRate": 0.025474683544303798,
+              "contacts": 0,
+              "funded": 0,
+              "fundingRate": 0.025474683544303798
+            },
+            "ask_need|fresh": {
+              "historicalContacts": 325,
+              "historicalRate": 0.12116564417177914,
+              "contacts": 20,
+              "funded": 2,
+              "fundingRate": 0.10604732690622261
+            },
+            "ask_need|recent": {
+              "historicalContacts": 406,
+              "historicalRate": 0.0945945945945946,
+              "contacts": 105,
+              "funded": 9,
+              "fundingRate": 0.08634298014828988
+            }
+          },
+          "scope": "Prior-day observed funding outcomes. Funding is an earlier signal than retained payment; the odds adjustment is a modeling assumption, not a causal effect.",
+          "id": "FUNDING-3ee05141a6a57f76"
+        }
+      },
+      "costMicros": 0,
+      "provider": []
+    }
+  ],
+  "receipts": [],
+  "warning": null,
+  "learning": {
+    "observations": 715,
+    "base": {
+      "brier": 0.16166379127909553,
+      "logLoss": 0.5054426069427613
+    },
+    "adapted": {
+      "brier": 0.16798015878731326,
+      "logLoss": 0.5064726805112298
+    },
+    "brierReduction": -0.039071009396984824,
+    "examples": [
+      {
+        "day": 71,
+        "customerId": "BUYER-0474",
+        "baseProbability": 0.3340523515643098,
+        "adaptedProbability": 0.7368541289277368,
+        "retained": 1,
+        "priorContacts": 248,
+        "funded": 105,
+        "orderId": "SIM-CAPTURE-1219"
+      },
+      {
+        "day": 71,
+        "customerId": "BUYER-0339",
+        "baseProbability": 0.33761805899292785,
+        "adaptedProbability": 0.7399421072969484,
+        "retained": 0,
+        "priorContacts": 248,
+        "funded": 105,
+        "orderId": null
+      },
+      {
+        "day": 71,
+        "customerId": "BUYER-0368",
+        "baseProbability": 0.3465223465078941,
+        "adaptedProbability": 0.747483141066625,
+        "retained": 0,
+        "priorContacts": 248,
+        "funded": 105,
+        "orderId": null
+      }
+    ],
+    "scope": "Predictions recorded before each contact; outcomes assessed after settlement. Same issued contacts, not a randomized causal campaign comparison."
+  }
+}
