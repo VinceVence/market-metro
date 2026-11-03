@@ -1,0 +1,1555 @@
+{
+  "status": "COMPLETED",
+  "parentRun": "EDA-TRENDS-2",
+  "parentCheckpointHash": "6c83e0012697e872029d475b0fda9453be2d7caacee75ad7b12eef847c44a54c",
+  "sourceHashes": {
+    "scripts/commerce-growth/autonomy/economic-analysis.mjs": "fbcda05346c87ef0d25f4a183618ee210e62167137d8bafaf1ba88f936b5fd6b",
+    "scripts/commerce-growth/autonomy/team-workbench-tools.mjs": "5f3578a6eb7b5cd6f63c0c64bde45c10d99b66a85556647857e9088af0c41c92",
+    "scripts/commerce-growth/autonomy/revise-recommendation.mjs": "4733f54ec5271a4178c631970aa9312f123ed59ed888110b0d60a850dcec954b"
+  },
+  "input": {
+    "task": "Revise the recommendation shortlist. The previous active/Electronics recipe produced no currently eligible shoppers despite high historical sales. Choose a reachable segment/category and ranking mode using the EDA, trends and trusted opportunity table. This is a read-only recommendation, not a campaign launch or profit claim.",
+    "asOfDay": 60,
+    "opportunities": {
+      "asOfDay": 60,
+      "method": "multiple_interests",
+      "scope": "Current reachable positive-value recommendations, subject to the same consent, cooldown, model, inventory and10-contact limit. Segment rows overlap with all and are not additive. These are model predictions, not new sales.",
+      "segments": [
+        {
+          "segment": "all",
+          "scoredProducts": 4,
+          "selectedShoppers": 3,
+          "categories": [
+            "Furniture",
+            "Stationery"
+          ],
+          "expectedPayPalUSD": 1.3589941991946364
+        },
+        {
+          "segment": "new",
+          "scoredProducts": 1,
+          "selectedShoppers": 1,
+          "categories": [
+            "Furniture"
+          ],
+          "expectedPayPalUSD": 0.5727230783640954
+        },
+        {
+          "segment": "active",
+          "scoredProducts": 1,
+          "selectedShoppers": 0,
+          "categories": [],
+          "expectedPayPalUSD": 0
+        },
+        {
+          "segment": "lapsed",
+          "scoredProducts": 2,
+          "selectedShoppers": 2,
+          "categories": [
+            "Stationery"
+          ],
+          "expectedPayPalUSD": 0.7862711208305408
+        }
+      ]
+    },
+    "analysis": [
+      {
+        "tool": "explore_market",
+        "asOfDay": 60,
+        "windowDays": 14,
+        "dimension": "customer_segment",
+        "domains": [
+          "demand",
+          "outreach",
+          "inventory",
+          "liquidity",
+          "payments"
+        ],
+        "coverage": {
+          "signalHistorySource": "Full observed signal history",
+          "signalHistoryCapped": false,
+          "earliestSignalDay": 0,
+          "signalWindowMayBeIncomplete": false,
+          "historyThroughDay": 59
+        },
+        "quality": {
+          "signals": {
+            "availableRows": 316,
+            "futureOrCurrentExcluded": 0,
+            "missingDay": 0,
+            "duplicateIds": 0
+          },
+          "orders": {
+            "availableRows": 121,
+            "futureOrCurrentExcluded": 0,
+            "missingDay": 0,
+            "duplicateIds": 0
+          },
+          "contacts": {
+            "availableRows": 300,
+            "futureOrCurrentExcluded": 0,
+            "missingDay": 0,
+            "duplicateIds": 0
+          }
+        },
+        "totals": {
+          "captures": 25,
+          "capturedUSD": 3751,
+          "currentConsentedShoppers": 73
+        },
+        "rows": {
+          "columns": [
+            "group",
+            "orders",
+            "buyers",
+            "units",
+            "grossUSD",
+            "signals",
+            "searches",
+            "interestedShoppers",
+            "contacts",
+            "replies",
+            "responseRate",
+            "matureContacts",
+            "matureContactPurchases",
+            "matureRetainedRate",
+            "matureOrders",
+            "matureRefundRate",
+            "currentAvailableUnits",
+            "currentSpendableUSD"
+          ],
+          "values": [
+            [
+              "new",
+              0,
+              0,
+              0,
+              0,
+              5,
+              2,
+              5,
+              32,
+              1,
+              0.03125,
+              0,
+              0,
+              null,
+              0,
+              null,
+              null,
+              null
+            ],
+            [
+              "active",
+              23,
+              21,
+              40,
+              3426,
+              30,
+              18,
+              19,
+              30,
+              10,
+              0.3333333333333333,
+              0,
+              0,
+              null,
+              0,
+              null,
+              null,
+              null
+            ],
+            [
+              "lapsed",
+              2,
+              2,
+              2,
+              325,
+              39,
+              9,
+              29,
+              78,
+              9,
+              0.11538461538461539,
+              0,
+              0,
+              null,
+              0,
+              null,
+              null,
+              null
+            ]
+          ]
+        },
+        "caveats": [
+          "Captured revenue is not settled PayPal profit; recent refunds may be unresolved.",
+          "Mixed-category orders count once per represented category; category order counts are not additive.",
+          "Merchant-level browsing and contact attribution are unavailable; null is not zero.",
+          "Customer segments use current observed purchase history, not a historical randomized cohort.",
+          "Browse, contact and purchase counts have different populations; they are not a causal conversion funnel.",
+          "A contact outcome is labeled mature only after the full26-day deadline/return horizon. Recent windows therefore have unresolved outcomes."
+        ],
+        "evidenceId": "EDA-8ffe394d2f674a9aa557"
+      },
+      {
+        "tool": "explore_market",
+        "asOfDay": 60,
+        "windowDays": 14,
+        "dimension": "category",
+        "domains": [
+          "demand",
+          "outreach",
+          "inventory",
+          "liquidity",
+          "payments"
+        ],
+        "coverage": {
+          "signalHistorySource": "Full observed signal history",
+          "signalHistoryCapped": false,
+          "earliestSignalDay": 0,
+          "signalWindowMayBeIncomplete": false,
+          "historyThroughDay": 59
+        },
+        "quality": {
+          "signals": {
+            "availableRows": 316,
+            "futureOrCurrentExcluded": 0,
+            "missingDay": 0,
+            "duplicateIds": 0
+          },
+          "orders": {
+            "availableRows": 121,
+            "futureOrCurrentExcluded": 0,
+            "missingDay": 0,
+            "duplicateIds": 0
+          },
+          "contacts": {
+            "availableRows": 300,
+            "futureOrCurrentExcluded": 0,
+            "missingDay": 0,
+            "duplicateIds": 0
+          }
+        },
+        "totals": {
+          "captures": 25,
+          "capturedUSD": 3751,
+          "currentConsentedShoppers": 73
+        },
+        "rows": {
+          "columns": [
+            "group",
+            "orders",
+            "buyers",
+            "units",
+            "grossUSD",
+            "signals",
+            "searches",
+            "interestedShoppers",
+            "contacts",
+            "replies",
+            "responseRate",
+            "matureContacts",
+            "matureContactPurchases",
+            "matureRetainedRate",
+            "matureOrders",
+            "matureRefundRate",
+            "currentAvailableUnits",
+            "currentSpendableUSD"
+          ],
+          "values": [
+            [
+              "Stationery",
+              10,
+              10,
+              12,
+              312,
+              20,
+              7,
+              19,
+              4,
+              2,
+              0.5,
+              0,
+              0,
+              null,
+              0,
+              null,
+              20,
+              null
+            ],
+            [
+              "Electronics",
+              12,
+              12,
+              14,
+              1390,
+              18,
+              6,
+              18,
+              9,
+              3,
+              0.3333333333333333,
+              0,
+              0,
+              null,
+              0,
+              null,
+              11,
+              null
+            ],
+            [
+              "Furniture",
+              8,
+              8,
+              9,
+              1129,
+              18,
+              5,
+              17,
+              5,
+              1,
+              0.2,
+              0,
+              0,
+              null,
+              0,
+              null,
+              16,
+              null
+            ],
+            [
+              "Office bundles",
+              6,
+              5,
+              7,
+              920,
+              18,
+              11,
+              17,
+              6,
+              1,
+              0.16666666666666666,
+              0,
+              0,
+              null,
+              0,
+              null,
+              14,
+              null
+            ],
+            [
+              "*",
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              116,
+              13,
+              0.11206896551724138,
+              0,
+              0,
+              null,
+              0,
+              null,
+              0,
+              null
+            ]
+          ]
+        },
+        "caveats": [
+          "Captured revenue is not settled PayPal profit; recent refunds may be unresolved.",
+          "Mixed-category orders count once per represented category; category order counts are not additive.",
+          "Merchant-level browsing and contact attribution are unavailable; null is not zero.",
+          "Customer segments use current observed purchase history, not a historical randomized cohort.",
+          "Browse, contact and purchase counts have different populations; they are not a causal conversion funnel.",
+          "A contact outcome is labeled mature only after the full26-day deadline/return horizon. Recent windows therefore have unresolved outcomes."
+        ],
+        "evidenceId": "EDA-fbee97942769d3f2c34d"
+      },
+      {
+        "tool": "analyze_market_trends",
+        "asOfDay": 60,
+        "windowDays": 14,
+        "domains": [
+          "demand"
+        ],
+        "coverage": {
+          "signalHistorySource": "Full observed signal history",
+          "signalHistoryCapped": false,
+          "earliestSignalDay": 0,
+          "signalWindowMayBeIncomplete": false,
+          "historyThroughDay": 59
+        },
+        "phaseComparable": true,
+        "periods": {
+          "previous": [
+            32,
+            45
+          ],
+          "current": [
+            46,
+            59
+          ]
+        },
+        "rows": {
+          "columns": [
+            "category",
+            "current",
+            "previous",
+            "rateRatio",
+            "interpretableInterestTrend",
+            "signalCoverageComplete",
+            "label",
+            "currentStock"
+          ],
+          "values": [
+            [
+              "Stationery",
+              {
+                "interestedShoppers": 20,
+                "searches": 7,
+                "discoveredUnits": 19,
+                "capturedUnits": 12
+              },
+              {
+                "interestedShoppers": 19,
+                "searches": 9,
+                "discoveredUnits": 17,
+                "capturedUnits": 12
+              },
+              {
+                "interestedShoppers": 1.0526315789473684,
+                "searches": 0.7777777777777777,
+                "discoveredUnits": 1.1176470588235297,
+                "capturedUnits": 1
+              },
+              true,
+              true,
+              "roughly stable interest",
+              20
+            ],
+            [
+              "Electronics",
+              {
+                "interestedShoppers": 18,
+                "searches": 6,
+                "discoveredUnits": 22,
+                "capturedUnits": 14
+              },
+              {
+                "interestedShoppers": 17,
+                "searches": 10,
+                "discoveredUnits": 17,
+                "capturedUnits": 9
+              },
+              {
+                "interestedShoppers": 1.058823529411765,
+                "searches": 0.6,
+                "discoveredUnits": 1.2941176470588236,
+                "capturedUnits": 1.5555555555555554
+              },
+              true,
+              true,
+              "roughly stable interest",
+              11
+            ],
+            [
+              "Furniture",
+              {
+                "interestedShoppers": 18,
+                "searches": 5,
+                "discoveredUnits": 28,
+                "capturedUnits": 9
+              },
+              {
+                "interestedShoppers": 23,
+                "searches": 9,
+                "discoveredUnits": 30,
+                "capturedUnits": 11
+              },
+              {
+                "interestedShoppers": 0.782608695652174,
+                "searches": 0.5555555555555556,
+                "discoveredUnits": 0.9333333333333333,
+                "capturedUnits": 0.8181818181818182
+              },
+              true,
+              true,
+              "falling observed interest",
+              16
+            ],
+            [
+              "Office bundles",
+              {
+                "interestedShoppers": 18,
+                "searches": 11,
+                "discoveredUnits": 22,
+                "capturedUnits": 7
+              },
+              {
+                "interestedShoppers": 18,
+                "searches": 6,
+                "discoveredUnits": 14,
+                "capturedUnits": 6
+              },
+              {
+                "interestedShoppers": 1,
+                "searches": 1.8333333333333335,
+                "discoveredUnits": 1.5714285714285714,
+                "capturedUnits": 1.1666666666666667
+              },
+              true,
+              true,
+              "roughly stable interest",
+              14
+            ]
+          ]
+        },
+        "series": {
+          "columns": [
+            "day",
+            "category",
+            "interestedShoppers",
+            "searches",
+            "discoveredUnits",
+            "capturedUnits"
+          ],
+          "values": [
+            [
+              32,
+              "Stationery",
+              0,
+              0,
+              2,
+              2
+            ],
+            [
+              33,
+              "Stationery",
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              34,
+              "Stationery",
+              2,
+              2,
+              0,
+              0
+            ],
+            [
+              35,
+              "Stationery",
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              36,
+              "Stationery",
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              37,
+              "Stationery",
+              2,
+              0,
+              1,
+              2
+            ],
+            [
+              38,
+              "Stationery",
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              39,
+              "Stationery",
+              5,
+              3,
+              1,
+              1
+            ],
+            [
+              40,
+              "Stationery",
+              2,
+              0,
+              2,
+              0
+            ],
+            [
+              41,
+              "Stationery",
+              1,
+              0,
+              2,
+              1
+            ],
+            [
+              42,
+              "Stationery",
+              2,
+              1,
+              0,
+              2
+            ],
+            [
+              43,
+              "Stationery",
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              44,
+              "Stationery",
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              45,
+              "Stationery",
+              1,
+              1,
+              4,
+              1
+            ],
+            [
+              46,
+              "Stationery",
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              47,
+              "Stationery",
+              3,
+              0,
+              3,
+              2
+            ],
+            [
+              48,
+              "Stationery",
+              1,
+              0,
+              4,
+              0
+            ],
+            [
+              49,
+              "Stationery",
+              3,
+              2,
+              2,
+              4
+            ],
+            [
+              50,
+              "Stationery",
+              1,
+              0,
+              2,
+              1
+            ],
+            [
+              51,
+              "Stationery",
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              52,
+              "Stationery",
+              3,
+              2,
+              3,
+              1
+            ],
+            [
+              53,
+              "Stationery",
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              54,
+              "Stationery",
+              2,
+              1,
+              1,
+              0
+            ],
+            [
+              55,
+              "Stationery",
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              56,
+              "Stationery",
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              57,
+              "Stationery",
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              58,
+              "Stationery",
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              59,
+              "Stationery",
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              32,
+              "Electronics",
+              2,
+              1,
+              2,
+              1
+            ],
+            [
+              33,
+              "Electronics",
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              34,
+              "Electronics",
+              2,
+              1,
+              1,
+              1
+            ],
+            [
+              35,
+              "Electronics",
+              2,
+              1,
+              1,
+              1
+            ],
+            [
+              36,
+              "Electronics",
+              2,
+              2,
+              1,
+              0
+            ],
+            [
+              37,
+              "Electronics",
+              0,
+              0,
+              2,
+              2
+            ],
+            [
+              38,
+              "Electronics",
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              39,
+              "Electronics",
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              40,
+              "Electronics",
+              0,
+              0,
+              2,
+              0
+            ],
+            [
+              41,
+              "Electronics",
+              3,
+              2,
+              3,
+              2
+            ],
+            [
+              42,
+              "Electronics",
+              3,
+              2,
+              1,
+              0
+            ],
+            [
+              43,
+              "Electronics",
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              44,
+              "Electronics",
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              45,
+              "Electronics",
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              46,
+              "Electronics",
+              4,
+              2,
+              1,
+              1
+            ],
+            [
+              47,
+              "Electronics",
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              48,
+              "Electronics",
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              49,
+              "Electronics",
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              50,
+              "Electronics",
+              1,
+              1,
+              2,
+              1
+            ],
+            [
+              51,
+              "Electronics",
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              52,
+              "Electronics",
+              3,
+              2,
+              2,
+              2
+            ],
+            [
+              53,
+              "Electronics",
+              1,
+              0,
+              3,
+              3
+            ],
+            [
+              54,
+              "Electronics",
+              2,
+              0,
+              5,
+              1
+            ],
+            [
+              55,
+              "Electronics",
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              56,
+              "Electronics",
+              0,
+              0,
+              2,
+              1
+            ],
+            [
+              57,
+              "Electronics",
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              58,
+              "Electronics",
+              2,
+              0,
+              2,
+              2
+            ],
+            [
+              59,
+              "Electronics",
+              3,
+              1,
+              0,
+              0
+            ],
+            [
+              32,
+              "Furniture",
+              3,
+              1,
+              4,
+              1
+            ],
+            [
+              33,
+              "Furniture",
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              34,
+              "Furniture",
+              3,
+              1,
+              4,
+              1
+            ],
+            [
+              35,
+              "Furniture",
+              2,
+              1,
+              2,
+              0
+            ],
+            [
+              36,
+              "Furniture",
+              0,
+              0,
+              6,
+              1
+            ],
+            [
+              37,
+              "Furniture",
+              3,
+              0,
+              4,
+              3
+            ],
+            [
+              38,
+              "Furniture",
+              2,
+              2,
+              1,
+              0
+            ],
+            [
+              39,
+              "Furniture",
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              40,
+              "Furniture",
+              3,
+              1,
+              0,
+              0
+            ],
+            [
+              41,
+              "Furniture",
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              42,
+              "Furniture",
+              0,
+              0,
+              2,
+              0
+            ],
+            [
+              43,
+              "Furniture",
+              3,
+              2,
+              5,
+              5
+            ],
+            [
+              44,
+              "Furniture",
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              45,
+              "Furniture",
+              1,
+              0,
+              2,
+              0
+            ],
+            [
+              46,
+              "Furniture",
+              2,
+              1,
+              2,
+              1
+            ],
+            [
+              47,
+              "Furniture",
+              2,
+              1,
+              1,
+              1
+            ],
+            [
+              48,
+              "Furniture",
+              2,
+              1,
+              8,
+              0
+            ],
+            [
+              49,
+              "Furniture",
+              1,
+              0,
+              0,
+              2
+            ],
+            [
+              50,
+              "Furniture",
+              1,
+              0,
+              3,
+              0
+            ],
+            [
+              51,
+              "Furniture",
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              52,
+              "Furniture",
+              3,
+              0,
+              4,
+              1
+            ],
+            [
+              53,
+              "Furniture",
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              54,
+              "Furniture",
+              1,
+              1,
+              4,
+              1
+            ],
+            [
+              55,
+              "Furniture",
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              56,
+              "Furniture",
+              0,
+              0,
+              2,
+              0
+            ],
+            [
+              57,
+              "Furniture",
+              1,
+              0,
+              2,
+              1
+            ],
+            [
+              58,
+              "Furniture",
+              2,
+              0,
+              1,
+              1
+            ],
+            [
+              59,
+              "Furniture",
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              32,
+              "Office bundles",
+              2,
+              2,
+              3,
+              1
+            ],
+            [
+              33,
+              "Office bundles",
+              3,
+              1,
+              1,
+              1
+            ],
+            [
+              34,
+              "Office bundles",
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              35,
+              "Office bundles",
+              3,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              "Office bundles",
+              1,
+              0,
+              2,
+              1
+            ],
+            [
+              37,
+              "Office bundles",
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              38,
+              "Office bundles",
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              39,
+              "Office bundles",
+              1,
+              0,
+              2,
+              2
+            ],
+            [
+              40,
+              "Office bundles",
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              41,
+              "Office bundles",
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              42,
+              "Office bundles",
+              1,
+              1,
+              2,
+              0
+            ],
+            [
+              43,
+              "Office bundles",
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              44,
+              "Office bundles",
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              45,
+              "Office bundles",
+              3,
+              1,
+              1,
+              1
+            ],
+            [
+              46,
+              "Office bundles",
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              47,
+              "Office bundles",
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              48,
+              "Office bundles",
+              6,
+              2,
+              5,
+              1
+            ],
+            [
+              49,
+              "Office bundles",
+              1,
+              1,
+              5,
+              1
+            ],
+            [
+              50,
+              "Office bundles",
+              4,
+              3,
+              4,
+              1
+            ],
+            [
+              51,
+              "Office bundles",
+              0,
+              0,
+              2,
+              0
+            ],
+            [
+              52,
+              "Office bundles",
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              53,
+              "Office bundles",
+              2,
+              2,
+              0,
+              0
+            ],
+            [
+              54,
+              "Office bundles",
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              55,
+              "Office bundles",
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              56,
+              "Office bundles",
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              57,
+              "Office bundles",
+              2,
+              1,
+              1,
+              0
+            ],
+            [
+              58,
+              "Office bundles",
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              59,
+              "Office bundles",
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "caveats": [
+          "Observed interest is not latent demand or a future sales guarantee.",
+          "Unique interested shoppers are counted per day; sums are shopper-days.",
+          "Low counts, truncated history and windows crossing warmup are flagged; descriptive labels are not significance tests.",
+          "A category can gain browsing while losing captures because of funding, stock or timing. These comparisons do not identify a causal driver."
+        ],
+        "evidenceId": "TREND-be8eb4a22119d72b3ada"
+      }
+    ],
+    "previousRecipe": {
+      "category": "Electronics",
+      "mode": "trend_aware",
+      "segment": "active"
+    },
+    "limit": "Exactly one tool call. Existing consent, cooldown, positive value, stock and contact constraints remain."
+  },
+  "evidenceId": "0fc8e8b7f48fa09bd8203ddcdf7947321f8eb5f1fedf1ccb69c2f0c4d04bcfda",
+  "scope": "Recommendation preview only. No new historical or unseen financial test; no contacts, native payment, promotion or economy change.",
+  "decision": {
+    "recipe": {
+      "segment": "lapsed",
+      "mode": "multiple_interests",
+      "category": "Stationery"
+    },
+    "evidenceId": "0fc8e8b7f48fa09bd8203ddcdf7947321f8eb5f1fedf1ccb69c2f0c4d04bcfda",
+    "reason": "The previous active/Electronics recipe yielded no eligible shoppers. The opportunity table shows the lapsed segment has 2 reachable shoppers for Stationery using the multiple_interests mode, and trend analysis confirms Stationery has roughly stable interest, unlike Furniture which is falling."
+  },
+  "recommendations": {
+    "snapshotId": "ac5f4d26ace691cb5676b2337708ccb43da281cbb2865b61c041825a9f062a81",
+    "asOfDay": 60,
+    "recipe": {
+      "segment": "lapsed",
+      "mode": "multiple_interests",
+      "category": "Stationery"
+    },
+    "modelHash": "122152d9e6a49331f94e05ccc273cd0ccb2af828189c56a56c441e95d4f6279a",
+    "modelId": "VALUE-INCUMBENT",
+    "domains": [
+      "recommendations",
+      "outreach",
+      "demand",
+      "inventory",
+      "payments"
+    ],
+    "rows": [
+      {
+        "customerId": "BUYER-0001",
+        "catalogId": "MM-PAPER-01",
+        "kind": "recommend",
+        "probability": 0.14375814164268447,
+        "expectedNetCents": 49.715186118619535,
+        "expectedMerchantNetCents": 499.9526238171226,
+        "score": 549.6678099357422,
+        "modelId": "VALUE-INCUMBENT",
+        "trendWeight": 1,
+        "signalAgeDays": 7,
+        "product": "Writing Pad Set",
+        "category": "Stationery",
+        "segment": "lapsed",
+        "availableUnits": 5,
+        "expectedPayPalUSD": 0.49715186118619537,
+        "expectedMerchantUSD": 4.999526238171226
+      },
+      {
+        "customerId": "BUYER-0046",
+        "catalogId": "MM-PAPER-03",
+        "kind": "recommend",
+        "probability": 0.08938599311910943,
+        "expectedNetCents": 28.911925964434552,
+        "expectedMerchantNetCents": 290.73859837623735,
+        "score": 319.6505243406719,
+        "modelId": "VALUE-INCUMBENT",
+        "trendWeight": 1,
+        "signalAgeDays": 6,
+        "product": "Marker and Label Set",
+        "category": "Stationery",
+        "segment": "lapsed",
+        "availableUnits": 2,
+        "expectedPayPalUSD": 0.28911925964434554,
+        "expectedMerchantUSD": 2.9073859837623734
+      }
+    ],
+    "actions": [
+      {
+        "customerId": "BUYER-0001",
+        "kind": "recommend",
+        "category": "Stationery",
+        "catalogId": "MM-PAPER-01"
+      },
+      {
+        "customerId": "BUYER-0046",
+        "kind": "recommend",
+        "category": "Stationery",
+        "catalogId": "MM-PAPER-03"
+      }
+    ],
+    "diagnostics": {
+      "scoredProducts": 2,
+      "positiveValueProducts": 2,
+      "selectedShoppers": 2,
+      "recipe": {
+        "segment": "lapsed",
+        "mode": "multiple_interests",
+        "category": "Stationery",
+        "trendWeights": {}
+      }
+    },
+    "baselineContacts": 10,
+    "selectedContacts": 2,
+    "expectedPayPalUSD": 0.7862711208305408,
+    "expectedMerchantUSD": 7.9069122219336,
+    "scope": "Existing locally trained purchase/value model scores observed candidate products. Scores are observational predictions, not incremental sales or guaranteed profit. Campaign execution recalculates from each market current observations, not these saved customer IDs. Consent, positive joint value, funding, stock/inbound checks and existing contact budgets remain enforced.",
+    "id": "REC-73ef25cc8536c03f4e19"
+  },
+  "provider": [
+    {
+      "reservationId": "e969b39d-a833-4e55-86c4-6aed1cfaf9bf",
+      "caseId": "recommendation-revision",
+      "trialId": "EDA-TRENDS-2",
+      "stage": "planner",
+      "status": "settled",
+      "modelCostMicros": 18388,
+      "reservedMicros": 150000,
+      "inputTokens": 4100,
+      "outputTokens": 146,
+      "thinkingTokens": 703,
+      "cachedInputTokens": 0,
+      "responseId": "l3jpauPhNrKipt8P7PSSwQc",
+      "modelVersion": "gemini-3.1-pro-preview",
+      "latencyMs": 14388,
+      "profile": "pro",
+      "configuredModel": "gemini-3.1-pro-preview",
+      "proEndpoint": "standard"
+    }
+  ],
+  "costUSD": 0.018388
+}

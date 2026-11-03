@@ -1,5 +1,7 @@
 # Market Metro: the learning market
 
+**New analyst capabilities:** [EDA, market trends and grounded recommendations](docs/commerce-growth/economic-analysis/README.md). The workflow can investigate category/merchant/shopper data, compare time windows and choose product/audience strategies. A fresh Gemini revision selected two reachable lapsed shoppers for Stationery; the shortlist is a preview, not a new profit claim. Open **Economic workflow → EDA, trends & recommendations**.
+
 **Final PayPal scorecard:** [14 fresh markets](docs/commerce-growth/economic-final-1/README.md): reviewed workflow $765.47 versus fixed $738.79, **+$26.68 / +3.61%** modeled net after allocated AI cost. The workflow retained v1; the new overlay did not beat it. Fresh Gemini cost $0.058668. All losses, partner safeguards and the planner's rationale errors are disclosed. Open **Economic workflow** for results and checkpoints.
 
 **Economic workflow:** [a planner-led extension of v1](docs/commerce-growth/economic-workflow/README.md) can inspect demand, inventory, liquidity, supply and payment economics, fit a forecast, compose a temporary conditional policy, and request a historical trial. Open **Economic workflow** in the sidebar to inspect a real Gemini tool trace. The demonstrated proposal failed its historical comparison and v1 was retained; the capability is implemented, but no new profit advantage is claimed.

@@ -1,0 +1,152 @@
+{
+  "version": 5,
+  "status": "STOPPED",
+  "snapshotId": "ac5f4d26ace691cb5676b2337708ccb43da281cbb2865b61c041825a9f062a81",
+  "briefHash": "fe228c1ee5f04cca49cc06ffa492535759bd64c0cf3c314d4395f7278f423eaf",
+  "day": 60,
+  "categories": [
+    "Stationery",
+    "Electronics",
+    "Furniture",
+    "Office bundles"
+  ],
+  "baseline": "paypal-net-v1",
+  "limits": {
+    "modelCalls": 12,
+    "proposals": 1,
+    "modelFits": 1,
+    "trials": 1
+  },
+  "models": {},
+  "analyses": {},
+  "recommendations": {},
+  "evidence": {},
+  "candidates": {},
+  "trials": {},
+  "cache": {},
+  "checkpoints": [
+    {
+      "id": "MODEL-0",
+      "actor": "GEMINI",
+      "status": "FAILED",
+      "input": {
+        "task": "Review this observed market. Choose which economic data to inspect, fit a model if useful, compose a bounded commerce intervention, and test defensible candidates within the historical trial budget. Investigate conflicting indicators. You can keep v1. Do not invent economic variables or make unconditional/permanent interventions.",
+        "brief": {
+          "businessQuestion": "What should we recommend, to which shoppers, given observed shopping behavior and market trends?",
+          "deliverables": "Inspect the actual baseline. Perform EDA and trend analysis, then build a concrete product recommendation recipe using the existing locally trained model. Choose dimensions, windows, shopper segment, category and ranking mode yourself. Cite the findings in your campaign rationale. Fit another forecast only if your analysis justifies it.",
+          "experiment": "Preview one grounded targeted_recommendations campaign with inventory v1, fast settlement and joint value, then test it on H1. Do not change fulfillment in this experiment; isolate the recommendation capability. Keep v1 if gates fail. You may finish without a trial if no worthwhile candidate is supported.",
+          "boundaries": "Recommendation scores are observational, not causal uplift. Sparse/missing data must be reported. More contacts or higher scores are not automatically higher profit."
+        },
+        "snapshotId": "ac5f4d26ace691cb5676b2337708ccb43da281cbb2865b61c041825a9f062a81",
+        "currentDay": 60,
+        "historyThroughDay": 59,
+        "customers": 100,
+        "merchants": 3,
+        "indicatorCatalog": {
+          "request_growth_ratio": {
+            "domain": "demand",
+            "unit": "ratio",
+            "meaning": "Observed request rate in this window divided by the preceding window. Null if there was no prior demand."
+          },
+          "response_rate": {
+            "domain": "outreach",
+            "unit": "fraction",
+            "meaning": "Observed replies / contacts in the window; not retained purchases."
+          },
+          "funded_fill_rate": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Share of currently funded requests individually fillable from current stock. Not a promise that all can be filled jointly."
+          },
+          "stockout_share": {
+            "domain": "inventory",
+            "unit": "fraction",
+            "meaning": "Merchant/product listings with no currently available units."
+          },
+          "spendable_cash_usd": {
+            "domain": "liquidity",
+            "unit": "USD",
+            "meaning": "Merchant-authorized spendable balances after existing refund/holding safeguards."
+          },
+          "cash_to_replenishment_ratio": {
+            "domain": "liquidity",
+            "unit": "ratio",
+            "meaning": "Spendable merchant cash / the current complete-funded-basket replenishment plan. Null when no purchase is needed."
+          },
+          "supplier_lead_days": {
+            "domain": "supply",
+            "unit": "days",
+            "meaning": "Currently quoted maximum physical supplier lead time. Payment settlement delays are additional."
+          },
+          "payment_cash_margin_usd": {
+            "domain": "payments",
+            "unit": "USD",
+            "meaning": "Observed platform ledger cash inflows minus outflows during the window, including processing, returns and outreach. Future refunds remain unknown."
+          },
+          "mature_refund_rate": {
+            "domain": "payments",
+            "unit": "fraction",
+            "meaning": "Refunded captured orders in the latest fully matured cohort. Null for an empty cohort."
+          }
+        },
+        "historicalComparison": {
+          "id": "H1",
+          "description": "A different completed market from the locked-v1 archive. Counterfactual tools replay this historical market, never the current target."
+        },
+        "baseline": "v1 uses broad positive-value inquiries, a local model, complete funded baskets and fast supplier settlement.",
+        "actionGrounding": {
+          "campaign": [
+            "outreach",
+            "demand",
+            "payments"
+          ],
+          "inventory": [
+            "inventory",
+            "liquidity"
+          ],
+          "settlement": [
+            "supply",
+            "payments"
+          ]
+        },
+        "remainingModelCalls": 12,
+        "remainingTrials": 1,
+        "outputs": [],
+        "lastTurn": "You choose the next tool; no fixed role sequence."
+      },
+      "error": "MODEL_TOOL_CALL_COUNT",
+      "provider": [
+        {
+          "reservationId": "b809306c-bc3f-4660-8f8d-276f7581ed42",
+          "caseId": "MODEL-0",
+          "trialId": "docs/commerce-growth/economic-workflows/EDA-TRENDS-1/checkpoints.json",
+          "stage": "planner",
+          "status": "settled",
+          "modelCostMicros": 7962,
+          "reservedMicros": 150000,
+          "inputTokens": 1425,
+          "outputTokens": 111,
+          "thinkingTokens": 315,
+          "cachedInputTokens": 0,
+          "responseId": "nnXpas_6IfWRpt8P94_TuQY",
+          "modelVersion": "gemini-3.1-pro-preview",
+          "latencyMs": 8692,
+          "error": "MODEL_TOOL_CALL_COUNT",
+          "profile": "pro",
+          "configuredModel": "gemini-3.1-pro-preview",
+          "proEndpoint": "standard"
+        }
+      ]
+    }
+  ],
+  "providerCalls": 1,
+  "pending": null,
+  "error": "MODEL_TOOL_CALL_COUNT",
+  "recommendation": {
+    "decision": "keep_v1",
+    "candidate_id": "v1",
+    "promoted": false,
+    "reason": "MODEL_TOOL_CALL_COUNT"
+  },
+  "costUSD": 0.007962
+}

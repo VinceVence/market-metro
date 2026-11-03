@@ -1,0 +1,94 @@
+// One planner chooses its own tool sequence. Persist model requests, tool
+// results and bounded research recommendations; never run arbitrary SQL/code.
+import {readFile,writeFile,rename} from 'node:fs/promises';
+import {digest} from '../environment.mjs';
+import {ECONOMIC_DOMAINS,ECONOMIC_INDICATORS,inspectEconomy,trainEconomicForecast,validateEconomicPatch,requiredEconomicEvidence,economicContactPlan,patchApplies,evaluateEconomicConditions} from './economic-tools.mjs';
+import {planFundedBaskets} from '../experiments/baskets.mjs';
+import {exploreMarket,analyzeTrends,buildRecommendations,inspectBaseline,SEGMENTS,RECOMMENDATION_MODES} from './economic-analysis.mjs';
+
+const str={type:'STRING'},en=x=>({type:'STRING',enum:x});
+const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
+const required=(properties)=>({type:'OBJECT',properties,required:Object.keys(properties)});
+const baseArgs=properties=>required({...properties,reason:str});
+function toolsFor(state,finalOnly=false){
+ const available=new Set(Object.values(state.evidence).flatMap(e=>e.domains)),campaignReady=['outreach','demand','payments'].every(d=>available.has(d)),inventoryReady=['inventory','liquidity'].every(d=>available.has(d)),settlementReady=['supply','payments'].every(d=>available.has(d));
+ const final={name:'select_economic_policy',description:'Finish by selecting v1 or an activated, tested research candidate that passes any supplied economic gates. The harness retrieves measured numbers; do not retype amounts. This never deploys or charges a customer.',parameters:baseArgs({candidate_id:en(['v1',...Object.keys(state.trials).filter(id=>state.trials[id].activeDays>0&&state.trials[id].eligible!==false)])})};
+ if(finalOnly)return [final];
+ const declarations=[final,
+  {name:'inspect_baseline_policy',description:'Read the actual locked v1 campaign, model and stock program before changing it. Do not guess what the incumbent does.',parameters:baseArgs({})},
+  {name:'explore_market',description:'Run EDA grouped by category, merchant or current shopper segment. Returns observed revenue, interest, replies, mature outcomes, stock, cash, source quality and missing-attribution caveats. Raw capture totals are not profit.',parameters:baseArgs({dimension:en(['category','merchant','customer_segment']),window_days:{type:'INTEGER',description:'7,14 or28 days.'}})},
+  {name:'analyze_market_trends',description:'Compare two equal windows by category: interested shopper-days, searches, discovered needs and purchased units. Returns actual daily series and flags sparse/truncated/noncomparable data. Trends are descriptive, not causal forecasts.',parameters:baseArgs({window_days:{type:'INTEGER',description:'7,14 or28 days.'}})},
+  {name:'build_recommendations',description:'Score a real product shortlist with the existing trained model. latest_interest mirrors the product restriction; multiple_interests considers all observed product signals within7 days; trend_aware adds a bounded observed-interest rank weight with sparse-data fallback. Choose a category and shopper segment. Requires EDA and trend evidence, plus segment EDA for segment targeting. This previews recommendations; no contacts or payment actions occur yet.',parameters:baseArgs({recipe:required({mode:en(RECOMMENDATION_MODES),segment:en(SEGMENTS),category:en(['all',...state.categories])}),evidence_ids:{type:'ARRAY',items:str}})},
+  {name:'inspect_indicators',description:'Read observed economic indicators. Choose the domains and time window needed for your hypothesis.',parameters:baseArgs({domains:{type:'ARRAY',items:en(ECONOMIC_DOMAINS)},window_days:{type:'INTEGER',description:'Use7,14 or28 days.'}})},
+  {name:'fit_demand_model',description:'Actually fit a local rolling-demand model; adaptive chooses among7/14/28-day windows using past-only validation.',parameters:baseArgs({method:en(['recent7','recent14','legacy28','adaptive'])})},
+  {name:'preview_policy',description:'Compose a temporary3/7-day policy, then return to v1. targeted_recommendations executes a bound recommendation recipe with joint value ranking; use recommendation_id, and cite its artifact plus inspected baseline. Other campaigns use recommendation_id none. pause_outreach stops paid contacts only. funded_only removes speculative buffer stock. forecast_cover covers the quoted lead time plus cover_days. fast uses modeled immediate PayPal settlement, not instant physical delivery. deadline changes to guarded SKU planning and bank settlement when deadlines permit; it requires forecast_cover. Conditions must use cited evidence windows. Preview moves no money.',parameters:baseArgs({policy:required({campaign:en(campaignReady?['v1','recommendations','reactivation','pause_outreach',...(Object.keys(state.recommendations).length?['targeted_recommendations']:[])]:['v1']),objective:en(campaignReady?['joint','paypal']:['joint']),inventory:en(inventoryReady?Object.keys(state.models).length?['v1','funded_only','forecast_cover']:['v1','funded_only']:['v1']),forecast_id:en(['none',...Object.keys(state.models)]),recommendation_id:en(['none',...Object.keys(state.recommendations)]),cover_days:{type:'INTEGER',description:'Use0,3 or7 days of extra demand cover.'},settlement:en(settlementReady?['fast','deadline']:['fast']),duration_days:{type:'INTEGER',description:'Use3 or7 days; a longer lease is not allowed.'},conditions:{type:'ARRAY',items:required({indicator:en(Object.keys(ECONOMIC_INDICATORS)),operator:en(['above','below']),value:{type:'NUMBER'},window_days:{type:'INTEGER',description:'Use7,14 or28, matching the cited indicator evidence.'}})}}),evidence_ids:{type:'ARRAY',items:str}})},
+  {name:'run_historical_trial',description:'Compare a previewed candidate with frozen v1 on the specified different, completed historical market or panel. Not a forecast or rollout of the current market. Follow the remaining trial budget.',parameters:baseArgs({candidate_id:en(Object.keys(state.candidates).length?Object.keys(state.candidates):['NO_CANDIDATE_YET']),historical_market:en(['H1'])})}
+ ];
+ return declarations.filter(d=>d.name!=='preview_policy'||Object.keys(state.evidence).length).filter(d=>d.name!=='fit_demand_model'||Object.keys(state.models).length<state.limits.modelFits).filter(d=>d.name!=='run_historical_trial'||Object.keys(state.candidates).length&&Object.keys(state.trials).length<state.limits.trials);
+}
+function checkKeys(args,keys){if(!args||Object.keys(args).sort().join()!==[...keys,'reason'].sort().join()||typeof args.reason!=='string'||args.reason.length>2200)throw Error('INVALID_TOOL_ARGUMENTS');}
+export async function openEconomicHarness({view,resources,path,historyDescription,compareHistorical,brief=null,limits={modelCalls:6,proposals:2,modelFits:2,trials:1},resume=false}){
+ const snapshotId=digest(view),initial={version:5,status:'RUNNING',snapshotId,briefHash:digest(brief),day:view.day,categories:[...new Set(view.products.map(p=>p.category))],baseline:'paypal-net-v1',limits,models:{},analyses:{},recommendations:{},evidence:{},candidates:{},trials:{},cache:{},checkpoints:[],providerCalls:0,pending:null},state=resume?JSON.parse(await readFile(path,'utf8')):initial;
+ if(state.version!==5)throw Error('WORKFLOW_VERSION_CHANGED');
+ if(state.briefHash!==digest(brief))throw Error('WORKFLOW_BRIEF_CHANGED');
+ if(state.snapshotId!==snapshotId||JSON.stringify(state.limits)!==JSON.stringify(limits))throw Error('STALE_WORKFLOW_SNAPSHOT');
+ const save=async()=>{await writeFile(path+'.tmp',JSON.stringify(state,null,2)+'\n');await rename(path+'.tmp',path);};
+ if(!resume)await writeFile(path,JSON.stringify(state,null,2)+'\n',{flag:'wx'});
+ async function execute(name,args){
+  if(!args||typeof args.reason!=='string'||args.reason.length>2200)throw Error('INVALID_TOOL_ARGUMENTS');
+  if(['run_historical_trial','select_economic_policy'].includes(name)&&args?.candidate_id&&args.candidate_id!=='v1'){
+   const candidate=state.candidates[args.candidate_id];if(!candidate)throw Error('UNKNOWN_CANDIDATE');const {id,...body}=candidate;if(id!=='P-'+digest(body).slice(0,20)||candidate.snapshotId!==snapshotId)throw Error('CANDIDATE_CHANGED_AFTER_PREVIEW');
+  }
+  const {reason,...parameters}=args||{},cacheId=digest(canonical({name,parameters}));if(state.cache[cacheId])return state.cache[cacheId];if(state.status!=='RUNNING')throw Error('WORKFLOW_CLOSED');let output;
+  if(name==='inspect_baseline_policy'){
+   checkKeys(args,[]);output=inspectBaseline(resources);state.evidence[output.evidenceId]={...output,snapshotId};
+  }else if(name==='explore_market'||name==='analyze_market_trends'){
+   checkKeys(args,name==='explore_market'?['dimension','window_days']:['window_days']);output=name==='explore_market'?exploreMarket(view,{dimension:args.dimension,windowDays:args.window_days}):analyzeTrends(view,{windowDays:args.window_days});state.analyses[output.evidenceId]=output;state.evidence[output.evidenceId]={...output,snapshotId};
+  }else if(name==='build_recommendations'){
+   checkKeys(args,['recipe','evidence_ids']);if(Object.keys(state.recommendations).length>=2)throw Error('RECOMMENDATION_LIMIT');
+   if(!Array.isArray(args.evidence_ids)||args.evidence_ids.some(id=>state.evidence[id]?.snapshotId!==snapshotId))throw Error('UNKNOWN_OR_STALE_EVIDENCE');
+   const evidence=args.evidence_ids.map(id=>state.evidence[id]);if(!evidence.some(e=>e.tool==='explore_market')||!evidence.some(e=>e.tool==='analyze_market_trends'))throw Error('EDA_AND_TRENDS_REQUIRED');
+   if(args.recipe?.segment!=='all'&&!evidence.some(e=>e.dimension==='customer_segment'))throw Error('SEGMENT_EDA_REQUIRED');
+   if(args.recipe?.category!=='all'&&!evidence.some(e=>e.dimension==='category'))throw Error('CATEGORY_EDA_REQUIRED');
+   const rec=buildRecommendations(view,resources,args.recipe);state.recommendations[rec.id]=rec;output={...rec,evidenceId:rec.id};state.evidence[rec.id]={snapshotId,domains:rec.domains};
+  }else if(name==='inspect_indicators'){
+   checkKeys(args,['domains','window_days']);output=inspectEconomy(view,args.domains,args.window_days);state.evidence[output.evidenceId]={...output,snapshotId};
+  }else if(name==='fit_demand_model'){
+   checkKeys(args,['method']);if(Object.keys(state.models).length>=limits.modelFits)throw Error('MODEL_FIT_LIMIT');const model=trainEconomicForecast(view,args.method);state.models[model.id]=model;output={...model,evidenceId:model.id,domains:['demand']};state.evidence[model.id]={snapshotId,domains:['demand'],output};
+  }else if(name==='preview_policy'){
+   checkKeys(args,['policy','evidence_ids']);if(Object.keys(state.candidates).length>=limits.proposals)throw Error('PROPOSAL_LIMIT');const forecast=args.policy?.forecast_id==='none'?null:state.models[args.policy?.forecast_id],recommendations=state.recommendations[args.policy?.recommendation_id]??null,policy=validateEconomicPatch(args.policy,forecast,recommendations);
+   if(recommendations){const {id,...body}=recommendations;if(recommendations.snapshotId!==snapshotId||id!=='REC-'+digest(body).slice(0,20)||recommendations.modelHash!==resources.incumbent.modelHash)throw Error('RECOMMENDATIONS_CHANGED_AFTER_SCORING');}
+   if(forecast){const {id,...body}=forecast;if(forecast.snapshotId!==snapshotId||id!=='F-'+digest(body).slice(0,20))throw Error('FORECAST_CHANGED_AFTER_FIT');}
+   if(!Array.isArray(args.evidence_ids)||!args.evidence_ids.length||args.evidence_ids.some(id=>state.evidence[id]?.snapshotId!==snapshotId))throw Error('UNKNOWN_OR_STALE_EVIDENCE');
+   const available=new Set(args.evidence_ids.flatMap(id=>state.evidence[id].domains)),missing=requiredEconomicEvidence(policy).filter(d=>!available.has(d));if(missing.length)throw Error('MISSING_EVIDENCE: '+missing.join(','));
+   if(recommendations&&!args.evidence_ids.includes(recommendations.id))throw Error('RECOMMENDATION_EVIDENCE_REQUIRED');
+   for(const c of policy.conditions)if(!args.evidence_ids.some(id=>state.evidence[id].windowDays===c.window_days&&Object.hasOwn(state.evidence[id].values||{},c.indicator)))throw Error('CONDITION_WINDOW_NOT_GROUNDED');
+   const body={snapshotId,reviewDay:view.day,policy,forecast,...(recommendations?{recommendations}:{}),evidenceIds:[...args.evidence_ids]},id='P-'+digest(body).slice(0,20),candidate={id,...body};
+   const contacts=economicContactPlan(view,resources,candidate),baseContacts=economicContactPlan(view,resources,{...candidate,policy:{...policy,campaign:'v1',objective:'joint'}}),funded=planFundedBaskets(view);output={candidate_id:id,policy,appliesNow:patchApplies(view,candidate),triggerEvaluation:evaluateEconomicConditions(view,policy),expiresBeforeDay:view.day+policy.duration_days,preview:{selectedContacts:contacts.actions.length,baselineContacts:baseContacts.actions.length,expectedRetailPaymentNetUSD:contacts.ranking.reduce((s,r)=>s+r.expectedNetCents,0)/100,baselineExpectedRetailPaymentNetUSD:baseContacts.ranking.reduce((s,r)=>s+r.expectedNetCents,0)/100,feasibleFundedPlans:funded.decisions.filter(d=>d.status==='COMPLETE_FUNDED_PLAN').length,fundedRestockUnits:funded.orders.flatMap(o=>o.items).reduce((s,i)=>s+i.quantity,0)},scope:'Current read-only preview. Predicted contact value is not causal profit. Funded plan counts describe the existing trusted complete-basket tool; actual policy stock changes are tested in the historical trial.'};state.candidates[id]=candidate;
+  }else if(name==='run_historical_trial'){
+   checkKeys(args,['candidate_id','historical_market']);if(args.historical_market!=='H1'||!state.candidates[args.candidate_id])throw Error('UNKNOWN_HISTORICAL_TRIAL');if(Object.keys(state.trials).length>=limits.trials)throw Error('HISTORICAL_TRIAL_LIMIT');
+   const candidate=state.candidates[args.candidate_id],{id,...body}=candidate;if(id!=='P-'+digest(body).slice(0,20))throw Error('CANDIDATE_CHANGED_AFTER_PREVIEW');output=await compareHistorical(structuredClone(candidate));if(output.source!=='DIFFERENT_COMPLETED_HISTORICAL_MARKET'||output.candidateId!==args.candidate_id||!output.economyUnchanged)throw Error('UNBOUND_HISTORICAL_RESULT');state.trials[args.candidate_id]=output;
+  }else if(name==='select_economic_policy'){
+   checkKeys(args,['candidate_id']);const baseline=args.candidate_id==='v1',trial=state.trials[args.candidate_id];if(!baseline&&(!trial||trial.activeDays<1))throw Error('UNTESTED_SELECTION');if(!baseline&&trial.eligible===false)throw Error('ECONOMIC_GATES_FAILED');
+   output={...args,decision:baseline?'keep_v1':'queue_shadow',measured_delta_usd:baseline?0:trial.delta.platformUSD,status:baseline?'BASELINE_RETAINED':'QUEUED_FOR_SHADOW_RESEARCH',promoted:false,budget:{usedCalls:state.providerCalls,maximumCalls:limits.modelCalls,usedTrials:Object.keys(state.trials).length,remainingTrials:limits.trials-Object.keys(state.trials).length},scope:'Research recommendation only. Measured values are supplied by the trusted trial, not typed by the model. A wider fresh-seed comparison is required for a financial improvement claim.'};state.recommendation=output;
+  }else throw Error('UNKNOWN_ECONOMIC_TOOL');
+  state.cache[cacheId]=output;return output;
+ }
+ async function finishPending(){const pending=state.pending;if(!pending)return;
+  const cp=state.checkpoints.find(c=>c.id===pending.checkpointId);try{cp.output=await execute(pending.name,pending.args);cp.status='COMPLETED';if(pending.name==='select_economic_policy')state.status='COMPLETED';}
+  catch(e){cp.status='ERROR';cp.output={error:e.message,scope:'No live mutation occurred. Choose a valid tool or keep v1.'};}state.pending=null;await save();
+ }
+ return {state,execute,save,async run(provider){
+  if(state.status==='COMPLETED')return state;state.status='RUNNING';await finishPending();
+  for(;state.status!=='COMPLETED'&&state.providerCalls<limits.modelCalls;){
+   const last=state.providerCalls===limits.modelCalls-1,functions=toolsFor(state,last),input={task:'Review this observed market. Choose which economic data to inspect, fit a model if useful, compose a bounded commerce intervention, and test defensible candidates within the historical trial budget. Investigate conflicting indicators. You can keep v1. Do not invent economic variables or make unconditional/permanent interventions.',brief,snapshotId,currentDay:view.day,historyThroughDay:view.day-1,customers:view.audience.length,merchants:view.merchants.length,indicatorCatalog:ECONOMIC_INDICATORS,historicalComparison:historyDescription,baseline:'v1 uses broad positive-value inquiries, a local model, complete funded baskets and fast supplier settlement.',actionGrounding:{campaign:['outreach','demand','payments'],inventory:['inventory','liquidity'],settlement:['supply','payments']},remainingModelCalls:limits.modelCalls-state.providerCalls,remainingTrials:limits.trials-Object.keys(state.trials).length,outputs:state.checkpoints.filter(c=>c.actor==='TRUSTED_TOOL').map(c=>({tool:c.tool,input:c.input,output:c.output,status:c.status})),lastTurn:last?'Finish now using select_economic_policy.':'You choose the next tool; no fixed role sequence.'};
+   const cp={id:'MODEL-'+state.providerCalls,actor:'GEMINI',status:'STARTED',input};state.checkpoints.push(cp);state.providerCalls++;await save();const before=provider.client.events.length;
+   try{const result=await provider.client.json('You are the economic workflow planner for Market Metro. Control the investigation through trusted tools. Interpret demand, stock, merchant liquidity, supply timing and payment economics together. All observations are synthetic and as-of; never infer hidden wallets, latent needs, scenario labels or future outcomes. A historical what-if result is not a live forecast. No raw code, SQL or external payment action is available. Explain each tool choice briefly. Respect the tool/cost budget and keep v1 when evidence does not support a change.',input,{caseId:cp.id,trialId:path,functions});
+    if(!functions.some(f=>f.name===result.name))throw Error('UNAVAILABLE_TOOL');Object.assign(cp,{status:'COMPLETED',output:result,provider:provider.client.events.slice(before)});
+    const id='TOOL-'+state.checkpoints.length;state.checkpoints.push({id,actor:'TRUSTED_TOOL',tool:result.name,status:'STARTED',input:result.args});state.pending={checkpointId:id,name:result.name,args:result.args};await save();await finishPending();
+   }catch(e){Object.assign(cp,{status:'FAILED',error:e.message,provider:provider.client.events.slice(before)});state.status='STOPPED';state.error=e.message;break;}
+  }
+  if(state.status!=='COMPLETED'){state.status='STOPPED';state.recommendation={decision:'keep_v1',candidate_id:'v1',promoted:false,reason:state.error||'Tool budget exhausted; no unreviewed plan is published.'};}
+  state.costUSD=state.checkpoints.flatMap(c=>c.provider||[]).reduce((s,e)=>s+(e.modelCostMicros??e.reservedMicros??0),0)/1e6;await save();return state;
+ }};
+}

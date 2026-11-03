@@ -1,0 +1,102 @@
+{
+  "source": "DIFFERENT_COMPLETED_HISTORICAL_MARKET",
+  "candidateId": "P-a3945e651a73ebe007db",
+  "historicalMarket": "H1",
+  "economyUnchanged": true,
+  "activeDays": 5,
+  "activationDays": [
+    61,
+    62,
+    63,
+    64,
+    66
+  ],
+  "baseline": {
+    "platformUSD": 910.23,
+    "retailerUSD": 10430.49,
+    "terminalCashUSD": 28715.12,
+    "terminalInventoryUSD": 2134.12,
+    "retainedPurchases": 133,
+    "retainedVolumeUSD": 22198,
+    "outreachCostUSD": 25.15,
+    "unpaidLiabilities": 0
+  },
+  "candidate": {
+    "platformUSD": 910.31,
+    "retailerUSD": 10424.42,
+    "terminalCashUSD": 28706.35,
+    "terminalInventoryUSD": 2134.12,
+    "retainedPurchases": 133,
+    "retainedVolumeUSD": 22186,
+    "outreachCostUSD": 24.6,
+    "unpaidLiabilities": 0
+  },
+  "delta": {
+    "platformUSD": 0.07999999999992724,
+    "retailerUSD": -6.069999999999709,
+    "terminalCashUSD": -8.770000000000437,
+    "terminalInventoryUSD": 0,
+    "retainedPurchases": 0,
+    "retainedVolumeUSD": -12,
+    "outreachCostUSD": -0.5499999999999972,
+    "unpaidLiabilities": 0
+  },
+  "execution": {
+    "source": "HISTORICAL_SIMULATED_CONTACTS_NOT_NATIVE_PAYPAL_RECEIPTS",
+    "contacts": 3,
+    "responses": 0,
+    "retainedPurchases": 0,
+    "sample": [
+      {
+        "day": 61,
+        "customerId": "BUYER-0078",
+        "kind": "recommend",
+        "catalogId": "MM-DEVICE-03",
+        "responded": false,
+        "authorizedAtContact": false,
+        "requestId": null,
+        "simulatedCaptureId": null,
+        "capturedUSD": 0,
+        "onTimeDelivery": null,
+        "retained": false
+      },
+      {
+        "day": 62,
+        "customerId": "BUYER-0064",
+        "kind": "recommend",
+        "catalogId": "MM-DEVICE-04",
+        "responded": false,
+        "authorizedAtContact": false,
+        "requestId": null,
+        "simulatedCaptureId": null,
+        "capturedUSD": 0,
+        "onTimeDelivery": null,
+        "retained": false
+      },
+      {
+        "day": 62,
+        "customerId": "BUYER-0044",
+        "kind": "recommend",
+        "catalogId": "MM-DEVICE-01",
+        "responded": false,
+        "authorizedAtContact": false,
+        "requestId": null,
+        "simulatedCaptureId": null,
+        "capturedUSD": 0,
+        "onTimeDelivery": null,
+        "retained": false
+      }
+    ],
+    "sampleRule": "First12 contacts in the active historical period, including nonresponses."
+  },
+  "scope": "One completed historical-market counterfactual. No current-market future was exposed, and this is not unseen confirmation or production PayPal profit.",
+  "gates": {
+    "paypal": true,
+    "retailer": false,
+    "cash": false,
+    "retainedVolume": false,
+    "inventory": true,
+    "liabilities": true
+  },
+  "eligible": false
+}
