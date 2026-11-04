@@ -26,7 +26,25 @@ The current local database contains completed sandbox purchases, saved-wallet ve
 - **Agent evidence:** validated decisions, actual local fits, tested revisions, publications/rejections, call cost and traceable artifacts.
 - **Generalization:** paired comparisons on registered fresh seeds. Model AUC and profitable development trials do not substitute for these outcomes.
 
-The V2 study produced no financial lift. V2.1 adds strict contracts, matched-size development trials and deterministic selection across tested proposals. Its new financial comparison is being measured; no improvement is claimed before it completes.
+The V2 study produced no financial lift. V2.1 adds strict contracts, matched-size development trials and deterministic selection across tested proposals.
+
+### First fresh market — provisional, not the four-market conclusion
+
+Seed 41873101, discovery scenario, identical starting state, needs, consent and income:
+
+| Outcome | Fixed | One planner | Three-role team |
+|---|---:|---:|---:|
+| Modeled PayPal net after AI | $4,178.98 | $4,178.95 | $4,267.03 |
+| Merchant contribution | $48,753.01 | $48,753.01 | $49,840.30 |
+| Retained purchases | 791 | 791 | 805 |
+
+The team used intent-context features, selected a locally trained forest and tested an intent-assistance campaign. Its revision raised the contact ceiling from 36 to 60 shoppers/day. The trusted publisher admitted the better measured revision; the later review retained it. The single planner's proposals failed the development gate.
+
+The **$88.05 net gain** reconciles to +$89.38 retail fees, +$49.26 supplier fees, −$47.95 processing, +$3.60 outreach savings, −$6.21 fee refunds and −$0.025926 AI cost. It is not merely outreach savings. Merchant contribution rose **$1,087.29**, with **14 more retained purchases**.
+
+One illustrative shopper, BUYER-0525, received a model-ranked recommendation on displayed day 33, funded a $174 basket and received on-time delivery on day 35. That request was not captured by fixed rules. This is a post-hoc simulated example; all market-level outcomes still include displaced sales and losses. [Accounting and customer trace](commerce-expanded/harness-v2/v21-20261104-transport/first-market-proof.json).
+
+The other three registered markets are still running. This result does not yet establish repeatability or prove that multiple roles are necessary. Model usage for the team in this market was $0.025926, calculated from provider token usage rather than a cloud billing invoice.
 
 ## Submission boundary
 
