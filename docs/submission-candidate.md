@@ -2,6 +2,8 @@
 
 **Purpose:** help a commerce operator turn observed shopping demand into a tested campaign, fulfilled orders and reconciled payments. The AI team proposes; trusted code validates, measures and executes.
 
+**Current audit:** [V2.2.1 completed all eight AI workflows](commerce-expanded/harness-v2/v221-20261104/README.md), but its four-seed mean gain was only $5.16 PayPal net and $121.21 merchant contribution versus fixed, and one planner performed better. The strong financial/team claim remains unproven. The next step is a data-fit improvement supported by free development tests, not another unmodified paid rerun. All previous results below remain available.
+
 **Latest candidate: V2.2.** [Open its recorded demo](http://127.0.0.1:4173/studio.html?session=AUTONOMY-e25772eb0a67670d). The [new four-market comparison](commerce-expanded/harness-v2/v22-20261104/README.md) shows mean **+$55.30 PayPal net after AI, +$704.07 merchant contribution and +9 retained purchases** versus fixed rules. It averages +$4.77 PayPal net over one planner, with fewer purchases than that planner. Two operational failures remain open; the goal is still active.
 
 For this version's end-to-end example, inspect the first review, then shopper BUYER-0083 on day 33: a needs inquiry led to a $96 purchase delivered on day 34. Its corresponding native Sandbox capture is **9S3344048D797830K**. The simulated totals and native receipt stay separate. The prior V2.1 evidence below remains available.
