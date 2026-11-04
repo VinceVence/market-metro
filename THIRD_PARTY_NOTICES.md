@@ -14,3 +14,6 @@ Original Market Metro source code and code-drawn artwork are covered by the
 - V2.3 architecture figures include brand vector marks from PayPal's asset host,
   Devicon and Simple Icons. [Asset sources and notices](docs/figures/planner-v23/README.md#vector-assets)
   accompany those figures; brand trademarks remain with their respective owners.
+
+- Architecture mockups use the STIX and DejaVu fonts distributed with Matplotlib.
+  Their [license notices](docs/figures/planner-v23/mockups/README.md#reproduce) accompany the exported figures.

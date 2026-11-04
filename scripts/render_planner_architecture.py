@@ -134,7 +134,7 @@ def architecture():
     f.text(2312,184,"LLM + trusted local tools",21,MUTED,align="end")
     f.rect(1570,250,530,126,"#ffffff","#aeb9c6",radius=8,width=1.5)
     f.logo("gemini",1593,278,53,"#3f5d88")
-    f.text(1668,303,"Gemini planner",29,ink,True)
+    f.text(1668,303,"LLM agent",29,ink,True)
     f.text(1668,344,"Choose experiments and campaigns",20,MUTED,max_width=400)
     f.logo("google-cloud",2050,277,29)
 

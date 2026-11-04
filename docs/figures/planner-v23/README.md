@@ -1,5 +1,7 @@
 # Market Metro: agent and environment workflow
 
+[Choose among three research-paper mockups](mockups/README.md): journal serif, ML methods, or typed protocol. The options add technical detail and use the generic label **LLM agent**.
+
 The actual market scene and the agent workflow sit side by side. Data and PayPal occupy the lower row; a local experiment sandbox sits inside the agent plane.
 
 [Editable SVG](system-architecture.svg) · [PNG preview](system-architecture.png) · [PDF](../../../output/pdf/market-metro-planner-v23.pdf)
@@ -9,7 +11,7 @@ The actual market scene and the agent workflow sit side by side. Data and PayPal
 | Plane | What the viewer follows |
 |---|---|
 | Environment | An unedited screenshot of the actual Market Metro canvas, replayed at Day 32 |
-| Agent | Gemini requests analysis, local training and trial evaluation; code validates publication |
+| Agent | The LLM agent requests analysis, local training and trial evaluation; code validates publication |
 | Data | Generated order rows, model artifacts, checkpoints and decision logs |
 | PayPal Sandbox | A selected existing order becomes a verified native receipt linked back to the warehouse |
 
