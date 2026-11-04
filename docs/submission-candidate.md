@@ -28,7 +28,7 @@ The current local database contains completed sandbox purchases, saved-wallet ve
 
 The V2 study produced no financial lift. V2.1 adds strict contracts, matched-size development trials and deterministic selection across tested proposals.
 
-### First fresh market — provisional, not the four-market conclusion
+### First fresh market — the recorded demonstration
 
 Seed 41873101, discovery scenario, identical starting state, needs, consent and income:
 
@@ -48,7 +48,7 @@ One illustrative shopper, BUYER-0525, received a model-ranked recommendation on 
 
 The shopper's **$34 merchant leg** was subsequently captured through the saved PayPal Sandbox wallet: capture `0JD4043540258600T`, fee **$1.46**, merchant proceeds **$32.54**, using fictitious funds. The **PayPal sandbox** view and `paypal_receipts` table link it to the simulated order. This sample does not add another sale to benchmark totals, and playback never repeats the payment. [Native receipt](commerce-expanded/harness-v2/v21-20261104-transport/native-receipt.json).
 
-The other three registered markets are still running. This result does not yet establish repeatability or prove that multiple roles are necessary. Model usage for the team in this market was $0.025926, calculated from provider token usage rather than a cloud billing invoice.
+The [completed four-market pilot](commerce-expanded/harness-v2/v21-20261104-transport/README.md) averaged **+$26.22 PayPal net, +$218.73 merchant contribution and +3.5 retained purchases** versus fixed rules. Four of eight AI workflows fell back after errors, and the zero-response market harmed merchants. The recorded discovery example supplies all additional purchases; it does not establish repeatability or prove that multiple roles are necessary. Model usage for the full comparison was $0.128868, calculated from provider tokens rather than a cloud billing invoice. The improvement goal remains active.
 
 ## Submission boundary
 
