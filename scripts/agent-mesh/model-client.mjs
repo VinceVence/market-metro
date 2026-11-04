@@ -18,6 +18,20 @@ export function capTeamLedger(ledger,{capMicros=250000,maxCalls=18,model}={}){
   }};
 }
 
+export async function initializeTeamVertex(config,path,{run=promisify(execFile),verify=verifySpendCap}={}){
+  if(config.projectId!==PROJECT_ID)throw Error('INVALID_CLOUD_PROJECT');
+  for(let attempt=0;attempt<2;attempt++)try{
+    const auth=await run(config.pythonPath,['-B',resolve(ROOT,'scripts/vertex-token.py'),path],{timeout:30000,maxBuffer:16384});
+    const token=auth.stdout.trim();if(token.length<20)throw Error('VERTEX_AUTH_UNAVAILABLE');
+    return {token,cap:await verify(config,token),initializationRetries:attempt};
+  }catch(error){
+    // Only read-only initialization retries. Never print captured token stdout.
+    const cancelled=error.name==='AbortError'||error.code==='ABORT_ERR'||error.signal==='SIGINT'||error.code==='ERR_CHILD_PROCESS_STDIO_MAXBUFFER';
+    const network=!cancelled&&(['ECONNRESET','ECONNREFUSED','ETIMEDOUT','EAI_AGAIN','ENETUNREACH','ENOTFOUND'].includes(error.code||error.cause?.code)||error.name==='TimeoutError'||error.killed===true&&error.signal==='SIGTERM'&&error.code==null||/(_new_conn|NewConnectionError|NameResolutionError|ConnectTimeout|ReadTimeout)/.test(error.stderr||'')||/^SPEND_CAP_VERIFICATION_HTTP_(429|500|502|503|504)$/.test(error.message));
+    if(attempt||!network){error.initializationAttempts=attempt+1;throw error;}
+  }
+}
+
 // Per-call sessions share one run ID and the existing durable spend ledger.
 // No cloud settings are changed. Profile-specific reservations retain their
 // original prices; the same250000-microdollar envelope covers both models.
@@ -25,10 +39,8 @@ export async function openTeamVertex(id,{route='lite',capMicros=250000,proEndpoi
   if(!Object.hasOwn(TEAM_MODEL_ROUTES,route)||![250000,300000].includes(capMicros)||!['standard','custom_tools'].includes(proEndpoint))throw Error('INVALID_TEAM_MODEL_CONFIG');
   const path=resolve(ROOT,'.local/gcp/config.json'),config=JSON.parse(await readFile(path,'utf8'));
   if(config.projectId!==PROJECT_ID)throw Error('INVALID_CLOUD_PROJECT');
-  const auth=await promisify(execFile)(config.pythonPath,['-B',resolve(ROOT,'scripts/vertex-token.py'),path],{timeout:30000,maxBuffer:16384});
-  const token=auth.stdout.trim();if(token.length<20)throw Error('VERTEX_AUTH_UNAVAILABLE');
-  const cap=await verifySpendCap(config,token),events=[];let lastAt=0,inFlight=false;
-  return {cap,client:{events,async json(system,packet,options){
+  const {token,cap,initializationRetries}=await initializeTeamVertex(config,path),events=[];let lastAt=0,inFlight=false;
+  return {cap,initializationRetries,client:{events,async json(system,packet,options){
     if(inFlight)throw Error('TEAM_PROVIDER_BUSY');inFlight=true;
     const profile=profileFor(route,options.functions?.[0]?.name),model=profile==='pro'?(proEndpoint==='custom_tools'?VERTEX_MODEL+'-customtools':VERTEX_MODEL):FLASH_LITE_PROFILE.model;let ledger,client;
     try{

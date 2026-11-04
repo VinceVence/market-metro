@@ -7,9 +7,10 @@ import {read,assertBinding} from './tools.mjs';
 import {VERSION,validate,contextSchema,canonicalHash,sealTrialReceipt,validateTrialReceipt,freeze} from './contracts.mjs';
 export async function verifyEconomy(){const p=await read('docs/commerce-expanded/harness-v2/protocol.json');for(const [path,hash]of Object.entries(p.economyHashes))if(createHash('sha256').update(await readFile(path)).digest('hex')!==hash)throw Error('V2_FROZEN_ECONOMY_CHANGED:'+path);return p;}
 export const DEVELOPMENT_CASES=Object.freeze([{seed:2026111101,regime:'discovery'},{seed:2026111102,regime:'low_response'},{seed:2026111103,regime:'zero_response'}].map(Object.freeze));
-export async function createTrialTool({root=resolve('.local/commerce-harness-v2/trials'),fixed,prior,marketProfile}={}){
+const executeLocalTrial=(inputPath,outputPath)=>promisify(execFile)(process.execPath,[resolve('scripts/commerce-expanded/harness-v2/trial-worker.mjs'),inputPath,outputPath],{timeout:240000,maxBuffer:1000000});
+export async function createTrialTool({root=resolve('.local/commerce-harness-v2/trials'),fixed,prior,marketProfile,execute=executeLocalTrial}={}){
  if(!['expanded-12x600','frozen-3x100'].includes(marketProfile))throw Error('V2_TRIAL_MARKET_REQUIRED');
- const protocol=await verifyEconomy();protocol.developmentCases=DEVELOPMENT_CASES;await mkdir(root,{recursive:true});
+ const protocol=await verifyEconomy(),recoveryEvents=[];protocol.developmentCases=DEVELOPMENT_CASES;await mkdir(root,{recursive:true});
  const sourcePaths=[...new Set([...Object.keys(protocol.economyHashes),...Object.keys(protocol.implementationHashes),'scripts/commerce-expanded/harness-v2/contracts.mjs'])];
  const sourceHashes=Object.fromEntries(await Promise.all(sourcePaths.map(async path=>[path,createHash('sha256').update(await readFile(path)).digest('hex')])));
  const evaluationContextHash=canonicalHash({version:VERSION,marketProfile,cases:protocol.developmentCases,sourceHashes,fixed,priorHash:canonicalHash(prior)});
@@ -19,13 +20,17 @@ export async function createTrialTool({root=resolve('.local/commerce-harness-v2/
   try{const cached=await read(path);if(cached.key!==key||cached.resultHash!==canonicalHash({key:cached.key,rows:cached.rows}))throw Error('V2_TRIAL_CACHE_MISMATCH');return cached;}catch(e){if(e.code!=='ENOENT')throw e;}
   const input={key,marketProfile,cases:protocol.developmentCases,schedule,models,fixed,prior},inputPath=resolve(root,key+'-input.json'),outputPath=path+'.tmp';
   await writeFile(inputPath,JSON.stringify(input));
-  await promisify(execFile)(process.execPath,[resolve('scripts/commerce-expanded/harness-v2/trial-worker.mjs'),inputPath,outputPath],{timeout:240000,maxBuffer:1000000});
+  for(let attempt=0;attempt<2;attempt++)try{await execute(inputPath,outputPath);break;}catch(error){
+   if(attempt||recoveryEvents.length>=2||error.killed!==true||error.signal!=='SIGTERM'||error.code!=null)throw error;
+   recoveryEvents.push({key,contractHash:schedule.at(-1)?.hash||'FIXED',reason:'LOCAL_PROCESS_DEADLINE',attempt:2,at:new Date().toISOString()});
+   await writeFile(resolve(root,key+'-recovery.json'),JSON.stringify(recoveryEvents.at(-1))+'\n');
+  }
   const result=await read(outputPath);if(result.key!==key||result.rows.length!==protocol.developmentCases.length)throw Error('V2_TRIAL_RESULT_MISMATCH');
   result.resultHash=canonicalHash({key:result.key,rows:result.rows});await writeFile(outputPath,JSON.stringify(result));
   await verifyEconomy();await rename(outputPath,path);return result;
  }
  const fixedResult=await evaluate([],{});
- return {async evaluate(contract,model,prefix=[],models={},context){
+ return {get recoveryEvents(){return structuredClone(recoveryEvents);},async evaluate(contract,model,prefix=[],models={},context){
   validate(context,contextSchema);if(context.marketProfile!==marketProfile||contract&&canonicalHash(contract.context)!==canonicalHash(context))throw Error('V2_TRIAL_CONTEXT_MISMATCH');
   const registry={...models,...(model?{[model.modelHash]:model}:{})},schedule=[...prefix,...(contract?[contract]:[])],result=await evaluate(schedule,registry),baseline=fixedResult.rows;
   for(let i=0;i<baseline.length;i++)for(const field of ['initialHash','opportunityHash','consentHash','incomeCents'])if(result.rows[i][field]!==baseline[i][field])throw Error('V2_UNMATCHED_TRIAL_INPUT');

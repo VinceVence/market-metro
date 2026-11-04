@@ -21,9 +21,10 @@ export async function openCommerceHarnessV2({id,dir,mode='team',prior,incumbent,
  const state={version:VERSION,id,mode,status:'READY',pending:false,failed:false,retries:0,rounds:0,lastDay:null,checkpoints:[],publications:[],training:[],schedule:[]};
  const observed=[],models={};let provider=null,trialTool=null,closed=false,reviewJob=null,lastPlan=null,inFlight=false;
  const costs=()=> (provider?.client.events||[]).reduce((s,e)=>s+(e.modelCostMicros??e.reservedMicros??0),0)/1e6;
+ const operationRecoveries=()=>({initialization:provider?.initializationRetries||0,localTrials:trialTool?.recoveryEvents||[]});
  let writes=Promise.resolve();
- function save(){const snapshot=JSON.stringify({...state,modelCostUSD:costs()},null,2)+'\n';const job=async()=>{await writeFile(dir+'/checkpoints.json.tmp',snapshot);await rename(dir+'/checkpoints.json.tmp',dir+'/checkpoints.json');await onCheckpoint();};writes=writes.then(job,job);return writes;}
- async function tool(role,actor,day,input,fn){const cp={role,actor,day,status:'STARTED',input,startedAt:new Date().toISOString()};state.checkpoints.push(cp);await save();try{const output=await fn();if(actor==='LOCAL_TRAINING_TOOL')Object.assign(cp.input,{rows:output.trainingRows,ownMatureRows:output.ownMatureRows});Object.assign(cp,{status:'COMPLETED',completedDay:day,output,finishedAt:new Date().toISOString()});await save();return output;}catch(e){Object.assign(cp,{status:'FAILED',completedDay:day,error:e.message});await save();throw e;}}
+ function save(){const snapshot=JSON.stringify({...state,modelCostUSD:costs(),operationRecoveries:operationRecoveries()},null,2)+'\n';const job=async()=>{await writeFile(dir+'/checkpoints.json.tmp',snapshot);await rename(dir+'/checkpoints.json.tmp',dir+'/checkpoints.json');await onCheckpoint();};writes=writes.then(job,job);return writes;}
+ async function tool(role,actor,day,input,fn){const cp={role,actor,day,status:'STARTED',input,startedAt:new Date().toISOString()};state.checkpoints.push(cp);await save();try{const output=await fn();if(actor==='LOCAL_TRAINING_TOOL')Object.assign(cp.input,{rows:output.trainingRows,ownMatureRows:output.ownMatureRows});Object.assign(cp,{status:'COMPLETED',completedDay:day,output,finishedAt:new Date().toISOString()});await save();return output;}catch(e){Object.assign(cp,{status:'FAILED',completedDay:day,error:e.message,errorDetails:{code:e.code??null,signal:e.signal??null,killed:e.killed===true}});await save();throw e;}}
  async function ask(role,name,day,input,fields,alternatives=[]){
   if(state.checkpoints.filter(c=>c.actor==='GEMINI'&&c.day===day).length>=6||state.checkpoints.filter(c=>c.actor==='GEMINI').length>=12)throw Error('V2_CALL_CAP');
   const brief=mode==='single'?Object.values(roleBriefs).join(' '):roleBriefs[role];role=mode==='single'?'Single commerce planner':role;const evidenceId=digest(input),cp={role,actor:'GEMINI',day,status:'STARTED',input:{...structuredClone(input),evidenceId},roleBrief:brief,startedAt:new Date().toISOString()};state.checkpoints.push(cp);await save();let start=0;
@@ -42,7 +43,7 @@ export async function openCommerceHarnessV2({id,dir,mode='team',prior,incumbent,
     }
    }
    Object.assign(cp,{status:'VALIDATED',completedDay:day,toolName:result.name,output:result.args,provider:provider.client.events.slice(start),finishedAt:new Date().toISOString()});await save();return {...result.args,toolName:result.name};
-  }catch(e){Object.assign(cp,{status:'FAILED',completedDay:day,error:e.message,provider:provider?.client.events.slice(start)||[]});await save();throw e;}
+  }catch(e){Object.assign(cp,{status:'FAILED',completedDay:day,error:e.message,errorDetails:{code:e.code??null,signal:e.signal??null,killed:e.killed===true,initializationAttempts:e.initializationAttempts??null},provider:provider?.client.events.slice(start)||[]});await save();throw e;}
  }
  async function review(view){
   const day=view.day,context=freeze({day,marketProfile:marketProfileFor(view),snapshotHash:canonicalHash(view)});state.pending=true;state.status='REVIEWING';state.rounds++;await save();
@@ -111,5 +112,5 @@ export async function openCommerceHarnessV2({id,dir,mode='team',prior,incumbent,
   if(inFlight||lastPlan&&view.day<lastPlan.day)throw Error('V2_INVALID_DAY_ORDER');
   inFlight=true;lastPlan={day:view.day,hash,promise:decide(freeze(structuredClone(view))).finally(()=>{inFlight=false;})};
   return structuredClone(await lastPlan.promise);
- },summary(){return {...state,clockMode:'decision_barrier',modelCalls:(provider?.client.events||[]).length,modelCostUSD:costs(),trainingJobs:state.training.length,calibrationUpdates:0,activeContract:state.schedule.at(-1)||null};},async close(){closed=true;await reviewJob;await provider?.close();await save();}};
+ },summary(){return {...state,operationRecoveries:operationRecoveries(),clockMode:'decision_barrier',modelCalls:(provider?.client.events||[]).length,modelCostUSD:costs(),trainingJobs:state.training.length,calibrationUpdates:0,activeContract:state.schedule.at(-1)||null};},async close(){closed=true;await reviewJob;await provider?.close();await save();}};
 }

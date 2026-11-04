@@ -1,8 +1,10 @@
-# V2.2: proposals from the LLM, execution decisions from code
+# V2.2.1: proposals from the LLM, execution decisions from code
 
 The LLM proposes analysis, model experiments and campaigns. It has **no publish tool**. A deterministic controller chooses which tested campaign can run.
 
 V2.2 retains the V2.1 comparison and recorded demo. Its new financial study uses separately registered seeds; implementation improvements alone are not a profit claim.
+
+V2.2.1 changes operational recovery only. Its confirmation uses new registered seeds; prior V2.2 failures remain in their original report.
 
 ```text
 Observed snapshot → LLM proposal → strict contract validation
@@ -58,7 +60,14 @@ The analyst owns the demand hypothesis and feature handoff; the scientist owns m
 
 Each review sees the exact active policy, observed response counts and earlier experiment results. Model summaries retain contact-type metrics and source-market validation gaps; full reports remain saved. Flash-Lite handles analysis and model selection. Pro handles the final campaign revision. Local fitting supports forests, logistic regression, response-hurdle models and shallow gradient boosting.
 
-Only definitive HTTP 429/500/502/503/504 rejections with a matching recorded rejection event are retryable. The same evidence is reused, each retry obtains a new spend reservation, and no commerce action has executed at that stage. There is at most one retry per decision and two per run. Timeouts, uncertain billing, invalid tool output and permission errors are not retried. Limits remain six decision stages per review, two reviews, fourteen total provider attempts and $0.25 per run.
+For billed model requests, only definitive HTTP 429/500/502/503/504 rejections with a matching recorded rejection event are retryable. The same evidence is reused, each retry obtains a new spend reservation, and no commerce action has executed at that stage. There is at most one retry per decision and two per run. Uncertain model-request timeouts, uncertain billing, invalid tool output and permission errors are not retried. Limits remain six decision stages per review, two reviews, fourteen total provider attempts and $0.25 per run.
+
+Two additional **safe-operation boundaries** now recover without discarding completed analysis:
+
+- Authentication and spend-cap reads may retry once for an identified transport failure or transient HTTP rejection. Spend-cap verification still must succeed before any model request. Wrong projects, permission failures, malformed tokens and cancellation remain closed. The token is never recorded in a checkpoint.
+- A local numerical trial may retry once after its process deadline, at most twice per run. It reuses the exact saved input, does not repeat a model or payment call, and records a recovery event before retrying. Invalid models, invalid outputs and ordinary process errors are not retried. Only a complete validated result enters the publication gate.
+
+Recovery counts and structured exit metadata are saved with the workflow. The original failed trial input was replayed through the recovery boundary with one controlled timeout; all financial means matched the earlier completed replay. That campaign remained unprofitable and would still be rejected. Recovery does not manufacture a positive result.
 
 ## Determinism and its limits
 

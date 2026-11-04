@@ -1,7 +1,7 @@
 // One owned schema subset for Vertex tool declarations and strict runtime checks.
 // This is not a general JSON-Schema library. Unsupported types fail closed.
 import {createHash} from 'node:crypto';
-export const VERSION='commerce-harness-v2.2';
+export const VERSION='commerce-harness-v2.2.1';
 export const en=values=>({type:'STRING',enum:[...values]});
 export const textSchema={type:'STRING',minLength:1,maxLength:2200};
 export const objectSchema=properties=>({type:'OBJECT',properties,required:Object.keys(properties)});
