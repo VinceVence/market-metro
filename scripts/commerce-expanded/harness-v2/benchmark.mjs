@@ -1,6 +1,7 @@
 import {mkdir,readFile,writeFile,rename} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
+import {gzipSync} from 'node:zlib';
 import {runCoordinatedCase} from '../runner.mjs';
 import {openAllocator} from '../../commerce-deadlines/solver.mjs';
 import {openCommerceHarnessV2} from './controller.mjs';
@@ -8,12 +9,15 @@ import {read,digest} from './tools.mjs';
 import {verifyEconomy} from './trials.mjs';
 import {VERSION} from './contracts.mjs';
 
-const dir='docs/commerce-expanded/harness-v2',publicPath='demo/data/commerce-harness-v2.json';
+const typed=process.argv.includes('--typed'),study=process.argv.find(a=>a.startsWith('--study='))?.slice(8)||'v21-20261104',seedBase=Number(process.argv.find(a=>a.startsWith('--seed-base='))?.slice(12)||(typed?41873001:32764101));
+if(!/^[a-z0-9-]+$/.test(study)||!Number.isSafeInteger(seedBase)||seedBase<1||seedBase>4294967291)throw Error('INVALID_STUDY_REGISTRATION');
+const dir='docs/commerce-expanded/harness-v2'+(typed?'/'+study:''),publicPath='demo/data/commerce-harness-v2.json';
 if(!process.argv.includes('--run'))throw Error('Use --run for the pre-registered capped pilot.');
-const protocol=await verifyEconomy(),ledger=await read('.local/gcp/model-spend.json'),startUSD=ledger.entries.reduce((s,e)=>s+(e.chargedMicros??e.reservedMicros??0),0)/1e6;
+const protocol=structuredClone(await verifyEconomy()),ledger=await read('.local/gcp/model-spend.json'),startUSD=ledger.entries.reduce((s,e)=>s+(e.chargedMicros??e.reservedMicros??0),0)/1e6;
+if(typed){await mkdir(dir,{recursive:true});try{await readFile(dir+'/protocol.json');throw Error('V21_STUDY_ALREADY_REGISTERED');}catch(e){if(e.code!=='ENOENT')throw e;}protocol.confirmationCases=[];}
 if(ledger.entries.some(e=>e.status!=='settled')||startUSD+protocol.caps.pilotUSD>Math.min(50,ledger.lifetimeCapMicros/1e6))throw Error('V2_PILOT_BUDGET_UNAVAILABLE');
 if(protocol.confirmationCases.length)throw Error('V2_PILOT_ALREADY_REGISTERED');
-protocol.confirmationCases=['discovery','reactivation','low_response','zero_response'].map((regime,i)=>({id:'case-'+(i+1),seed:32764101+i,regime}));
+protocol.confirmationCases=['discovery','reactivation','low_response','zero_response'].map((regime,i)=>({id:'case-'+(i+1),seed:seedBase+i,regime}));
 protocol.version=VERSION;protocol.developmentMarket='Separate frozen development seeds at the same market size as execution';protocol.registeredAt=new Date().toISOString();protocol.status='FROZEN_BEFORE_CONFIRMATION';protocol.startModelSpendUSD=startUSD;
 protocol.arms=['fixed','single','team'];protocol.fairness={sharedTools:true,callsPerReview:6,reviews:[30,60],sameModel:'gemini-3.1-flash-lite',sameDayBoundaries:true,trialMarkets:protocol.developmentCases,modelCostChargedPerRun:true,matchedDevelopmentMarketSize:true};
 const sources=['contracts.mjs','controller.mjs','tools.mjs','trials.mjs','trial-worker.mjs','benchmark.mjs'].map(f=>'scripts/commerce-expanded/harness-v2/'+f).concat(['scripts/commerce-growth/autonomy/train-workbench.py','scripts/commerce-growth/autonomy/team-workbench-tools.mjs','scripts/commerce-growth/autonomy/features.mjs','scripts/commerce-growth/autonomy/feedback-features.mjs','scripts/commerce-growth/experiments/program.mjs','scripts/agent-mesh/model-client.mjs','docs/commerce-growth/autonomy-1/funding-training/dataset.json']);
@@ -24,12 +28,12 @@ async function save(){const json=JSON.stringify(state,null,2)+'\n';await writeFi
 const fixed=(await read('docs/commerce-growth/team-1/development/results.json')).selectedFixed,prior=await read('docs/commerce-growth/team-1/training/model.json'),allocator=openAllocator();let controller=null;
 try{
  for(const c of protocol.confirmationCases)for(const arm of protocol.arms){
-  const runId='V2-'+c.id+'-'+arm;state.current={caseId:c.id,regime:c.regime,arm,phase:arm==='fixed'?'Strong fixed control':'Fresh agent review',day:0};await save();
+  const runId=(typed?study+'-':'V2-')+c.id+'-'+arm;state.current={caseId:c.id,regime:c.regime,arm,phase:arm==='fixed'?'Strong fixed control':'Fresh agent review',day:0};await save();
   const runDir=resolve(dir,runId);await mkdir(runDir,{recursive:true});
   if(arm!=='fixed')controller=await openCommerceHarnessV2({id:runId,dir:runDir,mode:arm,prior,incumbent:fixed.config,onCheckpoint:async()=>{const summary=controller?.summary();if(summary){state.current.day=summary.lastDay;state.current.phase=summary.checkpoints.at(-1)?.actor||summary.status;state.current.calls=summary.modelCalls;state.current.costUSD=summary.modelCostUSD;}await save();}});
   const metrics=await runCoordinatedCase({seed:c.seed,regime:c.regime},arm==='fixed'?fixed:{id:runId,config:fixed.config},{allocator,prior,controller,trace:arm!=='fixed'});
   const summary=controller?.summary();await controller?.close();controller=null;
-  if(metrics.trace){await writeFile(runDir+'/trace.json',JSON.stringify(metrics.trace));delete metrics.trace;}
+  if(metrics.trace){await writeFile(runDir+'/trace.json.gz',gzipSync(JSON.stringify(metrics.trace)));delete metrics.trace;}
   const cost=summary?.modelCostUSD||0,row={...metrics,caseId:c.id,arm,platformBeforeModelUSD:metrics.platformUSD,platformUSD:metrics.platformUSD-cost,modelCostUSD:cost,modelCalls:summary?.modelCalls||0,trainingJobs:summary?.trainingJobs||0,published:summary?.publications.filter(p=>p.published).length||0,revisions:summary?.checkpoints.filter(p=>p.actor==='GEMINI'&&(p.toolName==='propose_campaign_revision'||p.output?.decision==='revise')).length||0,failed:summary?.failed||false,reviewDays:summary?.publications.map(p=>p.day)||[]};
   const reference=state.rows.find(r=>r.caseId===c.id&&r.arm==='fixed');if(reference)for(const f of ['initialHash','opportunityHash','consentHash','incomeCents'])if(row[f]!==reference[f])throw Error('V2_CONFIRMATION_INPUT_MISMATCH_'+f);
   if(cost>.25||row.modelCalls>12||row.unpaidLiabilities)throw Error('V2_RUN_BOUNDARY_FAILED');

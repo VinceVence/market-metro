@@ -40,7 +40,8 @@ export function canonicalHash(value){
 export function toolDeclaration(name,fields,evidenceId){return freeze({name,description:'Propose bounded work. The deterministic controller owns validation and final publication.',parameters:objectSchema({...fields,rationale:textSchema,evidenceId:en([evidenceId])})});}
 export function validateToolReply(reply,tools){
  const tool=tools.find(t=>t.name===reply?.name);if(!tool)throw Error('CONTRACT_UNEXPECTED_TOOL');
- validate(reply,objectSchema({name:en([tool.name]),args:tool.parameters}));return freeze(structuredClone(reply));
+ // Vertex can include a transport call ID; it is not a campaign argument.
+ validate(reply,{type:'OBJECT',properties:{name:en([tool.name]),args:tool.parameters,id:{type:'STRING',minLength:1,maxLength:256}},required:['name','args']});return freeze(structuredClone({name:reply.name,args:reply.args}));
 }
 export function marketProfileFor(view){
  if(view.audience.length===600&&view.merchants.length===12)return 'expanded-12x600';

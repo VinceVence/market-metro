@@ -29,6 +29,8 @@ test('strict nested proposals reject extra fields, coercions, unknown tools and 
  for(const bad of [{...campaign,contactsPer100:10},{...campaign,coverDays:['7']},{...campaign,productPreference:'preferred_shoppers'},{...campaign,sql:'DROP TABLE orders'},{...campaign,supplierSettlement:null}])assert.throws(()=>validate(bad,campaignSchema),/CONTRACT_INVALID/);
  const tools=[toolDeclaration('propose_campaign_trial',{campaign:campaignSchema},'known')],good={name:'propose_campaign_trial',args:{campaign,rationale:'Test the proposal.',evidenceId:'known'}};
  assert.equal(validateToolReply(good,tools).name,good.name);
+ assert.deepEqual(validateToolReply({...good,id:'call_provider_1'},tools),good);
+ assert.throws(()=>validateToolReply({...good,id:42},tools),/CONTRACT_INVALID/);
  for(const bad of [{...good,name:'publish_campaign'},{...good,args:{...good.args,evidenceId:'old'}},{...good,args:{...good.args,approved:true}},{...good,args:{...good.args,campaign:{...campaign,amount:999}}}])assert.throws(()=>validateToolReply(bad,tools),/CONTRACT_/);
 });
 

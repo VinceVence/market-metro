@@ -1,0 +1,207 @@
+{
+  "version": "commerce-harness-v2.1",
+  "status": "ABORTED",
+  "protocol": {
+    "version": "commerce-harness-v2.1",
+    "status": "FROZEN_BEFORE_CONFIRMATION",
+    "economyVersion": "commerce-expanded-1",
+    "reviewDays": [
+      30,
+      60
+    ],
+    "clock": "decision_barrier",
+    "trainingSource": "docs/commerce-growth/autonomy-1/funding-training/dataset.json",
+    "developmentCases": [
+      {
+        "seed": 2026111101,
+        "regime": "discovery"
+      },
+      {
+        "seed": 2026111102,
+        "regime": "low_response"
+      }
+    ],
+    "developmentMarket": "Separate frozen development seeds at the same market size as execution",
+    "confirmationCases": [
+      {
+        "id": "case-1",
+        "seed": 41873001,
+        "regime": "discovery"
+      },
+      {
+        "id": "case-2",
+        "seed": 41873002,
+        "regime": "reactivation"
+      },
+      {
+        "id": "case-3",
+        "seed": 41873003,
+        "regime": "low_response"
+      },
+      {
+        "id": "case-4",
+        "seed": 41873004,
+        "regime": "zero_response"
+      }
+    ],
+    "caps": {
+      "callsPerReview": 6,
+      "reviews": 2,
+      "modelUSDPerRun": 0.25,
+      "paidRuns": 8,
+      "pilotUSD": 2
+    },
+    "economyHashes": {
+      "docs/commerce-growth/contract.json": "31b6c951ceb2028a387bd7ba57173394243843e11e9098fd9f6a87753dcdb09d",
+      "scripts/commerce-growth/kernel.mjs": "3ac01579b675c4a2162f11534d108082e386d4d037d451a4ce15d5bfb9aa0993",
+      "scripts/commerce-growth/environment.mjs": "2dd15576366e38741d6dde1f2cd1bd748a8da485e815bb0d7a02e310d552a0a3",
+      "scripts/commerce-growth/policies.mjs": "0d93abb0ac9f460989002aff9a12c7e8660d62f18b16095f221ee4faedb33603",
+      "scripts/commerce-growth/evaluate.mjs": "43777de48ffa7f1df2e819288b5dd4b97f972d01c716dcee8b4b51c7d2cf522e",
+      "scripts/commerce-growth/benchmark.mjs": "e5febd0e7039fecacd7e09cbcf17f5bb0255a43a4694039a211df1adca5fa0e6",
+      "scripts/commerce-deadlines/environment.mjs": "52af591f7a5b5454448d11248e86d2e4324d9504eccf7d9525773fbfac822cec",
+      "scripts/commerce-deadlines/suppliers.mjs": "fe8fb8c471383492ea8a28e77f4e73894b7d0a87ceb835246743337a11cba682",
+      "scripts/commerce-deadlines/policies.mjs": "c1df75eac6bc1388c337b0f44dd825343479833ffc52cc6b4b49841693c81d36",
+      "scripts/commerce-deadlines/evaluate.mjs": "44456586804dde0b4d7b2d446744400f6de2b8903a1a1679c72ad2de68bdd09b",
+      "scripts/behavior-v4/catalog.mjs": "d28989a7cf1e95ec751d74e3136574d0e30886f997cfada9a295a91588fd80a8",
+      "scripts/marketing/economy.mjs": "cefe444cda73462e32a5ba5f00a4fb58803b6584fd183f41a649fbcb2e9636a1",
+      "scripts/commerce-expanded/kernel.mjs": "f2045c4660f7b17f5d5b5f3e710471f0cc48a13d24d64b21b8bf979ff5de6918",
+      "scripts/commerce-expanded/environment.mjs": "a099948a48a08ce7b92c9c916549ba2c1a5d6cb2859bb7ba4e637d84b8aa1241",
+      "scripts/commerce-expanded/commerce.mjs": "e76ed5a7171440b2f7d4ca807fcf2982392203d560574a70fc03f22c515cde6b",
+      "scripts/commerce-expanded/runner.mjs": "b1d05ee3cc7eda4cf202d8268e98c8166759eff4cd9233d1d1a00bad7e494cc4",
+      "scripts/commerce-growth/team/control.mjs": "4a76de16a8c9a4b28da0d629f3ae3f19523c947b11682c9a654d9df3b985016e"
+    },
+    "nativePayments": false,
+    "noSubagents": true,
+    "registeredAt": "2026-11-04T01:32:47.238Z",
+    "startModelSpendUSD": 5.114372,
+    "arms": [
+      "fixed",
+      "single",
+      "team"
+    ],
+    "fairness": {
+      "sharedTools": true,
+      "callsPerReview": 6,
+      "reviews": [
+        30,
+        60
+      ],
+      "sameModel": "gemini-3.1-flash-lite",
+      "sameDayBoundaries": true,
+      "trialMarkets": [
+        {
+          "seed": 2026111101,
+          "regime": "discovery"
+        },
+        {
+          "seed": 2026111102,
+          "regime": "low_response"
+        }
+      ],
+      "modelCostChargedPerRun": true,
+      "matchedDevelopmentMarketSize": true
+    },
+    "implementationHashes": {
+      "scripts/commerce-expanded/harness-v2/contracts.mjs": "df8eae0ddfc102b8a533b6b4f792ddb269306b2f43e780f5f95c9cb79f9ca11a",
+      "scripts/commerce-expanded/harness-v2/controller.mjs": "2307e3d7a6da3512069a32e63b23ccaa405771f4dddb2976aabe3372b9799f7c",
+      "scripts/commerce-expanded/harness-v2/tools.mjs": "2d227fbf364985656f11c3331bb89b7bf0d496cc5a863fada8c1551ac877a4fe",
+      "scripts/commerce-expanded/harness-v2/trials.mjs": "45b01936f511c6c17e5c7112b3d39474a72f771ffba145b6f9c87a107de2cc1e",
+      "scripts/commerce-expanded/harness-v2/trial-worker.mjs": "7cd7ff6e597bcfb7df4a67ce3039534a466b0f01aaa65486a02277065a67a6bd",
+      "scripts/commerce-expanded/harness-v2/benchmark.mjs": "a5ee2a877308f5ae7bf688be4c46bf068a333aac88b70975063e0bd8742c13d7",
+      "scripts/commerce-growth/autonomy/train-workbench.py": "f17030be63886dc6f97f248e33cc8dca3a9ca81aa96a9b5f6900f17e2eb0978f",
+      "scripts/commerce-growth/autonomy/team-workbench-tools.mjs": "f32ceb8f23ee395b010b29fc7ffb546450fd4676a2d4f60396fa88f5c472f6d8",
+      "scripts/commerce-growth/autonomy/features.mjs": "deb12b29d9f534b2beee413d8f443ed5ed9ec194068665c0dcd4122795e14959",
+      "scripts/commerce-growth/autonomy/feedback-features.mjs": "15724cbd6e55e839fd206ea2c44bc18c0bb3538f9d5ead989e2c92277497356a",
+      "scripts/commerce-growth/experiments/program.mjs": "31550fca6455652c3a9f45f2c74856cfedc7b1e226c812997b3e5b0c1c8d73d8",
+      "scripts/agent-mesh/model-client.mjs": "19f98f835d4b80587e8074cb53cfd9202c75562499e113854c4e4ea1942db8c7",
+      "docs/commerce-growth/autonomy-1/funding-training/dataset.json": "982075400720adaadaac5bfac1431f112f9fe05379e4144807b4c43f95aa44ce"
+    }
+  },
+  "rows": [
+    {
+      "seed": 41873001,
+      "regime": "discovery",
+      "policy": "fixed_cover_joint",
+      "initialHash": "71c7bebe6c7fc5aa4175c8a9a988f2ca75c1850fb0d6c73c7588fe9399f496e2",
+      "opportunityHash": "a3a1498550b99af7e1be4c01c595a64cbbb1ddcdf2533c5425e56e599ce4a2d4",
+      "consentHash": "a5aed9aadc1a889769fe0f7fd3762a73c647dccc6264ad795eda1d436c8f5e4f",
+      "incomeCents": 50304940,
+      "platformUSD": 4475.92,
+      "retailerUSD": 52930.13,
+      "wholesalerUSD": 12072.71,
+      "manufacturerUSD": 11637.9,
+      "allPartnerUSD": 76640.74,
+      "terminalCashUSD": 164518.15,
+      "terminalInventoryUSD": 4857.71,
+      "merchantContributions": {
+        "MERCHANT-0": 0,
+        "MERCHANT-1": 5850.08,
+        "MERCHANT-2": 0,
+        "MERCHANT-3": 435.29,
+        "MERCHANT-4": 12039.35,
+        "MERCHANT-5": 355.88,
+        "MERCHANT-6": 574.73,
+        "MERCHANT-7": 16844.8,
+        "MERCHANT-8": 704.4,
+        "MERCHANT-9": 465.32,
+        "MERCHANT-10": 15088.04,
+        "MERCHANT-11": 572.24
+      },
+      "purchases": 884,
+      "retainedPurchases": 855,
+      "retainedVolumeUSD": 113123,
+      "fulfilledRequests": 884,
+      "contactCount": 2252,
+      "recommendationsSent": 2252,
+      "fundedResponses": 483,
+      "attributedPurchases": 504,
+      "recommendationPurchases": 397,
+      "outreachCostUSD": 112.6,
+      "requestCount": 1266,
+      "needCount": 2470,
+      "outsidePurchases": 811,
+      "unpaidLiabilities": 0,
+      "unpaidLiabilityUSD": 0,
+      "reliability": {
+        "invariantsPassed": true,
+        "learnedPosteriorUpdates": 1,
+        "calibrationUpdates": 0,
+        "p95DecisionMs": 367.30720799999835,
+        "totalWallMs": 31463
+      },
+      "modelCostUSD": 0,
+      "marketVersion": "commerce-expanded-1",
+      "merchants": 12,
+      "shoppers": 600,
+      "normalized": {
+        "platformPer100ShoppersUSD": 745.9866666666667,
+        "retainedPurchasesPer100": 142.5,
+        "merchantContributionPerMerchantUSD": 4410.844166666667
+      },
+      "source": "EXPANDED_AUTHORED_GROWTH_SIMULATION",
+      "caseId": "case-1",
+      "arm": "fixed",
+      "platformBeforeModelUSD": 4475.92,
+      "modelCalls": 0,
+      "trainingJobs": 0,
+      "published": 0,
+      "revisions": 0,
+      "failed": false,
+      "reviewDays": []
+    }
+  ],
+  "current": {
+    "caseId": "case-1",
+    "regime": "discovery",
+    "arm": "single",
+    "phase": "TRUSTED_FALLBACK",
+    "day": 30,
+    "calls": 1,
+    "costUSD": 0.000918
+  },
+  "startedAt": "2026-11-04T01:32:47.238Z",
+  "checkpoints": {},
+  "error": "Stopped after first model reply failed strict envelope validation; financial evaluation incomplete.",
+  "costUSD": 0.000918,
+  "completedAt": "2026-11-04T01:34:07.189Z"
+}
