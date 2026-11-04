@@ -44,6 +44,10 @@ The **$88.05 net gain** reconciles to +$89.38 retail fees, +$49.26 supplier fees
 
 One illustrative shopper, BUYER-0525, received a model-ranked recommendation on displayed day 33, funded a $174 basket and received on-time delivery on day 35. That request was not captured by fixed rules. This is a post-hoc simulated example; all market-level outcomes still include displaced sales and losses. [Accounting and customer trace](commerce-expanded/harness-v2/v21-20261104-transport/first-market-proof.json).
 
+[Open the recorded market](http://127.0.0.1:4173/studio.html?session=AUTONOMY-6e0392af093abb38). Press Replay and inspect the agent team at days 31 and 61. All 126 day frames and warehouse records were rebuilt with zero new model calls; financial metrics reproduce the recorded run exactly. [Replay verification](commerce-expanded/harness-v2/v21-20261104-transport/replay.json).
+
+The shopper's **$34 merchant leg** was subsequently captured through the saved PayPal Sandbox wallet: capture `0JD4043540258600T`, fee **$1.46**, merchant proceeds **$32.54**, using fictitious funds. The **PayPal sandbox** view and `paypal_receipts` table link it to the simulated order. This sample does not add another sale to benchmark totals, and playback never repeats the payment. [Native receipt](commerce-expanded/harness-v2/v21-20261104-transport/native-receipt.json).
+
 The other three registered markets are still running. This result does not yet establish repeatability or prove that multiple roles are necessary. Model usage for the team in this market was $0.025926, calculated from provider token usage rather than a cloud billing invoice.
 
 ## Submission boundary

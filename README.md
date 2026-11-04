@@ -15,6 +15,8 @@ npm run dev -- --no-recover
 
 Open [the workspace](http://127.0.0.1:4173/studio.html). **New live run** opens settings. The default is **V2, 12 merchants and 600 shoppers**. Existing V1 sessions and the original 3-store economy remain available.
 
+For the recorded submission example, run `node scripts/commerce-expanded/harness-v2/replay.mjs` after setup. It imports the measured campaign into the same market and warehouse, verifies the original financial totals and prints the demo URL. Playback makes no model or payment calls. The UI distinguishes recorded Gemini decisions from a fresh run. [Submission evidence and walkthrough](docs/submission-candidate.md).
+
 ## V2.1 workflow
 
 [Typed execution contracts](docs/commerce-expanded/harness-v2/typed-execution.md) validate every proposal. The LLM chooses experiments; deterministic code owns the final publish/retain decision. No new runtime dependency is required.
