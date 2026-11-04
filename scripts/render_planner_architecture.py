@@ -1,4 +1,4 @@
-"""Draw the implemented V2.3 planner architecture as documentation-style planes.
+"""Draw the implemented V2.3 workflow beside an actual recorded environment capture.
 
 Uses local evidence only. No model, payment, or other runtime API calls.
 Artifact-only dependencies: reportlab, svglib, pypdfium2.
@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs/figures/planner-v23"
 STUDY = ROOT / "docs/commerce-expanded/harness-v2/v23-20261104"
 PDF = ROOT / "output/pdf/market-metro-planner-v23.pdf"
-W, H = 1800, 1000
+W, H = 2400, 1470
 NAVY, BLUE, PURPLE, GREEN = "#102f49", "#0070e0", "#7955be", "#087f71"
 MUTED, LINE, RED = "#566d81", "#d7e1ea", "#b23f49"
 FONT = ROOT / "demo/assets/fonts"
@@ -78,6 +78,10 @@ class Figure:
         fill = color or node.attrib.get("fill", "#000000")
         self.add(f'<g transform="translate({x},{y}) scale({size/box[2]})" fill="{fill}">{inner}</g>')
 
+    def photo(self, path, x, y, w, h):
+        data=base64.b64encode(path.read_bytes()).decode()
+        self.add(f'<image x="{x}" y="{y}" width="{w}" height="{h}" preserveAspectRatio="xMidYMid meet" xlink:href="data:image/png;base64,{data}"/>')
+
     def save(self, name):
         css = []
         for family,weight in [("DMSans",400),("DMSans-Bold",700)]:
@@ -89,100 +93,144 @@ class Figure:
 
 
 def architecture():
-    f=Figure("Market Metro: planner–environment architecture")
-    ink,edge,accent="#253346","#74818e","#315e8c"
+    f=Figure("Market Metro: the agent–environment workflow")
+    ink,edge,accent="#253346","#7f8d9b","#315e8c"
+    snapshot=json.loads((OUT/"assets/environment-snapshot.json").read_text())
+    evidence=json.loads((OUT/"assets/diagram-evidence.json").read_text())
 
     def plane(x,y,w,h,letter,title):
-        f.rect(x,y,w,h,"#fafbfc","#aeb8c2",radius=1,width=1.4)
-        f.text(x+16,y+27,letter+". "+title,18,ink,True,max_width=w-32)
+        f.rect(x,y,w,h,"#fafbfc","#b4c0cd",radius=6,width=1.5)
+        f.text(x+26,y+44,letter+". "+title,26,ink,True,max_width=w-52)
 
-    def glyph(kind,x,y,size=26):
+    def chip(x,y,w,label):
+        f.rect(x,y,w,37,"#edf2f7",radius=4)
+        f.text(x+w/2,y+25,label,18,MUTED,align="middle",max_width=w-12)
+
+    def glyph(kind,x,y,size=36,color=ink):
         marks={
-          "state":'<rect x="2" y="3" width="28" height="26" rx="1"/><path d="M2 11 H30 M11 11 V29 M21 11 V29 M2 20 H30"/>',
-          "events":'<path d="M4 4 H23 L29 10 V29 H4Z M23 4 V10 H29 M9 15 H23 M9 20 H23 M9 25 H18"/>',
-          "ledger":'<path d="M3 5 H14 Q16 5 16 8 Q16 5 19 5 H29 V28 H19 Q16 28 16 30 Q16 28 13 28 H3Z M16 8 V28 M7 11 H12 M7 17 H12 M21 11 H25 M21 17 H25"/>',
-          "query":'<rect x="3" y="3" width="19" height="24"/><path d="M7 9 H17 M7 14 H15"/><circle cx="21" cy="21" r="7"/><path d="M26 26 L31 31"/>',
-          "analysis":'<path d="M3 3 V29 H31 M8 25 V18 H13 V25 M18 25 V12 H23 V25 M27 25 V6 H31"/>',
-          "trial":'<rect x="3" y="3" width="10" height="10"/><rect x="19" y="3" width="10" height="10"/><path d="M8 13 V20 H24 V13 M16 20 V26"/><path d="M11 26 L15 30 L23 23"/>',
+          "trend":'<path d="M3 3 V29 H31 M7 23 L13 16 L19 19 L29 7"/><circle cx="13" cy="16" r="1.5"/><circle cx="29" cy="7" r="1.5"/>',
+          "trial":'<rect x="2" y="3" width="10" height="9"/><rect x="20" y="3" width="10" height="9"/><path d="M7 12 V19 H25 V12 M16 19 V25"/><path d="M11 25 L15 29 L23 22"/>',
           "gate":'<path d="M16 2 L30 16 L16 30 L2 16Z M9 16 L14 21 L23 11"/>',
           "file":'<path d="M6 2 H23 L29 8 V30 H6Z M23 2 V8 H29 M11 14 H23 M11 19 H23 M11 24 H19"/>',
           "wallet":'<rect x="2" y="8" width="28" height="21" rx="2"/><path d="M4 8 L25 2 V8"/><rect x="21" y="15" width="11" height="8" rx="1"/><circle cx="25" cy="19" r="1"/>',
+          "api":'<rect x="2" y="3" width="28" height="26" rx="2"/><path d="M12 11 L7 16 L12 21 M20 11 L25 16 L20 21"/>'
         }
-        f.add(f'<g transform="translate({x},{y}) scale({size/32})" fill="none" stroke="{ink}" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">{marks[kind]}</g>')
+        f.add(f'<g transform="translate({x},{y}) scale({size/32})" fill="none" stroke="{color}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">{marks[kind]}</g>')
 
-    def module(x,y,w,h,title,icon=None,logo=None,size=20):
-        f.rect(x,y,w,h,"#ffffff","#b8c2cc",radius=2,width=1.3)
-        if logo:f.logo(logo,x+14,y+(h-28)/2,28)
-        elif icon:glyph(icon,x+14,y+(h-28)/2,28)
-        f.text(x+56,y+h/2+7,title,size,ink,bold=True,max_width=w-70)
+    def numbered(x,y,n,label,color=accent):
+        f.add(f'<circle cx="{x}" cy="{y}" r="16" fill="{color}"/>')
+        f.text(x,y+6,str(n),18,"white",True,align="middle")
+        f.text(x,y+45,label,21,color,True,align="middle")
 
-    plane(50,115,1700,145,"A","Environment plane")
-    module(100,168,360,62,"Seeded market state",icon="state")
-    module(665,168,400,62,"Orders and fulfillment",icon="events")
-    module(1270,168,430,62,"Modeled payment ledger",icon="ledger")
-    f.arrow([(460,199),(665,199)],edge,2)
-    f.arrow([(1065,199),(1270,199)],edge,2)
+    plane(60,140,1040,760,"A","Environment plane")
+    f.text(1072,184,"Market Metro",21,MUTED,align="end")
+    f.rect(85,235,990,593,"#102541",radius=3)
+    f.photo(OUT/"assets/environment-snapshot.png",85,235,990,593)
+    chip(87,848,260,"12 merchants")
+    chip(362,848,260,"600 simulated shoppers")
+    chip(637,848,436,"Actual saved-run snapshot · "+snapshot["displayedDay"])
 
-    plane(50,320,480,250,"B","Data plane")
-    module(75,390,430,65,"Observed state",icon="query")
-    module(75,475,430,65,"Warehouse / AG Studio",logo="sqlite")
-    f.arrow([(225,260),(225,320)],edge,2)
-    f.text(245,298,"events",15,MUTED)
+    plane(1310,140,1030,760,"B","Agent plane")
+    f.text(2312,184,"LLM + trusted local tools",21,MUTED,align="end")
+    f.rect(1570,250,530,126,"#ffffff","#aeb9c6",radius=8,width=1.5)
+    f.logo("gemini",1593,278,53,"#3f5d88")
+    f.text(1668,303,"Gemini planner",29,ink,True)
+    f.text(1668,344,"Choose experiments and campaigns",20,MUTED,max_width=400)
+    f.logo("google-cloud",2050,277,29)
 
-    plane(610,320,500,250,"C","Planner plane")
-    module(660,390,400,65,"Gemini planner",logo="gemini")
-    f.logo("google-cloud",1019,409,23)
-    module(660,490,400,50,"Review history / checkpoints",icon="file",size=18)
-    f.arrow([(780,455),(780,490)],edge,1.8)
-    f.arrow([(505,423),(660,423)],edge,2)
-    f.text(569,406,"snapshot",15,MUTED,align="middle")
+    f.add('<rect x="1340" y="440" width="970" height="370" rx="6" fill="#f3f6fa" stroke="#a8b7c6" stroke-width="1.5" stroke-dasharray="7 5"/>')
+    f.text(1830,471,"EXPERIMENT SANDBOX",18,MUTED,True,align="middle")
+    f.arrow([(1720,376),(1720,440)],accent,2.5)
+    f.text(1702,414,"tool calls",18,accent,align="end")
+    f.arrow([(1980,440),(1980,376)],accent,2.5)
+    f.text(2002,414,"results",18,accent)
 
-    plane(1200,320,550,250,"D","Tools and execution plane")
-    module(1225,390,140,65,"Analyze",icon="analysis",size=18)
-    f.rect(1380,390,160,65,"#fff","#b8c2cc",radius=2,width=1.3)
-    f.logo("python",1392,410,23)
-    f.logo("scikit-learn",1420,404,35)
-    f.text(1467,429,"Train",19,ink,True)
-    module(1555,390,170,65,"Test",icon="trial",size=19)
-    module(1225,485,500,55,"Validate → publish / retain",icon="gate",size=19)
-    f.arrow([(1365,422),(1380,422)],edge,1.5)
-    f.arrow([(1540,422),(1555,422)],edge,1.5)
-    f.arrow([(1640,455),(1640,485)],edge,1.6)
-    f.arrow([(1060,423),(1200,423)],accent,2.2)
-    f.text(1155,406,"proposal",15,accent,align="middle")
-    f.arrow([(1200,530),(1085,530),(1085,471),(880,471),(880,455)],accent,2.2)
-    f.text(1155,552,"tool results",15,accent,align="middle")
-    f.arrow([(1725,512),(1737,512),(1737,289),(900,289),(900,260)],accent,2)
-    f.text(1315,280,"admitted policy",15,accent,align="middle")
+    for x in [1370,1685,2000]:
+        f.rect(x,505,280,116,"white","#c0cbd6",radius=5,width=1.2)
+    glyph("trend",1392,530,39)
+    f.text(1452,548,"Analyze",25,ink,True)
+    f.text(1452,585,"Observed demand",19,MUTED)
+    f.logo("python",1705,530,34);f.logo("scikit-learn",1746,524,49)
+    f.text(1810,548,"Train",25,ink,True)
+    f.text(1711,585,"Fit local models",19,MUTED)
+    glyph("trial",2022,528,40)
+    f.text(2081,548,"Evaluate",25,ink,True)
+    f.text(2081,585,"Paired policy trials",19,MUTED,max_width=200)
+    f.arrow([(1650,563),(1685,563)],edge,1.5)
+    f.arrow([(1965,563),(2000,563)],edge,1.5)
+    f.arrow([(2140,621),(2140,682)],edge,2)
+    f.rect(1390,682,870,76,"#ffffff","#aebbc8",radius=5,width=1.4)
+    glyph("gate",1413,704,34,accent)
+    f.text(1471,729,"Validate → publish or retain",27,ink,True)
+    f.text(2236,729,"trusted code",19,MUTED,align="end")
+    f.text(1830,788,"Test candidate policies before changing the live market.",19,MUTED,align="middle")
+    f.text(1340,858,"Development trials feed the planner; final benchmarks stay separate.",19,MUTED,max_width=950)
 
-    plane(50,650,1060,250,"E","PayPal Sandbox plane")
-    f.logo("paypal",1039,666,30)
-    module(100,744,240,72,"Wallet token",icon="wallet",size=19)
-    module(410,744,270,72,"Orders / capture",icon="events",size=19)
-    module(750,744,300,72,"Receipt verification",icon="file",size=19)
-    f.arrow([(340,780),(410,780)],accent,2,dashed=True)
-    f.arrow([(680,780),(750,780)],edge,2)
-    f.arrow([(225,540),(225,610),(545,610),(545,744)],accent,2,dashed=True)
-    f.text(373,632,"selected order",15,accent,align="middle")
-    f.arrow([(1050,780),(1080,780),(1080,600),(430,600),(430,540)],edge,2)
-    f.text(915,592,"receipt",15,MUTED)
+    f.arrow([(1100,330),(1310,330),(1570,330)],accent,3)
+    numbered(1205,266,1,"Observe")
+    f.arrow([(1390,720),(1310,720),(1100,720)],accent,3)
+    numbered(1205,656,2,"Campaign")
 
-    plane(1200,650,550,250,"F","Evaluation plane")
-    for x,title in [(1225,"Fixed"),(1394,"Planner"),(1563,"Team")]:
-        f.rect(x,727,142,48,"white","#b8c2cc",radius=2,width=1.3)
-        f.text(x+71,758,title,19,ink,True,align="middle")
-    f.line(1296,775,1296,798,edge,1.5)
-    f.line(1296,798,1634,798,edge,1.5)
-    f.line(1634,775,1634,798,edge,1.5)
-    f.arrow([(1465,775),(1465,821)],edge,1.8)
-    module(1225,822,480,53,"Matched-seed comparison",icon="analysis",size=19)
-    f.arrow([(1750,199),(1777,199),(1777,777),(1750,777)],edge,1.8)
+    plane(60,1030,1040,330,"C","Data plane")
+    f.logo("sqlite",89,1113,40)
+    f.text(145,1144,"Warehouse",24,ink,True)
+    f.text(145,1175,"AG Studio",18,MUTED)
+    tx=340
+    for x,title,align in [(tx,"Order","start"),(tx+175,"Merchant","start"),(tx+445,"USD","end")]:
+        f.text(x,1128,title,18,MUTED,True,align=align)
+    f.line(tx,1144,tx+470,1144,"#ccd5df",1)
+    for i,row in enumerate(evidence["orders"]):
+        y=1184+i*57
+        if i==0:f.rect(tx-10,y-29,490,42,"#e9f1fa",radius=3)
+        order=row["order_id"].split("-SIM-CAPTURE-")[1].split("-MERCHANT-")[0]
+        merchant=row["shortMerchant"].replace("MERCHANT-","M")
+        f.text(tx,y,"#"+order,21,ink,True if i==0 else False)
+        f.text(tx+175,y,merchant,21,ink)
+        f.text(tx+445,y,"$"+format(row["total_cents"]/100,".2f"),21,accent if i==0 else ink,True if i==0 else False,align="end")
+    f.line(850,1110,850,1315,"#d1dae3",1)
+    glyph("file",914,1115,45)
+    f.text(969,1148,"Artifacts",23,ink,True)
+    f.text(900,1200,"Models",21,MUTED)
+    f.text(900,1240,"Checkpoints",21,MUTED)
+    f.text(900,1280,"Decision logs",21,MUTED)
 
-    for x,title,color,dashed in [(52,"Observed data / execution",edge,False),(600,"Planner–tool interaction",accent,False),(1150,"Native Sandbox sample",accent,True)]:
-        f.arrow([(x,953),(x+37,953)],color,1.8,dashed=dashed)
-        f.text(x+53,958,title,16,MUTED)
-    f.text(1750,958,"4 NOV 2026",14,MUTED,align="end")
+    f.arrow([(520,900),(520,1030)],edge,2.5)
+    f.text(545,975,"orders + outcomes",20,MUTED)
+    f.arrow([(1810,900),(1810,959),(960,959),(960,1030)],edge,2.5)
+    f.text(1430,947,"models + checkpoints",20,MUTED,align="middle")
+
+    plane(1310,1030,1030,330,"D","PayPal Sandbox plane")
+    f.logo("paypal",1342,1125,72)
+    glyph("wallet",1471,1127,34)
+    f.text(1525,1153,"Saved wallet",23,ink,True)
+    f.arrow([(1630,1170),(1630,1204)],accent,2,dashed=True)
+    glyph("api",1471,1213,35)
+    f.text(1525,1241,"Orders + capture",23,ink,True)
+    f.arrow([(1768,1230),(1928,1230)],accent,2.5)
+    f.text(1435,1317,"One selected order · fictitious funds",19,MUTED)
+
+    r=evidence["receipt"]
+    f.rect(1940,1097,360,231,"white","#b9c5d1",radius=4,width=1.3)
+    f.text(1961,1130,"VERIFIED RECEIPT",20,accent,True)
+    f.line(1960,1145,2280,1145,"#d6dee6",1)
+    for y,label,key in [(1184,"Amount","gross_cents"),(1232,"Fee","fee_cents"),(1280,"Net","net_cents")]:
+        f.text(1961,y,label,21,MUTED)
+        f.text(2278,y,"$"+format(r[key]/100,".2f"),24,ink,True,align="end")
+
+    f.arrow([(1100,1186),(1310,1186)],accent,2.5,dashed=True)
+    f.text(1205,1161,"selected order",18,accent,align="middle")
+    f.arrow([(1310,1290),(1100,1290)],edge,2.5)
+    f.text(1205,1321,"verified receipt",18,MUTED,align="middle")
+
+    f.text(60,1420,"Actual recorded environment. Vector workflow and logos. Native receipts are linked samples, not extra simulated sales.",20,MUTED,max_width=2110)
+    f.text(2340,1420,"4 NOV 2026",18,MUTED,align="end")
     return f.save("system-architecture")
+
+def snapshot_manifest():
+    p=OUT/"assets/environment-snapshot.png"
+    metadata=json.loads((OUT/"assets/environment-snapshot.json").read_text())
+    assert hashlib.sha256(p.read_bytes()).hexdigest()==metadata["sha256"]
+    return {"file":str(p.relative_to(ROOT)),"sha256":metadata["sha256"],"session":metadata["recordedSession"],"day":metadata["displayedDay"]}
 
 def main():
     OUT.mkdir(parents=True,exist_ok=True)
@@ -209,11 +257,11 @@ def main():
              "scripts/commerce-expanded/harness-v2/trials.mjs","scripts/commerce-expanded/runner.mjs",
              "scripts/commerce-growth/autonomy/live.mjs","scripts/market-store.mjs","scripts/market-service.mjs",
              "scripts/agent-mesh/model-client.mjs",str((STUDY/"results.json").relative_to(ROOT)),
-             str((STUDY/"protocol.json").relative_to(ROOT))]
+             str((STUDY/"protocol.json").relative_to(ROOT)),str((STUDY/"native-receipt.json").relative_to(ROOT)),str((OUT/"assets/diagram-evidence.json").relative_to(ROOT)),str((OUT/"assets/environment-snapshot.json").relative_to(ROOT))]
     manifest={"asOf":"2026-11-04","version":result["version"],"sourceHashes":{p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in sources},
               "figures":[str(p.relative_to(ROOT)) for p in svgs],"pdf":str(PDF.relative_to(ROOT)),
-              "scope":"Implemented environment, data, planner, tool/execution, PayPal Sandbox and evaluation planes. Logical responsibilities, not independently deployed services.",
-              "newModelCalls":0,"newPayments":0}
+              "scope":"Actual environment snapshot beside the LLM/tool plane, with a nested experiment sandbox and data/PayPal planes below. Final held-out benchmarks remain outside planner feedback.",
+              "newModelCalls":0,"newPayments":0,"snapshot":snapshot_manifest()}
     (OUT/"manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
     print(json.dumps({"figures":[str(p) for p in svgs],"pdf":str(PDF)}))
 

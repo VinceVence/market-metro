@@ -6,7 +6,7 @@
 
 ## What each role actually does
 
-[System architecture by plane](figures/planner-v23/README.md) provides an editable SVG, PNG preview and a single-page vector PDF.
+[System architecture by plane](figures/planner-v23/README.md) shows the actual recorded environment beside the agent workflow, with editable SVG, PNG preview and a single-page PDF.
 
 | Role | Observed input | Decision | Executed by trusted code |
 |---|---|---|---|

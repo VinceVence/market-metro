@@ -21,7 +21,7 @@ For the recorded submission example, run `node scripts/commerce-expanded/harness
 
 ## V2.3 workflow
 
-[System architecture by plane](docs/figures/planner-v23/README.md) show the environment, planner, numerical tools, publication guard, checkpoints, PayPal bridge and evaluation using vector logos and source-linked evidence.
+[System architecture by plane](docs/figures/planner-v23/README.md) shows the actual environment beside the planner and experiment sandbox, with data and PayPal beneath them. The capture and receipt values are linked to saved evidence.
 
 [Typed execution contracts](docs/commerce-expanded/harness-v2/typed-execution.md) validate every proposal. The LLM chooses experiments; deterministic code owns the final publish/retain decision. No new runtime dependency is required.
 
