@@ -1,14 +1,14 @@
 // One owned schema subset for Vertex tool declarations and strict runtime checks.
 // This is not a general JSON-Schema library. Unsupported types fail closed.
 import {createHash} from 'node:crypto';
-export const VERSION='commerce-harness-v2.1';
+export const VERSION='commerce-harness-v2.2';
 export const en=values=>({type:'STRING',enum:[...values]});
 export const textSchema={type:'STRING',minLength:1,maxLength:2200};
 export const objectSchema=properties=>({type:'OBJECT',properties,required:Object.keys(properties)});
 const sha={type:'STRING',pattern:'^[a-f0-9]{64}$'};
 export const contextSchema=objectSchema({day:{type:'INTEGER',minimum:0,maximum:365},marketProfile:en(['frozen-3x100','expanded-12x600']),snapshotHash:sha});
 export const campaignSchema=freeze(objectSchema({
- kind:en(['product_recommendations','intent_assistance','ranked_discovery','reactivation','open_discovery','hold']),
+ kind:{...en(['product_recommendations','intent_assistance','ranked_discovery','reactivation','open_discovery','hold']),description:'product_recommendations: SKU recommendations only. intent_assistance: recommendations plus general inquiries for recent non-search interest. ranked_discovery: both for recent interest. reactivation: returning shoppers inactive for 14 days. open_discovery: also consider consented general inquiries without recent product interest, only when modeled value is positive. hold: no outreach; organic shopping continues.'},
  objective:en(['paypal','joint']),contactsPer100:en(['3','6','10']),forecast:en(['recent7','recent14','adaptive']),coverDays:en(['0','3','7']),
  supplierSettlement:{...en(['paypal_fast','allow_bank_delay']),description:'Supplier payment rail. Bank settlement can add delay; this is not shopper targeting.'},
  productPreference:{...en(['lowest_acceptable_price','requested_preference']),description:'Which acceptable PRODUCT to replenish. This never selects preferred shoppers.'}
@@ -49,7 +49,7 @@ export function marketProfileFor(view){
  throw Error('CONTRACT_UNSUPPORTED_MARKET');
 }
 const amount={type:'NUMBER'},count={type:'NUMBER',minimum:0};
-const measurementSchema=objectSchema({platformUSD:amount,retailerUSD:amount,retainedPurchases:count,platformDeltaUSD:amount,retailerDeltaUSD:amount,purchaseDelta:amount,unpaidLiabilities:{type:'INTEGER',minimum:0}});
+const measurementSchema=objectSchema({platformUSD:amount,retailerUSD:amount,retainedPurchases:count,platformDeltaUSD:amount,retailerDeltaUSD:amount,purchaseDelta:amount,unpaidLiabilities:{type:'INTEGER',minimum:0},retainedVolumeUSD:count,volumeDeltaUSD:amount,partnerCashDeltaUSD:amount,inventoryRatio:{...count,nullable:true},contactCount:count,contactDelta:amount,outreachCostUSD:count,outreachCostDeltaUSD:amount});
 const receiptSchema=objectSchema({
  contractHash:{type:'STRING',pattern:'^(FIXED|[a-f0-9]{64})$'},modelHash:{...sha,nullable:true},trialHash:sha,
  evaluationContextHash:sha,reviewContextHash:sha,prefixHash:sha,measurement:measurementSchema,

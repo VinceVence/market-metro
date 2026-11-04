@@ -1,6 +1,8 @@
 # Commerce harness V2
 
-**Current implementation: [V2.1 typed execution](typed-execution.md).** Strict shared schemas and deterministic final selection replace the LLM's publish/retain choice. New development trials match the live market size. The historical comparison below predates these changes and has not been relabeled. The separately registered [4 November V2.1 comparison](v21-20261104-transport/README.md) is complete: mean PayPal net +$26.22 after AI, merchant contribution +$218.73, but four failed AI workflows and a merchant loss in the zero-response case. Those limitations remain part of the result.
+**Current implementation: [V2.2 typed execution](typed-execution.md).** It adds bounded recovery, experiment memory, a supply-preserved comparison, cash/volume/inventory checks and a no-response development case. Pro handles campaign revision; both AI approaches use the same routing. The [new four-seed study](v22-20261104/protocol.json) is running and must finish before a financial claim. The historical comparison below has not been relabeled.
+
+The [4 November V2.1 comparison](v21-20261104-transport/README.md) remains available: mean PayPal net +$26.22 after AI and merchant contribution +$218.73, with four failed AI workflows and a merchant loss in the zero-response case. Its recorded market and native receipt are preserved.
 
 V2 is implemented in the live app. Economic dates pause at review boundaries; the analyst can query demand, the scientist trains two local candidates, and the commerce manager tests and revises a hash-bound campaign. The verifier retains the existing policy if financial or model checks fail.
 

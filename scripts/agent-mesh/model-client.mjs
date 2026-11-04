@@ -8,7 +8,7 @@ const ROOT=resolve(import.meta.dirname,'../..');
 export const TEAM_MODEL_ROUTES=Object.freeze({lite:'Flash-Lite for all roles',hybrid:'Flash-Lite investigator; Gemini3.1 Pro campaign scientist and reviewer',research:'Gemini3.1 Pro for dataset contracts, model selection and economic review; Flash-Lite for evidence queries and campaign proposals'});
 export function profileFor(route,tool){
   if(!Object.hasOwn(TEAM_MODEL_ROUTES,route))throw Error('INVALID_TEAM_MODEL_ROUTE');
-  return route==='hybrid'&&['propose_policy','review_policy','close_experiment'].includes(tool)||route==='research'&&['prepare_training_data','select_model','select_economic_policy'].includes(tool)?'pro':'flash_lite';
+  return route==='hybrid'&&['propose_policy','review_policy','close_experiment','propose_campaign_revision'].includes(tool)||route==='research'&&['prepare_training_data','select_model','select_economic_policy'].includes(tool)?'pro':'flash_lite';
 }
 export function capTeamLedger(ledger,{capMicros=250000,maxCalls=18,model}={}){
   return {...ledger,async reserve(metadata){

@@ -1,6 +1,8 @@
-# V2.1: proposals from the LLM, execution decisions from code
+# V2.2: proposals from the LLM, execution decisions from code
 
 The LLM proposes analysis, model experiments and campaigns. It has **no publish tool**. A deterministic controller chooses which tested campaign can run.
+
+V2.2 retains the V2.1 comparison and recorded demo. Its new financial study uses separately registered seeds; implementation improvements alone are not a profit claim.
 
 ```text
 Observed snapshot → LLM proposal → strict contract validation
@@ -15,7 +17,7 @@ Observed snapshot → LLM proposal → strict contract validation
 |---|---|
 | Structure | Required fields, exact types and enum values, nested fields, text bounds and evidence references. Unknown fields and implicit coercions are rejected. |
 | Evidence and meaning | Product preference is distinct from shopper targeting. Model bytes, campaign, review date, snapshot, market size, prior policy and trial context must match. Pending outcomes are excluded from the retention-rate denominator. |
-| Business rules | Model validation and measured PayPal, merchant, purchase and liability checks must pass. Valid JSON alone never authorizes publication. |
+| Business rules | Model validation and measured PayPal, merchant, purchase, retained-volume, partner-cash, inventory and liability checks must pass. Valid JSON alone never authorizes publication. |
 
 The orchestrator is JavaScript. `contracts.mjs` provides the same boundary-validation role that strict Pydantic models would provide in Python, without adding a second runtime or a dependency. The same owned schemas generate model tool declarations and validate replies locally. This is a deliberately limited validator for these contracts, not a general JSON-Schema implementation.
 
@@ -39,16 +41,24 @@ Numeric enum strings are the wire format. Only those validated values are conver
 
 ## Final authority
 
-After the first trial, the LLM may call `propose_campaign_revision` or `finish_review`. Finishing the search is not a veto. The controller considers the initial and any valid revised candidate, applies the same guards, and selects by:
+After the first trial, the LLM may call `propose_campaign_revision` or `finish_review`. When the initial proposal also changes supply, code tests the same learned campaign with incumbent supply settings preserved. This isolates the contribution of the supply change. Finishing the search is not a veto. The controller considers the initial, supply-preserved and any valid revised candidate, applies the same guards, and selects by:
 
 1. Highest measured modeled PayPal contribution.
 2. Then merchant contribution.
 3. Then retained purchases.
 4. Then canonical contract hash for a stable tie-break.
 
-If no candidate qualifies, code retains the incumbent. A worse revision cannot discard a better eligible initial candidate. A rejected optional revision leaves the completed initial trial available; uncertain model calls are not retried. The checkpoint records the controller's authority, every candidate's checks, and the selected evidence hashes.
+If no candidate qualifies, code retains the incumbent. A worse revision cannot discard a better eligible initial candidate. An unchanged proposal reuses its existing trial; it does not fail the entire workflow. A rejected optional revision leaves completed trials available. The checkpoint records the controller's authority, every candidate's checks, and the selected evidence hashes.
 
-Development trials now use the execution market's size: 600 shoppers/12 merchants or 100/3. They still use separate development seeds, never future outcomes from the active market. Cache identities include the market profile, evaluator sources, controls and prior inputs. Trial records are checksummed; mismatched, changed or non-finite evidence is rejected. These hashes detect changes and bind artifacts—they are not cryptographic authentication against someone who controls the host filesystem.
+Development trials use the execution market's size: 600 shoppers/12 merchants or 100/3. The three separate development seeds cover discovery, low response and no response; active-market future is never exposed. Two bounded local CPU workers execute trials, with financial/input parity checked against sequential execution. They are numerical workers, not additional model agents. Cache identities include the market profile, evaluator sources, controls and prior inputs. Trial records are checksummed; mismatched, changed or non-finite evidence is rejected. These hashes detect changes and bind artifacts—they are not cryptographic authentication against someone who controls the host filesystem.
+
+## Roles, memory and bounded recovery
+
+The analyst owns the demand hypothesis and feature handoff; the scientist owns model experiments and validation; the manager owns campaign economics. Each receives its role brief plus shared measured artifacts. The single-planner comparator receives all three role briefs and the same tools, limits and evidence. This tests a division of work, not a claim that more personas automatically improve outcomes.
+
+Each review sees the exact active policy, observed response counts and earlier experiment results. Model summaries retain contact-type metrics and source-market validation gaps; full reports remain saved. Flash-Lite handles analysis and model selection. Pro handles the final campaign revision. Local fitting supports forests, logistic regression, response-hurdle models and shallow gradient boosting.
+
+Only definitive HTTP 429/500/502/503/504 rejections with a matching recorded rejection event are retryable. The same evidence is reused, each retry obtains a new spend reservation, and no commerce action has executed at that stage. There is at most one retry per decision and two per run. Timeouts, uncertain billing, invalid tool output and permission errors are not retried. Limits remain six decision stages per review, two reviews, fourteen total provider attempts and $0.25 per run.
 
 ## Determinism and its limits
 
@@ -58,7 +68,7 @@ Development trials now use the execution market's size: 600 shoppers/12 merchant
 - Review dates pause while work runs. Checkpoints preserve proposals, results and rejection reasons. Server restart still marks uncertain runs interrupted; this is not a new automatic crash-resume engine.
 - Fresh LLM output can differ. Training/solver reproducibility requires pinned runtimes. External PayPal responses remain external state; the existing idempotency and receipt reconciliation boundaries still apply.
 
-**This guarantees controlled execution, not profitable recommendations.** It does not remove simulation assumptions, selection bias or prediction error. The saved four-seed financial comparison is the earlier V2 run and is not evidence of a V2.1 improvement.
+**This guarantees controlled execution, not profitable recommendations.** It does not remove simulation assumptions, selection bias or prediction error. The saved V2 and V2.1 studies remain separately labeled; they are not evidence of a V2.2 improvement.
 
 ## Verification
 

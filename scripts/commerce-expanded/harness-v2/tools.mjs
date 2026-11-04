@@ -13,7 +13,7 @@ import {VERSION,campaignSchema,contextSchema,validate,freeze,canonicalHash,marke
 export {digest,datasetOverview,inspectDemand};
 export const read=async p=>JSON.parse(await readFile(p,'utf8'));
 export const FEATURES=['existing','intent_context','market_feedback'];
-export const FAMILIES=['forest','logistic','response_hurdle'];
+export const FAMILIES=['forest','logistic','response_hurdle','boosted'];
 export const KINDS=campaignSchema.properties.kind.enum;
 
 export function inputFeatures(view,c,fields,history=null){

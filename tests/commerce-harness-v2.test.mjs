@@ -8,7 +8,8 @@ import {createAutonomyRoom} from '../scripts/commerce-growth/autonomy/live.mjs';
 import {matureOwnRows,compileCampaign,digest,read,inspectCurrent} from '../scripts/commerce-expanded/harness-v2/tools.mjs';
 import {publicationGate,selectPublication} from '../scripts/commerce-expanded/harness-v2/trials.mjs';
 import {campaignSchema,validate,toolDeclaration,validateToolReply,canonicalHash,sealTrialReceipt} from '../scripts/commerce-expanded/harness-v2/contracts.mjs';
-import {openCommerceHarnessV2} from '../scripts/commerce-expanded/harness-v2/controller.mjs';
+import {openCommerceHarnessV2,retryableModelFailure} from '../scripts/commerce-expanded/harness-v2/controller.mjs';
+import {profileFor} from '../scripts/agent-mesh/model-client.mjs';
 import {createGrowthWorld,observeGrowthWorld} from '../scripts/commerce-expanded/environment.mjs';
 
 test('v2 maturity keeps late-funded purchases and excludes unresolved labels',()=>{
@@ -22,7 +23,7 @@ test('v2 maturity keeps late-funded purchases and excludes unresolved labels',()
 const context={day:30,marketProfile:'expanded-12x600',snapshotHash:canonicalHash('snapshot')};
 const campaign={kind:'intent_assistance',objective:'joint',contactsPer100:'10',forecast:'recent14',coverDays:'7',supplierSettlement:'paypal_fast',productPreference:'lowest_acceptable_price'};
 function receipt(contract,model,measurement,ctx=context,prefix=[]){return sealTrialReceipt({contractHash:contract?.hash||'FIXED',modelHash:model?.modelHash||null,trialHash:canonicalHash({contract:contract?.hash,measurement}),evaluationContextHash:canonicalHash('test-evaluator'),reviewContextHash:canonicalHash(ctx),prefixHash:canonicalHash(prefix),measurement,cases:[{regime:'test',platformDeltaUSD:measurement.platformDeltaUSD,retailerDeltaUSD:measurement.retailerDeltaUSD,purchaseDelta:measurement.purchaseDelta}],scope:'Offline fixture; no profit claim.',activeMarketFutureUsed:false,source:'LOCAL_TRUSTED_EVALUATOR'});}
-const measurement=g=>({platformUSD:100+g,retailerUSD:1000+g,retainedPurchases:20+Math.sign(g),platformDeltaUSD:g,retailerDeltaUSD:g,purchaseDelta:Math.sign(g),unpaidLiabilities:0});
+const measurement=g=>({platformUSD:100+g,retailerUSD:1000+g,retainedPurchases:20+Math.sign(g),platformDeltaUSD:g,retailerDeltaUSD:g,purchaseDelta:Math.sign(g),unpaidLiabilities:0,retainedVolumeUSD:1000+g,volumeDeltaUSD:g,partnerCashDeltaUSD:g,inventoryRatio:1,contactCount:100,contactDelta:0,outreachCostUSD:5,outreachCostDeltaUSD:0});
 
 test('strict nested proposals reject extra fields, coercions, unknown tools and stale evidence',()=>{
  assert.equal(validate(campaign,campaignSchema),campaign);
@@ -53,17 +54,19 @@ test('controller keeps the best tested candidate, independent of order or a wors
  const tie={...worse,trial:receipt(b,model,measurement(20))};assert.equal(selectPublication([tie,first],base,context).selected.contract.hash,[a.hash,b.hash].sort()[0]);
  const finish=toolDeclaration('finish_review',{},'snapshot');assert.equal(validateToolReply({name:'finish_review',args:{rationale:'No further experiment.',evidenceId:'snapshot'}},[finish]).name,'finish_review');
  assert.equal(selectPublication([first],base,context).decision.decision,'publish','Finishing the search is not an LLM veto');
+ for(const change of [{partnerCashDeltaUSD:-1},{volumeDeltaUSD:-1},{inventoryRatio:1.11},{inventoryRatio:null}])assert.equal(publicationGate(a,model,receipt(a,model,{...measurement(20),...change}),base).passed,false);
 });
 
-test('v2 pauses dates, trains real models, tests a proposal and revises before publication',async()=>{
+test('v2 recovers a rejected call, trains real models and treats an unchanged revision as an idempotent result',async()=>{
  const dir=await mkdtemp(join(tmpdir(),'commerce-v2-')),store=createMarketStore();let release,entered=false,trials=0,native=0;
- const gate=new Promise(r=>{release=r;}),events=[];
- const providerFactory=async()=>({client:{events,async json(system,packet,{functions}){
+ const gate=new Promise(r=>{release=r;}),events=[];let rejected=false;
+ const providerFactory=async(id,options)=>{assert.equal(options.route,'hybrid');return {client:{events,async json(system,packet,{functions}){
   const name=functions[0].name;if(!entered){entered=true;await gate;}
+  if(!rejected){rejected=true;events.push({status:'rejected',httpStatus:502,modelCostMicros:0});throw Error('VERTEX_HTTP_502');}
   events.push({configuredModel:'TEST_DOUBLE',modelCostMicros:0,latencyMs:0});const common={evidenceId:packet.evidenceId,rationale:'Offline integration fixture; not an AI performance result.'};
-  const args=name==='choose_investigation'?{lens:'payment_funnel',windowDays:'100'}:name==='define_dataset'?{featureView:'intent_context',windowDays:'100',opportunity:'Keep late-funded outcomes.'}:name==='choose_training_experiments'?{first:'forest',second:'logistic',secondFeatureView:'existing'}:name==='select_trained_artifact'?{modelId:packet.experiments.sort((a,b)=>a.report.metrics.logLoss-b.report.metrics.logLoss)[0].modelId,finding:'Use measured error.'}:name==='propose_campaign_trial'?{campaign}:{modelId:packet.availableModels[0].modelId,campaign:{...campaign,kind:'ranked_discovery'}};
+  const args=name==='choose_investigation'?{lens:'payment_funnel',windowDays:'100'}:name==='define_dataset'?{featureView:'intent_context',windowDays:'100',opportunity:'Keep late-funded outcomes.'}:name==='choose_training_experiments'?{first:'forest',second:'logistic',secondFeatureView:'existing'}:name==='select_trained_artifact'?{modelId:packet.experiments.sort((a,b)=>a.report.metrics.logLoss-b.report.metrics.logLoss)[0].modelId,finding:'Use measured error.'}:name==='propose_campaign_trial'?{campaign}:{modelId:packet.science.modelId,campaign};
   return {name,args:{...common,...args}};
- }},async close(){}});
+ }},async close(){}};};
  let firstContractHash=null;
  const v2TrialFactory=async({marketProfile})=>{assert.equal(marketProfile,'expanded-12x600');return {async evaluate(contract,model,prefix,models,ctx){if(contract){trials++;firstContractHash??=contract.hash;}return receipt(contract,model,measurement(contract?(trials>=2?10:20):0),ctx,prefix);}};};
  const service=createAutonomyRoom({store,market:{mirror:async()=>{native++;}},providerFactory,v2TrialFactory,rootDir:dir,autoPump:false});let pending;
@@ -73,11 +76,23 @@ test('v2 pauses dates, trains real models, tests a proposal and revises before p
   for(let i=0;i<100&&!entered;i++)await new Promise(r=>setTimeout(r,10));assert.equal(entered,true);
   const before=service.snapshot(s.id);assert.equal(before.day,30);assert.equal(before.clockPaused,true);assert.equal(before.reviewDay,31);assert.ok(before.steps.some(c=>c.actor==='GEMINI'&&c.status==='RUNNING'));
   await service.step(s.id);const still=service.snapshot(s.id);assert.equal(still.day,30);assert.equal(still.frame.stats.orders,before.frame.stats.orders);
-  release();await pending;const after=service.snapshot(s.id);assert.equal(after.day,31);assert.equal(after.clockPaused,false);assert.equal(after.warning,null);assert.equal(events.length,6);assert.equal(trials,2);
-  assert.equal(after.steps.filter(c=>c.actor==='LOCAL_MODEL').length,2);assert.equal(after.steps.filter(c=>c.actor==='LOCAL_CAMPAIGN_TRIAL').length,3);assert.equal(native,0);
+  release();await pending;const after=service.snapshot(s.id);assert.equal(after.day,31);assert.equal(after.clockPaused,false);assert.equal(after.warning,null);assert.equal(events.length,7);assert.equal(after.modelCalls,7);assert.equal(trials,1);
+  assert.equal(after.steps.filter(c=>c.actor==='LOCAL_MODEL').length,2);assert.equal(after.steps.filter(c=>c.actor==='LOCAL_CAMPAIGN_TRIAL').length,2);assert.ok(after.steps.some(c=>c.actor==='UNCHANGED_PROPOSAL'));assert.equal(native,0);
   const publication=after.steps.find(c=>c.actor==='TRUSTED_PUBLISHER');assert.ok(publication);assert.equal(publication.output.effectiveDay,30);
   assert.equal(publication.output.decision,'publish');assert.equal(publication.output.contractHash,firstContractHash);assert.equal(publication.output.contractHash,publication.output.testedContractHash);assert.equal(publication.output.authority,'DETERMINISTIC_CONTROLLER');
  }finally{release();await pending;await service.close();store.close();await rm(dir,{recursive:true,force:true});}
+});
+
+test('only definitive transient rejections retry, at most twice per run; uncertain outcomes remain stopped',async()=>{
+ assert.equal(profileFor('hybrid','propose_campaign_trial'),'flash_lite');assert.equal(profileFor('hybrid','propose_campaign_revision'),'pro');
+ assert.equal(retryableModelFailure(Error('VERTEX_HTTP_502'),{status:'uncertain',httpStatus:502}),false);
+ assert.equal(retryableModelFailure(Error('VERTEX_HTTP_403'),{status:'rejected',httpStatus:403}),false);
+ const dir=await mkdtemp(join(tmpdir(),'commerce-retry-')),prior=await read('docs/commerce-growth/team-1/training/model.json'),incumbent=(await read('docs/commerce-growth/team-1/development/results.json')).selectedFixed.config,seen=new Set(),events=[];
+ const c=await openCommerceHarnessV2({id:'retry-fixture',dir,prior,incumbent,providerFactory:async()=>({client:{events,async json(system,packet,{functions}){const name=functions[0].name;
+  if(!seen.has(name)){seen.add(name);events.push({status:'rejected',httpStatus:503,modelCostMicros:0});throw Error('VERTEX_HTTP_503');}
+  events.push({status:'settled',modelCostMicros:0});return {name,args:{evidenceId:packet.evidenceId,rationale:'Offline retry budget fixture.',...(name==='choose_investigation'?{lens:'intent',windowDays:'28'}:{featureView:'intent_context',windowDays:'28',opportunity:'Inspect observed intent.'})}};
+ }},async close(){}})});
+ try{const view=observeGrowthWorld(createGrowthWorld({seed:7,regime:'discovery'}));await c.plan({...view,day:30});const s=c.summary();assert.equal(s.retries,2);assert.equal(s.modelCalls,5);assert.equal(s.failed,true);assert.equal(s.trainingJobs,0);}finally{await c.close();await rm(dir,{recursive:true,force:true});}
 });
 
 test('repeated same-day planning is single-flight and cannot change evidence or return mutable state',async()=>{
