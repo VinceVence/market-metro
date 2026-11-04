@@ -6,6 +6,8 @@
 
 ## What each role actually does
 
+[System architecture by plane](figures/planner-v23/README.md) provides an editable SVG, PNG preview and a single-page vector PDF.
+
 | Role | Observed input | Decision | Executed by trusted code |
 |---|---|---|---|
 | Market analyst | Prior shopping, product interest, inventory and payment funnel | Which bottleneck to investigate; feature recipe and history window | Read-only demand analysis and a bounded dataset |

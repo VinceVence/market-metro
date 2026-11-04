@@ -11,3 +11,6 @@ Original Market Metro source code and code-drawn artwork are covered by the
   credentials, saved wallet tokens and local databases are excluded from Git.
 - Historical documentation includes source links for background research. The
   fetched research vault and third-party source copies are not distributed here.
+- V2.3 architecture figures include brand vector marks from PayPal's asset host,
+  Devicon and Simple Icons. [Asset sources and notices](docs/figures/planner-v23/README.md#vector-assets)
+  accompany those figures; brand trademarks remain with their respective owners.

@@ -21,6 +21,8 @@ For the recorded submission example, run `node scripts/commerce-expanded/harness
 
 ## V2.3 workflow
 
+[System architecture by plane](docs/figures/planner-v23/README.md) show the environment, planner, numerical tools, publication guard, checkpoints, PayPal bridge and evaluation using vector logos and source-linked evidence.
+
 [Typed execution contracts](docs/commerce-expanded/harness-v2/typed-execution.md) validate every proposal. The LLM chooses experiments; deterministic code owns the final publish/retain decision. No new runtime dependency is required.
 
 At days 31 and 61, economic dates pause while the team:
