@@ -1,12 +1,14 @@
 # Commerce harness V2
 
-**Current implementation: [V2.2 typed execution](typed-execution.md).** It adds bounded recovery, experiment memory, a supply-preserved comparison, cash/volume/inventory checks and a no-response development case. Pro handles campaign revision; both AI approaches use the same routing. The [completed four-seed study](v22-20261104/README.md) gained mean PayPal net $55.30 and merchant contribution $704.07 versus fixed rules, with two operational failures still recorded. The historical comparison below has not been relabeled.
+**V2.3 is complete.** The [four-market comparison](v23-20261104/README.md) delivered mean **+$38.09 modeled PayPal net after AI, +$417.34 merchant contribution and +4.25 purchases** over fixed rules. Every AI workflow completed. One planner performed better overall, so multi-agent financial superiority is unproven. Cost: $0.420699; project model ledger: $6.821028 / $8. [Implementation](typed-execution.md).
+
+**Current implementation: [V2.3 typed execution](typed-execution.md).** The LLM chooses investigations, model experiments and campaigns. Trusted code validates the exact proposal, runs local trials and owns publication. Action-specific inquiry value, bounded recovery, experiment memory and supply-preserved comparisons extend the original workflow. Both AI approaches receive the same tools, model routing and budget. The historical V2 comparison below has not been relabeled.
 
 The [4 November V2.1 comparison](v21-20261104-transport/README.md) remains available: mean PayPal net +$26.22 after AI and merchant contribution +$218.73, with four failed AI workflows and a merchant loss in the zero-response case. Its recorded market and native receipt are preserved.
 
 V2 is implemented in the live app. Economic dates pause at review boundaries; the analyst can query demand, the scientist trains two local candidates, and the commerce manager tests and revises a hash-bound campaign. The verifier retains the existing policy if financial or model checks fail.
 
-## Four unseen markets
+## Original V2 comparison — preserved
 
 | Mean per 600 shoppers | Fixed | One planner | Three-agent team |
 |---|---:|---:|---:|
@@ -34,12 +36,12 @@ The original and expanded economic kernels are unchanged. The publication check 
 
 Open `/studio.html` → **New live run** → **V2**. Dates pause on displayed days 31 and 61 while tools execute. Prior V1 sessions retain background behavior. The existing PayPal sample is optional, disabled in this benchmark, and separate from simulated sales.
 
-Open `/studio.html?view=performance&evaluation=harness-v2` for the comparison and every agent handoff. This saved view incurs no model charges. A new live V2 run retains the $0.25 cap.
+Open `/studio.html?view=performance&evaluation=harness-v2` for the latest comparison and every agent handoff. This saved view incurs no model charges. A new live V2.3 run has a $0.19 cap. Recorded older runs retain their original costs and caps.
 
 Checks:
 
 ```sh
-node --test tests/commerce-harness-v2.test.mjs tests/commerce-autonomy-live.test.mjs tests/commerce-expanded.test.mjs
+node --test tests/commerce-harness-v2.test.mjs tests/inquiry-value.test.mjs tests/commerce-operation-recovery.test.mjs tests/commerce-autonomy-live.test.mjs tests/commerce-expanded.test.mjs
 npm run baseline:verify
 ```
 

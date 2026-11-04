@@ -6,7 +6,7 @@ V2.2 retains the V2.1 comparison and recorded demo. Its new financial study uses
 
 V2.2.1 changes operational recovery only. Its confirmation uses new registered seeds; prior V2.2 failures remain in their original report.
 
-V2.3 adds an action-specific value model. Development performance motivates this change; the new confirmation must finish before claiming an unseen gain. All prior comparisons remain available.
+V2.3 adds an action-specific value model. Its [completed fresh-seed comparison](v23-20261104/README.md) improved mean PayPal and merchant contribution over fixed rules with all workflows completed, but one planner earned more than the team. All prior comparisons remain available.
 
 ## Different data needs different models
 
@@ -89,12 +89,12 @@ Recovery counts and structured exit metadata are saved with the workflow. The or
 - Review dates pause while work runs. Checkpoints preserve proposals, results and rejection reasons. Server restart still marks uncertain runs interrupted; this is not a new automatic crash-resume engine.
 - Fresh LLM output can differ. Training/solver reproducibility requires pinned runtimes. External PayPal responses remain external state; the existing idempotency and receipt reconciliation boundaries still apply.
 
-**This guarantees controlled execution, not profitable recommendations.** It does not remove simulation assumptions, selection bias or prediction error. The saved V2 and V2.1 studies remain separately labeled; they are not evidence of a V2.2 improvement.
+**This guarantees controlled execution, not profitable recommendations.** It does not remove simulation assumptions, selection bias or prediction error. Every prior study remains separately labeled; old results are not evidence for the current implementation.
 
 ## Verification
 
 ```sh
-node --test tests/commerce-harness-v2.test.mjs tests/commerce-autonomy-live.test.mjs tests/commerce-expanded.test.mjs
+node --test tests/commerce-harness-v2.test.mjs tests/inquiry-value.test.mjs tests/commerce-operation-recovery.test.mjs tests/commerce-autonomy-live.test.mjs tests/commerce-expanded.test.mjs
 npm run baseline:verify
 ```
 

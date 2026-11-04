@@ -1,61 +1,71 @@
 # Market Metro: submission candidate, 4 November 2026
 
-**Purpose:** help a commerce operator turn observed shopping demand into a tested campaign, fulfilled orders and reconciled payments. The AI team proposes; trusted code validates, measures and executes.
+**Purpose:** turn observed shopper demand into a tested campaign, fulfilled orders and reconciled payments. The AI team proposes investigations and experiments; trusted code validates, measures and executes.
 
-**Current audit:** [V2.2.1 completed all eight AI workflows](commerce-expanded/harness-v2/v221-20261104/README.md), but its four-seed mean gain was only $5.16 PayPal net and $121.21 merchant contribution versus fixed, and one planner performed better. The strong financial/team claim remains unproven. The next step is a data-fit improvement supported by free development tests, not another unmodified paid rerun. All previous results below remain available.
+**V2.3 is complete and replayable.** Across four registered unseen markets, the team added **$152.37 modeled PayPal net after AI, $1,669.35 merchant contribution and 17 retained purchases** versus fixed rules. All eight AI workflows completed. One planner performed better overall; the study supports the workflow, not multi-agent financial superiority. [Full comparison](commerce-expanded/harness-v2/v23-20261104/README.md) · [Implementation](commerce-expanded/harness-v2/typed-execution.md).
 
-**Latest candidate: V2.2.** [Open its recorded demo](http://127.0.0.1:4173/studio.html?session=AUTONOMY-e25772eb0a67670d). The [new four-market comparison](commerce-expanded/harness-v2/v22-20261104/README.md) shows mean **+$55.30 PayPal net after AI, +$704.07 merchant contribution and +9 retained purchases** versus fixed rules. It averages +$4.77 PayPal net over one planner, with fewer purchases than that planner. Two operational failures remain open; the goal is still active.
+## What each role actually does
 
-For this version's end-to-end example, inspect the first review, then shopper BUYER-0083 on day 33: a needs inquiry led to a $96 purchase delivered on day 34. Its corresponding native Sandbox capture is **9S3344048D797830K**. The simulated totals and native receipt stay separate. The prior V2.1 evidence below remains available.
+| Role | Observed input | Decision | Executed by trusted code |
+|---|---|---|---|
+| Market analyst | Prior shopping, product interest, inventory and payment funnel | Which bottleneck to investigate; feature recipe and history window | Read-only demand analysis and a bounded dataset |
+| ML scientist | Analysis and completed historical outcomes | Two model experiments and which trained artifact to propose | Local fitting, whole-market validation, model hashes |
+| Commerce manager | Model reports, merchant/payment economics and previous trials | Campaign type, audience, contact allowance, supply settings; one revision or stop | Frozen development trials and measured component comparisons |
+| Publisher | Exact contracts and validated trial receipts | Deterministic publish or retain | Select the best eligible tested proposal; enforce consent, spending and fulfillment constraints |
 
-## The demo
+The first three roles make fresh Gemini tool calls. The publisher is software, not a fourth LLM. A single-planner comparator receives the same tools, evidence, model schedule and decision budget. A team win must be measured; the role labels alone do not establish one.
 
-1. Start with 12 merchants and 600 simulated shoppers. Show organic shopping, stock, payment events and the warehouse before any campaign.
-2. At the first review, the analyst chooses what to investigate. Show its question and the actual query results.
-3. The scientist chooses feature recipes and two local model experiments. Show held-out model metrics and the selected artifact.
-4. The commerce manager proposes a specific audience/action, contact budget and supply configuration. It sees a separate development trial and can revise its proposal.
-5. The deterministic publisher rejects malformed or unprofitable proposals, and selects the best eligible tested candidate. Show a rejection or revision as well as a publication; never imply every proposal succeeds.
-6. Resume the market. Follow one shopper from recommendation to funded request, delivery and retained purchase. Compare all registered seeds, including losses, against fixed rules and one planner.
-7. Open an existing native PayPal Sandbox receipt linked to its warehouse order. This verifies the payment integration; it is not additional simulator revenue or proof of real-world profit.
+SKU recommendations use the scientist's fitted classifier. General needs inquiries use their own response/value model: prior replies adjust response estimates, while settled outcomes update expected payment and merchant value. The inquiry head is common to both AI approaches. Its contribution must not be credited to multi-agent prompting alone.
+
+## Three-minute demonstration
+
+1. **0:00–0:25 — Market.** Start at day 1 with 12 merchants and 600 simulated shoppers. Show organic purchases and the warehouse before campaigns.
+2. **0:25–0:55 — Review.** Jump to displayed day 31. The economic date pauses. Show the analyst's question, actual observations and scientist's two model reports.
+3. **0:55–1:30 — Experiment.** Show the manager's campaign and its trial. Compare the supply-preserved alternative. The controller publishes only an exact tested contract that passes the checks; a rationale alone cannot approve anything.
+4. **1:30–2:00 — Commerce.** Resume days. Follow a shopper from outreach to a funded request, delivery and retained purchase. Show the second review at day 61 retaining or revising the campaign.
+5. **2:00–2:30 — PayPal.** Open a native Sandbox receipt linked to its warehouse order. Distinguish the provider's receipt and fee from simulated accounting.
+6. **2:30–2:55 — Evidence.** Show every registered market, fixed rules, one planner and the team, including losses and model cost. End with what improved and what remains unproven.
+
+### Recorded submission walkthrough
+
+[Open the V2.3 recorded market](http://127.0.0.1:4173/studio.html?session=AUTONOMY-85115305aa04828f). Playback re-executes saved choices through all 126 day frames with **zero new model calls or payments**. A clean clone can build it with `node scripts/commerce-expanded/harness-v2/replay.mjs`; the script prints the local session URL.
+
+At displayed day 32, shopper **BUYER-0507** received an office-bundle recommendation, funded a **$64** order and received delivery on day 34. The fixed control did not capture that request. Its native Sandbox capture is **7KU53634N57929458**, with a **$2.48 fee** and **$61.52 merchant proceeds**, using fictitious funds. The adapter mirrors one synthetic merchant leg to our saved Sandbox test store; it does not onboard twelve real merchants. The local PayPal view and `paypal_receipts` table link the provider receipt to the generated order. [Native receipt](commerce-expanded/harness-v2/v23-20261104/native-receipt.json) · [Full accounting and shopper trace](commerce-expanded/harness-v2/v23-20261104/first-market-proof.json).
+
+The discovery campaign added $84.30 modeled PayPal net, $981.16 merchant contribution and seven retained purchases. Only $3.70 of its net bridge was outreach savings: payment fees, processing and refund differences account for the rest, minus $0.048424 AI cost.
+
+The example was selected after the run to explain the flow. All aggregate results still include displaced purchases and losses. A clean clone has the archived receipt evidence but no saved buyer or native receipt in its local database; it must not pretend to have made a new payment. The [prior V2.2 replay and receipt](commerce-expanded/harness-v2/v22-20261104/README.md) remain archived.
 
 ## Why PayPal matters
 
-The team's objective is retained, fulfillable commerce, not clicks. Payment authorizations, fees, settlement timing, refunds and outstanding obligations affect which campaigns can produce useful orders. PayPal is the native sandbox payment adapter for selected orders and the modeled payment layer in the experimental economy. The sandbox does not expose PayPal's internal customer data or validate our economic assumptions.
+Success is retained, fulfillable commerce rather than clicks. Payment authorizations, fees, settlement timing, refunds and outstanding obligations influence the campaigns and fulfillment configuration. The native Sandbox adapter proves selected payment execution and reconciliation; the simulated payment layer lets us compare policies without charging real shoppers.
 
-The current local database contains completed sandbox purchases, saved-wallet verification, a completed partial refund and shipment-tracking verification. An invoice is unpaid and a subscription awaits consent. Payouts failed and reporting is blocked. These states must remain distinct; we do not claim every integration completed.
+The current local database contains completed native Sandbox purchases, saved-wallet verification, a completed partial refund and shipment-tracking verification. An invoice is unpaid and a subscription awaits consent. Payouts failed and reporting is blocked. These states stay distinct; the demo does not claim every integration completed.
 
-## What counts as a result
+## Measurement and claim boundaries
 
-- **Modeled PayPal net after AI:** settled platform contribution less metered model usage. This includes payment costs and outreach; it is not payment volume or gross fees.
-- **Merchant contribution:** change in merchant equity, including inventory and obligations. Show realized cash and inventory separately when discussing liquidity.
-- **Commerce:** retained purchases, retained payment volume, recommendation-attributed purchases and fulfillment.
-- **Agent evidence:** validated decisions, actual local fits, tested revisions, publications/rejections, call cost and traceable artifacts.
-- **Generalization:** paired comparisons on registered fresh seeds. Model AUC and profitable development trials do not substitute for these outcomes.
+- **Modeled PayPal net after AI:** settled platform contribution minus metered model usage. Processing, refunds and outreach are included. It is not gross payment volume or actual PayPal profit.
+- **Merchant contribution:** change in merchant equity, including inventory and obligations. Report cash and inventory separately; contribution is not all realized cash.
+- **Commerce:** retained purchases and payment volume, recommendation-attributed purchases and fulfillment. An attributed purchase is not automatically incremental.
+- **Workflow:** actual validated model decisions, local fits, tested revisions, publications/rejections and artifact lineage.
+- **Comparison:** identical exogenous inputs, frozen economics, fresh registered seeds and the same tools/budgets for both AI approaches. Four markets are a small pilot; model AUC and development gains are not evidence of production lift.
+- **Cost:** token-metered estimates, not a cloud invoice. Local CPU time is reported separately and is not billed model usage. The $8 model ledger remains below the user's $50 ceiling.
 
-The V2 study produced no financial lift. V2.1 adds strict contracts, matched-size development trials and deterministic selection across tested proposals.
+Natural-language rationales remain visible as agent explanations, not verified facts. For example, an inquiry-classifier AUC below 0.5 does not become strong evidence merely because the agent describes it positively. The separate inquiry value head and downstream financial trials must be evaluated on their own outcomes.
 
-### First fresh market — the recorded demonstration
+## Preserved earlier results
 
-Seed 41873101, discovery scenario, identical starting state, needs, consent and income:
+| Study | Team mean PayPal gain vs fixed | Merchant gain | Important limit |
+|---|---:|---:|---|
+| [Original V2](commerce-expanded/harness-v2/README.md#original-v2-comparison--preserved) | No gain | $0 | All proposals retained fixed rules |
+| [V2.1](commerce-expanded/harness-v2/v21-20261104-transport/README.md) | $26.22 | $218.73 | Four of eight AI workflows failed |
+| [V2.2](commerce-expanded/harness-v2/v22-20261104/README.md) | $55.30 | $704.07 | Two of eight AI workflows failed |
+| [V2.2.1](commerce-expanded/harness-v2/v221-20261104/README.md) | $5.16 | $121.21 | All completed; one planner performed better |
 
-| Outcome | Fixed | One planner | Three-role team |
-|---|---:|---:|---:|
-| Modeled PayPal net after AI | $4,178.98 | $4,178.95 | $4,267.03 |
-| Merchant contribution | $48,753.01 | $48,753.01 | $49,840.30 |
-| Retained purchases | 791 | 791 | 805 |
+These are different seed cohorts, not a controlled learning curve. Preserve every result; do not compare their mean gains as proof that each code version improved.
 
-The team used intent-context features, selected a locally trained forest and tested an intent-assistance campaign. Its revision raised the contact ceiling from 36 to 60 shoppers/day. The trusted publisher admitted the better measured revision; the later review retained it. The single planner's proposals failed the development gate.
+## Release boundary
 
-The **$88.05 net gain** reconciles to +$89.38 retail fees, +$49.26 supplier fees, −$47.95 processing, +$3.60 outreach savings, −$6.21 fee refunds and −$0.025926 AI cost. It is not merely outreach savings. Merchant contribution rose **$1,087.29**, with **14 more retained purchases**.
+The catalog and customer behavior are authored. The current demo uses AG Studio and makes no Channel3 calls. PayPal Sandbox supplies test receipts, not PayPal's internal consumer data, and does not validate the simulator's economics. AG Studio is in local evaluation mode; hosted judging needs suitable license coverage.
 
-One illustrative shopper, BUYER-0525, received a model-ranked recommendation on displayed day 33, funded a $174 basket and received on-time delivery on day 35. That request was not captured by fixed rules. This is a post-hoc simulated example; all market-level outcomes still include displaced sales and losses. [Accounting and customer trace](commerce-expanded/harness-v2/v21-20261104-transport/first-market-proof.json).
-
-[Open the recorded market](http://127.0.0.1:4173/studio.html?session=AUTONOMY-6e0392af093abb38). Press Replay and inspect the agent team at days 31 and 61. All 126 day frames and warehouse records were rebuilt with zero new model calls; financial metrics reproduce the recorded run exactly. [Replay verification](commerce-expanded/harness-v2/v21-20261104-transport/replay.json).
-
-The shopper's **$34 merchant leg** was subsequently captured through the saved PayPal Sandbox wallet: capture `0JD4043540258600T`, fee **$1.46**, merchant proceeds **$32.54**, using fictitious funds. The **PayPal sandbox** view and `paypal_receipts` table link it to the simulated order. This sample does not add another sale to benchmark totals, and playback never repeats the payment. [Native receipt](commerce-expanded/harness-v2/v21-20261104-transport/native-receipt.json).
-
-The [completed four-market pilot](commerce-expanded/harness-v2/v21-20261104-transport/README.md) averaged **+$26.22 PayPal net, +$218.73 merchant contribution and +3.5 retained purchases** versus fixed rules. Four of eight AI workflows fell back after errors, and the zero-response market harmed merchants. The recorded discovery example supplies all additional purchases; it does not establish repeatability or prove that multiple roles are necessary. Model usage for the full comparison was $0.128868, calculated from provider tokens rather than a cloud billing invoice. The improvement goal remains active.
-
-## Submission boundary
-
-The catalog and customer behavior are authored; the current demo uses AG Studio and makes no Channel3 calls. The UI is a local demo with saved checkpoints, not a deployed production commerce system. Keep the GitHub repository private until the user authorizes publication. A public submission, video upload and competition eligibility check are separate release steps.
+This is a local submission candidate. Keep GitHub private as requested. Public release, video upload and competition eligibility checks are separate release steps. No winning outcome or real-world ROI is guaranteed.

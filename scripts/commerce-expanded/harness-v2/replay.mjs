@@ -8,7 +8,7 @@ import {createAutonomyRoom} from '../../commerce-growth/autonomy/live.mjs';
 import {canonicalHash} from './contracts.mjs';
 import {verifyEconomy} from './trials.mjs';
 
-const root=resolve(process.argv[2]||'docs/commerce-expanded/harness-v2/v22-20261104'),caseId=process.argv[3]||'case-1';
+const root=resolve(process.argv[2]||'docs/commerce-expanded/harness-v2/v23-20261104'),caseId=process.argv[3]||'case-1';
 if(!/^case-[1-4]$/.test(caseId))throw Error('INVALID_REPLAY_CASE');
 await verifyEconomy();
 const read=async path=>JSON.parse(await readFile(path,'utf8')),run=resolve(root,basename(root)+'-'+caseId+'-team'),result=await read(run+'/result.json'),recorded=await read(run+'/checkpoints.json'),trace=JSON.parse(gunzipSync(await readFile(run+'/trace.json.gz')));

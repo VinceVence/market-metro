@@ -17,7 +17,9 @@ Open [the workspace](http://127.0.0.1:4173/studio.html). **New live run** opens 
 
 For the recorded submission example, run `node scripts/commerce-expanded/harness-v2/replay.mjs` after setup. It imports the measured campaign into the same market and warehouse, verifies the original financial totals and prints the demo URL. Playback makes no model or payment calls. The UI distinguishes recorded Gemini decisions from a fresh run. [Submission evidence and walkthrough](docs/submission-candidate.md).
 
-## V2.2.1 workflow
+[Completed V2.3 results](docs/commerce-expanded/harness-v2/v23-20261104/README.md): mean **+$38.09 modeled PayPal net, +$417.34 merchant contribution and +4.25 purchases** over fixed rules across four fresh markets. All eight AI workflows completed. One planner performed better than the team; multi-agent superiority is not claimed.
+
+## V2.3 workflow
 
 [Typed execution contracts](docs/commerce-expanded/harness-v2/typed-execution.md) validate every proposal. The LLM chooses experiments; deterministic code owns the final publish/retain decision. No new runtime dependency is required.
 
@@ -29,9 +31,9 @@ At days 31 and 61, economic dates pause while the team:
 4. Compares the same campaign with incumbent supply preserved, then proposes one optional revision or finishes the search.
 5. Deterministically selects the best eligible tested contract, or retains the incumbent.
 
-The analyst, scientist and commerce manager make fresh Gemini decisions. Data queries, training, trial execution and financial checks are deterministic tools. Flash-Lite handles analysis and model selection; Pro handles campaign revision. Each run permits two six-stage reviews, up to two retries of definitive transient rejections, fourteen provider attempts total and at most **$0.25** in model usage. A single planner receives the same model routing, tools and allowance. V2.2.1 also bounds retries of authentication reads and local process deadlines; uncertain billing and payment writes are never retried by this mechanism.
+The analyst, scientist and commerce manager make fresh Gemini decisions. Data queries, training, trial execution and financial checks are deterministic tools. SKU recommendations use the fitted classifier; general inquiries use a response-calibrated payment/merchant value model. Both learn from observed data. Pro handles the first campaign revision; Flash-Lite handles every other decision. Each run permits two six-stage reviews, bounded safe-operation retries, fourteen provider attempts total and at most **$0.19** in model usage. A single planner receives the same routing, tools and allowance. Uncertain billing and payment writes are never retried by this mechanism.
 
-See **Performance → V2.2.1 · final confirmation** for current decisions and costs. The V2.2 and V2.1 recorded comparisons preserve prior results. [Implementation and results](docs/commerce-expanded/harness-v2/README.md). Retaining fixed rules is reported as a retained policy, not an agent-created financial gain.
+See **Performance → V2.3 · value-model confirmation** for current decisions and costs. Earlier recorded comparisons preserve prior results, including losses. [Implementation and results](docs/commerce-expanded/harness-v2/README.md). Retaining fixed rules is reported as a retained policy, not an agent-created financial gain.
 
 ## Data and payments
 
@@ -49,7 +51,7 @@ Fresh Gemini runs use the existing isolated `.local/gcp/config.json`, authorizat
 ## Validation
 
 ```sh
-node --test tests/commerce-harness-v2.test.mjs tests/commerce-autonomy-live.test.mjs tests/commerce-expanded.test.mjs
+node --test tests/commerce-harness-v2.test.mjs tests/inquiry-value.test.mjs tests/commerce-operation-recovery.test.mjs tests/commerce-autonomy-live.test.mjs tests/commerce-expanded.test.mjs
 npm run baseline:verify
 ```
 
