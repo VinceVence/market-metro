@@ -1,6 +1,6 @@
-# Architecture mockups: choose A, B or C
+# Architecture mockups: design history
 
-These are three alternative presentations of the implemented V2.3 workflow. All use **LLM agent**, retain the actual saved environment capture and distinguish LLM choices, numerical workers, admission checks, native Sandbox receipts and independent evaluation. Style selection is pending.
+These are three alternative presentations of the implemented V2.3 workflow. All use **LLM agent**, retain the actual saved environment capture and distinguish LLM choices, numerical workers, admission checks, native Sandbox receipts and independent evaluation. **Selection confirmed:** C’s layout, B’s palette, DM Sans, clearer wording and additional vector icons. [Final diagram](../README.md).
 
 | Option | Typography | Emphasis |
 |---|---|---|

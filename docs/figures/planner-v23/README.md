@@ -1,21 +1,20 @@
 # Market Metro: agent and environment workflow
 
-[Choose among three research-paper mockups](mockups/README.md): journal serif, ML methods, or typed protocol. The options add technical detail and use the generic label **LLM agent**.
-
-The actual market scene and the agent workflow sit side by side. Data and PayPal occupy the lower row; a local experiment sandbox sits inside the agent plane.
+**Selected design:** C’s structure, B’s colors, DM Sans, and plain-language labels. The final diagram uses the actual recorded environment, a six-step decision flow with saved checkpoints, illustrated tools, warehouse records, and PayPal receipt handling. [Original mockups](mockups/README.md) remain available as design history.
 
 [Editable SVG](system-architecture.svg) · [PNG preview](system-architecture.png) · [PDF](../../../output/pdf/market-metro-planner-v23.pdf)
 
 ![Agent and environment workflow](system-architecture.png)
 
-| Plane | What the viewer follows |
+| Panel | What it explains |
 |---|---|
-| Environment | An unedited screenshot of the actual Market Metro canvas, replayed at Day 32 |
-| Agent | The LLM agent requests analysis, local training and trial evaluation; code validates publication |
-| Data | Generated order rows, model artifacts, checkpoints and decision logs |
-| PayPal Sandbox | A selected existing order becomes a verified native receipt linked back to the warehouse |
+| Market environment | Shoppers, merchants, orders and the real saved app snapshot |
+| LLM agent | Explore, prepare, try models, compare, plan and refine; save every decision |
+| Data | Purchase records plus saved models, campaign plans and decisions |
+| Tools and sandbox | Analyze data, test campaigns, check outcomes and launch eligible plans |
+| PayPal and review | Record selected Sandbox payments and compare final market outcomes |
 
-The numbered observe/campaign arrows are the main feedback loop. Local development trial results return to the planner; final held-out benchmark scores do not. The nested experiment sandbox is a bounded numerical test workflow, not a claim of OS-level isolation. The planner consumes projected state and JSON evidence; the diagram does not imply unrestricted LLM SQL writes or payment authority.
+The activity, test-result and campaign-update arrows show the feedback loop. Local development trial results return to the planner; final held-out benchmark scores do not. The experiment sandbox is a bounded numerical test workflow, not a claim of OS-level isolation. The planner consumes projected state and JSON evidence; the diagram does not imply unrestricted LLM SQL writes or payment authority.
 
 ## Actual environment and payment evidence
 
@@ -33,4 +32,4 @@ The SVG and PDF embed the authentic raster scene screenshot. Labels, logos, arro
 
 ## Asset credits
 
-PayPal's mark comes from paypalobjects.com. Gemini comes from Simple Icons. Google Cloud, Python, scikit-learn and SQLite come from Devicon. [URLs and hashes](assets/sources.json), [Devicon MIT notice](assets/devicon-LICENSE.txt), and [Simple Icons CC0 text](assets/simple-icons-LICENSE.txt) accompany the assets. Trademarks remain with their owners. The environment is a screenshot of the project's own renderer; technical symbols are original vector artwork.
+PayPal's mark comes from paypalobjects.com. Google Cloud, Python, scikit-learn and SQLite come from Devicon. The retained asset bundle also includes a Simple Icons Gemini mark used in earlier designs; the selected diagram uses a generic LLM-agent symbol. [URLs and hashes](assets/sources.json), [Devicon MIT notice](assets/devicon-LICENSE.txt), and [Simple Icons CC0 text](assets/simple-icons-LICENSE.txt) accompany the assets. Trademarks remain with their owners. The environment is a screenshot of the project's own renderer; technical symbols are original vector artwork.
