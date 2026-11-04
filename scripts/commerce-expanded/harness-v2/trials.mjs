@@ -11,7 +11,7 @@ const executeLocalTrial=(inputPath,outputPath)=>promisify(execFile)(process.exec
 export async function createTrialTool({root=resolve('.local/commerce-harness-v2/trials'),fixed,prior,marketProfile,execute=executeLocalTrial}={}){
  if(!['expanded-12x600','frozen-3x100'].includes(marketProfile))throw Error('V2_TRIAL_MARKET_REQUIRED');
  const protocol=await verifyEconomy(),recoveryEvents=[];protocol.developmentCases=DEVELOPMENT_CASES;await mkdir(root,{recursive:true});
- const sourcePaths=[...new Set([...Object.keys(protocol.economyHashes),...Object.keys(protocol.implementationHashes),'scripts/commerce-expanded/harness-v2/contracts.mjs'])];
+ const sourcePaths=[...new Set([...Object.keys(protocol.economyHashes),...Object.keys(protocol.implementationHashes),'scripts/commerce-expanded/harness-v2/contracts.mjs','scripts/commerce-expanded/harness-v2/inquiry-value.mjs'])];
  const sourceHashes=Object.fromEntries(await Promise.all(sourcePaths.map(async path=>[path,createHash('sha256').update(await readFile(path)).digest('hex')])));
  const evaluationContextHash=canonicalHash({version:VERSION,marketProfile,cases:protocol.developmentCases,sourceHashes,fixed,priorHash:canonicalHash(prior)});
  async function evaluate(schedule,models){
@@ -47,7 +47,7 @@ export function publicationGate(candidate,model,trial,incumbentTrial){
  if(trial.contractHash!==candidate.hash||trial.modelHash!==model.modelHash||!trial.trialHash)throw Error('V2_UNTESTED_PUBLICATION');
  const m=trial.measurement,i=incumbentTrial.measurement;
  for(const value of [model.report.metrics.logLoss,model.report.coarse.logLoss])validate(value,{type:'NUMBER',minimum:0});
- const checks={modelBeatsCoarse:model.report.metrics.logLoss<=model.report.coarse.logLoss,positivePlatform:m.platformDeltaUSD>0,merchantProtected:m.retailerDeltaUSD>=0&&m.retailerUSD>=i.retailerUSD,purchasesProtected:m.purchaseDelta>=0&&m.retainedPurchases>=i.retainedPurchases,volumeProtected:m.volumeDeltaUSD>=0&&m.retainedVolumeUSD>=i.retainedVolumeUSD,cashProtected:m.partnerCashDeltaUSD>=0&&m.partnerCashDeltaUSD>=i.partnerCashDeltaUSD,inventoryBounded:m.inventoryRatio!==null&&m.inventoryRatio<=1.1,beatsIncumbent:m.platformUSD>i.platformUSD,settled:m.unpaidLiabilities===0};
+ const checks={modelBeatsCoarse:model.report.metrics.logLoss<=model.report.coarse.logLoss,positivePlatform:m.platformDeltaUSD>0,merchantProtected:m.retailerDeltaUSD>=0&&m.retailerUSD>=i.retailerUSD,purchasesProtected:m.purchaseDelta>=0&&m.retainedPurchases>=i.retainedPurchases,volumeProtected:m.volumeDeltaUSD>=0&&m.retainedVolumeUSD>=i.retainedVolumeUSD,cashProtected:m.partnerCashDeltaUSD>=0&&m.partnerCashDeltaUSD>=i.partnerCashDeltaUSD,inventoryBounded:m.inventoryRatio!==null&&m.inventoryRatio<=1.1,stressCasesProtected:trial.cases.every(c=>c.platformDeltaUSD>=0&&c.retailerDeltaUSD>=0&&c.purchaseDelta>=0),beatsIncumbent:m.platformUSD>i.platformUSD,settled:m.unpaidLiabilities===0};
  return {passed:Object.values(checks).every(Boolean),checks,scope:'Matched-size development gate including a no-response stress case; not a guarantee of live profit.'};
 }
 

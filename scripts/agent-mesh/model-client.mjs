@@ -5,9 +5,10 @@ import {resolve} from 'node:path';
 import {openSpendLedger,createVertexClient,verifySpendCap,PROJECT_ID,VERTEX_MODEL,FLASH_LITE_PROFILE} from '../../benchmark/vertex.mjs';
 
 const ROOT=resolve(import.meta.dirname,'../..');
-export const TEAM_MODEL_ROUTES=Object.freeze({lite:'Flash-Lite for all roles',hybrid:'Flash-Lite investigator; Gemini3.1 Pro campaign scientist and reviewer',research:'Gemini3.1 Pro for dataset contracts, model selection and economic review; Flash-Lite for evidence queries and campaign proposals'});
-export function profileFor(route,tool){
+export const TEAM_MODEL_ROUTES=Object.freeze({lite:'Flash-Lite for all roles',hybrid:'Flash-Lite investigator; Gemini3.1 Pro campaign scientist and reviewer',first_review_pro:'Pro for the first campaign revision; Flash-Lite for every other decision',research:'Gemini3.1 Pro for dataset contracts, model selection and economic review; Flash-Lite for evidence queries and campaign proposals'});
+export function profileFor(route,tool,reviewDay){
   if(!Object.hasOwn(TEAM_MODEL_ROUTES,route))throw Error('INVALID_TEAM_MODEL_ROUTE');
+  if(route==='first_review_pro')return tool==='propose_campaign_revision'&&reviewDay===30?'pro':'flash_lite';
   return route==='hybrid'&&['propose_policy','review_policy','close_experiment','propose_campaign_revision'].includes(tool)||route==='research'&&['prepare_training_data','select_model','select_economic_policy'].includes(tool)?'pro':'flash_lite';
 }
 export function capTeamLedger(ledger,{capMicros=250000,maxCalls=18,model}={}){
@@ -36,13 +37,13 @@ export async function initializeTeamVertex(config,path,{run=promisify(execFile),
 // No cloud settings are changed. Profile-specific reservations retain their
 // original prices; the same250000-microdollar envelope covers both models.
 export async function openTeamVertex(id,{route='lite',capMicros=250000,proEndpoint='standard'}={}){
-  if(!Object.hasOwn(TEAM_MODEL_ROUTES,route)||![250000,300000].includes(capMicros)||!['standard','custom_tools'].includes(proEndpoint))throw Error('INVALID_TEAM_MODEL_CONFIG');
+  if(!Object.hasOwn(TEAM_MODEL_ROUTES,route)||![190000,250000,300000].includes(capMicros)||!['standard','custom_tools'].includes(proEndpoint))throw Error('INVALID_TEAM_MODEL_CONFIG');
   const path=resolve(ROOT,'.local/gcp/config.json'),config=JSON.parse(await readFile(path,'utf8'));
   if(config.projectId!==PROJECT_ID)throw Error('INVALID_CLOUD_PROJECT');
   const {token,cap,initializationRetries}=await initializeTeamVertex(config,path),events=[];let lastAt=0,inFlight=false;
   return {cap,initializationRetries,client:{events,async json(system,packet,options){
     if(inFlight)throw Error('TEAM_PROVIDER_BUSY');inFlight=true;
-    const profile=profileFor(route,options.functions?.[0]?.name),model=profile==='pro'?(proEndpoint==='custom_tools'?VERTEX_MODEL+'-customtools':VERTEX_MODEL):FLASH_LITE_PROFILE.model;let ledger,client;
+    const profile=profileFor(route,options.functions?.[0]?.name,options.reviewDay),model=profile==='pro'?(proEndpoint==='custom_tools'?VERTEX_MODEL+'-customtools':VERTEX_MODEL):FLASH_LITE_PROFILE.model;let ledger,client;
     try{
       const delay=Math.max(0,lastAt+(profile==='pro'?12000:6000)-Date.now());if(delay)await new Promise(r=>setTimeout(r,delay));
       ledger=await openSpendLedger(resolve(ROOT,'.local/gcp/model-spend.json'),{runId:'market-'+id,profile});

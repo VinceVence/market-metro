@@ -9,6 +9,7 @@ import {prepareTraining,FEATURE_VIEWS,datasetOverview,inspectDemand} from '../..
 import {observedFeedbackHistory,feedbackFeatures} from '../../commerce-growth/autonomy/feedback-features.mjs';
 import {validateConfig} from '../../commerce-growth/team/control.mjs';
 import {VERSION,campaignSchema,contextSchema,validate,freeze,canonicalHash,marketProfileFor} from './contracts.mjs';
+import {fitInquiryValue,inquiryValueEstimates,inquiryBucket} from './inquiry-value.mjs';
 
 export {digest,datasetOverview,inspectDemand};
 export const read=async p=>JSON.parse(await readFile(p,'utf8'));
@@ -50,8 +51,10 @@ export async function fitModel(dir,historical,own,contract,day){
  await promisify(execFile)(resolve('.local/marketing-venv/bin/python'),[resolve('scripts/commerce-growth/autonomy/train-workbench.py'),resolve(dir)],{timeout:120000,maxBuffer:100000});
  const artifact=await read(dir+'/models.json'),report=await read(dir+'/report.json'),parity=await read(dir+'/parity.json');
  for(const r of parity)if(Math.abs(predictResponse(artifact.models[contract.family],r.x,artifact.featureNames)-r.expected)>1e-9||Math.abs(predictSharedContribution(artifact,r.expected,r.x,r.kind,artifact.featureNames).expectedSharedNetCents-r.expectedSharedNetCents)>1e-7)throw Error('V2_MODEL_PARITY_FAILED');
- artifact.normalization='stock and market contact counts per 100 shoppers';const modelHash=digest(artifact),result={id:'V2-MODEL-'+modelHash.slice(0,12),modelHash,artifact,report,cutoffDay:day,ownRows:current.length};
- await writeFile(dir+'/model.json',JSON.stringify(result));return result;
+ artifact.normalization='stock and market contact counts per 100 shoppers';artifact.inquiryValue=fitInquiryValue(historical);
+ report.inquiryValue={rows:artifact.inquiryValue.rows,cohorts:Object.fromEntries(Object.entries(artifact.inquiryValue.groups).map(([k,g])=>[k,{contacts:g.n,responseRate:g.responded/g.n,retentionRate:g.retained/g.n,paymentNetPerContactCents:(g.paymentReply+g.paymentSilent)/g.n,merchantNetPerContactCents:(g.sharedReply+g.sharedSilent-g.paymentReply-g.paymentSilent)/g.n}])),sourceHash:artifact.inquiryValue.sourceHash,scope:'Separate reply/value head for inquiries without a SKU. Complete historical outcomes fit value; only prior-day replies and mature current outcomes update it. Strength 8 and window 28 are assumptions; classifier AUC is not this head\'s validation.'};
+ const modelHash=digest(artifact),result={id:'V2-MODEL-'+modelHash.slice(0,12),modelHash,artifact,report,cutoffDay:day,ownRows:current.length};
+ await writeFile(dir+'/report.json',JSON.stringify(report,null,2)+'\n');await writeFile(dir+'/model.json',JSON.stringify(result));return result;
 }
 
 export function compileCampaign(raw,model,incumbent,context){
@@ -75,15 +78,15 @@ export function scoreCampaign(view,{contract,model,prior}){
  if(campaign.kind==='hold'||view.day<30||view.day>=view.marketDays)return {actions:[],ranking:[],configuration,agentCampaign:true,reason:'Retain organic shopping and fulfillment; no campaign contacts.'};
  const limit=Math.min(campaign.contactsPer100*(view.scale?.contactMultiplier||1),view.outreach.rules.dailyContactLimit-view.outreach.contactsToday,Math.floor(Math.min(view.outreach.remainingBudgetCents,view.outreach.availablePlatformCashCents)/view.outreach.rules.outreachCostCents));
  if(limit<=0)return {actions:[],ranking:[],configuration};
- const people=new Map(view.audience.map(p=>[p.customerId,p])),history=observedFeedbackHistory(view),fields=model.artifact.featureNames;
+ const people=new Map(view.audience.map(p=>[p.customerId,p])),history=observedFeedbackHistory(view),fields=model.artifact.featureNames,inquiries=model.artifact.inquiryValue?inquiryValueEstimates(view,model.artifact.inquiryValue):null;
  const ranked=contactFeatures(view,prior,7).filter(c=>{const p=people.get(c.action.customerId),age=p.signal?view.day-p.signal.day:99;
   if(campaign.kind==='reactivation'&&(!p.purchaseCount||p.lastPurchaseDay==null||view.day-p.lastPurchaseDay<14))return false;
   if(age>7&&!(campaign.kind==='open_discovery'&&c.action.kind==='ask_need'))return false;
   if(c.action.kind==='recommend')return c.action.catalogId===p.signal?.catalogId&&(c.features.stock>0||c.features.arrival_days<=5);
   return campaign.kind!=='product_recommendations'&&(campaign.kind!=='intent_assistance'||p.signal?.kind!=='SEARCH');
- }).map(c=>{const x=inputFeatures(view,c,fields,history),estimate=predictContribution(model.artifact,model.artifact.selected,x,c.action.kind,fields),shared=predictSharedContribution(model.artifact,estimate.probability,x,c.action.kind,fields);return {...c,...estimate,...shared,score:campaign.objective==='joint'?shared.expectedSharedNetCents:estimate.expectedNetCents};}).filter(c=>c.expectedNetCents>0&&c.expectedSharedNetCents>c.expectedNetCents).sort((a,b)=>b.score-a.score||a.action.customerId.localeCompare(b.action.customerId));
+ }).map(c=>{const inquiry=inquiries&&c.action.kind==='ask_need'?inquiries.get(inquiryBucket(view,people.get(c.action.customerId))):null,x=inquiry?null:inputFeatures(view,c,fields,history),estimate=inquiry||predictContribution(model.artifact,model.artifact.selected,x,c.action.kind,fields),shared=inquiry?{expectedSharedNetCents:inquiry.expectedSharedNetCents}:predictSharedContribution(model.artifact,estimate.probability,x,c.action.kind,fields);return {...c,...estimate,...shared,score:campaign.objective==='joint'?shared.expectedSharedNetCents:estimate.expectedNetCents};}).filter(c=>c.expectedNetCents>0&&c.expectedSharedNetCents>c.expectedNetCents).sort((a,b)=>b.score-a.score||a.action.customerId.localeCompare(b.action.customerId));
  const selected=[],seen=new Set();for(const c of ranked){if(seen.has(c.action.customerId))continue;seen.add(c.action.customerId);selected.push(c);if(selected.length>=limit)break;}
- return {actions:selected.map(c=>c.action),ranking:selected.map(c=>({customerId:c.action.customerId,kind:c.action.kind,catalogId:c.action.catalogId,probability:c.probability,expectedNetCents:c.expectedNetCents,expectedMerchantNetCents:c.expectedSharedNetCents-c.expectedNetCents,modelId:model.id})),configuration,agentCampaign:true,agentCheckpoint:contract.hash,reason:'Execute the exact tested '+campaign.kind+' contract with '+model.artifact.selected+'; no immediate-funding odds shortcut.',model:{id:model.id,type:model.artifact.selected,rows:model.artifact.trainingRows,cutoffDay:model.cutoffDay}};
+ return {actions:selected.map(c=>c.action),ranking:selected.map(c=>({customerId:c.action.customerId,kind:c.action.kind,catalogId:c.action.catalogId,probability:c.probability,expectedNetCents:c.expectedNetCents,expectedMerchantNetCents:c.expectedSharedNetCents-c.expectedNetCents,estimator:c.estimator||'SKU_CLASSIFIER',modelId:model.id})),configuration,agentCampaign:true,agentCheckpoint:contract.hash,reason:'Execute the tested '+campaign.kind+' contract: trained SKU model for products, reply/value model for general inquiries.',model:{id:model.id,type:model.artifact.selected,rows:model.artifact.trainingRows,cutoffDay:model.cutoffDay}};
 }
 
 export function captureInputs(view,actions,prior){

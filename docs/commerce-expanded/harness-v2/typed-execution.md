@@ -1,10 +1,22 @@
-# V2.2.1: proposals from the LLM, execution decisions from code
+# V2.3: proposals from the LLM, execution decisions from code
 
 The LLM proposes analysis, model experiments and campaigns. It has **no publish tool**. A deterministic controller chooses which tested campaign can run.
 
 V2.2 retains the V2.1 comparison and recorded demo. Its new financial study uses separately registered seeds; implementation improvements alone are not a profit claim.
 
 V2.2.1 changes operational recovery only. Its confirmation uses new registered seeds; prior V2.2 failures remain in their original report.
+
+V2.3 adds an action-specific value model. Development performance motivates this change; the new confirmation must finish before claiming an unseen gain. All prior comparisons remain available.
+
+## Different data needs different models
+
+SKU recommendations retain the scientist's fitted classifier and value model. A general needs inquiry has no SKU; it now uses its own reply/value head instead of placeholder product features.
+
+The inquiry head learns response rates and payment/merchant value from completed historical contacts, grouped by observed intent age. A regularized logistic intercept updates response estimates using only replies observed before the current day. Payment and merchant value update only after the 26-day simulation settlement window. Immediate funding is never substituted for eventual retained value.
+
+The model's precision/pseudo-count strength is 8 and the response window is 28 days. These are disclosed modeling assumptions. The historical data, fitted head and parameters are bound into the model artifact hash. Routing by action type is deterministic. The LLM still chooses the investigation, classifier experiments, campaign audience, contact allowance and supply proposal.
+
+The production scorer reproduced the free prototype's three development markets exactly. This proves implementation parity, not generalization. Classifier AUC is not presented as validation of the separate value head. Publication additionally requires no negative PayPal, merchant or purchase difference in any of the three known development stress cases; this does not guarantee future gains.
 
 ```text
 Observed snapshot → LLM proposal → strict contract validation
@@ -58,9 +70,9 @@ Development trials use the execution market's size: 600 shoppers/12 merchants or
 
 The analyst owns the demand hypothesis and feature handoff; the scientist owns model experiments and validation; the manager owns campaign economics. Each receives its role brief plus shared measured artifacts. The single-planner comparator receives all three role briefs and the same tools, limits and evidence. This tests a division of work, not a claim that more personas automatically improve outcomes.
 
-Each review sees the exact active policy, observed response counts and earlier experiment results. Model summaries retain contact-type metrics and source-market validation gaps; full reports remain saved. Flash-Lite handles analysis and model selection. Pro handles the final campaign revision. Local fitting supports forests, logistic regression, response-hurdle models and shallow gradient boosting.
+Each review sees the exact active policy, observed response counts and earlier experiment results. Model summaries retain contact-type metrics and source-market validation gaps; full reports remain saved. Pro handles the first campaign revision on day 30. Flash-Lite handles every other decision, including the day-60 revision. Both architectures use this same schedule. Local fitting supports forests, logistic regression, response-hurdle models and shallow gradient boosting, plus the inquiry value head.
 
-For billed model requests, only definitive HTTP 429/500/502/503/504 rejections with a matching recorded rejection event are retryable. The same evidence is reused, each retry obtains a new spend reservation, and no commerce action has executed at that stage. There is at most one retry per decision and two per run. Uncertain model-request timeouts, uncertain billing, invalid tool output and permission errors are not retried. Limits remain six decision stages per review, two reviews, fourteen total provider attempts and $0.25 per run.
+For billed model requests, only definitive HTTP 429/500/502/503/504 rejections with a matching recorded rejection event are retryable. The same evidence is reused, each retry obtains a new spend reservation, and no commerce action has executed at that stage. There is at most one retry per decision and two per run. Uncertain model-request timeouts, uncertain billing, invalid tool output and permission errors are not retried. Limits are six decision stages per review, two reviews, fourteen total provider attempts and **$0.19 per run**. The lifetime $8 ledger cap is unchanged.
 
 Two additional **safe-operation boundaries** now recover without discarding completed analysis:
 

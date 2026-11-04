@@ -55,12 +55,14 @@ test('controller keeps the best tested candidate, independent of order or a wors
  const finish=toolDeclaration('finish_review',{},'snapshot');assert.equal(validateToolReply({name:'finish_review',args:{rationale:'No further experiment.',evidenceId:'snapshot'}},[finish]).name,'finish_review');
  assert.equal(selectPublication([first],base,context).decision.decision,'publish','Finishing the search is not an LLM veto');
  for(const change of [{partnerCashDeltaUSD:-1},{volumeDeltaUSD:-1},{inventoryRatio:1.11},{inventoryRatio:null}])assert.equal(publicationGate(a,model,receipt(a,model,{...measurement(20),...change}),base).passed,false);
+ const badStress=sealTrialReceipt({...Object.fromEntries(Object.entries(first.trial).filter(([k])=>k!=='receiptHash')),cases:[{regime:'known-adverse',platformDeltaUSD:5,retailerDeltaUSD:-1,purchaseDelta:1}]});
+ assert.equal(publicationGate(a,model,badStress,base).checks.stressCasesProtected,false);
 });
 
 test('v2 recovers a rejected call, trains real models and treats an unchanged revision as an idempotent result',async()=>{
  const dir=await mkdtemp(join(tmpdir(),'commerce-v2-')),store=createMarketStore();let release,entered=false,trials=0,native=0;
  const gate=new Promise(r=>{release=r;}),events=[];let rejected=false;
- const providerFactory=async(id,options)=>{assert.equal(options.route,'hybrid');return {client:{events,async json(system,packet,{functions}){
+ const providerFactory=async(id,options)=>{assert.equal(options.route,'first_review_pro');assert.equal(options.capMicros,190000);return {client:{events,async json(system,packet,{functions}){
   const name=functions[0].name;if(!entered){entered=true;await gate;}
   if(!rejected){rejected=true;events.push({status:'rejected',httpStatus:502,modelCostMicros:0});throw Error('VERTEX_HTTP_502');}
   events.push({configuredModel:'TEST_DOUBLE',modelCostMicros:0,latencyMs:0});const common={evidenceId:packet.evidenceId,rationale:'Offline integration fixture; not an AI performance result.'};
