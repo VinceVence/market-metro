@@ -1,6 +1,6 @@
 # Commerce harness V2
 
-**Current implementation: [V2.2 typed execution](typed-execution.md).** It adds bounded recovery, experiment memory, a supply-preserved comparison, cash/volume/inventory checks and a no-response development case. Pro handles campaign revision; both AI approaches use the same routing. The [new four-seed study](v22-20261104/protocol.json) is running and must finish before a financial claim. The historical comparison below has not been relabeled.
+**Current implementation: [V2.2 typed execution](typed-execution.md).** It adds bounded recovery, experiment memory, a supply-preserved comparison, cash/volume/inventory checks and a no-response development case. Pro handles campaign revision; both AI approaches use the same routing. The [completed four-seed study](v22-20261104/README.md) gained mean PayPal net $55.30 and merchant contribution $704.07 versus fixed rules, with two operational failures still recorded. The historical comparison below has not been relabeled.
 
 The [4 November V2.1 comparison](v21-20261104-transport/README.md) remains available: mean PayPal net +$26.22 after AI and merchant contribution +$218.73, with four failed AI workflows and a merchant loss in the zero-response case. Its recorded market and native receipt are preserved.
 
