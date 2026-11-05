@@ -1,21 +1,30 @@
 # Market Metro
 
-A local commerce simulator with a checkpointed AI team, a 3D market, an AG Studio warehouse and optional PayPal Sandbox receipts.
+Market Metro shows how one LLM planner designs a merchant campaign and a local verifier tests which ranking earns more after purchases, refunds and settlement.
 
-## Run
+## Play the judge demo
 
-Requires Node.js 22.16+ and Python 3.12.
+With Node.js 22.16 or newer, run these commands from the project root.
 
 ```sh
 npm ci
-uv venv .local/marketing-venv --python 3.12 --cache-dir .local/uv-cache
-uv pip install --python .local/marketing-venv/bin/python --cache-dir .local/uv-cache -r scripts/marketing/requirements.txt
 npm run dev -- --no-recover
 ```
 
-Open [the workspace](http://127.0.0.1:4173/studio.html). **New live run** opens settings. The default is **V2, 12 merchants and 600 shoppers**. Existing V1 sessions and the original 3-store economy remain available.
+Open [the judge demo](http://127.0.0.1:4173/) and select **Play walkthrough**, or step through at your own pace. The seven chapters use a recorded single-planner review, simulation snapshots and a verified PayPal Sandbox receipt bundled with the project. Playback makes zero model or payment calls and requires no provider credentials.
 
-For the recorded submission example, run `node scripts/commerce-expanded/harness-v2/replay.mjs` after setup. It imports the measured campaign into the same market and warehouse, verifies the original financial totals and prints the demo URL. Playback makes no model or payment calls. The UI distinguishes recorded Gemini decisions from a fresh run. [Submission evidence and walkthrough](docs/submission-candidate.md).
+The planner's campaign brought Shopper 179 back after 16 days for a $96 Mobile Side Table. The receipt belongs to that exact warehouse order. Across this frozen market, the planner and verifier added **$114.96 in modeled PayPal net after AI, $1,024.86 in merchant contribution and 16 retained purchases** over fixed rules. [Judge walkthrough and evidence](docs/submission-candidate.md).
+
+## Run a live simulation
+
+In the [simulation workspace](http://127.0.0.1:4173/studio.html?view=market), **New live run** defaults to one planner, the financial verifier and reactivation. The full live workflow reviews on days 31 and 61. The recorded judge comparison holds its day-31 campaign through settlement. For live runs and offline numerical reproduction, install the Python dependencies and configure the appropriate services below.
+
+```sh
+uv venv .local/marketing-venv --python 3.12 --cache-dir .local/uv-cache
+uv pip install --python .local/marketing-venv/bin/python --cache-dir .local/uv-cache -r scripts/marketing/requirements.txt
+```
+
+To populate a local warehouse with all 126 days of the judge run, use `node scripts/commerce-expanded/harness-v2/judge-reactivation.mjs`. It reproduces the saved campaign, both financial controls and the selected shopper locally. The checkout receipt included with the judge demo remains a read-only record of the original test capture.
 
 [Completed V2.3 results](docs/commerce-expanded/harness-v2/v23-20261104/README.md): mean **+$38.09 modeled PayPal net, +$417.34 merchant contribution and +4.25 purchases** over fixed rules across four fresh markets. All eight AI workflows completed. One planner performed better than the team; multi-agent superiority is not claimed.
 
@@ -37,9 +46,9 @@ At days 31 and 61, economic dates pause while the team:
 4. Compares the same campaign with incumbent supply preserved, then proposes one optional revision or finishes the search.
 5. Deterministically selects the best eligible tested contract, or retains the incumbent.
 
-The analyst, scientist and commerce manager make fresh Gemini decisions. Data queries, training, trial execution and financial checks are deterministic tools. SKU recommendations use the fitted classifier; general inquiries use a response-calibrated payment/merchant value model. Both learn from observed data. Pro handles the first campaign revision; Flash-Lite handles every other decision. Each run permits two six-stage reviews, bounded safe-operation retries, fourteen provider attempts total and at most **$0.19** in model usage. A single planner receives the same routing, tools and allowance. Uncertain billing and payment writes are never retried by this mechanism.
+In the default live run, one planner handles analysis, model selection and campaign design. The optional three-role team divides these same Gemini decisions among the analyst, scientist and commerce manager. Data queries, training, trial execution and financial checks are deterministic tools. SKU recommendations use the fitted classifier; general inquiries use a response-calibrated payment/merchant value model. Both learn from observed data. Pro handles the first campaign revision; Flash-Lite handles every other decision. Each run permits two six-stage reviews, bounded safe-operation retries, fourteen provider attempts total and at most **$0.19** in model usage. A single planner receives the same routing, tools and allowance. Uncertain billing and payment writes are never retried by this mechanism.
 
-See **Performance → V2.3 · value-model confirmation** for current decisions and costs. Earlier recorded comparisons preserve prior results, including losses. [Implementation and results](docs/commerce-expanded/harness-v2/README.md). Retaining fixed rules is reported as a retained policy, not an agent-created financial gain.
+See **Performance → Fresh reactivation test** for the six-seed planner and team comparison. Earlier recorded comparisons preserve prior results, including losses. [Implementation and results](docs/commerce-expanded/harness-v2/README.md). Retaining fixed rules is reported as a retained policy, not an agent-created financial gain.
 
 ## Data and payments
 

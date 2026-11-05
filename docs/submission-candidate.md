@@ -1,46 +1,20 @@
-# Market Metro: submission candidate, 4 November 2026
+# Market Metro judge walkthrough
 
-**Purpose:** turn observed shopper demand into a tested campaign, fulfilled orders and reconciled payments. The AI team proposes investigations and experiments; trusted code validates, measures and executes.
+**Default entry** — [Play the reactivation demo](http://127.0.0.1:4173/). One LLM planner proposes the campaign. A deterministic verifier tests both trained ranking models against settlement outcomes. The recorded walkthrough works with the project’s bundled data and zero new model calls or payments.
 
-**V2.3 is complete and replayable.** Across four registered unseen markets, the team added **$152.37 modeled PayPal net after AI, $1,669.35 merchant contribution and 17 retained purchases** versus fixed rules. All eight AI workflows completed. One planner performed better overall; the study supports the workflow, not multi-agent financial superiority. [Full comparison](commerce-expanded/harness-v2/v23-20261104/README.md) · [Implementation](commerce-expanded/harness-v2/typed-execution.md).
+## One run from observed demand to PayPal
 
-## What each role actually does
+1. **Market.** Seed `92111706` has 600 simulated shoppers and 12 synthetic merchants. Organic shopping supplies 30 days of observations before the review on displayed day 31.
+2. **Evidence.** The planner observed 99 recent electronics interest signals and 85 furniture signals. Open funded requests included 6 electronics units and 35 furniture units. The current market had no mature campaign outcomes. Historical training data contained 7,010 simulated contacts and 457 retained purchases, 41 of which funded after the initial contact.
+3. **Campaign.** In six recorded Gemini decisions, the planner chose category analysis, a 28-day market-feedback window, two model fits, and a ranked discovery campaign. Consenting shoppers could receive a product recommendation or a needs inquiry, up to 36 contacts per day. The original review cost $0.032325 in metered model usage.
+4. **Verifier.** The planner preferred the two-stage response model. Across three development markets the same campaign averaged $26.65 in additional modeled PayPal net over fixed with that model and $30.97 with boosted trees. The boosted model also cleared the purchase and merchant checks. The verifier bound it to the published campaign.
+5. **Shopper.** Shopper 179 last purchased on day 19. On day 35 the planner recommended a **Mobile Side Table**. The shopper funded and bought it for **$96** from **Form & Function**. It arrived on day 36 and was retained. That same request went unfilled with either fixed rules or the planner’s original ranking.
+6. **PayPal.** The selected order was mirrored once to the connected PayPal Sandbox test store. Completed capture **`2M324038C71499318`** covered **$96.00** in test funds. The native fee was **$3.56** and test merchant proceeds were **$92.44**. The PayPal order’s custom ID matched warehouse order `GARDEN-AUTO-e26323c97cbcb456-SIM-CAPTURE-756-MERCHANT-7`. Playback reads this receipt. [Receipt chapter](http://127.0.0.1:4173/judge.html#receipt)
+7. **Result.** Through settlement on day 126, fixed rules produced $3,309.83 in modeled PayPal net, $38,928.95 in merchant contribution and 627 retained purchases. The planner with the verifier produced $3,424.79, $39,953.81 and 643. The gains were **+$114.96, +$1,024.86 and +16 purchases**. Changing only the ranking added **+$21.04, +$325.12 and +2 purchases**. The Sandbox capture contributes no additional benchmark revenue.
 
-For the reactivation claim, lead with the fresh comparison. A single planner using the same verifier added $809.18 in modeled PayPal net, $8,341.39 in merchant contribution and 135 retained purchases over fixed rules. It improved all three on each of six seeds. The three-role team beat fixed on all three in five markets. Its verifier added three purchases in total over its own original choices. [Fresh reactivation scorecard](http://127.0.0.1:4173/studio.html?view=performance&evaluation=reactivation-fresh)
+We chose this seed after the six-market study because it was the one single-planner case where the verifier switched models. Within that run, the shopper illustration favors a returning buyer with a completed single-merchant order, including a check against both comparison policies. Across all six seeds the checked planner improved the three primary outcomes over fixed rules in six markets. The model switch added purchases on one seed. [Six-seed results](commerce-expanded/model-check/reactivation-fresh/README.md) · [Exact decision lock](commerce-expanded/model-check/reactivation-fresh/decisions.json) · [Bundled demo evidence](../demo/data/judge-reactivation.json)
 
-[Compare the agent's two ranking models](http://127.0.0.1:4173/studio.html?view=performance&evaluation=model-check). Select **Reactivation** to see the campaign proposal, what the verifier measured and what a different ranking earned on fresh shoppers. The model comparison uses saved agent decisions. To show the payment integration, open [the recorded $64 PayPal Sandbox capture](http://127.0.0.1:4173/studio.html?session=AUTONOMY-85115305aa04828f&view=payments) from the earlier end-to-end campaign.
-
-[System architecture by plane](figures/planner-v23/README.md) shows the actual recorded environment beside the agent workflow, with editable SVG, PNG preview and a single-page PDF.
-
-| Role | Observed input | Decision | Executed by trusted code |
-|---|---|---|---|
-| Market analyst | Prior shopping, product interest, inventory and payment funnel | Which bottleneck to investigate; feature recipe and history window | Read-only demand analysis and a bounded dataset |
-| ML scientist | Analysis and completed historical outcomes | Two model experiments and which trained artifact to propose | Local fitting, whole-market validation, model hashes |
-| Commerce manager | Model reports, merchant/payment economics and previous trials | Campaign type, audience, contact allowance, supply settings; one revision or stop | Frozen development trials and measured component comparisons |
-| Publisher | Exact contracts and validated trial receipts | Deterministic publish or retain | Select the best eligible tested proposal; enforce consent, spending and fulfillment constraints |
-
-The first three roles make fresh Gemini tool calls. The publisher is software, not a fourth LLM. A single-planner comparator receives the same tools, evidence, model schedule and decision budget. A team win must be measured; the role labels alone do not establish one.
-
-SKU recommendations use the scientist's fitted classifier. General needs inquiries use their own response/value model: prior replies adjust response estimates, while settled outcomes update expected payment and merchant value. The inquiry head is common to both AI approaches. Its contribution must not be credited to multi-agent prompting alone.
-
-## Three-minute demonstration
-
-1. **0:00–0:25 — Market.** Start at day 1 with 12 merchants and 600 simulated shoppers. Show organic purchases and the warehouse before campaigns.
-2. **0:25–0:55 — Review.** Jump to displayed day 31. The economic date pauses. Show the analyst's question, actual observations and scientist's two model reports.
-3. **0:55–1:30 — Experiment.** Show the manager's campaign and its trial. Compare the supply-preserved alternative. The controller publishes only an exact tested contract that passes the checks; a rationale alone cannot approve anything.
-4. **1:30–2:00 — Commerce.** Resume days. Follow a shopper from outreach to a funded request, delivery and retained purchase. Show the second review at day 61 retaining or revising the campaign.
-5. **2:00–2:30 — PayPal.** Open a native Sandbox receipt linked to its warehouse order. Distinguish the provider's receipt and fee from simulated accounting.
-6. **2:30–2:55 — Evidence.** Show every registered market, fixed rules, one planner and the team, including losses and model cost. End with what improved and what remains unproven.
-
-### Recorded submission walkthrough
-
-[Open the V2.3 recorded market](http://127.0.0.1:4173/studio.html?session=AUTONOMY-85115305aa04828f). Playback re-executes saved choices through all 126 day frames with **zero new model calls or payments**. A clean clone can build it with `node scripts/commerce-expanded/harness-v2/replay.mjs`; the script prints the local session URL.
-
-At displayed day 32, shopper **BUYER-0507** received an office-bundle recommendation, funded a **$64** order and received delivery on day 34. The fixed control did not capture that request. Its native Sandbox capture is **7KU53634N57929458**, with a **$2.48 fee** and **$61.52 merchant proceeds**, using fictitious funds. The adapter mirrors one synthetic merchant leg to our saved Sandbox test store; it does not onboard twelve real merchants. The local PayPal view and `paypal_receipts` table link the provider receipt to the generated order. [Native receipt](commerce-expanded/harness-v2/v23-20261104/native-receipt.json) · [Full accounting and shopper trace](commerce-expanded/harness-v2/v23-20261104/first-market-proof.json).
-
-The discovery campaign added $84.30 modeled PayPal net, $981.16 merchant contribution and seven retained purchases. Only $3.70 of its net bridge was outreach savings: payment fees, processing and refund differences account for the rest, minus $0.048424 AI cost.
-
-The example was selected after the run to explain the flow. All aggregate results still include displaced purchases and losses. A clean clone has the archived receipt evidence but no saved buyer or native receipt in its local database; it must not pretend to have made a new payment. The [prior V2.2 replay and receipt](commerce-expanded/harness-v2/v22-20261104/README.md) remain archived.
+The earlier three-role discovery demo and its separate $64 capture remain available with the historical study. [Earlier V2.3 result](commerce-expanded/harness-v2/v23-20261104/README.md) · [System architecture](figures/planner-v23/README.md)
 
 ## Why PayPal matters
 
@@ -54,7 +28,7 @@ The current local database contains completed native Sandbox purchases, saved-wa
 - **Merchant contribution:** change in merchant equity, including inventory and obligations. Report cash and inventory separately; contribution is not all realized cash.
 - **Commerce:** retained purchases and payment volume, recommendation-attributed purchases and fulfillment. An attributed purchase is not automatically incremental.
 - **Workflow:** actual validated model decisions, local fits, tested revisions, publications/rejections and artifact lineage.
-- **Comparison:** identical exogenous inputs, frozen economics, fresh registered seeds and the same tools/budgets for both AI approaches. Four markets are a small pilot; model AUC and development gains are not evidence of production lift.
+- **Comparison:** identical exogenous inputs, frozen economics, fresh registered seeds and the same tools/budgets for both AI approaches. The reactivation replication covers six seeds in one modeled regime. Financial results measure this simulated market.
 - **Cost:** token-metered estimates, not a cloud invoice. Local CPU time is reported separately and is not billed model usage. The $8 model ledger remains below the user's $50 ceiling.
 
 Natural-language rationales remain visible as agent explanations, not verified facts. For example, an inquiry-classifier AUC below 0.5 does not become strong evidence merely because the agent describes it positively. The separate inquiry value head and downstream financial trials must be evaluated on their own outcomes.

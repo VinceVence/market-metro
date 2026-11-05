@@ -199,7 +199,8 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
       if(path==='/vendor/phaser.js'){const content=await readFile(resolve(root,'node_modules/phaser/dist/phaser.min.js'));res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=3600'});res.end(content);return;}
       const benchmarkAsset=path.startsWith('/benchmarks/');
       const base = benchmarkAsset ? resolve(root,'docs/policy-lab/benchmarks') : path.startsWith('/figures/') ? resolve(root, 'docs/figures') : resolve(root, 'demo');
-      const relative = benchmarkAsset ? path.slice(12) : path.startsWith('/figures/') ? path.slice(9) : path === '/' ? 'index.html' : path.slice(1);
+      const judgeEntry = ['/', '/studio.html'].includes(path) && [...url.searchParams.keys()].every(k => k.startsWith('utm_'));
+      const relative = judgeEntry ? 'judge.html' : benchmarkAsset ? path.slice(12) : path.startsWith('/figures/') ? path.slice(9) : path === '/' ? 'index.html' : path.slice(1);
       const file = resolve(base, relative);
       if (!file.startsWith(base + sep)) { res.writeHead(403); res.end(); return; }
       const content = await readFile(file);
