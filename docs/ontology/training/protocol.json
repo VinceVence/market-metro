@@ -1,0 +1,16 @@
+{
+  "study": "ontology-feature-triage-v1",
+  "economy": "frozen expanded 12 merchants and 600 shoppers",
+  "campaignSeed": 92111706,
+  "question": "Before a specific product recommendation, which shoppers will make a purchase through that contact and keep the basket through settlement?",
+  "scope": "The historical label identifies a retained basket following the contact. Exact product retention requires an item-level fulfillment join. General needs inquiries use the existing inquiry response/value head.",
+  "windowDays": 28,
+  "controls": ["incumbent", "sku_all", "statistical", "ontology"],
+  "arms": "Incumbent is the published pooled boosted classifier. SKU-all uses the same estimator and all nonconstant-by-design columns on recommendation rows. Statistical and ontology use the same recommendation rows, estimator and four subset budgets. Statistical ranks individual columns by a training-fold-only univariate F score. Ontology considers connected groups of pre-contact concepts.",
+  "selection": "Select each search arm by lowest mean whole-market log loss across the seven historical source markets, scoring only product recommendations in every arm. Ties prefer fewer fields and then the candidate name. Freeze models before opening four new markets. No tuning or replacement seeds.",
+  "invariants": "Same campaign, supply settings, contact budget, inquiry head, monetary value heads, model family and hyperparameters in all four policy arms. Only the product-contact probability model changes. One historical plan cost per arm. Fixed marketing rules are an additional economic reference.",
+  "evaluation": "Score all four probability models on the exact same pre-contact observations chosen by the incumbent. Label from actual contact-to-request-to-order links after settlement. Separately execute each policy through the frozen economy. Report held-out log loss, Brier, ROC AUC, average precision, actions changed, modeled PayPal net, merchant contribution and retained purchases. Do not call the prediction causal uplift.",
+  "markets": ["reactivation", "discovery", "low_response", "zero_response"],
+  "promotion": "Recommend replacing the incumbent only if common-panel held-out log loss improves, aggregate PayPal net and merchant contribution both increase, purchases do not decline and every market settles. Report the statistical and cohort-only comparisons separately to attribute any gain.",
+  "limits": "Local CPU only. No fresh LLM inference, native payments or changes to economic rules."
+}
