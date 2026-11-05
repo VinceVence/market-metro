@@ -43,7 +43,7 @@
       <div id="scale-settlement"></div>
     </div>
   </dialog>
-  <dialog id="feed-proof" aria-labelledby="feed-heading">
+  <dialog id="feed-proof" class="feed-dialog" aria-labelledby="feed-heading">
     <header><h2 id="feed-heading">Can this feed count purchases?</h2><button type="button" id="close-feed" aria-label="Close feed verifier">×</button></header>
     <div class="scale-body">
       <p>The verifier checks what each row represents, which keys connect it and how money is measured before admitting totals into this report.</p>
@@ -56,6 +56,16 @@
       <details><summary>Compare both methods on unseen merchant feeds</summary><div id="feed-benchmark"></div></details>
       <details><summary>Try a local JSON feed</summary><p>Start with the <a href="/api/market/ontology/feed?example=warehouse" download="merchant-feed.json">example export</a>. Your file is checked in this browser.</p>
         <label>Choose a feed <input id="feed-file" type="file" accept=".json,application/json"></label></details>
+    </div>
+  </dialog>
+  <dialog id="planner-feed" class="feed-dialog" aria-labelledby="planner-feed-heading">
+    <header><h2 id="planner-feed-heading">Can the planner launch this campaign?</h2><button type="button" id="close-planner-feed" aria-label="Close planner review">×</button></header>
+    <div class="scale-body">
+      <p>Day 31 · Seed 92111706 · One planner. Replay the recorded campaign with an ambiguous merchant export, then apply the merchant’s corrected data dictionary.</p>
+      <div id="planner-feed-held" aria-live="polite"></div>
+      <div class="scale-controls"><button class="primary" type="button" id="repair-planner-feed" disabled>Apply confirmed mapping and resume</button>
+        <button type="button" id="reset-planner-feed">Replay from hold</button></div>
+      <div id="planner-feed-resumed" aria-live="polite"></div>
     </div>
   </dialog>
   <script type="importmap">{"imports":{"three":"/vendor/three/three.module.js","three/addons/":"/vendor/three-addons/"}}</script>

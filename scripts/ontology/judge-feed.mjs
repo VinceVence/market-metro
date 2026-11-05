@@ -20,7 +20,13 @@ async function ledger(){
 // The fixed and semantic verifiers get only the resulting schema and records.
 export async function judgeFeed(example){
   if(!judgeFeeds.includes(example))throw RangeError('Unknown merchant feed');
-  const {source}=await ledger(),renamed=example==='renamed'||example==='flat',flat=example==='flat';
+  const {source}=await ledger();
+  return merchantFeedFromLedger(source,example);
+}
+
+export function merchantFeedFromLedger(source,example){
+  if(!judgeFeeds.includes(example))throw RangeError('Unknown merchant feed');
+  const renamed=example==='renamed'||example==='flat',flat=example==='flat';
   const [parents,children,basketId,orderId,link,merchant,gross,portion]=renamed?
     ['register_sales','seller_postings','till_ticket','posting_ticket','register_ref','outlet_ref','charged_value','posting_value']:
     ['autonomy_baskets','orders','basket_id','order_id','basket_id','merchant_id','gross_cents','total_cents'];

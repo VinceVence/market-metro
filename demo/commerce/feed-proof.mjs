@@ -11,7 +11,8 @@ const nextSteps={
 function explain({ontology:r,fixed}){
   const comparison=`<p class="feed-comparison">Fixed mapping <b>${label(fixed)}</b> · Ontology verifier <b>${label(r)}</b></p>`;
   if(r.decision==='HOLD')return comparison+`<section class="feed-decision held"><h3>Hold this feed</h3><p>${esc(r.reason)}</p>
-    <p>${esc(nextSteps[r.code]||'Clarify the source contract or correct the records before publishing a campaign measurement.')}</p></section>`;
+    <p>${esc(nextSteps[r.code]||'Clarify the source contract or correct the records before publishing a campaign measurement.')}</p></section>
+    <p><a href="/judge.html#planner">See a campaign pause and resume on day 31 ↗</a></p>`;
   const m=r.metrics,s=r.splitExample,p=r.payment,g=r.mapping;
   return comparison+`<section class="feed-decision"><h3>Admit the checkout count</h3>
     <p><b>${num(m.purchases)} captured shopper checkouts</b> reconcile to ${num(m.merchantOrders)} merchant orders. ${num(m.splitBaskets)} checkouts involved multiple stores.</p>

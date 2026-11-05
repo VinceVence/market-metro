@@ -3,6 +3,7 @@ import {createCommerceRoom} from './commerce-room/service.mjs';
 import {createAutonomyRoom} from './commerce-growth/autonomy/live.mjs';
 import {rankDistricts,scaleProtocol} from './commerce-expanded/harness-v2/merchant-scale.mjs';
 import {judgeFeeds,judgeFeed,verifyJudgeFeed} from './ontology/judge-feed.mjs';
+import {plannerFeedDemo} from './ontology/planner-demo.mjs';
 import {createOwnMarketService} from './behavior-v4/service.mjs';
 import {createAuthoredCatalogService} from './behavior-v4/catalog.mjs';
 import {createStudioService} from './studio/service.mjs';
@@ -62,6 +63,12 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
       const origin = `http://${req.headers.host}`;
       const url = new URL(req.url, origin), path = decodeURIComponent(url.pathname);
       if (path.startsWith('/api/')) {
+        if(req.method==='GET'&&path==='/api/market/ontology/planner'){
+          const phase=url.searchParams.get('phase')??'hold',holdId=url.searchParams.get('holdId');
+          if(!['hold','corrected'].includes(phase))return json(res,400,{error:{code:'UNKNOWN_REVIEW_PHASE',message:'Choose a registered review phase.'}});
+          try{return json(res,200,await plannerFeedDemo(phase,holdId));}
+          catch(e){if(e instanceof RangeError&&e.message==='Stale campaign mapping hold')return json(res,409,{error:{code:'STALE_MAPPING_HOLD',message:e.message}});throw e;}
+        }
         if(req.method==='GET'&&['/api/market/ontology/feed','/api/market/ontology/verify'].includes(path)){
           const example=url.searchParams.get('example')??'warehouse';
           if(!judgeFeeds.includes(example))return json(res,400,{error:{code:'UNKNOWN_FEED',message:'Choose a supported merchant export.'}});
@@ -141,6 +148,8 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
         const input = await body(req,path.startsWith('/api/market/studio/')?131072:path.startsWith('/api/workflows')?32768:4096);
         if (!input || Array.isArray(input) || typeof input !== 'object') throw new SandboxError(400, 'INVALID_JSON', 'Expected a JSON object.');
         if(path==='/api/market/autonomy/start'&&autonomy)return json(res,202,await autonomy.start(input));
+        const fixMapping=path.match(/^\/api\/market\/autonomy\/(AUTONOMY-[a-f0-9]{16})\/mapping$/);
+        if(fixMapping&&autonomy)return json(res,200,autonomy.correctMapping(fixMapping[1],input));
         if(path==='/api/market/room/start'&&room)return json(res,202,room.start(input));
         if(path==='/api/market/studio/analyze'&&studio)return json(res,200,await studio.analyze(input));
         if(path==='/api/market/studio/design'&&studio)return json(res,200,await studio.design(input));
