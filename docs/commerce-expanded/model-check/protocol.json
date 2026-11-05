@@ -1,0 +1,19 @@
+{
+  "version": "same-campaign-model-check-1",
+  "registeredOn": "2026-11-05",
+  "sourceStudy": "v23-20261104",
+  "sourceArm": "team",
+  "reviewDay": 30,
+  "cases": [
+    {"sourceCase":"case-1","seed":88110501,"regime":"discovery"},
+    {"sourceCase":"case-2","seed":88110502,"regime":"reactivation"},
+    {"sourceCase":"case-3","seed":88110503,"regime":"low_response"},
+    {"sourceCase":"case-4","seed":88110504,"regime":"zero_response"}
+  ],
+  "intervention": "For each recorded first-review published campaign, change only its fitted ranking model. Keep the original campaign, supply settings, timing, seed and constraints paired.",
+  "selection": "Use the existing three development worlds and publication gates. A challenger replacing an eligible choice must also pass those gates against that choice. Prefer the original on a tie or missing evidence. Freeze every choice before opening any evaluation market.",
+  "evaluation": "Run fixed rules, the original published first-review policy, and the locked checked policy on each assigned new seed. Hold that first-review policy through settlement. Reuse an identical arm's exact outcome when its contract is unchanged. No day-60 redesign in any arm.",
+  "metrics": ["platformUSD","retailerUSD","retainedPurchases","retainedVolumeUSD","unpaidLiabilities"],
+  "accounting": "Report modeled contribution before inference and charge the same recorded first-review inference cost to both AI policy arms. Incremental cloud spend for this comparison is zero. Local computation takes time.",
+  "limits": {"sourceReviews":4,"maxAdditionalDevelopmentTrialsPerReview":1,"freshProviderCalls":0,"nativePayments":0}
+}
