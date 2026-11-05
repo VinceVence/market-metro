@@ -1,6 +1,7 @@
 import {continuousReport} from './marketing/continuous-report.mjs';
 import {createCommerceRoom} from './commerce-room/service.mjs';
 import {createAutonomyRoom} from './commerce-growth/autonomy/live.mjs';
+import {rankDistricts,scaleProtocol} from './commerce-expanded/harness-v2/merchant-scale.mjs';
 import {createOwnMarketService} from './behavior-v4/service.mjs';
 import {createAuthoredCatalogService} from './behavior-v4/catalog.mjs';
 import {createStudioService} from './studio/service.mjs';
@@ -60,6 +61,12 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
       const origin = `http://${req.headers.host}`;
       const url = new URL(req.url, origin), path = decodeURIComponent(url.pathname);
       if (path.startsWith('/api/')) {
+        if(req.method==='GET'&&path==='/api/market/merchant-scale/rank'){
+          const districts=url.searchParams.get('districts'),feeds=url.searchParams.get('feeds');
+          if(!scaleProtocol.districts.map(String).includes(districts)||!scaleProtocol.feeds.map(String).includes(feeds))
+            return json(res,400,{error:{code:'INVALID_MERCHANT_SCALE',message:'Choose a supported district count and feed size.'}});
+          return json(res,200,await rankDistricts(Number(districts),Number(feeds)));
+        }
         if(req.method==='GET'&&path==='/api/market/autonomy/latest'&&autonomy)return json(res,200,{session:autonomy.latest()});
         const autonomyRead=path.match(/^\/api\/market\/autonomy\/(AUTONOMY-[a-f0-9]{16})(?:\/(trace))?$/);
         if(req.method==='GET'&&autonomyRead&&autonomy)return json(res,200,autonomyRead[2]?autonomy.trace(autonomyRead[1],url.searchParams.get('customer'),url.searchParams.has('day')?url.searchParams.get('day'):undefined):autonomy.snapshot(autonomyRead[1],url.searchParams.has('day')?url.searchParams.get('day'):undefined));

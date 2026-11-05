@@ -15,6 +15,8 @@ Open [the judge demo](http://127.0.0.1:4173/) and select **Play walkthrough**, o
 
 The planner's campaign brought Shopper 179 back after 16 days for a $96 Mobile Side Table. The receipt belongs to that exact warehouse order. Across this frozen market, the planner and verifier added **$114.96 in modeled PayPal net after AI, $1,024.86 in merchant contribution and 16 retained purchases** over fixed rules. [Judge walkthrough and evidence](docs/submission-candidate.md).
 
+Choose **Merchant scale → Run local ranking** to try the same model on up to 48 simulated stores across four independent districts. Judges can vary how many stores share inventory and compare settled outcomes for the same shoppers against fixed rules. [Live scale demo](http://127.0.0.1:4173/judge.html#scale) · [Measured results](docs/merchant-scale/README.md).
+
 ## Run a live simulation
 
 In the [simulation workspace](http://127.0.0.1:4173/studio.html?view=market), **New live run** defaults to one planner, the financial verifier and reactivation. The full live workflow reviews on days 31 and 61. The recorded judge comparison holds its day-31 campaign through settlement. For live runs and offline numerical reproduction, install the Python dependencies and configure the appropriate services below.

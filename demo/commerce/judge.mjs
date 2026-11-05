@@ -1,5 +1,6 @@
 import {createGarden} from '../garden/world.mjs';
 import {esc,money} from '../garden/ui.mjs';
+import {bindMerchantScale} from './merchant-scale.mjs';
 
 const $=id=>document.getElementById(id);
 const usd=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'});
@@ -49,7 +50,7 @@ function chapters(d){
       ${[['PayPal net','paypal'],['Merchants¹','merchants'],['Purchases','purchases']].map(([l,k])=>`<tr><th scope="row">${l}</th><td>${k==='purchases'?d.fixed[k]:usd.format(d.fixed[k])}</td><td>${k==='purchases'?d.planner[k]:usd.format(d.planner[k])}</td><td class="gain">${k==='purchases'?'+'+d.vsFixed[k]:signed(d.vsFixed[k])}</td></tr>`).join('')}</tbody></table>
       <p>Changing only the ranking model added ${signed(d.vsOriginal.paypal)} in PayPal net, ${signed(d.vsOriginal.merchants)} for merchants and ${d.vsOriginal.purchases} retained purchases over the planner’s original choice.</p>
       <small>¹ Merchant contribution includes inventory value. PayPal net includes the original $${p.reviewCostUSD.toFixed(6)} in model usage.</small>
-      <p><a href="/studio.html?view=performance&amp;evaluation=reactivation-fresh">Compare all six fresh markets ↗</a></p>`}
+      <p><a href="/studio.html?view=performance&amp;evaluation=reactivation-fresh">Compare all six fresh markets ↗</a> · <a href="#scale" data-open-scale>Test merchant scale ↗</a></p>`}
   ];
 }
 
@@ -98,5 +99,6 @@ async function start(){
   $('chapters').onkeydown=e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();go(Math.max(0,Math.min(steps.length-1,i+(e.key==='ArrowRight'?1:-1))));buttons[i].focus();}};
   window.addEventListener('pagehide',pause);document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
   render();
+  bindMerchantScale(pause);
 }
 start().catch(error=>{$('judge-error').textContent=error.message;$('judge-error').hidden=false;});

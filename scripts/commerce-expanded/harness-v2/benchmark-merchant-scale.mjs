@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFile,writeFile,rename,mkdir} from 'node:fs/promises';
+import {writeFile,rename,mkdir} from 'node:fs/promises';
 import {gzipSync} from 'node:zlib';
 import {Worker,isMainThread,parentPort,workerData} from 'node:worker_threads';
 import {canonicalHash} from './contracts.mjs';
