@@ -1,0 +1,15 @@
+{
+  "id": "merchant-scale-1",
+  "economyCommit": "d6fdb4b27179bceb35899eaff72ae4c2fc4a73df",
+  "regime": "reactivation",
+  "seeds": [92471001, 92471002, 92471003, 92471004],
+  "feeds": [4, 8, 12],
+  "districts": [1, 2, 4],
+  "policy": "Deploy the exact verified single-planner campaign and ranking artifact from judge seed 92111706. No new plan, retraining or verifier selection. Strong fixed outreach receives the identical feed treatment.",
+  "feedTest": "Twelve stores trade with the same 600 shoppers in each district. One, two or three merchants per category share stock and inbound quantities with the marketing policy. Rotate which stores enter first by seed and category. Keep all 16 products, historical purchases, consent, real stock, fulfillment and balances intact. Only information available to outreach changes.",
+  "deploymentTest": "Use the first one, two or four registered districts in order. Each has independent shoppers, balances and fulfillment. Pool their measured outcomes for a deployment total and report gains per 100 shoppers. No cross-district shopping or shared stock.",
+  "outcomes": ["retained exact-product recommendation purchases", "enrolled sellers fulfilling a retained recommended product", "PayPal net after one original plan cost", "merchant contribution", "retained purchases", "merchants gaining versus fixed"],
+  "runtime": "Use real day-31 observed snapshots. Time the unchanged CPU ranker across each batch, after one warm-up and over 15 timed repeats. Report median and p95. Exclude snapshot setup, cloud planning, simulated fulfillment and HTTP transport. The judge button performs a fresh local scoring pass.",
+  "accounting": "The fixed and planner arms settle all obligations. Charge the original 32325 microdollars once per reported deployment. New Gemini charges and native payments are zero.",
+  "selection": "Show every registered district and tier, including decreases. The 12-feed run must expose the unmodified scoring input. Interpret merchant-feed size and independent district throughput separately."
+}
