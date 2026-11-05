@@ -1,5 +1,7 @@
 # Which model should rank shoppers for this campaign?
 
+**Fresh follow-up.** The team verifier added three retained purchases across six new reactivation markets. All three came from one seed. The single planner with the same verifier beat fixed rules on all three primary outcomes in every market. [Six-seed replication](reactivation-fresh/README.md)
+
 A merchant has a limited outreach budget. The analyst identifies a sales opportunity, the scientist trains two ranking models, and the commerce manager proposes a campaign. In the V2.3 study, all 16 reviews fitted two models. Each review tested the financial outcome of just one model.
 
 The optional verifier now puts both rankings behind **the same campaign**. The offer, contact limit, inventory policy and settlement terms stay fixed during this comparison. The verifier measures retained purchases, merchant contribution and modeled PayPal net on three development markets. An eligible original model sets the floor for the challenger. A more profitable alternative also has to protect merchant contribution, purchases, payment volume and partner cash, pass the existing inventory and stress checks, and clear its liabilities. A tie or unavailable comparison keeps the original decision. The publisher binds the chosen campaign to its tested model and receipt. The next review can read the result.

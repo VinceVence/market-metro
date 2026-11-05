@@ -6,6 +6,8 @@
 
 ## What each role actually does
 
+For the reactivation claim, lead with the fresh comparison. A single planner using the same verifier added $809.18 in modeled PayPal net, $8,341.39 in merchant contribution and 135 retained purchases over fixed rules. It improved all three on each of six seeds. The three-role team beat fixed on all three in five markets. Its verifier added three purchases in total over its own original choices. [Fresh reactivation scorecard](http://127.0.0.1:4173/studio.html?view=performance&evaluation=reactivation-fresh)
+
 [Compare the agent's two ranking models](http://127.0.0.1:4173/studio.html?view=performance&evaluation=model-check). Select **Reactivation** to see the campaign proposal, what the verifier measured and what a different ranking earned on fresh shoppers. The model comparison uses saved agent decisions. To show the payment integration, open [the recorded $64 PayPal Sandbox capture](http://127.0.0.1:4173/studio.html?session=AUTONOMY-85115305aa04828f&view=payments) from the earlier end-to-end campaign.
 
 [System architecture by plane](figures/planner-v23/README.md) shows the actual recorded environment beside the agent workflow, with editable SVG, PNG preview and a single-page PDF.

@@ -23,6 +23,8 @@ Open [Campaign model check](http://127.0.0.1:4173/studio.html?view=performance&e
 
 ## V2.3 workflow
 
+In the [fresh reactivation comparison](docs/commerce-expanded/model-check/reactivation-fresh/README.md), one planner with the verifier improved modeled PayPal net, merchant contribution and retained purchases on all six new markets versus fixed rules. The three-role team did so on five. The extra model check lifted purchases on one seed per arm. [Open the scorecard](http://127.0.0.1:4173/studio.html?view=performance&evaluation=reactivation-fresh).
+
 [System architecture by plane](docs/figures/planner-v23/README.md) uses the selected C layout, B palette and DM Sans to show the market, LLM agent, saved decisions, local tools and PayPal. Labels use plain language and the capture is linked to saved evidence.
 
 [Typed execution contracts](docs/commerce-expanded/harness-v2/typed-execution.md) validate every proposal. The LLM chooses experiments; deterministic code owns the final publish/retain decision. No new runtime dependency is required.

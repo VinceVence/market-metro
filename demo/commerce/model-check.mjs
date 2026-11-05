@@ -39,7 +39,8 @@ export async function showModelCheck(root) {
     <div class="performance-table"><table><caption>Where the gains came from</caption><thead><tr><th>Unseen market</th><th>PayPal vs original</th><th>Merchants vs original</th><th>Purchases vs original</th><th>PayPal vs fixed</th></tr></thead><tbody>
     ${cases.map(c=>`<tr><th scope="row">${esc(marketNames[c.regime])}</th><td>${signed(c.vsOriginal.paypal)}</td><td>${signed(c.vsOriginal.merchants)}</td><td>${c.vsOriginal.purchases}</td><td>${signed(c.vsFixed.paypal)}</td></tr>`).join('')}</tbody></table></div>
     <p class="performance-note">Each campaign stayed in place from displayed day 31 through market close. Both agent policies carry the same recorded first-review AI cost. This comparison ran locally with $0 in new model charges. Financial results are simulated.</p>
-    <a href="/data/commerce-model-check.json" download>Download all four decisions and results</a></div>`;
+    <a href="?view=performance&amp;evaluation=reactivation-fresh">See whether the reactivation result repeated with fresh decisions</a>
+    <p><a href="/data/commerce-model-check.json" download>Download all four decisions and results</a></p></div>`;
   const selector = root.querySelector('[data-market]');
   selector.value=String(Math.max(0,cases.findIndex(c=>c.regime==='reactivation')));
   function draw() {
@@ -53,4 +54,31 @@ export async function showModelCheck(root) {
   }
   selector.onchange=draw;
   draw();
+}
+
+export async function showFreshReactivation(root) {
+  const file='/data/commerce-reactivation-fresh.json';
+  const response=await fetch(file,{cache:'no-store'});
+  if(!response.ok)throw Error('The fresh reactivation results are not available yet.');
+  const {cases,totals,comparisons,completeReviews,studyCostUSD,freshDecisions}=await response.json();
+  const comparisonsList=[['Single planner vs fixed','singleVsFixed'],['Team vs fixed','teamVsFixed'],['Team vs single planner','teamVsSingle'],
+    ['Verifier added to single planner','singleVerifier'],['Verifier added to team','teamVerifier']];
+  root.innerHTML=`<div class="channel-heading"><h2>Fresh reactivation test</h2></div><div class="performance-body">
+    <p class="performance-verdict"><b>The single planner beat fixed rules on all three outcomes in ${comparisons.singleVsFixed.strictJointWins} of ${cases.length} markets. The team did so in ${comparisons.teamVsFixed.strictJointWins}.</b>
+    <span>The team's extra model check improved PayPal net, merchant contribution and retained purchases together on ${comparisons.teamVerifier.strictJointWins} of ${cases.length} seeds. Its median PayPal gain was ${usd.format(comparisons.teamVerifier.medianPayPal)}.</span></p>
+    <p class="performance-note">One planner and a three-role team each received the same 30 days of shopper activity, the same financial verifier and the same call budget. Their campaigns ran through settlement on six new markets.</p>
+    <div class="performance-summary"><div><small>Completed reviews</small><b>${completeReviews} / ${2*cases.length}</b></div>
+    <div><small>Fresh Gemini decisions</small><b>${freshDecisions}</b></div><div><small>Metered AI cost</small><b>$${studyCostUSD.toFixed(4)}</b></div></div>
+    <div class="performance-section"><h3>What each approach added</h3></div>
+    <div class="performance-table"><table><caption>Paired totals across six markets</caption><thead><tr><th>Comparison</th><th>PayPal net after AI</th><th>Merchants</th><th>Retained purchases</th><th>Seeds up on all three</th></tr></thead>
+    <tbody>${comparisonsList.map(([label,key])=>{const c=comparisons[key];return `<tr><th scope="row">${label}</th><td>${signed(c.total.paypal)}</td><td>${signed(c.total.merchants)}</td><td>${c.total.purchases}</td><td>${c.strictJointWins} / ${cases.length}</td></tr>`;}).join('')}</tbody></table></div>
+    <div class="performance-section"><h3>Every seed</h3><select aria-label="Paired comparison" data-pair>${comparisonsList.map(([label,key])=>`<option value="${key}">${label}</option>`).join('')}</select></div>
+    <div class="performance-table"><table><thead><tr><th>Seed</th><th>PayPal net change</th><th>Merchant change</th><th>Purchase change</th></tr></thead><tbody data-seeds></tbody></table></div>
+    <p class="performance-note">The fixed policy earned ${usd.format(totals.fixed.paypal)} in modeled PayPal net across these markets. Each verifier comparison replays the same fresh proposal with its original ranking model and charges both versions the same AI cost. Four joint wins and positive totals in all three outcomes were required for a repeat. All shoppers and financial outcomes are simulated.</p>
+    <a href="${file}" download>Download paired results</a></div>`;
+  const pick=root.querySelector('[data-pair]');
+  pick.value='teamVerifier';
+  function draw(){root.querySelector('[data-seeds]').innerHTML=cases.map(c=>{const r=c.comparisons[pick.value];
+    return `<tr><th scope="row">${c.seed}</th><td>${signed(r.paypal)}</td><td>${signed(r.merchants)}</td><td>${r.purchases}</td></tr>`;}).join('');}
+  pick.onchange=draw;draw();
 }
