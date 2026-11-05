@@ -19,6 +19,8 @@ For the recorded submission example, run `node scripts/commerce-expanded/harness
 
 [Completed V2.3 results](docs/commerce-expanded/harness-v2/v23-20261104/README.md): mean **+$38.09 modeled PayPal net, +$417.34 merchant contribution and +4.25 purchases** over fixed rules across four fresh markets. All eight AI workflows completed. One planner performed better than the team; multi-agent superiority is not claimed.
 
+Open [Campaign model check](http://127.0.0.1:4173/studio.html?view=performance&evaluation=model-check) to see what happened when the verifier tested the same campaign with both trained models. Each market links to the original team decisions and shows the outcome on an unseen shopper population. You can enable this check in **New live run → Workflow**. [Method and frozen comparison](docs/commerce-expanded/model-check/README.md).
+
 ## V2.3 workflow
 
 [System architecture by plane](docs/figures/planner-v23/README.md) uses the selected C layout, B palette and DM Sans to show the market, LLM agent, saved decisions, local tools and PayPal. Labels use plain language and the capture is linked to saved evidence.

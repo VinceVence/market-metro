@@ -56,10 +56,13 @@ export async function checkCampaignModel({tested, trained, incumbentTrial, conte
     const selection = accepted ? selectPublication(existing ? tested : [...tested, challenger], incumbentTrial, context) : original;
     const changed = selection.decision.selectedContractHash !== original.decision.selectedContractHash;
     const status = changed ? (original.selected ? 'switched' : 'rescued') : 'kept';
-    const reason = changed ? 'The second model earned more in the trials and passed the merchant and purchase checks.'
-      : 'The original decision held after comparing the two models on the same campaign.';
+    const reasons = {
+      switched: 'The second model earned more in the trials and passed the merchant and purchase checks.',
+      rescued: 'The original campaign failed the checks. The second model qualified the same campaign for publication.',
+      kept: 'The original decision held after comparing the two models on the same campaign.'
+    };
     return {selection, admitted: changed && !existing ? challenger : null, report: {
-      ...initial, ...details, status, reason, selectedContractHash: selection.decision.selectedContractHash,
+      ...initial, ...details, status, reason: reasons[status], selectedContractHash: selection.decision.selectedContractHash,
       alternative: describe(challenger), extraTrials, receipt: trial,
       failedChecks: [...new Set([...Object.entries(standard.checks), ...Object.entries(floor.checks)]
         .filter(([, passed]) => !passed).map(([name]) => name))]

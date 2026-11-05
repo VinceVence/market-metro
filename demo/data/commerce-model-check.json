@@ -1,0 +1,705 @@
+{
+  "version": "same-campaign-model-check-1",
+  "coverage": {
+    "reviews": 16,
+    "twoModelsFitted": 16,
+    "bothModelsTrialed": 0
+  },
+  "protocol": {
+    "version": "same-campaign-model-check-1",
+    "registeredOn": "2026-11-05",
+    "sourceStudy": "v23-20261104",
+    "sourceArm": "team",
+    "reviewDay": 30,
+    "cases": [
+      {
+        "sourceCase": "case-1",
+        "seed": 88110501,
+        "regime": "discovery"
+      },
+      {
+        "sourceCase": "case-2",
+        "seed": 88110502,
+        "regime": "reactivation"
+      },
+      {
+        "sourceCase": "case-3",
+        "seed": 88110503,
+        "regime": "low_response"
+      },
+      {
+        "sourceCase": "case-4",
+        "seed": 88110504,
+        "regime": "zero_response"
+      }
+    ],
+    "intervention": "For each recorded first-review published campaign, change only its fitted ranking model. Keep the original campaign, supply settings, timing, seed and constraints paired.",
+    "selection": "Use the existing three development worlds and publication gates. A challenger replacing an eligible choice must also pass those gates against that choice. Prefer the original on a tie or missing evidence. Freeze every choice before opening any evaluation market.",
+    "evaluation": "Run fixed rules, the original published first-review policy, and the locked checked policy on each assigned new seed. Hold that first-review policy through settlement. Reuse an identical arm's exact outcome when its contract is unchanged. No day-60 redesign in any arm.",
+    "metrics": [
+      "platformUSD",
+      "retailerUSD",
+      "retainedPurchases",
+      "retainedVolumeUSD",
+      "unpaidLiabilities"
+    ],
+    "accounting": "Report modeled contribution before inference and charge the same recorded first-review inference cost to both AI policy arms. Incremental cloud spend for this comparison is zero. Local computation takes time.",
+    "limits": {
+      "sourceReviews": 4,
+      "maxAdditionalDevelopmentTrialsPerReview": 1,
+      "freshProviderCalls": 0,
+      "nativePayments": 0
+    }
+  },
+  "lockHash": "971d91d65204dfef5ccc05efd77fc17465ca4cd030277cdfcae16592fea2c521",
+  "lock": {
+    "protocolHash": "5ea2986fc156e3b502f90b5a5d7b8ec921dc4e9624e2e9c7fe58d31aedc3664f",
+    "economyHash": "6136ba9c94253a1db3c46071b890d4721426ee00427d2cbd44efba06513b4c45",
+    "choices": [
+      {
+        "sourceCase": "case-1",
+        "seed": 88110501,
+        "regime": "discovery",
+        "original": "19306d0ce60f8aca53e57ba912f1e89ddbd7dac49510400a12224c8ebd64cf88",
+        "selected": "19306d0ce60f8aca53e57ba912f1e89ddbd7dac49510400a12224c8ebd64cf88",
+        "pairedReceipts": [
+          "8011d0512b99455ab0a742e251744c1274f626493a5ae09fc0ef0773c4c7d272",
+          "0e4ebb0211f7025ab99ca1c0d0d6d0edec65b143a65ed91c17ccb8d953bab268"
+        ]
+      },
+      {
+        "sourceCase": "case-2",
+        "seed": 88110502,
+        "regime": "reactivation",
+        "original": "7f732dcd03aba8b2aa9575f39264629c4256ebcd544d5ea093300801319a69bb",
+        "selected": "97ceda83325edb43795cdd86ca44e3dc8eb01694ac85e6934573cfbf9c2a6335",
+        "pairedReceipts": [
+          "fa3fc97a689745e7db7a487728c88d551af97fed0d6c2da65fb0a740c15466ce",
+          "f8ddfc265087e61bf81f8423c3c96309db997f304d53833b8f6c6125eb96b540"
+        ]
+      },
+      {
+        "sourceCase": "case-3",
+        "seed": 88110503,
+        "regime": "low_response",
+        "original": "870071dadf689384904688c43f9885a505a40fca88cf085897d2c086b40ca77d",
+        "selected": "06ce04ac548572c48e39fab0f8b4e0b9d905abe59c631d8c098a7c3df2a3382d",
+        "pairedReceipts": [
+          "de2762f5a9891c567b9da086a5af4dc0db4c3a6abe8b936eab128e719f407ff8",
+          "0ddc87e042cc9294d3dd1336f75bc6619f60fa5b72fe157e97acc3213ba4a5dd"
+        ]
+      },
+      {
+        "sourceCase": "case-4",
+        "seed": 88110504,
+        "regime": "zero_response",
+        "original": "af2f6448999551c91958b66ac38834b07204e16c879d9e18d0529a26512ad485",
+        "selected": "af2f6448999551c91958b66ac38834b07204e16c879d9e18d0529a26512ad485",
+        "pairedReceipts": [
+          "ea78c4f7e74af393414c74305ec50b5bbc35ff290a241d8ae74d6ea48f2c5de8",
+          "77c96ed8b04ad7d29c64a6fe4f23e1dd2f1dc5e6c6b1d44ea8152aa89445063c"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "sourceCase": "case-1",
+      "seed": 88110501,
+      "regime": "discovery",
+      "identicalPolicy": true,
+      "originalCost": 0.033351,
+      "development": {
+        "version": "same-campaign-model-check-1",
+        "baselineDecision": "publish",
+        "selectedContractHash": "19306d0ce60f8aca53e57ba912f1e89ddbd7dac49510400a12224c8ebd64cf88",
+        "extraTrials": 1,
+        "anchor": {
+          "modelId": "V2-MODEL-d746ce0f65a0",
+          "modelHash": "d746ce0f65a0e762903cdfe9522fbcc19a4e2d9dd043c6a779e9906cadc07fc5",
+          "family": "boosted",
+          "features": "intent_context",
+          "auc": 0.6789286776935574,
+          "contractHash": "19306d0ce60f8aca53e57ba912f1e89ddbd7dac49510400a12224c8ebd64cf88",
+          "receiptHash": "8011d0512b99455ab0a742e251744c1274f626493a5ae09fc0ef0773c4c7d272",
+          "paypal": 27.336666666666588,
+          "merchants": 252.73000000000079,
+          "purchases": 4
+        },
+        "campaign": {
+          "objective": "joint",
+          "contactsPer100": 10,
+          "productPreference": "lowest_acceptable_price",
+          "kind": "intent_assistance",
+          "supplierSettlement": "paypal_fast",
+          "coverDays": 7,
+          "forecast": "recent14"
+        },
+        "contextHash": "af72da6bd8c86f75ec55202f0a59287962ba2ad45f786bf351c77170994a1eab",
+        "status": "kept",
+        "reason": "The original decision held after comparing the two models on the same campaign.",
+        "alternative": {
+          "modelId": "V2-MODEL-7361a405c294",
+          "modelHash": "7361a405c294fcdcaf8da945badf9be8bb722816cdd0f7a4614def66a4747081",
+          "family": "response_hurdle",
+          "features": "existing",
+          "auc": 0.6804484963428026,
+          "contractHash": "24c1ea0767f3b19db481a2e31eabdba12279923631e278a394dbd31e52c99d38",
+          "receiptHash": "0e4ebb0211f7025ab99ca1c0d0d6d0edec65b143a65ed91c17ccb8d953bab268",
+          "paypal": 24.106666666666722,
+          "merchants": 237.41666666666666,
+          "purchases": 2.6666666666666665
+        },
+        "receipt": {
+          "contractHash": "24c1ea0767f3b19db481a2e31eabdba12279923631e278a394dbd31e52c99d38",
+          "modelHash": "7361a405c294fcdcaf8da945badf9be8bb722816cdd0f7a4614def66a4747081",
+          "trialHash": "29554ec367afe7797de807703404bf67d8c70ba047fe216887c00dda3f7dcf76",
+          "evaluationContextHash": "ae5312d411f92d7dffac99a596028ad1816ec36f3d21f7abea16156d971c4955",
+          "reviewContextHash": "af72da6bd8c86f75ec55202f0a59287962ba2ad45f786bf351c77170994a1eab",
+          "prefixHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "measurement": {
+            "platformUSD": 4067.9533333333334,
+            "retailerUSD": 47876.206666666665,
+            "retainedPurchases": 749,
+            "platformDeltaUSD": 24.106666666666722,
+            "retailerDeltaUSD": 237.41666666666666,
+            "purchaseDelta": 2.6666666666666665,
+            "unpaidLiabilities": 0,
+            "retainedVolumeUSD": 106434,
+            "volumeDeltaUSD": 555.6666666666666,
+            "partnerCashDeltaUSD": 380.3333333333333,
+            "inventoryRatio": 1.000992292328898,
+            "contactCount": 2001.6666666666667,
+            "contactDelta": -14.666666666666666,
+            "outreachCostUSD": 100.08333333333333,
+            "outreachCostDeltaUSD": -0.7333333333333343
+          },
+          "cases": [
+            {
+              "regime": "discovery",
+              "platformDeltaUSD": 60.090000000000146,
+              "retailerDeltaUSD": 621.9199999999983,
+              "purchaseDelta": 5
+            },
+            {
+              "regime": "low_response",
+              "platformDeltaUSD": 11.480000000000018,
+              "retailerDeltaUSD": 90.33000000000175,
+              "purchaseDelta": 3
+            },
+            {
+              "regime": "zero_response",
+              "platformDeltaUSD": 0.75,
+              "retailerDeltaUSD": 0,
+              "purchaseDelta": 0
+            }
+          ],
+          "scope": "Frozen expanded-12x600 development markets; matches the execution market size. No active-market future.",
+          "activeMarketFutureUsed": false,
+          "source": "LOCAL_TRUSTED_EVALUATOR",
+          "receiptHash": "0e4ebb0211f7025ab99ca1c0d0d6d0edec65b143a65ed91c17ccb8d953bab268"
+        },
+        "failedChecks": [
+          "merchantProtected",
+          "purchasesProtected",
+          "volumeProtected",
+          "cashProtected",
+          "beatsIncumbent"
+        ]
+      },
+      "exposureHash": "ad04024aead65e10c2b333a7cbde483144b92c0b9ec155a577365dba8b5f929c",
+      "fixed": {
+        "paypal": 4174.89,
+        "paypalBeforeAI": 4174.89,
+        "merchants": 48674.14,
+        "purchases": 815,
+        "volume": 106109
+      },
+      "original": {
+        "paypal": 4262.636649,
+        "paypalBeforeAI": 4262.67,
+        "merchants": 49666.38,
+        "purchases": 827,
+        "volume": 108121
+      },
+      "checked": {
+        "paypal": 4262.636649,
+        "paypalBeforeAI": 4262.67,
+        "merchants": 49666.38,
+        "purchases": 827,
+        "volume": 108121
+      },
+      "vsOriginal": {
+        "paypal": 0,
+        "paypalBeforeAI": 0,
+        "merchants": 0,
+        "purchases": 0,
+        "volume": 0
+      },
+      "vsFixed": {
+        "paypal": 87.746649,
+        "paypalBeforeAI": 87.78,
+        "merchants": 992.24,
+        "purchases": 12,
+        "volume": 2012
+      },
+      "unpaidLiabilities": 0
+    },
+    {
+      "sourceCase": "case-2",
+      "seed": 88110502,
+      "regime": "reactivation",
+      "identicalPolicy": false,
+      "originalCost": 0.035439,
+      "development": {
+        "version": "same-campaign-model-check-1",
+        "baselineDecision": "publish",
+        "selectedContractHash": "97ceda83325edb43795cdd86ca44e3dc8eb01694ac85e6934573cfbf9c2a6335",
+        "extraTrials": 1,
+        "anchor": {
+          "modelId": "V2-MODEL-d417270e634b",
+          "modelHash": "d417270e634b80ff934e4350668f0f61e716565026dabc74af2e247d52ded680",
+          "family": "boosted",
+          "features": "market_feedback",
+          "auc": 0.7727218239536262,
+          "contractHash": "7f732dcd03aba8b2aa9575f39264629c4256ebcd544d5ea093300801319a69bb",
+          "receiptHash": "fa3fc97a689745e7db7a487728c88d551af97fed0d6c2da65fb0a740c15466ce",
+          "paypal": 30.97333333333351,
+          "merchants": 346.256666666668,
+          "purchases": 5.333333333333333
+        },
+        "campaign": {
+          "coverDays": 7,
+          "productPreference": "lowest_acceptable_price",
+          "forecast": "recent14",
+          "contactsPer100": 6,
+          "kind": "ranked_discovery",
+          "supplierSettlement": "paypal_fast",
+          "objective": "joint"
+        },
+        "contextHash": "e6c437c56b23bbabd16316908a59911a385a5e091c257261fe91ed44b0163c00",
+        "status": "switched",
+        "reason": "The second model earned more in the trials and passed the merchant and purchase checks.",
+        "alternative": {
+          "modelId": "V2-MODEL-7361a405c294",
+          "modelHash": "7361a405c294fcdcaf8da945badf9be8bb722816cdd0f7a4614def66a4747081",
+          "family": "response_hurdle",
+          "features": "existing",
+          "auc": 0.6804484963428026,
+          "contractHash": "97ceda83325edb43795cdd86ca44e3dc8eb01694ac85e6934573cfbf9c2a6335",
+          "receiptHash": "f8ddfc265087e61bf81f8423c3c96309db997f304d53833b8f6c6125eb96b540",
+          "paypal": 37.70999999999989,
+          "merchants": 402.47333333333273,
+          "purchases": 6
+        },
+        "receipt": {
+          "contractHash": "97ceda83325edb43795cdd86ca44e3dc8eb01694ac85e6934573cfbf9c2a6335",
+          "modelHash": "7361a405c294fcdcaf8da945badf9be8bb722816cdd0f7a4614def66a4747081",
+          "trialHash": "ec1b67fe28c1696a5653c7b13996c6c0fc3872b6f37006889207d55890947073",
+          "evaluationContextHash": "ae5312d411f92d7dffac99a596028ad1816ec36f3d21f7abea16156d971c4955",
+          "reviewContextHash": "e6c437c56b23bbabd16316908a59911a385a5e091c257261fe91ed44b0163c00",
+          "prefixHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "measurement": {
+            "platformUSD": 4081.556666666667,
+            "retailerUSD": 48041.26333333333,
+            "retainedPurchases": 752.3333333333334,
+            "platformDeltaUSD": 37.70999999999989,
+            "retailerDeltaUSD": 402.47333333333273,
+            "purchaseDelta": 6,
+            "unpaidLiabilities": 0,
+            "retainedVolumeUSD": 106765,
+            "volumeDeltaUSD": 886.6666666666666,
+            "partnerCashDeltaUSD": 622.4233333333395,
+            "inventoryRatio": 0.9978037356887677,
+            "contactCount": 1992.6666666666667,
+            "contactDelta": -23.666666666666668,
+            "outreachCostUSD": 99.63333333333333,
+            "outreachCostDeltaUSD": -1.1833333333333325
+          },
+          "cases": [
+            {
+              "regime": "discovery",
+              "platformDeltaUSD": 93,
+              "retailerDeltaUSD": 1018.3899999999994,
+              "purchaseDelta": 13
+            },
+            {
+              "regime": "low_response",
+              "platformDeltaUSD": 19.230000000000018,
+              "retailerDeltaUSD": 189.02999999999884,
+              "purchaseDelta": 5
+            },
+            {
+              "regime": "zero_response",
+              "platformDeltaUSD": 0.900000000000091,
+              "retailerDeltaUSD": 0,
+              "purchaseDelta": 0
+            }
+          ],
+          "scope": "Frozen expanded-12x600 development markets; matches the execution market size. No active-market future.",
+          "activeMarketFutureUsed": false,
+          "source": "LOCAL_TRUSTED_EVALUATOR",
+          "receiptHash": "f8ddfc265087e61bf81f8423c3c96309db997f304d53833b8f6c6125eb96b540"
+        },
+        "failedChecks": []
+      },
+      "exposureHash": "5b015bc863102102ea9547dc569c7175874c5c4d9a478661a43ad00263006ff1",
+      "fixed": {
+        "paypal": 3199.55,
+        "paypalBeforeAI": 3199.55,
+        "merchants": 38582.75,
+        "purchases": 637,
+        "volume": 87417
+      },
+      "original": {
+        "paypal": 3220.384561,
+        "paypalBeforeAI": 3220.42,
+        "merchants": 38850.18,
+        "purchases": 644,
+        "volume": 88045
+      },
+      "checked": {
+        "paypal": 3304.414561,
+        "paypalBeforeAI": 3304.45,
+        "merchants": 39804.58,
+        "purchases": 655,
+        "volume": 90076
+      },
+      "vsOriginal": {
+        "paypal": 84.03,
+        "paypalBeforeAI": 84.03,
+        "merchants": 954.4,
+        "purchases": 11,
+        "volume": 2031
+      },
+      "vsFixed": {
+        "paypal": 104.864561,
+        "paypalBeforeAI": 104.9,
+        "merchants": 1221.83,
+        "purchases": 18,
+        "volume": 2659
+      },
+      "unpaidLiabilities": 0
+    },
+    {
+      "sourceCase": "case-3",
+      "seed": 88110503,
+      "regime": "low_response",
+      "identicalPolicy": false,
+      "originalCost": 0.038299,
+      "development": {
+        "version": "same-campaign-model-check-1",
+        "baselineDecision": "publish",
+        "selectedContractHash": "06ce04ac548572c48e39fab0f8b4e0b9d905abe59c631d8c098a7c3df2a3382d",
+        "extraTrials": 1,
+        "anchor": {
+          "modelId": "V2-MODEL-7fabf1bb9dac",
+          "modelHash": "7fabf1bb9dac5297103c0ad39f4ff51dd9b0c6d28e1425ca03e89c2304f02c0c",
+          "family": "forest",
+          "features": "intent_context",
+          "auc": 0.6990202521186486,
+          "contractHash": "870071dadf689384904688c43f9885a505a40fca88cf085897d2c086b40ca77d",
+          "receiptHash": "de2762f5a9891c567b9da086a5af4dc0db4c3a6abe8b936eab128e719f407ff8",
+          "paypal": 14.296666666666624,
+          "merchants": 66.59333333333295,
+          "purchases": 2.3333333333333335
+        },
+        "campaign": {
+          "supplierSettlement": "paypal_fast",
+          "contactsPer100": 10,
+          "kind": "intent_assistance",
+          "forecast": "recent14",
+          "objective": "joint",
+          "productPreference": "lowest_acceptable_price",
+          "coverDays": 7
+        },
+        "contextHash": "83c1d284904dfc4b3445e5a625b0ecc1a5bac824268bb85101741b05406c0700",
+        "status": "switched",
+        "reason": "The second model earned more in the trials and passed the merchant and purchase checks.",
+        "alternative": {
+          "modelId": "V2-MODEL-356b8c909568",
+          "modelHash": "356b8c9095681b3d987c130789ae73d9bc4e45212ff064d6d700a9278f41980d",
+          "family": "forest",
+          "features": "existing",
+          "auc": 0.6652663642727026,
+          "contractHash": "06ce04ac548572c48e39fab0f8b4e0b9d905abe59c631d8c098a7c3df2a3382d",
+          "receiptHash": "0ddc87e042cc9294d3dd1336f75bc6619f60fa5b72fe157e97acc3213ba4a5dd",
+          "paypal": 20.750000000000153,
+          "merchants": 165.65333333333305,
+          "purchases": 3.6666666666666665
+        },
+        "receipt": {
+          "contractHash": "06ce04ac548572c48e39fab0f8b4e0b9d905abe59c631d8c098a7c3df2a3382d",
+          "modelHash": "356b8c9095681b3d987c130789ae73d9bc4e45212ff064d6d700a9278f41980d",
+          "trialHash": "e2be01aa06641e3225528400f5619ddecc78e72bc8cf0f14694c4a51e1c4cb49",
+          "evaluationContextHash": "ae5312d411f92d7dffac99a596028ad1816ec36f3d21f7abea16156d971c4955",
+          "reviewContextHash": "83c1d284904dfc4b3445e5a625b0ecc1a5bac824268bb85101741b05406c0700",
+          "prefixHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "measurement": {
+            "platformUSD": 4064.596666666667,
+            "retailerUSD": 47804.443333333336,
+            "retainedPurchases": 750,
+            "platformDeltaUSD": 20.750000000000153,
+            "retailerDeltaUSD": 165.65333333333305,
+            "purchaseDelta": 3.6666666666666665,
+            "unpaidLiabilities": 0,
+            "retainedVolumeUSD": 106254.33333333333,
+            "volumeDeltaUSD": 376,
+            "partnerCashDeltaUSD": 262.1699999999934,
+            "inventoryRatio": 0.9978775774283383,
+            "contactCount": 1919.6666666666667,
+            "contactDelta": -96.66666666666667,
+            "outreachCostUSD": 95.98333333333333,
+            "outreachCostDeltaUSD": -4.833333333333333
+          },
+          "cases": [
+            {
+              "regime": "discovery",
+              "platformDeltaUSD": 42.27000000000044,
+              "retailerDeltaUSD": 406.6299999999974,
+              "purchaseDelta": 8
+            },
+            {
+              "regime": "low_response",
+              "platformDeltaUSD": 15.480000000000018,
+              "retailerDeltaUSD": 90.33000000000175,
+              "purchaseDelta": 3
+            },
+            {
+              "regime": "zero_response",
+              "platformDeltaUSD": 4.5,
+              "retailerDeltaUSD": 0,
+              "purchaseDelta": 0
+            }
+          ],
+          "scope": "Frozen expanded-12x600 development markets; matches the execution market size. No active-market future.",
+          "activeMarketFutureUsed": false,
+          "source": "LOCAL_TRUSTED_EVALUATOR",
+          "receiptHash": "0ddc87e042cc9294d3dd1336f75bc6619f60fa5b72fe157e97acc3213ba4a5dd"
+        },
+        "failedChecks": []
+      },
+      "exposureHash": "f1a124df4aea4527fdc2f98d18049de20ad2aba41f0ae5fe44b17ae8ed70a44e",
+      "fixed": {
+        "paypal": 3842.87,
+        "paypalBeforeAI": 3842.87,
+        "merchants": 46728.2,
+        "purchases": 740,
+        "volume": 102155
+      },
+      "original": {
+        "paypal": 3839.471701,
+        "paypalBeforeAI": 3839.51,
+        "merchants": 46643.08,
+        "purchases": 739,
+        "volume": 101982
+      },
+      "checked": {
+        "paypal": 3841.291701,
+        "paypalBeforeAI": 3841.33,
+        "merchants": 46643.08,
+        "purchases": 739,
+        "volume": 101982
+      },
+      "vsOriginal": {
+        "paypal": 1.82,
+        "paypalBeforeAI": 1.82,
+        "merchants": 0,
+        "purchases": 0,
+        "volume": 0
+      },
+      "vsFixed": {
+        "paypal": -1.578299,
+        "paypalBeforeAI": -1.54,
+        "merchants": -85.12,
+        "purchases": -1,
+        "volume": -173
+      },
+      "unpaidLiabilities": 0
+    },
+    {
+      "sourceCase": "case-4",
+      "seed": 88110504,
+      "regime": "zero_response",
+      "identicalPolicy": true,
+      "originalCost": 0.037348,
+      "development": {
+        "version": "same-campaign-model-check-1",
+        "baselineDecision": "publish",
+        "selectedContractHash": "af2f6448999551c91958b66ac38834b07204e16c879d9e18d0529a26512ad485",
+        "extraTrials": 1,
+        "anchor": {
+          "modelId": "V2-MODEL-ce8ca7dcfccd",
+          "modelHash": "ce8ca7dcfccd46848c870010e0adf1ad94cc6324e6658d133ca130e29725c2bb",
+          "family": "response_hurdle",
+          "features": "intent_context",
+          "auc": 0.730827362042564,
+          "contractHash": "af2f6448999551c91958b66ac38834b07204e16c879d9e18d0529a26512ad485",
+          "receiptHash": "ea78c4f7e74af393414c74305ec50b5bbc35ff290a241d8ae74d6ea48f2c5de8",
+          "paypal": 40.0933333333331,
+          "merchants": 424.77666666666727,
+          "purchases": 7
+        },
+        "campaign": {
+          "objective": "joint",
+          "productPreference": "lowest_acceptable_price",
+          "coverDays": 7,
+          "contactsPer100": 6,
+          "kind": "ranked_discovery",
+          "supplierSettlement": "paypal_fast",
+          "forecast": "recent14"
+        },
+        "contextHash": "800b5eace2dce8d776e810ba471119381a42811db38ce64c0f457f030e9f04cb",
+        "status": "kept",
+        "reason": "The original decision held after comparing the two models on the same campaign.",
+        "alternative": {
+          "modelId": "V2-MODEL-65361c1d79b9",
+          "modelHash": "65361c1d79b961d870a273548b97ce0e6a42c99185e287165d4472fd54a2fd4f",
+          "family": "forest",
+          "features": "intent_context",
+          "auc": 0.7212891131552563,
+          "contractHash": "cc0968d011cb9aeb0b80ff53b9a5877dcbc66805e16bfc91e2d3b80e0f5212fb",
+          "receiptHash": "77c96ed8b04ad7d29c64a6fe4f23e1dd2f1dc5e6c6b1d44ea8152aa89445063c",
+          "paypal": 42.06000000000025,
+          "merchants": 459.006666666668,
+          "purchases": 6
+        },
+        "receipt": {
+          "contractHash": "cc0968d011cb9aeb0b80ff53b9a5877dcbc66805e16bfc91e2d3b80e0f5212fb",
+          "modelHash": "65361c1d79b961d870a273548b97ce0e6a42c99185e287165d4472fd54a2fd4f",
+          "trialHash": "3e802bb7c166c083abc5b34d8ed98df4979728b8cb089858562d8ea34c276b71",
+          "evaluationContextHash": "ae5312d411f92d7dffac99a596028ad1816ec36f3d21f7abea16156d971c4955",
+          "reviewContextHash": "800b5eace2dce8d776e810ba471119381a42811db38ce64c0f457f030e9f04cb",
+          "prefixHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "measurement": {
+            "platformUSD": 4085.906666666667,
+            "retailerUSD": 48097.79666666667,
+            "retainedPurchases": 752.3333333333334,
+            "platformDeltaUSD": 42.06000000000025,
+            "retailerDeltaUSD": 459.006666666668,
+            "purchaseDelta": 6,
+            "unpaidLiabilities": 0,
+            "retainedVolumeUSD": 106870.33333333333,
+            "volumeDeltaUSD": 992,
+            "partnerCashDeltaUSD": 701.3600000000055,
+            "inventoryRatio": 0.9983178148471125,
+            "contactCount": 1991.3333333333333,
+            "contactDelta": -25,
+            "outreachCostUSD": 99.56666666666666,
+            "outreachCostDeltaUSD": -1.2500000000000047
+          },
+          "cases": [
+            {
+              "regime": "discovery",
+              "platformDeltaUSD": 107.85000000000036,
+              "retailerDeltaUSD": 1206.3300000000017,
+              "purchaseDelta": 14
+            },
+            {
+              "regime": "low_response",
+              "platformDeltaUSD": 17.329999999999927,
+              "retailerDeltaUSD": 170.69000000000233,
+              "purchaseDelta": 4
+            },
+            {
+              "regime": "zero_response",
+              "platformDeltaUSD": 1,
+              "retailerDeltaUSD": 0,
+              "purchaseDelta": 0
+            }
+          ],
+          "scope": "Frozen expanded-12x600 development markets; matches the execution market size. No active-market future.",
+          "activeMarketFutureUsed": false,
+          "source": "LOCAL_TRUSTED_EVALUATOR",
+          "receiptHash": "77c96ed8b04ad7d29c64a6fe4f23e1dd2f1dc5e6c6b1d44ea8152aa89445063c"
+        },
+        "failedChecks": [
+          "purchasesProtected"
+        ]
+      },
+      "exposureHash": "1d1150a011b14188d17e0a0751d90c842791a2c0eee737a99833e81d948b0d47",
+      "fixed": {
+        "paypal": 3812.46,
+        "paypalBeforeAI": 3812.46,
+        "merchants": 44406.06,
+        "purchases": 679,
+        "volume": 102691
+      },
+      "original": {
+        "paypal": 3814.122652,
+        "paypalBeforeAI": 3814.16,
+        "merchants": 44406.06,
+        "purchases": 679,
+        "volume": 102691
+      },
+      "checked": {
+        "paypal": 3814.122652,
+        "paypalBeforeAI": 3814.16,
+        "merchants": 44406.06,
+        "purchases": 679,
+        "volume": 102691
+      },
+      "vsOriginal": {
+        "paypal": 0,
+        "paypalBeforeAI": 0,
+        "merchants": 0,
+        "purchases": 0,
+        "volume": 0
+      },
+      "vsFixed": {
+        "paypal": 1.662652,
+        "paypalBeforeAI": 1.7,
+        "merchants": 0,
+        "purchases": 0,
+        "volume": 0
+      },
+      "unpaidLiabilities": 0
+    }
+  ],
+  "totals": {
+    "fixed": {
+      "paypal": 15029.77,
+      "paypalBeforeAI": 15029.77,
+      "merchants": 178391.15,
+      "purchases": 2871,
+      "volume": 398372
+    },
+    "original": {
+      "paypal": 15136.615563,
+      "paypalBeforeAI": 15136.76,
+      "merchants": 179565.7,
+      "purchases": 2889,
+      "volume": 400839
+    },
+    "checked": {
+      "paypal": 15222.465563,
+      "paypalBeforeAI": 15222.61,
+      "merchants": 180520.1,
+      "purchases": 2900,
+      "volume": 402870
+    },
+    "vsOriginal": {
+      "paypal": 85.85,
+      "paypalBeforeAI": 85.85,
+      "merchants": 954.4,
+      "purchases": 11,
+      "volume": 2031
+    },
+    "vsFixed": {
+      "paypal": 192.695563,
+      "paypalBeforeAI": 192.84,
+      "merchants": 2128.95,
+      "purchases": 29,
+      "volume": 4498
+    }
+  },
+  "check": {
+    "switches": 2,
+    "developmentTrials": 4,
+    "newModelCalls": 0,
+    "newModelCostUSD": 0,
+    "newPayments": 0,
+    "originalCostAcrossCases": 0.144437,
+    "wallSeconds": 554
+  }
+}

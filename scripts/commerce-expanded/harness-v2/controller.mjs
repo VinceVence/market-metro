@@ -4,6 +4,7 @@ import {openTeamVertex} from '../../agent-mesh/model-client.mjs';
 import {outreachPlan} from '../../commerce-growth/team/control.mjs';
 import {read,digest,datasetOverview,inspectDemand,inspectCurrent,matureOwnRows,fitModel,compileCampaign,scoreCampaign,captureInputs,FEATURES,FAMILIES,KINDS} from './tools.mjs';
 import {createTrialTool,publicationGate,selectPublication} from './trials.mjs';
+import {checkCampaignModel,MODEL_CHECK} from './model-check.mjs';
 import {VERSION,MODEL_CAP_MICROS,en,textSchema as str,campaignSchema,toolDeclaration,validateToolReply,canonicalHash,freeze,marketProfileFor,validate} from './contracts.mjs';
 
 const instructions='You operate a checkpointed commerce experiment workflow. Economic dates PAUSE while you investigate, train, test and revise. Improve retained purchases and modeled PayPal contribution while protecting merchants. The same tools, evidence and six-decision review budget are available to a single planner and the three-role team. Use tool results to change decisions, not merely narrate them. No hidden needs, future active-market outcomes, household wallets or seeds are available. Immediate funding is not eventual purchase: some requests fund later. Training and development trials are synthetic and conditional; they do not establish causal lift or production profit. You propose experiments and revisions; you cannot publish or veto a tested candidate. A deterministic controller ranks all eligible measured candidates and owns final publication. Stop searching with finish_review, or propose one revision with propose_campaign_revision. Every publication binds the exact tested campaign and model. You cannot edit SQL, simulation behavior, rewards, fees or budgets. Never claim significance or optimality without evidence.';
@@ -15,10 +16,11 @@ const roleBriefs={
  'Commerce manager':'Own campaign economics. Use the analyst hypothesis and selected model; compare component trials and observed response. Seek additional retained commerce, protect merchant contribution and cash, and avoid supplier-fee gains from unnecessary stock. Revise based on measured differences.'
 };
 
-export async function openCommerceHarnessV2({id,dir,mode='team',prior,incumbent,providerFactory=openTeamVertex,trialFactory=createTrialTool,onCheckpoint=async()=>{}}){
+export async function openCommerceHarnessV2({id,dir,mode='team',modelCheck=false,prior,incumbent,providerFactory=openTeamVertex,trialFactory=createTrialTool,onCheckpoint=async()=>{}}){
  if(!['team','single'].includes(mode))throw Error('V2_INVALID_MODE');await mkdir(dir,{recursive:true});
  const historical=(await read('docs/commerce-growth/autonomy-1/funding-training/dataset.json')).rows;
  const state={version:VERSION,modelCapUSD:MODEL_CAP_MICROS/1e6,id,mode,status:'READY',pending:false,failed:false,retries:0,rounds:0,lastDay:null,checkpoints:[],publications:[],training:[],schedule:[]};
+ if(modelCheck)state.modelCheckVersion=MODEL_CHECK;
  const observed=[],models={};let provider=null,trialTool=null,closed=false,reviewJob=null,lastPlan=null,inFlight=false;
  const costs=()=> (provider?.client.events||[]).reduce((s,e)=>s+(e.modelCostMicros??e.reservedMicros??0),0)/1e6;
  const operationRecoveries=()=>({initialization:provider?.initializationRetries||0,localTrials:trialTool?.recoveryEvents||[]});
@@ -48,7 +50,7 @@ export async function openCommerceHarnessV2({id,dir,mode='team',prior,incumbent,
  async function review(view){
   const day=view.day,context=freeze({day,marketProfile:marketProfileFor(view),snapshotHash:canonicalHash(view)});state.pending=true;state.status='REVIEWING';state.rounds++;await save();
   try{
-   const own=matureOwnRows(observed,view),active=state.schedule.at(-1),currentConfig=active?.configuration||incumbent,recent=view.outreach.history.filter(c=>c.day<day&&c.day>=day-28),overview={day,marketScale:view.scale||{shoppers:100,merchants:3},historical:datasetOverview(historical),ownMature:datasetOverview(own),budgetCents:view.outreach.remainingBudgetCents,currentSnapshotHash:context.snapshotHash,currentModel:active?.modelHash||null,currentPolicy:{configuration:currentConfig,campaign:active?.campaign||null,source:active?'TESTED_CAMPAIGN':'STRONG_FIXED'},observedResponse:{contacts:recent.length,responded:recent.filter(c=>c.responded).length,rate:recent.length?recent.filter(c=>c.responded).length/recent.length:null,meaning:'Observed response, not immediate payment or eventual retained purchase.'},previousReviews:state.publications.map(p=>({day:p.day,published:p.published,experiments:p.experiments})),clock:'Dates wait at this boundary; no simulated transactions occur during this review.'};
+   const own=matureOwnRows(observed,view),active=state.schedule.at(-1),currentConfig=active?.configuration||incumbent,recent=view.outreach.history.filter(c=>c.day<day&&c.day>=day-28),overview={day,marketScale:view.scale||{shoppers:100,merchants:3},historical:datasetOverview(historical),ownMature:datasetOverview(own),budgetCents:view.outreach.remainingBudgetCents,currentSnapshotHash:context.snapshotHash,currentModel:active?.modelHash||null,currentPolicy:{configuration:currentConfig,campaign:active?.campaign||null,source:active?'TESTED_CAMPAIGN':'STRONG_FIXED'},observedResponse:{contacts:recent.length,responded:recent.filter(c=>c.responded).length,rate:recent.length?recent.filter(c=>c.responded).length/recent.length:null,meaning:'Observed response, not immediate payment or eventual retained purchase.'},previousReviews:state.publications.map(p=>({day:p.day,published:p.published,experiments:p.experiments,...(p.modelComparison?{modelComparison:p.modelComparison}:{})})),clock:'Dates wait at this boundary; no simulated transactions occur during this review.'};
    const query=await ask('Market analyst','choose_investigation',day,{overview,queries:{category:'Compare observed category interest, stock and outcomes.',intent:'Compare fresh/search/browse inquiry and recommendation cohorts.',payment_funnel:'Distinguish response, immediate funding, pending outcomes and delayed retained purchases.',recency:'Compare new and returning customer observations.'}},{lens:en(['category','intent','payment_funnel','recency']),windowDays:en(['28','56','100'])});
    const analysis=await tool('Market analyst','LOCAL_ANALYSIS',day,{lens:query.lens,windowDays:Number(query.windowDays)},async()=>({current:inspectCurrent(view,query.lens,Number(query.windowDays)),historical:inspectDemand(historical,{lens:query.lens,windowDays:Number(query.windowDays)}),title:'Demand investigation completed'}));
    const data=await ask('Market analyst','define_dataset',day,{overview,analysis,featureRecipes:{existing:'Original16 observed features; stock normalized per100shoppers.',intent_context:'Add actual pre-contact shopper interest freshness, including general inquiries with no SKU.',market_feedback:'Add prior-day contact/response/funding/mature-retention aggregates; train feedback directly rather than shifting retained odds with immediate funding.'},task:'Choose a dataset recipe and window supported by the investigation. Explain the commercial bottleneck.'},{featureView:en(FEATURES),windowDays:en(['28','56','100']),opportunity:str});
@@ -92,11 +94,23 @@ export async function openCommerceHarnessV2({id,dir,mode='team',prior,incumbent,
      }
     }
    }catch(e){state.failed=true;state.checkpoints.push({role:'Coordinator',actor:'REJECTED_REVISION',day,completedDay:day,status:'FAILED',error:e.message,output:{body:'Revision rejected. The controller will assess the previously completed trial; no uncertain model call is retried.'}});}
-   const selection=selectPublication(tested,incumbentTrial,context),publish=selection.decision.decision==='publish';
+   let selection, modelComparison;
+   if(modelCheck){
+    const report=await tool('Verifier','LOCAL_MODEL_COMPARISON',day,{candidateModels:candidates.map(m=>m.id)},async()=>{
+     const check=await checkCampaignModel({tested,trained:candidates,incumbentTrial,context,
+      evaluate:(candidate,model)=>trialTool.evaluate(candidate,model,state.schedule,models,context)});
+     selection=check.selection;
+     if(check.admitted)tested.push(check.admitted);
+     return check.report;
+    });
+    const {status,reason,anchor,alternative,selectedContractHash}=report;
+    modelComparison={status,reason,anchor,alternative,selectedContractHash};
+   }else selection=selectPublication(tested,incumbentTrial,context);
+   const publish=selection.decision.decision==='publish';
    if(publish)state.schedule.push(selection.selected.contract);
    const published=state.schedule.at(-1),campaign=published?.campaign,selectedTrial=selection.selected?.trial||incumbentTrial;
    await tool('Coordinator','TRUSTED_PUBLISHER',day,{agentRequest,candidateHashes:tested.map(c=>c.contract.hash)},async()=>({...selection.decision,effectiveDay:day,modelId:published?models[published.modelHash].id:null,campaign:campaign?{...campaign,audience:campaign.kind==='reactivation'?'lapsed':'all',contactsPerDay:campaign.contactsPer100}:null,contractHash:published?.hash||'FIXED',testedContractHash:selectedTrial.contractHash,trialHash:selectedTrial.trialHash,receiptHash:selectedTrial.receiptHash,automated:true,nativePayments:false}));
-   state.publications.push({day,published:publish,agentRequest,...selection.decision,contractHash:published?.hash||'FIXED',trialHash:selectedTrial.trialHash,experiments:tested.map(c=>({campaign:c.contract.campaign,model:c.model.artifact.selected,measurement:c.trial.measurement,gate:publicationGate(c.contract,c.model,c.trial,incumbentTrial)}))});state.status=state.failed?'FALLBACK':'READY';
+   state.publications.push({day,published:publish,agentRequest,...selection.decision,...(modelComparison?{modelComparison}:{}),contractHash:published?.hash||'FIXED',trialHash:selectedTrial.trialHash,experiments:tested.map(c=>({campaign:c.contract.campaign,model:c.model.artifact.selected,measurement:c.trial.measurement,gate:publicationGate(c.contract,c.model,c.trial,incumbentTrial)}))});state.status=state.failed?'FALLBACK':'READY';
   }catch(e){state.failed=true;state.status='FALLBACK';state.checkpoints.push({role:'Coordinator',actor:'TRUSTED_FALLBACK',day,completedDay:day,status:'FAILED',error:e.message,output:{body:'Review stopped: '+e.message+'. Last published policy stays active.'}});}
   finally{state.pending=false;await save();}
  }

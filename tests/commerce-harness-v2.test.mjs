@@ -9,6 +9,7 @@ import {matureOwnRows,compileCampaign,digest,read,inspectCurrent} from '../scrip
 import {publicationGate,selectPublication} from '../scripts/commerce-expanded/harness-v2/trials.mjs';
 import {campaignSchema,validate,toolDeclaration,validateToolReply,canonicalHash,sealTrialReceipt} from '../scripts/commerce-expanded/harness-v2/contracts.mjs';
 import {openCommerceHarnessV2,retryableModelFailure} from '../scripts/commerce-expanded/harness-v2/controller.mjs';
+import {checkCampaignModel} from '../scripts/commerce-expanded/harness-v2/model-check.mjs';
 import {profileFor} from '../scripts/agent-mesh/model-client.mjs';
 import {createGrowthWorld,observeGrowthWorld} from '../scripts/commerce-expanded/environment.mjs';
 
@@ -59,7 +60,47 @@ test('controller keeps the best tested candidate, independent of order or a wors
  assert.equal(publicationGate(a,model,badStress,base).checks.stressCasesProtected,false);
 });
 
-test('v2 recovers a rejected call, trains real models and treats an unchanged revision as an idempotent result',async()=>{
+test('comparing the same campaign changes only the model, protects the original and verifies the receipt',async()=>{
+ const {config}=(await read('docs/commerce-growth/team-1/development/results.json')).selectedFixed;
+ const fitted=family=>{
+  const artifact={selected:family,spec:{featureView:'existing'}};
+  return {id:family,modelHash:digest(artifact),artifact,report:{metrics:{logLoss:0.1,auc:0.75},coarse:{logLoss:0.2}}};
+ };
+ const [first,second]=['forest','boosted'].map(fitted);
+ const contract=compileCampaign(campaign,first,config,context);
+ const original={contract,model:first,trial:receipt(contract,first,measurement(10))};
+ const options={tested:[original],trained:[first,second],context,incumbentTrial:receipt(null,null,measurement(0))};
+ let evaluations=0;
+ const evaluate=(c,m)=>{
+  evaluations++;
+  assert.deepEqual(c.campaign,contract.campaign);
+  assert.deepEqual(c.configuration,contract.configuration);
+  assert.deepEqual(c.context,context);
+  assert.equal(m.modelHash,second.modelHash);
+  return receipt(c,m,measurement(20));
+ };
+ const win=await checkCampaignModel({...options,evaluate});
+ assert.equal(evaluations,1);
+ assert.equal(win.report.status,'switched');
+ assert.equal(win.selection.selected.contract.hash,win.report.receipt.contractHash);
+ assert.equal(win.selection.selected.model.modelHash,second.modelHash);
+ const lowerMerchant=await checkCampaignModel({...options,evaluate:(c,m)=>receipt(c,m,{...measurement(20),retailerUSD:1005,retailerDeltaUSD:5})});
+ assert.equal(lowerMerchant.report.status,'kept');
+ assert.ok(lowerMerchant.report.failedChecks.includes('merchantProtected'));
+ assert.equal(lowerMerchant.selection.selected.contract.hash,contract.hash);
+ const tie=await checkCampaignModel({...options,evaluate:(c,m)=>receipt(c,m,measurement(10))});
+ assert.equal(tie.report.status,'kept');
+ const reused=await checkCampaignModel({...options,tested:[original,win.admitted],evaluate:()=>assert.fail('duplicate trial')});
+ assert.equal(reused.report.extraTrials,0);
+ assert.equal(reused.selection.selected.contract.hash,win.selection.selected.contract.hash);
+ const failed=await checkCampaignModel({...options,evaluate:()=>original.trial});
+ assert.equal(failed.report.status,'unavailable');
+ assert.equal(failed.selection.selected.contract.hash,contract.hash);
+ const skipped=await checkCampaignModel({...options,trained:[first],evaluate:()=>assert.fail('no alternative')});
+ assert.equal(skipped.report.status,'skipped');
+});
+
+for(const modelCheck of [false,true])test('v2 recovers a rejected call and completes the day barrier with model check '+modelCheck,async()=>{
  const dir=await mkdtemp(join(tmpdir(),'commerce-v2-')),store=createMarketStore();let release,entered=false,trials=0,native=0;
  const gate=new Promise(r=>{release=r;}),events=[];let rejected=false;
  const providerFactory=async(id,options)=>{assert.equal(options.route,'first_review_pro');assert.equal(options.capMicros,190000);return {client:{events,async json(system,packet,{functions}){
@@ -73,12 +114,20 @@ test('v2 recovers a rejected call, trains real models and treats an unchanged re
  const v2TrialFactory=async({marketProfile})=>{assert.equal(marketProfile,'expanded-12x600');return {async evaluate(contract,model,prefix,models,ctx){if(contract){trials++;firstContractHash??=contract.hash;}return receipt(contract,model,measurement(contract?(trials>=2?10:20):0),ctx,prefix);}};};
  const service=createAutonomyRoom({store,market:{mirror:async()=>{native++;}},providerFactory,v2TrialFactory,rootDir:dir,autoPump:false});let pending;
  try{
-  const s=await service.start({requestId:'v2-offline-integration',seed:987777,regime:'discovery',marketProfile:'expanded-12x600',harnessVersion:'v2',sandbox:false});
+  const settings={requestId:'v2-offline-integration',seed:987777,regime:'discovery',marketProfile:'expanded-12x600',harnessVersion:'v2',sandbox:false,...(modelCheck?{modelCheck:true}:{})};
+  await assert.rejects(service.start({...settings,modelCheck:'yes'}),e=>e.code==='INVALID_AUTONOMY_SETTINGS');
+  await assert.rejects(service.start({...settings,harnessVersion:'v1',modelCheck:true}),e=>e.code==='INVALID_AUTONOMY_SETTINGS');
+  const s=await service.start(settings);
+  assert.equal(s.settings.modelCheck,modelCheck);
+  await assert.rejects(service.start({...settings,modelCheck:!modelCheck}),e=>e.code==='REQUEST_CONFLICT');
   for(let i=0;i<30;i++)await service.step(s.id);pending=service.step(s.id);
   for(let i=0;i<100&&!entered;i++)await new Promise(r=>setTimeout(r,10));assert.equal(entered,true);
   const before=service.snapshot(s.id);assert.equal(before.day,30);assert.equal(before.clockPaused,true);assert.equal(before.reviewDay,31);assert.ok(before.steps.some(c=>c.actor==='GEMINI'&&c.status==='RUNNING'));
   await service.step(s.id);const still=service.snapshot(s.id);assert.equal(still.day,30);assert.equal(still.frame.stats.orders,before.frame.stats.orders);
-  release();await pending;const after=service.snapshot(s.id);assert.equal(after.day,31);assert.equal(after.clockPaused,false);assert.equal(after.warning,null);assert.equal(events.length,7);assert.equal(after.modelCalls,7);assert.equal(trials,1);
+  release();await pending;const after=service.snapshot(s.id);assert.equal(after.day,31);assert.equal(after.clockPaused,false);assert.equal(after.warning,null);assert.equal(events.length,7);assert.equal(after.modelCalls,7);assert.equal(trials,modelCheck?2:1);
+  const verification=after.steps.filter(c=>c.actor==='LOCAL_MODEL_COMPARISON');
+  assert.equal(verification.length,modelCheck?1:0);
+  if(modelCheck){assert.equal(verification[0].output.status,'kept');assert.equal(verification[0].status,'COMPLETED');assert.equal(verification[0].output.extraTrials,1);}
   assert.equal(after.steps.filter(c=>c.actor==='LOCAL_MODEL').length,2);assert.equal(after.steps.filter(c=>c.actor==='LOCAL_CAMPAIGN_TRIAL').length,2);assert.ok(after.steps.some(c=>c.actor==='UNCHANGED_PROPOSAL'));assert.equal(native,0);
   const publication=after.steps.find(c=>c.actor==='TRUSTED_PUBLISHER');assert.ok(publication);assert.equal(publication.output.effectiveDay,30);
   assert.equal(publication.output.decision,'publish');assert.equal(publication.output.contractHash,firstContractHash);assert.equal(publication.output.contractHash,publication.output.testedContractHash);assert.equal(publication.output.authority,'DETERMINISTIC_CONTROLLER');
