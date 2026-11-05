@@ -1,0 +1,13 @@
+{
+  "study": "merchant-feed-ontology-v1",
+  "question": "Can the verifier certify captured shopper checkout counts and gross USD across unfamiliar merchant exports, and hold measurements with ambiguous keys, money units or contradictory records?",
+  "metric": "One captured shopper checkout per basket key, including checkouts subsequently refunded. Gross at capture is summed once per checkout. A seller order is a constituent amount. A Sandbox capture can independently corroborate one seller order and contributes zero additional purchases.",
+  "mapping": "Compare a fixed warehouse/standard-export field map with certified business terms and relationship binding. Both see the same feed, declared grain, keys, units and control totals. Both use one reconciler. The fixed mapper also supports conventional partner names, case/separator changes, standard flat exports, column reordering and explicit dollar amounts.",
+  "answerableFamilies": ["warehouse", "standard-partner", "renamed-relational", "renamed-decimal", "standard-flat", "renamed-flat"],
+  "holdFamilies": ["ambiguous-checkout-link", "unit-unknown", "duplicate-merchant-order", "orphan-merchant-order", "gross-disagreement", "conflicting-flat-checkout"],
+  "repetitions": 2,
+  "registration": "Freeze both mappers and the fixture generator in Git before drawing a new seed. Use that seed for all unseen merchant identifiers, physical names, column/row order, basket sizes and amounts. Never pass case labels or expected outcomes to either mapper. Publish every case.",
+  "measures": ["exact certifications on answerable feeds", "correct holds on unsafe feeds", "false certifications", "unnecessary holds", "wrong numerical answers"],
+  "acceptance": "Show the proof in the judge demo if the semantic mapper exactly certifies strictly more answerable feeds than fixed and produces zero false certifications. Any hold has no publishable totals. Test the actual saved Sandbox receipt separately.",
+  "limits": "Synthetic merchant exports and a reviewed vocabulary. This tests metadata binding and accounting, not arbitrary natural-language understanding, commercial lift, or the NVIDIA hosted stack. Zero network, model and payment calls in the verifier."
+}
