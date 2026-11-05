@@ -99,6 +99,6 @@ const summary={protocolHash:lock.protocolHash,lockHash,economyHash:lock.economyH
   nativePayments:0,totals,comparisons,cases};
 assert.equal(round(totals.single_checked.aiCost+totals.team_checked.aiCost),summary.studyCostUSD);
 assert.equal(canonicalHash((await verifyEconomy()).economyHashes),lock.economyHash);
-const out=process.argv.includes('--publish')?join(folder,'results.json'):join(work,'replicated-results.json');
+const out=process.argv.includes('--publish')?'demo/data/commerce-reactivation-fresh.json':join(work,'replicated-results.json');
 await mkdir(work,{recursive:true});await writeFile(out+'.tmp',JSON.stringify(summary,null,2)+'\n');await rename(out+'.tmp',out);
 console.log('Six paired markets',JSON.stringify(comparisons),out);
