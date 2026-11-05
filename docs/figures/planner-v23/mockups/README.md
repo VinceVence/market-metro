@@ -20,6 +20,6 @@ The generic agent label changes presentation only. The current model backend is 
 
 ## Reproduce
 
-[Drawing source](../../../../scripts/render_architecture_mockups.py) reuses the main figure's primitives, logos and saved capture. Run with the existing PDF dependencies plus Matplotlib's bundled fonts. This environment uses the bundled Python with PYTHONPATH=.local/diagram-deps. Intermediate editable SVGs are written to .local/architecture-mockups; final PNGs and the PDF are the review deliverables.
+[Historical drawing source](https://github.com/VinceVence/market-metro/blob/6544108c67dcb458ddafb2a8dee1cb1e4adc5195/scripts/render_architecture_mockups.py) reuses the main figure's primitives, logos and saved capture. Use a separate checkout of `6544108` with the existing PDF dependencies plus Matplotlib's bundled fonts. This environment uses the bundled Python with PYTHONPATH=.local/diagram-deps. Intermediate editable SVGs are written to .local/architecture-mockups; final PNGs and the PDF are the review deliverables.
 
 STIX and DejaVu fonts are distributed with Matplotlib. Their notices are included as [STIX](LICENSE_STIX.txt) and [DejaVu](LICENSE_DEJAVU.txt). Brand/source notices and capture provenance remain in the parent figure directory.

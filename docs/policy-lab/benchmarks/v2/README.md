@@ -57,6 +57,8 @@ Manual review of the first completed case found an unsupported attribution to "s
 
 ## Reproduce and inspect
 
+For this historical study, run the commands below in a separate checkout of [revision `6544108`](https://github.com/VinceVence/market-metro/tree/6544108c67dcb458ddafb2a8dee1cb1e4adc5195). It contains the matching scripts and npm commands.
+
 `node scripts/policy-lab/fresh-benchmark.mjs --run` resumes this exact frozen suite. Completed case results are reused; unknown in-flight paid calls are not retried. Do not change policy files and rerun the same holdout as if untouched. A new version requires a new protocol and new confirmatory seeds after tuning.
 
 `.local/research-venv/bin/python scripts/plot-fresh-policy.py` rebuilds figures and the browser index without new model or payment calls.

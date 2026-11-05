@@ -89,6 +89,8 @@ The full offline suite passed **231 tests**. Targeted service tests were rerun a
 
 ## Reproduce
 
+For this historical study, run the commands below in a separate checkout of [revision `6544108`](https://github.com/VinceVence/market-metro/tree/6544108c67dcb458ddafb2a8dee1cb1e4adc5195). It contains the matching scripts and npm commands.
+
 Research tools were tested on Node 25.2.1. Recorded playback needs neither model credentials nor a saved private economy. Fresh Gemini missions require the configured isolated Vertex project and spend ledger.
 
 ```sh

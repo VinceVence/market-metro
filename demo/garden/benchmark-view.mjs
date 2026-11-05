@@ -27,7 +27,7 @@ export function mountBenchmarkView(container){
           const fresh=await fetch('/benchmarks/v2/index.json');
           if(fresh.ok){renderFreshBenchmark(container,await fresh.json(),()=>{loaded=false;void load(false);});const researchButton=document.createElement('button');researchButton.textContent='Research workspace v3 ↗';researchButton.className='plb-version-switch';researchButton.onclick=()=>{loaded=false;void load(true);};container.prepend(researchButton);loaded=true;return;}
         }
-        const response=await fetch('/benchmarks/v1/index.json');if(!response.ok)throw Error('Benchmark artifacts are not available. Run npm run benchmark:policy and npm run plot:policy first.');
+        const response=await fetch('/benchmarks/v1/index.json');if(!response.ok)throw Error('The saved V1 benchmark index could not be loaded. See the reproduction instructions in docs/policy-lab/benchmarks/README.md.');
         const r=await response.json(),agent=r.summaries.find(s=>s.policy==='recorded_v1'),m=agent.metrics.deltaPlatformUSD;
         const chart=name=>figure(r.figures.find(f=>f.name===name));
         container.innerHTML=`<div class="plb-title"><div><p class="plb-eyebrow">BENCHMARK V1 · MEASURED LOCAL RESULTS</p><h3>Are the policies improving?</h3><p>${num(r.pairedCases)} paired cases · ${r.seedCount} seeds · ${r.scenarioCount} scenarios · ${num(r.worlds)} worlds</p></div><a class="plb-download" href="/benchmarks/v1/cases.csv" download>Download results ↓</a></div>

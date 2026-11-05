@@ -67,6 +67,8 @@ Fresh Gemini runs use the existing isolated `.local/gcp/config.json`, authorizat
 
 ## Validation
 
+Run `npm run test:demo` to check the bundled receipt, default routes, merchant-scale inputs and live local rankings using Node alone. The broader workflow checks below also exercise local training. The full historical suite additionally expects local fixtures from the V3 catalog, expert-stack, policy-value and team-repair studies.
+
 ```sh
 node --test tests/commerce-harness-v2.test.mjs tests/inquiry-value.test.mjs tests/commerce-operation-recovery.test.mjs tests/commerce-autonomy-live.test.mjs tests/commerce-expanded.test.mjs
 npm run baseline:verify
@@ -83,6 +85,8 @@ The [locked v1 baseline](docs/commerce-growth/baselines/paypal-net-v1/README.md)
 - `scripts/commerce-growth/autonomy/live.mjs`: live day loop, saved frames and warehouse integration.
 - `scripts/market-store.mjs`: base tables, views and exports.
 - `scripts/paypal-funding.mjs` and `scripts/market-service.mjs`: saved Sandbox wallet and receipt reconciliation.
+
+Historical V1–V4 chart generators, the pre-V2 review-timing diagnostic and the old research/confirmation runners are available in the [pre-cleanup source tree](https://github.com/VinceVence/market-metro/tree/6544108c67dcb458ddafb2a8dee1cb1e4adc5195/scripts). To reproduce those studies, use a separate checkout of that revision.
 
 Temporary training datasets and old experimental traces are not application dependencies. Keep run checkpoints, financial summaries and frozen evidence; put disposable scratch under `.local/`.
 

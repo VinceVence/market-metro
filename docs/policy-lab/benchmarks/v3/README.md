@@ -100,6 +100,8 @@ The evidence suggests limited reliable headroom in this tested policy class. The
 
 ## Reproduce and inspect
 
+For this historical study, run the commands below in a separate checkout of [revision `6544108`](https://github.com/VinceVence/market-metro/tree/6544108c67dcb458ddafb2a8dee1cb1e4adc5195). It contains the matching scripts and npm commands.
+
 The research sandbox was tested on Node **25.2.1** with SQLite's authorizer API. The base app's older Node minimum does not imply support for this new research runner. Plotting uses the existing local research Python environment and matplotlib.
 
 ```sh

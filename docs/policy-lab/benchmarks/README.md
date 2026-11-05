@@ -89,6 +89,8 @@ The seeds were held out from source-plan selection. Once these results are inspe
 
 ## Reproduce and inspect
 
+For this historical study, run the commands below in a separate checkout of [revision `6544108`](https://github.com/VinceVence/market-metro/tree/6544108c67dcb458ddafb2a8dee1cb1e4adc5195). It contains the matching scripts and npm commands.
+
 ```sh
 npm run test:policy-benchmark
 npm run benchmark:policy
