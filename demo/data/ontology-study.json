@@ -1,0 +1,632 @@
+{
+  "study": "merchant-feed-ontology-v1",
+  "lock": {
+    "study": "merchant-feed-ontology-v1",
+    "commit": "a78c55ffe4f03d86a7eedd84930506aac056094d",
+    "sources": {
+      "docs/ontology/protocol.json": "9a7f0464eaf80ff93fa757f5d6eb420cf1f34d781bf322321a3ec8f8f7cc5b13",
+      "demo/commerce/feed-verifier.mjs": "7322855de503de2bd17cf6d474879043d50865c247a514ae6628bd9fdeb2c780",
+      "scripts/ontology/feeds.mjs": "af389e281282b4398b7ce17ddcdfbf17fd5940371e5902c55d0c6e885f3a0704",
+      "scripts/ontology/benchmark.mjs": "2a6489fb5ca36b2fd84b4ebddfc6e9deaf3f15ca1d3da612f395f7fcc185bca5"
+    },
+    "registeredAt": "2026-11-05T12:07:44.378Z",
+    "seed": "b57d1d67fa065b29d1c9e199da31537a"
+  },
+  "answerable": 12,
+  "unsafe": 12,
+  "total": {
+    "fixed": {
+      "exactCertifications": 6,
+      "unnecessaryHolds": 6,
+      "unsafeHeld": 12,
+      "falseCertifications": 0,
+      "wrongNumbers": 0,
+      "holdReasonsMatched": 6
+    },
+    "ontology": {
+      "exactCertifications": 12,
+      "unnecessaryHolds": 0,
+      "unsafeHeld": 12,
+      "falseCertifications": 0,
+      "wrongNumbers": 0,
+      "holdReasonsMatched": 12
+    }
+  },
+  "cases": [
+    {
+      "id": "M01",
+      "family": "warehouse",
+      "layout": "warehouse",
+      "feedHash": "3473543d76b43291aa1dfc8616fa01a55bce1ec12bf7302a2c3cc51f5a5cd3a5",
+      "expected": {
+        "purchases": 10,
+        "merchantOrders": 20,
+        "splitBaskets": 7,
+        "grossCents": 188426
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 10,
+          "merchantOrders": 20,
+          "splitBaskets": 7,
+          "grossCents": 188426
+        }
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 10,
+          "merchantOrders": 20,
+          "splitBaskets": 7,
+          "grossCents": 188426
+        }
+      }
+    },
+    {
+      "id": "M02",
+      "family": "standard-partner",
+      "layout": "standard-partner",
+      "feedHash": "e502d005bc251683bc4eb970a4fa1f37bc320644e35be1de4fa44c87a0cddc52",
+      "expected": {
+        "purchases": 20,
+        "merchantOrders": 35,
+        "splitBaskets": 11,
+        "grossCents": 299762
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 20,
+          "merchantOrders": 35,
+          "splitBaskets": 11,
+          "grossCents": 299762
+        }
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 20,
+          "merchantOrders": 35,
+          "splitBaskets": 11,
+          "grossCents": 299762
+        }
+      }
+    },
+    {
+      "id": "M03",
+      "family": "renamed-relational",
+      "layout": "renamed-relational",
+      "feedHash": "6da8be959545e93f6cf2bcd24f85d70036cf64b26816572b28b13e02d25b5cc0",
+      "expected": {
+        "purchases": 21,
+        "merchantOrders": 46,
+        "splitBaskets": 14,
+        "grossCents": 408212
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 21,
+          "merchantOrders": 46,
+          "splitBaskets": 14,
+          "grossCents": 408212
+        }
+      }
+    },
+    {
+      "id": "M04",
+      "family": "renamed-decimal",
+      "layout": "renamed-decimal",
+      "feedHash": "d3aeb912e80ea8a924def7f2241d467840227b583803fa5cab8d0b7e141d3a91",
+      "expected": {
+        "purchases": 24,
+        "merchantOrders": 43,
+        "splitBaskets": 15,
+        "grossCents": 373714
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 24,
+          "merchantOrders": 43,
+          "splitBaskets": 15,
+          "grossCents": 373714
+        }
+      }
+    },
+    {
+      "id": "M05",
+      "family": "standard-flat",
+      "layout": "standard-flat",
+      "feedHash": "e27b172f93c93eb0083e00df73da5cd0d2ef142e806739a83e60c08c2a232f9e",
+      "expected": {
+        "purchases": 18,
+        "merchantOrders": 35,
+        "splitBaskets": 12,
+        "grossCents": 339309
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 18,
+          "merchantOrders": 35,
+          "splitBaskets": 12,
+          "grossCents": 339309
+        }
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 18,
+          "merchantOrders": 35,
+          "splitBaskets": 12,
+          "grossCents": 339309
+        }
+      }
+    },
+    {
+      "id": "M06",
+      "family": "renamed-flat",
+      "layout": "renamed-flat",
+      "feedHash": "636720b4028f897ad4d1da7b09ebbb1f1192ba467714881767c19d13dd1a3335",
+      "expected": {
+        "purchases": 22,
+        "merchantOrders": 44,
+        "splitBaskets": 15,
+        "grossCents": 285377
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 22,
+          "merchantOrders": 44,
+          "splitBaskets": 15,
+          "grossCents": 285377
+        }
+      }
+    },
+    {
+      "id": "M07",
+      "family": "ambiguous-checkout-link",
+      "layout": "warehouse",
+      "feedHash": "11af8b3f6c463e7dea051c4fce399533be8bce894d956ea1d2752cce0d86b9a1",
+      "expected": null,
+      "expectedHold": "ambiguous-link",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "ambiguous-link",
+        "reason": "Expected exactly one declared merchant-order to checkout relationship. Found 2."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "ambiguous-link",
+        "reason": "Expected exactly one declared merchant-order to checkout relationship. Found 2."
+      }
+    },
+    {
+      "id": "M08",
+      "family": "unit-unknown",
+      "layout": "warehouse",
+      "feedHash": "cf4dcaf9b0922aae3e9bdb5b1fc03b2e8c5de3dc45e6fd07325d90abca810836",
+      "expected": null,
+      "expectedHold": "unit-unknown",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "unit-unknown",
+        "reason": "Declare whether orders.total_cents contains US dollars or integer US cents."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "unit-unknown",
+        "reason": "Declare whether orders.total_cents contains US dollars or integer US cents."
+      }
+    },
+    {
+      "id": "M09",
+      "family": "duplicate-merchant-order",
+      "layout": "warehouse",
+      "feedHash": "aeefe72db9199d87d1e8307dceb7628035c9c35642bb241a5fe460a94b0c7458",
+      "expected": null,
+      "expectedHold": "duplicate-order",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "duplicate-order",
+        "reason": "A merchant-order key is empty or duplicated."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "duplicate-order",
+        "reason": "A merchant-order key is empty or duplicated."
+      }
+    },
+    {
+      "id": "M10",
+      "family": "orphan-merchant-order",
+      "layout": "warehouse",
+      "feedHash": "02fcbd20c790622e1061a060dcc49c8abc9a51115daf5bcefde0f97c2f50374c",
+      "expected": null,
+      "expectedHold": "orphan-order",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "orphan-order",
+        "reason": "A merchant order points to a checkout missing from the export."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "orphan-order",
+        "reason": "A merchant order points to a checkout missing from the export."
+      }
+    },
+    {
+      "id": "M11",
+      "family": "gross-disagreement",
+      "layout": "warehouse",
+      "feedHash": "3b5452cee5dd3606ef9854694a536e06a6427cb13cdaddf9e1d81565db917354",
+      "expected": null,
+      "expectedHold": "gross-disagreement",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "gross-disagreement",
+        "reason": "Every checkout must have merchant portions that sum exactly to its gross amount."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "gross-disagreement",
+        "reason": "Every checkout must have merchant portions that sum exactly to its gross amount."
+      }
+    },
+    {
+      "id": "M12",
+      "family": "conflicting-flat-checkout",
+      "layout": "standard-flat",
+      "feedHash": "5069fef1b88d1ffd10026437d3849a6c259f022a1442e19fbdac8569489ee949",
+      "expected": null,
+      "expectedHold": "conflicting-checkout",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "conflicting-checkout",
+        "reason": "Rows for one checkout disagree about its total."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "conflicting-checkout",
+        "reason": "Rows for one checkout disagree about its total."
+      }
+    },
+    {
+      "id": "M13",
+      "family": "warehouse",
+      "layout": "warehouse",
+      "feedHash": "c00baba5e5be06ca7061d07b8408a2f5232b14e764b80a920660b3b4efaa9f18",
+      "expected": {
+        "purchases": 17,
+        "merchantOrders": 31,
+        "splitBaskets": 11,
+        "grossCents": 287643
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 17,
+          "merchantOrders": 31,
+          "splitBaskets": 11,
+          "grossCents": 287643
+        }
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 17,
+          "merchantOrders": 31,
+          "splitBaskets": 11,
+          "grossCents": 287643
+        }
+      }
+    },
+    {
+      "id": "M14",
+      "family": "standard-partner",
+      "layout": "standard-partner",
+      "feedHash": "8cd2b699e21eaa14c0d58a3651f7717aa7ba69d361cad3f6954b905c24de82e1",
+      "expected": {
+        "purchases": 21,
+        "merchantOrders": 38,
+        "splitBaskets": 13,
+        "grossCents": 386081
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 21,
+          "merchantOrders": 38,
+          "splitBaskets": 13,
+          "grossCents": 386081
+        }
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 21,
+          "merchantOrders": 38,
+          "splitBaskets": 13,
+          "grossCents": 386081
+        }
+      }
+    },
+    {
+      "id": "M15",
+      "family": "renamed-relational",
+      "layout": "renamed-relational",
+      "feedHash": "c4bbbfa7de89bc6a707dc9d193dd48b6e3efc2c6847046eee105fd925d4e1773",
+      "expected": {
+        "purchases": 10,
+        "merchantOrders": 18,
+        "splitBaskets": 6,
+        "grossCents": 157698
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 10,
+          "merchantOrders": 18,
+          "splitBaskets": 6,
+          "grossCents": 157698
+        }
+      }
+    },
+    {
+      "id": "M16",
+      "family": "renamed-decimal",
+      "layout": "renamed-decimal",
+      "feedHash": "c422846853ffffbcbd44b897add28c1b65f9d41b14bb615928efd20982e9c9b0",
+      "expected": {
+        "purchases": 18,
+        "merchantOrders": 37,
+        "splitBaskets": 14,
+        "grossCents": 341269
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 18,
+          "merchantOrders": 37,
+          "splitBaskets": 14,
+          "grossCents": 341269
+        }
+      }
+    },
+    {
+      "id": "M17",
+      "family": "standard-flat",
+      "layout": "standard-flat",
+      "feedHash": "d410652989b12f6c51ec51311a26778d445fbbcabb33e2d90dd8c8aa289e44ac",
+      "expected": {
+        "purchases": 11,
+        "merchantOrders": 22,
+        "splitBaskets": 8,
+        "grossCents": 236681
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 11,
+          "merchantOrders": 22,
+          "splitBaskets": 8,
+          "grossCents": 236681
+        }
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 11,
+          "merchantOrders": 22,
+          "splitBaskets": 8,
+          "grossCents": 236681
+        }
+      }
+    },
+    {
+      "id": "M18",
+      "family": "renamed-flat",
+      "layout": "renamed-flat",
+      "feedHash": "aa7e17aef6394c63e1b278622d5babaedb84d43cacb954d801e8b76eddade494",
+      "expected": {
+        "purchases": 17,
+        "merchantOrders": 29,
+        "splitBaskets": 9,
+        "grossCents": 223313
+      },
+      "expectedHold": null,
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "CERTIFY",
+        "metrics": {
+          "purchases": 17,
+          "merchantOrders": 29,
+          "splitBaskets": 9,
+          "grossCents": 223313
+        }
+      }
+    },
+    {
+      "id": "M19",
+      "family": "ambiguous-checkout-link",
+      "layout": "renamed-relational",
+      "feedHash": "68321902be982e54a2380c0f4c4cd399bd9b181638c56df1aa331f2ca71f6964",
+      "expected": null,
+      "expectedHold": "ambiguous-link",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "ambiguous-link",
+        "reason": "Expected exactly one declared merchant-order to checkout relationship. Found 2."
+      }
+    },
+    {
+      "id": "M20",
+      "family": "unit-unknown",
+      "layout": "renamed-relational",
+      "feedHash": "011076e4ca2058f7b04ce51a45e4bd28305343b2813f9bd19a2eebfd0246a62d",
+      "expected": null,
+      "expectedHold": "unit-unknown",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "unit-unknown",
+        "reason": "Declare whether f_82e23f7d9da6.f_5ddc1f038aad contains US dollars or integer US cents."
+      }
+    },
+    {
+      "id": "M21",
+      "family": "duplicate-merchant-order",
+      "layout": "renamed-relational",
+      "feedHash": "ae744b60f992f83686b4dbd02081ef4e559bc0550c5c1c6076259cb08493593d",
+      "expected": null,
+      "expectedHold": "duplicate-order",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "duplicate-order",
+        "reason": "A merchant-order key is empty or duplicated."
+      }
+    },
+    {
+      "id": "M22",
+      "family": "orphan-merchant-order",
+      "layout": "renamed-relational",
+      "feedHash": "728623445e9d116025db989fe1028843e8664b09bd77eb0242cdb7e45c597a0a",
+      "expected": null,
+      "expectedHold": "orphan-order",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "orphan-order",
+        "reason": "A merchant order points to a checkout missing from the export."
+      }
+    },
+    {
+      "id": "M23",
+      "family": "gross-disagreement",
+      "layout": "renamed-relational",
+      "feedHash": "07674a31137a8515d2aa902a2b6386f5cc3c1d716b1d004745ea436fefe34e7f",
+      "expected": null,
+      "expectedHold": "gross-disagreement",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "gross-disagreement",
+        "reason": "Every checkout must have merchant portions that sum exactly to its gross amount."
+      }
+    },
+    {
+      "id": "M24",
+      "family": "conflicting-flat-checkout",
+      "layout": "renamed-flat",
+      "feedHash": "96d9478b073628db4576d5f60a359a67630fec2d0baa6a2b5ac3b62ab399d3a4",
+      "expected": null,
+      "expectedHold": "conflicting-checkout",
+      "fixed": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "table-binding",
+        "reason": "Expected exactly one table for the merchant-order grain. Found 0."
+      },
+      "ontology": {
+        "decision": "HOLD",
+        "metrics": null,
+        "code": "conflicting-checkout",
+        "reason": "Rows for one checkout disagree about its total."
+      }
+    }
+  ],
+  "accepted": true
+}

@@ -11,7 +11,7 @@
   <nav class="server-rail" aria-label="Workspace"><a class="server-icon selected" href="/judge.html" aria-label="Restart judge demo">M</a></nav>
   <aside class="channels judge-sidebar"><header><b>Market Metro</b><span>Judge demo</span></header>
     <div class="channel-group">Campaign walkthrough</div><nav id="chapters" aria-label="Campaign steps"></nav>
-    <div class="judge-links"><a href="/studio.html?view=performance&amp;evaluation=reactivation-fresh">Six-market benchmark ↗</a><a href="/studio.html?view=market">Simulation workspace ↗</a></div>
+    <div class="judge-links"><a href="#ontology" data-open-ontology>Verify a merchant feed ↗</a><a href="/studio.html?view=performance&amp;evaluation=reactivation-fresh">Six-market benchmark ↗</a><a href="/studio.html?view=market">Simulation workspace ↗</a></div>
     <footer><img src="/commerce/mark.svg" alt="" width="27" height="27"><div><b>Reactivation market</b><small>12 merchants · 600 shoppers</small></div></footer>
   </aside>
   <main id="story">
@@ -41,6 +41,21 @@
       </div>
       <div id="scale-workload"></div><div id="scale-live" class="scale-live" role="status"></div>
       <div id="scale-settlement"></div>
+    </div>
+  </dialog>
+  <dialog id="feed-proof" aria-labelledby="feed-heading">
+    <header><h2 id="feed-heading">Can this feed count purchases?</h2><button type="button" id="close-feed" aria-label="Close feed verifier">×</button></header>
+    <div class="scale-body">
+      <p>The verifier checks what each row represents, which keys connect it and how money is measured before admitting totals into this report.</p>
+      <div class="scale-controls"><label>Merchant export <select id="feed-example">
+        <option value="warehouse">Recorded warehouse</option><option value="renamed">Partner with renamed fields</option>
+        <option value="flat">Flat seller rows, checkout total in dollars</option><option value="ambiguous">Two possible checkout links</option>
+        <option value="units">Undeclared money unit</option>
+      </select></label><button id="verify-feed" class="primary" type="button">Verify feed</button></div>
+      <div id="feed-proof-result" role="status" aria-live="polite"></div>
+      <details><summary>Compare both methods on unseen merchant feeds</summary><div id="feed-benchmark"></div></details>
+      <details><summary>Try a local JSON feed</summary><p>Start with the <a href="/api/market/ontology/feed?example=warehouse" download="merchant-feed.json">example export</a>. Your file is checked in this browser.</p>
+        <label>Choose a feed <input id="feed-file" type="file" accept=".json,application/json"></label></details>
     </div>
   </dialog>
   <script type="importmap">{"imports":{"three":"/vendor/three/three.module.js","three/addons/":"/vendor/three-addons/"}}</script>

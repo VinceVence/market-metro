@@ -17,6 +17,8 @@ The planner's campaign brought Shopper 179 back after 16 days for a $96 Mobile S
 
 Choose **Merchant scale → Run local ranking** to try the same model on up to 48 simulated stores across four independent districts. Judges can vary how many stores share inventory and compare settled outcomes for the same shoppers against fixed rules. [Live scale demo](http://127.0.0.1:4173/judge.html#scale) · [Measured results](docs/merchant-scale/README.md).
 
+At the receipt, select **Why is this one purchase?** The read-only merchant feed verifier reconciles 1,922 seller orders into 1,384 shopper checkouts and explains why the saved $96 capture adds zero additional purchases. Try renamed headers, flat seller rows or two conflicting checkout links. [Open the verifier](http://127.0.0.1:4173/judge.html#ontology) · [Method, results and scope](docs/ontology/README.md).
+
 ## Run a live simulation
 
 In the [simulation workspace](http://127.0.0.1:4173/studio.html?view=market), **New live run** defaults to one planner, the financial verifier and reactivation. The full live workflow reviews on days 31 and 61. The recorded judge comparison holds its day-31 campaign through settlement. For live runs and offline numerical reproduction, install the Python dependencies and configure the appropriate services below.

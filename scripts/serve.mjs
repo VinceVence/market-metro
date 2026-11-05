@@ -2,6 +2,7 @@ import {continuousReport} from './marketing/continuous-report.mjs';
 import {createCommerceRoom} from './commerce-room/service.mjs';
 import {createAutonomyRoom} from './commerce-growth/autonomy/live.mjs';
 import {rankDistricts,scaleProtocol} from './commerce-expanded/harness-v2/merchant-scale.mjs';
+import {judgeFeeds,judgeFeed,verifyJudgeFeed} from './ontology/judge-feed.mjs';
 import {createOwnMarketService} from './behavior-v4/service.mjs';
 import {createAuthoredCatalogService} from './behavior-v4/catalog.mjs';
 import {createStudioService} from './studio/service.mjs';
@@ -61,6 +62,11 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
       const origin = `http://${req.headers.host}`;
       const url = new URL(req.url, origin), path = decodeURIComponent(url.pathname);
       if (path.startsWith('/api/')) {
+        if(req.method==='GET'&&['/api/market/ontology/feed','/api/market/ontology/verify'].includes(path)){
+          const example=url.searchParams.get('example')??'warehouse';
+          if(!judgeFeeds.includes(example))return json(res,400,{error:{code:'UNKNOWN_FEED',message:'Choose a supported merchant export.'}});
+          return json(res,200,path.endsWith('/verify')?await verifyJudgeFeed(example):await judgeFeed(example));
+        }
         if(req.method==='GET'&&path==='/api/market/merchant-scale/rank'){
           const districts=url.searchParams.get('districts'),feeds=url.searchParams.get('feeds');
           if(!scaleProtocol.districts.map(String).includes(districts)||!scaleProtocol.feeds.map(String).includes(feeds))

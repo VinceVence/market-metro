@@ -1,6 +1,7 @@
 import {createGarden} from '../garden/world.mjs';
 import {esc,money} from '../garden/ui.mjs';
 import {bindMerchantScale} from './merchant-scale.mjs';
+import {bindFeedProof} from './feed-proof.mjs';
 
 const $=id=>document.getElementById(id);
 const usd=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'});
@@ -32,7 +33,7 @@ function chapters(d){
       `<p>Both models ranked shoppers for the same campaign in three separate trial markets. The verifier chose ${esc(models[p.chosen.family].toLowerCase())} after checking PayPal earnings, merchant outcomes and retained purchases.</p>
       <table><caption>Average gain over fixed rules in development</caption><thead><tr><th>Ranking model</th><th>PayPal</th><th>Merchants</th></tr></thead><tbody>
       ${[p.original,p.chosen].map(m=>`<tr><th scope="row">${esc(models[m.family])}</th><td>${signed(m.paypal)}</td><td>${signed(m.merchants)}</td></tr>`).join('')}</tbody></table>
-      <p>The campaign was locked before these shoppers’ later purchases were measured.</p>`},
+      <p>The campaign was locked before these shoppers’ later purchases were measured.</p><a href="#ontology" data-open-ontology>Verify what counts as a purchase ↗</a>`},
     {day:s.purchaseDay,source:'Simulated shopper · observed purchase and delivery',title:customer+' bought a '+s.product+'.',body:
       `<p>${s.daysSincePurchase!=null?`Their previous purchase was ${s.daysSincePurchase} days earlier. `:''}${merch} fulfilled the order after the planner’s recommendation.</p>
       ${dl([['Recommendation','Day '+s.contactDay],['Funded and purchased',s.fundedDay===s.purchaseDay?'Day '+s.purchaseDay:'Days '+s.fundedDay+' and '+s.purchaseDay],
@@ -44,7 +45,8 @@ function chapters(d){
       ${dl([['Capture status',r.status],['Sandbox fee',money(r.fee_cents)],['Test merchant received',money(r.net_cents)]])}
       <p>PayPal capture <code>${esc(r.capture_id)}</code></p><details><summary>Match the provider receipt to the warehouse</summary>
       <p>PayPal order<br><code>${esc(r.paypal_order_id)}</code></p><p>Warehouse order / PayPal custom ID<br><code>${esc(r.order_id)}</code></p><p>Verified <time>${esc(r.verified_at)}</time></p></details>
-      <small>Playback reads this saved receipt. The benchmark counts the simulated sale once.</small>`},
+      <small>Playback reads this saved receipt. The benchmark counts the simulated sale once.</small>
+      <p><button type="button" data-open-ontology>Why is this one purchase?</button></p>`},
     {day:d.settledDay,source:'Simulated results after refunds, settlement and AI cost',title:d.vsFixed.purchases+' more retained purchases.',body:
       `<table><thead><tr><th>Outcome</th><th>Fixed rules</th><th>Planner + verifier</th><th>Gain</th></tr></thead><tbody>
       ${[['PayPal net','paypal'],['Merchants¹','merchants'],['Purchases','purchases']].map(([l,k])=>`<tr><th scope="row">${l}</th><td>${k==='purchases'?d.fixed[k]:usd.format(d.fixed[k])}</td><td>${k==='purchases'?d.planner[k]:usd.format(d.planner[k])}</td><td class="gain">${k==='purchases'?'+'+d.vsFixed[k]:signed(d.vsFixed[k])}</td></tr>`).join('')}</tbody></table>
@@ -100,5 +102,6 @@ async function start(){
   window.addEventListener('pagehide',pause);document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
   render();
   bindMerchantScale(pause);
+  bindFeedProof(pause);
 }
 start().catch(error=>{$('judge-error').textContent=error.message;$('judge-error').hidden=false;});

@@ -18,6 +18,8 @@ The earlier three-role discovery demo and its separate $64 capture remain availa
 
 ## Why PayPal matters
 
+At the receipt chapter, select **Why is this one purchase?** The business definitions distinguish a shopper checkout, a seller’s portion and a Sandbox confirmation. Switch from **Recorded warehouse** to **Partner with renamed fields**, then **Two possible checkout links**. The verifier first recovers the same audited purchase count, then holds the ambiguous feed before publishing its totals. The earlier campaign and its financial comparison use their original evidence. [Merchant feed verifier](http://127.0.0.1:4173/judge.html#ontology) · [Held-out comparison](ontology/README.md)
+
 For a short scale demonstration after the receipt, open **Merchant scale**, choose four districts and twelve inventory feeds per district, then click **Run local ranking**. One trained model serves 48 simulated stores using four independent markets. With full stock visibility it sent 35% fewer product recommendations than fixed rules and produced 45 more retained purchases across all shopping. PayPal net rose $260.68 in the simulation. Keeping the same 2,400 shoppers and increasing participating sellers from 16 to 48 took recommendation sales from 12 to 36 distinct participating merchants. [Merchant scale and controls](merchant-scale/README.md)
 
 Success is retained, fulfillable commerce rather than clicks. Payment authorizations, fees, settlement timing, refunds and outstanding obligations influence the campaigns and fulfillment configuration. The native Sandbox adapter proves selected payment execution and reconciliation; the simulated payment layer lets us compare policies without charging real shoppers.
