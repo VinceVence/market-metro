@@ -1,0 +1,18 @@
+{
+  "id": "reactivation-fresh-r1",
+  "registered": "2026-11-05",
+  "baseCommit": "6f4d8b88cabf484f02430ba4ab23b5c46f425cb2",
+  "economy": "expanded-12x600",
+  "regime": "reactivation",
+  "seeds": [92111701, 92111702, 92111703, 92111704, 92111705, 92111706],
+  "decisionDay": 30,
+  "evaluation": "Replicate the first-review comparison. Both arms receive the identical observed day-30 market. Each makes six fresh Gemini tool decisions through the existing harness and the same local financial verifier. Keep the selected campaign through final settlement. Lock every arm before scoring held-out outcomes.",
+  "arms": ["single", "team"],
+  "order": "Alternate which arm goes first on successive seeds, starting with single. Each review starts with empty agent state. Only trusted numerical development trials can be reused. No feedback from evaluation goes to later reviews.",
+  "comparators": ["strong fixed rules", "each arm's own equally costed proposal before the extra model check", "checked team versus checked single planner"],
+  "outcomes": ["modeled PayPal net after actual metered token cost", "aggregate merchant contribution", "retained purchases", "retained payment volume"],
+  "repeat": "Report every paired difference. Count how many seeds improve strictly on all three primary outcomes. Call a majority repeat only if at least four of six seeds improve on all three and all three totals are positive. Apply this test separately for each verifier versus its own original and for team versus planner. Report incomplete or fallback reviews separately, retain every assigned seed, and make no claim of production profit.",
+  "budget": {"studyMicros":1140000,"perArmMicros":190000,"existingLedgerMicros":8000000,"externalMaximumUSD":50,"startingLedgerMicros":6821028},
+  "stopping": "Start a new pair only if both arms fit at their full run ceilings. Stop on an unresolved provider reservation. Keep definitive fallbacks and failures without replacing seeds or re-prompting. No native payments.",
+  "links": {"originalComparison":"../protocol.json","frozenHarness":"../../harness-v2/v23-20261104/protocol.json"}
+}
