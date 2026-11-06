@@ -4,6 +4,7 @@ import {createAutonomyRoom} from './commerce-growth/autonomy/live.mjs';
 import {rankDistricts,scaleProtocol} from './commerce-expanded/harness-v2/merchant-scale.mjs';
 import {judgeFeeds,judgeFeed,verifyJudgeFeed} from './ontology/judge-feed.mjs';
 import {plannerFeedDemo} from './ontology/planner-demo.mjs';
+import {trainingReview} from './ontology/training-advisor.mjs';
 import {createOwnMarketService} from './behavior-v4/service.mjs';
 import {createAuthoredCatalogService} from './behavior-v4/catalog.mjs';
 import {createStudioService} from './studio/service.mjs';
@@ -63,6 +64,11 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
       const origin = `http://${req.headers.host}`;
       const url = new URL(req.url, origin), path = decodeURIComponent(url.pathname);
       if (path.startsWith('/api/')) {
+        if(req.method==='GET'&&path==='/api/market/ontology/training'){
+          const task=url.searchParams.get('task')??'retained_recommendation';
+          if(!['retained_recommendation','inquiry_value','exact_sku','campaign_net'].includes(task))return json(res,400,{error:{code:'UNKNOWN_TRAINING_TASK',message:'Choose a supported business question.'}});
+          return json(res,200,await trainingReview(task));
+        }
         if(req.method==='GET'&&path==='/api/market/ontology/planner'){
           const phase=url.searchParams.get('phase')??'hold',holdId=url.searchParams.get('holdId');
           if(!['hold','corrected'].includes(phase))return json(res,400,{error:{code:'UNKNOWN_REVIEW_PHASE',message:'Choose a registered review phase.'}});

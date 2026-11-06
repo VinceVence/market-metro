@@ -3,6 +3,7 @@ import {esc,money} from '../garden/ui.mjs';
 import {bindMerchantScale} from './merchant-scale.mjs';
 import {bindFeedProof} from './feed-proof.mjs';
 import {bindPlannerReview} from './planner-review.mjs';
+import {bindTrainingReview} from './training-review.mjs';
 
 const $=id=>document.getElementById(id);
 const usd=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'});
@@ -29,6 +30,7 @@ function chapters(d){
     {day:31,source:'Recorded Gemini proposal · local training',title:'Recommend a product or ask what the shopper needs.',body:
       `<p>Rank consenting shoppers by the expected value for both PayPal and the merchant. Use recent interest and prior market responses to choose whom to contact.</p>
       ${dl([['Daily ceiling',p.per100*6+' contacts across 600 shoppers'],['Feature window',p.window+' days'],['Local model fits','2'],['Planner’s first choice',models[p.original.family]]])}
+      <p><button type="button" data-open-training>Try ontology-guided model training</button></p>
       <details><summary>Read the recorded proposal</summary><p>${esc(p.rationale)}</p></details>`},
     {day:31,source:'Deterministic verifier · simulated financial trials',title:'The verifier switched the ranking model.',body:
       `<p>Both models ranked shoppers for the same campaign in three separate trial markets. The verifier chose ${esc(models[p.chosen.family].toLowerCase())} after checking PayPal earnings, merchant outcomes and retained purchases.</p>
@@ -105,5 +107,6 @@ async function start(){
   bindMerchantScale(pause);
   bindFeedProof(pause);
   bindPlannerReview(()=>go(3));
+  bindTrainingReview(()=>go(2));
 }
 start().catch(error=>{$('judge-error').textContent=error.message;$('judge-error').hidden=false;});

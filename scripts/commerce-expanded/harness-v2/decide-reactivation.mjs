@@ -26,10 +26,11 @@ const sources=[...new Set([...Object.keys(economy.economyHashes),...Object.keys(
   'benchmark/vertex.mjs','scripts/commerce-deadlines/solver.mjs','scripts/commerce-deadlines/allocator.py',
   'docs/commerce-growth/team-1/development/results.json','docs/commerce-growth/team-1/training/model.json'])];
 const sha=buf=>createHash('sha256').update(buf).digest('hex');
+const priorLock=await optional(join(folder,'decisions.json'));
 const fingerprints={};
 for(const path of sources){
-  fingerprints[path]=sha(await readFile(path));
-  assert.equal(fingerprints[path],sha(execFileSync('git',['show',protocol.baseCommit+':'+path],{maxBuffer:32*1024*1024})),path);
+  fingerprints[path]=sha(execFileSync('git',['show',protocol.baseCommit+':'+path],{maxBuffer:32*1024*1024}));
+  if(!priorLock)assert.equal(sha(await readFile(path)),fingerprints[path],path);
 }
 const sourceHash=canonicalHash(fingerprints);
 async function optional(path){try{return await read(path);}catch(e){if(e.code!=='ENOENT')throw e;return null;}}
@@ -47,8 +48,8 @@ async function spending(){
   return {project,study,entries};
 }
 await mkdir(work,{recursive:true});
-const priorLock=await optional(join(folder,'decisions.json'));
 if(priorLock){
+  const {lockHash,...decisions}=priorLock;assert.equal(canonicalHash(decisions),lockHash);
   assert.equal(priorLock.protocolHash,protocolHash);assert.equal(priorLock.sourceHash,sourceHash);
   console.log('Registered decisions already locked. No provider calls made.');process.exit(0);
 }

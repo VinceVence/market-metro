@@ -12,6 +12,7 @@ import {openAllocator} from '../../commerce-deadlines/solver.mjs';
 import {openAutonomousCommerce} from './controller.mjs';
 import {openCommerceHarnessV2} from '../../commerce-expanded/harness-v2/controller.mjs';
 import {plannerMappings,withPlannerFeed} from '../../ontology/planner-gate.mjs';
+import {ontologyTrainingAdvisor} from '../../ontology/training-advisor.mjs';
 import {evaluateFundingPredictions} from './funding-calibration.mjs';
 import {projection,marketFrame,warehouseBatch,key,stamp} from './live-data.mjs';
 import * as expandedEnvironment from '../../commerce-expanded/environment.mjs';
@@ -123,7 +124,7 @@ export function createAutonomyRoom({store,market,providerFactory,rootDir=resolve
   try{for(const [path,h]of Object.entries(core.sourceHashes))if(createHash('sha256').update(readFileSync(path)).digest('hex')!==h)throw Error('FROZEN_ECONOMY_CHANGED');await mkdir(rootDir,{recursive:true});
    const suffix=digest(input).slice(0,16),s={id:'AUTONOMY-'+suffix,runId:'GARDEN-AUTO-'+suffix,seed:input.seed,regime:input.regime||'discovery',marketProfile:input.marketProfile||'frozen-3x100',harnessVersion:input.harnessVersion||'v1',plannerMode:input.plannerMode||'team',modelCheck:input.modelCheck??false,merchantMapping,sandbox:input.sandbox,status:'RUNNING',cursor:{},committedDay:0,team:null},w=engineFor(s).createGrowthWorld({seed:s.seed,regime:s.regime}),p=projection(w,s),f=marketFrame(w,s,null);p.autonomyFrame=f;
    store.create(p);r={s,w,team:null,allocator:openAllocator(),stepping:false};db.prepare('INSERT INTO autonomy_sessions VALUES(?,?,?,?,?,?)').run(s.id,input.requestId,s.runId,s.status,JSON.stringify({s,w}),new Date().toISOString());db.prepare('INSERT INTO autonomy_frames VALUES(?,?,?)').run(s.runId,0,JSON.stringify(f));active.set(s.id,r);
-   r.team=s.harnessVersion==='v2'?await v2ControllerFactory({id:s.id,dir:resolve(rootDir,s.id),mode:s.plannerMode,modelCheck:s.modelCheck,prior,incumbent:fixed.config,providerFactory,trialFactory:v2TrialFactory,onCheckpoint:async()=>persist(r)}):await openAutonomousCommerce({id:s.id,dir:resolve(rootDir,s.id),prior,incumbent:fixed.config,providerFactory,background:true,recipeSelection:true,developmentEvidence,fundingPrior});
+   r.team=s.harnessVersion==='v2'?await v2ControllerFactory({id:s.id,dir:resolve(rootDir,s.id),mode:s.plannerMode,modelCheck:s.modelCheck,trainingAdvisor:s.merchantMapping?ontologyTrainingAdvisor:null,prior,incumbent:fixed.config,providerFactory,trialFactory:v2TrialFactory,onCheckpoint:async()=>persist(r)}):await openAutonomousCommerce({id:s.id,dir:resolve(rootDir,s.id),prior,incumbent:fixed.config,providerFactory,background:true,recipeSelection:true,developmentEvidence,fundingPrior});
    if(s.merchantMapping)r.team=withPlannerFeed(r.team,{runId:s.runId,mapping:s.merchantMapping});
    persist(r);if(autoPump)r.timer=setTimeout(()=>pump(r),150);return snapshot(s.id);
   }catch(error){if(r){r.s.status='ATTENTION';r.s.warning=error.message;persist(r);r.allocator.close();active.delete(r.s.id);}throw error;}finally{starting=false;}

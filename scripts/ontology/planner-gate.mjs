@@ -60,10 +60,11 @@ export function withPlannerFeed(planner,{runId,mapping='warehouse'}){
     const history=admittedOrders(feed,cert,view);
     const fixedHold=waiting?.holdId??null;
     waiting=null;
-    checkpoint(view.day,{...evidence,decision:'CERTIFY',metrics:cert.metrics,checkoutKey:cert.mapping.orderToCheckout,
+    const admission={...evidence,decision:'CERTIFY',metrics:cert.metrics,checkoutKey:cert.mapping.orderToCheckout,
       correctedHoldId:fixedHold,title:'Purchase history admitted to planning',
-      body:`Released ${history.length} captured checkouts from ${cert.metrics.merchantOrders} merchant orders through day ${view.day}.`});
-    return planner.plan({...view,pastOrders:history});
+      body:`Released ${history.length} captured checkouts from ${cert.metrics.merchantOrders} merchant orders through day ${view.day}.`};
+    checkpoint(view.day,admission);
+    return planner.plan({...view,pastOrders:history},structuredClone(admission));
   }
   return {
     async plan(view){

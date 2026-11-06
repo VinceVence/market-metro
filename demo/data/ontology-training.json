@@ -1,0 +1,2060 @@
+{
+  "study": "ontology-feature-triage-v1",
+  "lock": {
+    "study": "ontology-feature-triage-v1",
+    "commit": "34ed51b4c2b19038daef699c6729a4422989fb99",
+    "sources": {
+      "docs/ontology/training/protocol.json": "76dcb6334f87b39792cad82126047f280aaf89ca31374549fd943285ca776f66",
+      "scripts/ontology/training.mjs": "7c2f8481b3500e0636d65032e1f659f60195cf6ac7e604755f6db241e3f7e27c",
+      "scripts/ontology/train-features.py": "d167541015edcae713979e775f41222cc19635294689f5f89d21eac7cce2acce",
+      "scripts/ontology/feature-study.mjs": "5d79ed7b7547780c311faaaf3d5b2cb77212a0fcaccf5ad5bd5c522779df9582",
+      "scripts/commerce-expanded/harness-v2/tools.mjs": "a2b75fb60227d05d5f6752bc8b25548d3a9ddabaed75b919c02172d684beed8d",
+      "scripts/commerce-expanded/harness-v2/contracts.mjs": "e84b50e8c988f276fb4d733f06ebad741ec103d9c33ecab3336da3214cc19ec4",
+      "scripts/commerce-expanded/harness-v2/inquiry-value.mjs": "6526a6d1ca5937048a600cda0db946bbe15fdf6db85e360263257fe2289a685a",
+      "scripts/commerce-expanded/harness-v2/merchant-scale.mjs": "0f03a5ff95bad8089ec7bb9d95ea608ae9348f74803097fd646331dd916b5346",
+      "scripts/commerce-growth/autonomy/features.mjs": "deb12b29d9f534b2beee413d8f443ed5ed9ec194068665c0dcd4122795e14959",
+      "scripts/commerce-growth/autonomy/feedback-features.mjs": "15724cbd6e55e839fd206ea2c44bc18c0bb3538f9d5ead989e2c92277497356a",
+      "scripts/commerce-growth/autonomy/team-workbench-tools.mjs": "f32ceb8f23ee395b010b29fc7ffb546450fd4676a2d4f60396fa88f5c472f6d8",
+      "scripts/commerce-growth/autonomy/prediction-metrics.mjs": "d1b5c5c9692a114deedc1ac10e310e85e15285cc40698066d0e2a5b4c07aca0f",
+      "scripts/commerce-growth/experiments/program.mjs": "31550fca6455652c3a9f45f2c74856cfedc7b1e226c812997b3e5b0c1c8d73d8",
+      "scripts/commerce-deadlines/allocator.py": "901e0c66fb95ad7865b8a4b681f432d02280a59141a310e39fcd9f910108f168",
+      "docs/commerce-growth/team-1/training/model.json": "24ca6bb40717fddc516a7bd8047e00d5da19bc256b8fd8972c0424886d83929b",
+      "docs/commerce-growth/team-1/development/results.json": "cd411af56293b675f5a54148587b43e21a941d923cbfd758a0d583f432c27a8d",
+      "docs/merchant-scale/ranking-inputs.json.gz": "74c9b76ea9e1214100b957a41b72ac43df780624355420544f1e62ea71c5b876",
+      "docs/commerce-growth/autonomy-1/funding-training/dataset.json": "982075400720adaadaac5bfac1431f112f9fe05379e4144807b4c43f95aa44ce",
+      "docs/ontology/training/models.json.gz": "4f2344824342fbd5a8e3869efde64eed0898e632bb9715d71871f587359792bc"
+    },
+    "cases": [
+      {
+        "seed": 949236195,
+        "regime": "reactivation"
+      },
+      {
+        "seed": 370105743,
+        "regime": "discovery"
+      },
+      {
+        "seed": 832843023,
+        "regime": "low_response"
+      },
+      {
+        "seed": 712097669,
+        "regime": "zero_response"
+      }
+    ],
+    "economyHash": "6136ba9c94253a1db3c46071b890d4721426ee00427d2cbd44efba06513b4c45"
+  },
+  "development": {
+    "audit": {
+      "version": "ontology-training-1",
+      "plan": {
+        "task": "retained_recommendation",
+        "decision": "FIT_PRODUCT_MODEL",
+        "target": "A retained basket following a product recommendation",
+        "grain": "One product contact with a catalog item",
+        "label": "retained",
+        "maturityDays": 26,
+        "paths": [
+          {
+            "id": "intent",
+            "path": "Recommendation → product interest observed before contact",
+            "fields": [
+              "age",
+              "search",
+              "signal_count",
+              "category_affinity",
+              "sku_purchase_recency",
+              "signal_after_sku_purchase"
+            ]
+          },
+          {
+            "id": "shopper",
+            "path": "Contact → shopper → earlier checkouts",
+            "fields": [
+              "recency",
+              "prior_purchases"
+            ]
+          },
+          {
+            "id": "offer",
+            "path": "Recommendation → listed item → current price, category and available supply",
+            "fields": [
+              "price_usd",
+              "stock",
+              "arrival_days",
+              "stationery",
+              "electronics",
+              "furniture",
+              "bundles"
+            ]
+          },
+          {
+            "id": "feedback",
+            "path": "Contact → same action in earlier market history",
+            "fields": [
+              "market_contacts_log",
+              "market_response_rate",
+              "market_authorization_rate",
+              "market_mature_retention_rate"
+            ]
+          }
+        ],
+        "recipes": [
+          {
+            "name": "intent_shopper",
+            "fields": [
+              "age",
+              "search",
+              "signal_count",
+              "category_affinity",
+              "recency",
+              "prior_purchases",
+              "sku_purchase_recency",
+              "signal_after_sku_purchase"
+            ]
+          },
+          {
+            "name": "with_supply",
+            "fields": [
+              "age",
+              "search",
+              "signal_count",
+              "category_affinity",
+              "price_usd",
+              "stock",
+              "arrival_days",
+              "recency",
+              "prior_purchases",
+              "sku_purchase_recency",
+              "signal_after_sku_purchase",
+              "stationery",
+              "electronics",
+              "furniture",
+              "bundles"
+            ]
+          },
+          {
+            "name": "with_market_history",
+            "fields": [
+              "age",
+              "search",
+              "signal_count",
+              "category_affinity",
+              "recency",
+              "prior_purchases",
+              "sku_purchase_recency",
+              "signal_after_sku_purchase",
+              "market_contacts_log",
+              "market_response_rate",
+              "market_authorization_rate",
+              "market_mature_retention_rate"
+            ]
+          },
+          {
+            "name": "all_linked",
+            "fields": [
+              "age",
+              "search",
+              "signal_count",
+              "category_affinity",
+              "price_usd",
+              "stock",
+              "arrival_days",
+              "recency",
+              "prior_purchases",
+              "sku_purchase_recency",
+              "signal_after_sku_purchase",
+              "stationery",
+              "electronics",
+              "furniture",
+              "bundles",
+              "market_contacts_log",
+              "market_response_rate",
+              "market_authorization_rate",
+              "market_mature_retention_rate"
+            ]
+          }
+        ],
+        "bindings": {
+          "age": "age",
+          "search": "search",
+          "signal_count": "signal_count",
+          "category_affinity": "category_affinity",
+          "price_usd": "price_usd",
+          "stock": "stock",
+          "arrival_days": "arrival_days",
+          "recency": "recency",
+          "prior_purchases": "prior_purchases",
+          "sku_purchase_recency": "sku_purchase_recency",
+          "signal_after_sku_purchase": "signal_after_sku_purchase",
+          "stationery": "stationery",
+          "electronics": "electronics",
+          "furniture": "furniture",
+          "bundles": "bundles",
+          "market_contacts_log": "market_contacts_log",
+          "market_response_rate": "market_response_rate",
+          "market_authorization_rate": "market_authorization_rate",
+          "market_mature_retention_rate": "market_mature_retention_rate"
+        },
+        "excluded": [
+          {
+            "fields": [
+              "responded",
+              "authorized",
+              "fundingObservedDay"
+            ],
+            "reason": "Outcomes of the current contact become known after targeting."
+          },
+          {
+            "fields": [
+              "retained",
+              "retainedGrossCents",
+              "retailNetCents",
+              "merchantOrderContributionCents",
+              "labelCompleteDay"
+            ],
+            "reason": "Settlement supplies labels, evaluation values and maturity checks."
+          },
+          {
+            "fields": [
+              "customerId",
+              "catalogId",
+              "episode",
+              "regime",
+              "sourcePolicy"
+            ],
+            "reason": "Keys and market identifiers support joins, grouping or validation."
+          },
+          {
+            "fields": [
+              "is_recommendation"
+            ],
+            "reason": "Contact kind is constant inside the product recommendation cohort."
+          }
+        ]
+      },
+      "inputFields": [
+        "age",
+        "search",
+        "signal_count",
+        "category_affinity",
+        "price_usd",
+        "stock",
+        "arrival_days",
+        "recency",
+        "prior_purchases",
+        "is_recommendation",
+        "sku_purchase_recency",
+        "signal_after_sku_purchase",
+        "stationery",
+        "electronics",
+        "furniture",
+        "bundles",
+        "market_contacts_log",
+        "market_response_rate",
+        "market_authorization_rate",
+        "market_mature_retention_rate"
+      ],
+      "historyRows": 7010,
+      "windowRows": 2762,
+      "routedToInquiries": 1532,
+      "unmatured": 0,
+      "dataHash": "59fef273049e8ba16fc097123503fcef672851125ba1e66d02d40c2d0c832973",
+      "choices": {
+        "pooled": "all_pooled",
+        "sku_all": "all_linked",
+        "statistical": "top_12",
+        "ontology": "with_market_history"
+      },
+      "selected": {
+        "pooled": {
+          "selection": "pooled",
+          "fields": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "price_usd",
+            "stock",
+            "arrival_days",
+            "recency",
+            "prior_purchases",
+            "is_recommendation",
+            "sku_purchase_recency",
+            "signal_after_sku_purchase",
+            "stationery",
+            "electronics",
+            "furniture",
+            "bundles",
+            "market_contacts_log",
+            "market_response_rate",
+            "market_authorization_rate",
+            "market_mature_retention_rate"
+          ],
+          "rows": 2762,
+          "positive": 181,
+          "target": "A retained basket following a product recommendation"
+        },
+        "sku_all": {
+          "selection": "sku_all",
+          "fields": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "price_usd",
+            "stock",
+            "arrival_days",
+            "recency",
+            "prior_purchases",
+            "sku_purchase_recency",
+            "signal_after_sku_purchase",
+            "stationery",
+            "electronics",
+            "furniture",
+            "bundles",
+            "market_contacts_log",
+            "market_response_rate",
+            "market_authorization_rate",
+            "market_mature_retention_rate"
+          ],
+          "rows": 1230,
+          "positive": 116,
+          "target": "A retained basket following a product recommendation"
+        },
+        "statistical": {
+          "selection": "statistical",
+          "fields": [
+            "age",
+            "search",
+            "signal_count",
+            "recency",
+            "prior_purchases",
+            "sku_purchase_recency",
+            "signal_after_sku_purchase",
+            "stationery",
+            "electronics",
+            "market_response_rate",
+            "market_authorization_rate",
+            "market_mature_retention_rate"
+          ],
+          "rows": 1230,
+          "positive": 116,
+          "target": "A retained basket following a product recommendation"
+        },
+        "ontology": {
+          "selection": "ontology",
+          "fields": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "recency",
+            "prior_purchases",
+            "sku_purchase_recency",
+            "signal_after_sku_purchase",
+            "market_contacts_log",
+            "market_response_rate",
+            "market_authorization_rate",
+            "market_mature_retention_rate"
+          ],
+          "rows": 1230,
+          "positive": 116,
+          "target": "A retained basket following a product recommendation"
+        }
+      },
+      "search": {
+        "pooled": [
+          {
+            "candidate": "all_pooled",
+            "fields": 20,
+            "macroLogLoss": 0.2656407828104071,
+            "auc": 0.7667654615241751
+          }
+        ],
+        "sku_all": [
+          {
+            "candidate": "all_linked",
+            "fields": 19,
+            "macroLogLoss": 0.26928609568868306,
+            "auc": 0.7765817495202131
+          }
+        ],
+        "statistical": [
+          {
+            "candidate": "top_8",
+            "fields": 8,
+            "macroLogLoss": 0.2680184872037497,
+            "auc": 0.7775297158422584
+          },
+          {
+            "candidate": "top_15",
+            "fields": 15,
+            "macroLogLoss": 0.2694365971102513,
+            "auc": 0.7722443199405683
+          },
+          {
+            "candidate": "top_12",
+            "fields": 12,
+            "macroLogLoss": 0.2663284435124113,
+            "auc": 0.7782803503993067
+          },
+          {
+            "candidate": "top_19",
+            "fields": 19,
+            "macroLogLoss": 0.26928609568868306,
+            "auc": 0.7765817495202131
+          }
+        ],
+        "ontology": [
+          {
+            "candidate": "intent_shopper",
+            "fields": 8,
+            "macroLogLoss": 0.26487564531712066,
+            "auc": 0.7898726242803195
+          },
+          {
+            "candidate": "with_supply",
+            "fields": 15,
+            "macroLogLoss": 0.2747449926798663,
+            "auc": 0.7630548504921686
+          },
+          {
+            "candidate": "with_market_history",
+            "fields": 12,
+            "macroLogLoss": 0.2629471332594915,
+            "auc": 0.7895553457562062
+          },
+          {
+            "candidate": "all_linked",
+            "fields": 19,
+            "macroLogLoss": 0.26928609568868306,
+            "auc": 0.7765817495202131
+          }
+        ]
+      }
+    },
+    "pooledValidation": {
+      "logLoss": 0.2737193525020035,
+      "brier": 0.07800164230756527,
+      "auc": 0.7667654615241751,
+      "averagePrecision": 0.2551243404952907,
+      "macroMarketAUC": 0.746504839704497,
+      "macroLogLoss": 0.2656407828104071
+    },
+    "quality": {
+      "sku_all": {
+        "logLoss": 0.27623378902911694,
+        "brier": 0.07996033483825468,
+        "auc": 0.7765817495202131,
+        "averagePrecision": 0.24534759974786535,
+        "macroMarketAUC": 0.7378138006333522,
+        "macroLogLoss": 0.26928609568868306
+      },
+      "statistical": {
+        "logLoss": 0.27295940767964505,
+        "brier": 0.07847629529289593,
+        "auc": 0.7782803503993067,
+        "averagePrecision": 0.2519680271554072,
+        "macroMarketAUC": 0.746115895306858,
+        "macroLogLoss": 0.2663284435124113
+      },
+      "ontology": {
+        "logLoss": 0.26971743618046423,
+        "brier": 0.07847406323304804,
+        "auc": 0.7895553457562062,
+        "averagePrecision": 0.25993963347185645,
+        "macroMarketAUC": 0.7701144533631407,
+        "macroLogLoss": 0.2629471332594915
+      }
+    }
+  },
+  "cases": [
+    {
+      "seed": 949236195,
+      "regime": "reactivation",
+      "identity": [
+        "eb6e4ecfb2f5314f1e959faa789496fd1ecabbeb24529c7091cc61db6a74920e",
+        "d61dc1dfde3046ae8c71c1e2b9df94aa61436c4bb8e26165e2519a9c024009c3",
+        "cbaae9e6495f01c8e35cb87814828357ac68342f4e2bdc1ea060f84a963f80b1",
+        50039724
+      ],
+      "outcomes": {
+        "fixed": {
+          "paypal": 2939.26,
+          "merchants": 35744.93,
+          "purchases": 569,
+          "volume": 82129,
+          "recommendations": 1844,
+          "exactProductBaskets": 173,
+          "originalPlanCost": 0
+        },
+        "incumbent": {
+          "paypal": 3153.267675,
+          "merchants": 38298.82,
+          "purchases": 599,
+          "volume": 87044,
+          "recommendations": 1033,
+          "exactProductBaskets": 136,
+          "originalPlanCost": 0.032325
+        },
+        "sku_all": {
+          "paypal": 3132.767675,
+          "merchants": 37963.65,
+          "purchases": 599,
+          "volume": 86587,
+          "recommendations": 977,
+          "exactProductBaskets": 136,
+          "originalPlanCost": 0.032325
+        },
+        "statistical": {
+          "paypal": 3150.077675,
+          "merchants": 38134.95,
+          "purchases": 598,
+          "volume": 86820,
+          "recommendations": 996,
+          "exactProductBaskets": 138,
+          "originalPlanCost": 0.032325
+        },
+        "ontology": {
+          "paypal": 3142.197675,
+          "merchants": 38019.13,
+          "purchases": 600,
+          "volume": 86644,
+          "recommendations": 999,
+          "exactProductBaskets": 138,
+          "originalPlanCost": 0.032325
+        }
+      },
+      "changedDays": {
+        "incumbent": 0,
+        "sku_all": 68,
+        "statistical": 70,
+        "ontology": 70
+      },
+      "firstChange": {
+        "sku_all": {
+          "added": [
+            {
+              "customerId": "BUYER-0147",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0567",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-01"
+            },
+            {
+              "customerId": "BUYER-0253",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-04"
+            },
+            {
+              "customerId": "BUYER-0215",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0254",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0283",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0102",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            },
+            {
+              "customerId": "BUYER-0452",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0236",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0513",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-02"
+            },
+            {
+              "customerId": "BUYER-0204",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            },
+            {
+              "customerId": "BUYER-0340",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            }
+          ]
+        },
+        "statistical": {
+          "added": [
+            {
+              "customerId": "BUYER-0147",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0253",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-04"
+            },
+            {
+              "customerId": "BUYER-0254",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0233",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0018",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0215",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0283",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0102",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            },
+            {
+              "customerId": "BUYER-0151",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-01"
+            },
+            {
+              "customerId": "BUYER-0018",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-01"
+            },
+            {
+              "customerId": "BUYER-0513",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-02"
+            },
+            {
+              "customerId": "BUYER-0373",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-02"
+            },
+            {
+              "customerId": "BUYER-0204",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            },
+            {
+              "customerId": "BUYER-0340",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            }
+          ]
+        },
+        "ontology": {
+          "added": [
+            {
+              "customerId": "BUYER-0147",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0253",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-04"
+            },
+            {
+              "customerId": "BUYER-0215",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0254",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0283",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0102",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            },
+            {
+              "customerId": "BUYER-0452",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0236",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0204",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            },
+            {
+              "customerId": "BUYER-0340",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            }
+          ]
+        }
+      },
+      "quality": {
+        "incumbent": {
+          "n": 1033,
+          "positives": 186,
+          "auc": 0.8060390245140978,
+          "averagePrecision": 0.4413138910217521,
+          "brier": 0.12187705769039095,
+          "logLoss": 0.39112866284380987,
+          "macroMarketAUC": null
+        },
+        "sku_all": {
+          "n": 1033,
+          "positives": 186,
+          "auc": 0.787488415787536,
+          "averagePrecision": 0.4222133940316313,
+          "brier": 0.12353855704504493,
+          "logLoss": 0.39252540156897997,
+          "macroMarketAUC": null
+        },
+        "statistical": {
+          "n": 1033,
+          "positives": 186,
+          "auc": 0.7855079915197217,
+          "averagePrecision": 0.41429110927604257,
+          "brier": 0.12470517819011473,
+          "logLoss": 0.3938981062463772,
+          "macroMarketAUC": null
+        },
+        "ontology": {
+          "n": 1033,
+          "positives": 186,
+          "auc": 0.7905098322986887,
+          "averagePrecision": 0.410676261738015,
+          "brier": 0.12386227062736423,
+          "logLoss": 0.3920841264520493,
+          "macroMarketAUC": null
+        }
+      }
+    },
+    {
+      "seed": 370105743,
+      "regime": "discovery",
+      "identity": [
+        "4b455334a9217af03a52cef4fb1f46714b98ca0eb274b598e977985edae665fb",
+        "d35de57e4e22574190938455128c38ad2c8b129f33b51cdbd350b9c7ec974977",
+        "a523642976fe8cf3f88c4c29e619b82e1dd1f35f14f805f13da626c25adc4f27",
+        49708680
+      ],
+      "outcomes": {
+        "fixed": {
+          "paypal": 4429.48,
+          "merchants": 52858.55,
+          "purchases": 855,
+          "volume": 112217,
+          "recommendations": 2236,
+          "exactProductBaskets": 363,
+          "originalPlanCost": 0
+        },
+        "incumbent": {
+          "paypal": 4485.407675,
+          "merchants": 53356.79,
+          "purchases": 865,
+          "volume": 113464,
+          "recommendations": 1633,
+          "exactProductBaskets": 335,
+          "originalPlanCost": 0.032325
+        },
+        "sku_all": {
+          "paypal": 4519.877675,
+          "merchants": 53709.79,
+          "purchases": 870,
+          "volume": 114182,
+          "recommendations": 1397,
+          "exactProductBaskets": 331,
+          "originalPlanCost": 0.032325
+        },
+        "statistical": {
+          "paypal": 4527.837675,
+          "merchants": 53800.76,
+          "purchases": 872,
+          "volume": 114368,
+          "recommendations": 1369,
+          "exactProductBaskets": 324,
+          "originalPlanCost": 0.032325
+        },
+        "ontology": {
+          "paypal": 4540.897675,
+          "merchants": 53920.2,
+          "purchases": 877,
+          "volume": 114642,
+          "recommendations": 1421,
+          "exactProductBaskets": 334,
+          "originalPlanCost": 0.032325
+        }
+      },
+      "changedDays": {
+        "incumbent": 0,
+        "sku_all": 68,
+        "statistical": 70,
+        "ontology": 69
+      },
+      "firstChange": {
+        "sku_all": {
+          "added": [
+            {
+              "customerId": "BUYER-0050",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0109",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0118",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0143",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0149",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0041",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-03"
+            },
+            {
+              "customerId": "BUYER-0355",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-03"
+            },
+            {
+              "customerId": "BUYER-0287",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-04"
+            },
+            {
+              "customerId": "BUYER-0050",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-01"
+            },
+            {
+              "customerId": "BUYER-0058",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            }
+          ]
+        },
+        "statistical": {
+          "added": [
+            {
+              "customerId": "BUYER-0480",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-03"
+            },
+            {
+              "customerId": "BUYER-0050",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0109",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0118",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0143",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0149",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0161",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0171",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0197",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0041",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-03"
+            },
+            {
+              "customerId": "BUYER-0355",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-03"
+            },
+            {
+              "customerId": "BUYER-0287",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-04"
+            },
+            {
+              "customerId": "BUYER-0409",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-01"
+            },
+            {
+              "customerId": "BUYER-0021",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-02"
+            },
+            {
+              "customerId": "BUYER-0050",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-01"
+            },
+            {
+              "customerId": "BUYER-0058",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0424",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-03"
+            },
+            {
+              "customerId": "BUYER-0519",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-03"
+            }
+          ]
+        },
+        "ontology": {
+          "added": [
+            {
+              "customerId": "BUYER-0050",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0109",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0118",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0143",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0149",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0041",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-03"
+            },
+            {
+              "customerId": "BUYER-0355",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-03"
+            },
+            {
+              "customerId": "BUYER-0287",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-04"
+            },
+            {
+              "customerId": "BUYER-0050",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-01"
+            },
+            {
+              "customerId": "BUYER-0058",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            }
+          ]
+        }
+      },
+      "quality": {
+        "incumbent": {
+          "n": 1633,
+          "positives": 442,
+          "auc": 0.7604507410404581,
+          "averagePrecision": 0.5191976334287846,
+          "brier": 0.1614049793138112,
+          "logLoss": 0.4935413424790162,
+          "macroMarketAUC": null
+        },
+        "sku_all": {
+          "n": 1633,
+          "positives": 442,
+          "auc": 0.7661115986793865,
+          "averagePrecision": 0.5145662221820161,
+          "brier": 0.16156223594560165,
+          "logLoss": 0.49049722614359587,
+          "macroMarketAUC": null
+        },
+        "statistical": {
+          "n": 1633,
+          "positives": 442,
+          "auc": 0.7688736412991858,
+          "averagePrecision": 0.5163343726371593,
+          "brier": 0.1605766117825631,
+          "logLoss": 0.4883108476291741,
+          "macroMarketAUC": null
+        },
+        "ontology": {
+          "n": 1633,
+          "positives": 442,
+          "auc": 0.7764816060119067,
+          "averagePrecision": 0.5332300671318131,
+          "brier": 0.15957608619182673,
+          "logLoss": 0.4858225113277516,
+          "macroMarketAUC": null
+        }
+      }
+    },
+    {
+      "seed": 832843023,
+      "regime": "low_response",
+      "identity": [
+        "189ef02a7fec774783ffb4eee1ddbf057626a8be602274360f670b29ff35e54f",
+        "9d98c8ec41d3dadd6308c451178123a570e7d38d0d0abafe0324401d2f9c10bd",
+        "21ba1fc0a1afd8b54ce115196b579f64ba7d556df959e8e6fd4171e0677baa70",
+        49579614
+      ],
+      "outcomes": {
+        "fixed": {
+          "paypal": 3877.3,
+          "merchants": 46755.44,
+          "purchases": 771,
+          "volume": 104303,
+          "recommendations": 1901,
+          "exactProductBaskets": 52,
+          "originalPlanCost": 0
+        },
+        "incumbent": {
+          "paypal": 3872.067675,
+          "merchants": 46701.87,
+          "purchases": 770,
+          "volume": 104155,
+          "recommendations": 1163,
+          "exactProductBaskets": 42,
+          "originalPlanCost": 0.032325
+        },
+        "sku_all": {
+          "paypal": 3890.377675,
+          "merchants": 46896.02,
+          "purchases": 773,
+          "volume": 104541,
+          "recommendations": 1040,
+          "exactProductBaskets": 46,
+          "originalPlanCost": 0.032325
+        },
+        "statistical": {
+          "paypal": 3883.557675,
+          "merchants": 46837.17,
+          "purchases": 772,
+          "volume": 104423,
+          "recommendations": 1060,
+          "exactProductBaskets": 47,
+          "originalPlanCost": 0.032325
+        },
+        "ontology": {
+          "paypal": 3899.257675,
+          "merchants": 47016.04,
+          "purchases": 773,
+          "volume": 104765,
+          "recommendations": 1025,
+          "exactProductBaskets": 46,
+          "originalPlanCost": 0.032325
+        }
+      },
+      "changedDays": {
+        "incumbent": 0,
+        "sku_all": 70,
+        "statistical": 70,
+        "ontology": 70
+      },
+      "firstChange": {
+        "sku_all": {
+          "added": [
+            {
+              "customerId": "BUYER-0166",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-02"
+            },
+            {
+              "customerId": "BUYER-0400",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-01"
+            },
+            {
+              "customerId": "BUYER-0194",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0218",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0334",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0337",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0483",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0216",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0276",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0165",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-04"
+            },
+            {
+              "customerId": "BUYER-0142",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-02"
+            },
+            {
+              "customerId": "BUYER-0166",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ]
+        },
+        "statistical": {
+          "added": [
+            {
+              "customerId": "BUYER-0417",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0166",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-02"
+            },
+            {
+              "customerId": "BUYER-0194",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0218",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0312",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0334",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0337",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0359",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0370",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0380",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0019",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-01"
+            },
+            {
+              "customerId": "BUYER-0483",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0216",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0276",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0029",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-02"
+            },
+            {
+              "customerId": "BUYER-0393",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-02"
+            },
+            {
+              "customerId": "BUYER-0165",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-04"
+            },
+            {
+              "customerId": "BUYER-0142",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-02"
+            },
+            {
+              "customerId": "BUYER-0312",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-03"
+            },
+            {
+              "customerId": "BUYER-0166",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ]
+        },
+        "ontology": {
+          "added": [
+            {
+              "customerId": "BUYER-0166",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-02"
+            },
+            {
+              "customerId": "BUYER-0400",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-01"
+            },
+            {
+              "customerId": "BUYER-0194",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0218",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0334",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0337",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0483",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0216",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0276",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0165",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-04"
+            },
+            {
+              "customerId": "BUYER-0142",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-02"
+            },
+            {
+              "customerId": "BUYER-0166",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ]
+        }
+      },
+      "quality": {
+        "incumbent": {
+          "n": 1163,
+          "positives": 51,
+          "auc": 0.6116871208915221,
+          "averagePrecision": 0.07696748229623858,
+          "brier": 0.050082625188181504,
+          "logLoss": 0.20946676683060256,
+          "macroMarketAUC": null
+        },
+        "sku_all": {
+          "n": 1163,
+          "positives": 51,
+          "auc": 0.7134204401184935,
+          "averagePrecision": 0.08503744252585461,
+          "brier": 0.04198882164483911,
+          "logLoss": 0.1717660475610849,
+          "macroMarketAUC": null
+        },
+        "statistical": {
+          "n": 1163,
+          "positives": 51,
+          "auc": 0.7350296233601354,
+          "averagePrecision": 0.09277224764684665,
+          "brier": 0.0415425379600121,
+          "logLoss": 0.169445271599649,
+          "macroMarketAUC": null
+        },
+        "ontology": {
+          "n": 1163,
+          "positives": 51,
+          "auc": 0.7338393990689801,
+          "averagePrecision": 0.0909359145901612,
+          "brier": 0.04165038700610271,
+          "logLoss": 0.1696311006473473,
+          "macroMarketAUC": null
+        }
+      }
+    },
+    {
+      "seed": 712097669,
+      "regime": "zero_response",
+      "identity": [
+        "b1bb0736e82a37018683b3e70ef3b6bac62babd51293d538374e56129e5027bd",
+        "2e8fbcd0c0965e4db399bda5152f4c7877d12f21bb63757a3e803c64ad683935",
+        "c5c0d36145bf185db6019d1cc74661bcc8dff567742c824b529ebb3259eaac37",
+        49745388
+      ],
+      "outcomes": {
+        "fixed": {
+          "paypal": 3457.1,
+          "merchants": 40043.58,
+          "purchases": 603,
+          "volume": 91977,
+          "recommendations": 1973,
+          "exactProductBaskets": 0,
+          "originalPlanCost": 0
+        },
+        "incumbent": {
+          "paypal": 3458.067675,
+          "merchants": 40043.58,
+          "purchases": 603,
+          "volume": 91977,
+          "recommendations": 1036,
+          "exactProductBaskets": 0,
+          "originalPlanCost": 0.032325
+        },
+        "sku_all": {
+          "paypal": 3458.067675,
+          "merchants": 40043.58,
+          "purchases": 603,
+          "volume": 91977,
+          "recommendations": 1008,
+          "exactProductBaskets": 0,
+          "originalPlanCost": 0.032325
+        },
+        "statistical": {
+          "paypal": 3458.067675,
+          "merchants": 40043.58,
+          "purchases": 603,
+          "volume": 91977,
+          "recommendations": 958,
+          "exactProductBaskets": 0,
+          "originalPlanCost": 0.032325
+        },
+        "ontology": {
+          "paypal": 3458.267675,
+          "merchants": 40043.58,
+          "purchases": 603,
+          "volume": 91977,
+          "recommendations": 1010,
+          "exactProductBaskets": 0,
+          "originalPlanCost": 0.032325
+        }
+      },
+      "changedDays": {
+        "incumbent": 0,
+        "sku_all": 68,
+        "statistical": 69,
+        "ontology": 70
+      },
+      "firstChange": {
+        "sku_all": {
+          "added": [
+            {
+              "customerId": "BUYER-0293",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-04"
+            },
+            {
+              "customerId": "BUYER-0097",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-04"
+            },
+            {
+              "customerId": "BUYER-0005",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-01"
+            },
+            {
+              "customerId": "BUYER-0001",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0065",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0074",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0089",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0116",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0116",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            },
+            {
+              "customerId": "BUYER-0033",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-01"
+            },
+            {
+              "customerId": "BUYER-0538",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-01"
+            },
+            {
+              "customerId": "BUYER-0407",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-03"
+            },
+            {
+              "customerId": "BUYER-0001",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-04"
+            },
+            {
+              "customerId": "BUYER-0385",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0463",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-03"
+            },
+            {
+              "customerId": "BUYER-0065",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            }
+          ]
+        },
+        "statistical": {
+          "added": [
+            {
+              "customerId": "BUYER-0550",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0313",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            },
+            {
+              "customerId": "BUYER-0293",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-04"
+            },
+            {
+              "customerId": "BUYER-0001",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0005",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0046",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0074",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0089",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0116",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0142",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0323",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-01"
+            },
+            {
+              "customerId": "BUYER-0116",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            },
+            {
+              "customerId": "BUYER-0033",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-01"
+            },
+            {
+              "customerId": "BUYER-0538",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-01"
+            },
+            {
+              "customerId": "BUYER-0078",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-01"
+            },
+            {
+              "customerId": "BUYER-0407",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-03"
+            },
+            {
+              "customerId": "BUYER-0541",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-04"
+            },
+            {
+              "customerId": "BUYER-0001",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-04"
+            },
+            {
+              "customerId": "BUYER-0385",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0046",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-02"
+            }
+          ]
+        },
+        "ontology": {
+          "added": [
+            {
+              "customerId": "BUYER-0293",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-04"
+            },
+            {
+              "customerId": "BUYER-0089",
+              "kind": "recommend",
+              "category": "Stationery",
+              "catalogId": "MM-PAPER-02"
+            },
+            {
+              "customerId": "BUYER-0005",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-01"
+            },
+            {
+              "customerId": "BUYER-0001",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0065",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0074",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            },
+            {
+              "customerId": "BUYER-0116",
+              "kind": "ask_need",
+              "category": "*",
+              "catalogId": null
+            }
+          ],
+          "removed": [
+            {
+              "customerId": "BUYER-0323",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-01"
+            },
+            {
+              "customerId": "BUYER-0116",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-02"
+            },
+            {
+              "customerId": "BUYER-0033",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-01"
+            },
+            {
+              "customerId": "BUYER-0407",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-03"
+            },
+            {
+              "customerId": "BUYER-0001",
+              "kind": "recommend",
+              "category": "Furniture",
+              "catalogId": "MM-SPACE-04"
+            },
+            {
+              "customerId": "BUYER-0385",
+              "kind": "recommend",
+              "category": "Office bundles",
+              "catalogId": "MM-PACK-03"
+            },
+            {
+              "customerId": "BUYER-0065",
+              "kind": "recommend",
+              "category": "Electronics",
+              "catalogId": "MM-DEVICE-04"
+            }
+          ]
+        }
+      },
+      "quality": {
+        "incumbent": {
+          "n": 1036,
+          "positives": 0,
+          "auc": null,
+          "averagePrecision": null,
+          "brier": 0.01861918085589125,
+          "logLoss": 0.11647950841027266,
+          "macroMarketAUC": null
+        },
+        "sku_all": {
+          "n": 1036,
+          "positives": 0,
+          "auc": null,
+          "averagePrecision": null,
+          "brier": 0.006804841126209884,
+          "logLoss": 0.06733494101011377,
+          "macroMarketAUC": null
+        },
+        "statistical": {
+          "n": 1036,
+          "positives": 0,
+          "auc": null,
+          "averagePrecision": null,
+          "brier": 0.006353285572630005,
+          "logLoss": 0.06495700111653016,
+          "macroMarketAUC": null
+        },
+        "ontology": {
+          "n": 1036,
+          "positives": 0,
+          "auc": null,
+          "averagePrecision": null,
+          "brier": 0.006714840698047222,
+          "logLoss": 0.06744871016885584,
+          "macroMarketAUC": null
+        }
+      }
+    }
+  ],
+  "quality": {
+    "incumbent": {
+      "n": 4865,
+      "positives": 679,
+      "auc": 0.8270974079387987,
+      "averagePrecision": 0.4549116377443255,
+      "brier": 0.09599360663395445,
+      "logLoss": 0.3235912726665825,
+      "macroMarketAUC": 0.7260589621486927
+    },
+    "sku_all": {
+      "n": 4865,
+      "positives": 679,
+      "auc": 0.8479020819098939,
+      "averagePrecision": 0.4674186588924049,
+      "brier": 0.09194846366010268,
+      "logLoss": 0.3033882060253404,
+      "macroMarketAUC": 0.7556734848618053
+    },
+    "statistical": {
+      "n": 4865,
+      "positives": 679,
+      "auc": 0.8510085515432253,
+      "averagePrecision": 0.4697918303641628,
+      "brier": 0.09166249365098766,
+      "logLoss": 0.301884617052015,
+      "macroMarketAUC": 0.7631370853930144
+    },
+    "ontology": {
+      "n": 4865,
+      "positives": 679,
+      "auc": 0.852409180753293,
+      "averagePrecision": 0.480721556442821,
+      "brier": 0.09125045207823097,
+      "logLoss": 0.3012392389333989,
+      "macroMarketAUC": 0.7669436124598584
+    }
+  },
+  "totals": {
+    "fixed": {
+      "paypal": 14703.14,
+      "merchants": 175402.5,
+      "purchases": 2798,
+      "volume": 390626,
+      "recommendations": 7954,
+      "exactProductBaskets": 588,
+      "originalPlanCost": 0
+    },
+    "incumbent": {
+      "paypal": 14968.8107,
+      "merchants": 178401.06,
+      "purchases": 2837,
+      "volume": 396640,
+      "recommendations": 4865,
+      "exactProductBaskets": 513,
+      "originalPlanCost": 0.1293
+    },
+    "sku_all": {
+      "paypal": 15001.0907,
+      "merchants": 178613.04,
+      "purchases": 2845,
+      "volume": 397287,
+      "recommendations": 4422,
+      "exactProductBaskets": 513,
+      "originalPlanCost": 0.1293
+    },
+    "statistical": {
+      "paypal": 15019.5407,
+      "merchants": 178816.46,
+      "purchases": 2845,
+      "volume": 397588,
+      "recommendations": 4383,
+      "exactProductBaskets": 509,
+      "originalPlanCost": 0.1293
+    },
+    "ontology": {
+      "paypal": 15040.6207,
+      "merchants": 178998.95,
+      "purchases": 2853,
+      "volume": 398028,
+      "recommendations": 4455,
+      "exactProductBaskets": 518,
+      "originalPlanCost": 0.1293
+    }
+  },
+  "promotion": {
+    "betterLogLoss": true,
+    "higherPayPal": true,
+    "higherMerchants": true,
+    "purchasesProtected": true
+  },
+  "recommendPromotion": true,
+  "newModelCalls": 0,
+  "newPayments": 0
+}

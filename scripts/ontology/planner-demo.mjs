@@ -12,7 +12,7 @@ import {compileCampaign,scoreCampaign,read} from '../commerce-expanded/harness-v
 import {withPlannerFeed} from './planner-gate.mjs';
 
 let observation;
-function observedMarket(){
+export function observedMarket(){
   return observation??=(async()=>{
     const {seed,runId}=await read('demo/data/judge-reactivation.json');
     const world=warmGrowthWorld({seed,regime:'reactivation'});beginGrowthDay(world);

@@ -21,6 +21,8 @@ At the receipt, select **Why is this one purchase?** The read-only merchant feed
 
 In **Verifier → Try a feed that holds this campaign**, two declared checkout keys stop the day-31 planner before it can issue outreach. Apply the simulated merchant’s corrected mapping to admit 715 past checkouts and execute the recorded policy on the same shoppers. It selects 31 product recommendations and five needs inquiries. The local replay requires zero new model calls, payments or Python setup. [Run the hold and correction](http://127.0.0.1:4173/judge.html#planner).
 
+In **Campaign → Try ontology-guided model training**, choose a business question and see which rows and features can answer it. The revised product ranking changed four outreach choices on day 31. Across four fresh simulated markets it added $71.81 in PayPal net, $597.89 in merchant contribution and 16 retained purchases over the original ranking. [Try the training review](http://127.0.0.1:4173/judge.html#training) · [Controls and results by market](docs/ontology/training/README.md)
+
 ## Run a live simulation
 
 In the [simulation workspace](http://127.0.0.1:4173/studio.html?view=market), **New live run** defaults to one planner, the financial verifier and reactivation. The full live workflow reviews on days 31 and 61. The recorded judge comparison holds its day-31 campaign through settlement. For live runs and offline numerical reproduction, install the Python dependencies and configure the appropriate services below.

@@ -1,5 +1,7 @@
 # Can this merchant feed measure purchases?
 
+Once the current market history is certified, the planner can select training data by business question and test which features improve its product rankings. [Training decisions and four-market results](training/README.md)
+
 [Open the verifier](http://127.0.0.1:4173/judge.html#ontology) or select **Why is this one purchase?** in the PayPal receipt chapter. The tool returns **CERTIFY** with the evidence supporting a measurement, or **HOLD** with the missing or conflicting definition. A hold publishes no totals or receipt claim. The tool reads local data and can run in a browser or in Node.
 
 ## The recorded case
