@@ -2,6 +2,7 @@ import {continuousReport} from './marketing/continuous-report.mjs';
 import {createCommerceRoom} from './commerce-room/service.mjs';
 import {createAutonomyRoom} from './commerce-growth/autonomy/live.mjs';
 import {rankDistricts,scaleProtocol} from './commerce-expanded/harness-v2/merchant-scale.mjs';
+import {rankCapacity} from './commerce-expanded/harness-v2/capacity.mjs';
 import {judgeFeeds,judgeFeed,verifyJudgeFeed} from './ontology/judge-feed.mjs';
 import {plannerFeedDemo} from './ontology/planner-demo.mjs';
 import {trainingReview} from './ontology/training-advisor.mjs';
@@ -84,6 +85,7 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
         }
         if(req.method==='GET'&&path==='/api/market/merchant-scale/rank'){
           const districts=url.searchParams.get('districts'),feeds=url.searchParams.get('feeds');
+          if(districts==='8'&&feeds==='12')return json(res,200,await rankCapacity(8));
           if(!scaleProtocol.districts.map(String).includes(districts)||!scaleProtocol.feeds.map(String).includes(feeds))
             return json(res,400,{error:{code:'INVALID_MERCHANT_SCALE',message:'Choose a supported district count and feed size.'}});
           return json(res,200,await rankDistricts(Number(districts),Number(feeds)));

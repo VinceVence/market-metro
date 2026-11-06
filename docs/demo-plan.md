@@ -71,7 +71,7 @@ The finished campaign improved PayPal net, merchant contribution and retained pu
 | **12 real model responses, under $0.08** | $0.077443 across both fresh planners. Local CPU training has a separate compute cost. [Usage records](../demo/data/ontology-live-campaign.json) | Closing |
 | **$96 native Sandbox capture** | Completed capture 2M324038C71499318 belongs to the archived original judge order. It contributes zero additional benchmark sales. [Receipt](../demo/data/judge-reactivation.json) | PayPal segment |
 | **ROC AUC 0.827 → 0.852** | Separate local feature study on 4,865 common held-out contacts across four markets, with real local training and scripted tool choices. One market lost money. [Feature study](ontology/training/README.md) | Supporting submission text or questions |
-| **48 merchants, 2,400 shoppers** | Separate four-district study with a reused campaign. At full feed coverage, +45 retained purchases and +$260.68 modeled PayPal net over fixed. Median local scoring time was 36 ms over 15 warm passes. [Scale study](merchant-scale/README.md) | Optional extended demo |
+| **96 merchants, 4,800 shoppers** | Separate eight-district deployment with a reused campaign. At full feed coverage, +103 retained purchases and +$624.95 modeled PayPal net over fixed. Median local scoring was 86.1 ms, with 109.0 ms p95 over 15 warm passes. [Scale study](merchant-capacity/README.md) | Optional extended demo |
 
 The live eight-feature model was rejected. Present the live gain as the outcome of the ontology-assisted planning and verification workflow. Use the four-market feature study when discussing measured feature-selection improvement. Its 12-feature model and $71.81 aggregate gain have their own experiment boundary.
 

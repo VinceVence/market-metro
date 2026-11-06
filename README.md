@@ -37,6 +37,8 @@ At the end of the judge walkthrough, **Run your own simulation** opens the [judg
 - **Agent workflow** shows that run's analysis, training, proposals, financial trials and publication decisions. A free run can open the clearly labeled source review that created its reused policy.
 - **PayPal Sandbox** shows the selected run's native receipt when a sample was requested. Check its capture ID, warehouse order and fee reconciliation. The archived judge receipt is also available from the guided walkthrough.
 
+For larger deployments, the run settings link to the [scale comparison](http://127.0.0.1:4173/judge.html#scale). It tests up to **96 merchants and 4,800 shoppers** across eight independent districts using the saved policy. Median local ranking was **86.1 ms**. The complete matched simulation added **103 retained purchases and $624.95 modeled PayPal net** over fixed rules. [Scope and all results](docs/merchant-capacity/README.md)
+
 In the [simulation workspace](http://127.0.0.1:4173/studio.html?view=market), **New live run** defaults to one planner, the financial verifier and reactivation. The full live workflow reviews on days 31 and 61. The recorded judge comparison holds its day-31 campaign through settlement. For live runs and offline numerical reproduction, install the Python dependencies and configure the appropriate services below.
 
 ```sh

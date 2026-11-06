@@ -1,0 +1,12 @@
+{
+  "id": "merchant-capacity-1",
+  "seeds": [92471001, 92471002, 92471003, 92471004, 92471005, 92471006, 92471007, 92471008],
+  "districts": [1, 2, 4, 8],
+  "regime": "reactivation",
+  "policy": "The existing saved judge campaign and trained model. No fresh planning or retraining.",
+  "economy": "Each independent district has 12 merchants, 600 shoppers, 16 catalog items and full inventory visibility. Original economic transitions and supply rules are frozen. Districts have separate stock, balances, customers and fulfillment.",
+  "comparison": "Run fixed rules and the saved planner on each identical seed through day 126. Verify equal opening state, underlying needs, consent and income, and zero unsettled liabilities. Report every district, including losses. The first four seeds also reproduce the previous full-feed scale experiment.",
+  "aggregation": "Sum the first one, two, four or eight districts in registered order. Charge the original plan cost once per reported deployment. Report net and purchase deltas per 100 shoppers alongside total gains.",
+  "timing": "After settlement work is complete, warm each batch once and time 15 sequential local ranking passes on its prepared day-31 observations. Report median and p95. Exclude snapshot preparation, HTTP, LLM latency and payment settlement from ranking time. Record full benchmark wall time separately.",
+  "limits": "At most 16 full local campaigns, two CPU workers, zero model API calls and zero native payments. Results describe independent-district deployment, with one repeated product assortment."
+}
