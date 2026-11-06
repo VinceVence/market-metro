@@ -90,6 +90,7 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
             return json(res,400,{error:{code:'INVALID_MERCHANT_SCALE',message:'Choose a supported district count and feed size.'}});
           return json(res,200,await rankDistricts(Number(districts),Number(feeds)));
         }
+        if(req.method==='GET'&&path==='/api/market/autonomy/scale-results'&&autonomy)return json(res,200,{runs:autonomy.scaleResults()});
         if(req.method==='GET'&&path==='/api/market/autonomy/latest'&&autonomy)return json(res,200,{session:autonomy.latest()});
         const autonomyRead=path.match(/^\/api\/market\/autonomy\/(AUTONOMY-[a-f0-9]{16})(?:\/(trace))?$/);
         if(req.method==='GET'&&autonomyRead&&autonomy)return json(res,200,autonomyRead[2]?autonomy.trace(autonomyRead[1],url.searchParams.get('customer'),url.searchParams.has('day')?url.searchParams.get('day'):undefined):autonomy.snapshot(autonomyRead[1],url.searchParams.has('day')?url.searchParams.get('day'):undefined));

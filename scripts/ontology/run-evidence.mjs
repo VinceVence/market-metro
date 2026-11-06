@@ -1,4 +1,5 @@
 import {observedReviewFeed} from './planner-gate.mjs';
+import {verifyLargeFeed} from '../commerce-metropolis/feed-verifier.mjs';
 import {verifyMerchantFeed} from '../../demo/commerce/feed-verifier.mjs';
 import {mapTrainingTask} from './training.mjs';
 
@@ -14,7 +15,7 @@ export function runOntology({world,run,day,steps,receipts,reference,hold}){
   const confirmed=lastGate?.decision==='CERTIFY';
   const mapping=run.merchantMapping==='two-links'?(confirmed?'warehouse':'ambiguous'):(run.merchantMapping??'warehouse');
   const feed=observedReviewFeed({day,pastOrders:orders},run.runId,mapping);
-  const certificate=orders.length?verifyMerchantFeed(feed):null;
+  const certificate=orders.length?(world.version==='commerce-metropolis-1'?verifyLargeFeed:verifyMerchantFeed)(feed):null;
   const split=orders.find(o=>o.merchants.length>1)??orders[0];
   const record=split?{checkout:run.runId+'-'+split.id,shopper:run.runId+'-'+split.customerId,grossCents:split.grossCents,
     orders:split.merchants.map(m=>({id:run.runId+'-'+split.id+'-'+m.id,merchant:world.merchants.find(x=>x.id===m.id)?.name??m.id,grossCents:m.grossCents})),
@@ -29,7 +30,7 @@ export function runOntology({world,run,day,steps,receipts,reference,hold}){
       sandboxReceipts:receipts.filter(r=>r.status==='COMPLETED').length},
     mapping:{selection:run.merchantMapping??'warehouse',decision:certificate?.decision??'WAITING',code:certificate?.code??null,
       reason:certificate?.decision==='CERTIFY'?'The declared checkout link and money units reconcile every merchant portion.':certificate?.reason??'Captures will appear as shoppers transact.',definition:certificate?.mapping??null,
-      metrics:certificate?.metrics??null,checkpoint:lastGate??null,held:Boolean(hold)},
+      metrics:certificate?.metrics??null,pages:certificate?(certificate.pages??1):0,checkpoint:lastGate??null,held:Boolean(hold)},
     training:mapTrainingTask('retained_recommendation'),models:models.map(s=>({id:s.output?.modelId,day:s.day,
       fields:s.output?.featureNames??[],rows:s.output?.trainingRows??s.input.rows,ownRows:s.output?.ownMatureRows??s.input.ownMatureRows??null,metrics:s.output?.metrics})),
     reference:reference??null,example:record,

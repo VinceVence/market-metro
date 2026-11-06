@@ -22,6 +22,8 @@ The earlier three-role discovery demo and its separate $64 capture remain availa
 
 The final walkthrough chapter links to **Run your own simulation**. The settings offer fresh planning and a zero-call recorded policy on a new seed. Both use the frozen economy. The free option requires the local numerical engine and transparently reuses the reference model and campaign.
 
+**Run settings → Size** also offers separately versioned shared markets of 96, 192 and 384 merchants, with 50 shoppers per merchant. These require fresh planning. All three validation runs settled through day 126. At 384 merchants, the combined workflow added 532 retained purchases and $3,310.75 modeled PayPal net versus same-size fixed rules. The live Performance view includes merchant outcomes, model cost, earlier attempts and the smaller proxy-trial scope. [Full live-market evidence](commerce-metropolis/README.md)
+
 The workspace has two inspection tabs. **Ontology graph** displays clickable nodes and their real associations for the selected run, with pan and zoom. **Agent workflow** groups checkpoint evidence into data checks, analysis, training, campaign planning, verification and launch. Each tab keeps the run identity and observation day visible. For saved-policy runs, the source planning record has its own reference label.
 
 After settlement, open **PayPal Sandbox** to inspect any native sample created for that run. Match its capture to the warehouse order and reconcile gross, fee and merchant proceeds. Requesting a native sample is optional and uses fictitious funds.

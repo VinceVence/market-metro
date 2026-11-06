@@ -63,7 +63,7 @@ export function createRunInspector({ontology,workflow,detail,onNavigate}){
       orders:[['Merchant order portions',c.merchantOrders],...(example?.orders.map(m=>[m.merchant,money(m.grossCents)])??[])],
       payments:[['Modeled captures',c.merchantOrders],['Observed refunds',c.refunds],['Source','Simulated transaction ledger']],
       receipts:[['Completed native receipts',c.sandboxReceipts],['Receipt source','PayPal Sandbox'],...(o.receipts.flatMap(r=>[['Status',r.status],['Capture',r.captureId],['Warehouse order',r.orderId],['Gross',money(r.grossCents)],['Fee',r.feeCents==null?'Pending':money(r.feeCents)],['Merchant proceeds',r.netCents==null?'Pending':money(r.netCents)]]))],
-      definitions:[['Current export',o.mapping.selection],['Verification',o.mapping.decision],['Checked in',o.mapping.checkpoint?'Recorded review':'Snapshot inspection'],['Checkout key',o.mapping.definition?.checkoutKey],['Merchant-order link',o.mapping.definition?.orderToCheckout]],
+      definitions:[['Current export',o.mapping.selection],['Verification',o.mapping.decision],['Verified batches',o.mapping.pages],['Checked in',o.mapping.checkpoint?.decision===o.mapping.decision?'Recorded review and snapshot':'Snapshot inspection'],['Checkout key',o.mapping.definition?.checkoutKey],['Merchant-order link',o.mapping.definition?.orderToCheckout]],
       training:[['Mature product contacts in this run',c.matureRecommendations],['Mature general inquiries',c.matureInquiries],['Minimum label delay',o.training.maturityDays+' days'],['Prediction target',o.training.target]],
       models:[['Fits in this run',c.trainedModels],['Latest fitted model',last?.id],['Training rows',last?.rows],['Training rows from this run',last?.ownRows],['Reference model',ref?.modelId],['Reference seed',ref?.seed]],
       campaigns:[['Applied campaigns',c.campaigns],['Current campaign',session.latestCampaign?.name]],
@@ -135,13 +135,18 @@ export function createRunInspector({ontology,workflow,detail,onNavigate}){
   function showStep(step){
     selectedStep=step.id;
     const output=step.output??{},input=step.input??{},overview=input.overview??{},measurement=output.measurement;
+    const experiments=visibleSteps().flatMap(s=>s.input?.experiments??[]);
+    const productAUC=m=>experiments.find(e=>e.modelId===m?.modelId)?.report?.byContactType?.recommend?.auc;
+    const productComparison=step.actor==='LOCAL_MODEL_COMPARISON'&&session.settings.marketProfile?.startsWith('metropolis-')&&output.anchor&&output.alternative;
+    const comparison=productComparison?{...output,anchor:{...output.anchor,auc:productAUC(output.anchor)??output.anchor.auc},alternative:{...output.alternative,auc:productAUC(output.alternative)??output.alternative.auc}}:output;
     workflow.querySelectorAll('[data-step]').forEach(b=>b.classList.toggle('selected',b.dataset.step===selectedStep));
     workflow.querySelector('.workflow-inspector').innerHTML=`<small>${esc(provenance(step))} · ${useReference?'Reference ':''}Day ${step.day} · ${esc(step.status)}</small><h3>${esc(title(step))}</h3>
       <p>${esc(output.rationale??output.body??output.finding??step.error??'Waiting for the tool to finish.')}</p>
       ${pairs([['Observed through day',overview.day??input.observed?.asOfDay??input.throughDay],['Training window',output.windowDays?output.windowDays+' days':null],['Training rows',output.trainingRows??input.rows],['Recent contacts',overview.observedResponse?.contacts],['Model',output.modelId],['Decision',output.decision],['This step’s model cost',money((step.costMicros??0)/1e4)]])}
       ${output.features?'<h4>Requested features</h4><div class="feature-tags">'+output.features.map(f=>'<span>'+esc(f)+'</span>').join('')+'</div>':''}
       ${measurement?'<h4>Development trial versus fixed rules</h4>'+pairs([['PayPal net',dollars(measurement.platformDeltaUSD)],['Merchant contribution',dollars(measurement.retailerDeltaUSD)],['Retained purchases',measurement.purchaseDelta]]):''}
-      ${step.actor==='LOCAL_MODEL_COMPARISON'?modelTrialTable(output):''}
+      ${step.actor==='LOCAL_MODEL_COMPARISON'?modelTrialTable(comparison):''}
+      ${productComparison?'<small>Both AUC values above use product-recommendation contacts.</small>':''}
       ${output.failedChecks?.length?'<h4>Failed checks</h4><p>'+esc(output.failedChecks.join(', '))+'</p>':''}
       <details><summary>Evidence supplied to this step</summary><pre>${esc(JSON.stringify(input,null,2))}</pre></details><details><summary>Recorded output and checks</summary><pre>${esc(JSON.stringify(output,null,2))}</pre></details>`;
   }
@@ -149,6 +154,7 @@ export function createRunInspector({ontology,workflow,detail,onNavigate}){
     if(!session){empty(workflow);return;}
     const steps=visibleSteps(),shown=steps.filter(s=>selectedPhase==='all'||group(s)===selectedPhase);
     workflow.innerHTML=`<header class="inspector-heading"><div><h2>Agent workflow</h2><p>${esc(runCaption())}</p></div><span class="run-tag">${useReference?'Reference review · seed '+reference.seed:session.settings.execution==='saved'?'Saved policy applied':'Selected run checkpoints'}</span></header>
+      ${session.validationScope?'<p class="workflow-reference">'+esc(session.validationScope)+'</p>':''}
       ${session.settings.execution==='saved'?`<div class="workflow-reference"><p>${useReference?'These recorded LLM decisions produced the policy used by your simulation.':'This run applies an existing policy. Its own data-contract checks appear below.'}</p><button id="reference-toggle">${useReference?'Return to this run':'View source planning and verification'}</button></div>`:''}
       <nav class="phase-tabs" aria-label="Workflow phases"><button data-phase="all" aria-pressed="${selectedPhase==='all'}">All steps</button>${phases.map(([id,label])=>'<button data-phase="'+id+'" aria-pressed="'+(selectedPhase===id)+'">'+label+' <small>'+steps.filter(s=>group(s)===id).length+'</small></button>').join('')}</nav>
       <div class="workflow-layout"><div class="workflow-list">${shown.map(s=>'<button class="workflow-item" data-step="'+esc(s.id)+'"><span class="workflow-kind">'+esc(provenance(s))+' · Day '+s.day+'</span><b>'+esc(title(s))+'</b><small class="state-'+s.status.toLowerCase()+'">'+esc(s.status)+'</small></button>').join('')||'<div class="inspector-empty"><h3>Collecting market evidence</h3><p>The first review begins on day 31. Current purchases continue to populate the warehouse.</p></div>'}</div><article class="workflow-inspector" aria-live="polite"></article></div>`;

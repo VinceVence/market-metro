@@ -173,7 +173,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     if(changed){clearWorld();layout=createLayout(next.merchantCount);environment();cameraHome();lastRun=next.runId;}
     // A fixed representative population prevents same-day polling or new events from popping people in/out.
     const sampleCount=Math.min(next.visibleCustomerLimit||32,next.customers.length);
-    parent.dataset.simulatedCustomers=String(next.customers.length);
+    parent.dataset.simulatedCustomers=String(next.customerCount??next.customers.length);
     parent.dataset.representativeCustomers=String(sampleCount);
     const ids=new Set(Array.from({length:sampleCount},(_,i)=>next.customers[Math.floor(i*next.customers.length/sampleCount)].id));
     for(const id of (next.featuredIds||[]).slice(0,8))ids.add(id);

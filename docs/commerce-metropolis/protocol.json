@@ -1,0 +1,16 @@
+{
+  "version": "commerce-metropolis-1",
+  "seed": 92111706,
+  "regime": "reactivation",
+  "merchantSizes": [96, 192, 384],
+  "shoppersPerMerchant": 50,
+  "marketDays": 100,
+  "warmupDays": 30,
+  "settlementDays": 26,
+  "topology": "One shared market per run. Every shopper can buy from any eligible merchant. All merchants compete for the same requests and share the supplier clearing system.",
+  "economics": "Existing fee, refund, customer funding and supplier-timing rules. Merchant cash and initial stock are normalized to shoppers per merchant. Need probabilities and consent rules are unchanged; needs are generated deterministically when their day arrives.",
+  "execution": "Fresh single planner with ontology and financial verifier. Local indexed scoring evaluates the full audience. Fulfillment uses deadline-ordered batches of 128 requests over shared inventory, with bounded real basket alternatives and the existing numerical solver. The same execution rules apply to the fixed comparator.",
+  "verification": "Three separate 12-merchant/600-shopper development trials check the proposed per-100-shopper policy. These are proxy validation, not full-size profit proof. Full-size realized modeled net is measured after settlement against a same-size fixed run on identical generated needs, income and consent.",
+  "resources": "Existing $0.19 model cap per live run and the tighter shared project ledger apply within the user's $50 ceiling. One active live run. Household finance journal entries are aggregated; transaction records and monetary conservation are retained. Compressed world checkpoints and bounded render frames avoid quadratic UI state.",
+  "reporting": "Show actual run ID, completed day, model calls/cost, checkpoint bytes, step time, merchant and PayPal net, purchases and comparable fixed outcomes. Keep incomplete or failed tiers visible. No fresh native payment is requested for scale validation."
+}

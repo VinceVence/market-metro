@@ -29,6 +29,8 @@ In **Campaign → Compare the fresh Gemini campaigns**, see fixed rules, a fresh
 
 ## Run a live simulation
 
+**Run settings → Size** now offers **96, 192 and 384 merchants**, paired with 50 shoppers per merchant. These are separately versioned, shared live markets with fresh planner + ontology decisions. The Performance tab measures full-size net against fixed rules and plots the settled gain per 100 shoppers. [Live size ladder, assumptions and validation](docs/commerce-metropolis/README.md)
+
 At the end of the judge walkthrough, **Run your own simulation** opens the [judge workspace and settings](http://127.0.0.1:4173/studio.html?view=market&judge=1&setup=1). Choose a seed, scenario and merchant export.
 
 - **One planner + financial verifier** makes new Gemini decisions under the existing $0.19 run cap.
@@ -37,7 +39,7 @@ At the end of the judge walkthrough, **Run your own simulation** opens the [judg
 - **Agent workflow** shows that run's analysis, training, proposals, financial trials and publication decisions. A free run can open the clearly labeled source review that created its reused policy.
 - **PayPal Sandbox** shows the selected run's native receipt when a sample was requested. Check its capture ID, warehouse order and fee reconciliation. The archived judge receipt is also available from the guided walkthrough.
 
-For larger deployments, the run settings link to the [scale comparison](http://127.0.0.1:4173/judge.html#scale). It tests up to **96 merchants and 4,800 shoppers** across eight independent districts using the saved policy. Median local ranking was **86.1 ms**. The complete matched simulation added **103 retained purchases and $624.95 modeled PayPal net** over fixed rules. [Scope and all results](docs/merchant-capacity/README.md)
+The earlier independent-district [scale comparison](http://127.0.0.1:4173/judge.html#scale). It tests up to **96 merchants and 4,800 shoppers** across eight independent districts using the saved policy. Median local ranking was **86.1 ms**. The complete matched simulation added **103 retained purchases and $624.95 modeled PayPal net** over fixed rules. [Scope and all results](docs/merchant-capacity/README.md)
 
 In the [simulation workspace](http://127.0.0.1:4173/studio.html?view=market), **New live run** defaults to one planner, the financial verifier and reactivation. The full live workflow reviews on days 31 and 61. The recorded judge comparison holds its day-31 campaign through settlement. For live runs and offline numerical reproduction, install the Python dependencies and configure the appropriate services below.
 
@@ -92,6 +94,7 @@ Run `npm run test:demo` to check the bundled receipt, default routes, merchant-s
 ```sh
 node --test tests/commerce-harness-v2.test.mjs tests/inquiry-value.test.mjs tests/commerce-operation-recovery.test.mjs tests/commerce-autonomy-live.test.mjs tests/commerce-expanded.test.mjs
 node --test tests/judge-exploration.test.mjs
+node --test tests/metropolis-live.test.mjs
 npm run baseline:verify
 ```
 

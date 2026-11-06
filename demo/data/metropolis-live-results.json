@@ -1,0 +1,2478 @@
+{
+  "version": "commerce-metropolis-live-validation-1",
+  "scope": "Three fresh planner + ontology live runs in separate, unified markets. Each was compared with the same-size fixed policy on identical generated inputs. One seed per size.",
+  "validationScope": "Proposal checks use three separate 12-merchant/600-shopper proxy trials. Reported financial results execute the entire selected market.",
+  "seed": 92111706,
+  "capMerchants": 384,
+  "rows": [
+    {
+      "id": "AUTONOMY-425babc2569256ee",
+      "runId": "GARDEN-AUTO-425babc2569256ee",
+      "seed": 92111706,
+      "profile": "metropolis-96",
+      "merchants": 96,
+      "shoppers": 4800,
+      "status": "COMPLETED",
+      "day": 126,
+      "modelCalls": 12,
+      "modelCostUSD": 0.057541,
+      "fixed": {
+        "paypal": 24395.05,
+        "merchants": 303961.04,
+        "purchases": 4896,
+        "volume": 689370
+      },
+      "planner": {
+        "paypal": 24418.682459000003,
+        "merchants": 303480.75,
+        "purchases": 4897,
+        "volume": 689251
+      },
+      "delta": {
+        "paypal": 23.63245900000402,
+        "merchants": -480.28999999997905,
+        "purchases": 1,
+        "volume": -119
+      },
+      "paypalGainPer100": 0.49234289583341706,
+      "runtime": {
+        "checkpointMs": 708.4396669999696,
+        "checkpointBytes": 8756907,
+        "stepMs": 1044.1026670000283,
+        "heapMB": 489
+      },
+      "initialHash": "08ba11369d11d5b69551100f79197e39431cadd66e5dfb1f759de3492b31c9cc",
+      "unpaidLiabilities": 0,
+      "decisions": [
+        {
+          "day": 31,
+          "tool": "choose_investigation",
+          "evidenceId": "581646262453a0df223cfad80cebe1e8483ce4e965672a9b06a28ee44aea8cee",
+          "choice": {
+            "rationale": "I need to identify which categories have high interest but low retained purchase rates to determine if the current 'cheap' target policy is underserving specific segments.",
+            "lens": "category",
+            "windowDays": "28",
+            "evidenceId": "581646262453a0df223cfad80cebe1e8483ce4e965672a9b06a28ee44aea8cee"
+          },
+          "provider": [
+            {
+              "responseId": "EtLtaoenOaWl0-kPwfmY0Qk",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 1247,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "define_dataset",
+          "evidenceId": "6c06e6446a968b46089045bbfde01a2c9d5c778ba2eb6c40afde630face11842",
+          "choice": {
+            "evidenceId": "6c06e6446a968b46089045bbfde01a2c9d5c778ba2eb6c40afde630face11842",
+            "opportunity": "The current fixed-policy approach (STRONG_FIXED) fails to capitalize on category-specific intent. Electronics shows the highest retained rate (12.9%), while Furniture drives significant funded volume (230 units). By implementing a model trained on market_feedback, we can shift contact allocation toward these high-intent segments, improving retained purchase rates and retailer contribution while reducing waste in lower-performing categories like Stationery.",
+            "windowDays": "28",
+            "featureView": "market_feedback",
+            "rationale": "The lack of a predictive model is the primary commercial bottleneck. A fixed policy cannot dynamically respond to the observed interest-to-retention funnel. Using market_feedback features allows the model to learn from recent performance trends (prior-day contact/response/funding), which is essential for optimizing the retained purchase outcome rather than just immediate funding. A 28-day window is selected to maintain relevance to current market conditions while providing sufficient volume for model training."
+          },
+          "provider": [
+            {
+              "responseId": "GNLtatrmNP6w2roP3P-1wQI",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 1803,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "train_ontology_model",
+          "evidenceId": "076c3454b682e15d2def753f918189ea4fa70e98c4507806bcd2288e65bfba29",
+          "choice": {
+            "features": [
+              "age",
+              "search",
+              "signal_count",
+              "category_affinity",
+              "recency",
+              "prior_purchases",
+              "price_usd",
+              "stock",
+              "electronics",
+              "furniture",
+              "market_response_rate",
+              "market_mature_retention_rate"
+            ],
+            "first": "boosted",
+            "target": "retained_recommendation",
+            "evidenceId": "076c3454b682e15d2def753f918189ea4fa70e98c4507806bcd2288e65bfba29",
+            "rationale": "The model is designed to prioritize high-intent and high-retention segments (Electronics and Furniture) by leveraging shopper history (recency, prior_purchases) and intent (age, search, signal_count, category_affinity). Market-level feedback (market_response_rate, market_mature_retention_rate) is included to refine predictions based on broader category performance. Stationery and bundles are excluded to reduce noise and focus the model on the most impactful categories for retained purchase growth. Price and stock are included to ensure the model accounts for offer-level constraints."
+          },
+          "provider": [
+            {
+              "responseId": "HtLtarrgNJvz2roPgeidmAU",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2351,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "select_trained_artifact",
+          "evidenceId": "0464dca36d8370b4bbb5d96bc4ea12495bf654b96d189b6477573ca9d139387d",
+          "choice": {
+            "modelId": "V2-MODEL-df407129384a",
+            "evidenceId": "0464dca36d8370b4bbb5d96bc4ea12495bf654b96d189b6477573ca9d139387d",
+            "finding": "Model V2-MODEL-df407129384a (the LLM-selected feature model) demonstrates superior performance in the 'recommend' contact type, achieving a higher AUC (0.779 vs 0.767) and higher Average Precision (0.262 vs 0.255) compared to the broader V2-MODEL-d417270e634b. While V2-MODEL-d417270e634b has a slightly lower logLoss, the V2-MODEL-df407129384a model's targeted feature set (focusing on high-intent categories like Electronics and Furniture and incorporating market-level feedback) is better aligned with the goal of optimizing retained purchases. The leave-one-source-market-out validation shows more consistent performance improvements (logLossDelta) across most markets for the targeted model.",
+            "rationale": "The V2-MODEL-df407129384a model is specifically engineered for the 'retained_recommendation' task. By excluding lower-performing categories like Stationery and focusing on high-intent signals, it reduces noise and improves the precision of recommendations. The higher Average Precision (0.262) is critical for a campaign aiming to maximize retained purchases while protecting merchant contribution, as it indicates a better ability to rank high-value, high-retention shoppers. The model's inclusion of market-level feedback (market_response_rate, market_mature_retention_rate) allows it to adapt to category-specific performance, which is essential given the observed variance in retention rates (12.9% for Electronics vs 6.9% for Stationery)."
+          },
+          "provider": [
+            {
+              "responseId": "KtLtat6IO4ONpt8P8vukuAM",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2102,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "propose_campaign_trial",
+          "evidenceId": "b599752e4e5953c6c71483e248a39dc3c065d7472132edae8e13e919acfa045e",
+          "choice": {
+            "evidenceId": "b599752e4e5953c6c71483e248a39dc3c065d7472132edae8e13e919acfa045e",
+            "campaign": {
+              "coverDays": "7",
+              "productPreference": "lowest_acceptable_price",
+              "supplierSettlement": "paypal_fast",
+              "forecast": "recent14",
+              "kind": "product_recommendations",
+              "contactsPer100": "10",
+              "objective": "joint"
+            },
+            "rationale": "The current fixed-policy approach is inefficient and fails to capitalize on category-specific intent. Electronics and Furniture demonstrate significantly higher retention rates (12.9% and 7.6% respectively) compared to Stationery. By deploying the V2-MODEL-df407129384a model, which is optimized for retained purchases and incorporates market-level feedback, we can shift contact allocation toward these high-intent segments. Increasing contact density to 10 per 100 shoppers will allow us to better capture this demand while protecting merchant contribution. The 'joint' objective ensures we balance payment and merchant order value, and 'paypal_fast' settlement supports the goal of maximizing retained outcomes."
+          },
+          "provider": [
+            {
+              "responseId": "MtLtavG2FIHEpt8PuoeoyQk",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2642,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "propose_campaign_revision",
+          "evidenceId": "7a37b28bc5d2b3c4733f83b9cb584b89c159a7d9e369162387ad4e1bc04860dc",
+          "choice": {
+            "campaign": {
+              "coverDays": "7",
+              "supplierSettlement": "paypal_fast",
+              "objective": "joint",
+              "kind": "product_recommendations",
+              "productPreference": "requested_preference",
+              "contactsPer100": "10",
+              "forecast": "recent14"
+            },
+            "modelId": "V2-MODEL-df407129384a",
+            "evidenceId": "7a37b28bc5d2b3c4733f83b9cb584b89c159a7d9e369162387ad4e1bc04860dc",
+            "rationale": "The first trial showed positive overall platform and retailer deltas, but failed the stressCasesProtected check because the retailer delta was negative (-$3.53) in the low_response regime. To protect merchant contribution in lower-response scenarios, we will switch productPreference to requested_preference, which should yield higher margins per retained purchase compared to lowest_acceptable_price."
+          },
+          "provider": [
+            {
+              "responseId": "dNLtaoG9DIHEpt8PuoeoyQk",
+              "model": "gemini-3.1-pro-preview",
+              "costMicros": 30228,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "choose_investigation",
+          "evidenceId": "61e15c202b71c49b201eb0c08ea5273ff849016fec6c6321b3c33d85b2b87d76",
+          "choice": {
+            "windowDays": "56",
+            "evidenceId": "61e15c202b71c49b201eb0c08ea5273ff849016fec6c6321b3c33d85b2b87d76",
+            "rationale": "I need to understand the conversion path of the 'retainedWithoutImmediateFunding' segment. By analyzing the payment funnel, I can determine if these shoppers are dropping off at the funding stage but returning later, or if they are a distinct cohort that requires a different outreach strategy. This will help me decide if the current 'fresh_signal' policy is too restrictive.",
+            "lens": "payment_funnel"
+          },
+          "provider": [
+            {
+              "responseId": "H9PtavrnCaWl0-kPwfmY0Qk",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 1958,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "define_dataset",
+          "evidenceId": "b5dc8786c63997d8e3dc856dd2c67faf5bbbdae04f9790875d7fdb0f1a7ebe70",
+          "choice": {
+            "rationale": "Current mature retention (7.07%) is trailing historical benchmarks (10.22%). While interest exists in Furniture and Office bundles, funded units are zero. Incorporating intent_context (shopper intent age) will allow the model to distinguish between casual browsers and fresh, high-intent shoppers, addressing the conversion bottleneck.",
+            "windowDays": "56",
+            "opportunity": "Improve conversion of high-interest categories (Furniture and Office bundles) by leveraging shopper intent freshness to better target ready-to-purchase shoppers.",
+            "featureView": "intent_context",
+            "evidenceId": "b5dc8786c63997d8e3dc856dd2c67faf5bbbdae04f9790875d7fdb0f1a7ebe70"
+          },
+          "provider": [
+            {
+              "responseId": "JdPtavPSBoPJrfcPqvrxmQo",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2037,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "train_ontology_model",
+          "evidenceId": "0bebae0038d5748e8fda45e94f131a743a24aa55f0024cc98d25eab64b57567c",
+          "choice": {
+            "features": [
+              "age",
+              "customer_intent_fresh",
+              "customer_intent_recent",
+              "recency",
+              "prior_purchases",
+              "price_usd",
+              "stock",
+              "arrival_days",
+              "stationery",
+              "electronics",
+              "furniture",
+              "bundles"
+            ],
+            "evidenceId": "0bebae0038d5748e8fda45e94f131a743a24aa55f0024cc98d25eab64b57567c",
+            "first": "boosted",
+            "target": "retained_recommendation",
+            "rationale": "To address the conversion bottleneck in Furniture and Office bundles, I am training a boosted model that explicitly incorporates shopper intent freshness (customer_intent_fresh, customer_intent_recent) alongside historical shopper behavior (recency, prior_purchases). By including these alongside product-specific offer features (price_usd, stock, arrival_days, and category flags), the model can better distinguish between casual browsers and high-intent shoppers ready to complete a purchase. Excluded features include identifiers, leakage variables (like responded/authorized), and the target variable itself to ensure the model learns predictive patterns rather than historical outcomes."
+          },
+          "provider": [
+            {
+              "responseId": "K9PtavbICNCZ0-kP7eah6Q0",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2515,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "select_trained_artifact",
+          "evidenceId": "6a8020efd118f31665622e46a6b17b4bd15deef22575a75a73a5bbf35e5e60a3",
+          "choice": {
+            "evidenceId": "6a8020efd118f31665622e46a6b17b4bd15deef22575a75a73a5bbf35e5e60a3",
+            "rationale": "The comparison clearly favors V2-MODEL-06c57f233b57. Its higher AUC and precision in the 'recommend' category directly address the identified conversion bottleneck by better identifying fresh, high-intent shoppers who are currently under-served in the Furniture and Office bundle categories. The model's stability across source markets provides confidence for a live financial trial.",
+            "finding": "Model V2-MODEL-06c57f233b57 demonstrates superior predictive performance for the 'recommend' contact type, achieving an AUC of 0.7536 compared to 0.6498 for V2-MODEL-065c894b8611. It also exhibits lower LogLoss (0.2737 vs 0.3032) and higher Average Precision (0.2332 vs 0.1335), indicating better discrimination of high-intent shoppers. The model's performance is robust across source markets, making it the optimal choice for the upcoming financial trial.",
+            "modelId": "V2-MODEL-06c57f233b57"
+          },
+          "provider": [
+            {
+              "responseId": "ONPtas_vM9GSpt8P-JHz6Qs",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 3219,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "propose_campaign_trial",
+          "evidenceId": "38d535587692f9fe5a52fd5040a4054eacfbf4cbdcd8d8b951614f50d3aef2b1",
+          "choice": {
+            "campaign": {
+              "contactsPer100": "10",
+              "forecast": "recent14",
+              "coverDays": "7",
+              "objective": "joint",
+              "productPreference": "requested_preference",
+              "kind": "product_recommendations",
+              "supplierSettlement": "paypal_fast"
+            },
+            "evidenceId": "38d535587692f9fe5a52fd5040a4054eacfbf4cbdcd8d8b951614f50d3aef2b1",
+            "rationale": "Current mature retention (7.07%) is trailing historical benchmarks (10.22%). The newly selected model (V2-MODEL-06c57f233b57) demonstrates superior predictive performance (AUC 0.7536) for the 'recommend' contact type, which is critical for converting the observed interest in Furniture and Office bundles. By maintaining a high contact density (10 per 100) and utilizing the 'requested_preference' setting, this campaign aims to better match high-intent shoppers with their preferred categories, directly addressing the identified conversion bottleneck."
+          },
+          "provider": [
+            {
+              "responseId": "PtPtap3aL4CGpt8P4_C-iQU",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2948,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "finish_review",
+          "evidenceId": "25b82c8f37a08b2f9e8263f890bd2a7a25b0b99f130b1ef369ec6141c893d7c0",
+          "choice": {
+            "evidenceId": "25b82c8f37a08b2f9e8263f890bd2a7a25b0b99f130b1ef369ec6141c893d7c0",
+            "rationale": "The incumbent model (V2-MODEL-df407129384a) continues to outperform the new candidate (V2-MODEL-06c57f233b57) in live proxy trials, despite the latter's higher AUC. The incumbent maintains a positive platform delta and better purchase retention. Given the stability and superior performance of the incumbent, I am concluding the investigation and maintaining the current configuration."
+          },
+          "provider": [
+            {
+              "responseId": "gdPtavCILv6f0-kP1Me72Qk",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 4491,
+              "status": "settled"
+            }
+          ]
+        }
+      ],
+      "publications": [
+        {
+          "day": 30,
+          "published": true,
+          "agentRequest": "propose_campaign_revision",
+          "authority": "DETERMINISTIC_CONTROLLER",
+          "version": "commerce-metropolis-harness-1",
+          "decision": "publish",
+          "selectedContractHash": "0743741a39273f4e675dc5d797750da84b28b826fef4b38b322f19ecdfc2e4c3",
+          "reviewContextHash": "8c72386683035ada4df9170fd94cb001ee060f4c0332e83e4ca0f28c738c8391",
+          "reason": "Highest measured PayPal net among all eligible tested candidates; merchant and purchase guards passed.",
+          "candidates": [
+            {
+              "contractHash": "7b3428fb60616be560bd4751bea1b079b41322a5af4c337d56277bcef2ceed69",
+              "trialHash": "94d16e96fa85d801666eb251e53743bdf175bf743ced23dd2b8729b7094aff2a",
+              "receiptHash": "958c75641733ff4a35ab93f8c71f3a1f58b3d0964ba0c5b9526a30be2d2b6101",
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "contractHash": "0743741a39273f4e675dc5d797750da84b28b826fef4b38b322f19ecdfc2e4c3",
+              "trialHash": "930c28b564e47b4a0d9ad32e618474623767aec649cf883604440d6b6f3707e3",
+              "receiptHash": "8db0872325fafa93ad4886f79224ae8a0610f1267aae340c68efe86aee3f3168",
+              "gate": {
+                "passed": true,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ],
+          "modelComparison": {
+            "status": "kept",
+            "reason": "The original decision held after comparing the two models on the same campaign.",
+            "anchor": {
+              "modelId": "V2-MODEL-df407129384a",
+              "modelHash": "df407129384a0497f5ebda79f4c67755de5aa386f17648f989b5989b4aa959f6",
+              "family": "boosted",
+              "features": "market_feedback",
+              "auc": 0.7790464619575311,
+              "contractHash": "0743741a39273f4e675dc5d797750da84b28b826fef4b38b322f19ecdfc2e4c3",
+              "receiptHash": "8db0872325fafa93ad4886f79224ae8a0610f1267aae340c68efe86aee3f3168",
+              "paypal": 16.01333333333317,
+              "merchants": 61.99666666666841,
+              "purchases": 0.3333333333333333
+            },
+            "alternative": {
+              "modelId": "V2-MODEL-d417270e634b",
+              "modelHash": "d417270e634b80ff934e4350668f0f61e716565026dabc74af2e247d52ded680",
+              "family": "boosted",
+              "features": "market_feedback",
+              "auc": 0.7727218239536262,
+              "contractHash": "ccc31e1372d70bd13de323864467d270b46459a84fe92eca03f060f24c98bfe6",
+              "receiptHash": "518dd2953d17af589524d940c4cc29beb57d66e90137262a7213a83deb9428bb",
+              "paypal": 10.563333333333352,
+              "merchants": 18.230000000000775,
+              "purchases": 0
+            },
+            "selectedContractHash": "0743741a39273f4e675dc5d797750da84b28b826fef4b38b322f19ecdfc2e4c3"
+          },
+          "contractHash": "0743741a39273f4e675dc5d797750da84b28b826fef4b38b322f19ecdfc2e4c3",
+          "trialHash": "930c28b564e47b4a0d9ad32e618474623767aec649cf883604440d6b6f3707e3",
+          "experiments": [
+            {
+              "campaign": {
+                "coverDays": 7,
+                "productPreference": "lowest_acceptable_price",
+                "supplierSettlement": "paypal_fast",
+                "forecast": "recent14",
+                "kind": "product_recommendations",
+                "contactsPer100": 10,
+                "objective": "joint"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4060.5066666666667,
+                "retailerUSD": 47699.079999999994,
+                "retainedPurchases": 746.6666666666666,
+                "platformDeltaUSD": 16.660000000000007,
+                "retailerDeltaUSD": 60.29000000000087,
+                "purchaseDelta": 0.3333333333333333,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 105997.33333333333,
+                "volumeDeltaUSD": 119,
+                "partnerCashDeltaUSD": 96.98000000000077,
+                "inventoryRatio": 0.9954337674758783,
+                "contactCount": 1767,
+                "contactDelta": -249.33333333333334,
+                "outreachCostUSD": 88.35000000000001,
+                "outreachCostDeltaUSD": -12.466666666666663
+              },
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "campaign": {
+                "coverDays": 7,
+                "supplierSettlement": "paypal_fast",
+                "objective": "joint",
+                "kind": "product_recommendations",
+                "productPreference": "requested_preference",
+                "contactsPer100": 10,
+                "forecast": "recent14"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4059.86,
+                "retailerUSD": 47700.78666666666,
+                "retainedPurchases": 746.6666666666666,
+                "platformDeltaUSD": 16.01333333333317,
+                "retailerDeltaUSD": 61.99666666666841,
+                "purchaseDelta": 0.3333333333333333,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 105997.33333333333,
+                "volumeDeltaUSD": 119,
+                "partnerCashDeltaUSD": 106.1066666666593,
+                "inventoryRatio": 0.9920468930209008,
+                "contactCount": 1767,
+                "contactDelta": -249.33333333333334,
+                "outreachCostUSD": 88.35000000000001,
+                "outreachCostDeltaUSD": -12.466666666666663
+              },
+              "gate": {
+                "passed": true,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ]
+        },
+        {
+          "day": 60,
+          "published": false,
+          "agentRequest": "finish_review",
+          "authority": "DETERMINISTIC_CONTROLLER",
+          "version": "commerce-metropolis-harness-1",
+          "decision": "keep",
+          "selectedContractHash": "0743741a39273f4e675dc5d797750da84b28b826fef4b38b322f19ecdfc2e4c3",
+          "reviewContextHash": "713cac6dbfbcf0646c395d21924691f08c85c3b5dd5191039de6928dc99cd605",
+          "reason": "No tested candidate passed all guards; retain the incumbent.",
+          "candidates": [
+            {
+              "contractHash": "2c4808b6b165a00b13f9745c43a46ee8e22a184aa7677b995cb97461c18853b9",
+              "trialHash": "3a3c99d0dc2e73f5576b4e7d34c4d39dfcc38c87b18c0eea018654d32a186bee",
+              "receiptHash": "ff8aa73fcbf4e6df00bb36b2e658b353226f20c733228cd679f0a726fa323bc8",
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": false,
+                  "purchasesProtected": false,
+                  "volumeProtected": false,
+                  "cashProtected": false,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": false,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ],
+          "modelComparison": {
+            "status": "kept",
+            "reason": "The original decision held after comparing the two models on the same campaign.",
+            "anchor": {
+              "modelId": "V2-MODEL-06c57f233b57",
+              "modelHash": "06c57f233b577bc3a614ad874097d540ff0c1cf0180f2bb60e3c37eae151eb79",
+              "family": "boosted",
+              "features": "intent_context",
+              "auc": 0.7138550438658905,
+              "contractHash": "2c4808b6b165a00b13f9745c43a46ee8e22a184aa7677b995cb97461c18853b9",
+              "receiptHash": "ff8aa73fcbf4e6df00bb36b2e658b353226f20c733228cd679f0a726fa323bc8",
+              "paypal": 1.669999999999921,
+              "merchants": 5.296666666668898,
+              "purchases": 0
+            },
+            "alternative": {
+              "modelId": "V2-MODEL-065c894b8611",
+              "modelHash": "065c894b861137f37b16a4e7b7fde5b3968f92bf673c662f4d0dc1cc0b90e9f5",
+              "family": "boosted",
+              "features": "intent_context",
+              "auc": 0.649792629515813,
+              "contractHash": "d8513950738f49e62b1e31d99063227294b7fa7bcbae74a8114397b503e9b1ee",
+              "receiptHash": "c2f867546f142e155129eb44c7bec1d7fa8270d491f1bf01eb43942169ec8e3e",
+              "paypal": 4.636666666666618,
+              "merchants": 31.336666666667345,
+              "purchases": 0.3333333333333333
+            },
+            "selectedContractHash": "0743741a39273f4e675dc5d797750da84b28b826fef4b38b322f19ecdfc2e4c3"
+          },
+          "contractHash": "0743741a39273f4e675dc5d797750da84b28b826fef4b38b322f19ecdfc2e4c3",
+          "trialHash": "930c28b564e47b4a0d9ad32e618474623767aec649cf883604440d6b6f3707e3",
+          "experiments": [
+            {
+              "campaign": {
+                "contactsPer100": 10,
+                "forecast": "recent14",
+                "coverDays": 7,
+                "objective": "joint",
+                "productPreference": "requested_preference",
+                "kind": "product_recommendations",
+                "supplierSettlement": "paypal_fast"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4045.5166666666664,
+                "retailerUSD": 47644.08666666667,
+                "retainedPurchases": 746.3333333333334,
+                "platformDeltaUSD": 1.669999999999921,
+                "retailerDeltaUSD": 5.296666666668898,
+                "purchaseDelta": 0,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 105887,
+                "volumeDeltaUSD": 8.666666666666666,
+                "partnerCashDeltaUSD": 14.666666666666666,
+                "inventoryRatio": 0.9966131255450223,
+                "contactCount": 1977.3333333333333,
+                "contactDelta": -39,
+                "outreachCostUSD": 98.86666666666667,
+                "outreachCostDeltaUSD": -1.9499999999999982
+              },
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": false,
+                  "purchasesProtected": false,
+                  "volumeProtected": false,
+                  "cashProtected": false,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": false,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ]
+        }
+      ],
+      "models": [
+        {
+          "id": "V2-MODEL-d417270e634b",
+          "hash": "d417270e634b80ff934e4350668f0f61e716565026dabc74af2e247d52ded680",
+          "rows": 2762,
+          "spec": {
+            "family": "boosted",
+            "featureView": "market_feedback",
+            "windowDays": 28
+          },
+          "features": null,
+          "recommendationMetrics": {
+            "logLoss": 0.2737193525020035,
+            "brier": 0.07800164230756527,
+            "auc": 0.7667654615241751,
+            "averagePrecision": 0.2551243404952907
+          }
+        },
+        {
+          "id": "V2-MODEL-df407129384a",
+          "hash": "df407129384a0497f5ebda79f4c67755de5aa386f17648f989b5989b4aa959f6",
+          "rows": 1230,
+          "spec": {
+            "family": "boosted",
+            "featureView": "market_feedback",
+            "windowDays": 28,
+            "trainingTask": "retained_recommendation",
+            "selection": "llm_selected"
+          },
+          "features": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "recency",
+            "prior_purchases",
+            "price_usd",
+            "stock",
+            "electronics",
+            "furniture",
+            "market_response_rate",
+            "market_mature_retention_rate"
+          ],
+          "recommendationMetrics": {
+            "logLoss": 0.2729485728674769,
+            "brier": 0.07886941801381525,
+            "auc": 0.7790464619575311,
+            "averagePrecision": 0.26195776688042977,
+            "macroMarketAUC": 0.7484886355727767,
+            "macroLogLoss": 0.2663279208934005
+          }
+        },
+        {
+          "id": "V2-MODEL-06c57f233b57",
+          "hash": "06c57f233b577bc3a614ad874097d540ff0c1cf0180f2bb60e3c37eae151eb79",
+          "rows": 6610,
+          "spec": {
+            "family": "boosted",
+            "featureView": "intent_context",
+            "windowDays": 56
+          },
+          "features": null,
+          "recommendationMetrics": {
+            "logLoss": 0.27371605683139016,
+            "brier": 0.07766295754623875,
+            "auc": 0.753628862486994,
+            "averagePrecision": 0.2331902345707342
+          }
+        },
+        {
+          "id": "V2-MODEL-065c894b8611",
+          "hash": "065c894b861137f37b16a4e7b7fde5b3968f92bf673c662f4d0dc1cc0b90e9f5",
+          "rows": 3504,
+          "spec": {
+            "family": "boosted",
+            "featureView": "intent_context",
+            "windowDays": 56,
+            "trainingTask": "retained_recommendation",
+            "selection": "llm_selected"
+          },
+          "features": [
+            "age",
+            "customer_intent_fresh",
+            "customer_intent_recent",
+            "recency",
+            "prior_purchases",
+            "price_usd",
+            "stock",
+            "arrival_days",
+            "stationery",
+            "electronics",
+            "furniture",
+            "bundles"
+          ],
+          "recommendationMetrics": {
+            "logLoss": 0.3031668448189883,
+            "brier": 0.08445111906007498,
+            "auc": 0.649792629515813,
+            "averagePrecision": 0.13346313571954113,
+            "macroMarketAUC": 0.7042622147263549,
+            "macroLogLoss": 0.31067034365243357
+          }
+        }
+      ]
+    },
+    {
+      "id": "AUTONOMY-dc60d126ba20526a",
+      "runId": "GARDEN-AUTO-dc60d126ba20526a",
+      "seed": 92111706,
+      "profile": "metropolis-192",
+      "merchants": 192,
+      "shoppers": 9600,
+      "status": "COMPLETED",
+      "day": 126,
+      "modelCalls": 12,
+      "modelCostUSD": 0.059784,
+      "fixed": {
+        "paypal": 49530.34,
+        "merchants": 624024.69,
+        "purchases": 9912,
+        "volume": 1403475
+      },
+      "planner": {
+        "paypal": 51406.770216000004,
+        "merchants": 642136.78,
+        "purchases": 10226,
+        "volume": 1448889
+      },
+      "delta": {
+        "paypal": 1876.430216000008,
+        "merchants": 18112.090000000084,
+        "purchases": 314,
+        "volume": 45414
+      },
+      "paypalGainPer100": 19.546148083333417,
+      "runtime": {
+        "checkpointMs": 1581.0267920000479,
+        "checkpointBytes": 16791086,
+        "worldBytes": 176254684,
+        "stepMs": 2331.987375000026,
+        "heapMB": 1012
+      },
+      "initialHash": "05706ac7a3f5620511e16de90fbc0005921a754cb49a813d7bcc6d57261aa49b",
+      "unpaidLiabilities": 0,
+      "decisions": [
+        {
+          "day": 31,
+          "tool": "choose_investigation",
+          "evidenceId": "4957154d9687007b5e93758b351ca3df6d090be3b95c5a24f5baf7567846e738",
+          "choice": {
+            "lens": "payment_funnel",
+            "windowDays": "28",
+            "evidenceId": "4957154d9687007b5e93758b351ca3df6d090be3b95c5a24f5baf7567846e738",
+            "rationale": "I need to analyze the conversion drop-off from response to immediate authorization and final retention to identify where the current policy is failing to capture value. Understanding this funnel will help determine if the issue is in the initial contact, the funding process, or the final settlement."
+          },
+          "provider": [
+            {
+              "responseId": "wtrtarGxHNGSpt8P-JHz6Qs",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 1499,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "define_dataset",
+          "evidenceId": "f369527a8b7d884642950a923807acb911afa465792a85fa7f7415c9acfcf5ae",
+          "choice": {
+            "evidenceId": "f369527a8b7d884642950a923807acb911afa465792a85fa7f7415c9acfcf5ae",
+            "opportunity": "The 'ask_need' group (general inquiries) is significantly underperforming, with a 4.2% retention rate compared to 9.4% for 'recommend'. The current model lacks the granularity to distinguish between high-intent general inquiries and low-intent browsing, leading to inefficient contact allocation.",
+            "rationale": "By incorporating 'intent_context' (specifically the freshness of the shopper's interest), the model can better prioritize contacts for shoppers who are actively searching. This addresses the bottleneck in the 'ask_need' group by allowing the system to distinguish between fresh, high-intent inquiries and older, colder signals, thereby improving the conversion of general inquiries into retained purchases.",
+            "windowDays": "28",
+            "featureView": "intent_context"
+          },
+          "provider": [
+            {
+              "responseId": "yNrtaorkFbOhpt8P6MyxgAY",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 1859,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "train_ontology_model",
+          "evidenceId": "8ff11bdfb37353bbddb0dc53db8b9039846e445a0229e4d0d8b653fceff8d703",
+          "choice": {
+            "target": "retained_recommendation",
+            "first": "boosted",
+            "evidenceId": "8ff11bdfb37353bbddb0dc53db8b9039846e445a0229e4d0d8b653fceff8d703",
+            "features": [
+              "age",
+              "search",
+              "signal_count",
+              "category_affinity",
+              "customer_intent_fresh",
+              "customer_intent_recent",
+              "recency",
+              "prior_purchases",
+              "price_usd",
+              "stock",
+              "arrival_days",
+              "stationery",
+              "electronics",
+              "furniture",
+              "bundles"
+            ],
+            "rationale": "To address the 4.2% retention rate in the 'ask_need' group, this boosted-tree model incorporates intent-based features (customer_intent_fresh, customer_intent_recent, age, search, signal_count, category_affinity) to distinguish high-intent shoppers from casual browsers. By adding shopper history (recency, prior_purchases) and offer-specific attributes (price_usd, stock, arrival_days, and category indicators), the model can better predict the likelihood of a retained purchase, allowing for more precise contact allocation and improved conversion efficiency."
+          },
+          "provider": [
+            {
+              "responseId": "ztrtaq7yFYCGpt8P4_C-iQU",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2039,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "select_trained_artifact",
+          "evidenceId": "a8e2aa28e3aec9737433d73474a54d2508a393569a9d5647b5ab819239f265a1",
+          "choice": {
+            "evidenceId": "a8e2aa28e3aec9737433d73474a54d2508a393569a9d5647b5ab819239f265a1",
+            "finding": "V2-MODEL-31ed07c89a25 demonstrates superior predictive performance for the 'recommend' contact type (AUC 0.7584, AP 0.2034) compared to V2-MODEL-d746ce0f65a0. Its inclusion of specific shopper history and offer-level attributes makes it better suited for identifying high-value retained purchases.",
+            "modelId": "V2-MODEL-31ed07c89a25",
+            "rationale": "V2-MODEL-31ed07c89a25 shows consistent improvement across all key metrics (AUC, LogLoss, Average Precision) for the 'recommend' contact type. By leveraging this model, we can more effectively allocate contacts to high-intent shoppers, addressing the retention gap identified in the 'ask_need' group while maximizing the contribution from the 'recommend' group."
+          },
+          "provider": [
+            {
+              "responseId": "2drtaq3UD-mVpt8P3rXo8QQ",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 3207,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "propose_campaign_trial",
+          "evidenceId": "b75967145b5b0aec5f3f2e5772bdd37882297070042373e38525767fc3c05b39",
+          "choice": {
+            "campaign": {
+              "objective": "joint",
+              "forecast": "adaptive",
+              "contactsPer100": "6",
+              "productPreference": "requested_preference",
+              "coverDays": "7",
+              "supplierSettlement": "paypal_fast",
+              "kind": "ranked_discovery"
+            },
+            "rationale": "The current 'ask_need' group is underperforming (4.2% retention) compared to 'recommend' (9.4%). Analysis of inquiry value shows that 'fresh' and 'recent' inquiries have significantly higher retention rates (13.2% and 9.6%) than 'cold' inquiries (2.6%). By switching to 'ranked_discovery' with an 'adaptive' forecast, we can better prioritize these high-intent inquiries while maintaining product recommendations, effectively addressing the retention gap in the 'ask_need' group. 'Joint' objective ensures we balance payment and merchant contribution.",
+            "evidenceId": "b75967145b5b0aec5f3f2e5772bdd37882297070042373e38525767fc3c05b39"
+          },
+          "provider": [
+            {
+              "responseId": "39rtatDIB9GSpt8P-JHz6Qs",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2414,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "propose_campaign_revision",
+          "evidenceId": "6ffb7a7f4d862fa8a8e759174f8433acf6f6a153c39b31d0e76069371536da18",
+          "choice": {
+            "evidenceId": "6ffb7a7f4d862fa8a8e759174f8433acf6f6a153c39b31d0e76069371536da18",
+            "modelId": "V2-MODEL-31ed07c89a25",
+            "campaign": {
+              "kind": "ranked_discovery",
+              "forecast": "recent14",
+              "productPreference": "lowest_acceptable_price",
+              "coverDays": "7",
+              "objective": "joint",
+              "supplierSettlement": "paypal_fast",
+              "contactsPer100": "10"
+            },
+            "rationale": "The component trial using 'recent14' forecast and 'lowest_acceptable_price' passed all gate checks, including stress cases, and delivered positive platform and retailer delta. Since the contact delta was negative (-25), increasing contactsPer100 to 10 could safely scale these positive returns while maintaining the protective stress case performance."
+          },
+          "provider": [
+            {
+              "responseId": "atvtasS-INGSpt8P-JHz6Qs",
+              "model": "gemini-3.1-pro-preview",
+              "costMicros": 30666,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "choose_investigation",
+          "evidenceId": "876285b93927c7cacf0de538cec930d37d9e58907084e21e266920c249314320",
+          "choice": {
+            "lens": "payment_funnel",
+            "windowDays": "56",
+            "rationale": "The current response rate is 23.6%, but retained purchases are a subset of this. Understanding the drop-off between response, immediate funding, and final retention will help identify if the issue is in the initial outreach (response) or the post-contact settlement (retained purchase).",
+            "evidenceId": "876285b93927c7cacf0de538cec930d37d9e58907084e21e266920c249314320"
+          },
+          "provider": [
+            {
+              "responseId": "W9ztaqK7CdGSpt8P-JHz6Qs",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 1963,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "define_dataset",
+          "evidenceId": "1ee57a16206730e24c7c7f47eadd3fe27d3072388a6ca4f7cb31d6668183457b",
+          "choice": {
+            "evidenceId": "1ee57a16206730e24c7c7f47eadd3fe27d3072388a6ca4f7cb31d6668183457b",
+            "opportunity": "The ask_need group is significantly underperforming in mature retention (3.8% vs 14.2% for recommend). High interest in Furniture and Office bundles is not translating to funded units, suggesting the model fails to distinguish between casual browsers and high-intent shoppers in these categories.",
+            "rationale": "By incorporating market_feedback (prior-day mature retention aggregates), the model can learn to prioritize inquiries that exhibit patterns associated with successful retention, rather than just general interest. This should improve the precision of the ask_need outreach and help convert high-interest categories like Furniture/Bundles.",
+            "windowDays": "56",
+            "featureView": "market_feedback"
+          },
+          "provider": [
+            {
+              "responseId": "YdztauKgArOhpt8P6MyxgAY",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2527,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "train_ontology_model",
+          "evidenceId": "88415eec909e80aeee79d97b560107185145342999918ec9c9dd94b34e37994a",
+          "choice": {
+            "target": "retained_recommendation",
+            "rationale": "The ask_need group is currently underperforming in mature retention (3.8% vs 14.2% for recommend). By incorporating market-level feedback (market_response_rate and market_mature_retention_rate) alongside individual shopper intent (age, category_affinity) and history (recency, prior_purchases), the model can better distinguish between casual browsers and high-intent shoppers. This is critical for converting interest in Furniture and Office bundles into actual retained purchases, while price and stock features ensure the model remains aligned with merchant fulfillment capabilities.",
+            "evidenceId": "88415eec909e80aeee79d97b560107185145342999918ec9c9dd94b34e37994a",
+            "features": [
+              "age",
+              "category_affinity",
+              "recency",
+              "prior_purchases",
+              "price_usd",
+              "stock",
+              "market_response_rate",
+              "market_mature_retention_rate"
+            ],
+            "first": "boosted"
+          },
+          "provider": [
+            {
+              "responseId": "Z9ztauabBOmVpt8P3rXo8QQ",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2693,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "select_trained_artifact",
+          "evidenceId": "29b84e18675f4a0e8a7407f15912af2e498734e54f168837773be887284412e6",
+          "choice": {
+            "evidenceId": "29b84e18675f4a0e8a7407f15912af2e498734e54f168837773be887284412e6",
+            "rationale": "Model b1a67b75c65e demonstrates higher predictive accuracy and lower log-loss across the primary contact types. Its ability to leverage market_feedback effectively addresses the identified retention gap in the ask_need group while maintaining strong performance in the recommend group. This model is the most suitable candidate for the next financial trial to validate conversion improvements in Furniture and Office bundles.",
+            "modelId": "V2-MODEL-b1a67b75c65e",
+            "finding": "V2-MODEL-b1a67b75c65e outperforms V2-MODEL-ee0b1f38f15a on the recommend population (AUC 0.7886 vs 0.7006; LogLoss 0.2934 vs 0.3294). The broader feature set and market_feedback integration in b1a67b75c65e provide superior discrimination for both recommend and ask_need segments."
+          },
+          "provider": [
+            {
+              "responseId": "d9ztaqOBMYHEpt8PuoeoyQk",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 3276,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "propose_campaign_trial",
+          "evidenceId": "faffe38d12c748662e0c50e817ef755c4960934f14cc16bf20e2e3c53a1f6bdd",
+          "choice": {
+            "rationale": "The current policy shows a significant retention gap in the 'ask_need' group (3.8% vs 14.2% for 'recommend'). The new model (V2-MODEL-b1a67b75c65e) incorporates market_feedback to better distinguish high-intent shoppers in Furniture and Office bundles. By deploying this model within a 'ranked_discovery' campaign, we aim to improve the precision of our outreach to these underperforming segments, thereby increasing mature retention and overall merchant contribution without increasing the contact volume beyond the proven 6 per 100 shoppers.",
+            "campaign": {
+              "forecast": "recent14",
+              "kind": "ranked_discovery",
+              "contactsPer100": "6",
+              "coverDays": "7",
+              "objective": "joint",
+              "productPreference": "lowest_acceptable_price",
+              "supplierSettlement": "paypal_fast"
+            },
+            "evidenceId": "faffe38d12c748662e0c50e817ef755c4960934f14cc16bf20e2e3c53a1f6bdd"
+          },
+          "provider": [
+            {
+              "responseId": "fdztaoaCK4ONpt8P8vukuAM",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2854,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "propose_campaign_revision",
+          "evidenceId": "475540d799b3d845018169354cd27ca136375bbf2e44e8f0716ebd1acfce0b56",
+          "choice": {
+            "campaign": {
+              "coverDays": "7",
+              "objective": "joint",
+              "forecast": "recent14",
+              "kind": "ranked_discovery",
+              "productPreference": "lowest_acceptable_price",
+              "contactsPer100": "3",
+              "supplierSettlement": "paypal_fast"
+            },
+            "rationale": "The previous trial using V2-MODEL-b1a67b75c65e at 6 contacts per 100 shoppers demonstrated strong platform and retailer gains but failed the merchantProtected gate, likely due to inventory pressure in the discovery regime. Reducing the contact density to 3 per 100 shoppers aims to maintain the predictive accuracy of the new model while protecting merchant inventory and contribution, ensuring a more sustainable growth path.",
+            "modelId": "V2-MODEL-b1a67b75c65e",
+            "evidenceId": "475540d799b3d845018169354cd27ca136375bbf2e44e8f0716ebd1acfce0b56"
+          },
+          "provider": [
+            {
+              "responseId": "0NztavuvG_6w2roP3P-1wQI",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 4787,
+              "status": "settled"
+            }
+          ]
+        }
+      ],
+      "publications": [
+        {
+          "day": 30,
+          "published": true,
+          "agentRequest": "propose_campaign_revision",
+          "authority": "DETERMINISTIC_CONTROLLER",
+          "version": "commerce-metropolis-harness-1",
+          "decision": "publish",
+          "selectedContractHash": "0fce3177e7617e749df16708be7ba60181a2bb143ad614aa7b8171e98b6ec1f0",
+          "reviewContextHash": "7ad30262205c32cae6573ce01861f41c419acd665909551065dfe729a7873be9",
+          "reason": "Highest measured PayPal net among all eligible tested candidates; merchant and purchase guards passed.",
+          "candidates": [
+            {
+              "contractHash": "b9b62ebd484efc177cbb11fee7b50b49fdd5fd0e5b514ea1d103a66a910bf6e8",
+              "trialHash": "2f6676e5c5b172a7797f4da174c8f476e1f765bc3cda65143c0ee025caaa4f05",
+              "receiptHash": "9b593e01bd41f810369b8389fb87eee7a4883f6a85140b9e8d3aa57d66ebc8e0",
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "contractHash": "0fce3177e7617e749df16708be7ba60181a2bb143ad614aa7b8171e98b6ec1f0",
+              "trialHash": "fff04655a02c4ae797fcb0501402da3331301e15558aca27dc7d1aa1146ee399",
+              "receiptHash": "25e06405e8f2a2c761d888b49ec643262cd09c2c77edd85d3307acc557826116",
+              "gate": {
+                "passed": true,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "contractHash": "d2b85a09ef1add6e57554db40aecc608d5b6335d866f11884e8383bc60960c10",
+              "trialHash": "cb1ff571093a1ca455d92112bef7bfb07c1d4aafac78390de34f74ddfeca36ae",
+              "receiptHash": "92a7d2c60be1ac2c31080a93431be29816ecd6fff0e900500ca12f5990b392be",
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ],
+          "modelComparison": {
+            "status": "kept",
+            "reason": "The original decision held after comparing the two models on the same campaign.",
+            "anchor": {
+              "modelId": "V2-MODEL-31ed07c89a25",
+              "modelHash": "31ed07c89a255a0b5644e55781eb9fdf33e899cc0d1fefd93448d162ce061984",
+              "family": "boosted",
+              "features": "intent_context",
+              "auc": 0.7583962731381169,
+              "contractHash": "0fce3177e7617e749df16708be7ba60181a2bb143ad614aa7b8171e98b6ec1f0",
+              "receiptHash": "25e06405e8f2a2c761d888b49ec643262cd09c2c77edd85d3307acc557826116",
+              "paypal": 26.879999999999956,
+              "merchants": 306.25,
+              "purchases": 4.666666666666667
+            },
+            "alternative": {
+              "modelId": "V2-MODEL-d746ce0f65a0",
+              "modelHash": "d746ce0f65a0e762903cdfe9522fbcc19a4e2d9dd043c6a779e9906cadc07fc5",
+              "family": "boosted",
+              "features": "intent_context",
+              "auc": 0.6789286776935574,
+              "contractHash": "d3c8429ec71f0270c321c2bf077fb02b9a77ea915fdd1ce16bf8a5676325be36",
+              "receiptHash": "ed786d4d7acc88ebe1223a00ed6461c06c416bba33ee0f944800f3d6ad34358c",
+              "paypal": 20.200000000000273,
+              "merchants": 195.753333333334,
+              "purchases": 2.6666666666666665
+            },
+            "selectedContractHash": "0fce3177e7617e749df16708be7ba60181a2bb143ad614aa7b8171e98b6ec1f0"
+          },
+          "contractHash": "0fce3177e7617e749df16708be7ba60181a2bb143ad614aa7b8171e98b6ec1f0",
+          "trialHash": "fff04655a02c4ae797fcb0501402da3331301e15558aca27dc7d1aa1146ee399",
+          "experiments": [
+            {
+              "campaign": {
+                "objective": "joint",
+                "forecast": "adaptive",
+                "contactsPer100": 6,
+                "productPreference": "requested_preference",
+                "coverDays": 7,
+                "supplierSettlement": "paypal_fast",
+                "kind": "ranked_discovery"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4047.1633333333334,
+                "retailerUSD": 47899.533333333326,
+                "retainedPurchases": 751.3333333333334,
+                "platformDeltaUSD": 3.316666666666606,
+                "retailerDeltaUSD": 260.7433333333344,
+                "purchaseDelta": 5,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 106469.66666666667,
+                "volumeDeltaUSD": 591.3333333333334,
+                "partnerCashDeltaUSD": 695.8766666666585,
+                "inventoryRatio": 0.8753924161017186,
+                "contactCount": 1991.3333333333333,
+                "contactDelta": -25,
+                "outreachCostUSD": 99.56666666666668,
+                "outreachCostDeltaUSD": -1.25
+              },
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "campaign": {
+                "objective": "joint",
+                "forecast": "recent14",
+                "contactsPer100": 6,
+                "productPreference": "lowest_acceptable_price",
+                "coverDays": 7,
+                "supplierSettlement": "paypal_fast",
+                "kind": "ranked_discovery"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4070.726666666667,
+                "retailerUSD": 47945.04,
+                "retainedPurchases": 751,
+                "platformDeltaUSD": 26.879999999999956,
+                "retailerDeltaUSD": 306.25,
+                "purchaseDelta": 4.666666666666667,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 106533.66666666667,
+                "volumeDeltaUSD": 655.3333333333334,
+                "partnerCashDeltaUSD": 486.226666666674,
+                "inventoryRatio": 0.9886543925286224,
+                "contactCount": 1991,
+                "contactDelta": -25.333333333333332,
+                "outreachCostUSD": 99.55,
+                "outreachCostDeltaUSD": -1.2666666666666657
+              },
+              "gate": {
+                "passed": true,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "campaign": {
+                "kind": "ranked_discovery",
+                "forecast": "recent14",
+                "productPreference": "lowest_acceptable_price",
+                "coverDays": 7,
+                "objective": "joint",
+                "supplierSettlement": "paypal_fast",
+                "contactsPer100": 10
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4066.336666666666,
+                "retailerUSD": 47909.82,
+                "retainedPurchases": 752,
+                "platformDeltaUSD": 22.489999999999934,
+                "retailerDeltaUSD": 271.02999999999884,
+                "purchaseDelta": 5.666666666666667,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 106476.33333333333,
+                "volumeDeltaUSD": 598,
+                "partnerCashDeltaUSD": 449.58333333334303,
+                "inventoryRatio": 0.9836345607471376,
+                "contactCount": 2020.3333333333333,
+                "contactDelta": 4,
+                "outreachCostUSD": 101.01666666666665,
+                "outreachCostDeltaUSD": 0.1999999999999981
+              },
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ]
+        },
+        {
+          "day": 60,
+          "published": false,
+          "agentRequest": "propose_campaign_revision",
+          "authority": "DETERMINISTIC_CONTROLLER",
+          "version": "commerce-metropolis-harness-1",
+          "decision": "keep",
+          "selectedContractHash": "0fce3177e7617e749df16708be7ba60181a2bb143ad614aa7b8171e98b6ec1f0",
+          "reviewContextHash": "4d91c734ec9c142fbb773ec5ee4a93a33d22f97f699e297348a0a41c363adf43",
+          "reason": "No tested candidate passed all guards; retain the incumbent.",
+          "candidates": [
+            {
+              "contractHash": "57a894f9d33f0556f8061da7cdc8362db980ace22d8f44af5e77e2c7013c3909",
+              "trialHash": "c7b03c58688108fb64b8e53270fe1248c996b305019f16afb1cab61acbe229dd",
+              "receiptHash": "960b1e64db0df137cee1f3150abae98b9aedafece19688e600335aeac15509f7",
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": false,
+                  "purchasesProtected": true,
+                  "volumeProtected": false,
+                  "cashProtected": false,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "contractHash": "bde5cb443c7cba929e25f23c674c96026117ce08aee8c32d0843de6c85758f6e",
+              "trialHash": "8c295aa42f121ec95015bc7eb535ea356de99b06cc2368c932276ce56907b528",
+              "receiptHash": "96556517838d7a71b0d35f0a06cdee09d7efe9be0f8278d3ff30dd1931d204b5",
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": false,
+                  "purchasesProtected": false,
+                  "volumeProtected": false,
+                  "cashProtected": false,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": false,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ],
+          "modelComparison": {
+            "status": "kept",
+            "reason": "The original decision held after comparing the two models on the same campaign.",
+            "anchor": {
+              "modelId": "V2-MODEL-b1a67b75c65e",
+              "modelHash": "b1a67b75c65eabc63988cd70fa8bc767d6157aada06a7585b5f174e3f8a7c795",
+              "family": "boosted",
+              "features": "market_feedback",
+              "auc": 0.7606402704208921,
+              "contractHash": "57a894f9d33f0556f8061da7cdc8362db980ace22d8f44af5e77e2c7013c3909",
+              "receiptHash": "960b1e64db0df137cee1f3150abae98b9aedafece19688e600335aeac15509f7",
+              "paypal": 27.223333333333205,
+              "merchants": 283.8866666666654,
+              "purchases": 5.666666666666667
+            },
+            "alternative": {
+              "modelId": "V2-MODEL-ee0b1f38f15a",
+              "modelHash": "ee0b1f38f15a7edb946b60aa56b1acfed134d729983faf48a5f3bf0ffa8646ee",
+              "family": "boosted",
+              "features": "market_feedback",
+              "auc": 0.7006421543043838,
+              "contractHash": "8fcb56a84f2dbdbc63aaea67e16105f5ec5af31fda0bf78f302715f525d348d7",
+              "receiptHash": "052c2b446f05e1fc85a097cefe27ded5205ae28743bed0e6e6eebd1f61f0228b",
+              "paypal": 31.809999999999945,
+              "merchants": 282.48000000000076,
+              "purchases": 6
+            },
+            "selectedContractHash": "0fce3177e7617e749df16708be7ba60181a2bb143ad614aa7b8171e98b6ec1f0"
+          },
+          "contractHash": "0fce3177e7617e749df16708be7ba60181a2bb143ad614aa7b8171e98b6ec1f0",
+          "trialHash": "fff04655a02c4ae797fcb0501402da3331301e15558aca27dc7d1aa1146ee399",
+          "experiments": [
+            {
+              "campaign": {
+                "forecast": "recent14",
+                "kind": "ranked_discovery",
+                "contactsPer100": 6,
+                "coverDays": 7,
+                "objective": "joint",
+                "productPreference": "lowest_acceptable_price",
+                "supplierSettlement": "paypal_fast"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4071.0699999999997,
+                "retailerUSD": 47922.67666666666,
+                "retainedPurchases": 752,
+                "platformDeltaUSD": 27.223333333333205,
+                "retailerDeltaUSD": 283.8866666666654,
+                "purchaseDelta": 5.666666666666667,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 106522.33333333333,
+                "volumeDeltaUSD": 644,
+                "partnerCashDeltaUSD": 462.13000000000466,
+                "inventoryRatio": 0.99065022926102,
+                "contactCount": 1990.3333333333333,
+                "contactDelta": -26,
+                "outreachCostUSD": 99.51666666666667,
+                "outreachCostDeltaUSD": -1.3000000000000018
+              },
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": false,
+                  "purchasesProtected": true,
+                  "volumeProtected": false,
+                  "cashProtected": false,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "campaign": {
+                "coverDays": 7,
+                "objective": "joint",
+                "forecast": "recent14",
+                "kind": "ranked_discovery",
+                "productPreference": "lowest_acceptable_price",
+                "contactsPer100": 3,
+                "supplierSettlement": "paypal_fast"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4050.306666666667,
+                "retailerUSD": 47545.07666666666,
+                "retainedPurchases": 738,
+                "platformDeltaUSD": 6.4599999999998845,
+                "retailerDeltaUSD": -93.71333333333314,
+                "purchaseDelta": -8.333333333333334,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 105658,
+                "volumeDeltaUSD": -220.33333333333334,
+                "partnerCashDeltaUSD": -96.04666666667133,
+                "inventoryRatio": 0.9819397170103238,
+                "contactCount": 1601,
+                "contactDelta": -415.3333333333333,
+                "outreachCostUSD": 80.05,
+                "outreachCostDeltaUSD": -20.76666666666667
+              },
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": false,
+                  "purchasesProtected": false,
+                  "volumeProtected": false,
+                  "cashProtected": false,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": false,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ]
+        }
+      ],
+      "models": [
+        {
+          "id": "V2-MODEL-d746ce0f65a0",
+          "hash": "d746ce0f65a0e762903cdfe9522fbcc19a4e2d9dd043c6a779e9906cadc07fc5",
+          "rows": 2762,
+          "spec": {
+            "family": "boosted",
+            "featureView": "intent_context",
+            "windowDays": 28
+          },
+          "features": null,
+          "recommendationMetrics": {
+            "logLoss": 0.28517147730458475,
+            "brier": 0.08261769735242497,
+            "auc": 0.7503250170247013,
+            "averagePrecision": 0.20117728153643358
+          }
+        },
+        {
+          "id": "V2-MODEL-31ed07c89a25",
+          "hash": "31ed07c89a255a0b5644e55781eb9fdf33e899cc0d1fefd93448d162ce061984",
+          "rows": 1230,
+          "spec": {
+            "family": "boosted",
+            "featureView": "intent_context",
+            "windowDays": 28,
+            "trainingTask": "retained_recommendation",
+            "selection": "llm_selected"
+          },
+          "features": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "customer_intent_fresh",
+            "customer_intent_recent",
+            "recency",
+            "prior_purchases",
+            "price_usd",
+            "stock",
+            "arrival_days",
+            "stationery",
+            "electronics",
+            "furniture",
+            "bundles"
+          ],
+          "recommendationMetrics": {
+            "logLoss": 0.2829860472274378,
+            "brier": 0.08262589092618518,
+            "auc": 0.7583962731381169,
+            "averagePrecision": 0.20338258356560254,
+            "macroMarketAUC": 0.7897735317436413,
+            "macroLogLoss": 0.27519406565514803
+          }
+        },
+        {
+          "id": "V2-MODEL-b1a67b75c65e",
+          "hash": "b1a67b75c65eabc63988cd70fa8bc767d6157aada06a7585b5f174e3f8a7c795",
+          "rows": 7567,
+          "spec": {
+            "family": "boosted",
+            "featureView": "market_feedback",
+            "windowDays": 56
+          },
+          "features": null,
+          "recommendationMetrics": {
+            "logLoss": 0.2933784984875436,
+            "brier": 0.08586561491225089,
+            "auc": 0.7885526771086042,
+            "averagePrecision": 0.33505557767920374
+          }
+        },
+        {
+          "id": "V2-MODEL-ee0b1f38f15a",
+          "hash": "ee0b1f38f15a7edb946b60aa56b1acfed134d729983faf48a5f3bf0ffa8646ee",
+          "rows": 3245,
+          "spec": {
+            "family": "boosted",
+            "featureView": "market_feedback",
+            "windowDays": 56,
+            "trainingTask": "retained_recommendation",
+            "selection": "llm_selected"
+          },
+          "features": [
+            "age",
+            "category_affinity",
+            "recency",
+            "prior_purchases",
+            "price_usd",
+            "stock",
+            "market_response_rate",
+            "market_mature_retention_rate"
+          ],
+          "recommendationMetrics": {
+            "logLoss": 0.3294375336546647,
+            "brier": 0.09601562904422091,
+            "auc": 0.7006421543043838,
+            "averagePrecision": 0.1986732933408116,
+            "macroMarketAUC": 0.6436935428794043,
+            "macroLogLoss": 0.310604888030045
+          }
+        }
+      ]
+    },
+    {
+      "id": "AUTONOMY-d8f8e3695c9118cb",
+      "runId": "GARDEN-AUTO-d8f8e3695c9118cb",
+      "seed": 92111706,
+      "profile": "metropolis-384",
+      "merchants": 384,
+      "shoppers": 19200,
+      "status": "COMPLETED",
+      "day": 126,
+      "modelCalls": 12,
+      "modelCostUSD": 0.059695,
+      "fixed": {
+        "paypal": 100111.95,
+        "merchants": 1254057.38,
+        "purchases": 19810,
+        "volume": 2816704
+      },
+      "planner": {
+        "paypal": 103422.70030499999,
+        "merchants": 1290100.26,
+        "purchases": 20342,
+        "volume": 2895340
+      },
+      "delta": {
+        "paypal": 3310.750304999994,
+        "merchants": 36042.88000000012,
+        "purchases": 532,
+        "volume": 78636
+      },
+      "paypalGainPer100": 17.243491171874968,
+      "runtime": {
+        "checkpointMs": 4281.567207999993,
+        "checkpointBytes": 34548680,
+        "worldBytes": 352441830,
+        "stepMs": 5642.728457999881,
+        "heapMB": 1381
+      },
+      "initialHash": "b7a53d4bdffef3190b9f28c0ab99dd5bd84422dd6359b0ce932458ff8d183e8f",
+      "unpaidLiabilities": 0,
+      "decisions": [
+        {
+          "day": 31,
+          "tool": "choose_investigation",
+          "evidenceId": "e700294e589a5a82abec38e067a4dfea5f9950b857fc9aa0262bade69655187c",
+          "choice": {
+            "evidenceId": "e700294e589a5a82abec38e067a4dfea5f9950b857fc9aa0262bade69655187c",
+            "rationale": "Analyze the conversion funnel from response to retained purchase to identify where shoppers drop off and characterize the 41 shoppers who retained without immediate funding. This will help determine if the current 'cheap' target and 'fresh' signal policy is missing conversion opportunities.",
+            "windowDays": "28",
+            "lens": "payment_funnel"
+          },
+          "provider": [
+            {
+              "responseId": "P-DtauyOL9GSpt8P-JHz6Qs",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 1629,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "define_dataset",
+          "evidenceId": "fcd9383ea03511a43bab26334e9a95dd98a531b132e78d7befe15056563fba9a",
+          "choice": {
+            "featureView": "intent_context",
+            "windowDays": "28",
+            "opportunity": "Improve retention for general inquiries (ask_need) by leveraging pre-contact shopper interest freshness. Currently, the ask_need group has a 4.2% retention rate compared to 9.4% for recommend, indicating a significant bottleneck in converting general intent into mature purchases.",
+            "rationale": "The current policy relies on fresh signals, but general inquiries (ask_need) lack specific SKU context, leading to lower conversion. By incorporating intent_context, we can better segment shoppers based on the freshness of their interest, allowing for more relevant outreach even when a specific product SKU is not yet identified. This should help close the performance gap between general inquiries and personalized recommendations.",
+            "evidenceId": "fcd9383ea03511a43bab26334e9a95dd98a531b132e78d7befe15056563fba9a"
+          },
+          "provider": [
+            {
+              "responseId": "ReDtau3NKbOhpt8P6MyxgAY",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 1714,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "train_ontology_model",
+          "evidenceId": "5b26247fd5a7f65969b76d4833432b6a5f5039edac9e8f223435b53b1dab719a",
+          "choice": {
+            "evidenceId": "5b26247fd5a7f65969b76d4833432b6a5f5039edac9e8f223435b53b1dab719a",
+            "rationale": "To improve retention for general inquiries (ask_need), we must better leverage intent freshness and shopper history. By including 'age' and 'search' (intent), 'recency' and 'prior_purchases' (shopper history), and 'price_usd' and 'stock' (offer context), the boosted model can better predict the likelihood of a retained purchase even when a specific SKU is not initially identified. This approach aims to close the performance gap between the recommend and ask_need groups by providing a more nuanced prediction of conversion potential.",
+            "first": "boosted",
+            "target": "retained_recommendation",
+            "features": [
+              "age",
+              "search",
+              "signal_count",
+              "category_affinity",
+              "recency",
+              "prior_purchases",
+              "price_usd",
+              "stock"
+            ]
+          },
+          "provider": [
+            {
+              "responseId": "S-DtauWAK6GWpt8Pk9rv2As",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2359,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "select_trained_artifact",
+          "evidenceId": "e029e71b2e012a3d4955476c237c12141048d8b7f52e239f3b8cdd1904027064",
+          "choice": {
+            "finding": "V2-MODEL-acb28b01cf5a outperforms V2-MODEL-d746ce0f65a0 on the recommend contact type, achieving a higher AUC (0.7620 vs 0.7503) and lower logLoss (0.2820 vs 0.2852). The feature triage in the selected model effectively focuses on high-signal variables (age, search, recency, prior_purchases), which provides a more stable foundation for predicting retention. While both models share the same inquiryValue head for ask_need segmentation, the superior performance of V2-MODEL-acb28b01cf5a on the recommend group makes it the more reliable choice for a financial trial.",
+            "rationale": "The objective is to improve retention for general inquiries (ask_need) while maintaining performance on recommendations. V2-MODEL-acb28b01cf5a demonstrates better predictive accuracy for the recommend group and uses a refined feature set that is less prone to overfitting than the full-feature model. By pairing this model with the existing inquiryValue head, we can effectively segment ask_need inquiries by freshness while leveraging a more robust model for recommendation-based retention.",
+            "evidenceId": "e029e71b2e012a3d4955476c237c12141048d8b7f52e239f3b8cdd1904027064",
+            "modelId": "V2-MODEL-acb28b01cf5a"
+          },
+          "provider": [
+            {
+              "responseId": "V-DtavOsMoPJrfcPqvrxmQo",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 3003,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "propose_campaign_trial",
+          "evidenceId": "3d0c5c0e4c5d1c6a2e2cc7e385dfa0d0baa3604f0cd237eeae43b77f697c3989",
+          "choice": {
+            "rationale": "The current policy shows a significant retention gap between 'recommend' (9.4%) and 'ask_need' (4.2%) groups. The inquiry value head analysis confirms that 'fresh' and 'recent' inquiries have much higher retention potential (13.2% and 9.6% respectively) compared to 'cold' inquiries (2.6%). By deploying an 'intent_assistance' campaign with an 'adaptive' forecast and a 3-day cover window, we can prioritize these high-value segments. A 'contactsPer100' of 6 provides a balanced approach to scaling outreach while maintaining merchant contribution and payment performance. This trial aims to close the performance gap by focusing on the freshness of shopper intent.",
+            "evidenceId": "3d0c5c0e4c5d1c6a2e2cc7e385dfa0d0baa3604f0cd237eeae43b77f697c3989",
+            "campaign": {
+              "supplierSettlement": "paypal_fast",
+              "forecast": "adaptive",
+              "objective": "joint",
+              "contactsPer100": "6",
+              "coverDays": "3",
+              "kind": "intent_assistance",
+              "productPreference": "lowest_acceptable_price"
+            }
+          },
+          "provider": [
+            {
+              "responseId": "XeDtarDpK4PJrfcPqvrxmQo",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2253,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 31,
+          "tool": "propose_campaign_revision",
+          "evidenceId": "552fb0ad029e938954710719458cf307b75ccbe3b6403578b8aa73fb77609ed2",
+          "choice": {
+            "rationale": "The component trial using the recent14 forecast and 7 cover days successfully passed the gate, delivering positive platform and retailer deltas while protecting stress cases. To explore if we can capture more retained purchases and further increase contribution, we will scale the outreach by increasing contactsPer100 from 6 to 10, keeping all other parameters identical.",
+            "modelId": "V2-MODEL-acb28b01cf5a",
+            "evidenceId": "552fb0ad029e938954710719458cf307b75ccbe3b6403578b8aa73fb77609ed2",
+            "campaign": {
+              "objective": "joint",
+              "supplierSettlement": "paypal_fast",
+              "kind": "intent_assistance",
+              "contactsPer100": "10",
+              "coverDays": "7",
+              "forecast": "recent14",
+              "productPreference": "lowest_acceptable_price"
+            }
+          },
+          "provider": [
+            {
+              "responseId": "3uDtat79LYHEpt8PuoeoyQk",
+              "model": "gemini-3.1-pro-preview",
+              "costMicros": 30188,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "choose_investigation",
+          "evidenceId": "f51ce7a1d8b0f6f935620f032af865d3fd8a8f1ed4f793fd647e5d2747cfa459",
+          "choice": {
+            "lens": "payment_funnel",
+            "evidenceId": "f51ce7a1d8b0f6f935620f032af865d3fd8a8f1ed4f793fd647e5d2747cfa459",
+            "windowDays": "56",
+            "rationale": "I need to understand the drop-off between response, immediate funding, and final retained purchase to identify where the current policy is losing potential conversions. This will help in refining the outreach strategy."
+          },
+          "provider": [
+            {
+              "responseId": "NOLtavW5JoPJrfcPqvrxmQo",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 1941,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "define_dataset",
+          "evidenceId": "183453bae79d027b53510bd022812069ce407dbe66f8e55b6196c81a8d361a6e",
+          "choice": {
+            "evidenceId": "183453bae79d027b53510bd022812069ce407dbe66f8e55b6196c81a8d361a6e",
+            "opportunity": "The current model is over-indexing on general intent, failing to account for the severe conversion stagnation in Furniture (0 funded units) and Electronics (96 funded units) despite high availability. By incorporating market-wide feedback (prior-day contact/response/funding/mature-retention aggregates), the model can learn to dynamically deprioritize these categories and reallocate contacts to high-performing segments like Stationery and Office bundles.",
+            "rationale": "The 'recommend' group is significantly outperforming 'ask_need' (10.7% vs 2.3% retention), confirming that proactive recommendations are the primary driver of retained purchases. However, the current model lacks visibility into category-specific performance trends. The 'market_feedback' recipe will allow the model to learn from recent category-level conversion failures, enabling a more efficient allocation of the 960,000-cent budget toward categories that actually convert. A 56-day window aligns with the current analysis period, providing sufficient historical depth to capture these trends without being diluted by older, less relevant data.",
+            "featureView": "market_feedback",
+            "windowDays": "56"
+          },
+          "provider": [
+            {
+              "responseId": "OuLtauz5G9CZ0-kP7eah6Q0",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 2349,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "train_ontology_model",
+          "evidenceId": "9247993001190387a5c5acd23ba60dfc62ff7543ae00d347662c029fa612cc00",
+          "choice": {
+            "target": "retained_recommendation",
+            "first": "boosted",
+            "evidenceId": "9247993001190387a5c5acd23ba60dfc62ff7543ae00d347662c029fa612cc00",
+            "rationale": "The model needs to move beyond general intent to account for category-specific conversion stagnation. By including category indicators (stationery, electronics, furniture, bundles) alongside market-wide performance metrics (market_response_rate, market_mature_retention_rate), the model can learn to deprioritize categories like Furniture and Electronics that have shown zero or low conversion, while focusing on high-performing segments. Including age, search, category_affinity (intent) and recency, prior_purchases (shopper history) ensures we maintain the core predictive power of the existing model while adding the necessary context to optimize allocation.",
+            "features": [
+              "age",
+              "search",
+              "category_affinity",
+              "recency",
+              "prior_purchases",
+              "stationery",
+              "electronics",
+              "furniture",
+              "bundles",
+              "market_response_rate",
+              "market_mature_retention_rate"
+            ]
+          },
+          "provider": [
+            {
+              "responseId": "QOLtapufHJvz2roPgeidmAU",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 3208,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "select_trained_artifact",
+          "evidenceId": "fb008d40f3bb1d030d7297ada493d490cae5c256d29b62653b106d62b7e4bc62",
+          "choice": {
+            "rationale": "The 'recommend' segment is the primary driver of retained purchases (10.7% retention rate). V2-MODEL-e45d6d49913c demonstrates superior predictive performance (AUC 0.7728, LogLoss 0.2876) on this segment compared to the alternative. By utilizing the 'market_feedback' feature view, this model effectively incorporates category-level performance trends to address the identified stagnation in Furniture and Electronics, while maintaining high performance in Stationery and Bundles.",
+            "evidenceId": "fb008d40f3bb1d030d7297ada493d490cae5c256d29b62653b106d62b7e4bc62",
+            "modelId": "V2-MODEL-e45d6d49913c",
+            "finding": "V2-MODEL-e45d6d49913c outperforms V2-MODEL-264b4e7a3048 on the critical 'recommend' contact segment, achieving a higher AUC (0.7728 vs 0.7595) and better precision metrics. Despite the feature triage in the second model, the broader model with market_feedback provides more robust predictive power for the primary retention driver."
+          },
+          "provider": [
+            {
+              "responseId": "WeLtar2QCtCZ0-kP7eah6Q0",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 3358,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "propose_campaign_trial",
+          "evidenceId": "3811b4b5f15ad8ccb6574b6883582b51812f92ccbd665ce2ad48ccefbe30c927",
+          "choice": {
+            "campaign": {
+              "coverDays": "7",
+              "objective": "joint",
+              "productPreference": "lowest_acceptable_price",
+              "contactsPer100": "6",
+              "supplierSettlement": "paypal_fast",
+              "kind": "product_recommendations",
+              "forecast": "adaptive"
+            },
+            "evidenceId": "3811b4b5f15ad8ccb6574b6883582b51812f92ccbd665ce2ad48ccefbe30c927",
+            "rationale": "The current 'intent_assistance' policy is failing to convert in Furniture and Electronics despite high availability. Analysis shows that proactive recommendations are the primary driver of retention (10.7% vs 2.3%). By switching to 'product_recommendations' and using an 'adaptive' forecast, the model can better prioritize high-performing categories like Stationery and Office bundles while deprioritizing stagnant ones. Reducing contacts to 6 per 100 shoppers will improve efficiency as the model learns to reallocate resources toward higher-converting segments."
+          },
+          "provider": [
+            {
+              "responseId": "X-LtatHpAqWl0-kPwfmY0Qk",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 3669,
+              "status": "settled"
+            }
+          ]
+        },
+        {
+          "day": 61,
+          "tool": "propose_campaign_revision",
+          "evidenceId": "819be9b3bbd41d37ea1fafd5e60f01271b483c7e50310a7291c6c83d42448efb",
+          "choice": {
+            "rationale": "The 'product_recommendations' trial with 'recent14' forecast outperformed the 'adaptive' forecast in both platform and retailer contribution, showing positive deltas (+16.26 and +51.03 respectively). By focusing on 'product_recommendations' with the 'recent14' forecast, we can better leverage the high-performing 'recommend' segment while maintaining the efficiency of 6 contacts per 100 shoppers. This configuration addresses the stagnation in Furniture and Electronics by shifting focus to proven categories, while the model V2-MODEL-e45d6d49913c provides the necessary predictive accuracy to sustain these gains.",
+            "evidenceId": "819be9b3bbd41d37ea1fafd5e60f01271b483c7e50310a7291c6c83d42448efb",
+            "campaign": {
+              "objective": "joint",
+              "productPreference": "lowest_acceptable_price",
+              "contactsPer100": "6",
+              "kind": "product_recommendations",
+              "supplierSettlement": "paypal_fast",
+              "coverDays": "7",
+              "forecast": "recent14"
+            },
+            "modelId": "V2-MODEL-e45d6d49913c"
+          },
+          "provider": [
+            {
+              "responseId": "AePtaovYBqWl0-kPwfmY0Qk",
+              "model": "gemini-3.1-flash-lite",
+              "costMicros": 4024,
+              "status": "settled"
+            }
+          ]
+        }
+      ],
+      "publications": [
+        {
+          "day": 30,
+          "published": true,
+          "agentRequest": "propose_campaign_revision",
+          "authority": "DETERMINISTIC_CONTROLLER",
+          "version": "commerce-metropolis-harness-1",
+          "decision": "publish",
+          "selectedContractHash": "dab9b207c04dc90129b92bc68de26e3fefe38f842021d6931f666b20242f1aad",
+          "reviewContextHash": "faabd147c2cc7089f50cda4e0896f50301fd03f07d3caffa992b3f4f91b73e27",
+          "reason": "Highest measured PayPal net among all eligible tested candidates; merchant and purchase guards passed.",
+          "candidates": [
+            {
+              "contractHash": "fa1098cb294224d8295377ca1191b63b345cc0106816ca1bfaa62260cdf68fb8",
+              "trialHash": "c1b192c6cd918b6694ad2256c52863bc961a5cb877b502e0726fb72309cd9078",
+              "receiptHash": "89e1720cb41352af3c54d1036af442eaf90ad5a0095e56719dd1bee9a7bea8d4",
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": false,
+                  "merchantProtected": false,
+                  "purchasesProtected": true,
+                  "volumeProtected": false,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": false,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "contractHash": "c8f67a44c308df6db19df589661b798f5d7a7d33eae08e095e9359d6fc6993a4",
+              "trialHash": "39e7deb9bb4360ad24b2de59fd3493b53bb44cad5602dddce5c3b8227f2c791a",
+              "receiptHash": "79d468ab6aed3129ef9cb1327cfd07736989d2d289a6e9d248b7b209456f3cf0",
+              "gate": {
+                "passed": true,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "contractHash": "dab9b207c04dc90129b92bc68de26e3fefe38f842021d6931f666b20242f1aad",
+              "trialHash": "624201fd41519702cc2ced2e1deb58b7ca65a4b0638f25981a319a87a51bf206",
+              "receiptHash": "12946b8bedb92f1784e18ac33b1c511cec715c46cc65d020b5bf15e294bb98d9",
+              "gate": {
+                "passed": true,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ],
+          "modelComparison": {
+            "status": "kept",
+            "reason": "The original decision held after comparing the two models on the same campaign.",
+            "anchor": {
+              "modelId": "V2-MODEL-acb28b01cf5a",
+              "modelHash": "acb28b01cf5a237bbaa45e7d1e585b403199b4125224438cbf86357d8265312e",
+              "family": "boosted",
+              "features": "intent_context",
+              "auc": 0.7620411069151241,
+              "contractHash": "dab9b207c04dc90129b92bc68de26e3fefe38f842021d6931f666b20242f1aad",
+              "receiptHash": "12946b8bedb92f1784e18ac33b1c511cec715c46cc65d020b5bf15e294bb98d9",
+              "paypal": 25.43333333333324,
+              "merchants": 245.1833333333343,
+              "purchases": 4.666666666666667
+            },
+            "alternative": {
+              "modelId": "V2-MODEL-d746ce0f65a0",
+              "modelHash": "d746ce0f65a0e762903cdfe9522fbcc19a4e2d9dd043c6a779e9906cadc07fc5",
+              "family": "boosted",
+              "features": "intent_context",
+              "auc": 0.6789286776935574,
+              "contractHash": "261ca29fec3f6518b055205e9bbf6da6f80d8eea03deafc3cddef444b1b35079",
+              "receiptHash": "89b80467268d75e0ea508eab4a6331e006e59b103ae766b56761ea8b992c178a",
+              "paypal": 27.336666666666588,
+              "merchants": 252.73000000000079,
+              "purchases": 4
+            },
+            "selectedContractHash": "dab9b207c04dc90129b92bc68de26e3fefe38f842021d6931f666b20242f1aad"
+          },
+          "contractHash": "dab9b207c04dc90129b92bc68de26e3fefe38f842021d6931f666b20242f1aad",
+          "trialHash": "624201fd41519702cc2ced2e1deb58b7ca65a4b0638f25981a319a87a51bf206",
+          "experiments": [
+            {
+              "campaign": {
+                "supplierSettlement": "paypal_fast",
+                "forecast": "adaptive",
+                "objective": "joint",
+                "contactsPer100": 6,
+                "coverDays": 3,
+                "kind": "intent_assistance",
+                "productPreference": "lowest_acceptable_price"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 3989.9166666666665,
+                "retailerUSD": 47589.416666666664,
+                "retainedPurchases": 747,
+                "platformDeltaUSD": -53.929999999999836,
+                "retailerDeltaUSD": -49.37333333333178,
+                "purchaseDelta": 0.6666666666666666,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 105689.33333333333,
+                "volumeDeltaUSD": -189,
+                "partnerCashDeltaUSD": 534.4133333333302,
+                "inventoryRatio": 0.7225716616501168,
+                "contactCount": 1955.6666666666667,
+                "contactDelta": -60.666666666666664,
+                "outreachCostUSD": 97.78333333333335,
+                "outreachCostDeltaUSD": -3.0333333333333363
+              },
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": false,
+                  "merchantProtected": false,
+                  "purchasesProtected": true,
+                  "volumeProtected": false,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": false,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "campaign": {
+                "supplierSettlement": "paypal_fast",
+                "forecast": "recent14",
+                "objective": "joint",
+                "contactsPer100": 6,
+                "coverDays": 7,
+                "kind": "intent_assistance",
+                "productPreference": "lowest_acceptable_price"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4069.1266666666666,
+                "retailerUSD": 47879.69,
+                "retainedPurchases": 750,
+                "platformDeltaUSD": 25.279999999999898,
+                "retailerDeltaUSD": 240.90000000000146,
+                "purchaseDelta": 3.6666666666666665,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 106400.33333333333,
+                "volumeDeltaUSD": 522,
+                "partnerCashDeltaUSD": 363.4900000000004,
+                "inventoryRatio": 1.000780612675462,
+                "contactCount": 1956.3333333333333,
+                "contactDelta": -60,
+                "outreachCostUSD": 97.81666666666666,
+                "outreachCostDeltaUSD": -3
+              },
+              "gate": {
+                "passed": true,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "campaign": {
+                "objective": "joint",
+                "supplierSettlement": "paypal_fast",
+                "kind": "intent_assistance",
+                "contactsPer100": 10,
+                "coverDays": 7,
+                "forecast": "recent14",
+                "productPreference": "lowest_acceptable_price"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4069.28,
+                "retailerUSD": 47883.97333333333,
+                "retainedPurchases": 751,
+                "platformDeltaUSD": 25.43333333333324,
+                "retailerDeltaUSD": 245.1833333333343,
+                "purchaseDelta": 4.666666666666667,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 106417.33333333333,
+                "volumeDeltaUSD": 539,
+                "partnerCashDeltaUSD": 370.3499999999961,
+                "inventoryRatio": 1.0013249317842976,
+                "contactCount": 1974.3333333333333,
+                "contactDelta": -42,
+                "outreachCostUSD": 98.71666666666665,
+                "outreachCostDeltaUSD": -2.1000000000000036
+              },
+              "gate": {
+                "passed": true,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": true,
+                  "purchasesProtected": true,
+                  "volumeProtected": true,
+                  "cashProtected": true,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": true,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ]
+        },
+        {
+          "day": 60,
+          "published": false,
+          "agentRequest": "propose_campaign_revision",
+          "authority": "DETERMINISTIC_CONTROLLER",
+          "version": "commerce-metropolis-harness-1",
+          "decision": "keep",
+          "selectedContractHash": "dab9b207c04dc90129b92bc68de26e3fefe38f842021d6931f666b20242f1aad",
+          "reviewContextHash": "57eac33caa9536d2cbc8b55b0c4e926069a0267b35999ff94e921b327077dd3d",
+          "reason": "No tested candidate passed all guards; retain the incumbent.",
+          "candidates": [
+            {
+              "contractHash": "843cba0a2e809d29e631a1e36e5de49896f758c91b28c20d42f6439d0bff661b",
+              "trialHash": "3063d7a9b3de56358caacb07b819404f714f16e4eb473b9948105581729d0b9b",
+              "receiptHash": "1a68ef6af15efb288797e851e45749256f567b12698a2dfdffb208695c6f8772",
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": false,
+                  "merchantProtected": false,
+                  "purchasesProtected": false,
+                  "volumeProtected": false,
+                  "cashProtected": false,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": false,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "contractHash": "7125c6167dec19644fe81fed907fb81ab7a0db579d6dbfdf2eb4626dded66bbb",
+              "trialHash": "d4018f1c12c799b47941f24994f9e185da4779825a3e7aff1e4e191f51419268",
+              "receiptHash": "4c40c45fb63655318b0ead30bdb722feefc5fc5d4ceebbc396795457ef02a975",
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": false,
+                  "purchasesProtected": false,
+                  "volumeProtected": false,
+                  "cashProtected": false,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": false,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ],
+          "modelComparison": {
+            "status": "kept",
+            "reason": "The original decision held after comparing the two models on the same campaign.",
+            "anchor": {
+              "modelId": "V2-MODEL-e45d6d49913c",
+              "modelHash": "e45d6d49913c34a632f02f5407e8045a878c9c33afc30cb928782dd9bef995e2",
+              "family": "boosted",
+              "features": "market_feedback",
+              "auc": 0.7504170315395833,
+              "contractHash": "843cba0a2e809d29e631a1e36e5de49896f758c91b28c20d42f6439d0bff661b",
+              "receiptHash": "1a68ef6af15efb288797e851e45749256f567b12698a2dfdffb208695c6f8772",
+              "paypal": -6.1233333333334485,
+              "merchants": 25.390000000001844,
+              "purchases": 1.3333333333333333
+            },
+            "alternative": {
+              "modelId": "V2-MODEL-264b4e7a3048",
+              "modelHash": "264b4e7a304829db10726c91c49119cefc595348c44eed706fd279af0c276db9",
+              "family": "boosted",
+              "features": "market_feedback",
+              "auc": 0.7595318615917754,
+              "contractHash": "00924cfc377a585597e2c98450acdebcb50798d4bdaec32b01702621b65890a8",
+              "receiptHash": "d9be7c01a97e07404c77472b8cc582450cc5c1af8b52a562ecf0f13e73100f66",
+              "paypal": -5.8933333333332785,
+              "merchants": 10.23333333333479,
+              "purchases": 1.3333333333333333
+            },
+            "selectedContractHash": "dab9b207c04dc90129b92bc68de26e3fefe38f842021d6931f666b20242f1aad"
+          },
+          "contractHash": "dab9b207c04dc90129b92bc68de26e3fefe38f842021d6931f666b20242f1aad",
+          "trialHash": "624201fd41519702cc2ced2e1deb58b7ca65a4b0638f25981a319a87a51bf206",
+          "experiments": [
+            {
+              "campaign": {
+                "coverDays": 7,
+                "objective": "joint",
+                "productPreference": "lowest_acceptable_price",
+                "contactsPer100": 6,
+                "supplierSettlement": "paypal_fast",
+                "kind": "product_recommendations",
+                "forecast": "adaptive"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4037.7233333333334,
+                "retailerUSD": 47664.18,
+                "retainedPurchases": 747.6666666666666,
+                "platformDeltaUSD": -6.1233333333334485,
+                "retailerDeltaUSD": 25.390000000001844,
+                "purchaseDelta": 1.3333333333333333,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 106008.33333333333,
+                "volumeDeltaUSD": 130,
+                "partnerCashDeltaUSD": 326.77333333333564,
+                "inventoryRatio": 0.8895686235899743,
+                "contactCount": 1859.3333333333333,
+                "contactDelta": -157,
+                "outreachCostUSD": 92.96666666666665,
+                "outreachCostDeltaUSD": -7.849999999999999
+              },
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": false,
+                  "merchantProtected": false,
+                  "purchasesProtected": false,
+                  "volumeProtected": false,
+                  "cashProtected": false,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": false,
+                  "beatsIncumbent": false,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            },
+            {
+              "campaign": {
+                "coverDays": 7,
+                "objective": "joint",
+                "productPreference": "lowest_acceptable_price",
+                "contactsPer100": 6,
+                "supplierSettlement": "paypal_fast",
+                "kind": "product_recommendations",
+                "forecast": "recent14"
+              },
+              "model": "boosted",
+              "measurement": {
+                "platformUSD": 4060.1066666666666,
+                "retailerUSD": 47689.82000000001,
+                "retainedPurchases": 747.6666666666666,
+                "platformDeltaUSD": 16.259999999999764,
+                "retailerDeltaUSD": 51.03000000000126,
+                "purchaseDelta": 1.3333333333333333,
+                "unpaidLiabilities": 0,
+                "retainedVolumeUSD": 106038,
+                "volumeDeltaUSD": 159.66666666666666,
+                "partnerCashDeltaUSD": 85.13999999999457,
+                "inventoryRatio": 1.006350389603083,
+                "contactCount": 1859,
+                "contactDelta": -157.33333333333334,
+                "outreachCostUSD": 92.95,
+                "outreachCostDeltaUSD": -7.86666666666667
+              },
+              "gate": {
+                "passed": false,
+                "checks": {
+                  "modelBeatsCoarse": true,
+                  "positivePlatform": true,
+                  "merchantProtected": false,
+                  "purchasesProtected": false,
+                  "volumeProtected": false,
+                  "cashProtected": false,
+                  "inventoryBounded": true,
+                  "stressCasesProtected": true,
+                  "beatsIncumbent": false,
+                  "settled": true
+                },
+                "scope": "Matched-size development gate including a no-response stress case; not a guarantee of live profit."
+              }
+            }
+          ]
+        }
+      ],
+      "models": [
+        {
+          "id": "V2-MODEL-d746ce0f65a0",
+          "hash": "d746ce0f65a0e762903cdfe9522fbcc19a4e2d9dd043c6a779e9906cadc07fc5",
+          "rows": 2762,
+          "spec": {
+            "family": "boosted",
+            "featureView": "intent_context",
+            "windowDays": 28
+          },
+          "features": null,
+          "recommendationMetrics": {
+            "logLoss": 0.28517147730458475,
+            "brier": 0.08261769735242497,
+            "auc": 0.7503250170247013,
+            "averagePrecision": 0.20117728153643358
+          }
+        },
+        {
+          "id": "V2-MODEL-acb28b01cf5a",
+          "hash": "acb28b01cf5a237bbaa45e7d1e585b403199b4125224438cbf86357d8265312e",
+          "rows": 1230,
+          "spec": {
+            "family": "boosted",
+            "featureView": "intent_context",
+            "windowDays": 28,
+            "trainingTask": "retained_recommendation",
+            "selection": "llm_selected"
+          },
+          "features": [
+            "age",
+            "search",
+            "signal_count",
+            "category_affinity",
+            "recency",
+            "prior_purchases",
+            "price_usd",
+            "stock"
+          ],
+          "recommendationMetrics": {
+            "logLoss": 0.2819651463706594,
+            "brier": 0.08256941129495783,
+            "auc": 0.7620411069151241,
+            "averagePrecision": 0.20340382011749505,
+            "macroMarketAUC": 0.7986130682782567,
+            "macroLogLoss": 0.27424644653841684
+          }
+        },
+        {
+          "id": "V2-MODEL-e45d6d49913c",
+          "hash": "e45d6d49913c34a632f02f5407e8045a878c9c33afc30cb928782dd9bef995e2",
+          "rows": 9821,
+          "spec": {
+            "family": "boosted",
+            "featureView": "market_feedback",
+            "windowDays": 56
+          },
+          "features": null,
+          "recommendationMetrics": {
+            "logLoss": 0.2876411668962481,
+            "brier": 0.08202722580049689,
+            "auc": 0.7727820678764257,
+            "averagePrecision": 0.32501506581224116
+          }
+        },
+        {
+          "id": "V2-MODEL-264b4e7a3048",
+          "hash": "264b4e7a304829db10726c91c49119cefc595348c44eed706fd279af0c276db9",
+          "rows": 4900,
+          "spec": {
+            "family": "boosted",
+            "featureView": "market_feedback",
+            "windowDays": 56,
+            "trainingTask": "retained_recommendation",
+            "selection": "llm_selected"
+          },
+          "features": [
+            "age",
+            "search",
+            "category_affinity",
+            "recency",
+            "prior_purchases",
+            "stationery",
+            "electronics",
+            "furniture",
+            "bundles",
+            "market_response_rate",
+            "market_mature_retention_rate"
+          ],
+          "recommendationMetrics": {
+            "logLoss": 0.29077481639399705,
+            "brier": 0.08315876325478291,
+            "auc": 0.7595318615917754,
+            "averagePrecision": 0.3143088207873629,
+            "macroMarketAUC": 0.7602042132753922,
+            "macroLogLoss": 0.2810658826695567
+          }
+        }
+      ]
+    }
+  ],
+  "attempts": [
+    {
+      "id": "AUTONOMY-fc9d0a2ad8709d75",
+      "profile": "metropolis-96",
+      "status": "ATTENTION",
+      "day": 1,
+      "costUSD": 0,
+      "calls": 0,
+      "warning": "sum is not defined"
+    },
+    {
+      "id": "AUTONOMY-425babc2569256ee",
+      "profile": "metropolis-96",
+      "status": "COMPLETED",
+      "day": 126,
+      "costUSD": 0.057541,
+      "calls": 12,
+      "warning": null
+    },
+    {
+      "id": "AUTONOMY-a924d1a07e0ec0c9",
+      "profile": "metropolis-192",
+      "status": "INTERRUPTED",
+      "day": 60,
+      "costUSD": 0.041686,
+      "calls": 6,
+      "warning": "A table needs a name, primary key, columns, foreign keys and bounded rows."
+    },
+    {
+      "id": "AUTONOMY-dc60d126ba20526a",
+      "profile": "metropolis-192",
+      "status": "COMPLETED",
+      "day": 126,
+      "costUSD": 0.059784,
+      "calls": 12,
+      "warning": null
+    },
+    {
+      "id": "AUTONOMY-d8f8e3695c9118cb",
+      "profile": "metropolis-384",
+      "status": "COMPLETED",
+      "day": 126,
+      "costUSD": 0.059695,
+      "calls": 12,
+      "warning": null
+    }
+  ],
+  "newModelCostUSD": 0.218706,
+  "projectModelCostUSD": 7.573648,
+  "nativePayments": 0
+}
