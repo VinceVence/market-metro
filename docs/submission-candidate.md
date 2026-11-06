@@ -1,5 +1,7 @@
 # Market Metro judge walkthrough
 
+[Final recording plan and metric cards](demo-plan.md) · [Submission description draft](submission-draft.md)
+
 **Default entry** — [Play the reactivation demo](http://127.0.0.1:4173/). One LLM planner proposes the campaign. A deterministic verifier tests both trained ranking models against settlement outcomes. The recorded walkthrough works with the project’s bundled data and zero new model calls or payments.
 
 ## One run from observed demand to PayPal

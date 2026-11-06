@@ -2,6 +2,8 @@
 
 Market Metro shows how one LLM planner designs a merchant campaign and a local verifier tests which ranking earns more after purchases, refunds and settlement.
 
+[Submission demo plan](docs/demo-plan.md) · [Submission description](docs/submission-draft.md)
+
 ## Play the judge demo
 
 With Node.js 22.16 or newer, run these commands from the project root.
