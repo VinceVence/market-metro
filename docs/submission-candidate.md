@@ -18,6 +18,14 @@ We chose this seed after the six-market study because it was the one single-plan
 
 The earlier three-role discovery demo and its separate $64 capture remain available with the historical study. [Earlier V2.3 result](commerce-expanded/harness-v2/v23-20261104/README.md) · [System architecture](figures/planner-v23/README.md)
 
+## Let judges explore
+
+The final walkthrough chapter links to **Run your own simulation**. The settings offer fresh planning and a zero-call recorded policy on a new seed. Both use the frozen economy. The free option requires the local numerical engine and transparently reuses the reference model and campaign.
+
+The workspace has two inspection tabs. **Ontology graph** displays clickable nodes and their real associations for the selected run, with pan and zoom. **Agent workflow** groups checkpoint evidence into data checks, analysis, training, campaign planning, verification and launch. Each tab keeps the run identity and observation day visible. For saved-policy runs, the source planning record has its own reference label.
+
+After settlement, open **PayPal Sandbox** to inspect any native sample created for that run. Match its capture to the warehouse order and reconcile gross, fee and merchant proceeds. Requesting a native sample is optional and uses fictitious funds.
+
 ## Why PayPal matters
 
 For the day-31 decision, choose **Try a feed that holds this campaign** in the Verifier chapter. Show the two competing checkout keys and zero outreach. Apply the merchant’s confirmed mapping. The same rows now release 715 prior checkouts to the planner, which restores the recorded campaign and previews 36 contacts. The $96 shopper order comes later in the run. [Hold and resume the planner](http://127.0.0.1:4173/judge.html#planner).

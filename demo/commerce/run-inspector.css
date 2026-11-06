@@ -1,0 +1,417 @@
+.inspector-view{
+  overflow:auto;
+  padding:22px;
+  min-width:0
+}
+.inspector-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px
+}
+.inspector-heading h2{
+  font-size:22px;
+  margin:0 0 4px
+}
+.inspector-heading p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  overflow-wrap:anywhere
+}
+.run-tag{
+  font-size:11px;
+  color:#b7d9ff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:5px 10px;
+  flex-shrink:0
+}
+.ontology-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 270px;
+  gap:18px;
+  align-items:start
+}
+.ontology-map{
+  min-width:0;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#081d37;
+  overflow:hidden
+}
+.graph-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px;
+  gap:8px;
+  border-bottom:1px solid var(--line);
+  font-size:12px;
+  color:var(--muted)
+}
+.graph-toolbar button{
+  padding:5px 10px
+}
+.graph-viewport{
+  overflow:auto;
+  min-height:360px;
+  max-height:60vh;
+  cursor:grab;
+  background-image:radial-gradient(#25496c 1px,transparent 1px);
+  background-size:20px 20px;
+  touch-action:pan-x pan-y
+}
+.graph-viewport:active{
+  cursor:grabbing
+}
+.graph-viewport svg{
+  display:block;
+  height:auto;
+  min-width:570px;
+  user-select:none
+}
+.relation{
+  color:#446585
+}
+.relation path{
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.4
+}
+.relation text{
+  font:11px 'DM Sans',sans-serif;
+  fill:#b8d7f5;
+  paint-order:stroke;
+  stroke:#081d37;
+  stroke-width:5px;
+  stroke-linejoin:round;
+  text-anchor:middle;
+  opacity:0;
+  pointer-events:none
+}
+.relation.connected{
+  color:#85c9ff
+}
+.relation.connected path{
+  stroke-width:2
+}
+.relation.connected text{
+  opacity:1
+}
+.ontology-node{
+  cursor:pointer;
+  transition:opacity .15s
+}
+.ontology-node rect{
+  fill:#0e2b4c;
+  stroke:#385c80;
+  stroke-width:1.4
+}
+.ontology-node.commerce circle{
+  fill:#71b9ff
+}
+.ontology-node.learning circle{
+  fill:#acb4ff
+}
+.ontology-node.governance circle{
+  fill:#56d9c1
+}
+.ontology-node text{
+  font-family:'DM Sans',sans-serif;
+  text-anchor:middle;
+  fill:var(--text);
+  pointer-events:none
+}
+.ontology-node .node-name{
+  font-size:16px;
+  font-weight:600
+}
+.ontology-node .node-count{
+  font-size:13px;
+  fill:#a8c2db
+}
+.ontology-node.selected rect,.ontology-node:focus rect{
+  stroke:#9fdaff;
+  stroke-width:2.5;
+  fill:#163c60
+}
+.ontology-node.held rect{
+  stroke:#ffc671
+}
+.ontology-node.dimmed{
+  opacity:.48
+}
+.graph-legend{
+  display:flex;
+  gap:17px;
+  flex-wrap:wrap;
+  padding:12px;
+  color:var(--muted);
+  font-size:11px
+}
+.graph-legend>span:before{
+  content:'';
+  display:inline-block;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  margin-right:6px;
+  background:#71b9ff
+}
+.graph-legend>.learning:before{
+  background:#acb4ff
+}
+.graph-legend>.governance:before{
+  background:#56d9c1
+}
+.graph-legend small{
+  margin-left:auto
+}
+.node-inspector,.workflow-inspector{
+  background:#0b2242;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:18px;
+  min-width:0;
+  overflow-wrap:anywhere
+}
+.node-inspector>small,.workflow-inspector>small{
+  color:var(--muted);
+  font-size:11px
+}
+.node-inspector h3,.workflow-inspector h3{
+  font-size:20px;
+  margin:6px 0 12px
+}
+.node-inspector h4,.workflow-inspector h4{
+  margin:19px 0 9px;
+  font-size:12px;
+  color:#c6daf1
+}
+.node-inspector p,.workflow-inspector p{
+  font-size:13px;
+  line-height:1.6;
+  color:var(--muted)
+}
+.node-inspector dl,.workflow-inspector dl{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+  gap:9px;
+  font-size:12px;
+  margin:16px 0
+}
+.node-inspector dt,.workflow-inspector dt{
+  color:var(--muted)
+}
+.node-inspector dd,.workflow-inspector dd{
+  margin:0;
+  text-align:right;
+  overflow-wrap:anywhere
+}
+.association{
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:9px 0;
+  background:none;
+  border:0;
+  border-top:1px solid #244563;
+  font-size:11px;
+  color:#acd7ff
+}
+.feature-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin:12px 0
+}
+.feature-tags span{
+  font-size:10px;
+  background:#142f52;
+  border:1px solid #355578;
+  border-radius:4px;
+  padding:3px 5px
+}
+.node-inspector details,.workflow-inspector details{
+  margin-top:12px;
+  color:var(--muted);
+  font-size:12px
+}
+.node-inspector summary,.workflow-inspector summary{
+  cursor:pointer;
+  color:#a9d7ff
+}
+.workflow-inspector pre{
+  font-size:11px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  max-height:360px;
+  overflow:auto
+}
+.phase-tabs{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding-bottom:18px
+}
+.phase-tabs button{
+  white-space:nowrap;
+  background:transparent;
+  border:1px solid var(--line);
+  font-size:12px;
+  padding:9px 13px
+}
+.phase-tabs button[aria-pressed=true]{
+  background:#075bac;
+  border-color:#2e91ee
+}
+.phase-tabs small{
+  padding-left:5px;
+  opacity:.8
+}
+.workflow-layout{
+  display:grid;
+  grid-template-columns:minmax(230px,.8fr) minmax(0,1.35fr);
+  gap:18px;
+  align-items:start
+}
+.workflow-list{
+  display:grid;
+  gap:8px
+}
+.workflow-item{
+  display:grid;
+  gap:5px;
+  padding:13px 15px;
+  text-align:left;
+  background:#0a2242;
+  border:1px solid var(--line);
+  border-radius:8px
+}
+.workflow-item.selected{
+  background:#143c63;
+  border-color:#5babf1
+}
+.workflow-item b{
+  font-size:13px
+}
+.workflow-kind{
+  color:var(--muted);
+  font-size:10px
+}
+.workflow-item>small{
+  font-size:9px;
+  letter-spacing:.04em;
+  color:#9bb1ca
+}
+.workflow-item>.state-completed{
+  color:#65d8ac
+}
+.workflow-item>.state-running{
+  color:#e7c479
+}
+.workflow-item>.state-failed{
+  color:#ffa9a9
+}
+.workflow-reference{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 15px;
+  margin-bottom:16px;
+  background:#0e3656;
+  border-left:3px solid #52b9eb
+}
+.workflow-reference p{
+  font-size:12px;
+  color:var(--muted);
+  margin:0
+}
+.workflow-reference button{
+  flex-shrink:0;
+  font-size:12px
+}
+.inspector-empty{
+  padding:28px;
+  color:var(--muted)
+}
+.inspector-empty h2,.inspector-empty h3{
+  color:var(--text);
+  font-size:19px
+}
+.judge-guidance{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 20px;
+  background:#0c3555;
+  border-bottom:1px solid #2f5d7d;
+  font-size:12px
+}
+.judge-guidance>span{
+  flex:1
+}
+.judge-guidance .primary{
+  white-space:nowrap
+}
+.judge-explore .channels [data-view=economic],.judge-explore .channels [data-view=insights],.judge-explore .secondary-view{
+  display:none
+}
+@media(max-width:1100px){
+  .ontology-layout{
+    grid-template-columns:minmax(0,1fr) 235px
+  }
+  .inspector-view{
+    padding:16px
+  }
+  .graph-toolbar{
+    align-items:start
+  }
+  .graph-toolbar>div{
+    white-space:nowrap
+  }
+  .workflow-layout{
+    grid-template-columns:230px minmax(0,1fr)
+  }
+}
+@media(max-width:850px){
+  .ontology-layout,.workflow-layout{
+    grid-template-columns:minmax(0,1fr)
+  }
+  .inspector-heading{
+    align-items:start;
+    flex-direction:column;
+    margin-bottom:14px
+  }
+  .graph-viewport{
+    max-height:380px;
+    min-height:280px
+  }
+  .workflow-list{
+    grid-template-columns:repeat(2,minmax(0,1fr))
+  }
+  .workflow-reference{
+    align-items:start;
+    flex-direction:column
+  }
+  .judge-guidance{
+    flex-wrap:wrap
+  }
+  .judge-guidance>span{
+    flex-basis:100%
+  }
+  .graph-toolbar{
+    font-size:11px
+  }
+  .graph-legend{
+    gap:10px
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .ontology-node{
+    transition:none
+  }
+}

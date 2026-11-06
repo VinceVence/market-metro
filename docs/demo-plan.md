@@ -26,7 +26,7 @@ Keep the planner comparator visible. The ontology-assisted workflow adds **$33.7
 | 0:58–1:35 | Return to [Fresh campaign comparison](http://127.0.0.1:4173/judge.html#livecampaign). Scroll to **Planner + ontology**. Expand **Choose ontology features**, then **Select a trained model**. | The actual 28-day training choice, eight requested features, 1,230 product-contact rows, model scores and selection. Briefly show the evidence supplied to Gemini. |
 | 1:35–2:00 | Expand **Revise after the trial**, then **Verifier’s final decision**. | The initial no-response stress result, the LLM’s revision, and measured approval. Overlay “Stress-test PayPal delta −$36.63 → +$0.85” and “Contact ceiling 60 → 36 per day”. The revision also restored the existing supply settings. |
 | 2:00–2:25 | Open [PayPal receipt](http://127.0.0.1:4173/judge.html#receipt). Expand **Match the provider receipt to the warehouse**. | A completed native $96 Sandbox capture, $3.56 fee and $92.44 test merchant proceeds, bound to one warehouse order. Caption “Archived judge-order integration proof · Sandbox test funds”. |
-| 2:25–2:50 | Return to [Fresh campaign comparison](http://127.0.0.1:4173/judge.html#livecampaign), first table. | All three results, 12 fresh model responses, $0.077443 estimated inference cost, and the final workflow statement. End at 2:50. |
+| 2:25–2:50 | Return to [Fresh campaign comparison](http://127.0.0.1:4173/judge.html#livecampaign), then show **Run your own simulation** in the [final walkthrough chapter](http://127.0.0.1:4173/judge.html#result). | All three results, 12 fresh model responses and $0.077443 estimated inference cost. End by showing where judges choose their seed and inspect Ontology graph and Agent workflow. |
 
 Show recorded checkpoints without waiting for another model call. The core comparison actually used fresh Gemini decisions, local training and full settlement. Playback reads that evidence. The ontology’s merchant definitions and the financial publication checks execute deterministically. Seeded shopper behavior and financial outcomes are simulated.
 
@@ -58,7 +58,7 @@ PayPal is part of both execution and evaluation. Fees, processing, refunds and s
 
 ### 2:25–2:50
 
-The finished campaign beat fixed rules and the fresh planner on modeled PayPal net, merchant contribution and retained purchases. The two planners made twelve fresh model calls for under eight cents. Market Metro brings verified data, model experiments, tested campaign decisions and traceable payments into one commerce workflow.
+The finished campaign improved PayPal net, merchant contribution and retained purchases. Both planners used under eight cents in model calls. Now choose Run your own simulation. Change the seed, follow your market's associations in Ontology graph, and inspect the planning and verification in Agent workflow.
 
 ## Metric cards and exact scope
 

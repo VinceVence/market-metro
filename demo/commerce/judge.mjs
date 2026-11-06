@@ -20,7 +20,7 @@ function chapters(d){
     {day:1,source:'Simulated economy',title:'Who should the merchants contact?',body:
       `<p>Shoppers buy office supplies across 12 stores. After 30 days of shopping, the planner gets one chance to design a campaign.</p>
       ${dl([['Shoppers',600],['Planning day',31],['Market closes','Day '+d.marketDays],['Refunds and settlement','Through day '+d.settledDay]])}
-      <p>The comparison follows the same shoppers under strong fixed rules.</p>`},
+      <p>The comparison follows the same shoppers under strong fixed rules. After the walkthrough, run your own seed and inspect its ontology, workflow and payment evidence.</p>`},
     {day:31,source:'Observed simulation data · recorded LLM investigation',title:'Interest and funding told different stories.',body:
       `<p>The planner inspected category demand. It saw ${e.openFundedRequests} open funded requests and ${e.observedContacts} mature campaign outcomes in this market.</p>
       <table><thead><tr><th>Category</th><th>7-day interest signals</th><th>Funded units¹</th></tr></thead><tbody>
@@ -56,6 +56,7 @@ function chapters(d){
       ${[['PayPal net','paypal'],['Merchants¹','merchants'],['Purchases','purchases']].map(([l,k])=>`<tr><th scope="row">${l}</th><td>${k==='purchases'?d.fixed[k]:usd.format(d.fixed[k])}</td><td>${k==='purchases'?d.planner[k]:usd.format(d.planner[k])}</td><td class="gain">${k==='purchases'?'+'+d.vsFixed[k]:signed(d.vsFixed[k])}</td></tr>`).join('')}</tbody></table>
       <p>Changing only the ranking model added ${signed(d.vsOriginal.paypal)} in PayPal net, ${signed(d.vsOriginal.merchants)} for merchants and ${d.vsOriginal.purchases} retained purchases over the planner’s original choice.</p>
       <small>¹ Merchant contribution includes inventory value. PayPal net includes the original $${p.reviewCostUSD.toFixed(6)} in model usage.</small>
+      <div class="judge-handoff"><h3>Now try your own market</h3><p>Choose a seed and scenario. Follow the resulting purchases in Ontology graph, inspect Agent workflow, then check the payment records in PayPal Sandbox.</p><a class="primary" href="/studio.html?view=market&amp;judge=1&amp;setup=1">Run your own simulation →</a><small>Fresh Gemini planning or a free run with the recorded policy. Sandbox receipts use test funds.</small></div>
       <p><a href="/studio.html?view=performance&amp;evaluation=reactivation-fresh">Compare all six fresh markets ↗</a> · <a href="#scale" data-open-scale>Test merchant scale ↗</a></p>`}
   ];
 }

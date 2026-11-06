@@ -29,6 +29,14 @@ In **Campaign → Compare the fresh Gemini campaigns**, see fixed rules, a fresh
 
 ## Run a live simulation
 
+At the end of the judge walkthrough, **Run your own simulation** opens the [judge workspace and settings](http://127.0.0.1:4173/studio.html?view=market&judge=1&setup=1). Choose a seed, scenario and merchant export.
+
+- **One planner + financial verifier** makes new Gemini decisions under the existing $0.19 run cap.
+- **Recorded policy · free new simulation** runs a new seeded economy using the saved model and campaign. It makes zero provider calls. This option uses the 12-merchant market and the local Python engine below.
+- **Ontology graph** connects the selected run's shoppers, outreach, checkout parents, merchant portions, models and payment records. Click a node to inspect its counts, definitions and associations. An ambiguous checkout key holds the review until corrected.
+- **Agent workflow** shows that run's analysis, training, proposals, financial trials and publication decisions. A free run can open the clearly labeled source review that created its reused policy.
+- **PayPal Sandbox** shows the selected run's native receipt when a sample was requested. Check its capture ID, warehouse order and fee reconciliation. The archived judge receipt is also available from the guided walkthrough.
+
 In the [simulation workspace](http://127.0.0.1:4173/studio.html?view=market), **New live run** defaults to one planner, the financial verifier and reactivation. The full live workflow reviews on days 31 and 61. The recorded judge comparison holds its day-31 campaign through settlement. For live runs and offline numerical reproduction, install the Python dependencies and configure the appropriate services below.
 
 ```sh
@@ -81,6 +89,7 @@ Run `npm run test:demo` to check the bundled receipt, default routes, merchant-s
 
 ```sh
 node --test tests/commerce-harness-v2.test.mjs tests/inquiry-value.test.mjs tests/commerce-operation-recovery.test.mjs tests/commerce-autonomy-live.test.mjs tests/commerce-expanded.test.mjs
+node --test tests/judge-exploration.test.mjs
 npm run baseline:verify
 ```
 

@@ -5,6 +5,7 @@ import {rankDistricts,scaleProtocol} from './commerce-expanded/harness-v2/mercha
 import {judgeFeeds,judgeFeed,verifyJudgeFeed} from './ontology/judge-feed.mjs';
 import {plannerFeedDemo} from './ontology/planner-demo.mjs';
 import {trainingReview} from './ontology/training-advisor.mjs';
+import {savedPlanningEvidence} from './ontology/saved-policy.mjs';
 import {createOwnMarketService} from './behavior-v4/service.mjs';
 import {createAuthoredCatalogService} from './behavior-v4/catalog.mjs';
 import {createStudioService} from './studio/service.mjs';
@@ -64,6 +65,7 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
       const origin = `http://${req.headers.host}`;
       const url = new URL(req.url, origin), path = decodeURIComponent(url.pathname);
       if (path.startsWith('/api/')) {
+        if(req.method==='GET'&&path==='/api/market/ontology/reference')return json(res,200,await savedPlanningEvidence());
         if(req.method==='GET'&&path==='/api/market/ontology/training'){
           const task=url.searchParams.get('task')??'retained_recommendation';
           if(!['retained_recommendation','inquiry_value','exact_sku','campaign_net'].includes(task))return json(res,400,{error:{code:'UNKNOWN_TRAINING_TASK',message:'Choose a supported business question.'}});
