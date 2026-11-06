@@ -31,6 +31,7 @@ function chapters(d){
       `<p>Rank consenting shoppers by the expected value for both PayPal and the merchant. Use recent interest and prior market responses to choose whom to contact.</p>
       ${dl([['Daily ceiling',p.per100*6+' contacts across 600 shoppers'],['Feature window',p.window+' days'],['Local model fits','2'],['Planner’s first choice',models[p.original.family]]])}
       <p><button type="button" data-open-training>Try ontology-guided model training</button></p>
+      <p><button type="button" data-open-training="live">Compare the fresh Gemini campaigns</button></p>
       <details><summary>Read the recorded proposal</summary><p>${esc(p.rationale)}</p></details>`},
     {day:31,source:'Deterministic verifier · simulated financial trials',title:'The verifier switched the ranking model.',body:
       `<p>Both models ranked shoppers for the same campaign in three separate trial markets. The verifier chose ${esc(models[p.chosen.family].toLowerCase())} after checking PayPal earnings, merchant outcomes and retained purchases.</p>

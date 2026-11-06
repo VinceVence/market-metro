@@ -7,8 +7,24 @@ import {gunzipSync} from 'node:zlib';
 import {mapTrainingTask,productTask,trainingMatrix} from '../scripts/ontology/training.mjs';
 import {loadScaleInputs} from '../scripts/commerce-expanded/harness-v2/merchant-scale.mjs';
 import {createSupplyYardServer} from '../scripts/serve.mjs';
+import {selectTrainingFeatures,llmTrainingAdvisor} from '../scripts/ontology/planner-training.mjs';
+import {toolDeclaration,validateToolReply,canonicalHash} from '../scripts/commerce-expanded/harness-v2/contracts.mjs';
 
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
+
+test('real planner feature tools constrain time, grain and requested inputs before execution',()=>{
+  const plan=mapTrainingTask(productTask);
+  const allowed=plan.paths.flatMap(p=>p.fields),evidenceId=canonicalHash(plan);
+  const definition=llmTrainingAdvisor.experiment({allowedFeatures:allowed});
+  const tool=toolDeclaration(definition.name,definition.fields,evidenceId);
+  const args={first:'boosted',target:productTask,features:['recency','search','market_response_rate'],rationale:'Test prior interest and observed responses.',evidenceId};
+  validateToolReply({name:definition.name,args},[tool]);
+  assert.deepEqual(selectTrainingFeatures(plan,args.features),['search','recency','market_response_rate']);
+  assert.throws(()=>selectTrainingFeatures(plan,['search','recency','authorized']),/unavailable/);
+  assert.throws(()=>selectTrainingFeatures(plan,['search','search','recency']),/Repeated/);
+  assert.throws(()=>selectTrainingFeatures(plan,['recency','prior_purchases']),/intent/);
+  assert.throws(()=>validateToolReply({name:definition.name,args:{...args,features:['search','authorized']}},[tool]),/CONTRACT_INVALID/);
+});
 
 test('the business question determines the label, observation time, entity and unit',()=>{
   const alias={name:'quiet_days',concept:'recency',entity:'shopper',unit:'days',availableAt:'before_contact'};

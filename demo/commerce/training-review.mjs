@@ -1,4 +1,5 @@
 import {esc,num} from '../garden/ui.mjs';
+import {liveTraining} from './live-training.mjs';
 const usd=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'});
 const dollars=n=>(n>0?'+':'')+usd.format(n);
 const sign=n=>(n>0?'+':'')+n;
@@ -40,15 +41,18 @@ export function bindTrainingReview(showCampaign){
   async function run(){
     const id=++serial;output.textContent='Resolving the training question…';
     try{
-      const response=await fetch('/api/market/ontology/training?task='+encodeURIComponent(task.value),{cache:'no-store'});
-      if(!response.ok)throw Error('The local training analysis could not be loaded.');
-      const r=await response.json();if(id===serial)output.innerHTML=explain(r);
+      const live=task.value==='live_campaign';
+      const response=await fetch(live?'/data/ontology-live-campaign.json':'/api/market/ontology/training?task='+encodeURIComponent(task.value),{cache:'no-store'});
+      if(!response.ok)throw Error(live?'The fresh campaign comparison is still running. Reopen this view after settlement.':'The local training analysis could not be loaded.');
+      const r=await response.json();if(id===serial)output.innerHTML=live?liveTraining(r):explain(r);
     }catch(error){if(id===serial)output.textContent=error.message;}
   }
-  function open(){if(dialog.open)return;showCampaign();dialog.showModal();history.replaceState(null,'',location.pathname+location.search+'#training');task.value='retained_recommendation';void run();}
-  task.onchange=run;$('close-training-proof').onclick=()=>dialog.close();
-  document.addEventListener('click',e=>{if(e.target.closest('[data-open-training]')){e.preventDefault();open();}});
-  dialog.addEventListener('close',()=>{serial++;if(location.hash==='#training')history.replaceState(null,'',location.pathname+location.search+'#campaign');});
-  window.addEventListener('hashchange',()=>{if(location.hash==='#training')open();else if(dialog.open)dialog.close();});
-  if(location.hash==='#training')open();
+  const selectedHash=()=>task.value==='live_campaign'?'#livecampaign':'#training';
+  const isTrainingHash=()=>['#training','#livecampaign'].includes(location.hash);
+  function open(choice='retained_recommendation'){showCampaign();if(!dialog.open)dialog.showModal();task.value=choice;history.replaceState(null,'',location.pathname+location.search+selectedHash());void run();}
+  task.onchange=()=>{history.replaceState(null,'',location.pathname+location.search+selectedHash());void run();};$('close-training-proof').onclick=()=>dialog.close();
+  document.addEventListener('click',e=>{const button=e.target.closest('[data-open-training]');if(button){e.preventDefault();open(button.dataset.openTraining==='live'?'live_campaign':'retained_recommendation');}});
+  dialog.addEventListener('close',()=>{serial++;if(isTrainingHash())history.replaceState(null,'',location.pathname+location.search+'#campaign');});
+  window.addEventListener('hashchange',()=>{if(isTrainingHash())open(location.hash==='#livecampaign'?'live_campaign':'retained_recommendation');else if(dialog.open)dialog.close();});
+  if(isTrainingHash())open(location.hash==='#livecampaign'?'live_campaign':'retained_recommendation');
 }

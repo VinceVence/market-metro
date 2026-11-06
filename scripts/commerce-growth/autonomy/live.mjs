@@ -12,7 +12,7 @@ import {openAllocator} from '../../commerce-deadlines/solver.mjs';
 import {openAutonomousCommerce} from './controller.mjs';
 import {openCommerceHarnessV2} from '../../commerce-expanded/harness-v2/controller.mjs';
 import {plannerMappings,withPlannerFeed} from '../../ontology/planner-gate.mjs';
-import {ontologyTrainingAdvisor} from '../../ontology/training-advisor.mjs';
+import {llmTrainingAdvisor as ontologyTrainingAdvisor} from '../../ontology/planner-training.mjs';
 import {evaluateFundingPredictions} from './funding-calibration.mjs';
 import {projection,marketFrame,warehouseBatch,key,stamp} from './live-data.mjs';
 import * as expandedEnvironment from '../../commerce-expanded/environment.mjs';

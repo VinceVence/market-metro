@@ -23,6 +23,8 @@ In **Verifier → Try a feed that holds this campaign**, two declared checkout k
 
 In **Campaign → Try ontology-guided model training**, choose a business question and see which rows and features can answer it. The revised product ranking changed four outreach choices on day 31. Across four fresh simulated markets it added $71.81 in PayPal net, $597.89 in merchant contribution and 16 retained purchases over the original ranking. [Try the training review](http://127.0.0.1:4173/judge.html#training) · [Controls and results by market](docs/ontology/training/README.md)
 
+In **Campaign → Compare the fresh Gemini campaigns**, see fixed rules, a fresh planner and a fresh planner using ontology on the original judge market. Inspect the LLM's actual training window, requested feature list, campaign revisions and the verifier's publication decision. [Open the three-way comparison](http://127.0.0.1:4173/judge.html#livecampaign) · [Method and cost limits](docs/ontology/live/README.md)
+
 ## Run a live simulation
 
 In the [simulation workspace](http://127.0.0.1:4173/studio.html?view=market), **New live run** defaults to one planner, the financial verifier and reactivation. The full live workflow reviews on days 31 and 61. The recorded judge comparison holds its day-31 campaign through settlement. For live runs and offline numerical reproduction, install the Python dependencies and configure the appropriate services below.
