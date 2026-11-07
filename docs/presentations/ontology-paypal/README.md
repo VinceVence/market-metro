@@ -1,6 +1,6 @@
 # Market Metro architecture presentation
 
-Seven editable slides connect the implemented ontology, LLM planner, deterministic tools, verifier and PayPal integration to measured demo results. The diagrams extend the selected DM Sans, C-layout/B-palette design in [the existing architecture](../../figures/planner-v23/README.md).
+Seven editable slides connect the implemented ontology, LLM planner, deterministic tools, verifier and PayPal integration to measured demo results. The two architecture views use open spacing, shorter labels and a consistent vector icon set. The numerical slides and underlying evidence are unchanged. The diagrams extend the selected DM Sans, C-layout/B-palette design in [the existing architecture](../../figures/planner-v23/README.md).
 
 [Presentation](market-metro-ontology-paypal.pptx)
 
@@ -60,7 +60,7 @@ The ontology is a project-owned verifier inspired by NVIDIA's work. It is not a 
 
 Open the saved 384-store run at `studio.html?session=AUTONOMY-d8f8e3695c9118cb&view=market&judge=1`. Change `view` to `ontology`, `workflow`, then `performance`. The original native receipt appears in `judge.html#result`.
 
-The saved environment screenshot used in slide 2 comes from an earlier recorded view of the same renderer. It illustrates the environment plane, not a simultaneous rendering of all 384 stores. Its [capture provenance](../../figures/planner-v23/assets/environment-snapshot.json) and [logo credits](../../figures/planner-v23/assets/sources.json) remain with the original assets.
+The saved environment screenshot used in slide 2 comes from an earlier recorded view of the same renderer. It illustrates the environment plane, not a simultaneous rendering of all 384 stores. Lucide supplies the [semantic vector icons](vectors/sources.json), with the [original license](vectors/LICENSE). Original SVG paths are retained, with diagram colors and a consistent stroke weight. Brand logos retain their original artwork. The screenshot’s [capture provenance](../../figures/planner-v23/assets/environment-snapshot.json) and [logo credits](../../figures/planner-v23/assets/sources.json) remain with the original assets.
 
 ## Rebuild
 

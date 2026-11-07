@@ -26,11 +26,18 @@ function line(s,x1,y1,x2,y2,color=C.line,width=2,dash=false,end=false){
 }
 function arrow(s,points,color=C.blue,dash=false){points.slice(1).forEach((p,i)=>line(s,...points[i],...p,color,2,dash,i===points.length-2));}
 async function img(s,name,x,y,w,h){const bytes=await fs.readFile(path.join(assets,name));return s.images.add({blob:bytes,contentType:name.endsWith('.svg')?'image/svg+xml':'image/png',alt:name.replace(/[-.]/g,' '),fit:'contain',position:{left:x,top:y,width:w,height:h}});}
-function panel(s,x,y,w,h,title,fill,color){const p=shape(s,x,y,w,h,fill,C.line);line(s,x,y,x,y+h,color,5);txt(s,title,x+18,y+10,w-36,34,23,color,true);return p;}
-function node(s,title,sub,x,y,w,h,fill=C.paper,color=C.ink){const a=shape(s,x,y,w,h,fill,C.line,'roundRect');txt(s,title,x+14,y+12,w-28,32,24,color,true);if(sub)txt(s,sub,x+14,y+49,w-28,h-57,21,C.muted);return a;}
+async function vector(s,name,x,y,size,color=C.ink){
+ const svg=(await fs.readFile(path.join(out,'vectors',name+'.svg'),'utf8')).replaceAll('currentColor',color);
+ return s.images.add({svg,alt:name+' vector icon',fit:'contain',position:{left:x,top:y,width:size,height:size}});
+}
+async function plane(s,x,y,w,h,title,icon,fill,color){
+ shape(s,x,y,w,h,fill,'#DDE5ED','rect',0.8);
+ await vector(s,icon,x+23,y+20,32,color);
+ txt(s,title,x+70,y+16,w-91,40,26,color,true);
+}
 function footer(s,text,n){line(s,50,850,1550,850);txt(s,text,50,863,1465,24,17,C.muted);txt(s,String(n).padStart(2,'0'),1510,860,40,26,19,C.muted,false,'right');}
 function page(title,subtitle){const s=P.slides.add();s.background.fill=C.paper;txt(s,title,50,40,1500,62,44,C.ink,true);if(subtitle)txt(s,subtitle,52,107,1490,36,24,C.muted);return s;}
-function notes(s,text,sources=[]){s.speakerNotes.text=text+'\n\nImplementation and evidence\n'+sources.map(p=>path.join(root,p)).join('\n')+'\n\nBrand asset provenance\n'+path.join(assets,'sources.json');}
+function notes(s,text,sources=[]){s.speakerNotes.text=text+'\n\nImplementation and evidence\n'+sources.map(p=>path.join(root,p)).join('\n')+'\n\nBrand asset provenance\n'+path.join(assets,'sources.json')+'\n'+path.join(out,'vectors/sources.json');}
 function table(s,values,x,y,width,height,widths,highlightRows=[]){const t=s.tables.add({rows:values.length,columns:values[0].length,left:x,top:y,width,height,columnWidths:widths,values});t.borders.assign({fill:C.line,width:.7});for(let i=0;i<values.length;i++)for(let j=0;j<values[i].length;j++){const c=t.getCell(i,j);c.fill=i===0?C.navy:highlightRows.includes(i)?C.light:C.paper;c.text.style={typeface:'DM Sans',fontSize:i===0?21:24,color:i===0?'#FFFFFF':C.ink,bold:i===0||highlightRows.includes(i),alignment:j===0?'left':'right',verticalAlignment:'middle',insets:12};}return t;}
 const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2}).format(n);
 const plus=n=>(n<0?'−':'+')+money(Math.abs(n));
@@ -48,52 +55,69 @@ const plus=n=>(n<0?'−':'+')+money(Math.abs(n));
 }
 // 2. Revised implementation. The old five planes remain, and ontology is the new bridge.
 {
- const s=page('Revised system architecture','Five existing planes, with ontology checks for evidence and training.');
- panel(s,50,175,400,375,'A  Market environment',C.mint,C.teal);
- await img(s,'environment-snapshot.png',66,225,368,218);
- txt(s,'Browse → buy → receive',72,458,355,34,24,C.ink,true);
- txt(s,'Shared economy · 384-store limit',72,501,357,28,21,C.muted);
- panel(s,50,590,400,240,'C  Data plane',C.light,C.navy);
- await img(s,'sqlite.svg',74,647,38,38);
- txt(s,'SQLite warehouse',127,646,289,37,27,C.ink,true);
- txt(s,'Checkouts • merchant orders\nContacts • returns • receipts\nModels • decisions • checkpoints',75,700,345,104,23,C.muted);
- panel(s,500,175,340,655,'Ontology layer',C.sand,C.amber);
- txt(s,'1  Verify the feed',522,238,294,36,27,C.ink,true);
- txt(s,'Resolve keys and money units.\nCount each checkout once.',522,285,292,66,23,C.muted);
- const co=node(s,'Checkout','one payment',566,381,207,81,C.paper,C.amber);
- const mo1=node(s,'Order A','',520,493,142,57,C.paper,C.amber),mo2=node(s,'Order B','',678,493,142,57,C.paper,C.amber);
- arrow(s,[[627,462],[627,477],[591,477],[591,493]],C.amber);arrow(s,[[711,462],[711,477],[749,477],[749,493]],C.amber);
- txt(s,'2  Define training',522,578,295,38,27,C.ink,true);
- txt(s,'Correct target + contact cohort\nAllowed pre-contact features\nMature outcomes for labels',522,630,298,100,22,C.muted);
- txt(s,'Ambiguous feed → HOLD',522,763,300,38,24,C.amber,true);
- panel(s,895,175,655,277,'B  LLM agent',C.lav,C.violet);
- await img(s,'google-cloud.svg',1484,187,37,32);
- const nodes=[['Investigate','Demand + payment signals'],['Train','Choose data + features'],['Plan','Propose + revise campaign']];
- nodes.forEach((n,i)=>node(s,n[0],n[1],916+i*209,246,190,117,C.paper,C.violet));
- arrow(s,[[1106,303],[1125,303]],C.violet);arrow(s,[[1315,303],[1334,303]],C.violet);
- txt(s,'Every choice saves evidence IDs and a checkpoint',918,391,595,37,23,C.violet);
- panel(s,895,500,655,164,'D  Local tools + experiment sandbox',C.lav,C.violet);
- await img(s,'scikit-learn.svg',918,554,54,40);
- txt(s,'Model fit',979,553,160,30,23,C.ink,true);
- txt(s,'3 proxy trials',1140,553,170,30,23,C.ink,true);
- txt(s,'Verify + bind',1340,553,185,30,23,C.ink,true);
- txt(s,'Python / sklearn',918,600,198,31,21,C.muted);
- txt(s,'600 shoppers each',1137,600,198,31,21,C.muted);
- txt(s,'Publish or keep policy',1335,600,204,31,20,C.muted);
- panel(s,895,712,655,118,'E  PayPal execution',C.light,C.blue);
- await img(s,'paypal.svg',918,760,40,48);
- txt(s,'Saved wallet → capture → linked receipt',980,759,545,38,24,C.navy,true);
- arrow(s,[[250,550],[250,590]],C.teal);
- arrow(s,[[450,709],[500,709]],C.navy);
- arrow(s,[[840,310],[895,310]],C.amber);
- arrow(s,[[1220,452],[1220,500]],C.violet);
- arrow(s,[[1527,500],[1527,452]],C.violet,true);
- arrow(s,[[895,788],[872,788],[872,840],[470,840],[470,784],[450,784]],C.blue,true);
- txt(s,'order ↔ receipt',574,813,265,26,18,C.blue,false,'center');
- // Campaign return line is intentionally above the system planes.
- arrow(s,[[1550,581],[1575,581],[1575,157],[250,157],[250,175]],C.teal);
- txt(s,'checked campaign returns to the market',930,130,470,28,18,C.teal);
- footer(s,'Proxy trials screen proposals. The final comparison runs the full market. Screenshot shows the saved representative app view.',2);
+ const s=page('Revised system architecture','Observed commerce → verified data → tested campaigns');
+ await plane(s,50,190,360,380,'A · Environment','Store',C.mint,C.teal);
+ await img(s,'environment-snapshot.png',70,264,320,192);
+ txt(s,'384 merchants',74,482,310,34,26,C.ink,true);
+ txt(s,'19,200 simulated shoppers',74,524,310,30,22,C.muted);
+ shape(s,50,625,360,185,C.light,'#DDE5ED','rect',0.8);
+ await img(s,'sqlite.svg',74,646,35,35);
+ txt(s,'C · Data plane',120,643,265,42,26,C.navy,true);
+ txt(s,'Orders · contacts · refunds',75,711,315,34,23,C.muted);
+ txt(s,'Models · checkpoints · receipts',75,759,315,32,21,C.muted);
+ await plane(s,465,190,345,620,'Ontology','Network',C.sand,C.amber);
+ txt(s,'Link data before decisions',488,258,298,33,23,C.muted);
+ await vector(s,'ReceiptText',615,311,45,C.amber);
+ txt(s,'Checkout',550,367,175,34,25,C.ink,true,'center');
+ arrow(s,[[638,404],[638,423],[548,423],[548,448]],C.amber);
+ arrow(s,[[638,423],[728,423],[728,448]],C.amber);
+ await vector(s,'Store',525,458,44,C.amber);
+ await vector(s,'Store',705,458,44,C.amber);
+ txt(s,'Order A',496,516,105,32,22,C.ink,false,'center');
+ txt(s,'Order B',675,516,105,32,22,C.ink,false,'center');
+ txt(s,'One payment · two merchant legs',485,562,305,30,20,C.muted,false,'center');
+ line(s,488,615,787,615,C.line,1);
+ await vector(s,'SlidersHorizontal',489,642,31,C.amber);
+ txt(s,'Training contract',537,637,251,39,26,C.ink,true);
+ txt(s,'Target · cohort · features',490,687,297,32,23,C.muted);
+ await vector(s,'CirclePause',490,757,25,C.amber);
+ txt(s,'Hold ambiguous inputs',527,750,265,35,22,C.amber,true);
+ await plane(s,865,190,685,260,'B · LLM agent','BrainCircuit',C.lav,C.violet);
+ await img(s,'google-cloud.svg',1495,211,30,30);
+ for(const [i,title,sub,icon] of [[0,'Investigate','Demand signals','Search'],[1,'Design training','Data + features','SlidersHorizontal'],[2,'Plan','Revise campaign','Megaphone']]){
+  const x=894+i*218;
+  await vector(s,icon,x+70,279,42,C.violet);
+  txt(s,title,x,335,190,35,25,C.ink,true,'center');
+  txt(s,sub,x,377,190,30,22,C.muted,false,'center');
+  if(i<2)arrow(s,[[x+133,300],[x+197,300]],C.violet);
+ }
+ await vector(s,'History',1040,419,20,C.violet);
+ txt(s,'Decisions saved at each step',1072,413,365,30,20,C.violet);
+ await plane(s,865,500,685,175,'D · Tools + verifier','ShieldCheck',C.lav,C.violet);
+ await img(s,'scikit-learn.svg',896,576,42,36);
+ txt(s,'Train',951,575,145,35,26,C.ink,true);
+ await vector(s,'FlaskConical',1114,577,33,C.violet);
+ txt(s,'Trial',1161,575,140,35,26,C.ink,true);
+ await vector(s,'ShieldCheck',1327,577,33,C.violet);
+ txt(s,'Verify',1374,575,149,35,26,C.ink,true);
+ txt(s,'Local models',895,625,192,30,22,C.muted);
+ txt(s,'3 × 600 shoppers',1113,625,192,30,21,C.muted);
+ txt(s,'Publish or hold',1326,625,198,30,22,C.muted);
+ shape(s,865,735,685,75,C.light,'#DDE5ED','rect',0.8);
+ await img(s,'paypal.svg',886,751,38,45);
+ txt(s,'E · PayPal Sandbox',940,747,295,46,27,C.navy,true);
+ txt(s,'Capture → receipt',1252,751,275,39,23,C.navy);
+ arrow(s,[[230,570],[230,625]],C.teal);
+ txt(s,'events',248,583,132,27,18,C.teal);
+ arrow(s,[[410,714],[465,714]],C.navy);
+ arrow(s,[[810,324],[865,324]],C.amber);
+ arrow(s,[[1200,450],[1200,500]],C.violet);
+ arrow(s,[[1510,500],[1510,450]],C.violet,true);
+ arrow(s,[[865,778],[838,778],[838,832],[438,832],[438,778],[410,778]],C.blue,true);
+ txt(s,'selected order / receipt',492,811,294,23,18,C.blue,false,'center');
+ arrow(s,[[1550,615],[1578,615],[1578,167],[230,167],[230,190]],C.teal);
+ txt(s,'Approved campaign',1175,141,338,27,20,C.teal,false,'right');
+ footer(s,'Proxy trials screen proposals. Final results use the full market. App snapshot shows the representative view.',2);
  notes(s,'This extends the existing A-E architecture in docs/figures/planner-v23. A and C preserve the environment and warehouse. Ontology is a new logical bridge on warehouse exports, not a separate database service. B is one LLM with bounded tools, not a claim of several autonomous LLMs. D executes training, deterministic financial guards and immutable contract binding. The financial verifier uses three 12-merchant/600-shopper proxy markets. Reviews pause economic dates at displayed days 31 and 61. E runs selected native Sandbox orders and returns provider-linked receipts; the large-scale validation itself makes no native payments. The saved screenshot depicts an earlier representative view of the same renderer. The small checkout graph shows cardinality only; its A/B merchant legs are schematic. Agent decisions and tool results are checkpointed. The return line denotes only a checked campaign, not unrestricted LLM execution.', ['docs/figures/planner-v23/README.md','scripts/commerce-metropolis/feed-gate.mjs','scripts/commerce-metropolis/feed-verifier.mjs','scripts/commerce-metropolis/harness/controller.mjs','scripts/commerce-metropolis/harness/contracts.mjs','scripts/ontology/planner-training.mjs','scripts/commerce-growth/autonomy/live.mjs']);
 }
 // 3. Mapping and measurable ontology role.
@@ -118,34 +142,56 @@ const plus=n=>(n<0?'−':'+')+money(Math.abs(n));
 }
 // 4. PayPal-centered system with real and modeled roles kept visibly separate.
 {
- const s=page('PayPal at the center of the commerce loop','The agent optimizes payment outcomes. Selected purchases prove the execution and reconciliation path.');
- node(s,'LLM campaign planner','Checks payment value together with merchant contribution',530,173,540,115,C.lav,C.violet);
- const central=shape(s,600,365,400,304,C.light,C.blue,'roundRect',2);
- await img(s,'paypal.svg',629,391,63,74);
- txt(s,'PayPal',710,393,250,67,42,C.navy,true);
- txt(s,'Sandbox execution',630,473,340,36,29,C.navy,true);
- txt(s,'Saved wallet → Orders → Capture',630,512,340,45,22,C.ink);
- line(s,626,566,974,566,C.line);
- txt(s,'Modeled PayPal net gain',630,577,340,30,22,C.blue,true);
- txt(s,'+$3,310.75',630,613,340,43,34,C.navy,true);
- node(s,'Simulated shoppers','Receive relevant outreach.\nFund requests and keep purchases.',50,390,430,154,C.mint,C.teal);
- node(s,'Merchants / test store','Market measures contribution.\nNative payment uses one test store.',1120,390,430,154,C.mint,C.teal);
- txt(s,'+532 retained purchases',64,567,430,42,30,C.teal,true);
- txt(s,'+$36,042.88 contribution',1130,567,428,42,30,C.teal,true);
- node(s,'Ontology + warehouse','One checkout, linked merchant legs.\nGross = fee + test merchant proceeds.',50,690,480,133,C.sand,C.amber);
- node(s,'Archived native receipt','$96.00 gross − $3.56 fee = $92.44 net\nCOMPLETED · fictitious test funds',1070,690,480,133,C.light,C.blue);
- arrow(s,[[800,288],[800,365]],C.violet,true);
- txt(s,'fees + funding checks',815,309,285,31,21,C.violet);
- arrow(s,[[480,466],[600,466]],C.blue);
- txt(s,'selected\norder',491,397,106,62,20,C.blue,false,'center');
- arrow(s,[[1000,466],[1120,466]],C.blue);
- txt(s,'test\nproceeds',1009,397,104,62,20,C.blue,false,'center');
- arrow(s,[[800,669],[800,751],[1070,751]],C.blue);
- arrow(s,[[1070,790],[555,790],[530,790]],C.blue);
- txt(s,'receipt + order link',637,755,390,29,20,C.blue,false,'center');
- arrow(s,[[50,723],[35,723],[35,241],[530,241]],C.amber,true);
- txt(s,'validated outcomes',170,252,305,34,21,C.amber);
- footer(s,'Solid blue = native test payment / receipt path. Dashed = analysis. Gains are modeled; the archived $96 receipt is a separate 12-store run.',4);
+ const s=page('PayPal at the center of the commerce loop','Payment execution, verified outcomes and merchant growth');
+ shape(s,570,184,460,112,C.lav,'#DED6E8','roundRect',1);
+ await vector(s,'BrainCircuit',590,211,42,C.violet);
+ txt(s,'LLM campaign planner',651,198,351,39,29,C.violet,true);
+ txt(s,'Fees + merchant value',652,249,343,29,23,C.muted);
+ // The surrounding actors are open vector-led groups, leaving clear arrow corridors.
+ await vector(s,'UsersRound',217,351,65,C.teal);
+ txt(s,'Simulated shoppers',60,450,380,43,30,C.ink,true,'center');
+ txt(s,'Relevant recommendations',60,506,380,36,24,C.muted,false,'center');
+ txt(s,'+532',60,563,380,63,49,C.teal,true,'center');
+ txt(s,'retained purchases',60,626,380,32,23,C.muted,false,'center');
+ await vector(s,'Store',1318,351,65,C.teal);
+ txt(s,'Merchants',1160,450,380,43,30,C.ink,true,'center');
+ txt(s,'One Sandbox test store',1150,506,400,36,24,C.muted,false,'center');
+ txt(s,'+$36,042.88',1130,563,420,63,43,C.teal,true,'center');
+ txt(s,'modeled contribution',1150,626,400,32,23,C.muted,false,'center');
+ shape(s,605,340,390,290,C.light,'#98BCEB','roundRect',1.4);
+ await img(s,'paypal.svg',659,366,61,70);
+ txt(s,'PayPal',739,366,220,71,43,C.navy,true);
+ txt(s,'Sandbox payments',635,452,330,41,29,C.navy,true,'center');
+ await vector(s,'WalletCards',647,515,34,C.blue);
+ await vector(s,'CreditCard',782,515,34,C.blue);
+ await vector(s,'ReceiptText',917,515,34,C.blue);
+ arrow(s,[[699,532],[761,532]],C.blue);
+ arrow(s,[[834,532],[896,532]],C.blue);
+ txt(s,'Wallet',626,569,76,32,21,C.muted,false,'center');
+ txt(s,'Capture',754,569,93,32,21,C.muted,false,'center');
+ txt(s,'Receipt',891,569,88,32,21,C.muted,false,'center');
+ txt(s,'+$3,310.75',595,650,410,61,43,C.navy,true,'center');
+ txt(s,'modeled PayPal net gain',585,712,430,30,23,C.muted,false,'center');
+ line(s,65,703,545,703,C.line,1);
+ await vector(s,'Network',75,732,42,C.amber);
+ txt(s,'Ontology + warehouse',135,717,412,42,27,C.amber,true);
+ txt(s,'Checkout ↔ order ↔ receipt',135,768,420,33,22,C.muted);
+ line(s,1055,703,1535,703,C.line,1);
+ await vector(s,'ReceiptText',1060,733,41,C.blue);
+ txt(s,'Native Sandbox receipt',1115,717,425,42,27,C.navy,true);
+ txt(s,'$96 − $3.56 = $92.44',1115,768,425,35,27,C.muted);
+ arrow(s,[[800,296],[800,340]],C.violet,true);
+ txt(s,'check economics',823,305,239,26,19,C.violet);
+ arrow(s,[[445,417],[605,417]],C.blue);
+ txt(s,'selected order',450,371,150,29,20,C.blue,false,'center');
+ arrow(s,[[995,417],[1155,417]],C.blue);
+ txt(s,'test proceeds',1000,371,150,29,20,C.blue,false,'center');
+ arrow(s,[[995,594],[1025,594],[1025,782],[1050,782]],C.blue);
+ arrow(s,[[1050,824],[550,824]],C.blue);
+ txt(s,'linked payment evidence',616,786,367,28,20,C.blue,false,'center');
+ arrow(s,[[60,760],[35,760],[35,240],[570,240]],C.amber,true);
+ txt(s,'validated outcomes',150,253,320,32,21,C.amber);
+ footer(s,'Blue = Sandbox path · dashed = analysis. Gains are modeled; the $96 receipt is a separate run using test funds.',4);
  notes(s,'PayPal is central through two concrete responsibilities. First, native Sandbox execution proves saved buyer consent, Orders create/capture and exact receipt reconciliation. Second, the simulator models payment fees, processing, refunds, outreach and supplier settlement, and the verifier measures platform and merchant outcomes together. The current scaled study generated zero native payments, so the archived $96 receipt cannot be presented as a new 384-store receipt. Capture ID 2M324038C71499318 belongs to order GARDEN-AUTO-e26323c97cbcb456-SIM-CAPTURE-756-MERCHANT-7, PayPal order 7Y121350Y1983874T, USD 96 gross, 3.56 fee, 92.44 merchant proceeds. These proceeds are not PayPal profit. The diagram shows the validated active path. It does not claim autonomous production access, live revenue, PayPal internal customer data, or completed use of every PayPal product. Modeled fee assumptions differ from native receipt charges. The retained purchases and merchant gain around the diagram are from the 384-store run. The small left return line represents the warehouse feeding validated analysis to the planner.', ['demo/data/judge-reactivation.json','demo/data/metropolis-live-results.json','scripts/commerce-metropolis/kernel.mjs','scripts/commerce-metropolis/balances.mjs','scripts/commerce-metropolis/suppliers.mjs']);
 }
 // 5. Concrete LLM decisions versus deterministic work.
