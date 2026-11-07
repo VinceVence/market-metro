@@ -2,6 +2,14 @@
 
 Open [the archived judge workspace](http://127.0.0.1:4173/analytics.html?run=recorded-demo). It uses the completed 384-merchant / 19,200-shopper run and needs no model credentials, native payment calls or private database. The source selector also opens current local warehouse runs. Archived and current records are labeled separately.
 
+## Navigation tutorial
+
+A first-visit tutorial explains the market, planner decisions, model checks, PayPal evidence and ontology. **Tutorial** or the **?** rail button reopens the guide. **Skip tour**, **Finish tour** and Escape dismiss it. The highlighted targets follow the selected view. It never starts a simulation, trains a model or executes a payment.
+
+The bright Intelligence button in the left rail opens the workspace for the same selected run. **Agent & tools** is expanded by default in the market sidebar and can still be collapsed. The judge walkthrough pauses while its tutorial is open and resumes its previous playback state when the tutorial closes.
+
+Use `/analytics.html?run=recorded-demo&tutorial=1` or `/judge.html?tutorial=1` to force the tutorial for a recording. The first-visit preference is stored locally in the browser.
+
 ## What the judge can inspect
 
 | Sidebar | Native AG views and interaction |

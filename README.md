@@ -29,6 +29,8 @@ In **Campaign → Compare the fresh Gemini campaigns**, see fixed rules, a fresh
 
 ## Intelligence workspace
 
+The first-visit tutorial highlights where to look. Reopen it with **Tutorial**. **Agent & tools** starts expanded in the market, and the highlighted left-rail **Intelligence** button keeps the selected run when opening the dashboards.
+
 Open [Commerce Intelligence](http://127.0.0.1:4173/analytics.html?run=recorded-demo) for the portable, read-only 384-store evidence demo. It requires no private database or new API calls. Native AG Studio charts and grids cover market trends, settled profits, model training, LLM usage and verifier decisions. The review graph opens each recorded decision and its evidence; the ontology tab traces merchant associations. Local runs are also available in the run selector.
 
 Use **Arrange** for native layout editing, grid headers to sort records and **Export** for the source records. [Dashboard guide](docs/ag-studio/intelligence.md) · [Submission readiness](docs/submission-readiness.md).

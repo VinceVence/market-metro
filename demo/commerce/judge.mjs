@@ -1,3 +1,4 @@
+import {mountTutorial,continueTutorial} from '../tutorial.mjs';
 import {createGarden} from '../garden/world.mjs';
 import {esc,money} from '../garden/ui.mjs';
 import {bindMerchantScale} from './merchant-scale.mjs';
@@ -115,6 +116,15 @@ async function start(){
   bindFeedProof(pause);
   bindPlannerReview(()=>go(3));
   bindTrainingReview(()=>go(2));
-  if(new URL(location.href).searchParams.get('autoplay')==='1')play(false);
+  const autoplay=new URL(location.href).searchParams.get('autoplay')==='1';
+  if(autoplay)play(false);
+  let tourOrigin=0,tourWasPlaying=false;
+  mountTutorial({onStart:()=>{tourOrigin=i;tourWasPlaying=Boolean(timer);pause();},onClose:reason=>{go(reason==='finish'?0:tourOrigin);if(tourWasPlaying)play(false);},steps:[
+    {title:'A quick guide for the demo',body:'Follow one campaign from market evidence to a PayPal receipt. You can pause the story and inspect any chapter.'},
+    {title:'Navigate the campaign chapters',body:'Use the chapter buttons or Next and Back. Play walkthrough advances the recorded story without making new model or payment calls.',target:'#chapters',enter:()=>go(0)},
+    {title:'Read what the planner decided',body:'Each chapter labels the source. Open the recorded proposal to inspect the planner’s reasoning and chosen model.',target:'.judge-card',enter:()=>go(2)},
+    {title:'Check the native payment proof',body:'Match the capture ID, fee and merchant proceeds. This is an archived PayPal Sandbox receipt using test funds.',target:'.judge-card',enter:()=>go(5)},
+    {title:'Explore the evidence yourself',body:'Intelligence has the decision timeline, model registry, financial comparisons and merchant ontology. Finish the tour to return to the campaign.',target:'#judge-intelligence',enter:()=>go(6),action:{label:'Continue in Intelligence →',href:()=>continueTutorial($('judge-intelligence').href)}}
+  ]});
 }
 start().catch(error=>{$('judge-error').textContent=error.message;$('judge-error').hidden=false;});
