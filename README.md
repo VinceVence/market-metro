@@ -1,4 +1,4 @@
-# Market Metro
+# Market Metro — Agentic Commerce That Learns
 
 Market Metro shows how one LLM planner designs a merchant campaign and a local verifier tests which ranking earns more after purchases, refunds and settlement.
 
@@ -26,6 +26,12 @@ In **Verifier → Try a feed that holds this campaign**, two declared checkout k
 In **Campaign → Try ontology-guided model training**, choose a business question and see which rows and features can answer it. The revised product ranking changed four outreach choices on day 31. Across four fresh simulated markets it added $71.81 in PayPal net, $597.89 in merchant contribution and 16 retained purchases over the original ranking. [Try the training review](http://127.0.0.1:4173/judge.html#training) · [Controls and results by market](docs/ontology/training/README.md)
 
 In **Campaign → Compare the fresh Gemini campaigns**, see fixed rules, a fresh planner and a fresh planner using ontology on the original judge market. Inspect the LLM's actual training window, requested feature list, campaign revisions and the verifier's publication decision. [Open the three-way comparison](http://127.0.0.1:4173/judge.html#livecampaign) · [Method and cost limits](docs/ontology/live/README.md)
+
+## Intelligence workspace
+
+Open [Commerce Intelligence](http://127.0.0.1:4173/analytics.html?run=recorded-demo) for the portable, read-only 384-store evidence demo. It requires no private database or new API calls. Native AG Studio charts and grids cover market trends, settled profits, model training, LLM usage and verifier decisions. The review graph opens each recorded decision and its evidence; the ontology tab traces merchant associations. Local runs are also available in the run selector.
+
+Use **Arrange** for native layout editing, grid headers to sort records and **Export** for the source records. [Dashboard guide](docs/ag-studio/intelligence.md) · [Submission readiness](docs/submission-readiness.md).
 
 ## Run a live simulation
 

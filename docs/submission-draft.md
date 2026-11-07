@@ -1,4 +1,4 @@
-# Market Metro
+# Market Metro: Agentic Commerce That Learns
 
 ## Elevator pitch
 
@@ -44,7 +44,7 @@ The ontology follows ideas from NVIDIA Auto Ontology. This project implements it
 - **Python and scikit-learn** fit and validate local predictive models. The LLM receives the numerical results before selecting a candidate.
 - **Node.js, SQLite and Three.js** support the application, transaction warehouse and visual economy.
 - **PayPal Sandbox APIs** execute selected payments and return native receipts that reconcile to warehouse orders.
-- **AG Studio** supports the separate analytical workspace and its native tables and charts. The main judge comparison uses the app's own interface.
+- **AG Studio** powers the Intelligence workspace with native grids, charts, sortable grids, layout editing and a custom PayPal evidence widget. It displays market trends, model training, LLM usage and settled financial comparisons. Review checkpoints and the ontology graph link these views to recorded decisions. The older reports workspace also contains the analyst/designer agent harness.
 - **Project-owned ontology and verifier code** validates data meanings, feature eligibility, typed tool inputs and financial publication rules.
 
 The catalog, shoppers and demand are authored simulation data. The current candidate uses the authored catalog and its local warehouse.

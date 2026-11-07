@@ -204,7 +204,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     lastTick=visualTick;parent.dataset.actorCount=String(actors.size);
   }
   try{
-    const sky=night?0x0a1b33:0xdfe8ed;scene=new THREE.Scene();scene.background=new THREE.Color(sky);scene.fog=new THREE.Fog(sky,160,255);
+    const sky=0xffffff;scene=new THREE.Scene();scene.background=new THREE.Color(sky);scene.fog=new THREE.Fog(sky,160,255);
     renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));
     renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.93;
     renderer.domElement.tabIndex=0;renderer.domElement.setAttribute('aria-label','3D market. Drag to pan, right-drag to orbit, scroll to zoom. Arrow keys pan; R rotates; Home resets.');
@@ -216,7 +216,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     scene.add(new THREE.HemisphereLight(0xe5f1ff,0xb5a58b,2.0));
     const sun=new THREE.DirectionalLight(0xffedd0,2.6);sun.position.set(-35,65,35);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
     Object.assign(sun.shadow.camera,{left:-65,right:65,top:55,bottom:-55,near:1,far:160});sun.shadow.bias=-.0003;sun.shadow.normalBias=.025;sun.shadow.radius=4;scene.add(sun);
-    const floor=mesh(scene,new THREE.PlaneGeometry(600,600),mat(night?0x132d4b:0xdfe8ed),0,-1.2,0);floor.rotation.x=-Math.PI/2;floor.castShadow=false;
+    const floor=mesh(scene,new THREE.PlaneGeometry(600,600),new THREE.MeshBasicMaterial({color:0xffffff,toneMapped:false}),0,-1.2,0);floor.rotation.x=-Math.PI/2;floor.castShadow=false;
     hoverRing=ring(0x83bb9b);selectRing=ring(0xe2b765);environment();cameraHome();
     const observer=new ResizeObserver(()=>resize(false));observer.observe(parent);
     renderer.domElement.addEventListener('pointermove',e=>{

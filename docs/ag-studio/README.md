@@ -1,5 +1,7 @@
 # Market Metro + AG Studio
 
+The current light-mode [Intelligence workspace](intelligence.md) adds selected-run marketing BI, models, LLM observability, financial comparisons and ontology inspection. The older analyst/designer workflow below remains available in the reports workspace.
+
 Implemented October 26, 2026. This is the current sponsor transition. The town remains the visual economy; AG Studio is the agent-created review workspace over its warehouse.
 
 **October 30 update:** [Game-office UI and handoff evaluation](office-evaluation.md) — themed charts and office sprites, exact metric references, public operating context, deterministic evidence-view coverage, and three fresh Gemini review trials with a documented correction round. All costs and initial interpretation failures are retained.

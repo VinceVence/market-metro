@@ -10,6 +10,7 @@ import {savedPlanningEvidence} from './ontology/saved-policy.mjs';
 import {createOwnMarketService} from './behavior-v4/service.mjs';
 import {createAuthoredCatalogService} from './behavior-v4/catalog.mjs';
 import {createStudioService} from './studio/service.mjs';
+import {intelligenceRuns,intelligenceSnapshot} from './studio/intelligence.mjs';
 import {createTrustedWorkflowService} from './trusted-workflow/service.mjs';
 import {policySpendStatus} from './policy-lab/service.mjs';
 import {createAgentMesh} from './agent-mesh/integration.mjs';
@@ -98,6 +99,13 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
         if(req.method==='GET'&&path==='/api/market/room/preview'&&room)return json(res,200,{frame:room.preview()});
         const roomRead=path.match(/^\/api\/market\/room\/(COMMERCE-[a-f0-9]{16})$/);
         if(req.method==='GET'&&roomRead&&room)return json(res,200,room.snapshot(roomRead[1],url.searchParams.has('day')?url.searchParams.get('day'):undefined));
+        if(req.method==='GET'&&path==='/api/market/intelligence/runs'&&market)return json(res,200,{runs:intelligenceRuns(market.store.db)});
+        if(req.method==='GET'&&path==='/api/market/intelligence'&&market){
+          const runId=url.searchParams.get('run'),sessionId=url.searchParams.get('session');
+          const row=sessionId?market.store.db.prepare('SELECT id,run_id FROM autonomy_sessions WHERE id=?').get(sessionId):runId?market.store.db.prepare('SELECT id,run_id FROM autonomy_sessions WHERE run_id=?').get(runId):market.store.db.prepare('SELECT id,run_id FROM autonomy_sessions ORDER BY rowid DESC LIMIT 1').get();
+          if(sessionId&&!row)return json(res,404,{error:{message:'This planner run is not available.'}});
+          return json(res,200,intelligenceSnapshot(market.store.db,row?.run_id??runId,row?autonomy.snapshot(row.id):null));
+        }
         if(req.method==='GET'&&path==='/api/market/studio/snapshot'&&studio)return json(res,200,studio.snapshot(url.searchParams.get('run'),url.searchParams.get('day')));
         if(req.method==='GET'&&path==='/api/market/studio/report'&&studio)return json(res,200,studio.report(url.searchParams.get('run'),url.searchParams.get('day')));
         if(req.method==='GET'&&path==='/api/market/studio/steps'&&studio)return json(res,200,studio.steps(url.searchParams.get('run')));

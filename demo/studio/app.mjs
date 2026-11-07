@@ -1,4 +1,4 @@
-import {DARK_THEME} from './theme.mjs';
+import {LIGHT_THEME} from './theme.mjs';
 import {compileDashboard,studioWidgets,styleReport} from './widgets.mjs';
 import {marketHarness,applyCheckedDesign} from './agents.mjs';
 import {coverEvidence} from './coverage.mjs';
@@ -28,7 +28,7 @@ async function showCheckpoints(){
  if(analyst&&designer){for(const id of ['analyst','designer','guard'])progress(id,'done');const n=analyst.output.evidence?.length||0,coverage=coverEvidence(analyst.output,designer.output.widgets),page=report.state?.pages.find(p=>p.id===report.state.selectedPageId),missing=coverage.widgets.filter(w=>!page?.widgets?.[w]),added=coverage.added.filter(w=>page?.widgets?.[w]);$('handoff-note').textContent=missing.length?'Evidence coverage needs repair: '+missing.join(', ')+'. Choose Restore team view.':n?`${n} exact facts checked → ${Object.keys(page?.widgets||{}).length} views saved.${added.length?' Local guard added: '+added.join(', ')+'.':''}`:'Saved earlier handoff · exact metric references were added in the latest workflow.';}
  else{for(const [id,,,,task]of roles){$('desk-'+id).dataset.state='idle';$('desk-'+id).querySelector('small').textContent=task;}$('handoff-note').textContent='Read the evidence → design the views → check and save.';}
 }
-const theme=agStudio.studioTheme.withParams(DARK_THEME);
+const theme=agStudio.studioTheme.withParams(LIGHT_THEME);
 if(new URL(location.href).searchParams.has('embed'))document.body.classList.add('embedded');
 async function load(){
  $('status').textContent='Reading checked warehouse snapshot…';for(const id of ['load','assistant','save','undo','edit','restore'])$(id).disabled=true;
