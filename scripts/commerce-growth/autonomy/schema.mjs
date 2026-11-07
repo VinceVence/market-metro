@@ -3,6 +3,9 @@ CREATE TABLE IF NOT EXISTS autonomy_baskets(basket_id TEXT PRIMARY KEY,run_id TE
 CREATE TABLE IF NOT EXISTS autonomy_contacts(contact_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),day INTEGER,event_date TEXT,customer_id TEXT REFERENCES customers(customer_id),catalog_item_id TEXT,kind TEXT,cost_cents INTEGER,responded INTEGER,authorized INTEGER,request_id TEXT,model_id TEXT,policy_source TEXT,source TEXT);
 CREATE TABLE IF NOT EXISTS autonomy_ledger(entry_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),day INTEGER,event_date TEXT,from_account TEXT,to_account TEXT,amount_cents INTEGER,kind TEXT,reference_id TEXT,source TEXT);
 CREATE TABLE IF NOT EXISTS autonomy_supplier_payments(invoice_id TEXT PRIMARY KEY,run_id TEXT REFERENCES simulation_runs(run_id),stage TEXT,rail TEXT,created_day INTEGER,settlement_day INTEGER,gross_cents INTEGER,fee_cents INTEGER,processing_cents INTEGER,status TEXT,source TEXT);
+CREATE INDEX IF NOT EXISTS autonomy_baskets_daily ON autonomy_baskets(run_id,capture_day,gross_cents,fee_cents);
+CREATE INDEX IF NOT EXISTS autonomy_contacts_daily ON autonomy_contacts(run_id,day,cost_cents);
+CREATE INDEX IF NOT EXISTS autonomy_ledger_daily ON autonomy_ledger(run_id,day,kind,amount_cents);
 `;
 export const AUTONOMY_TABLES=['autonomy_baskets','autonomy_contacts','autonomy_ledger','autonomy_supplier_payments'];
 export const AUTONOMY_DICTIONARY={

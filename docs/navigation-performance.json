@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-07",
+  "run": "AUTONOMY-d8f8e3695c9118cb",
+  "scope": "Local read-only navigation; 384 merchants, 19200 simulated shoppers. No new LLM calls or payments.",
+  "before": {
+    "savedRunMs": [
+      6885,
+      3858
+    ],
+    "intelligenceMs": 8985
+  },
+  "after": {
+    "savedRunColdMs": 625,
+    "savedRunWarmMs": [
+      70,
+      79,
+      122
+    ],
+    "intelligenceMs": [
+      497,
+      405
+    ],
+    "firstFullOntologyAuditMs": 3815
+  },
+  "parity": {
+    "sameFrame": true,
+    "sameSteps": true,
+    "sameCampaigns": true,
+    "sameOrders": true,
+    "sameReceipts": true,
+    "sameRecordedCost": true,
+    "samePairedResults": true,
+    "sameArchivedDashboardAggregates": true
+  },
+  "uiChecks": [
+    "Tutorial is non-modal; sidebar click dismisses it and navigates",
+    "Market, Agent decisions and Impact work from the main path",
+    "Replay advanced from day 1 to day 36; final comparison hidden during replay",
+    "Impact restored the settled result using Jump to settled result",
+    "Hidden world renderedFrames stayed at 7 between view changes",
+    "Switching away while ontology loads does not reopen the old view",
+    "Ontology can be reopened from the completed-run cache",
+    "Desktop 1366px and native narrow 523px layouts checked; no horizontal page overflow"
+  ],
+  "tests": {
+    "uniquePassed": 24,
+    "failed": 0
+  },
+  "limits": [
+    "Timings are local API response measurements, not an internet/browser performance guarantee.",
+    "The first full ontology inspection still loads and verifies the saved world. It is lazy, visibly loading and does not block client navigation.",
+    "AG Studio trial license notices remain unchanged."
+  ],
+  "newPaidCalls": 0
+}

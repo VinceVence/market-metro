@@ -11,7 +11,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
   let hovered=null,selected=null,pointerInside=false,dragging=false,down=null,lastTime=0,statsTime=0,rotationTarget=null;
   const pointer=new THREE.Vector2(),ray=new THREE.Raycaster(),actors=new Map(),pickables=[],labels=[],materials=new Map();
   let mode='city',city=null,labelClock=0;
-  let paused=false,playbackRate=1,namesVisible=true;
+  let paused=false,playbackRate=1,namesVisible=true,needsRender=true,visible=true,lastRender=0,renderedFrames=0;
   const svgNS='http://www.w3.org/2000/svg',connections=document.createElementNS(svgNS,'svg');connections.classList.add('city-connections');connections.setAttribute('aria-hidden','true');parent.append(connections);
   const labelLayer=document.createElement('div');labelLayer.className='city-labels';labelLayer.setAttribute('aria-label','Places in the district');parent.append(labelLayer);
   const tooltip=document.createElement('div');tooltip.className='world-tooltip';tooltip.hidden=true;tooltip.setAttribute('role','status');
@@ -23,7 +23,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
   const mat=(color,options={})=>{const key=String(color)+JSON.stringify(options);if(!materials.has(key))materials.set(key,new THREE.MeshStandardMaterial({color,roughness:.82,...options}));return materials.get(key);};
   function mesh(group,geometry,material,x=0,y=0,z=0){const m=new THREE.Mesh(geometry,material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;group.add(m);return m;}
   function box(group,x,y,z,w,h,d,color){const m=mesh(group,boxGeo,mat(color),x,y,z);m.scale.set(w,h,d);return m;}
-  function activate(entity){
+  function activate(entity){needsRender=true;
     selected=entity;placeRing(selectRing,selected);
     if(entity?.type==='customer')onCustomer?.(entity.id);
     else if(entity?.type==='merchant'&&entity.id)onMerchant?.(entity.id);
@@ -92,7 +92,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     connections.innerHTML='<defs>'+[['data','#8c7ab8'],['offer','#bd8e48'],['payment','#3d8da5']].map(([id,color])=>'<marker id="arrow-'+id+'" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="'+color+'"/></marker>').join('')+'</defs>'+arcs+leaders.join('');
     parent.dataset.visibleLabels=String(visible);
   }
-  function setMode(next){const value=next==='agents'?'agents':'city';if(value!==mode){selected=null;if(selectRing)selectRing.visible=false;}mode=value;parent.dataset.mode=mode;updateLabels();}
+  function setMode(next){needsRender=true;const value=next==='agents'?'agents':'city';if(value!==mode){selected=null;if(selectRing)selectRing.visible=false;}mode=value;parent.dataset.mode=mode;updateLabels();}
   function focusStation(station){
     const e=city?.entities.find(e=>e.station===station||e.id===station);if(!e||!camera)return;
     const offset=camera.position.clone().sub(controls.target);controls.target.set(e.x,0,e.z+5);camera.position.copy(controls.target).add(offset);camera.zoom=1.6;camera.updateProjectionMatrix();controls.update();selected=e;placeRing(selectRing,e);
@@ -126,10 +126,12 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     actors.clear();city=null;connections.replaceChildren();
   }
   function cameraHome(){
+    needsRender=true;
     if(!camera||!controls)return;
     rotationTarget=null;controls.target.set(0,3,-4);camera.position.set(44,65,78);camera.zoom=1;camera.updateProjectionMatrix();controls.update();resize(true);
   }
   function resize(fit=false){
+    needsRender=true;
     if(!renderer)return;const width=parent.clientWidth,height=parent.clientHeight;if(width<1||height<1)return;
     renderer.setSize(width,height,false);const aspect=width/height;let vertical=fit||autoFit?Math.max(35,(layout.width+8)/(aspect*2.0)):camera.userData.vertical||38;
     if((fit||autoFit)&&frame?.merchantCount>8&&world){
@@ -167,6 +169,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     tooltip.style.transform='translate('+x+'px,'+y+'px)';parent.dataset.hoverType=hovered.type;
   }
   function setFrame(next){
+    needsRender=true;
     const visualTick=next.replayTick??next.simTime?.elapsedHours??next.tick;
     const changed=lastRun!==next.runId,newDay=lastTick!==visualTick;frame=next;
     if(!renderer||parent.dataset.renderState!=='ready')return;
@@ -219,6 +222,9 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     const floor=mesh(scene,new THREE.PlaneGeometry(600,600),new THREE.MeshBasicMaterial({color:0xffffff,toneMapped:false}),0,-1.2,0);floor.rotation.x=-Math.PI/2;floor.castShadow=false;
     hoverRing=ring(0x83bb9b);selectRing=ring(0xe2b765);environment();cameraHome();
     const observer=new ResizeObserver(()=>resize(false));observer.observe(parent);
+    const visibility=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;needsRender=true;});visibility.observe(parent);
+    controls.addEventListener('change',()=>{needsRender=true;});
+    for(const name of ['pointermove','pointerleave','pointerdown','pointerup','keydown'])renderer.domElement.addEventListener(name,()=>{needsRender=true;});
     renderer.domElement.addEventListener('pointermove',e=>{
       const r=renderer.domElement.getBoundingClientRect();pointerX=e.clientX-r.left;pointerY=e.clientY-r.top;pointer.set(pointerX/r.width*2-1,-pointerY/r.height*2+1);pointerInside=true;
       if(down&&Math.hypot(e.clientX-down.x,e.clientY-down.y)>5){dragging=true;parent.style.cursor='grabbing';tooltip.hidden=true;}
@@ -238,8 +244,12 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();parent.dataset.renderState='context-lost';tooltip.hidden=false;tooltip.querySelector('strong').textContent='3D view paused';tooltip.querySelector('span').textContent='Graphics context interrupted. Reload to restore the view; saved data is safe.';});
     renderer.domElement.addEventListener('webglcontextrestored',()=>{parent.dataset.renderState='ready';tooltip.hidden=true;if(frame)setFrame(frame);});
     function loop(){
-      // Pause shopper motion, not rendering: resize, scrub and camera controls still need a frame.
-      raf=requestAnimationFrame(loop);const now=performance.now(),cameraDt=Math.min(.05,(now-lastTime)/1000||.016),dt=paused?0:cameraDt*playbackRate;lastTime=now;
+      raf=requestAnimationFrame(loop);const now=performance.now();
+      if(document.hidden||!visible||parent.clientWidth===0||parent.clientHeight===0){lastTime=now;return;}
+      if(now-lastRender<1000/30)return;
+      controls.update();
+      if(paused&&!needsRender&&!rotationTarget){lastTime=now;return;}
+      const cameraDt=Math.min(.05,(now-lastTime)/1000||.016),dt=paused?0:cameraDt*playbackRate;lastTime=now;
       const walkers=[...actors.values()].map(a=>a.walker);
       for(const a of actors.values()){
         updateWalker(a.walker,layout,reduced()?0:dt,walkers);
@@ -257,19 +267,18 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
         }
       }
       if(rotationTarget){const offset=camera.position.clone().sub(controls.target),spherical=new THREE.Spherical().setFromVector3(offset);const d=Math.atan2(Math.sin(rotationTarget-spherical.theta),Math.cos(rotationTarget-spherical.theta));spherical.theta+=d*Math.min(1,cameraDt*7);camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(spherical));if(Math.abs(d)<.005)rotationTarget=null;}
-      controls.update();
       const tx=THREE.MathUtils.clamp(controls.target.x,-layout.edge,layout.edge),tz=THREE.MathUtils.clamp(controls.target.z,-25,25);
       camera.position.x+=tx-controls.target.x;camera.position.z+=tz-controls.target.z;controls.target.set(tx,controls.target.y,tz);
-      hover();placeRing(selectRing,selected);renderer.render(scene,camera);if(now-labelClock>60){labelClock=now;updateLabels();}
+      hover();placeRing(selectRing,selected);renderer.render(scene,camera);lastRender=now;needsRender=false;renderedFrames++;parent.dataset.renderedFrames=String(renderedFrames);if(now-labelClock>60){labelClock=now;updateLabels();}
       if(now-statsTime>700){statsTime=now;parent.dataset.camera=JSON.stringify({x:+camera.position.x.toFixed(2),z:+camera.position.z.toFixed(2),zoom:+camera.zoom.toFixed(2)});parent.dataset.moving=String(walkers.filter(w=>w.moving).length);parent.dataset.drawCalls=String(renderer.info.render.calls);}
     }
-    function dispose(){cancelAnimationFrame(raf);observer.disconnect();controls.dispose();renderer.dispose();}
+    function dispose(){cancelAnimationFrame(raf);observer.disconnect();visibility.disconnect();controls.dispose();renderer.dispose();}
     parent._dispose3D=dispose;loop();
   }catch(error){
     parent.dataset.renderState='unavailable';const warning=document.createElement('div');warning.className='graphics-warning';warning.textContent='The 3D view could not start. Models, tables and saved runs remain available. '+error.message;parent.append(warning);
   }
-  function zoom(factor){if(!camera)return;camera.zoom=THREE.MathUtils.clamp(camera.zoom*factor,.65,3.5);camera.updateProjectionMatrix();}
-  function rotate(){if(!camera)return;const s=new THREE.Spherical().setFromVector3(camera.position.clone().sub(controls.target));rotationTarget=s.theta+Math.PI/4;}
+  function zoom(factor){needsRender=true;if(!camera)return;camera.zoom=THREE.MathUtils.clamp(camera.zoom*factor,.65,3.5);camera.updateProjectionMatrix();}
+  function rotate(){needsRender=true;if(!camera)return;const s=new THREE.Spherical().setFromVector3(camera.position.clone().sub(controls.target));rotationTarget=s.theta+Math.PI/4;}
   function project({customerId,merchantId}={}){if(!camera)return null;const actor=actors.get(customerId),entity=city?.entities.find(e=>e.id===merchantId);const point=actor?.group.visible?new THREE.Vector3(actor.group.position.x,2.8,actor.group.position.z):entity?new THREE.Vector3(entity.x,entity.height+1,entity.z):null;if(!point)return null;point.project(camera);return {x:(point.x+1)*parent.clientWidth/2,y:(1-point.y)*parent.clientHeight/2,visible:point.z>-1&&point.z<1&&Math.abs(point.x)<1&&Math.abs(point.y)<1};}
-  return {setFrame,setMode,focusStation,project,setNamesVisible(value){namesVisible=Boolean(value);parent.dataset.storeNames=String(namesVisible);if(camera)updateLabels();},setPaused(value){paused=Boolean(value);},setPlaybackRate(value){playbackRate=Math.max(.5,Math.min(3,Number(value)||1));},zoomIn(){zoom(1.15);},zoomOut(){zoom(1/1.15);},rotate,home:cameraHome,destroy(){parent._dispose3D?.();clearWorld();}};
+  return {setFrame,setMode,focusStation,project,setNamesVisible(value){needsRender=true;namesVisible=Boolean(value);parent.dataset.storeNames=String(namesVisible);if(camera)updateLabels();},setPaused(value){needsRender=true;paused=Boolean(value);},setPlaybackRate(value){playbackRate=Math.max(.5,Math.min(3,Number(value)||1));},zoomIn(){zoom(1.15);},zoomOut(){zoom(1/1.15);},rotate,home:cameraHome,destroy(){parent._dispose3D?.();clearWorld();}};
 }

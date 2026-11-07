@@ -92,9 +92,9 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
           return json(res,200,await rankDistricts(Number(districts),Number(feeds)));
         }
         if(req.method==='GET'&&path==='/api/market/autonomy/scale-results'&&autonomy)return json(res,200,{runs:autonomy.scaleResults()});
-        if(req.method==='GET'&&path==='/api/market/autonomy/latest'&&autonomy)return json(res,200,{session:autonomy.latest()});
+        if(req.method==='GET'&&path==='/api/market/autonomy/latest'&&autonomy)return json(res,200,{session:autonomy.latest({details:url.searchParams.get('detail')!=='0'})});
         const autonomyRead=path.match(/^\/api\/market\/autonomy\/(AUTONOMY-[a-f0-9]{16})(?:\/(trace))?$/);
-        if(req.method==='GET'&&autonomyRead&&autonomy)return json(res,200,autonomyRead[2]?autonomy.trace(autonomyRead[1],url.searchParams.get('customer'),url.searchParams.has('day')?url.searchParams.get('day'):undefined):autonomy.snapshot(autonomyRead[1],url.searchParams.has('day')?url.searchParams.get('day'):undefined));
+        if(req.method==='GET'&&autonomyRead&&autonomy)return json(res,200,autonomyRead[2]?autonomy.trace(autonomyRead[1],url.searchParams.get('customer'),url.searchParams.has('day')?url.searchParams.get('day'):undefined):autonomy.snapshot(autonomyRead[1],url.searchParams.has('day')?url.searchParams.get('day'):undefined,{details:url.searchParams.get('detail')!=='0'}));
         if(req.method==='GET'&&path==='/api/market/room/latest'&&room)return json(res,200,{session:room.latest()});
         if(req.method==='GET'&&path==='/api/market/room/preview'&&room)return json(res,200,{frame:room.preview()});
         const roomRead=path.match(/^\/api\/market\/room\/(COMMERCE-[a-f0-9]{16})$/);
@@ -104,7 +104,7 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
           const runId=url.searchParams.get('run'),sessionId=url.searchParams.get('session');
           const row=sessionId?market.store.db.prepare('SELECT id,run_id FROM autonomy_sessions WHERE id=?').get(sessionId):runId?market.store.db.prepare('SELECT id,run_id FROM autonomy_sessions WHERE run_id=?').get(runId):market.store.db.prepare('SELECT id,run_id FROM autonomy_sessions ORDER BY rowid DESC LIMIT 1').get();
           if(sessionId&&!row)return json(res,404,{error:{message:'This planner run is not available.'}});
-          return json(res,200,intelligenceSnapshot(market.store.db,row?.run_id??runId,row?autonomy.snapshot(row.id):null));
+          return json(res,200,intelligenceSnapshot(market.store.db,row?.run_id??runId,row?autonomy.snapshot(row.id,undefined,{details:false}):null));
         }
         if(req.method==='GET'&&path==='/api/market/studio/snapshot'&&studio)return json(res,200,studio.snapshot(url.searchParams.get('run'),url.searchParams.get('day')));
         if(req.method==='GET'&&path==='/api/market/studio/report'&&studio)return json(res,200,studio.report(url.searchParams.get('run'),url.searchParams.get('day')));

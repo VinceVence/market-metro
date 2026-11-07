@@ -8,8 +8,8 @@ export const money = cents => currency.format((cents || 0) / 100);
 export const num = value => number.format(Number(value || 0));
 export const pct = value => Number.isFinite(value) ? (value * 100).toFixed(1) + '%' : '—';
 
-export async function api(path, input) {
-  const response = await fetch(path, input === undefined ? {} : {
+export async function api(path, input, options = {}) {
+  const response = await fetch(path, input === undefined ? options : {
     method: 'POST',
     headers: {'Content-Type': 'application/json', 'X-Supply-Yard': 'sandbox'},
     body: JSON.stringify(input)
