@@ -119,7 +119,7 @@ export function buildDistrict(layout, merchants) {
     const name=m.name||'Market store';const hex='#'+accent.toString(16).padStart(6,'0');
     sign(g,name.toUpperCase(),0,3.2,3.91,8.7,hex,'#fff4d6',.88);
     const rear=sign(g,name.toUpperCase(),0,3.2,-3.91,8.7,hex,'#fff4d6',.88);rear.rotation.y=Math.PI;
-    register(g,{type:'merchant',id:m.merchant_id,name,x:m.x,z:m.z,width:10.6,depth:8,height:h+(kind===5?2:1.6),number:String(i+1).padStart(2,'0'),color:hex,detail:'Fictional merchant · inspect stock & sales'});
+    register(g,{type:'merchant',id:m.merchant_id,name,x:m.x,z:m.z,width:10.6,depth:8,height:h+(kind===5?2:1.6),number:String(m.displayNumber??i+1).padStart(2,'0'),color:hex,detail:'Fictional merchant · inspect stock & sales'});
   }
   const ground=new THREE.Group(),edge=layout.edge,outerX=edge+7;
   box(ground,0,-.1,0,layout.width+10,1.5,96,0x889995);box(ground,0,.68,0,layout.width+9,.14,95,C.pave);

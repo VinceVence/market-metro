@@ -79,7 +79,7 @@ async function start(){
     $('market-day').textContent='Market day '+step.day;
     $('frame-note').textContent=i===4?s.merchant+' · '+money(s.grossCents)+' simulated checkout':
       i===5?'Delivery recorded on day '+s.deliveryDay:frame.orders.toLocaleString()+' checkouts since day 1';
-    buttons.forEach((b,n)=>{if(n===i)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});
+    buttons.forEach((b,n)=>{if(n===i)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});buttons[i]?.scrollIntoView({block:'nearest',inline:'nearest'});
     $('back').disabled=i===0;$('next').disabled=false;$('next').textContent=i===steps.length-1?'Start again':'Next';
     $('position').textContent='Step '+(i+1)+' of '+steps.length+' · '+labels[i];
     if($('world').dataset.renderState==='unavailable'){
@@ -92,16 +92,21 @@ async function start(){
     }
     if(i===steps.length-1)pause();
   }
-  function pause(){clearInterval(timer);timer=null;$('auto').textContent='Play walkthrough';$('auto').setAttribute('aria-pressed','false');}
+  function pause(){clearInterval(timer);timer=null;$('playback-status').hidden=true;$('auto').textContent='Play walkthrough';$('auto').setAttribute('aria-pressed','false');}
   function go(n,manual=true){
     if(manual)pause();i=n;history.replaceState(null,'',location.pathname+location.search+(i?'#'+hashes[i]:''));
     render();
   }
   buttons.forEach((b,n)=>b.onclick=()=>go(n));
   $('back').onclick=()=>go(Math.max(0,i-1));$('next').onclick=()=>go((i+1)%steps.length);
-  $('auto').disabled=false;$('auto').onclick=()=>{if(timer)return pause();if(i===steps.length-1)go(0);
-    $('auto').textContent='Pause';$('auto').setAttribute('aria-pressed','true');
-    timer=setInterval(()=>go(i+1,false),9000);};
+  function play(advance=true){
+    if(timer)return pause();const restarting=i===steps.length-1;if(restarting)go(0);
+    if(advance&&!restarting)go(Math.min(i+1,steps.length-1),false);
+    if(i===steps.length-1)return;
+    $('auto').textContent='Pause walkthrough';$('auto').setAttribute('aria-pressed','true');$('playback-status').hidden=false;
+    timer=setInterval(()=>go(Math.min(i+1,steps.length-1),false),5000);
+  }
+  $('auto').disabled=false;$('auto').onclick=()=>play();
   $('names').onchange=()=>garden.setNamesVisible($('names').checked);$('reset-camera').onclick=()=>garden.home();
   $('chapters').onkeydown=e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();go(Math.max(0,Math.min(steps.length-1,i+(e.key==='ArrowRight'?1:-1))));buttons[i].focus();}};
   window.addEventListener('pagehide',pause);document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
@@ -110,5 +115,6 @@ async function start(){
   bindFeedProof(pause);
   bindPlannerReview(()=>go(3));
   bindTrainingReview(()=>go(2));
+  if(new URL(location.href).searchParams.get('autoplay')==='1')play(false);
 }
 start().catch(error=>{$('judge-error').textContent=error.message;$('judge-error').hidden=false;});

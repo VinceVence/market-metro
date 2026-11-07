@@ -6,6 +6,7 @@ Open [the archived judge workspace](http://127.0.0.1:4173/analytics.html?run=rec
 
 | Sidebar | Native AG views and interaction |
 |---|---|
+| PayPal | Native Sandbox receipt example, selected-run capture count and modeled payment economics kept separate |
 | Overview | Captured-volume line chart, category-spending bars and merchant grid |
 | Market trends | Browsing/search trends, checkout counts and category demand |
 | Net profits | Full-size fixed-versus-planner payment and merchant outcomes |
@@ -45,3 +46,5 @@ The older analyst → designer → checked publication harness remains in [agent
 ## Verification
 
 Focused tests cover parent-checkout counting, immunity to repeated item rows, refund totals, model-cohort selection, provider costs and read-only execution. Existing Studio and ontology checks are retained. No new model calls or payments were made for the UI update.
+
+The blue navigation sidebar is shared with the market and judge walkthrough. Judge launch links start recorded playback, with a visible progress indicator. The market renderer maps each 32-store district to local positions while preserving global merchant IDs and numbering. Previous/next controls and the searchable full-store directory reach every store through 384.

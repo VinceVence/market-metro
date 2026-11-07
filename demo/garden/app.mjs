@@ -23,7 +23,7 @@ const simulationSettings=mountSimulationSettings({
   onLegacy:async()=>{setPlaying(false);await refreshStatus();plannerChoice();$('brief').showModal();},
   onVisibility:open=>garden.setPaused(open||liveMarketOpen)
 });
-$('run-demo').onclick=()=>{location.href='/judge.html';};
+$('run-demo').onclick=()=>{location.href='/judge.html?autoplay=1';};
 $('recorded-demo').onclick=()=>{simulationSettings.close();liveMarket.close();judgeDemo.open();};
 function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,8000);}
 function setPlaying(value){
