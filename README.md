@@ -13,19 +13,21 @@ npm ci
 npm run dev -- --no-recover
 ```
 
-Open [the judge demo](http://127.0.0.1:4173/) and select **Play walkthrough**, or step through at your own pace. The seven chapters use a recorded single-planner review, simulation snapshots and a verified PayPal Sandbox receipt bundled with the project. Playback makes zero model or payment calls and requires no provider credentials.
+Open [the judge demo](http://127.0.0.1:4173/) and select **Play walkthrough**, or step through at your own pace. The three sections—**Market → Agent decisions → Impact**—contain six saved stops. Start at Day 1, inspect the day-31 evidence and model change, follow the shopper’s purchase, then see settled gains and the matching PayPal Sandbox receipt. Next and Back remain visible throughout. Playback makes zero model or payment calls and requires no provider credentials.
+
+The [saved AG Grid dashboards](http://127.0.0.1:4173/analytics.html?run=judge-demo) use that same 12-store campaign for model fits, decisions, net gains and payment proof. The 384-store result is a separate, labeled scale example in the run picker.
 
 The planner's campaign brought Shopper 179 back after 16 days for a $96 Mobile Side Table. The receipt belongs to that exact warehouse order. Across this frozen market, the planner and verifier added **$114.96 in modeled PayPal net after AI, $1,024.86 in merchant contribution and 16 retained purchases** over fixed rules. [Judge walkthrough and evidence](docs/submission-candidate.md).
 
-Choose **Merchant scale → Run local ranking** to try the same model on up to 48 simulated stores across four independent districts. Judges can vary how many stores share inventory and compare settled outcomes for the same shoppers against fixed rules. [Live scale demo](http://127.0.0.1:4173/judge.html#scale) · [Measured results](docs/merchant-scale/README.md).
+Choose **More evidence → Separate scale experiment → Run local ranking** to try the same model on up to 48 simulated stores across four independent districts. Judges can vary how many stores share inventory and compare settled outcomes for the same shoppers against fixed rules. [Live scale demo](http://127.0.0.1:4173/judge.html#scale) · [Measured results](docs/merchant-scale/README.md).
 
-At the receipt, select **Why is this one purchase?** The read-only merchant feed verifier reconciles 1,922 seller orders into 1,384 shopper checkouts and explains why the saved $96 capture adds zero additional purchases. Try renamed headers, flat seller rows or two conflicting checkout links. [Open the verifier](http://127.0.0.1:4173/judge.html#ontology) · [Method, results and scope](docs/ontology/README.md).
+Select **More evidence → Verify a merchant feed**. The read-only merchant feed verifier reconciles 1,922 seller orders into 1,384 shopper checkouts and explains why the saved $96 capture adds zero additional purchases. Try renamed headers, flat seller rows or two conflicting checkout links. [Open the verifier](http://127.0.0.1:4173/judge.html#ontology) · [Method, results and scope](docs/ontology/README.md).
 
-In **Verifier → Try a feed that holds this campaign**, two declared checkout keys stop the day-31 planner before it can issue outreach. Apply the simulated merchant’s corrected mapping to admit 715 past checkouts and execute the recorded policy on the same shoppers. It selects 31 product recommendations and five needs inquiries. The local replay requires zero new model calls, payments or Python setup. [Run the hold and correction](http://127.0.0.1:4173/judge.html#planner).
+In **More evidence → Mapping hold example**, two declared checkout keys stop the day-31 planner before it can issue outreach. Apply the simulated merchant’s corrected mapping to admit 715 past checkouts and execute the recorded policy on the same shoppers. It selects 31 product recommendations and five needs inquiries. The local replay requires zero new model calls, payments or Python setup. [Run the hold and correction](http://127.0.0.1:4173/judge.html#planner).
 
-In **Campaign → Try ontology-guided model training**, choose a business question and see which rows and features can answer it. The revised product ranking changed four outreach choices on day 31. Across four fresh simulated markets it added $71.81 in PayPal net, $597.89 in merchant contribution and 16 retained purchases over the original ranking. [Try the training review](http://127.0.0.1:4173/judge.html#training) · [Controls and results by market](docs/ontology/training/README.md)
+In **More evidence → Training comparison**, choose a business question and see which rows and features can answer it. The revised product ranking changed four outreach choices on day 31. Across four fresh simulated markets it added $71.81 in PayPal net, $597.89 in merchant contribution and 16 retained purchases over the original ranking. [Try the training review](http://127.0.0.1:4173/judge.html#training) · [Controls and results by market](docs/ontology/training/README.md)
 
-In **Campaign → Compare the fresh Gemini campaigns**, see fixed rules, a fresh planner and a fresh planner using ontology on the original judge market. Inspect the LLM's actual training window, requested feature list, campaign revisions and the verifier's publication decision. [Open the three-way comparison](http://127.0.0.1:4173/judge.html#livecampaign) · [Method and cost limits](docs/ontology/live/README.md)
+In **More evidence → Training comparison**, choose **Compare fixed rules, Gemini and Gemini with ontology** to see fixed rules, a fresh planner and a fresh planner using ontology on the original judge market. Inspect the LLM's actual training window, requested feature list, campaign revisions and the verifier's publication decision. [Open the three-way comparison](http://127.0.0.1:4173/judge.html#livecampaign) · [Method and cost limits](docs/ontology/live/README.md)
 
 ## Intelligence workspace
 
@@ -39,7 +41,7 @@ Use **Arrange** for native layout editing, grid headers to sort records and **Ex
 
 **Run settings → Size** now offers **96, 192 and 384 merchants**, paired with 50 shoppers per merchant. These are separately versioned, shared live markets with fresh planner + ontology decisions. The Performance tab measures full-size net against fixed rules and plots the settled gain per 100 shoppers. [Live size ladder, assumptions and validation](docs/commerce-metropolis/README.md)
 
-At the end of the judge walkthrough, **Run your own simulation** opens the [judge workspace and settings](http://127.0.0.1:4173/studio.html?view=market&judge=1&setup=1). Choose a seed, scenario and merchant export.
+At the end of the judge walkthrough, **Try your own free simulation** opens the [judge workspace and settings](http://127.0.0.1:4173/studio.html?view=market&judge=1&setup=1&execution=saved) with the recorded policy selected. Choose a seed, scenario and merchant export.
 
 - **One planner + financial verifier** makes new Gemini decisions under the existing $0.19 run cap.
 - **Recorded policy · free new simulation** runs a new seeded economy using the saved model and campaign. It makes zero provider calls. This option uses the 12-merchant market and the local Python engine below.

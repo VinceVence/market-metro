@@ -2,6 +2,29 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createMarketStore} from '../scripts/market-store.mjs';
 import {intelligenceSnapshot} from '../scripts/studio/intelligence.mjs';
+test('saved model charts keep same-day, same-size fits in distinct categories',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ for(const path of ['demo/data/intelligence-demo.json','demo/data/judge-intelligence.json']){
+  const d=JSON.parse(await readFile(path,'utf8')),groups=new Map();
+  for(const m of d.models)groups.set(m.label,(groups.get(m.label)||0)+(m.auc||0));
+  assert.equal(groups.size,d.models.length,'A chart label must identify one model fit');
+  assert.ok([...groups.values()].every(auc=>auc>=0&&auc<=1),'AUROC bars cannot sum independent fits');
+ }
+});
+test('live Intelligence remains readable while trials and publication have no output yet',()=>{
+ const store=createMarketStore(),run='GARDEN-AUTO-2222222222222222';
+ try{
+  store.insert('simulation_runs',[{run_id:run,started_at:'2026-01-01T00:00:00Z',current_tick:30,status:'RUNNING'}]);
+  for(const actor of ['LOCAL_CAMPAIGN_TRIAL','TRUSTED_PUBLISHER']){
+   const snapshot=intelligenceSnapshot(store.db,run,{steps:[{id:'pending',actor,role:'Verifier',day:31,status:'RUNNING',input:{},output:null}]});
+   assert.equal(snapshot.decisions[0].status,'RUNNING');
+   assert.equal(snapshot.comparison.length,0);
+   assert.equal(snapshot.gates.length,0);
+   assert.equal(snapshot.publications.length,0);
+   assert.ok(snapshot.trials.every(t=>t.paypalUSD===null));
+  }
+ }finally{store.close();}
+});
 test('intelligence counts split baskets once, uses matching model cohorts and reads without writes',()=>{
  const store=createMarketStore(),run='GARDEN-AUTO-1111111111111111',at='2026-01-01T00:00:00Z';
  try{

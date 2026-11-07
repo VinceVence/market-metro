@@ -250,7 +250,8 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
     } catch (error) {
       if (error instanceof SandboxError || error instanceof BenchmarkError || error instanceof WorkflowError) return json(res, error.status, { error: { code: error.code, message: error.message, debugId: error.debugId } });
       if (error.code === 'ENOENT') { res.writeHead(404); res.end('Not found'); return; }
-      json(res, 500, { error: { code: 'LOCAL_SERVER_ERROR', message: 'The local server could not complete this request. Refresh before retrying a payment.' } });
+      console.error('[local-request]',req.method,String(req.url).split('?')[0],error.name);
+      json(res, 500, { error: { code: 'LOCAL_SERVER_ERROR', message: ['GET','HEAD'].includes(req.method)?'This data view could not load. Try Refresh; no payment was requested.':'This request did not finish. Check its saved status before retrying.' } });
     }
   });
   server.planner=planner;

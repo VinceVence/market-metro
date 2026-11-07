@@ -5,7 +5,23 @@ import {readFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
 import {createSupplyYardServer} from '../scripts/serve.mjs';
 import {canonicalHash} from '../scripts/commerce-expanded/harness-v2/contracts.mjs';
+import {judgeStory} from '../demo/commerce/judge-story.mjs';
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
+
+test('judge path begins at day 1, advances chronologically and ends with gains plus its own receipt',async()=>{
+ const d=await read('demo/data/judge-reactivation.json'),story=judgeStory(d),dashboard=await read('demo/data/judge-intelligence.json');
+ assert.deepEqual([...new Set(story.map(s=>s.phase))],['market','workflow','performance']);
+ assert.equal(story[0].day,1);
+ assert.ok(story.every((s,i)=>d.frames[s.day]&&(!i||s.day>=story[i-1].day)));
+ assert.ok(story.at(-1).body.includes(d.receipt.capture_id));
+ assert.ok(story.at(-1).body.includes('+$114.96'));assert.ok(story.at(-1).body.includes('+$1,024.86'));
+ assert.ok(story[2].body.includes(d.decision.rationale.split('. ')[0]));
+ assert.equal(dashboard.run.id,d.runId);assert.equal(dashboard.archiveId,'judge-demo');
+ assert.equal(dashboard.receipts[0].capture,d.receipt.capture_id);
+ assert.equal(dashboard.summary.nativeCaptures,1);assert.equal(dashboard.summary.modelFits,2);
+ assert.equal(dashboard.comparison.find(r=>r.policy!=='Fixed rules').paypalUSD,d.planner.paypal);
+ assert.equal(dashboard.comparison.find(r=>r.policy==='Fixed rules').paypalUSD,d.fixed.paypal);
+});
 
 test('judge artifact binds the reported single-planner gain and checkout to the same seed, ranking and shopper',async()=>{
   const d=await read('demo/data/judge-reactivation.json'),study=await read('demo/data/commerce-reactivation-fresh.json');
