@@ -35,11 +35,11 @@
     {
       "id": "market",
       "startFrame": 0,
-      "durationInFrames": 540,
+      "durationInFrames": 480,
       "title": "Start inside the economy",
       "url": "/judge.html",
       "captureAction": "Keep Day 1 visible. Pan across stores, shoppers and the PayPal building. Use real recorded app footage.",
-      "narration": "This is Market Metro: twelve merchants, six hundred simulated shoppers, and a market that keeps a record of what people want, what they buy, and what actually gets delivered. We built it to test agentic commerce against measurable outcomes.",
+      "narration": "This is Market Metro: twelve merchants and six hundred simulated shoppers. They browse, buy, and receive deliveries. Their activity becomes the data our AI planner uses to investigate demand, train models, and test campaigns.",
       "onScreen": [
         "12 merchants \u00b7 600 simulated shoppers",
         "Agentic Commerce That Learns"
@@ -50,12 +50,12 @@
     },
     {
       "id": "problem",
-      "startFrame": 540,
-      "durationInFrames": 420,
+      "startFrame": 480,
+      "durationInFrames": 360,
       "title": "Make the business decision concrete",
       "url": "/judge.html",
       "captureAction": "Advance to Agent decisions, first stop. Highlight electronics and furniture interest versus funded units.",
-      "narration": "The business question is simple: who should we contact, and what should we recommend? High interest does not always mean a funded purchase. The agent needs to turn those signals into a campaign merchants can actually fulfill.",
+      "narration": "The business question: who should we contact, and what should we recommend? Interest alone does not guarantee a funded purchase, or an order the merchant can fulfill.",
       "onScreen": [
         "Demand \u2192 campaign \u2192 retained purchase"
       ],
@@ -65,12 +65,12 @@
     },
     {
       "id": "ontology",
-      "startFrame": 960,
-      "durationInFrames": 540,
+      "startFrame": 840,
+      "durationInFrames": 480,
       "title": "Show the data contract",
       "url": "/judge.html#ontology",
       "captureAction": "In the feed verifier, show a split checkout, then the ambiguous-link hold. Label this as a separate data-quality demonstration.",
-      "narration": "First, the data must mean the same thing across merchants. Our ontology verifier counts a split checkout once and holds ambiguous relationships. In a separate test of twenty-four synthetic feeds, it accepted all twelve usable exports; fixed mapping accepted six. Both held every unsafe export.",
+      "narration": "Our ontology verifier counts split checkouts once and holds ambiguous relationships. In a separate twenty-four-feed test, it accepted all twelve usable merchant exports, versus six for fixed mapping. Both methods held all twelve unsafe exports.",
       "onScreen": [
         "Separate 24-feed test",
         "Usable feeds: 6/12 fixed \u2192 12/12 verifier",
@@ -82,16 +82,17 @@
     },
     {
       "id": "planner",
-      "startFrame": 1500,
-      "durationInFrames": 720,
+      "startFrame": 1320,
+      "durationInFrames": 690,
       "title": "Show the LLM choosing work",
       "url": "/analytics.html?run=judge-demo&view=decisions",
-      "captureAction": "Open Day 31 Analyze, then Train, and inspect the saved proposal. Cut to Model training with both distinct model bars.",
+      "captureAction": "Open the same campaign in AG Studio. In Agent decisions, inspect Day 31 Analyze and Train; then show Model training with two distinct model bars and its native AG Grid registry. Keep the AG Studio/AG Grid caption visible.",
       "narration": "Back in our recorded campaign, the LLM investigates demand, chooses a twenty-eight-day market-feedback window, and requests two local model fits. It proposes ranked recommendations and shopping-needs inquiries for up to thirty-six consenting shoppers a day. These are saved decisions from a real model run, with the inputs and tool results available to inspect.",
       "onScreen": [
         "Recorded LLM decisions",
         "Investigate \u2192 choose data \u2192 train \u2192 propose",
-        "6 decisions \u00b7 2 local model fits"
+        "6 decisions \u00b7 2 local model fits",
+        "AG Studio \u00b7 model registry and recorded decisions"
       ],
       "evidence": [
         "demo/data/judge-intelligence.json",
@@ -100,12 +101,12 @@
     },
     {
       "id": "verifier",
-      "startFrame": 2220,
-      "durationInFrames": 600,
+      "startFrame": 2010,
+      "durationInFrames": 540,
       "title": "Show why the model changed",
       "url": "/judge.html",
       "captureAction": "Choose Agent decisions, then Next to the model-change stop. Highlight the two development-trial rows and selected boosted model.",
-      "narration": "The LLM preferred the two-stage response model. The financial verifier tested both rankings with the same campaign in three development markets. Boosted trees earned more while clearing merchant and purchase checks, so the verifier selected that model. The agent proposes; typed tools and financial checks control execution.",
+      "narration": "The LLM preferred a two-stage response model. The verifier tested both rankings with the same campaign in three development markets. Boosted trees earned more and passed the merchant and purchase checks, so the verifier selected it. The LLM proposes; trusted tools govern execution.",
       "onScreen": [
         "Same campaign \u00b7 two rankings",
         "Development PayPal gain: $26.65 \u2192 $30.97",
@@ -117,12 +118,12 @@
     },
     {
       "id": "shopper",
-      "startFrame": 2820,
-      "durationInFrames": 480,
+      "startFrame": 2550,
+      "durationInFrames": 450,
       "title": "Follow one shopper",
       "url": "/judge.html",
       "captureAction": "Advance to Shopper response. Focus Form & Function and the Day 35 purchase \u2192 Day 36 delivery trace.",
-      "narration": "Now follow Shopper one-seventy-nine. Sixteen days after their last purchase, they receive a recommendation for a mobile side table, buy it for ninety-six dollars, and receive it the next day. The same request went unfilled under fixed rules.",
+      "narration": "Shopper one-seventy-nine had not bought for sixteen days. After a recommendation, they buy a ninety-six-dollar mobile side table and receive it the next day. Under fixed rules, the same request went unfilled.",
       "onScreen": [
         "Day 35: recommendation + $96 simulated purchase",
         "Day 36: delivery"
@@ -133,7 +134,7 @@
     },
     {
       "id": "paypal",
-      "startFrame": 3300,
+      "startFrame": 3000,
       "durationInFrames": 600,
       "title": "Connect the purchase to PayPal",
       "url": "/analytics.html?run=judge-demo&view=payments",
@@ -151,12 +152,12 @@
     },
     {
       "id": "impact",
-      "startFrame": 3900,
+      "startFrame": 3600,
       "durationInFrames": 540,
       "title": "Show the matched gain",
-      "url": "/judge.html",
-      "captureAction": "Choose Impact to show the settled table. Highlight fixed vs planner values, then the three gain figures.",
-      "narration": "After refunds and settlement, this campaign delivered sixteen more retained purchases, one thousand twenty-four dollars eighty-six in additional merchant contribution, and one hundred fourteen dollars ninety-six in modeled PayPal net over fixed rules. The original model usage cost about three cents. These are simulated results, not production profit.",
+      "url": "/analytics.html?run=judge-demo&view=profits",
+      "captureAction": "Use AG Studio Net profits for this same campaign. Show native AG Charts fixed-versus-planner bars and the AG Grid settled-comparison rows, then emphasize the three gains. Preserve the simulation and inventory labels.",
+      "narration": "After settlement, the campaign produced sixteen more retained purchases, over a thousand dollars in additional merchant contribution, and three point four seven percent higher modeled PayPal net than fixed rules. Estimated model usage was roughly three cents. These are simulated results, not production profit.",
       "onScreen": [
         "+16 retained purchases",
         "+$1,024.86 merchant contribution",
@@ -164,29 +165,75 @@
         "One paired simulation \u00b7 contribution includes inventory"
       ],
       "evidence": [
-        "demo/data/judge-reactivation.json"
+        "demo/data/judge-reactivation.json",
+        "demo/data/judge-intelligence.json"
       ]
     },
     {
-      "id": "inspect",
-      "startFrame": 4440,
-      "durationInFrames": 510,
-      "title": "End with inspectable evidence",
-      "url": "/analytics.html?run=judge-demo",
-      "captureAction": "Show AG Grid model/decision rows, click one checkpoint, and briefly show the ontology graph. End on the Market \u2192 Agent decisions \u2192 Impact navigation and project title.",
-      "narration": "AG Studio brings the evidence together: market trends, model validation, LLM usage, campaign decisions, and payment reconciliation. Judges can inspect the same campaign or run a new seed with the saved policy. Market Metro makes commerce decisions traceable, testable, and connected to PayPal.",
+      "id": "ag_grid",
+      "durationInFrames": 660,
+      "title": "Show AG Grid as the evidence workspace",
+      "url": "/analytics.html?run=judge-demo&view=models",
+      "captureAction": "Sort the model registry by Recommendation AUROC, filter the decision ledger with the Day 31 Verify stage, show the custom PayPal widget, then enable Arrange and resize one dashboard widget. Use actual app interactions from the same saved campaign.",
+      "narration": "AG Grid and AG Charts, inside AG Studio, make the workflow inspectable. Sort the model registry, follow a decision back to its evidence, and reconcile payments in our custom PayPal widget. The same dashboards compare fixed rules with the published campaign, and their layouts can be rearranged.",
       "onScreen": [
-        "Inspect the evidence \u00b7 try a new seed",
-        "Market Metro \u2014 Agentic Commerce That Learns"
+        "AG Studio \u00b7 AG Grid \u00b7 AG Charts",
+        "Inspect models \u2192 explain decisions \u2192 reconcile payments",
+        "Custom PayPal widget \u00b7 editable dashboard layout"
       ],
       "evidence": [
-        "demo/data/judge-intelligence.json"
-      ]
+        "demo/data/judge-intelligence.json",
+        "demo/studio/intelligence.mjs",
+        "demo/studio/widgets.mjs"
+      ],
+      "captureSteps": [
+        {
+          "offsetSeconds": 0,
+          "durationSeconds": 6,
+          "url": "/analytics.html?run=judge-demo&view=models",
+          "action": "Click the Recommendation AUROC column header to sort the training registry. Keep both model names and actual scores visible."
+        },
+        {
+          "offsetSeconds": 6,
+          "durationSeconds": 6,
+          "url": "/analytics.html?run=judge-demo&view=decisions",
+          "action": "Choose Day 31 Verify. Show the filtered AG Grid checkpoint rows and open the recorded verifier evidence."
+        },
+        {
+          "offsetSeconds": 12,
+          "durationSeconds": 5,
+          "url": "/analytics.html?run=judge-demo&view=lifecycle",
+          "action": "Show the custom PayPal evidence widget: one native capture, alongside the receipt reconciliation grid."
+        },
+        {
+          "offsetSeconds": 17,
+          "durationSeconds": 5,
+          "url": "/analytics.html?run=judge-demo&view=profits",
+          "action": "Enable Arrange and resize one widget. Do not imply that the LLM generated the layout or that the edit persists."
+        }
+      ],
+      "startFrame": 4140
+    },
+    {
+      "id": "close",
+      "durationInFrames": 150,
+      "title": "Close on the product",
+      "url": "/judge.html",
+      "captureAction": "End on the Market \u2192 Agent decisions \u2192 Impact navigation with the project title. Keep the free saved-policy exploration link readable.",
+      "narration": "Market Metro. Agentic commerce that learns, and shows its work.",
+      "onScreen": [
+        "Market Metro",
+        "Agentic Commerce That Learns"
+      ],
+      "evidence": [
+        "demo/data/judge-reactivation.json"
+      ],
+      "startFrame": 4800
     }
   ],
   "uploadDraft": {
     "title": "Market Metro | Agentic Commerce That Learns | PayPal AI Hackathon",
     "visibility": "Public after approval",
-    "description": "Market Metro turns observed merchant activity into trained models, tested campaigns and traceable PayPal payments. This demo follows one saved 12-store, 600-shopper simulation from Day 1 to a recorded agent decision, purchase and native PayPal Sandbox receipt.\n\nAgainst fixed rules in that same simulation: 16 more retained purchases, $1,024.86 additional merchant contribution, and $114.96 higher modeled PayPal net after estimated model cost. Merchant contribution includes inventory value. These are simulated outcomes, not actual PayPal profit. The $96 Sandbox capture is an existing order and uses fictitious funds.\n\nBuilt with PayPal Sandbox, Gemini on Vertex AI, local scikit-learn models, SQLite, Three.js and AG Studio. The ontology feed comparison is a separate synthetic-data test.\n\nSource and setup: https://github.com/VinceVence/market-metro\nOriginal code: MIT. Third-party components retain their own licenses."
+    "description": "Market Metro turns observed merchant activity into trained models, tested campaigns and traceable PayPal payments. This demo follows one saved 12-store, 600-shopper simulation from Day 1 to a recorded agent decision, purchase and native PayPal Sandbox receipt.\n\nAgainst fixed rules in that same simulation: 16 more retained purchases, $1,024.86 additional merchant contribution, and $114.96 higher modeled PayPal net after estimated model cost. Merchant contribution includes inventory value. These are simulated outcomes, not actual PayPal profit. The $96 Sandbox capture is an existing order and uses fictitious funds.\n\nBuilt with PayPal Sandbox, Gemini on Vertex AI, local scikit-learn models, SQLite, Three.js and AG Studio with native AG Grid, AG Charts and a custom PayPal evidence widget. The ontology feed comparison is a separate synthetic-data test.\n\nSource and setup: https://github.com/VinceVence/market-metro\nOriginal code: MIT. Third-party components retain their own licenses."
   }
 }
