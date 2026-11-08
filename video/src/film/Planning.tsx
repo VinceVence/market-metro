@@ -1,4 +1,4 @@
-import { Stage, Icon, Note, ramp, useTime, cue, C } from "./Design";
+import { Stage, Icon, ramp, useTime, cue, C } from "./Design";
 import { Person } from "./StoryArt";
 export function Planning() {
   const t = useTime();
@@ -9,7 +9,7 @@ export function Planning() {
     cue("planner", "campaign", 9),
   ];
   return (
-    <Stage dark label="From evidence to a campaign">
+    <Stage dark>
       <Person
         style={{ left: 90, top: 470, width: 185, height: 322, opacity: 0.85 }}
       />
@@ -69,9 +69,6 @@ export function Planning() {
           <div style={{ fontSize: 31, fontWeight: 600 }}>{name}</div>
         </div>
       ))}
-      <Note dark>
-        Original LLM decisions · local training tools · recorded evidence
-      </Note>
     </Stage>
   );
 }

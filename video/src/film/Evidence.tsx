@@ -1,5 +1,5 @@
 import { Sequence, useVideoConfig } from "remotion";
-import { Stage, Clip, Note, useTime, cue, ramp, C } from "./Design";
+import { Stage, Clip, useTime, cue, ramp, C } from "./Design";
 export function Evidence() {
   const t = useTime(),
     { fps, durationInFrames } = useVideoConfig(),
@@ -7,7 +7,7 @@ export function Evidence() {
     b = cue("ag_grid", "receipt", 6),
     c = durationInFrames / fps - 1.9;
   return (
-    <Stage dark label="AG Grid + AG Charts">
+    <Stage dark>
       <div
         style={{
           position: "absolute",
@@ -101,10 +101,6 @@ export function Evidence() {
           />
         </div>
       </Sequence>
-      <Note dark>
-        Recorded app interactions · authored AG Studio layouts · evaluation
-        build
-      </Note>
     </Stage>
   );
 }

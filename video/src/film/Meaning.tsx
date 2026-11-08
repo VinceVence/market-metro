@@ -1,11 +1,11 @@
 import role from "../../public/data/ontology-role.json";
-import { Stage, Icon, Note, ramp, useTime, cue, C } from "./Design";
+import { Stage, Icon, ramp, useTime, cue, C } from "./Design";
 export function Meaning() {
   const t = useTime(),
     split = cue("ontology", "recommendations", 4),
     future = cue("ontology", "later", 9);
   return (
-    <Stage label="Ontology → training decisions">
+    <Stage disclosure="Historical training example">
       <div
         style={{
           position: "absolute",
@@ -149,10 +149,6 @@ export function Meaning() {
           Labels, not model inputs
         </div>
       </div>
-      <Note>
-        Historical training example · 26-day mature labels · campaign gain
-        evaluated separately
-      </Note>
     </Stage>
   );
 }

@@ -99,6 +99,7 @@ def cue(name,word,fallback):
     voice=next(s for s in VOICE['scenes'] if s['id']==name)
     return next((w['startMs']/1000 for w in voice.get('words',[]) if ''.join(c for c in w['text'].lower() if c.isalnum())==word),fallback)
 events=[('sweep',1.5,.3),('notify',when('problem',.25),.35),
+        ('verified',when('problem',cue('problem','meet',6)),.24),
         ('notify',when('ontology',2.0),.22),('sweep',when('planner',.1),.3),
         ('verified',when('verifier',cue('verifier','selects',6)),.28),('notify',when('shopper',cue('shopper','recommendation',2)),.35),
         ('coin',when('shopper',cue('shopper','buy',4)),.45),('verified',when('shopper',cue('shopper','arrives',7)),.3),

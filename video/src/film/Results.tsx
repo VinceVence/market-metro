@@ -1,5 +1,5 @@
 import data from "../../public/data/case.json";
-import { Stage, HeroVideo, Note, ramp, useTime, cue, usd, C } from "./Design";
+import { Stage, HeroVideo, ramp, useTime, cue, usd, C } from "./Design";
 export function Results() {
   const t = useTime();
   const cards = [
@@ -26,7 +26,7 @@ export function Results() {
     ],
   ];
   return (
-    <Stage label="Same frozen market · vs fixed">
+    <Stage disclosure="Controlled benchmark · vs fixed">
       <HeroVideo file="film-world" zoom={1.1} opacity={0.09} />
       <div
         style={{
@@ -76,7 +76,6 @@ export function Results() {
           </div>
         </div>
       ))}
-      <Note>One paired 12-store simulation · not production earnings</Note>
     </Stage>
   );
 }

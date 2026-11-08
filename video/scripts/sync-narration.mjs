@@ -9,7 +9,7 @@ const clips=read('public/footage.json').clips;
 const components=['MarketScene','DemandScene','OntologyScene','PlannerScene','VerifierScene','ShopperScene','PayPalScene','ImpactScene','AGGridScene','ClosingScene'];
 // Short breathing room, with picture overlaps bridging adjacent sentences.
 const overlap=plan.overlapFrames||0;
-const durations=plan.scenes.map(s=>Math.ceil((audio.scenes.find(a=>a.id===s.id).seconds+.45)*plan.fps));
+const durations=plan.scenes.map(s=>Math.ceil((audio.scenes.find(a=>a.id===s.id).seconds+overlap/plan.fps+.12)*plan.fps));
 if(durations.reduce((a,b)=>a+b,0)>=180*plan.fps)throw Error('Natural narration exceeds three minutes; review pacing before changing the timeline.');
 const writes=[];let cursor=0;
 for(const [index,scene] of plan.scenes.entries()){
@@ -43,5 +43,8 @@ plan.production.stage='Editable Remotion preview assembled; final MP4 not export
 plan.production.audio='Local Kokoro-82M neural female voice (af_heart), optimistic and warm; no hosted speech API';
 plan.production.voiceId=audio.voice;plan.production.previewURL='http://localhost:3000/MarketMetroSubmission';
 for(const p of ['../docs/submission-video.json','public/data/plan.json'])writes.push([resolve(root,p),JSON.stringify(plan,null,2)+'\n']);
+const timestamp=ms=>new Date(Math.round(ms)).toISOString().slice(11,23);
+const captions=plan.scenes.flatMap(s=>audio.scenes.find(a=>a.id===s.id).captions.map(c=>`${timestamp(s.startFrame/plan.fps*1000+c.startMs)} --> ${timestamp(s.startFrame/plan.fps*1000+c.endMs)}\n${c.text}`));
+writes.push([resolve(root,'public/captions.vtt'),'WEBVTT\n\n'+captions.join('\n\n')+'\n']);
 for(const [path,value] of writes)writeFileSync(path,value);
 console.log(JSON.stringify({voice:audio.voice,frames:cursor,seconds:cursor/plan.fps,scenes:durations.length}));

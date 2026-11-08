@@ -1,13 +1,13 @@
 import { CanvasImage, Sequence, staticFile, useVideoConfig } from "remotion";
 import data from "../../public/data/case.json";
-import { Stage, Clip, Note, ramp, useTime, cue, usd, C } from "./Design";
+import { Stage, Clip, ramp, useTime, cue, usd, C } from "./Design";
 export function Payment() {
   const t = useTime(),
     { fps } = useVideoConfig(),
     r = data.receipt,
     cut = cue("paypal", "receipt", 8);
   return (
-    <Stage dark label="Sandbox · test funds">
+    <Stage dark disclosure="PayPal Sandbox · test funds">
       <div
         style={{
           position: "absolute",
@@ -74,9 +74,6 @@ export function Payment() {
           crop={[817, 143, 410, 430]}
         />
       </Sequence>
-      <Note dark>
-        Archived native Sandbox receipt · existing order · no real money
-      </Note>
     </Stage>
   );
 }

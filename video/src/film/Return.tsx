@@ -3,7 +3,6 @@ import {
   HeroVideo,
   Icon,
   ProductTable,
-  Note,
   ramp,
   useTime,
   cue,
@@ -15,7 +14,7 @@ export function Return() {
     paid = cue("shopper", "buy", 4),
     delivered = cue("shopper", "arrives", 7);
   return (
-    <Stage label="Day 35 → day 36">
+    <Stage>
       <HeroVideo
         file="film-return"
         zoom={1.14 + 0.06 * ramp(t, 0, 12)}
@@ -35,7 +34,10 @@ export function Return() {
         The recommendation reaches them.
       </div>
       <Person
-        happy={t >= paid}
+        emotion={-0.15 + 1.15 * ramp(t, paid, paid + 0.7)}
+        wave={ramp(t, delivered, delivered + 0.7)}
+        thinking={0.25 * (1 - ramp(t, paid, paid + 0.5))}
+        gaze={0.6}
         style={{ left: 360, top: 370, width: 290, height: 504 }}
       />
       <div
@@ -143,10 +145,6 @@ export function Return() {
         <Icon kind="check" size={48} />
         $96 purchase
       </div>
-      <Note>
-        Illustrated recommendation · saved simulated purchase · fixed left this
-        request unfilled
-      </Note>
     </Stage>
   );
 }

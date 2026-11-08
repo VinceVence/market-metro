@@ -1,25 +1,50 @@
 import type { CSSProperties } from "react";
 import { useTime, C } from "./Design";
 
-/** Original illustrative characters; never presented as additional app footage. */
+/** Original illustrative characters, with frame-driven expressions and gestures. */
 export function Person({
   role = "shopper",
   style = {},
   happy = false,
+  emotion,
+  thinking = 0,
+  wave = 0,
+  gaze = 0,
 }: {
   role?: "shopper" | "merchant";
   style?: CSSProperties;
   happy?: boolean;
+  emotion?: number;
+  thinking?: number;
+  wave?: number;
+  gaze?: number;
 }) {
   const t = useTime(),
-    merchant = role === "merchant";
+    merchant = role === "merchant",
+    feel = emotion ?? (happy ? 1 : 0.12);
+  const worry = Math.max(0, -feel),
+    think = Math.min(1, Math.max(0, thinking)),
+    greet = Math.min(1, Math.max(0, wave));
+  const blink = Math.min(1, Math.abs(((t + 0.35) % 4.1) - 2.5) / 0.075);
+  const handX = 151 + (134 - 151) * think + (188 - 151) * greet;
+  const handY =
+    197 +
+    (123 - 197) * think +
+    (77 - 197) * greet +
+    Math.sin(t * 7) * 7 * greet;
+  const elbowX = 180 - 8 * think + 7 * greet,
+    elbowY = 207 - 46 * think - 76 * greet;
   return (
     <div style={{ position: "absolute", width: 230, height: 400, ...style }}>
       <svg
         viewBox="0 0 230 400"
         width="100%"
         height="100%"
-        aria-label={merchant ? "Illustrated merchant" : "Illustrated shopper"}
+        aria-label={
+          merchant
+            ? "Expressive illustrated merchant"
+            : "Expressive illustrated shopper"
+        }
       >
         <ellipse
           cx="115"
@@ -29,7 +54,7 @@ export function Person({
           fill="#0a294b"
           opacity=".1"
         />
-        <g transform={`translate(0 ${Math.sin(t * 1.6) * 2})`}>
+        <g transform={`translate(0 ${Math.sin(t * 1.6) * 1.3 - 1.4 * greet})`}>
           <path
             d="M85 245 78 357M142 245l12 112"
             stroke="#243f60"
@@ -47,70 +72,130 @@ export function Person({
             fill={merchant ? "#f09b79" : "#169b91"}
           />
           {merchant && (
-            <path
-              d="M84 143h60v116H77Zm6-4v-20m46 20v-20"
-              fill="#123f67"
-              stroke="#123f67"
-              strokeWidth="9"
-            />
+            <>
+              <path
+                d="M84 143h60v116H77Zm6-4v-20m46 20v-20"
+                fill="#123f67"
+                stroke="#123f67"
+                strokeWidth="9"
+              />
+              <rect
+                x="93"
+                y="192"
+                width="44"
+                height="31"
+                rx="5"
+                fill="#ffffff33"
+              />
+            </>
           )}
           <path
-            d={merchant ? "M71 149 45 209 72 233" : "M72 150 48 210 72 250"}
+            d={`M72 150Q${45 + 10 * think} ${208 - 18 * think} ${72 + 20 * think} ${244 - 12 * think}`}
             stroke="#d99b76"
             strokeWidth="23"
             fill="none"
             strokeLinecap="round"
           />
           <path
-            d="M155 150 180 207 151 197"
+            d={`M155 150Q${elbowX} ${elbowY} ${handX} ${handY}`}
             stroke="#d99b76"
             strokeWidth="23"
             fill="none"
             strokeLinecap="round"
           />
-          <rect
-            x="139"
-            y="168"
-            width="35"
-            height="57"
-            rx="7"
-            fill="#122f50"
-            transform="rotate(-14 155 194)"
-          />
-          <rect
-            x="145"
-            y="175"
-            width="23"
-            height="36"
-            rx="3"
-            fill="#bfe8ff"
-            transform="rotate(-14 155 194)"
-          />
-          <rect x="98" y="101" width="31" height="37" rx="12" fill="#d99b76" />
-          <ellipse cx="114" cy="78" rx="49" ry="57" fill="#e8ae89" />
-          <path
-            d="M65 77Q52 8 113 12q61-3 53 69l-15-39q-26 21-70 11Z"
-            fill={merchant ? "#394053" : "#1d304a"}
-          />
-          <circle cx="97" cy="79" r="4" fill="#263545" />
-          <circle cx="132" cy="79" r="4" fill="#263545" />
-          <path
-            d={happy ? "M100 101q14 15 29-1" : "M105 106h18"}
-            fill="none"
-            stroke="#7a4c40"
-            strokeWidth="4"
-            strokeLinecap="round"
-          />
-          {merchant && (
+          <circle cx={handX} cy={handY} r="13" fill="#e8ae89" />
+          <g
+            opacity={1 - Math.max(think, greet)}
+            transform={`rotate(-14 ${handX} ${handY})`}
+          >
             <rect
-              x="93"
-              y="192"
-              width="44"
-              height="31"
-              rx="5"
-              fill="#ffffff33"
+              x={handX - 13}
+              y={handY - 30}
+              width="35"
+              height="57"
+              rx="7"
+              fill="#122f50"
             />
-          )}
+            <rect
+              x={handX - 7}
+              y={handY - 23}
+              width="23"
+              height="36"
+              rx="3"
+              fill="#bfe8ff"
+            />
+          </g>
+          <rect x="98" y="101" width="31" height="37" rx="12" fill="#d99b76" />
+          <g transform={`rotate(${-5 * think - 4 * worry + gaze * 2} 114 125)`}>
+            <ellipse cx="114" cy="78" rx="49" ry="57" fill="#e8ae89" />
+            <path
+              d="M65 77Q52 8 113 12q61-3 53 69l-15-39q-26 21-70 11Z"
+              fill={merchant ? "#394053" : "#1d304a"}
+            />
+            <path
+              d={`M87 ${63 + 3 * worry}Q97 ${58 - 5 * worry} 106 ${63 - 8 * worry}M122 ${63 - 8 * worry}Q133 ${58 - 5 * worry} 142 ${63 + 3 * worry}`}
+              stroke="#4d3b37"
+              strokeWidth="3.2"
+              fill="none"
+              strokeLinecap="round"
+            />
+            {[97, 132].map((x) => (
+              <g key={x}>
+                <ellipse
+                  cx={x}
+                  cy="79"
+                  rx="8"
+                  ry={Math.max(0.8, 6 * blink)}
+                  fill="#fff9ed"
+                />
+                <ellipse
+                  cx={x + gaze * 2.2}
+                  cy={79 + think * 1.1}
+                  rx="3.8"
+                  ry={Math.max(0.6, 4.1 * blink)}
+                  fill="#203549"
+                />
+                <circle
+                  cx={x + gaze * 2.2 + 1}
+                  cy="77"
+                  r="1"
+                  fill="#fff"
+                  opacity={blink}
+                />
+              </g>
+            ))}
+            <path
+              d="M114 84v8l4 2"
+              stroke="#cc8d70"
+              fill="none"
+              strokeWidth="2.3"
+              strokeLinecap="round"
+            />
+            <path
+              d={`M100 104Q114 ${104 + 14 * feel} 129 104`}
+              fill="none"
+              stroke="#805345"
+              strokeWidth={feel > 0.6 ? 4.6 : 3.7}
+              strokeLinecap="round"
+            />
+            <ellipse
+              cx="84"
+              cy="96"
+              rx="8"
+              ry="4"
+              fill="#de8c7c"
+              opacity={Math.max(0, feel) * 0.4}
+            />
+            <ellipse
+              cx="143"
+              cy="96"
+              rx="8"
+              ry="4"
+              fill="#de8c7c"
+              opacity={Math.max(0, feel) * 0.4}
+            />
+          </g>
+          <circle cx={handX} cy={handY} r="10" fill="#e8ae89" opacity={think} />
         </g>
       </svg>
     </div>

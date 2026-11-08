@@ -1,10 +1,10 @@
 import data from "../../public/data/case.json";
-import { Stage, Icon, Note, ramp, useTime, cue, usd, C } from "./Design";
+import { Stage, Icon, ramp, useTime, cue, usd, C } from "./Design";
 export function Testing() {
   const t = useTime(),
     selected = cue("verifier", "selects", 6);
   return (
-    <Stage label="Verifier">
+    <Stage disclosure="Mean modeled PayPal gain vs fixed · development trials">
       <div
         style={{
           position: "absolute",
@@ -72,10 +72,6 @@ export function Testing() {
           )}
         </div>
       ))}
-      <Note>
-        Mean modeled PayPal gain vs fixed · 3 development markets · not final
-        profit
-      </Note>
     </Stage>
   );
 }

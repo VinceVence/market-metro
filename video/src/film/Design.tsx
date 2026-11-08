@@ -10,6 +10,7 @@ import {
 } from "remotion";
 import { Video } from "@remotion/media";
 import narration from "../../public/narration-neural.json";
+import plan from "../../public/data/plan.json";
 import "../fonts";
 export const C = {
   ink: "#09284e",
@@ -45,15 +46,19 @@ export const usd = (n: number) =>
 
 export function Stage({
   children,
-  label,
   dark = false,
+  brand = true,
+  enter = true,
+  disclosure,
 }: {
   children: ReactNode;
-  label: string;
   dark?: boolean;
+  brand?: boolean;
+  enter?: boolean;
+  disclosure?: string;
 }) {
-  const { fps } = useVideoConfig();
-  const t = useTime();
+  const { fps } = useVideoConfig(),
+    t = useTime();
   return (
     <AbsoluteFill
       style={{
@@ -63,65 +68,43 @@ export function Stage({
           : "radial-gradient(ellipse at 60% 35%,#ffffff,#f0f5fb)",
         color: dark ? "#fff" : C.ink,
         overflow: "hidden",
-        opacity: ramp(t, 0, 10 / fps),
+        opacity: enter ? ramp(t, 0, plan.overlapFrames / fps) : 1,
       }}
     >
       {children}
-      <div
-        style={{
-          position: "absolute",
-          left: 80,
-          top: 42,
-          display: "flex",
-          gap: 13,
-          alignItems: "center",
-          fontSize: 23,
-          fontWeight: 700,
-          letterSpacing: 0.5,
-        }}
-      >
+      {brand && (
         <CanvasImage
           src={staticFile("brand/metro.svg")}
           premountFor={fps}
-          style={{ width: 34, height: 34 }}
+          style={{
+            position: "absolute",
+            left: 62,
+            top: 38,
+            width: 38,
+            height: 38,
+          }}
         />
-        MARKET METRO
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          right: 80,
-          top: 48,
-          fontSize: 21,
-          letterSpacing: 2,
-          color: dark ? "#9cc4e9" : C.muted,
-          textTransform: "uppercase",
-        }}
-      >
-        {label}
-      </div>
+      )}
+      {disclosure && (
+        <div
+          style={{
+            position: "absolute",
+            right: 62,
+            top: 42,
+            fontSize: 22,
+            color: dark ? "#c1d5eb" : "#61758a",
+            background: dark ? "#09284e99" : "#ffffffcc",
+            padding: "8px 14px",
+            borderRadius: 9,
+          }}
+        >
+          {disclosure}
+        </div>
+      )}
     </AbsoluteFill>
   );
 }
-export const Note = ({
-  children,
-  dark = false,
-}: {
-  children: ReactNode;
-  dark?: boolean;
-}) => (
-  <div
-    style={{
-      position: "absolute",
-      bottom: 22,
-      left: 80,
-      fontSize: 20,
-      color: dark ? "#9cb6d3" : C.muted,
-    }}
-  >
-    {children}
-  </div>
-);
+
 export function Icon({
   kind,
   size = 60,

@@ -5,14 +5,19 @@ export function Ending() {
   const t = useTime(),
     { fps } = useVideoConfig();
   return (
-    <Stage label="">
+    <Stage brand={false}>
       <HeroVideo file="film-return" zoom={1.12} opacity={0.14} />
       <Person
         role="merchant"
         happy
+        wave={1}
         style={{ left: 140, top: 520, width: 200, height: 348 }}
       />
-      <Person happy style={{ left: 1580, top: 520, width: 200, height: 348 }} />
+      <Person
+        happy
+        wave={1}
+        style={{ left: 1580, top: 520, width: 200, height: 348 }}
+      />
       <div
         style={{
           position: "absolute",

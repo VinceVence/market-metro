@@ -11,7 +11,7 @@ export const DemandScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
   {
-    "text": "The answer starts with your data.",
+    "text": "Could AI work out who to reach,",
     "startMs": 250,
     "endMs": 2375,
     "timestampMs": null,
@@ -19,25 +19,49 @@ export const DemandScene=()=>{
     "pageBreakAfter": true
   },
   {
-    "text": "Market Metro uses an ontology, a shared",
-    "startMs": 2475,
-    "endMs": 5350,
+    "text": "what to recommend, and test the campaign",
+    "startMs": 2425,
+    "endMs": 4450,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "map of shoppers, products and payments, to",
-    "startMs": 5400,
-    "endMs": 7995,
+    "text": "automatically?",
+    "startMs": 4525,
+    "endMs": 5825,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "turn scattered records into connected evidence.",
-    "startMs": 8045,
-    "endMs": 10870,
+    "text": "Meet Market Metro.",
+    "startMs": 5925,
+    "endMs": 7425,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Its ontology connects shoppers, products and payments",
+    "startMs": 7500,
+    "endMs": 10650,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "into one shared map, giving the agent",
+    "startMs": 10675,
+    "endMs": 13050,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "meaningful evidence to work with.",
+    "startMs": 13150,
+    "endMs": 15125,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
