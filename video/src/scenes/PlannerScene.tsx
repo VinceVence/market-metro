@@ -1,3 +1,4 @@
+import soundMix from '../../public/music/sound-design.json';
 import {Audio} from '@remotion/media';
 import {AbsoluteFill,staticFile,useVideoConfig} from 'remotion';
 import {BasicCaptions} from '../basic-captions.element';
@@ -7,7 +8,7 @@ export const PlannerScene=()=>{
   const {fps}=useVideoConfig();
   return <AbsoluteFill>
     <Planning/>
-    <Audio name="Heart · upbeat neural female narration" src={staticFile("narration-neural/planner.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
+    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-neural/planner.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {

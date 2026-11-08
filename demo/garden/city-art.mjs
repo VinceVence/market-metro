@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 
 // View-only architecture. None of these decorative props create commerce events.
-export function buildDistrict(layout, merchants) {
+export function buildDistrict(layout, merchants, {parkland=false}={}) {
   const root=new THREE.Group(),entities=[],mats=new Map(),unit=new THREE.BoxGeometry(1,1,1);
   const C={asphalt:0x465564,curb:0x9ca8ad,pave:0xd6d0c1,cream:0xf1e7d3,navy:0x203e4e,glass:0x527d8d,light:0xa9d0d4,metal:0x3e5662,wood:0xa67954,leaf:0x3d7563};
   const material=(color,extra={})=>{const k=color+JSON.stringify(extra);if(!mats.has(k))mats.set(k,new THREE.MeshStandardMaterial({color,roughness:.85,...extra}));return mats.get(k);};
@@ -122,6 +122,15 @@ export function buildDistrict(layout, merchants) {
     register(g,{type:'merchant',id:m.merchant_id,name,x:m.x,z:m.z,width:10.6,depth:8,height:h+(kind===5?2:1.6),number:String(m.displayNumber??i+1).padStart(2,'0'),color:hex,detail:'Fictional merchant · inspect stock & sales'});
   }
   const ground=new THREE.Group(),edge=layout.edge,outerX=edge+7;
+  if(parkland){
+    // Presentation-only park perimeter; it creates no routes, stock or events.
+    const park=new THREE.Group();
+    box(park,0,-.60,0,layout.width+36,.5,120,0x799b71);
+    box(park,0,-.31,0,layout.width+35,.12,119,0x9db98a);
+    for(const x of [-edge-17,edge+17])for(const z of [-43,-25,-7,12,30,47])tree(park,x,z,1.25);
+    for(const x of layout.centers.filter((_,i)=>i%2===0)){tree(park,x,54,1.15);tree(park,x,-56,1.2);}
+    merge(park);root.add(park);
+  }
   box(ground,0,-.1,0,layout.width+10,1.5,96,0x889995);box(ground,0,.68,0,layout.width+9,.14,95,C.pave);
   box(ground,0,.77,0,layout.width+8,.12,6.5,C.asphalt);
   for(const x of [-outerX,outerX])box(ground,x,.77,0,6,.12,92,C.asphalt);

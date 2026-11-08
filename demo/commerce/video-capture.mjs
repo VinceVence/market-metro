@@ -3,12 +3,12 @@ import {merchantWindow} from './merchant-window.mjs';
 // A presentation-only camera over the same renderer and saved frames as the app.
 // Merchant isolation changes only the render window, never the economic records.
 const data=await fetch('/data/judge-reactivation.json').then(r=>r.json());
-const garden=createGarden(document.getElementById('world'),{autoFit:true});
+const garden=createGarden(document.getElementById('world'),{autoFit:true,parkland:true});
 garden.setNamesVisible(false);
 function shot(kind){
- const day=kind==='return'?35:1,source=data.frames[day];
- let frame=source;
- if(kind!=='world'){
+ const day=kind==='return'||kind==='traffic'?35:1,source=data.frames[day];
+ let frame=kind==='traffic'?{...source,visibleCustomerLimit:16}:source;
+ if(kind!=='world'&&kind!=='traffic'){
   const index=source.merchants.findIndex(m=>m.merchant_id===data.shopper.merchantId);
   frame=merchantWindow(source,index,1).frame;
   frame={...frame,runId:frame.runId+'-'+kind,customers:kind==='return'?source.customers.filter(c=>c.id===data.shopper.id):[],featuredIds:kind==='return'?[data.shopper.id]:[]};
@@ -21,6 +21,7 @@ function shot(kind){
 document.getElementById('world-shot').onclick=()=>shot('world');
 document.getElementById('shop-shot').onclick=()=>shot('shop');
 document.getElementById('return-shot').onclick=()=>shot('return');
+document.getElementById('traffic-shot').onclick=()=>shot('traffic');
 document.getElementById('orbit').onclick=()=>garden.rotate();
 document.getElementById('hide').onclick=()=>document.body.classList.add('recording');
 document.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='h')document.body.classList.toggle('recording');});

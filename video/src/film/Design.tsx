@@ -44,6 +44,45 @@ export const usd = (n: number) =>
     n,
   );
 
+export function Brand({ opacity = 1 }: { opacity?: number }) {
+  const { fps } = useVideoConfig();
+  return (
+    <div
+      style={{
+        position: "absolute",
+        left: 44,
+        top: 32,
+        display: "flex",
+        alignItems: "center",
+        gap: 15,
+        padding: "10px 20px 10px 10px",
+        borderRadius: 24,
+        background: "#fff7e9",
+        boxShadow: "0 9px 0 #12334b10,0 15px 35px #12334b16",
+        opacity,
+        zIndex: 5,
+      }}
+    >
+      <CanvasImage
+        src={staticFile("brand/metro.svg")}
+        premountFor={fps}
+        style={{ width: 64, height: 64 }}
+      />
+      <div
+        style={{
+          fontFamily: "DM Sans",
+          fontSize: 31,
+          fontWeight: 750,
+          letterSpacing: -1.1,
+          color: "#14354e",
+        }}
+      >
+        Market <span style={{ color: "#087dd6" }}>Metro</span>
+      </div>
+    </div>
+  );
+}
+
 export function Stage({
   children,
   dark = false,
@@ -65,26 +104,14 @@ export function Stage({
         fontFamily: "DM Sans",
         background: dark
           ? "radial-gradient(ellipse at 65% 35%,#153f70,#06172e 78%)"
-          : "radial-gradient(ellipse at 60% 35%,#ffffff,#f0f5fb)",
+          : "#ffffff",
         color: dark ? "#fff" : C.ink,
         overflow: "hidden",
         opacity: enter ? ramp(t, 0, plan.overlapFrames / fps) : 1,
       }}
     >
       {children}
-      {brand && (
-        <CanvasImage
-          src={staticFile("brand/metro.svg")}
-          premountFor={fps}
-          style={{
-            position: "absolute",
-            left: 62,
-            top: 38,
-            width: 38,
-            height: 38,
-          }}
-        />
-      )}
+      {brand && <Brand />}
       {disclosure && (
         <div
           style={{
@@ -236,12 +263,14 @@ export function HeroVideo({
   x = 0,
   y = 0,
   opacity = 1,
+  rate = 1,
 }: {
   file: string;
   zoom?: number;
   x?: number;
   y?: number;
   opacity?: number;
+  rate?: number;
 }) {
   const { fps } = useVideoConfig();
   return (
@@ -253,6 +282,7 @@ export function HeroVideo({
         src={staticFile("footage/" + file + ".mp4")}
         muted
         loop
+        playbackRate={rate}
         premountFor={fps}
         objectFit="cover"
         style={{

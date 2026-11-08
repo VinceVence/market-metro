@@ -1,6 +1,6 @@
 # Market Metro video preview
 
-An editable **2:00** Remotion composition with recurring illustrated characters, connected story graphics, actual app evidence, an original upbeat music bed and event sound effects and upbeat neural female narration. A quiet shopper gets a useful recommendation, purchases, and receives the item; the film follows the agent tools, PayPal proof and AG Grid evidence behind that outcome.
+An editable **2:04** Remotion composition with recurring illustrated characters, connected story graphics, actual app evidence, an original upbeat music bed and event sound effects and upbeat neural female narration. A quiet shopper gets a useful recommendation, purchases, and receives the item; the film follows the agent tools, PayPal proof and AG Grid evidence behind that outcome.
 
 ## Preview
 
@@ -14,7 +14,7 @@ Open http://localhost:3000/MarketMetroSubmission and press Play. The main video 
 
 ## Evidence and media
 
-- Eleven retained clips contain actual app recordings and clean renderer-camera shots: 1,551 frames sampled at roughly 15 fps, encoded at 30 fps. No app UI or financial rows were fabricated. Some recordings are gently retimed to fit the voiceover.
+- Thirteen retained clips contain actual app recordings and clean renderer-camera shots: 1,731 frames sampled at roughly 15 fps, encoded at 30 fps. No app UI or financial rows were fabricated. Some recordings are gently retimed to fit the voiceover.
 - The app footage uses the same saved 12-store campaign. Shopper behavior and financial gains are simulated; the $96 receipt is archived native PayPal Sandbox evidence using fictitious funds.
 - Native AG Grid sorting, the decision drill-down, a custom PayPal widget and dashboard resizing were performed in the app. Its layouts are authored, not AI-generated.
 - The narrator is the local Kokoro-82M stock female preset **af_heart**, at 1.02 synthesis speed. No hosted speech service or voice cloning was used.
@@ -22,7 +22,7 @@ Open http://localhost:3000/MarketMetroSubmission and press Play. The main video 
 
 ## Merchant, problem, question, introduction
 
-The film opens with an aerial metro view, pushes into the storefront, and introduces Leo, an illustrative merchant persona struggling for days to bring shoppers back. The automation question follows, immediately before Market Metro appears. Characters blink, look toward evidence, frown, think and brighten after the purchase. Opening shots share matching positions and dissolve over eighteen frames.
+The film opens with “It was a normal day for Leo,” a landscaped native 3D metro view on white. Recorded native pedestrians move through the market while Leo’s illustrated expression and WHO/WHAT thought cards carry the story. The automation question follows, immediately before Market Metro appears. Characters blink, look toward evidence, frown, think and brighten after the purchase. Opening shots share matching positions and dissolve over eighteen frames.
 
 The ontology then connects shopper/product/payment meaning, separates recommendation and inquiry training tasks, and restricts predictors to information available before contact. Its historical cohort counts are checked against the saved study; primary campaign gain is not attributed solely to ontology.
 
@@ -34,9 +34,15 @@ The question is a separate slower take with a 0.6-second pause and a rising fina
 
 The payoff compares fixed and agent purchase counts, then highlights incremental volume, merchant contribution and modeled PayPal net. All displayed values are read from the saved case. No new financial result is claimed.
 
+## Logo and visual separation
+
+The original route-M mark is shared by `public/brand/metro.svg` and `../demo/commerce/mark.svg`. The new logo and kinetic WHO/WHAT cards remain on a clean white canvas. The custom walking scene was removed.
+
+`demo/video-capture.html` opts into a presentation-only grass/tree perimeter and offers a native traffic shot. It changes no economic records. Native routes are recorded immediately after the saved frame replay starts, with a small representative crowd to avoid congestion. The 3D renderer and gait are the app's own, not newly animated cartoon legs.
+
 ## Sound and pacing
 
-The continuous 120 BPM score and thirteen event cues are original local synthesis (`scripts/score.py`). Music ducks under narration. `src/Soundtrack.tsx` keeps each cue editable. The story runs 120.8 seconds with eighteen-frame picture dissolves and approximately 0.12–0.15 seconds between adjacent spoken segments. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
+The continuous 120 BPM score and twenty-one event cues are original local synthesis (`scripts/score.py`). Music ducks under narration. Birds, doorbell, footsteps, page turns and pop cues are synthesized locally. The measured master gain is shared by every voice and effect, and is already baked into the music bed. `src/Soundtrack.tsx` keeps each cue editable. The story runs 124.4 seconds with eighteen-frame picture dissolves and approximately 0.12–0.15 seconds between adjacent spoken segments. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
 
 ## Edit and verify
 
@@ -68,4 +74,4 @@ Download the official [ONNX model](https://github.com/thewh1teagle/kokoro-onnx/r
 - Praat-Parselmouth 0.4.7 (GPL-3.0-or-later) is an optional local audio-production dependency; it is not shipped in the app runtime.
 - DM Sans retains its OFL in `public/fonts/`. Brand marks remain their owners’ property. AG Studio evaluation notices remain in the footage; see the parent repository’s third-party notices.
 
-The clean shop shots use `demo/video-capture.html`, the existing Three.js renderer and saved data. Isolating a merchant is a render-window change only. APAC was a read-only storytelling reference; no APAC code or cloud project was changed.
+The landscape and clean shop shots use `demo/video-capture.html`, the existing Three.js renderer and saved data. Isolating a merchant is a render-window change only. APAC was a read-only storytelling reference; no APAC code or cloud project was changed.

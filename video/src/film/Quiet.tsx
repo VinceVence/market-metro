@@ -1,86 +1,97 @@
 import { CanvasImage, staticFile, useVideoConfig } from "remotion";
-import { Stage, HeroVideo, Icon, ramp, useTime, cue, C } from "./Design";
-import { Person, Store } from "./StoryArt";
+import { Stage, HeroVideo, Icon, ramp, useTime, cue, Brand } from "./Design";
+import { Person } from "./StoryArt";
 export function Quiet() {
   const t = useTime(),
     { fps } = useVideoConfig(),
-    intro = cue("problem", "meet", 6),
-    map = cue("problem", "ontology", 9),
-    reveal = ramp(t, intro, intro + 0.9);
+    intro = cue("problem", "meet", 3),
+    map = cue("problem", "ontology", 5),
+    reveal = ramp(t, intro, intro + 0.85);
   return (
     <Stage brand={false}>
-      <HeroVideo file="film-world" zoom={1.04} opacity={0.08} />
-      <div
-        style={{ position: "absolute", inset: 0, opacity: 1 - 0.88 * reveal }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 884,
-            height: 200,
-            background: "#dce8f3",
-          }}
-        />
-        <Store style={{ left: 40, top: 220, width: 1050, height: 758 }} />
-        <Person
-          emotion={-0.15}
-          gaze={-0.6}
-          thinking={0.25}
-          style={{
-            left: 1370,
-            top: 520,
-            width: 225,
-            height: 391,
-            opacity: 0.6 * (1 - reveal),
-          }}
-        />
-      </div>
+      <HeroVideo
+        file="film-traffic"
+        zoom={1.04}
+        opacity={0.12 * (1 - reveal)}
+      />
       <Person
         role="merchant"
-        emotion={-0.65 + 0.9 * reveal}
-        thinking={1 - 0.75 * reveal}
-        gaze={0.8}
+        emotion={-0.7 + 1.2 * reveal}
+        thinking={1 - 0.8 * reveal}
+        gaze={0.7}
         style={{
-          left: 680 - 420 * reveal,
-          top: 355 + 60 * reveal,
-          width: 330 - 70 * reveal,
-          height: 574 - 122 * reveal,
+          left: 420 - 230 * reveal,
+          top: 350 + 30 * reveal,
+          width: 320,
+          height: 557,
+          filter: "drop-shadow(0px 9px 5px #14394b20)",
         }}
       />
       <div
         style={{
           position: "absolute",
-          left: 1085,
+          left: 1040,
           top: 235,
-          width: 735,
-          fontSize: 77,
-          lineHeight: 1.18,
-          fontWeight: 650,
-          letterSpacing: -2,
+          width: 730,
+          padding: "42px 45px",
+          boxSizing: "border-box",
+          borderRadius: "38px 38px 38px 6px",
+          background: "#fff4da",
+          border: "3px solid #214a65",
+          boxShadow: "9px 12px 0 #24465716",
+          rotate: "-2deg",
           opacity: 1 - reveal,
         }}
       >
-        Could AI do this
-        <br />
-        for Leo?
+        <div
+          style={{
+            fontSize: 70,
+            lineHeight: 1.15,
+            fontWeight: 750,
+            letterSpacing: -2,
+          }}
+        >
+          Could AI do
+          <br />
+          this for Leo?
+        </div>
+        <svg width="380" height="22" style={{ marginTop: 18 }}>
+          <path
+            d="M3 12Q180 -6 375 11"
+            stroke="#edaa75"
+            strokeWidth="11"
+            fill="none"
+            strokeLinecap="round"
+          />
+        </svg>
       </div>
       <div
         style={{
           position: "absolute",
-          left: 755,
-          top: 165,
-          width: 1080,
-          textAlign: "center",
-          fontSize: 112,
-          fontWeight: 700,
-          letterSpacing: -5,
+          left: 795,
+          top: 175,
+          display: "flex",
+          alignItems: "center",
+          gap: 24,
           opacity: reveal,
-          translate: `0px ${(1 - reveal) * 25}px`,
+          translate: `0px ${(1 - reveal) * 40}px`,
         }}
       >
-        Market Metro
+        <CanvasImage
+          src={staticFile("brand/metro.svg")}
+          premountFor={fps}
+          style={{ width: 112, height: 112 }}
+        />
+        <div
+          style={{
+            fontSize: 91,
+            fontWeight: 750,
+            letterSpacing: -4,
+            color: "#173d57",
+          }}
+        >
+          Market Metro
+        </div>
       </div>
       <div style={{ position: "absolute", inset: 0, opacity: reveal }}>
         <svg
@@ -90,7 +101,7 @@ export function Quiet() {
         >
           <path
             d="M1260 480V555M920 690H1125M1395 690H1600"
-            stroke="#a8c6df"
+            stroke="#9fc3d7"
             strokeWidth="6"
           />
           {[0, 1].map((i) => (
@@ -99,7 +110,7 @@ export function Quiet() {
               cx={920 + ((t * 95 + i * 330) % 680)}
               cy="690"
               r="8"
-              fill={C.blue}
+              fill="#dfb575"
             />
           ))}
         </svg>
@@ -111,71 +122,63 @@ export function Quiet() {
             width: 270,
             height: 270,
             borderRadius: 135,
-            background: C.blue,
+            background: "#087fba",
             color: "#fff",
             display: "grid",
             alignContent: "center",
             justifyItems: "center",
             gap: 16,
-            boxShadow: "0 20px 65px #0877e525",
+            border: "4px solid #b7e1e5",
           }}
         >
           <Icon kind="model" size={75} />
           <div
             style={{
               fontSize: 42,
-              fontWeight: 600,
+              fontWeight: 650,
               opacity: ramp(t, map - 0.2, map + 0.3),
             }}
           >
             Ontology
           </div>
         </div>
-        <div
-          style={{
-            position: "absolute",
-            left: 1165,
-            top: 310,
-            width: 190,
-            height: 190,
-            borderRadius: 30,
-            background: "#fff",
-            display: "grid",
-            alignContent: "center",
-            justifyItems: "center",
-            gap: 18,
-          }}
-        >
-          <Icon kind="store" size={65} color={C.blue} />
-          <div style={{ fontSize: 30 }}>Products</div>
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            left: 745,
-            top: 595,
-            width: 195,
-            height: 200,
-            borderRadius: 30,
-            background: "#fff",
-            display: "grid",
-            alignContent: "center",
-            justifyItems: "center",
-            gap: 18,
-          }}
-        >
-          <Icon kind="person" size={65} color={C.blue} />
-          <div style={{ fontSize: 30 }}>Shoppers</div>
-        </div>
+        {[
+          ["store", "Products", 1165, 320],
+          ["person", "Shoppers", 745, 595],
+        ].map(([icon, label, x, y]) => (
+          <div
+            key={String(label)}
+            style={{
+              position: "absolute",
+              left: Number(x),
+              top: Number(y),
+              width: 195,
+              height: 195,
+              borderRadius: 28,
+              background: "#f5f9fc",
+              border: "1px solid #c9dce8",
+              color: "#194056",
+              display: "grid",
+              alignContent: "center",
+              justifyItems: "center",
+              gap: 18,
+            }}
+          >
+            <Icon kind={String(icon)} size={65} color="#147e9c" />
+            <div style={{ fontSize: 30, fontWeight: 600 }}>{label}</div>
+          </div>
+        ))}
         <div
           style={{
             position: "absolute",
             left: 1580,
             top: 595,
             width: 220,
-            height: 200,
-            borderRadius: 30,
-            background: "#fff",
+            height: 195,
+            borderRadius: 28,
+            background: "#f5f9fc",
+            border: "1px solid #c9dce8",
+            color: "#194056",
             display: "grid",
             alignContent: "center",
             justifyItems: "center",
@@ -187,9 +190,10 @@ export function Quiet() {
             premountFor={fps}
             style={{ width: 49, height: 58 }}
           />
-          <div style={{ fontSize: 30 }}>Payments</div>
+          <div style={{ fontSize: 30, fontWeight: 600 }}>Payments</div>
         </div>
       </div>
+      <Brand />
     </Stage>
   );
 }

@@ -1,30 +1,35 @@
-# Market Metro merchant story
+# Market Metro — a normal day for Leo
 
-**Preview ready · 2:00.8 · 1920 × 1080 · 30 fps**
+**Preview ready · 2:04.4 · 1920 × 1080 · 30 fps**
 
-Aerial metro → storefront → meet Leo → days of trying to reach customers → “Could AI do this for Leo?” → Market Metro → ontology and tested campaign → purchase, PayPal receipt and measured benefit.
+“It was a normal day for Leo.” The city flyover turns into a native market scene: the shop opens, people pass, days go by, and Leo cannot tell who to reach or what to offer. Animated WHO/WHAT thought cards frame the problem before the rising question and Market Metro reveal.
 
 [Open the preview](http://localhost:3000/MarketMetroSubmission) · [Narration](video-narration.txt) · [Captions](../video/public/captions.vtt)
 
-| Start | Story beat |
+| Start | Beat |
 |---|---|
-| 0:00.0 | Above the metro, into Leo’s shop |
-| 0:15.5 | The question, then Market Metro |
-| 0:27.3 | The right data for the question |
-| 0:40.2 | From understanding to action |
-| 0:52.9 | Test before sending |
-| 1:03.1 | The recommendation becomes a purchase |
-| 1:15.1 | A payment you can trace |
-| 1:26.3 | What changed |
-| 1:42.7 | Follow the full trail |
-| 1:52.5 | Agentic commerce that learns |
+| 0:00.0 | A normal day for Leo |
+| 0:19.1 | The question, then Market Metro |
+| 0:30.9 | The right data for the question |
+| 0:43.8 | From understanding to action |
+| 0:56.6 | Test before sending |
+| 1:06.8 | The recommendation becomes a purchase |
+| 1:18.7 | A payment you can trace |
+| 1:29.9 | What changed |
+| 1:46.4 | Follow the full trail |
+| 1:56.1 | Agentic commerce that learns |
 
-## Delivery and payoff
+## Art and motion
 
-- The question is synthesized separately at a slower pace, with a rising final word and a 0.6-second pause before the introduction. Local Praat PSOLA shapes the stock voice without changing timing. The processed ending measures approximately four semitones of upward movement.
-- DM Sans subtitles are visible in short phrases near the lower edge. Unrelated footer commentary stays removed; synchronized WebVTT remains available.
-- The impact scene explicitly compares 627 purchases for fixed rules with 643 for the agent. Sixteen highlighted payment icons correspond to the net increase.
-- It then shows +$2,345 payment volume, +$1,024.86 merchant contribution including inventory, and +$114.96 modeled PayPal net after $0.032325 estimated inference cost. These are the existing controlled benchmark results, not new measurements or production earnings.
-- The $96 Sandbox receipt is the archived native capture for an existing order. Leo is an illustrative persona, not an identity in the receipt.
-- The ontology explanation and its separate historical training cohort are preserved. The campaign's entire gain is not attributed solely to ontology.
-- Local voice, music and pitch processing only; no paid API calls, payments, APAC changes or subagents. This is an editable preview; final MP4 export and upload remain separate.
+- Clean white canvas restored. The opening actual 3D map gains a grass perimeter and trees through an opt-in presentation-only renderer flag. Live economy settings remain unchanged.
+- Recorded native 3D pedestrians replace the rejected custom 2D walk cycle. The camera presents 16 representative shoppers plus the featured shopper, using the saved day-35 records. The usable take contains 79 distinct captured frames over 10 seconds and is gently retimed.
+- The expressive Leo illustration remains stationary in the foreground. WHO/WHAT cards emphasize his decision with the new backed route-M logo at upper left.
+- The original music, morning birds, shop bell, footsteps, page turns, thought-card pops and payment cues remain. A shared measured master gain keeps the mix below clipping.
+- Subtitles remain visible near the lower edge; extra footer commentary stays removed. Question intonation and the measured payoff are preserved.
+
+## Proof and boundaries
+
+- Leo and the walking street are illustrative narrative scenes. Financial and decision evidence still comes from the saved campaign, native PayPal Sandbox capture and recorded AG Grid interactions.
+- The paired benchmark remains 627 fixed vs 643 agent purchases, +$2,345 payment volume, +$1,024.86 merchant contribution including inventory, and +$114.96 modeled PayPal net after estimated inference cost. No financial outcome is newly measured or inflated.
+- The historical ontology training counts and prediction restrictions remain separate evidence. The full campaign gain is not attributed solely to ontology.
+- No paid API calls, new payments, APAC changes or subagents. Final MP4 export and upload remain separate from the editable preview.

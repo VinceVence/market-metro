@@ -1,160 +1,195 @@
-import { Stage, HeroVideo, Icon, ramp, useTime, cue, C } from "./Design";
-import { Person, Store } from "./StoryArt";
+import { Stage, HeroVideo, Icon, Brand, ramp, useTime, cue } from "./Design";
+import { Person } from "./StoryArt";
 export function Merchant() {
   const t = useTime(),
-    meet = cue("market", "meet", 3.5),
-    days = cue("market", "days", 6),
-    worry = cue("market", "struggled", 6.5),
-    records = cue("market", "checks", 8);
-  const flight = ramp(t, 0.5, meet + 0.25),
-    zoom = 1 + 2.2 * flight,
-    close = ramp(t, meet - 0.12, meet + 0.28),
-    story = ramp(t, meet + 0.4, meet + 1.3);
-  const concerned = ramp(t, worry, worry + 1),
-    thinking = ramp(t, records, records + 0.8);
+    opened = cue("market", "opened", 3),
+    people = cue("market", "people", 6),
+    days = cue("market", "days", 12),
+    data = cue("market", "data", 15),
+    who = cue("market", "who", 17),
+    what = cue("market", "what", 18);
+  const close = ramp(t, opened - 0.25, opened + 0.45),
+    thought = ramp(t, data - 0.5, data + 0.5),
+    concern = ramp(t, people, days);
   return (
     <Stage brand={false} enter={false}>
       <HeroVideo
-        file="film-world"
-        zoom={zoom}
-        x={310 * zoom * flight}
-        y={140 * zoom * flight}
-        opacity={(1 - close) * (1 - story)}
+        file="film-park"
+        zoom={1 + 0.18 * ramp(t, 0.2, opened)}
+        opacity={1 - close}
       />
-      <HeroVideo
-        file="film-shop"
-        zoom={1.15 + 0.04 * ramp(t, meet, meet + 2)}
-        x={-23}
-        y={184}
-        opacity={close * (1 - story)}
-      />
-      <div style={{ position: "absolute", inset: 0, opacity: story }}>
-        <HeroVideo file="film-world" zoom={1.04} opacity={0.08} />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: close * (1 - 0.88 * thought),
+        }}
+      >
+        <HeroVideo file="film-traffic" rate={0.78} zoom={1.04} />
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 90,
+          top: 125,
+          rotate: "-3deg",
+          opacity: 1 - ramp(t, opened - 0.4, opened + 0.15),
+        }}
+      >
         <div
           style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 884,
-            height: 200,
-            background: "#dce8f3",
-          }}
-        />
-        <Store style={{ left: 40, top: 220, width: 1050, height: 758 }} />
-        <Person
-          role="merchant"
-          emotion={0.65 - 1.3 * concerned}
-          wave={1 - concerned}
-          thinking={thinking}
-          gaze={0.4 + thinking * 0.4}
-          style={{ left: 680, top: 355, width: 330, height: 574 }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            left: 810,
-            top: 300,
-            fontSize: 48,
-            fontWeight: 650,
-            color: C.ink,
-            opacity: 1 - ramp(t, days + 2.3, days + 2.9),
+            display: "inline-block",
+            padding: "10px 20px",
+            background: "#fff2d7",
+            borderRadius: 13,
+            fontSize: 26,
+            fontWeight: 700,
+            color: "#183e58",
           }}
         >
-          Leo
+          FOR LEO, IT WAS A
         </div>
-        <Person
-          emotion={-0.15}
-          gaze={-0.6}
-          thinking={0.25}
+        <div
           style={{
-            left: 1370,
-            top: 520,
-            width: 225,
-            height: 391,
-            opacity: 1 - 0.4 * concerned,
+            fontSize: 101,
+            fontWeight: 800,
+            lineHeight: 1.05,
+            letterSpacing: -4,
+            color: "#103b5b",
+            textShadow: "3px 4px 0 #ffffff",
           }}
-        />
+        >
+          normal day.
+        </div>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: 580,
+          background: "#fff",
+          borderRadius: "0 100px 100px 0",
+          opacity: close * (1 - thought),
+        }}
+      />
+      <Person
+        role="merchant"
+        emotion={0.75 - 1.45 * concern}
+        wave={1 - ramp(t, people, people + 0.8)}
+        thinking={thought}
+        gaze={0.65}
+        style={{
+          left: 155 + 265 * thought,
+          top: 410 - 60 * thought,
+          width: 265 + 55 * thought,
+          height: 461 + 96 * thought,
+          opacity: close,
+          filter: "drop-shadow(0px 9px 5px #14394b25)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          left: 205,
+          top: 335,
+          fontSize: 48,
+          fontWeight: 700,
+          color: "#153c57",
+          opacity: close * (1 - ramp(t, people + 0.1, people + 0.8)),
+        }}
+      >
+        Leo
+      </div>
+      <div style={{ position: "absolute", inset: 0, opacity: thought }}>
+        <svg
+          width="1920"
+          height="1080"
+          style={{ position: "absolute", inset: 0 }}
+        >
+          <path
+            d="M710 460Q860 300 1070 370M710 470Q1080 780 1430 650"
+            stroke="#6a9bb5"
+            strokeWidth="4"
+            strokeDasharray="10 12"
+            fill="none"
+          />
+        </svg>
         <div
           style={{
             position: "absolute",
-            left: 1375,
-            top: 210,
-            width: 300,
-            height: 260,
-            borderRadius: 30,
-            background: "#fff",
-            boxShadow: "0 20px 65px #183c5b15",
-            opacity: ramp(t, days - 0.3, days + 0.3),
+            left: 1050,
+            top: 250,
+            width: 370,
+            height: 285,
+            background: "#fff5df",
+            border: "3px solid #234b64",
+            borderRadius: 28,
+            boxShadow: "8px 10px 0 #23485814",
+            rotate: "-3deg",
+            padding: 32,
+            boxSizing: "border-box",
+            opacity: ramp(t, who - 0.8, who - 0.25),
           }}
         >
           <div
             style={{
-              height: 50,
-              background: C.blue,
-              borderRadius: "30px 30px 0 0",
-            }}
-          />
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4,1fr)",
-              gap: 13,
-              padding: 24,
+              display: "flex",
+              gap: 12,
+              color: "#197f99",
+              marginBottom: 14,
             }}
           >
-            {Array.from({ length: 12 }, (_, i) => (
-              <div
-                key={i}
-                style={{
-                  height: 34,
-                  borderRadius: 6,
-                  background: "#e1edf7",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: C.blue,
-                    opacity: ramp(t, days + i * 0.25, days + i * 0.25 + 0.3),
-                  }}
-                />
-              </div>
+            {[0, 1, 2].map((i) => (
+              <Icon key={i} kind="person" size={43} />
             ))}
           </div>
-        </div>
-        {[
-          ["data", "sales", 1100, 410],
-          ["store", "product", 1120, 200],
-          ["card", "payments", 1700, 500],
-        ].map(([kind, word, x, y]) => (
           <div
-            key={String(kind)}
             style={{
-              position: "absolute",
-              left: Number(x),
-              top: Number(y),
-              width: 130,
-              height: 130,
-              borderRadius: 24,
-              background: "#fff",
-              boxShadow: "0 15px 45px #12345615",
-              display: "grid",
-              placeItems: "center",
-              opacity: ramp(
-                t,
-                cue("market", String(word), records) - 0.2,
-                cue("market", String(word), records) + 0.4,
-              ),
-              rotate: `${Math.sin(t * 0.7 + Number(x)) * 3}deg`,
+              fontSize: 77,
+              lineHeight: 1,
+              fontWeight: 800,
+              letterSpacing: -3,
             }}
           >
-            <Icon kind={String(kind)} size={62} color={C.blue} />
+            WHO?
           </div>
-        ))}
+          <div style={{ fontSize: 34, marginTop: 12 }}>Who to reach</div>
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            left: 1430,
+            top: 570,
+            width: 350,
+            height: 270,
+            background: "#def0f1",
+            border: "3px solid #234b64",
+            borderRadius: 28,
+            boxShadow: "8px 10px 0 #23485814",
+            rotate: "3deg",
+            padding: 30,
+            boxSizing: "border-box",
+            opacity: ramp(t, what - 0.8, what - 0.25),
+          }}
+        >
+          <Icon kind="store" size={54} color="#16758f" />
+          <div
+            style={{
+              fontSize: 73,
+              lineHeight: 1,
+              fontWeight: 800,
+              letterSpacing: -3,
+              marginTop: 6,
+            }}
+          >
+            WHAT?
+          </div>
+          <div style={{ fontSize: 32, marginTop: 10 }}>What to offer</div>
+        </div>
       </div>
+      <Brand opacity={ramp(t, data - 0.5, data + 0.2)} />
     </Stage>
   );
 }

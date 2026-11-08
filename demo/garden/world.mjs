@@ -6,7 +6,7 @@ import {createLayout,createWalker,requestDestination,updateWalker,homePoint,shop
 const shirtColors=[0xc67f5b,0x648ca5,0xc6a855,0x8679a8,0x6e9572,0xb17b91];
 const skins=[0xe0b38e,0xc59068,0x9b6a4d,0xedc19b,0xb8835c,0xd1a47d];
 
-export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,autoFit=false,night=false,paymentLabel}={}){
+export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,autoFit=false,night=false,paymentLabel,parkland=false}={}){
   let frame=null,layout=createLayout(8),lastRun=null,lastTick=-1,scene,renderer,camera,controls,world,raf=0;
   let hovered=null,selected=null,pointerInside=false,dragging=false,down=null,lastTime=0,statsTime=0,rotationTarget=null;
   const pointer=new THREE.Vector2(),ray=new THREE.Raycaster(),actors=new Map(),pickables=[],labels=[],materials=new Map();
@@ -43,7 +43,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
   }
   function environment(){
     const merchants=frame?.merchants||layout.merchants.map((m,i)=>({position:i,name:['Willow Goods','Oak & Ink','Corner Supply','Sunroom Market','River General','Juniper House','The Desk Shop','Clover Trading'][i%8]}));
-    city=buildDistrict(layout,merchants);world=city.root;scene.add(world);pickables.length=0;labelLayer.replaceChildren();labels.length=0;
+    city=buildDistrict(layout,merchants,{parkland});world=city.root;scene.add(world);pickables.length=0;labelLayer.replaceChildren();labels.length=0;
     for(const entity of city.entities){if(entity.type==='payments'&&paymentLabel)entity.name=paymentLabel;entity.group.traverse(o=>{if(o.isMesh)pickables.push(o);});makeLabel(entity);}
     const commerce={type:'commerce',id:'commerce',name:'Customers & shops',detail:'Offers → purchases → delivery outcomes',x:0,z:0,height:1.0,number:'↔',color:'#8a7046'};makeLabel(commerce);
     van={group:city.van,target:null,state:'parked',pause:0};parent.dataset.renderState='ready';parent.dataset.mode=mode;
