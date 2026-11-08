@@ -1,6 +1,6 @@
 # Market Metro video preview
 
-An editable **2:04** Remotion composition with recurring illustrated characters, connected story graphics, actual app evidence, an original upbeat music bed and event sound effects and upbeat neural female narration. A quiet shopper gets a useful recommendation, purchases, and receives the item; the film follows the agent tools, PayPal proof and AG Grid evidence behind that outcome.
+An editable **2:10** Remotion composition with recurring illustrated characters, connected story graphics, actual app evidence, an original upbeat music bed and event sound effects and upbeat neural female narration. A quiet shopper gets a useful recommendation, purchases, and receives the item; the film follows the agent tools, PayPal proof and AG Grid evidence behind that outcome.
 
 ## Preview
 
@@ -22,11 +22,9 @@ Open http://localhost:3000/MarketMetroSubmission and press Play. The main video 
 
 ## Merchant, problem, question, introduction
 
-The film opens with “It was a normal day for Leo,” a landscaped native 3D metro view on white. Recorded native pedestrians move through the market while Leo’s illustrated expression and WHO/WHAT thought cards carry the story. The automation question follows, immediately before Market Metro appears. Characters blink, look toward evidence, frown, think and brighten after the purchase. Opening shots share matching positions and dissolve over eighteen frames.
+The earlier metro-to-shop push-in and merchant reveal are restored. Leo’s problem leads to the question, then Market Metro is introduced as an AI commerce environment. The market view and Observe → Train → Test → Measure sequence explain the product before the next chapter introduces ontology.
 
-The ontology then connects shopper/product/payment meaning, separates recommendation and inquiry training tasks, and restricts predictors to information available before contact. Its historical cohort counts are checked against the saved study; primary campaign gain is not attributed solely to ontology.
-
-Readable DM Sans subtitles are restored. Unrelated footer commentary stays removed. Synchronized captions are also in `public/captions.vtt`; the narration transcript remains in the submission docs.
+Subtitles, logo, music, question intonation and the measured payoff remain. No new app behavior or benchmark result is claimed by the edit.
 
 ## Question delivery and impact
 
@@ -42,7 +40,7 @@ The original route-M mark is shared by `public/brand/metro.svg` and `../demo/com
 
 ## Sound and pacing
 
-The continuous 120 BPM score and twenty-one event cues are original local synthesis (`scripts/score.py`). Music ducks under narration. Birds, doorbell, footsteps, page turns and pop cues are synthesized locally. The measured master gain is shared by every voice and effect, and is already baked into the music bed. `src/Soundtrack.tsx` keeps each cue editable. The story runs 124.4 seconds with eighteen-frame picture dissolves and approximately 0.12–0.15 seconds between adjacent spoken segments. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
+The continuous 120 BPM score and twenty-one event cues are original local synthesis (`scripts/score.py`). Music ducks under narration. Birds, doorbell, footsteps, page turns and pop cues are synthesized locally. The measured master gain is shared by every voice and effect, and is already baked into the music bed. `src/Soundtrack.tsx` keeps each cue editable. The story runs 130.1 seconds with eighteen-frame picture dissolves and approximately 0.12–0.15 seconds between adjacent spoken segments. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
 
 ## Edit and verify
 

@@ -114,6 +114,12 @@ for scene in PLAN['scenes']:
         pause = np.zeros(round(delivery['pauseAfterQuestion']*rate), dtype=q.dtype)
         offset=(len(q)+len(pause))/rate
         samples=np.concatenate([q,pause,answer])
+        q_captions, q_method, q_words = phrase_captions(question+'?',len(q)/rate,qt)
+        a_captions, a_method, a_words = phrase_captions(rest.strip(),len(answer)/rate,at)
+        def shifted(items):
+            return [{**item,'startMs':round(item['startMs']+offset*1000),
+                     'endMs':round(item['endMs']+offset*1000)} for item in items]
+        segmented=(q_captions+shifted(a_captions),q_method+' / '+a_method,q_words+shifted(a_words))
         timings=list(qt)+[SimpleNamespace(phoneme=' ',start=len(q)/rate,end=offset)]+[
             SimpleNamespace(phoneme=t.phoneme,start=t.start+offset,end=t.end+offset) for t in at]
         sf.write(ROOT/'public/question-take.wav', q, rate)
@@ -130,7 +136,7 @@ for scene in PLAN['scenes']:
     rms = float(np.sqrt(np.mean(samples ** 2)))
     samples *= min(.13 / max(rms, 1e-6), .88 / max(float(np.max(np.abs(samples))), 1e-6))
     sf.write(target, samples, rate)
-    captions, method, words = phrase_captions(text, seconds, timings)
+    captions, method, words = segmented if delivery.get('questionTake') else phrase_captions(text, seconds, timings)
     records.append(dict(id=scene['id'], voice=VOICE, speed=SPEED, delivery=delivery, seconds=seconds,
                         source='Local Kokoro-82M neural speech on CPU', sampleRate=rate,
                         file='narration-neural/' + target.name, text=text, captions=captions, words=words,

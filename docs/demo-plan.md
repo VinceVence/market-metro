@@ -1,35 +1,32 @@
-# Market Metro — a normal day for Leo
+# Market Metro — purpose before mechanism
 
-**Preview ready · 2:04.4 · 1920 × 1080 · 30 fps**
+**Preview ready · 2:10.1 · 1920 × 1080 · 30 fps**
 
-“It was a normal day for Leo.” The city flyover turns into a native market scene: the shop opens, people pass, days go by, and Leo cannot tell who to reach or what to offer. Animated WHO/WHAT thought cards frame the problem before the rising question and Market Metro reveal.
+The earlier close-up camera move is restored: metro overview → strong zoom into the shop → Leo. His story and question lead into a product definition before the ontology explanation.
+
+**Introduction:** Market Metro is a simulated commerce environment where AI agents analyze shopper behavior, train models and test marketing campaigns. Its comparisons track purchases, merchant contribution and PayPal payments.
 
 [Open the preview](http://localhost:3000/MarketMetroSubmission) · [Narration](video-narration.txt) · [Captions](../video/public/captions.vtt)
 
 | Start | Beat |
 |---|---|
 | 0:00.0 | A normal day for Leo |
-| 0:19.1 | The question, then Market Metro |
-| 0:30.9 | The right data for the question |
-| 0:43.8 | From understanding to action |
-| 0:56.6 | Test before sending |
-| 1:06.8 | The recommendation becomes a purchase |
-| 1:18.7 | A payment you can trace |
-| 1:29.9 | What changed |
-| 1:46.4 | Follow the full trail |
-| 1:56.1 | Agentic commerce that learns |
+| 0:19.1 | What Market Metro is |
+| 0:37.4 | The right data for the question |
+| 0:49.5 | From understanding to action |
+| 1:02.2 | Test before sending |
+| 1:12.4 | The recommendation becomes a purchase |
+| 1:24.4 | A payment you can trace |
+| 1:35.6 | What changed |
+| 1:52.0 | Follow the full trail |
+| 2:01.8 | Agentic commerce that learns |
 
-## Art and motion
+## Review scope
 
-- Clean white canvas restored. The opening actual 3D map gains a grass perimeter and trees through an opt-in presentation-only renderer flag. Live economy settings remain unchanged.
-- Recorded native 3D pedestrians replace the rejected custom 2D walk cycle. The camera presents 16 representative shoppers plus the featured shopper, using the saved day-35 records. The usable take contains 79 distinct captured frames over 10 seconds and is gently retimed.
-- The expressive Leo illustration remains stationary in the foreground. WHO/WHAT cards emphasize his decision with the new backed route-M logo at upper left.
-- The original music, morning birds, shop bell, footsteps, page turns, thought-card pops and payment cues remain. A shared measured master gain keeps the mix below clipping.
-- Subtitles remain visible near the lower edge; extra footer commentary stays removed. Question intonation and the measured payoff are preserved.
-
-## Proof and boundaries
-
-- Leo and the walking street are illustrative narrative scenes. Financial and decision evidence still comes from the saved campaign, native PayPal Sandbox capture and recorded AG Grid interactions.
-- The paired benchmark remains 627 fixed vs 643 agent purchases, +$2,345 payment volume, +$1,024.86 merchant contribution including inventory, and +$114.96 modeled PayPal net after estimated inference cost. No financial outcome is newly measured or inflated.
-- The historical ontology training counts and prediction restrictions remain separate evidence. The full campaign gain is not attributed solely to ontology.
-- No paid API calls, new payments, APAC changes or subagents. Final MP4 export and upload remain separate from the editable preview.
+- The camera and merchant reveal reuse the earlier accepted composition. This correction does not redesign the rest of the film.
+- The product introduction shows the market and Observe → Train → Test → Measure. Ontology appears in the following chapter as the data map supporting that workflow.
+- Current subtitles, logo, expressive Leo, music, sound effects, rising question and measured payoff are retained.
+- The question and following introduction have separately aligned captions; their pause and product reveal remain synchronized.
+- Benchmark figures and the native $96 PayPal Sandbox receipt are unchanged. The full campaign gain is not attributed solely to ontology.
+- The narrative persona and market are a POC; benchmark gains are not production earnings. No new paid model calls, native payments, APAC changes or subagents.
+- Final MP4 export and public upload are separate from this editable preview.

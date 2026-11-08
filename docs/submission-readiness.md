@@ -72,7 +72,7 @@ The 24-feed ontology test and the 384-store scale study are separate supporting 
 - [Existing screenshots](screenshots/intelligence/)
 - [Third-party notices](../THIRD_PARTY_NOTICES.md)
 
-An editable Remotion composition now exists with actual app recordings and local Kokoro neural female narration. Its preview duration is 124.4 seconds. No final MP4 or public upload is claimed yet. Review the voice, caption timing and footage before export. See [video setup and source notices](../video/README.md).
+An editable Remotion composition now exists with actual app recordings and local Kokoro neural female narration. Its preview duration is 130.1 seconds. No final MP4 or public upload is claimed yet. Review the voice, caption timing and footage before export. See [video setup and source notices](../video/README.md).
 
 ## Source verification
 

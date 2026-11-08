@@ -20,33 +20,41 @@ export const DemandScene=()=>{
     "pageBreakAfter": true
   },
   {
-    "text": "Meet Market Metro.",
+    "text": "Meet Market Metro: a simulated commerce environment",
     "startMs": 2725,
-    "endMs": 4250,
+    "endMs": 6047,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Its ontology connects shoppers, products and payments",
-    "startMs": 4325,
-    "endMs": 7450,
+    "text": "where AI agents analyze shopper behavior, train",
+    "startMs": 6047,
+    "endMs": 9074,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "into one shared map, giving the agent",
-    "startMs": 7500,
-    "endMs": 9850,
+    "text": "models, and test marketing campaigns.",
+    "startMs": 9074,
+    "endMs": 11953,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "meaningful evidence to work with.",
-    "startMs": 9950,
-    "endMs": 11950,
+    "text": "We measure how those decisions change purchases,",
+    "startMs": 11953,
+    "endMs": 15053,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "merchant contribution, and PayPal payments.",
+    "startMs": 15053,
+    "endMs": 18375,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
