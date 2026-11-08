@@ -17,32 +17,32 @@ export const MarketMetroSubmission = () => {
       <Soundtrack />
       <Series>
         <Series.Sequence
-          name="A shop and a quiet shopper"
-          durationInFrames={209}
+          name="Who should we reach next?"
+          durationInFrames={203}
           offset={0}
           premountFor={fps}
         >
           <MarketScene />
         </Series.Sequence>
         <Series.Sequence
-          name="A reason to reach out"
-          durationInFrames={328}
+          name="Give the agent a connected map"
+          durationInFrames={333}
           offset={-10}
           premountFor={fps}
         >
           <DemandScene />
         </Series.Sequence>
         <Series.Sequence
-          name="Connect the evidence"
-          durationInFrames={334}
+          name="The right data for the question"
+          durationInFrames={396}
           offset={-10}
           premountFor={fps}
         >
           <OntologyScene />
         </Series.Sequence>
         <Series.Sequence
-          name="Build the campaign"
-          durationInFrames={335}
+          name="From understanding to action"
+          durationInFrames={393}
           offset={-10}
           premountFor={fps}
         >
@@ -104,7 +104,7 @@ export const MarketMetroComposition = () => (
   <Composition
     id="MarketMetroSubmission"
     component={MarketMetroSubmission}
-    durationInFrames={3093}
+    durationInFrames={3212}
     fps={30}
     width={1920}
     height={1080}

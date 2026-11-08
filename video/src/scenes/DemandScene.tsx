@@ -11,33 +11,33 @@ export const DemandScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
   {
-    "text": "In our simulated market, this shopper hasn't",
+    "text": "The answer starts with your data.",
     "startMs": 250,
-    "endMs": 2775,
+    "endMs": 2375,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "bought for sixteen days.",
-    "startMs": 2825,
-    "endMs": 4600,
+    "text": "Market Metro uses an ontology, a shared",
+    "startMs": 2475,
+    "endMs": 5350,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Sending everyone a discount is easy, but",
-    "startMs": 4700,
-    "endMs": 7325,
+    "text": "map of shoppers, products and payments, to",
+    "startMs": 5400,
+    "endMs": 7995,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "finding a recommendation worth sending takes evidence.",
-    "startMs": 7400,
-    "endMs": 10725,
+    "text": "turn scattered records into connected evidence.",
+    "startMs": 8045,
+    "endMs": 10870,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

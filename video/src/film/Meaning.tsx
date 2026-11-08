@@ -1,109 +1,157 @@
-import { Sequence, useVideoConfig } from "remotion";
-import { Stage, Icon, Clip, Note, ramp, useTime, cue, C } from "./Design";
-import { Person } from "./StoryArt";
+import role from "../../public/data/ontology-role.json";
+import { Stage, Icon, Note, ramp, useTime, cue, C } from "./Design";
 export function Meaning() {
   const t = useTime(),
-    { fps } = useVideoConfig(),
-    hold = cue("ontology", "holds", 8);
+    split = cue("ontology", "recommendations", 4),
+    future = cue("ontology", "later", 9);
   return (
-    <Stage label="The ontology connects meaning">
+    <Stage label="Ontology → training decisions">
       <div
         style={{
           position: "absolute",
           left: 110,
-          top: 155,
+          top: 150,
           fontSize: 78,
           fontWeight: 650,
+          letterSpacing: -3,
         }}
       >
-        Connect the evidence.
+        The right data for the question.
       </div>
-      <Person style={{ left: 115, top: 450, width: 200, height: 348 }} />
-      <div style={{ opacity: 1 - ramp(t, hold, hold + 0.4) }}>
-        <svg
-          width="1920"
-          height="1080"
-          style={{ position: "absolute", inset: 0 }}
-        >
-          <path
-            d="M320 620H590M790 620H1100M1300 620H1570"
-            stroke="#a9c7e2"
-            strokeWidth="6"
-          />
-          <path
-            d="M1680 520V365h-180"
-            fill="none"
-            stroke="#a9c7e2"
-            strokeWidth="5"
-          />
-        </svg>
-        {[
-          ["data", "Product"],
-          ["card", "Checkout"],
-          ["store", "Merchant orders"],
-        ].map(([kind, name], i) => (
-          <div
-            key={name}
-            style={{
-              position: "absolute",
-              left: 500 + i * 500,
-              top: 440,
-              width: 310,
-              height: 310,
-              borderRadius: 30,
-              background: i === 1 ? C.blue : "#fff",
-              color: i === 1 ? "#fff" : C.ink,
-              boxShadow: "0 22px 65px #12345614",
-              display: "flex",
-              flexDirection: "column",
-              gap: 30,
-              alignItems: "center",
-              justifyContent: "center",
-              opacity: ramp(t, 0.5 + i * 0.5, 1 + i * 0.5),
-            }}
-          >
-            <Icon kind={kind} size={90} />
-            <div style={{ fontSize: 34, fontWeight: 600 }}>{name}</div>
-          </div>
-        ))}
+      <svg
+        width="1920"
+        height="1080"
+        style={{ position: "absolute", inset: 0 }}
+      >
+        <path
+          d="M480 560H565V405H650M565 560v175h85M1100 405h100v155h90"
+          stroke="#9dbedc"
+          strokeWidth="6"
+          fill="none"
+        />
+        <path d="M1100 735h100" stroke="#a7cec7" strokeWidth="6" />
+      </svg>
+      <div
+        style={{
+          position: "absolute",
+          left: 110,
+          top: 405,
+          width: 370,
+          height: 305,
+          borderRadius: 30,
+          background: "#e4f1ff",
+          display: "grid",
+          alignContent: "center",
+          justifyItems: "center",
+          gap: 25,
+          color: C.ink,
+        }}
+      >
+        <Icon kind="person" size={82} color={C.blue} />
+        <div style={{ fontSize: 37, fontWeight: 600 }}>Who to contact?</div>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 650,
+          top: 310,
+          width: 450,
+          height: 210,
+          borderRadius: 26,
+          background: C.blue,
+          color: "#fff",
+          padding: 30,
+          boxSizing: "border-box",
+          opacity: 0.3 + 0.7 * ramp(t, split - 0.4, split + 0.3),
+        }}
+      >
+        <div style={{ fontSize: 67, fontWeight: 650 }}>
+          {role.productContacts.toLocaleString("en-US")}
+        </div>
+        <div style={{ fontSize: 31 }}>product recommendations</div>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 650,
+          top: 625,
+          width: 450,
+          height: 210,
+          borderRadius: 26,
+          background: "#e1f2ed",
+          padding: 30,
+          boxSizing: "border-box",
+          opacity: 0.3 + 0.7 * ramp(t, split, split + 0.5),
+        }}
+      >
+        <div style={{ fontSize: 67, fontWeight: 650, color: "#168b75" }}>
+          {role.inquiryContacts.toLocaleString("en-US")}
+        </div>
+        <div style={{ fontSize: 31 }}>general inquiries</div>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 1290,
+          top: 330,
+          width: 500,
+          height: 295,
+          borderRadius: 26,
+          background: "#fff",
+          border: "2px solid #b9dccc",
+          padding: 30,
+          boxSizing: "border-box",
+        }}
+      >
         <div
           style={{
-            position: "absolute",
-            left: 1155,
-            top: 307,
-            fontSize: 34,
-            color: C.blue,
-            opacity: ramp(t, 4.5, 5),
+            fontSize: 29,
+            fontWeight: 600,
+            color: "#168b75",
+            marginBottom: 25,
           }}
         >
-          One parent purchase
+          Known before contact
         </div>
-      </div>
-      <Sequence from={Math.round(hold * fps)} premountFor={fps}>
-        <div style={{ opacity: ramp(t, hold, hold + 0.4) }}>
-          <Clip
-            file="ontology"
-            trim={6}
-            box={[650, 330, 1140, 570]}
-            crop={[270, 100, 740, 370]}
-          />
+        {["Product interest", "Purchase history"].map((x) => (
           <div
+            key={x}
             style={{
-              position: "absolute",
-              left: 110,
-              top: 320,
-              color: "#a66d19",
-              fontSize: 43,
-              fontWeight: 600,
+              display: "flex",
+              alignItems: "center",
+              gap: 18,
+              fontSize: 33,
+              marginTop: 20,
             }}
           >
-            Unclear link → hold
+            <Icon kind="check" size={32} color="#168b75" />
+            {x}
           </div>
+        ))}
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 1290,
+          top: 690,
+          width: 500,
+          padding: 28,
+          borderRadius: 22,
+          background: "#fff0e6",
+          boxSizing: "border-box",
+          opacity: ramp(t, future - 0.2, future + 0.35),
+        }}
+      >
+        <div style={{ fontSize: 31, fontWeight: 600, color: "#a46826" }}>
+          Later payment outcomes
         </div>
-      </Sequence>
+        <div style={{ fontSize: 28, color: "#805d3d", marginTop: 12 }}>
+          Labels, not model inputs
+        </div>
+      </div>
       <Note>
-        Illustrated links · recorded ambiguity check · each checkout counted
-        once
+        Historical training example · 26-day mature labels · campaign gain
+        evaluated separately
       </Note>
     </Stage>
   );

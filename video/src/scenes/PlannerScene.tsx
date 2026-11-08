@@ -11,33 +11,41 @@ export const PlannerScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
   {
-    "text": "With that evidence, the agent examines demand",
+    "text": "Now follow one saved reactivation campaign.",
     "startMs": 250,
-    "endMs": 3089,
+    "endMs": 3475,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "and stock, chooses twenty eight days of",
-    "startMs": 3089,
-    "endMs": 5491,
+    "text": "The agent analyzes demand, chooses twenty eight",
+    "startMs": 3525,
+    "endMs": 6575,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "training data, and asks local tools to",
-    "startMs": 5491,
-    "endMs": 7820,
+    "text": "days of history, and fits two models.",
+    "startMs": 6625,
+    "endMs": 9325,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "fit two models for a reactivation campaign.",
-    "startMs": 7820,
-    "endMs": 10950,
+    "text": "A verifier tests the campaign before it",
+    "startMs": 9400,
+    "endMs": 11500,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "reaches shoppers.",
+    "startMs": 11550,
+    "endMs": 12875,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

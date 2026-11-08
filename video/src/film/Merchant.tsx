@@ -1,65 +1,95 @@
-import { Stage, HeroVideo, Note, ramp, useTime, cue, C } from "./Design";
+import { Stage, HeroVideo, Icon, Note, ramp, useTime, C } from "./Design";
 import { Person, Store } from "./StoryArt";
 export function Merchant() {
-  const t = useTime(),
-    quiet = cue("market", "shopper", 3);
+  const t = useTime();
   return (
-    <Stage label="A story from the simulated market">
+    <Stage label="Agentic commerce that learns">
       <HeroVideo file="film-world" zoom={1.04} opacity={0.1} />
+      <div
+        style={{
+          position: "absolute",
+          left: 110,
+          top: 165,
+          width: 1700,
+          fontSize: 88,
+          lineHeight: 1.1,
+          fontWeight: 700,
+          letterSpacing: -3,
+        }}
+      >
+        Who should we reach next?
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 115,
+          top: 290,
+          fontSize: 40,
+          color: C.muted,
+        }}
+      >
+        Can AI work it out automatically?
+      </div>
       <div
         style={{
           position: "absolute",
           left: 0,
           right: 0,
-          top: 825,
+          top: 835,
           height: 180,
           background: "#dce8f3",
         }}
       />
-      <Store style={{ left: 80, top: 190, width: 1020, height: 737 }} />
+      <Store style={{ left: 70, top: 315, width: 780, height: 563 }} />
       <Person
         role="merchant"
-        style={{ left: 680, top: 450, width: 245, height: 426 }}
+        style={{ left: 555, top: 585, width: 158, height: 275 }}
       />
+      <Person style={{ left: 1450, top: 470, width: 225, height: 391 }} />
+      <svg
+        width="1920"
+        height="1080"
+        style={{ position: "absolute", inset: 0 }}
+      >
+        <path
+          d="M835 655H1460"
+          fill="none"
+          stroke="#8bb2d5"
+          strokeWidth="5"
+          strokeDasharray="10 13"
+        />
+        {[0, 1].map((i) => (
+          <circle
+            key={i}
+            cx={835 + ((t * 100 + i * 300) % 625)}
+            cy={655}
+            r="8"
+            fill={C.blue}
+          />
+        ))}
+      </svg>
       <div
         style={{
           position: "absolute",
-          left: 1130,
-          top: 500,
-          width: 440,
-          borderTop: "5px dashed #91b7d8",
-          opacity: ramp(t, quiet, quiet + 0.5),
-        }}
-      />
-      <Person
-        style={{
-          left: 1430 - 90 * ramp(t, quiet, quiet + 0.8),
-          top: 440,
-          width: 250,
-          height: 435,
-          opacity: ramp(t, quiet - 0.3, quiet + 0.35),
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          left: 1530,
-          top: 300,
-          width: 130,
-          height: 110,
-          borderRadius: "28px 28px 28px 4px",
-          background: "#fff",
-          boxShadow: "0 12px 35px #10345614",
+          left: 1010,
+          top: 530,
+          width: 255,
+          height: 255,
+          borderRadius: 60,
+          background: C.blue,
+          color: "#fff",
           display: "grid",
-          placeItems: "center",
-          fontSize: 64,
-          color: C.muted,
-          opacity: ramp(t, quiet + 0.4, quiet + 0.8),
+          placeContent: "center",
+          justifyItems: "center",
+          gap: 14,
+          boxShadow: "0 20px 65px #0877e52a",
+          opacity: ramp(t, 0.3, 0.9),
         }}
       >
-        …
+        <Icon kind="model" size={83} />
+        <div style={{ fontSize: 40, fontWeight: 600 }}>AI agent</div>
       </div>
-      <Note>Illustrated story · 12 shops · 600 simulated shoppers</Note>
+      <Note>Illustrated question · 12 shops · 600 simulated shoppers</Note>
     </Stage>
   );
 }

@@ -1,0 +1,88 @@
+{
+  "source": "demo/data/ontology-training.json",
+  "productContacts": 1230,
+  "inquiryContacts": 1532,
+  "target": "A retained basket following a product recommendation",
+  "maturityDays": 26,
+  "paths": [
+    {
+      "id": "intent",
+      "path": "Recommendation \u2192 product interest observed before contact",
+      "fields": [
+        "age",
+        "search",
+        "signal_count",
+        "category_affinity",
+        "sku_purchase_recency",
+        "signal_after_sku_purchase"
+      ]
+    },
+    {
+      "id": "shopper",
+      "path": "Contact \u2192 shopper \u2192 earlier checkouts",
+      "fields": [
+        "recency",
+        "prior_purchases"
+      ]
+    },
+    {
+      "id": "offer",
+      "path": "Recommendation \u2192 listed item \u2192 current price, category and available supply",
+      "fields": [
+        "price_usd",
+        "stock",
+        "arrival_days",
+        "stationery",
+        "electronics",
+        "furniture",
+        "bundles"
+      ]
+    },
+    {
+      "id": "feedback",
+      "path": "Contact \u2192 same action in earlier market history",
+      "fields": [
+        "market_contacts_log",
+        "market_response_rate",
+        "market_authorization_rate",
+        "market_mature_retention_rate"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "fields": [
+        "responded",
+        "authorized",
+        "fundingObservedDay"
+      ],
+      "reason": "Outcomes of the current contact become known after targeting."
+    },
+    {
+      "fields": [
+        "retained",
+        "retainedGrossCents",
+        "retailNetCents",
+        "merchantOrderContributionCents",
+        "labelCompleteDay"
+      ],
+      "reason": "Settlement supplies labels, evaluation values and maturity checks."
+    },
+    {
+      "fields": [
+        "customerId",
+        "catalogId",
+        "episode",
+        "regime",
+        "sourcePolicy"
+      ],
+      "reason": "Keys and market identifiers support joins, grouping or validation."
+    },
+    {
+      "fields": [
+        "is_recommendation"
+      ],
+      "reason": "Contact kind is constant inside the product recommendation cohort."
+    }
+  ]
+}

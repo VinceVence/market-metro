@@ -7,7 +7,7 @@
 | Priority | Gap | Concrete next step |
 |---|---|---|
 | Required | GitHub is still private by request | Approve public visibility after reviewing the release. MIT license is already present. |
-| Required | No final public video URL | Review the [1:43 Remotion preview](http://localhost:3000/MarketMetroSubmission) and female narration, export and verify the final MP4, then publish to YouTube. |
+| Required | No final public video URL | Review the [1:47 Remotion preview](http://localhost:3000/MarketMetroSubmission) and female narration, export and verify the final MP4, then publish to YouTube. |
 | Required | Devpost entry is not verified as submitted | Paste [submission copy](submission-draft.md), add repository/video links, select applicable categories and complete the entrant declarations. |
 | Required third-party coverage | AG Studio is running in evaluation mode; no trial key is configured | Obtain sponsor trial/license coverage that includes judging. The sponsor advertises a free 45-day trial. Do not remove vendor notices. |
 | Optional | No hosted demo is claimed | Use the verified local setup, which is permitted; host only if there is time to validate it. |
@@ -72,7 +72,7 @@ The 24-feed ontology test and the 384-store scale study are separate supporting 
 - [Existing screenshots](screenshots/intelligence/)
 - [Third-party notices](../THIRD_PARTY_NOTICES.md)
 
-An editable Remotion composition now exists with actual app recordings and local Kokoro neural female narration. Its preview duration is 103.1 seconds. No final MP4 or public upload is claimed yet. Review the voice, caption timing and footage before export. See [video setup and source notices](../video/README.md).
+An editable Remotion composition now exists with actual app recordings and local Kokoro neural female narration. Its preview duration is 107.1 seconds. No final MP4 or public upload is claimed yet. Review the voice, caption timing and footage before export. See [video setup and source notices](../video/README.md).
 
 ## Source verification
 

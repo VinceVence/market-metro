@@ -9,6 +9,10 @@ const plan=read('public/data/plan.json'),audio=read('public/narration-neural.jso
 assert.equal(audio.voice,'af_heart');assert.equal(audio.providerCalls,0);
 assert.ok(plan.durationInFrames/plan.fps<180);
 assert.deepEqual(read('public/data/case.json'),read('../demo/data/judge-reactivation.json'));
+const ontology=read('public/data/ontology-role.json'),audit=read('../demo/data/ontology-training.json').development.audit;
+assert.equal(ontology.inquiryContacts,audit.routedToInquiries);
+assert.equal(ontology.productContacts+ontology.inquiryContacts,audit.windowRows);
+assert.deepEqual(ontology.paths,audit.plan.paths);
 const score=read('public/music/sound-design.json');
 assert.equal(score.seconds,plan.durationInFrames/plan.fps);
 assert.equal(score.providerCalls,0);assert.ok(score.mixPeakDb<0);

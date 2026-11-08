@@ -1,32 +1,38 @@
-# Market Metro story film
+# Market Metro question-led story
 
-**Preview ready · 1:43.1 · 1920 × 1080 · 30 fps**
+**Preview ready · 1:47.1 · 1920 × 1080 · 30 fps**
 
-An original animated-infographic story follows a furniture seller and a quiet shopper through evidence, a tested recommendation, a purchase and a traceable payment. The actual app recordings remain the proof behind the illustration.
+**Opening question:** “Can AI work out which customers to reach, what to recommend, and build the campaign automatically?”
+
+The first answer is the ontology: a shared map of shopper activity, products and payments. It gives meaning to the records and maps business questions to training examples, allowed features and outcome labels. The film then follows one saved reactivation campaign through tested recommendations, a purchase and a native PayPal Sandbox receipt.
 
 [Open the preview](http://localhost:3000/MarketMetroSubmission) · [Narration](video-narration.txt) · [Source](../video/README.md)
 
 | Start | Story beat |
 |---|---|
-| 0:00.0 | A shop and a quiet shopper |
-| 0:06.6 | A reason to reach out |
-| 0:17.2 | Connect the evidence |
-| 0:28.0 | Build the campaign |
-| 0:38.9 | Test before sending |
-| 0:49.1 | The recommendation becomes a purchase |
-| 1:01.0 | A payment you can trace |
-| 1:12.2 | What changed |
-| 1:25.3 | Follow the full trail |
-| 1:35.1 | Agentic commerce that learns |
+| 0:00.0 | Who should we reach next? |
+| 0:06.4 | Give the agent a connected map |
+| 0:17.2 | The right data for the question |
+| 0:30.1 | From understanding to action |
+| 0:42.8 | Test before sending |
+| 0:53.0 | The recommendation becomes a purchase |
+| 1:05.0 | A payment you can trace |
+| 1:16.2 | What changed |
+| 1:29.3 | Follow the full trail |
+| 1:39.1 | Agentic commerce that learns |
 
-## Story and timing
+## Ontology highlight
 
-- The same illustrated merchant and shopper carry the story. The customer has a recorded 16-day market purchase gap; no invented cause of inactivity is claimed.
-- Full connected sentences replace the short slogan narration. Persistent labels and accumulating results replace abrupt title changes.
-- Scene pictures dissolve across ten frames. Adjacent voice segments have roughly 0.12–0.15 seconds of separation, with no overlap.
-- Key visual and sound events use narration word timings. Timings derived from estimates are labeled in the audio manifest.
-- Original 120 BPM music continues beneath the female voice; twelve brief effects reinforce the actions.
-- PayPal and AG Grid use saved native app footage. The product phone and characters are explicitly illustrations, not additional app functionality.
-- Gains remain one paired 12-store simulation: +16 retained purchases, +$1,024.86 merchant contribution including inventory, and +$114.96 modeled PayPal net after model cost. These are not production earnings.
-- Native Sandbox proof is the archived $96 capture. No new paid model calls, payments, APAC changes or subagents.
-- Final MP4 export and public upload are separate from this editable preview.
+- Historical product recommendations and productless inquiries are distinct prediction tasks: 1,230 and 1,532 mature examples in the recorded training snapshot.
+- Reviewed relations connect prior product interest, shopper history and available supply. Later contact and payment outcomes supply labels or evaluation values, not predictors of the same contact.
+- The model's target is a retained basket following a recommendation. Exact-item retention is held when fulfilled item labels are unavailable.
+- Definitions and evidence come from [the implemented training map](../scripts/ontology/training.mjs) and [the training study](ontology/training/README.md).
+- These are implemented training safeguards, not a claim that ontology alone caused the primary campaign gain. The saved baseline campaign and financial verifier are shown separately.
+
+## Presentation and evidence
+
+- Original illustrated merchant and shopper; connected sentences; stable headings; ten-frame picture dissolves; narration-timed events.
+- Female narration and original upbeat music are generated locally. No new paid calls, payments, APAC modifications or subagents.
+- +16 retained purchases, +$1,024.86 merchant contribution including inventory, and +$114.96 modeled PayPal net come from one paired 12-store simulation. They are not production earnings.
+- The $96 PayPal capture is an archived native Sandbox receipt for an existing order. App footage and AG Grid interactions remain recorded evidence.
+- This is an editable preview. Final MP4 export and public upload remain separate.

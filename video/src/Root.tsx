@@ -17,7 +17,7 @@ export const RemotionRoot = () => (
       <Composition
         id="MarketScene"
         component={MarketScene}
-        durationInFrames={209}
+        durationInFrames={203}
         fps={30}
         width={1920}
         height={1080}
@@ -25,7 +25,7 @@ export const RemotionRoot = () => (
       <Composition
         id="DemandScene"
         component={DemandScene}
-        durationInFrames={328}
+        durationInFrames={333}
         fps={30}
         width={1920}
         height={1080}
@@ -33,7 +33,7 @@ export const RemotionRoot = () => (
       <Composition
         id="OntologyScene"
         component={OntologyScene}
-        durationInFrames={334}
+        durationInFrames={396}
         fps={30}
         width={1920}
         height={1080}
@@ -41,7 +41,7 @@ export const RemotionRoot = () => (
       <Composition
         id="PlannerScene"
         component={PlannerScene}
-        durationInFrames={335}
+        durationInFrames={393}
         fps={30}
         width={1920}
         height={1080}

@@ -11,41 +11,41 @@ export const OntologyScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
   {
-    "text": "So Market Metro first connects the shopper,",
+    "text": "The ontology maps each business question to",
     "startMs": 250,
-    "endMs": 2900,
+    "endMs": 2875,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "product and payment records.",
-    "startMs": 2975,
-    "endMs": 4925,
+    "text": "the right training examples.",
+    "startMs": 2900,
+    "endMs": 4800,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Its ontology keeps split merchant orders tied",
-    "startMs": 5000,
-    "endMs": 7550,
+    "text": "Product recommendations and general inquiries follow separate",
+    "startMs": 4875,
+    "endMs": 8200,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "to one checkout, and holds any links",
-    "startMs": 7600,
-    "endMs": 9700,
+    "text": "paths, while later payment outcomes supply labels,",
+    "startMs": 8250,
+    "endMs": 11625,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "it can't trust.",
-    "startMs": 9750,
-    "endMs": 10925,
+    "text": "not predictors.",
+    "startMs": 11700,
+    "endMs": 12975,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

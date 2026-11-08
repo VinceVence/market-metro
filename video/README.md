@@ -1,6 +1,6 @@
 # Market Metro video preview
 
-An editable **1:43** Remotion composition with recurring illustrated characters, connected story graphics, actual app evidence, an original upbeat music bed and event sound effects and upbeat neural female narration. A quiet shopper gets a useful recommendation, purchases, and receives the item; the film follows the agent tools, PayPal proof and AG Grid evidence behind that outcome.
+An editable **1:47** Remotion composition with recurring illustrated characters, connected story graphics, actual app evidence, an original upbeat music bed and event sound effects and upbeat neural female narration. A quiet shopper gets a useful recommendation, purchases, and receives the item; the film follows the agent tools, PayPal proof and AG Grid evidence behind that outcome.
 
 ## Preview
 
@@ -20,9 +20,13 @@ Open http://localhost:3000/MarketMetroSubmission and press Play. The main video 
 - The narrator is the local Kokoro-82M stock female preset **af_heart**, at 1.02 synthesis speed. No hosted speech service or voice cloning was used.
 - Captions use model phoneme boundaries where these match the transcript; other phrase timings are estimated. Review caption timing before publishing.
 
+## Ontology in the opening
+
+The film starts with automated customer targeting as a question. It then visualizes the implemented ontology: connected shopper/product/payment records, separate recommendation and inquiry training paths, and pre-contact input restrictions. `public/data/ontology-role.json` carries the historical cohort counts and reviewed relations; checks compare them with the saved training study. Primary campaign gain is not attributed solely to ontology.
+
 ## Sound and pacing
 
-The continuous 120 BPM score and twelve event cues are original local synthesis (`scripts/score.py`). Music ducks under narration. `src/Soundtrack.tsx` keeps each cue editable. The story runs 103.1 seconds with ten-frame picture dissolves and approximately 0.12–0.15 seconds between adjacent spoken segments. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
+The continuous 120 BPM score and twelve event cues are original local synthesis (`scripts/score.py`). Music ducks under narration. `src/Soundtrack.tsx` keeps each cue editable. The story runs 107.1 seconds with ten-frame picture dissolves and approximately 0.12–0.15 seconds between adjacent spoken segments. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
 
 ## Edit and verify
 
