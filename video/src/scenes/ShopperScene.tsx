@@ -11,49 +11,41 @@ export const ShopperScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
   {
-    "text": "Day thirty five.",
+    "text": "On day thirty five, the selected recommendation",
     "startMs": 250,
-    "endMs": 1350,
+    "endMs": 2975,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "A useful recommendation.",
-    "startMs": 1425,
-    "endMs": 3025,
+    "text": "reaches our shopper.",
+    "startMs": 3050,
+    "endMs": 4550,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "One mobile side table.",
-    "startMs": 3100,
-    "endMs": 4775,
+    "text": "They buy a ninety six dollar side",
+    "startMs": 4625,
+    "endMs": 6450,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Ninety six dollars.",
-    "startMs": 4850,
-    "endMs": 6125,
+    "text": "table, and it arrives the next day;",
+    "startMs": 6500,
+    "endMs": 8890,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Delivered tomorrow.",
-    "startMs": 6200,
-    "endMs": 7500,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "Fixed rules left this request unfilled.",
-    "startMs": 7600,
-    "endMs": 10175,
+    "text": "fixed rules left that same request unfilled.",
+    "startMs": 8965,
+    "endMs": 12090,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

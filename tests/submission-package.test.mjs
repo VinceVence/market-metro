@@ -19,7 +19,8 @@ test('reviewable video plan starts in the market, stays under three minutes and 
  }else assert.equal(plan.audioGenerated,false);
  assert.equal(plan.scenes[0].id,'market');assert.equal(plan.scenes[0].startFrame,0);
  let end=0,words=0;
- for(const scene of plan.scenes){
+ for(const [index,scene] of plan.scenes.entries()){
+  if(index)end-=plan.overlapFrames||0;
   assert.equal(scene.startFrame,end);assert.ok(scene.durationInFrames>0);
   end+=scene.durationInFrames;words+=scene.narration.split(/\s+/).length;
   assert.ok(scene.url.startsWith('/'));assert.ok(scene.evidence.length);

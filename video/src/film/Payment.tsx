@@ -1,11 +1,11 @@
 import { CanvasImage, Sequence, staticFile, useVideoConfig } from "remotion";
 import data from "../../public/data/case.json";
-import { Stage, Clip, Note, ramp, useTime, usd, C } from "./Design";
+import { Stage, Clip, Note, ramp, useTime, cue, usd, C } from "./Design";
 export function Payment() {
   const t = useTime(),
-    { fps, durationInFrames } = useVideoConfig(),
+    { fps } = useVideoConfig(),
     r = data.receipt,
-    cut = (durationInFrames / fps) * 0.52;
+    cut = cue("paypal", "receipt", 8);
   return (
     <Stage dark label="Sandbox · test funds">
       <div

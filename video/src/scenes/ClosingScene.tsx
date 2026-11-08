@@ -11,17 +11,25 @@ export const ClosingScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
   {
-    "text": "Market Metro.",
+    "text": "Market Metro turns observed activity into tested",
     "startMs": 250,
-    "endMs": 1225,
+    "endMs": 3125,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Agentic commerce that learns.",
-    "startMs": 1300,
-    "endMs": 3250,
+    "text": "campaigns and traceable payments: agentic commerce that",
+    "startMs": 3175,
+    "endMs": 6900,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "learns.",
+    "startMs": 6950,
+    "endMs": 7775,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

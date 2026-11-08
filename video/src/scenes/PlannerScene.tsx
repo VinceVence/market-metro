@@ -11,25 +11,33 @@ export const PlannerScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
   {
-    "text": "The agent checks demand and stock, chooses",
+    "text": "With that evidence, the agent examines demand",
     "startMs": 250,
-    "endMs": 2850,
+    "endMs": 3089,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "the training data, and fits two models.",
-    "startMs": 2875,
-    "endMs": 5250,
+    "text": "and stock, chooses twenty eight days of",
+    "startMs": 3089,
+    "endMs": 5491,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Then it proposes a campaign.",
-    "startMs": 5325,
-    "endMs": 7225,
+    "text": "training data, and asks local tools to",
+    "startMs": 5491,
+    "endMs": 7820,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "fit two models for a reactivation campaign.",
+    "startMs": 7820,
+    "endMs": 10950,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

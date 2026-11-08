@@ -20,77 +20,77 @@ export const Soundtrack = () => {
       <Audio
         name="notify · event"
         src={staticFile("music/notify.wav")}
-        from={Math.round(5.75 * fps)}
+        from={Math.round(6.883 * fps)}
         volume={0.35}
         premountFor={fps}
       />
       <Audio
         name="notify · event"
         src={staticFile("music/notify.wav")}
-        from={Math.round(14.0 * fps)}
+        from={Math.round(19.233 * fps)}
         volume={0.22}
         premountFor={fps}
       />
       <Audio
         name="sweep · event"
         src={staticFile("music/sweep.wav")}
-        from={Math.round(21.1 * fps)}
+        from={Math.round(28.133 * fps)}
         volume={0.3}
         premountFor={fps}
       />
       <Audio
         name="verified · event"
         src={staticFile("music/verified.wav")}
-        from={Math.round(32.4 * fps)}
+        from={Math.round(45.767 * fps)}
         volume={0.28}
         premountFor={fps}
       />
       <Audio
         name="notify · event"
         src={staticFile("music/notify.wav")}
-        from={Math.round(36.25 * fps)}
+        from={Math.round(51.292 * fps)}
         volume={0.35}
         premountFor={fps}
       />
       <Audio
         name="coin · event"
         src={staticFile("music/coin.wav")}
-        from={Math.round(41.06 * fps)}
+        from={Math.round(53.817 * fps)}
         volume={0.45}
         premountFor={fps}
       />
       <Audio
         name="verified · event"
         src={staticFile("music/verified.wav")}
-        from={Math.round(42.2 * fps)}
+        from={Math.round(56.507 * fps)}
         volume={0.3}
         premountFor={fps}
       />
       <Audio
         name="verified · event"
         src={staticFile("music/verified.wav")}
-        from={Math.round(47.35 * fps)}
+        from={Math.round(65.401 * fps)}
         volume={0.4}
         premountFor={fps}
       />
       <Audio
         name="coin · event"
         src={staticFile("music/coin.wav")}
-        from={Math.round(56.8 * fps)}
+        from={Math.round(76.133 * fps)}
         volume={0.33}
         premountFor={fps}
       />
       <Audio
         name="sweep · event"
         src={staticFile("music/sweep.wav")}
-        from={Math.round(68.6 * fps)}
+        from={Math.round(85.433 * fps)}
         volume={0.25}
         premountFor={fps}
       />
       <Audio
         name="verified · event"
         src={staticFile("music/verified.wav")}
-        from={Math.round(78.15 * fps)}
+        from={Math.round(95.25 * fps)}
         volume={0.28}
         premountFor={fps}
       />

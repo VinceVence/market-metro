@@ -11,33 +11,41 @@ export const OntologyScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
   {
-    "text": "First, connect the dots.",
+    "text": "So Market Metro first connects the shopper,",
     "startMs": 250,
-    "endMs": 1840,
+    "endMs": 2900,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Products, shoppers, orders.",
-    "startMs": 1915,
-    "endMs": 3765,
+    "text": "product and payment records.",
+    "startMs": 2975,
+    "endMs": 4925,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "The ontology links them, counts each checkout",
-    "startMs": 3815,
-    "endMs": 6115,
+    "text": "Its ontology keeps split merchant orders tied",
+    "startMs": 5000,
+    "endMs": 7550,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "once, and holds unclear data.",
-    "startMs": 6165,
-    "endMs": 8290,
+    "text": "to one checkout, and holds any links",
+    "startMs": 7600,
+    "endMs": 9700,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "it can't trust.",
+    "startMs": 9750,
+    "endMs": 10925,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

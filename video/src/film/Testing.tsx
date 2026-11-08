@@ -1,7 +1,8 @@
 import data from "../../public/data/case.json";
-import { Stage, Icon, Note, ramp, useTime, usd, C } from "./Design";
+import { Stage, Icon, Note, ramp, useTime, cue, usd, C } from "./Design";
 export function Testing() {
-  const t = useTime();
+  const t = useTime(),
+    selected = cue("verifier", "selects", 6);
   return (
     <Stage label="Verifier">
       <div
@@ -9,12 +10,12 @@ export function Testing() {
           position: "absolute",
           left: 110,
           top: 145,
-          fontSize: 115,
+          fontSize: 82,
           fontWeight: 700,
           letterSpacing: -5,
         }}
       >
-        Prove it first.
+        Test before sending.
       </div>
       {[data.decision.original, data.decision.chosen].map((m, i) => (
         <div
@@ -62,7 +63,7 @@ export function Testing() {
                 alignItems: "center",
                 color: "#fff",
                 fontSize: 32,
-                opacity: ramp(t, 3.4, 3.65),
+                opacity: ramp(t, selected, selected + 0.4),
               }}
             >
               <Icon kind="check" size={34} />

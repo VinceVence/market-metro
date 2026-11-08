@@ -1,4 +1,3 @@
-import { useVideoConfig } from "remotion";
 import {
   Stage,
   HeroVideo,
@@ -7,74 +6,60 @@ import {
   Note,
   ramp,
   useTime,
+  cue,
   C,
 } from "./Design";
+import { Person } from "./StoryArt";
 export function Return() {
   const t = useTime(),
-    { durationInFrames, fps } = useVideoConfig(),
-    paid = (durationInFrames / fps) * 0.46,
-    delivered = 6.2;
+    paid = cue("shopper", "buy", 4),
+    delivered = cue("shopper", "arrives", 7);
   return (
-    <Stage label="Day 35 → 36">
+    <Stage label="Day 35 → day 36">
       <HeroVideo
         file="film-return"
-        zoom={1.14 + 0.1 * ramp(t, 0, 10)}
+        zoom={1.14 + 0.06 * ramp(t, 0, 12)}
         x={-200}
+        opacity={0.3}
       />
       <div
         style={{
           position: "absolute",
-          inset: 0,
-          background: "linear-gradient(90deg,#071d3e88,transparent 66%)",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          left: 110,
-          top: 340,
-          fontSize: 130,
-          fontWeight: 700,
-          lineHeight: 1,
-          letterSpacing: -5,
-          color: "#fff",
-          textShadow: "0 6px 40px #09284e66",
+          left: 100,
+          top: 165,
+          fontSize: 50,
+          color: C.ink,
+          fontWeight: 600,
         }}
       >
-        {t < paid ? (
-          <>
-            A useful
-            <br />
-            match.
-          </>
-        ) : t < delivered ? (
-          <>
-            They
-            <br />
-            bought.
-          </>
-        ) : (
-          <>
-            And it
-            <br />
-            arrived.
-          </>
-        )}
+        The recommendation reaches them.
       </div>
+      <Person
+        happy={t >= paid}
+        style={{ left: 360, top: 370, width: 290, height: 504 }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          left: 700,
+          top: 580,
+          width: 390,
+          borderTop: "5px dashed #70a8d3",
+        }}
+      />
       <div
         style={{
           position: "absolute",
           left: 1150,
-          top: 150,
+          top: 140,
           width: 590,
           height: 750,
           background: "#f8fbff",
           border: "10px solid #0d2f55",
           borderRadius: 58,
           overflow: "hidden",
-          boxShadow: "0 30px 100px #09284e66",
-          rotate: `${2 - 2 * ramp(t, 0, 0.6)}deg`,
-          translate: `${(1 - ramp(t, 0, 0.5)) * 100}px 0px`,
+          boxShadow: "0 30px 80px #09284e22",
+          translate: `${(1 - ramp(t, 0, 0.7)) * 70}px 0px`,
         }}
       >
         <div
@@ -102,33 +87,63 @@ export function Return() {
         <div style={{ position: "absolute", left: 38, right: 38, top: 470 }}>
           <div style={{ fontSize: 38, fontWeight: 600 }}>Mobile Side Table</div>
           <div style={{ fontSize: 76, fontWeight: 700, marginTop: 4 }}>$96</div>
-          <div
-            style={{
-              height: 76,
-              marginTop: 15,
-              background: t >= paid ? "#128e72" : C.blue,
-              color: "#fff",
-              borderRadius: 16,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 16,
-              fontSize: 32,
-              fontWeight: 600,
-            }}
-          >
-            {t >= paid && (
-              <Icon kind={t >= delivered ? "truck" : "check"} size={36} />
-            )}{" "}
-            {t < paid
-              ? "Recommended"
-              : t < delivered
-                ? "Purchased"
-                : "Delivered"}
+          <div style={{ height: 76, marginTop: 15, position: "relative" }}>
+            {[
+              ["Recommended", C.blue, 0, paid],
+              ["Purchased", "#128e72", paid, delivered],
+              ["Delivered", "#128e72", delivered, 999],
+            ].map(([label, color, start, end]) => (
+              <div
+                key={String(label)}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: String(color),
+                  color: "#fff",
+                  borderRadius: 16,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 16,
+                  fontSize: 32,
+                  fontWeight: 600,
+                  opacity:
+                    (Number(start) === 0
+                      ? 1
+                      : ramp(t, Number(start), Number(start) + 0.4)) *
+                    (1 - ramp(t, Number(end), Number(end) + 0.4)),
+                }}
+              >
+                {Number(start) > 0 && (
+                  <Icon
+                    kind={label === "Delivered" ? "truck" : "check"}
+                    size={36}
+                  />
+                )}{" "}
+                {label}
+              </div>
+            ))}
           </div>
         </div>
       </div>
-      <Note dark>
+      <div
+        style={{
+          position: "absolute",
+          left: 700,
+          top: 410,
+          display: "flex",
+          gap: 15,
+          alignItems: "center",
+          fontSize: 46,
+          color: "#148d73",
+          opacity: ramp(t, paid, paid + 0.4),
+          translate: `0px ${-35 * ramp(t, paid, paid + 1)}px`,
+        }}
+      >
+        <Icon kind="check" size={48} />
+        $96 purchase
+      </div>
+      <Note>
         Illustrated recommendation · saved simulated purchase · fixed left this
         request unfilled
       </Note>

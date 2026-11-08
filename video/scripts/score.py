@@ -95,12 +95,14 @@ for name,a in effects.items():sf.write(OUT/(name+'.wav'),a,SR)
 
 byid={s['id']:s for s in PLAN['scenes']}
 def when(name,offset):return byid[name]['startFrame']/PLAN['fps']+offset
-shoplen=byid['shopper']['durationInFrames']/PLAN['fps']
+def cue(name,word,fallback):
+    voice=next(s for s in VOICE['scenes'] if s['id']==name)
+    return next((w['startMs']/1000 for w in voice.get('words',[]) if ''.join(c for c in w['text'].lower() if c.isalnum())==word),fallback)
 events=[('sweep',1.5,.3),('notify',when('problem',.25),.35),
         ('notify',when('ontology',2.0),.22),('sweep',when('planner',.1),.3),
-        ('verified',when('verifier',3.4),.28),('notify',when('shopper',.25),.35),
-        ('coin',when('shopper',shoplen*.46),.45),('verified',when('shopper',6.2),.3),
-        ('verified',when('paypal',.35),.4),('coin',when('impact',.3),.33),
+        ('verified',when('verifier',cue('verifier','selects',6)),.28),('notify',when('shopper',cue('shopper','recommendation',2)),.35),
+        ('coin',when('shopper',cue('shopper','buy',4)),.45),('verified',when('shopper',cue('shopper','arrives',7)),.3),
+        ('verified',when('paypal',cue('paypal','capture',3)),.4),('coin',when('impact',cue('impact','sixteen',3)),.33),
         ('sweep',when('ag_grid',.1),.25),('verified',when('close',.15),.28)]
 effect_bus=np.zeros_like(music)
 for name,at,gain in events:put(effect_bus,effects[name],at,gain,np.float32(0))

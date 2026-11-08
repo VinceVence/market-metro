@@ -9,6 +9,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import { Video } from "@remotion/media";
+import narration from "../../public/narration-neural.json";
 import "../fonts";
 export const C = {
   ink: "#09284e",
@@ -28,6 +29,15 @@ export const ramp = (t: number, a: number, b: number) =>
     easing: Easing.bezier(0.22, 1, 0.36, 1),
   });
 export const useTime = () => useCurrentFrame() / useVideoConfig().fps;
+export const cue = (scene: string, word: string, fallback: number) => {
+  const item = narration.scenes
+    .find((s) => s.id === scene)
+    ?.words.find(
+      (w) =>
+        w.text.toLowerCase().replace(/[^a-z0-9]/g, "") === word.toLowerCase(),
+    );
+  return item ? item.startMs / 1000 : fallback;
+};
 export const usd = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
     n,
@@ -43,6 +53,7 @@ export function Stage({
   dark?: boolean;
 }) {
   const { fps } = useVideoConfig();
+  const t = useTime();
   return (
     <AbsoluteFill
       style={{
@@ -52,6 +63,7 @@ export function Stage({
           : "radial-gradient(ellipse at 60% 35%,#ffffff,#f0f5fb)",
         color: dark ? "#fff" : C.ink,
         overflow: "hidden",
+        opacity: ramp(t, 0, 10 / fps),
       }}
     >
       {children}
@@ -259,10 +271,10 @@ export function HeroVideo({
         muted
         loop
         premountFor={fps}
+        objectFit="cover"
         style={{
           width: "100%",
           height: "100%",
-          objectFit: "cover",
           scale: zoom,
           translate: `${x}px ${y}px`,
         }}

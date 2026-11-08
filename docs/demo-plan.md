@@ -1,30 +1,32 @@
-# Market Metro product spotlight
+# Market Metro story film
 
-**Preview ready · 1:22 · 1920 × 1080 · 30 fps**
+**Preview ready · 1:43.1 · 1920 × 1080 · 30 fps**
 
-Reference: the final APAC case-first submission, inspected read-only. Follow an event, keep the world visible, land sound cues on actions, and show evidence in short close-ups.
+An original animated-infographic story follows a furniture seller and a quiet shopper through evidence, a tested recommendation, a purchase and a traceable payment. The actual app recordings remain the proof behind the illustration.
 
 [Open the preview](http://localhost:3000/MarketMetroSubmission) · [Narration](video-narration.txt) · [Source](../video/README.md)
 
-| Time | Beat |
+| Start | Story beat |
 |---|---|
-| 0:00.0–0:05.5 | Bring them back |
-| 0:05.5–0:12.0 | Spot the gap |
-| 0:12.0–0:21.0 | Connect the dots |
-| 0:21.0–0:29.0 | Choose. Train. Recommend. |
-| 0:29.0–0:36.0 | Prove it first |
-| 0:36.0–0:47.0 | A customer returns |
-| 0:47.0–0:56.5 | Paid with PayPal |
-| 0:56.5–1:08.5 | The payoff |
-| 1:08.5–1:18.0 | Show the work |
-| 1:18.0–1:22.0 | Market Metro |
+| 0:00.0 | A shop and a quiet shopper |
+| 0:06.6 | A reason to reach out |
+| 0:17.2 | Connect the evidence |
+| 0:28.0 | Build the campaign |
+| 0:38.9 | Test before sending |
+| 0:49.1 | The recommendation becomes a purchase |
+| 1:01.0 | A payment you can trace |
+| 1:12.2 | What changed |
+| 1:25.3 | Follow the full trail |
+| 1:35.1 | Agentic commerce that learns |
 
-## Edit and sound
+## Story and timing
 
-- Short hook; no merchant-name introduction. Quiet shopper → useful match → purchase → PayPal → measurable payoff.
-- One focal point per shot, moving shop camera, illustrated recommendation phone, money and delivery state changes. Supporting app recordings remain genuine.
-- Original 120 BPM electronic groove, ducked under the female voice. Twelve short notification, transition, purchase and confirmation cues. No stock music or paid provider.
-- Every scene ends less than one second after narration. Main composition includes the score; individual scene compositions isolate their voice and visuals.
-- Native PayPal Sandbox proof is an archived $96 test capture. The phone is an explanatory illustration, not a new app screen.
-- +16 retained purchases, +$1,024.86 merchant contribution and +$114.96 modeled PayPal net are from one paired 12-store simulation. Merchant contribution includes inventory. These are not production earnings.
-- Final MP4 export and public upload remain separate from this editable preview.
+- The same illustrated merchant and shopper carry the story. The customer has a recorded 16-day market purchase gap; no invented cause of inactivity is claimed.
+- Full connected sentences replace the short slogan narration. Persistent labels and accumulating results replace abrupt title changes.
+- Scene pictures dissolve across ten frames. Adjacent voice segments have roughly 0.12–0.15 seconds of separation, with no overlap.
+- Key visual and sound events use narration word timings. Timings derived from estimates are labeled in the audio manifest.
+- Original 120 BPM music continues beneath the female voice; twelve brief effects reinforce the actions.
+- PayPal and AG Grid use saved native app footage. The product phone and characters are explicitly illustrations, not additional app functionality.
+- Gains remain one paired 12-store simulation: +16 retained purchases, +$1,024.86 merchant contribution including inventory, and +$114.96 modeled PayPal net after model cost. These are not production earnings.
+- Native Sandbox proof is the archived $96 capture. No new paid model calls, payments, APAC changes or subagents.
+- Final MP4 export and public upload are separate from this editable preview.

@@ -15,7 +15,7 @@ PLAN = json.loads((ROOT.parent / 'docs/submission-video.json').read_text())
 OUT = ROOT / 'public/narration-neural'
 OUT.mkdir(exist_ok=True)
 VOICE = 'af_heart'
-SPEED = 1.06
+SPEED = 1.02
 
 options = ort.SessionOptions()
 options.intra_op_num_threads = 2
@@ -56,7 +56,8 @@ def phrase_captions(text, seconds, timings):
                                endMs=round(250 + bounds[i][1] * 1000), timestampMs=None,
                                confidence=None, pageBreakAfter=True))
             group, first = [], i + 1
-    return result, 'model phoneme boundaries' if aligned else 'estimated phrase timing'
+    word_times = [dict(text=w, startMs=round(250+b[0]*1000), endMs=round(250+b[1]*1000)) for w,b in zip(words,bounds)]
+    return result, 'model phoneme boundaries' if aligned else 'estimated phrase timing', word_times
 
 
 previous_path = ROOT / 'public/narration-neural.json'
@@ -65,14 +66,14 @@ records = []
 for scene in PLAN['scenes']:
     text = scene['narration'].replace('AG ', 'A G ').replace('LLM', 'L L M').replace('-', ' ')
     cached = next((r for r in previous.get('scenes', []) if r['id'] == scene['id']), None)
-    if cached and previous.get('voice') == VOICE and cached.get('speed') == SPEED and cached.get('text') == text and (ROOT / 'public' / cached['file']).exists():
+    if cached and cached.get('words') and previous.get('voice') == VOICE and cached.get('speed') == SPEED and cached.get('text') == text and (ROOT / 'public' / cached['file']).exists():
         records.append(cached)
         print(scene['id'] + ': reused unchanged local voice', flush=True)
         continue
     started = time.monotonic()
     samples, rate, timings = speaker.create_timed(text, voice=VOICE, speed=SPEED,
                                                 lang='en-us', continuous=True,
-                                                sentence_pause=.11, clause_pause=.06)
+                                                sentence_pause=.13, clause_pause=.06)
     seconds = len(samples) / rate
     if seconds <= 0:
         raise RuntimeError('Empty narration: ' + scene['id'])
@@ -81,10 +82,10 @@ for scene in PLAN['scenes']:
     rms = float(np.sqrt(np.mean(samples ** 2)))
     samples *= min(.13 / max(rms, 1e-6), .88 / max(float(np.max(np.abs(samples))), 1e-6))
     sf.write(target, samples, rate)
-    captions, method = phrase_captions(text, seconds, timings)
+    captions, method, words = phrase_captions(text, seconds, timings)
     records.append(dict(id=scene['id'], voice=VOICE, speed=SPEED, seconds=seconds,
                         source='Local Kokoro-82M neural speech on CPU', sampleRate=rate,
-                        file='narration-neural/' + target.name, text=text, captions=captions,
+                        file='narration-neural/' + target.name, text=text, captions=captions, words=words,
                         captionTiming=method, generationSeconds=round(time.monotonic() - started, 2)))
     print(scene['id'] + ': ' + str(round(seconds, 2)) + ' s; ' + method, flush=True)
 

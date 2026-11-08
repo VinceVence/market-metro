@@ -21,6 +21,7 @@ for(const clip of Object.values(footage.clips)){
  assert.ok(existsSync(resolve(root,'public',clip.file)));
 }
 const cli=resolve(root,'node_modules/.bin/remotion');
+let previousVoiceEnd=0;
 for(const scene of plan.scenes){
  const clip=audio.scenes.find(a=>a.id===scene.id);assert.ok(clip);
  const actual=JSON.parse(execFileSync(cli,['ffprobe','-v','quiet','-show_entries','format=duration','-of','json',resolve(root,'public',clip.file)],{cwd:root,encoding:'utf8'}));
@@ -28,5 +29,8 @@ for(const scene of plan.scenes){
  assert.ok(clip.seconds+.27<=scene.durationInFrames/plan.fps);
  assert.ok(scene.durationInFrames/plan.fps-clip.seconds-.25<1,'Avoid long silent scene tails');
  assert.ok(clip.captions.length>0);
+ const voiceStart=scene.startFrame/plan.fps+.25;
+ if(previousVoiceEnd)assert.ok(voiceStart-previousVoiceEnd>0&&voiceStart-previousVoiceEnd<.3,'Continuous story has a short, non-overlapping narration handoff');
+ previousVoiceEnd=voiceStart+clip.seconds;
 }
 console.log(JSON.stringify({durationSeconds:plan.durationInFrames/plan.fps,voice:audio.voice,recordedClips:Object.keys(footage.clips).length,capturedFrames:Object.values(footage.clips).reduce((n,c)=>n+c.capturedFrames,0),narrationTracks:audio.scenes.length,paidCalls:0,payments:0}));

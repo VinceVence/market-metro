@@ -11,7 +11,7 @@ export const VerifierScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
   {
-    "text": "The verifier tests both.",
+    "text": "The first idea doesn't get a free",
     "startMs": 250,
     "endMs": 1850,
     "timestampMs": null,
@@ -19,17 +19,33 @@ export const VerifierScene=()=>{
     "pageBreakAfter": true
   },
   {
-    "text": "Boosted trees win this trial.",
-    "startMs": 1925,
-    "endMs": 3775,
+    "text": "pass.",
+    "startMs": 1900,
+    "endMs": 2825,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "The campaign clears the financial checks.",
-    "startMs": 3825,
-    "endMs": 6300,
+    "text": "A verifier tests both rankings in separate",
+    "startMs": 2900,
+    "endMs": 5450,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "development markets and selects the one that",
+    "startMs": 5500,
+    "endMs": 7750,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "earns more while protecting merchants.",
+    "startMs": 7800,
+    "endMs": 10325,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

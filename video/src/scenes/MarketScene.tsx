@@ -11,33 +11,25 @@ export const MarketScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
   {
-    "text": "Your shop is open.",
+    "text": "Imagine running a furniture shop with products",
     "startMs": 250,
-    "endMs": 1475,
+    "endMs": 2550,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Your customers?",
-    "startMs": 1525,
-    "endMs": 2425,
+    "text": "ready to sell, while a shopper who",
+    "startMs": 2600,
+    "endMs": 4475,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Some have gone quiet.",
-    "startMs": 2475,
-    "endMs": 3550,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "Let's bring one back.",
-    "startMs": 3600,
-    "endMs": 4825,
+    "text": "could buy from you has gone quiet.",
+    "startMs": 4500,
+    "endMs": 6750,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

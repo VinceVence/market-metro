@@ -1,83 +1,101 @@
-import { Stage, HeroVideo, Icon, Note, ramp, useTime, C } from "./Design";
+import { Stage, Icon, Note, ramp, useTime, cue, C } from "./Design";
+import { Person, Store } from "./StoryArt";
 export function Quiet() {
-  const t = useTime();
+  const t = useTime(),
+    gap = cue("problem", "sixteen", 2),
+    offer = cue("problem", "discount", 5),
+    evidence = cue("problem", "evidence", 9);
   return (
-    <Stage dark label="Spot the gap">
-      <HeroVideo
-        file="film-world"
-        zoom={1.35 + 0.1 * ramp(t, 0, 7)}
-        x={-100}
-        opacity={0.32}
+    <Stage label="What would bring this shopper back?">
+      <Store
+        style={{ left: -260, top: 350, width: 820, height: 592, opacity: 0.18 }}
       />
+      <Person style={{ left: 420, top: 420, width: 280, height: 487 }} />
       <div
         style={{
           position: "absolute",
-          left: 170,
-          top: 230,
-          width: 680,
-          height: 620,
-          borderRadius: 48,
-          background: "#07284fef",
-          padding: 50,
-          boxSizing: "border-box",
-          rotate: `${-3 + 3 * ramp(t, 0, 0.5)}deg`,
+          left: 900,
+          top: 190,
+          width: 470,
+          height: 460,
+          borderRadius: 32,
+          background: "#fff",
+          boxShadow: "0 25px 75px #143d6820",
+          overflow: "hidden",
         }}
       >
         <div
           style={{
+            height: 82,
+            background: C.blue,
             display: "flex",
-            gap: 20,
             alignItems: "center",
-            color: "#9ddaff",
-            fontSize: 30,
+            justifyContent: "center",
+            color: "#fff",
+            fontSize: 31,
           }}
         >
-          <Icon kind="person" size={50} />
-          Shopper 179
+          Since the last purchase
         </div>
         <div
           style={{
-            fontSize: 250,
+            fontSize: 235,
+            lineHeight: 1.3,
+            textAlign: "center",
             fontWeight: 700,
-            lineHeight: 1.2,
-            letterSpacing: -12,
+            color: C.ink,
           }}
         >
-          {Math.round(16 * ramp(t, 0.15, 0.9))}
+          {Math.round(16 * ramp(t, gap - 0.5, gap + 0.2))}
         </div>
-        <div style={{ fontSize: 42 }}>days since purchase</div>
-        <div style={{ display: "flex", gap: 14, marginTop: 35 }}>
-          {Array.from({ length: 16 }, (_, i) => (
-            <div
-              key={i}
-              style={{
-                width: 18,
-                height: 18,
-                borderRadius: 9,
-                background: i === 15 ? C.cyan : "#4c719b",
-                opacity: ramp(t, 0.2 + i * 0.035, 0.5 + i * 0.035),
-              }}
-            />
-          ))}
+        <div style={{ textAlign: "center", fontSize: 36, color: C.muted }}>
+          days
         </div>
       </div>
       <div
         style={{
           position: "absolute",
-          left: 1020,
-          top: 350,
-          width: 740,
-          fontSize: 112,
-          fontWeight: 600,
-          lineHeight: 1.05,
-          letterSpacing: -4,
-          opacity: ramp(t, 2.6, 3),
+          left: 1470,
+          top: 260,
+          rotate: "8deg",
+          width: 245,
+          height: 180,
+          borderRadius: 25,
+          background: "#f9d08b",
+          display: "flex",
+          gap: 20,
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: 86,
+          color: "#7d5421",
+          opacity:
+            ramp(t, offer - 0.3, offer + 0.2) *
+            (1 - ramp(t, evidence - 0.8, evidence - 0.3)),
         }}
       >
-        Find a<br />
-        <span style={{ color: C.cyan }}>useful match.</span>
+        % ?
       </div>
-      <Note dark>Saved shopper history · market-wide purchase gap</Note>
+      <div
+        style={{
+          position: "absolute",
+          left: 895,
+          top: 705,
+          display: "flex",
+          alignItems: "center",
+          gap: 25,
+          color: C.blue,
+          opacity: ramp(t, evidence - 0.9, evidence - 0.4),
+        }}
+      >
+        <Icon kind="data" size={65} />
+        <span style={{ fontSize: 42, fontWeight: 600 }}>
+          Start with evidence.
+        </span>
+      </div>
+      <Note>
+        Shopper 179 · market-wide purchase gap · illustrated choices, not extra
+        campaign events
+      </Note>
     </Stage>
   );
 }

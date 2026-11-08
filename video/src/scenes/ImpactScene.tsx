@@ -11,41 +11,41 @@ export const ImpactScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
   {
-    "text": "Across this simulated market: sixteen more retained",
+    "text": "Across this twelve store simulation, the campaign",
     "startMs": 250,
-    "endMs": 3389,
+    "endMs": 3356,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "purchases.",
-    "startMs": 3389,
-    "endMs": 4505,
+    "text": "delivers sixteen extra retained purchases, over a",
+    "startMs": 3356,
+    "endMs": 6461,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Over a thousand dollars in merchant contribution.",
-    "startMs": 4505,
-    "endMs": 7923,
+    "text": "thousand dollars in merchant contribution, and three",
+    "startMs": 6461,
+    "endMs": 9783,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Modeled PayPal net, up three point four",
-    "startMs": 7923,
-    "endMs": 10225,
+    "text": "point four seven percent more modeled PayPal",
+    "startMs": 9783,
+    "endMs": 12528,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "seven percent.",
-    "startMs": 10225,
-    "endMs": 11550,
+    "text": "net.",
+    "startMs": 12528,
+    "endMs": 13250,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

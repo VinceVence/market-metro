@@ -7,8 +7,9 @@ const read=p=>JSON.parse(readFileSync(resolve(root,p),'utf8'));
 const plan=read('../docs/submission-video.json'),audio=read('public/narration-neural.json');
 const clips=read('public/footage.json').clips;
 const components=['MarketScene','DemandScene','OntologyScene','PlannerScene','VerifierScene','ShopperScene','PayPalScene','ImpactScene','AGGridScene','ClosingScene'];
-// End on the next half-second beat; no inherited multi-second silent holds.
-const durations=plan.scenes.map(s=>Math.ceil((audio.scenes.find(a=>a.id===s.id).seconds+.65)*2)/2*plan.fps);
+// Short breathing room, with picture overlaps bridging adjacent sentences.
+const overlap=plan.overlapFrames||0;
+const durations=plan.scenes.map(s=>Math.ceil((audio.scenes.find(a=>a.id===s.id).seconds+.45)*plan.fps));
 if(durations.reduce((a,b)=>a+b,0)>=180*plan.fps)throw Error('Natural narration exceeds three minutes; review pacing before changing the timeline.');
 const writes=[];let cursor=0;
 for(const [index,scene] of plan.scenes.entries()){
@@ -26,10 +27,11 @@ for(const [index,scene] of plan.scenes.entries()){
   src=src.replace(/src=\{staticFile\("narration\/([^\"]+)"\)\}/g,'src={staticFile("narration-neural/$1")}')
     .replace(/name="Daniel · local male narration"/g,'name="Heart · local neural female narration"')
     .replace(/captions=\{\[[\s\S]*?\]\}/,'captions={'+JSON.stringify(recording.captions,null,2)+'}');
+  if(index)cursor-=overlap;
   writes.push([path,src]);scene.startFrame=cursor;scene.durationInFrames=durations[index];cursor+=durations[index];
 }
 let main=readFileSync(resolve(root,'src/Composition.tsx'),'utf8'),i=0;
-main=main.replace(/(<Series\.Sequence\s+name=")[^"]+("\s+durationInFrames=)\{[^}]+\}/g,(_,a,b)=>{const s=plan.scenes[i];return a+s.title+b+'{'+durations[i++]+'}';});
+main=main.replace(/(<Series\.Sequence\s+name=")[^"]+("\s+durationInFrames=)\{[^}]+\}(?:\s+offset=\{[^}]+\})?/g,(_,a,b)=>{const index=i++,s=plan.scenes[index];return a+s.title+b+'{'+durations[index]+'} offset={'+(index?-overlap:0)+'}';});
 if(i!==plan.scenes.length)throw Error('Main timeline differs from the approved scene list.');
 main=main.replace(/(id="MarketMetroSubmission"\s+component=\{MarketMetroSubmission\}\s+durationInFrames=)\{\d+\}/,'$1{'+cursor+'}');
 writes.push([resolve(root,'src/Composition.tsx'),main]);

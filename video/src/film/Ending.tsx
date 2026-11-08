@@ -1,11 +1,18 @@
 import { CanvasImage, staticFile, useVideoConfig } from "remotion";
-import { Stage, HeroVideo, ramp, useTime } from "./Design";
+import { Stage, HeroVideo, Icon, ramp, useTime, cue, C } from "./Design";
+import { Person } from "./StoryArt";
 export function Ending() {
   const t = useTime(),
     { fps } = useVideoConfig();
   return (
     <Stage label="">
       <HeroVideo file="film-return" zoom={1.12} opacity={0.14} />
+      <Person
+        role="merchant"
+        happy
+        style={{ left: 140, top: 520, width: 200, height: 348 }}
+      />
+      <Person happy style={{ left: 1580, top: 520, width: 200, height: 348 }} />
       <div
         style={{
           position: "absolute",
@@ -28,6 +35,26 @@ export function Ending() {
           Market Metro
         </div>
         <div style={{ fontSize: 54 }}>Agentic commerce that learns.</div>
+        <div style={{ display: "flex", gap: 80, marginTop: 30, color: C.blue }}>
+          {[
+            ["data", "activity"],
+            ["model", "campaigns"],
+            ["card", "payments"],
+          ].map(([kind, word]) => (
+            <div
+              key={kind}
+              style={{
+                opacity: ramp(
+                  t,
+                  cue("close", word, 1) - 0.3,
+                  cue("close", word, 1) + 0.2,
+                ),
+              }}
+            >
+              <Icon kind={kind} size={56} />
+            </div>
+          ))}
+        </div>
       </div>
     </Stage>
   );
