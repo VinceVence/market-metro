@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import {readFileSync,existsSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {resolve,dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+const read=p=>JSON.parse(readFileSync(resolve(root,p),'utf8'));
+const plan=read('public/data/plan.json'),audio=read('public/narration-neural.json'),footage=read('public/footage.json');
+assert.equal(audio.voice,'af_heart');assert.equal(audio.providerCalls,0);
+assert.ok(plan.durationInFrames/plan.fps<180);
+assert.deepEqual(read('public/data/case.json'),read('../demo/data/judge-reactivation.json'));
+for(const sound of ['soft-sweep','soft-tap','confirmation'])assert.ok(existsSync(resolve(root,'public/sfx/'+sound+'.wav')));
+assert.ok(Object.keys(footage.clips).length>=11);
+for(const clip of Object.values(footage.clips)){
+ assert.ok(clip.capturedFrames>40);assert.ok(clip.sourceURL.startsWith('http://127.0.0.1:4173/'));
+ assert.ok(existsSync(resolve(root,'public',clip.file)));
+}
+const cli=resolve(root,'node_modules/.bin/remotion');
+for(const scene of plan.scenes){
+ const clip=audio.scenes.find(a=>a.id===scene.id);assert.ok(clip);
+ const actual=JSON.parse(execFileSync(cli,['ffprobe','-v','quiet','-show_entries','format=duration','-of','json',resolve(root,'public',clip.file)],{cwd:root,encoding:'utf8'}));
+ assert.ok(Math.abs(Number(actual.format.duration)-clip.seconds)<.02);
+ assert.ok(clip.seconds+.27<=scene.durationInFrames/plan.fps);
+ assert.ok(clip.captions.length>0);
+}
+console.log(JSON.stringify({durationSeconds:plan.durationInFrames/plan.fps,voice:audio.voice,recordedClips:Object.keys(footage.clips).length,capturedFrames:Object.values(footage.clips).reduce((n,c)=>n+c.capturedFrames,0),narrationTracks:audio.scenes.length,paidCalls:0,payments:0}));

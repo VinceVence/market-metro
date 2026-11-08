@@ -1,0 +1,52 @@
+# Market Metro video preview
+
+An editable **2:46.73** Remotion composition with merchant close-ups, animated story graphics, actual app evidence, sparse original sound effects and upbeat neural female narration. It follows the saved market, planning, verification, shopper purchase, native PayPal receipt and matched gains, then demonstrates AG Grid interactions.
+
+## Preview
+
+```sh
+cd video
+npm ci
+npm run dev -- --port=3000
+```
+
+Open http://localhost:3000/MarketMetroSubmission and press Play. The main video and ten individual scenes are editable in Studio. Footage and narration are bundled: previewing needs no credentials, speech-model download, paid calls or payments. No final submission MP4 has been exported.
+
+## Evidence and media
+
+- Eleven retained clips contain actual app recordings and clean renderer-camera shots: 1,551 frames sampled at roughly 15 fps, encoded at 30 fps. No app UI or financial rows were fabricated. Some recordings are gently retimed to fit the voiceover.
+- The app footage uses the same saved 12-store campaign. Shopper behavior and financial gains are simulated; the $96 receipt is archived native PayPal Sandbox evidence using fictitious funds.
+- Native AG Grid sorting, the decision drill-down, a custom PayPal widget and dashboard resizing were performed in the app. Its layouts are authored, not AI-generated.
+- The narrator is the local Kokoro-82M stock female preset **af_heart**, at normal synthesis speed. No hosted speech service or voice cloning was used.
+- Captions use model phoneme boundaries where these match the transcript; other phrase timings are estimated. Review caption timing before publishing.
+
+## Edit and verify
+
+`src/Composition.tsx` contains the independent scene sequences; `src/scenes/` contains their voice and inline captions; `src/film/` contains the merchant story, animation and focused demo cut-ins. `public/footage.json` records capture provenance. `public/narration-neural.json` records measured audio durations. The script and final timings are in `../docs/submission-video.json`.
+
+```sh
+npm run check
+```
+
+This checks types, media files, narration durations and the under-three-minute limit without provider calls.
+
+## Regenerate speech locally
+
+These steps are optional; they are not needed to preview the bundled video.
+
+```sh
+# From the repository root
+uv venv .local/video-voice-venv --python 3.12 --cache-dir .local/uv-cache
+uv pip install --python .local/video-voice-venv/bin/python --cache-dir .local/uv-cache -r video/requirements-voice.txt
+```
+
+Download the official [ONNX model](https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/kokoro-v1.0.onnx) and [voice bank](https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/voices-v1.0.bin) into `.local/voice-models/kokoro/`. Run `npm --prefix video run voice` to synthesize on CPU and synchronize timing and captions. The synchronizer rejects videos of three minutes or more. Weights, raw frames and Python environments stay outside Git.
+
+## Notices
+
+- [Remotion](https://www.remotion.dev/) and its media/font/caption packages retain their own licenses.
+- The [Basic Captions element](https://www.remotion.dev/elements/captions/basic-captions/) source is copied unchanged; application CSS supplies the DM Sans styling.
+- [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) has Apache-2.0 weights; [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx) is MIT inference code. Weights are not distributed here.
+- DM Sans retains its OFL in `public/fonts/`. Brand marks remain their owners’ property. AG Studio evaluation notices remain in the footage; see the parent repository’s third-party notices.
+
+The clean shop shots use `demo/video-capture.html`, the existing Three.js renderer and saved data. Isolating a merchant is a render-window change only. APAC was a read-only storytelling reference; no APAC code or cloud project was changed.

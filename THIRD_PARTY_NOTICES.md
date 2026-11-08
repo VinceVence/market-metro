@@ -23,3 +23,11 @@ Original Market Metro source code and code-drawn artwork are covered by the
   The application currently retains their evaluation notices. The hackathon
   sponsor offers a [free 45-day trial](https://paypalaihackathon.devpost.com/details/aggrid).
   Obtain coverage appropriate for the judging period before public release.
+
+- The video subproject uses Remotion and its media/caption/font packages under
+  their own terms. The official Basic Captions element source is retained in
+  `video/src/basic-captions.element.tsx`.
+- Video narration was synthesized locally with the stock `af_heart` voice from
+  [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache-2.0 weights),
+  using [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx) (MIT inference code).
+  Model weights and raw recording frames are not distributed in this repo.

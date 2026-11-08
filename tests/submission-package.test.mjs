@@ -5,8 +5,18 @@ const read=async p=>JSON.parse(await readFile(p,'utf8'));
 
 test('reviewable video plan starts in the market, stays under three minutes and binds every scene to evidence',async()=>{
  const plan=await read('docs/submission-video.json');
- assert.equal(plan.status,'DRAFT_FOR_USER_REVIEW');
- assert.equal(plan.rendered,false);assert.equal(plan.audioGenerated,false);
+ assert.ok(['DRAFT_FOR_USER_REVIEW','PREVIEW_READY_FOR_REVIEW'].includes(plan.status));
+ assert.equal(plan.rendered,false);
+ if(plan.status==='PREVIEW_READY_FOR_REVIEW'){
+  assert.equal(plan.audioGenerated,true);
+  const audio=await read('video/public/narration-neural.json');
+  assert.equal(audio.voice,plan.production.voiceId);assert.equal(audio.providerCalls,0);
+  for(const scene of plan.scenes){
+   const clip=audio.scenes.find(c=>c.id===scene.id);assert.ok(clip);
+   await access('video/public/'+clip.file);
+   assert.ok(clip.seconds+.27<=scene.durationInFrames/plan.fps,'Narration must finish before its scene ends');
+  }
+ }else assert.equal(plan.audioGenerated,false);
  assert.equal(plan.scenes[0].id,'market');assert.equal(plan.scenes[0].startFrame,0);
  let end=0,words=0;
  for(const scene of plan.scenes){

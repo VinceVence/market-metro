@@ -1,0 +1,38 @@
+{
+  "name": "market-metro-video",
+  "version": "1.0.0",
+  "description": "Merchant-led Market Metro product showcase with local neural female narration",
+  "repository": {},
+  "license": "MIT",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
+  "private": true,
+  "dependencies": {
+    "@remotion/captions": "4.0.541",
+    "@remotion/cli": "4.0.541",
+    "@remotion/fonts": "4.0.541",
+    "@remotion/media": "4.0.541",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.541"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/web": "0.0.166",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "remotion studio --no-open --webpack-poll=1000",
+    "build": "remotion bundle",
+    "upgrade": "remotion upgrade",
+    "lint": "tsc --noEmit",
+    "voice": "../.local/video-voice-venv/bin/python scripts/narrate-neural.py && node scripts/sync-narration.mjs",
+    "footage": "node scripts/encode-footage.mjs",
+    "check": "tsc --noEmit && node scripts/validate.mjs"
+  },
+  "allowScripts": {
+    "esbuild": false
+  }
+}

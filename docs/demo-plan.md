@@ -1,112 +1,79 @@
-# Market Metro video plan
+# Market Metro product showcase
 
-**Draft for review · 2:45 · 1920 × 1080 · 30 fps**
+**Preview ready · 2:46.73 · 1920 × 1080 · 30 fps**
 
-Open with the functioning simulation. Follow the same saved 12-store campaign through evidence, planning, verification, purchase, PayPal receipt and measured impact. AG Studio is visible during planning and financial comparison, then gets a dedicated 22-second interaction sequence. The merchant-feed demonstration remains a separate test. The 384-store study belongs in supporting materials.
+A merchant-led story inspired by the close-up storytelling approach of the APAC reference, which was inspected without modifications. The film uses the current Market Metro store, an inactive shopper, a useful recommendation, and a verified payment as its narrative thread.
 
-The source timeline is [submission-video.json](submission-video.json). The clean recording script is [video-narration.txt](video-narration.txt). No video or voice audio has been rendered.
+[Open the editable preview](http://localhost:3000/MarketMetroSubmission) · [Narration text](video-narration.txt) · [Scene manifest](submission-video.json)
 
-## Storyboard
+## Film sequence
 
-| Time | Scene | App action |
+| Time | Story beat | Visual direction |
 |---|---|---|
-| 0:00–0:16 | Start inside the economy | Keep Day 1 visible. Pan across stores, shoppers and the PayPal building. Use real recorded app footage. |
-| 0:16–0:28 | Make the business decision concrete | Advance to Agent decisions, first stop. Highlight electronics and furniture interest versus funded units. |
-| 0:28–0:44 | Show the data contract | In the feed verifier, show a split checkout, then the ambiguous-link hold. Label this as a separate data-quality demonstration. |
-| 0:44–1:07 | Show the LLM choosing work | Open the same campaign in AG Studio. In Agent decisions, inspect Day 31 Analyze and Train; then show Model training with two distinct model bars and its native AG Grid registry. Keep the AG Studio/AG Grid caption visible. |
-| 1:07–1:25 | Show why the model changed | Choose Agent decisions, then Next to the model-change stop. Highlight the two development-trial rows and selected boosted model. |
-| 1:25–1:40 | Follow one shopper | Advance to Shopper response. Focus Form & Function and the Day 35 purchase → Day 36 delivery trace. |
-| 1:40–2:00 | Connect the purchase to PayPal | Show this campaign’s native receipt, its capture ID, fee and test merchant proceeds. Briefly open the warehouse-order link. |
-| 2:00–2:18 | Show the matched gain | Use AG Studio Net profits for this same campaign. Show native AG Charts fixed-versus-planner bars and the AG Grid settled-comparison rows, then emphasize the three gains. Preserve the simulation and inventory labels. |
-| 2:18–2:40 | Show AG Grid as the evidence workspace | Sort the model registry by Recommendation AUROC, filter the decision ledger with the Day 31 Verify stage, show the custom PayPal widget, then enable Arrange and resize one dashboard widget. Use actual app interactions from the same saved campaign. |
-| 2:40–2:45 | Close on the product | End on the Market → Agent decisions → Impact navigation with the project title. Keep the free saved-policy exploration link readable. |
-
-## Dedicated AG Grid sequence — 2:18–2:40
-
-Use the same `judge-demo` run throughout. Show native functionality and useful evidence, rather than a sponsor title card.
-
-| Time | Interaction | What it demonstrates |
-|---|---|---|
-| 2:18–2:24 | Sort the model registry by Recommendation AUROC | Actual model rows and validation scores remain inspectable. The higher-accuracy model was not automatically the financial winner. |
-| 2:24–2:30 | Select Day 31 Verify and open its saved evidence | The app’s review-stage selector filters the AG Grid ledger and connects decisions to their recorded inputs. |
-| 2:30–2:35 | Open Lifecycle’s custom PayPal evidence widget and receipt grid | One native capture, tied to the same campaign and warehouse order. |
-| 2:35–2:40 | Enable Arrange and resize a profit widget | AG Studio’s editable layout, existing theme and native charts. No AI-generated-layout or persistence claim. |
-
-Capture full interactions; use a close-up of the active grid or widget so viewers can read it. The ontology node graph is application-owned, not an AG Grid feature. Keep any vendor evaluation notices intact.
+| 0:00–0:14 | Meet Form & Function | Wide market opening dissolves into a clean close-up of the actual shop renderer. Large merchant-focused typography; no website chrome. |
+| 0:14–0:28 | A shopper goes quiet | Show Shopper 179 and an animated 16-day market purchase gap. Do not imply permanent churn or a store-specific purchase history. |
+| 0:28–0:42 | Keep the meaning intact | Animate one checkout splitting into two merchant portions, then cut into the recorded ambiguity hold. |
+| 0:42–1:04 | Turn activity into a plan | Animate observed demand, inventory and past responses feeding one planner and local training tools. Show a short close-up of the real recorded decision. |
+| 1:04–1:22 | Test before launch | Reveal the two development-trial outcomes and the selected ranking, using the saved numerical evidence. |
+| 1:22–1:40 | The shopper returns | Show the shop and returning avatar, a clearly illustrated side table, the $96 purchase and day-36 delivery. Retain a recorded app cut-in. |
+| 1:40–2:00 | Payment verified | Make PayPal and the $96 test capture the hero. Reveal the fee and merchant proceeds, then show the real receipt and warehouse linkage. |
+| 2:00–2:18 | A measured result | Reveal +16 retained purchases, +$114.96 modeled PayPal net and +$1,024.86 merchant contribution across the full 12-store market. |
+| 2:18–2:41 | Open the evidence | Use enlarged native AG Grid sorting, a decision drill-down, the PayPal custom widget and a real dashboard resize. |
+| 2:41–2:46 | Market Metro | Return to the shop, with a clean brand lock-up and Agentic Commerce That Learns tagline. |
 
 ## Narration
 
-### 0:00 — Start inside the economy
+### 0:00 — Meet Form & Function
 
-This is Market Metro: twelve merchants and six hundred simulated shoppers. They browse, buy, and receive deliveries. Their activity becomes the data our AI planner uses to investigate demand, train models, and test campaigns.
+The doors are open. The shelves are ready. But some shoppers have gone quiet. Meet Form and Function, a furniture shop inside our simulated Market Metro.
 
-### 0:16 — Make the business decision concrete
+### 0:14 — A shopper goes quiet
 
-The business question: who should we contact, and what should we recommend? Interest alone does not guarantee a funded purchase, or an order the merchant can fulfill.
+Shopper one seventy nine has not bought in sixteen days. Which product would bring them back? And how can a merchant know the next campaign will be worth it?
 
-### 0:28 — Show the data contract
+### 0:28 — Keep the meaning intact
 
-Our ontology verifier counts split checkouts once and holds ambiguous relationships. In a separate twenty-four-feed test, it accepted all twelve usable merchant exports, versus six for fixed mapping. Both methods held all twelve unsafe exports.
+A single checkout can split into several merchant orders. Our ontology keeps the meaning intact: one purchase, counted once. If the links are unclear, the system holds the decision.
 
-### 0:44 — Show the LLM choosing work
+### 0:42 — Turn activity into a plan
 
-Back in our recorded campaign, the LLM investigates demand, chooses a twenty-eight-day market-feedback window, and requests two local model fits. It proposes ranked recommendations and shopping-needs inquiries for up to thirty-six consenting shoppers a day. These are saved decisions from a real model run, with the inputs and tool results available to inspect.
+Market Metro turns those questions into a plan. The language model investigates demand, chooses twenty eight days of history, and requests two model fits. It proposes recommendations and shopping needs inquiries for consenting shoppers. Every choice is recorded, and every campaign must pass a financial test.
 
-### 1:07 — Show why the model changed
+### 1:04 — Test before launch
 
-The LLM preferred a two-stage response model. The verifier tested both rankings with the same campaign in three development markets. Boosted trees earned more and passed the merchant and purchase checks, so the verifier selected it. The LLM proposes; trusted tools govern execution.
+The planner preferred one model. The verifier tested both rankings on separate trial markets. Boosted trees earned more while protecting merchant outcomes, so it became the selected model. Measure first. Then launch.
 
-### 1:25 — Follow one shopper
+### 1:22 — The shopper returns
 
-Shopper one-seventy-nine had not bought for sixteen days. After a recommendation, they buy a ninety-six-dollar mobile side table and receive it the next day. Under fixed rules, the same request went unfilled.
+On day thirty five, the recommendation meets a need in the simulation. Our quiet shopper chooses a mobile side table from Form and Function, pays ninety six dollars, and receives it the next day. Under fixed rules, that request went unfilled.
 
-### 1:40 — Connect the purchase to PayPal
+### 1:40 — Payment verified
 
-That exact warehouse order was mirrored once through PayPal Sandbox. Here is the completed ninety-six-dollar capture: a three-dollar-fifty-six fee and ninety-two dollars forty-four in test merchant proceeds. PayPal supplies the execution and receipt proof. The simulated payment economics let us compare campaigns without charging real shoppers.
+That exact order was mirrored once through PayPal Sandbox. A completed ninety six dollar capture. Three fifty six in fees, and ninety two forty four for the test merchant. One order, one receipt, linked back to the warehouse.
 
-### 2:00 — Show the matched gain
+### 2:00 — A measured result
 
-After settlement, the campaign produced sixteen more retained purchases, over a thousand dollars in additional merchant contribution, and three point four seven percent higher modeled PayPal net than fixed rules. Estimated model usage was roughly three cents. These are simulated results, not production profit.
+Across the twelve store market, this campaign delivered sixteen extra retained purchases. Merchant contribution grew by over a thousand dollars. Modeled PayPal net rose three point four seven percent after model cost. These are simulated results, not production profit.
 
-### 2:18 — Show AG Grid as the evidence workspace
+### 2:18 — Open the evidence
 
-AG Grid and AG Charts, inside AG Studio, make the workflow inspectable. Sort the model registry, follow a decision back to its evidence, and reconcile payments in our custom PayPal widget. The same dashboards compare fixed rules with the published campaign, and their layouts can be rearranged.
+AG Grid and AG Charts make every step inspectable. Compare models. Open the agent's evidence. Check the native PayPal receipt in our custom widget. Even the dashboard layout is editable. The story ends with a sale, and a record you can verify.
 
-### 2:40 — Close on the product
+### 2:41 — Market Metro
 
 Market Metro. Agentic commerce that learns, and shows its work.
 
-## Remotion production direction
+## Style and sound
 
-- Build one composition with the scene IDs and frame counts in the JSON. Each actual app clip gets its own sequence; captions and emphasis overlays remain editable.
-- Use recorded interaction footage, not a fabricated interface or a slide-only substitute. Zoom into the active card/table so it is legible at 1080p.
-- Keep the PayPal blue sidebar, white environment and DM Sans. Use the existing application assets and vector marks with their notices; add no stock music.
-- Include the simulation boundary on financial screens. Label historical training data and the separate feed test. Keep receipt source, gross, fee and proceeds visible.
-- Use one LLM planner plus deterministic tools/verifier in labels. Do not portray distinct autonomous LLM employees, AI-generated dashboard layouts, a 2× profit result, or actual PayPal production earnings.
-- After script review: capture clips, record narration, assemble in Remotion Studio, review timing, then export and verify the final video is under 180 seconds. Upload publicly to YouTube when approved.
-
-## Review decisions
-
-Please review the opening, technical depth and closing. The narration currently uses an explanatory product-demo voice. A personal founder narration can use the same timings.
+- Close shop shots, large DM Sans typography, animated evidence connections and controlled result reveals. PayPal blue, white, navy and restrained teal accents.
+- The upbeat female narration is generated locally. Subtle original sweeps, taps and one confirmation chime support the story; no music bed.
+- Recorded UI appears as focused evidence, rather than full-page browsing. The AG Grid section shows native interactions and the custom PayPal widget.
+- Graphics and product illustrations explain the saved case; they are not presented as additional app screens or new simulation events.
+- The shopper’s 16-day inactivity is market-wide. Gains belong to the entire 12-store simulation, not just Form & Function. The native receipt uses fictitious Sandbox funds.
+- No new paid model calls, payment calls or subagents were used. The final submission MP4 and public upload remain separate from this editable preview.
 
 ## Evidence
 
-- [Saved campaign and receipt](../demo/data/judge-reactivation.json)
-- [Matching AG Grid evidence](../demo/data/judge-intelligence.json)
-- [Separate held-out merchant-feed comparison](../demo/data/ontology-study.json)
-- [Architecture assets](presentations/ontology-paypal/README.md)
-
-## Upload copy draft
-
-**Title:** Market Metro | Agentic Commerce That Learns | PayPal AI Hackathon
-
-Market Metro turns observed merchant activity into trained models, tested campaigns and traceable PayPal payments. This demo follows one saved 12-store, 600-shopper simulation from Day 1 to a recorded agent decision, purchase and native PayPal Sandbox receipt.
-
-Against fixed rules in that same simulation: 16 more retained purchases, $1,024.86 additional merchant contribution, and $114.96 higher modeled PayPal net after estimated model cost. Merchant contribution includes inventory value. These are simulated outcomes, not actual PayPal profit. The $96 Sandbox capture is an existing order and uses fictitious funds.
-
-Built with PayPal Sandbox, Gemini on Vertex AI, local scikit-learn models, SQLite, Three.js and AG Studio with native AG Grid, AG Charts and a custom PayPal evidence widget. The ontology feed comparison is a separate synthetic-data test.
-
-Source and setup: https://github.com/VinceVence/market-metro
-Original code: MIT. Third-party components retain their own licenses.
-
-Publish only after the narration/video review and public repository release. The JSON contains the same upload text for reuse.
+- [Primary case and native receipt](../demo/data/judge-reactivation.json)
+- [Matching dashboard data](../demo/data/judge-intelligence.json)
+- [Video source and regeneration instructions](../video/README.md)

@@ -1,14 +1,14 @@
 {
-  "status": "DRAFT_FOR_USER_REVIEW",
+  "status": "PREVIEW_READY_FOR_REVIEW",
   "title": "Market Metro \u2014 Agentic Commerce That Learns",
   "compositionId": "MarketMetroSubmission",
   "width": 1920,
   "height": 1080,
   "fps": 30,
-  "durationInFrames": 4950,
-  "targetSeconds": 165.0,
+  "durationInFrames": 5002,
+  "targetSeconds": 166.73333333333332,
   "rendered": false,
-  "audioGenerated": false,
+  "audioGenerated": true,
   "style": {
     "font": "DM Sans",
     "background": "#ffffff",
@@ -24,25 +24,28 @@
     "motion": "Slow push-ins, brief highlights and clean cuts; do not fabricate UI actions"
   },
   "production": {
-    "stage": "Narration and storyboard review only",
-    "capture": "Real app interaction clips using saved data; Remotion edits the captured footage",
-    "audio": "Record the approved voiceover or use an agreed local voice; no paid TTS call yet",
-    "music": "None proposed",
+    "stage": "Merchant-led product showcase preview complete; final MP4 not exported",
+    "capture": "11 source clips: recorded app interactions plus clean presentation-camera shots of the same app renderer and saved data.",
+    "audio": "Local Kokoro-82M neural female voice (af_heart), optimistic and warm; no hosted speech API",
+    "music": "No music bed. Three original synthesized effects, used sparingly for transitions, interaction and payment confirmation.",
     "paidModelCalls": 0,
-    "payments": 0
+    "payments": 0,
+    "voiceId": "af_heart",
+    "previewURL": "http://localhost:3000/MarketMetroSubmission",
+    "story": "Form & Function and a shopper who went quiet; narrative visuals are illustrative, supporting clips are recorded app evidence."
   },
   "scenes": [
     {
       "id": "market",
       "startFrame": 0,
-      "durationInFrames": 480,
-      "title": "Start inside the economy",
-      "url": "/judge.html",
-      "captureAction": "Keep Day 1 visible. Pan across stores, shoppers and the PayPal building. Use real recorded app footage.",
-      "narration": "This is Market Metro: twelve merchants and six hundred simulated shoppers. They browse, buy, and receive deliveries. Their activity becomes the data our AI planner uses to investigate demand, train models, and test campaigns.",
+      "durationInFrames": 420,
+      "title": "Meet Form & Function",
+      "url": "/video-capture.html",
+      "captureAction": "Wide market opening dissolves into a clean close-up of the actual shop renderer. Large merchant-focused typography; no website chrome.",
+      "narration": "The doors are open. The shelves are ready. But some shoppers have gone quiet. Meet Form and Function, a furniture shop inside our simulated Market Metro.",
       "onScreen": [
-        "12 merchants \u00b7 600 simulated shoppers",
-        "Agentic Commerce That Learns"
+        "Meet Form & Function",
+        "12 shops \u00b7 600 simulated shoppers"
       ],
       "evidence": [
         "demo/data/judge-reactivation.json"
@@ -50,14 +53,15 @@
     },
     {
       "id": "problem",
-      "startFrame": 480,
-      "durationInFrames": 360,
-      "title": "Make the business decision concrete",
+      "startFrame": 420,
+      "durationInFrames": 420,
+      "title": "A shopper goes quiet",
       "url": "/judge.html",
-      "captureAction": "Advance to Agent decisions, first stop. Highlight electronics and furniture interest versus funded units.",
-      "narration": "The business question: who should we contact, and what should we recommend? Interest alone does not guarantee a funded purchase, or an order the merchant can fulfill.",
+      "captureAction": "Show Shopper 179 and an animated 16-day market purchase gap. Do not imply permanent churn or a store-specific purchase history.",
+      "narration": "Shopper one seventy nine has not bought in sixteen days. Which product would bring them back? And how can a merchant know the next campaign will be worth it?",
       "onScreen": [
-        "Demand \u2192 campaign \u2192 retained purchase"
+        "16 days between market purchases",
+        "Shopper 179"
       ],
       "evidence": [
         "demo/data/judge-reactivation.json"
@@ -66,15 +70,14 @@
     {
       "id": "ontology",
       "startFrame": 840,
-      "durationInFrames": 480,
-      "title": "Show the data contract",
+      "durationInFrames": 420,
+      "title": "Keep the meaning intact",
       "url": "/judge.html#ontology",
-      "captureAction": "In the feed verifier, show a split checkout, then the ambiguous-link hold. Label this as a separate data-quality demonstration.",
-      "narration": "Our ontology verifier counts split checkouts once and holds ambiguous relationships. In a separate twenty-four-feed test, it accepted all twelve usable merchant exports, versus six for fixed mapping. Both methods held all twelve unsafe exports.",
+      "captureAction": "Animate one checkout splitting into two merchant portions, then cut into the recorded ambiguity hold.",
+      "narration": "A single checkout can split into several merchant orders. Our ontology keeps the meaning intact: one purchase, counted once. If the links are unclear, the system holds the decision.",
       "onScreen": [
-        "Separate 24-feed test",
-        "Usable feeds: 6/12 fixed \u2192 12/12 verifier",
-        "Unsafe feeds: 12/12 held by both"
+        "One purchase. Counted once.",
+        "Unclear link \u2192 hold"
       ],
       "evidence": [
         "demo/data/ontology-study.json"
@@ -82,12 +85,12 @@
     },
     {
       "id": "planner",
-      "startFrame": 1320,
-      "durationInFrames": 690,
-      "title": "Show the LLM choosing work",
+      "startFrame": 1260,
+      "durationInFrames": 660,
+      "title": "Turn activity into a plan",
       "url": "/analytics.html?run=judge-demo&view=decisions",
-      "captureAction": "Open the same campaign in AG Studio. In Agent decisions, inspect Day 31 Analyze and Train; then show Model training with two distinct model bars and its native AG Grid registry. Keep the AG Studio/AG Grid caption visible.",
-      "narration": "Back in our recorded campaign, the LLM investigates demand, chooses a twenty-eight-day market-feedback window, and requests two local model fits. It proposes ranked recommendations and shopping-needs inquiries for up to thirty-six consenting shoppers a day. These are saved decisions from a real model run, with the inputs and tool results available to inspect.",
+      "captureAction": "Animate observed demand, inventory and past responses feeding one planner and local training tools. Show a short close-up of the real recorded decision.",
+      "narration": "Market Metro turns those questions into a plan. The language model investigates demand, chooses twenty eight days of history, and requests two model fits. It proposes recommendations and shopping needs inquiries for consenting shoppers. Every choice is recorded, and every campaign must pass a financial test.",
       "onScreen": [
         "Recorded LLM decisions",
         "Investigate \u2192 choose data \u2192 train \u2192 propose",
@@ -101,12 +104,12 @@
     },
     {
       "id": "verifier",
-      "startFrame": 2010,
+      "startFrame": 1920,
       "durationInFrames": 540,
-      "title": "Show why the model changed",
+      "title": "Test before launch",
       "url": "/judge.html",
-      "captureAction": "Choose Agent decisions, then Next to the model-change stop. Highlight the two development-trial rows and selected boosted model.",
-      "narration": "The LLM preferred a two-stage response model. The verifier tested both rankings with the same campaign in three development markets. Boosted trees earned more and passed the merchant and purchase checks, so the verifier selected it. The LLM proposes; trusted tools govern execution.",
+      "captureAction": "Reveal the two development-trial outcomes and the selected ranking, using the saved numerical evidence.",
+      "narration": "The planner preferred one model. The verifier tested both rankings on separate trial markets. Boosted trees earned more while protecting merchant outcomes, so it became the selected model. Measure first. Then launch.",
       "onScreen": [
         "Same campaign \u00b7 two rankings",
         "Development PayPal gain: $26.65 \u2192 $30.97",
@@ -118,12 +121,12 @@
     },
     {
       "id": "shopper",
-      "startFrame": 2550,
-      "durationInFrames": 450,
-      "title": "Follow one shopper",
+      "startFrame": 2460,
+      "durationInFrames": 540,
+      "title": "The shopper returns",
       "url": "/judge.html",
-      "captureAction": "Advance to Shopper response. Focus Form & Function and the Day 35 purchase \u2192 Day 36 delivery trace.",
-      "narration": "Shopper one-seventy-nine had not bought for sixteen days. After a recommendation, they buy a ninety-six-dollar mobile side table and receive it the next day. Under fixed rules, the same request went unfilled.",
+      "captureAction": "Show the shop and returning avatar, a clearly illustrated side table, the $96 purchase and day-36 delivery. Retain a recorded app cut-in.",
+      "narration": "On day thirty five, the recommendation meets a need in the simulation. Our quiet shopper chooses a mobile side table from Form and Function, pays ninety six dollars, and receives it the next day. Under fixed rules, that request went unfilled.",
       "onScreen": [
         "Day 35: recommendation + $96 simulated purchase",
         "Day 36: delivery"
@@ -136,10 +139,10 @@
       "id": "paypal",
       "startFrame": 3000,
       "durationInFrames": 600,
-      "title": "Connect the purchase to PayPal",
+      "title": "Payment verified",
       "url": "/analytics.html?run=judge-demo&view=payments",
-      "captureAction": "Show this campaign\u2019s native receipt, its capture ID, fee and test merchant proceeds. Briefly open the warehouse-order link.",
-      "narration": "That exact warehouse order was mirrored once through PayPal Sandbox. Here is the completed ninety-six-dollar capture: a three-dollar-fifty-six fee and ninety-two dollars forty-four in test merchant proceeds. PayPal supplies the execution and receipt proof. The simulated payment economics let us compare campaigns without charging real shoppers.",
+      "captureAction": "Make PayPal and the $96 test capture the hero. Reveal the fee and merchant proceeds, then show the real receipt and warehouse linkage.",
+      "narration": "That exact order was mirrored once through PayPal Sandbox. A completed ninety six dollar capture. Three fifty six in fees, and ninety two forty four for the test merchant. One order, one receipt, linked back to the warehouse.",
       "onScreen": [
         "PayPal Sandbox \u00b7 test funds",
         "$96.00 = $3.56 fee + $92.44 merchant proceeds",
@@ -153,11 +156,11 @@
     {
       "id": "impact",
       "startFrame": 3600,
-      "durationInFrames": 540,
-      "title": "Show the matched gain",
+      "durationInFrames": 562,
+      "title": "A measured result",
       "url": "/analytics.html?run=judge-demo&view=profits",
-      "captureAction": "Use AG Studio Net profits for this same campaign. Show native AG Charts fixed-versus-planner bars and the AG Grid settled-comparison rows, then emphasize the three gains. Preserve the simulation and inventory labels.",
-      "narration": "After settlement, the campaign produced sixteen more retained purchases, over a thousand dollars in additional merchant contribution, and three point four seven percent higher modeled PayPal net than fixed rules. Estimated model usage was roughly three cents. These are simulated results, not production profit.",
+      "captureAction": "Reveal +16 retained purchases, +$114.96 modeled PayPal net and +$1,024.86 merchant contribution across the full 12-store market.",
+      "narration": "Across the twelve store market, this campaign delivered sixteen extra retained purchases. Merchant contribution grew by over a thousand dollars. Modeled PayPal net rose three point four seven percent after model cost. These are simulated results, not production profit.",
       "onScreen": [
         "+16 retained purchases",
         "+$1,024.86 merchant contribution",
@@ -171,11 +174,11 @@
     },
     {
       "id": "ag_grid",
-      "durationInFrames": 660,
-      "title": "Show AG Grid as the evidence workspace",
+      "durationInFrames": 690,
+      "title": "Open the evidence",
       "url": "/analytics.html?run=judge-demo&view=models",
-      "captureAction": "Sort the model registry by Recommendation AUROC, filter the decision ledger with the Day 31 Verify stage, show the custom PayPal widget, then enable Arrange and resize one dashboard widget. Use actual app interactions from the same saved campaign.",
-      "narration": "AG Grid and AG Charts, inside AG Studio, make the workflow inspectable. Sort the model registry, follow a decision back to its evidence, and reconcile payments in our custom PayPal widget. The same dashboards compare fixed rules with the published campaign, and their layouts can be rearranged.",
+      "captureAction": "Use enlarged native AG Grid sorting, a decision drill-down, the PayPal custom widget and a real dashboard resize.",
+      "narration": "AG Grid and AG Charts make every step inspectable. Compare models. Open the agent's evidence. Check the native PayPal receipt in our custom widget. Even the dashboard layout is editable. The story ends with a sale, and a record you can verify.",
       "onScreen": [
         "AG Studio \u00b7 AG Grid \u00b7 AG Charts",
         "Inspect models \u2192 explain decisions \u2192 reconcile payments",
@@ -207,19 +210,19 @@
         },
         {
           "offsetSeconds": 17,
-          "durationSeconds": 5,
+          "durationSeconds": 6,
           "url": "/analytics.html?run=judge-demo&view=profits",
           "action": "Enable Arrange and resize one widget. Do not imply that the LLM generated the layout or that the edit persists."
         }
       ],
-      "startFrame": 4140
+      "startFrame": 4162
     },
     {
       "id": "close",
       "durationInFrames": 150,
-      "title": "Close on the product",
+      "title": "Market Metro",
       "url": "/judge.html",
-      "captureAction": "End on the Market \u2192 Agent decisions \u2192 Impact navigation with the project title. Keep the free saved-policy exploration link readable.",
+      "captureAction": "Return to the shop, with a clean brand lock-up and Agentic Commerce That Learns tagline.",
       "narration": "Market Metro. Agentic commerce that learns, and shows its work.",
       "onScreen": [
         "Market Metro",
@@ -228,7 +231,7 @@
       "evidence": [
         "demo/data/judge-reactivation.json"
       ],
-      "startFrame": 4800
+      "startFrame": 4852
     }
   ],
   "uploadDraft": {

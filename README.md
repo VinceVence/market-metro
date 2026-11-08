@@ -2,7 +2,7 @@
 
 Market Metro shows how one LLM planner designs a merchant campaign and a local verifier tests which ranking earns more after purchases, refunds and settlement.
 
-[Submission demo plan](docs/demo-plan.md) · [Submission description](docs/submission-draft.md) · [Release audit](docs/submission-readiness.md) · [Narration draft](docs/video-narration.txt)
+[Submission demo plan](docs/demo-plan.md) · [Submission description](docs/submission-draft.md) · [Release audit](docs/submission-readiness.md) · [Narration](docs/video-narration.txt) · [Remotion preview setup](video/README.md)
 
 ## Play the judge demo
 
