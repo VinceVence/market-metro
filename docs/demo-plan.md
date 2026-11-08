@@ -1,30 +1,30 @@
 # Market Metro merchant story
 
-**Preview ready · 2:00.2 · 1920 × 1080 · 30 fps**
+**Preview ready · 2:00.8 · 1920 × 1080 · 30 fps**
 
-The camera starts above the metro and pushes into the furniture shop. The narrator introduces Leo, a merchant who has spent days trying to bring customers back. Calendar pages and changing expressions show the struggle, while disconnected activity and payment records explain why the decision is difficult. The automation question comes next; Market Metro is introduced only afterward.
+Aerial metro → storefront → meet Leo → days of trying to reach customers → “Could AI do this for Leo?” → Market Metro → ontology and tested campaign → purchase, PayPal receipt and measured benefit.
 
-[Open the preview](http://localhost:3000/MarketMetroSubmission) · [Narration](video-narration.txt) · [Optional captions](../video/public/captions.vtt)
+[Open the preview](http://localhost:3000/MarketMetroSubmission) · [Narration](video-narration.txt) · [Captions](../video/public/captions.vtt)
 
 | Start | Story beat |
 |---|---|
 | 0:00.0 | Above the metro, into Leo’s shop |
 | 0:15.5 | The question, then Market Metro |
-| 0:30.5 | The right data for the question |
-| 0:43.3 | From understanding to action |
-| 0:56.1 | Test before sending |
-| 1:06.3 | The recommendation becomes a purchase |
-| 1:18.3 | A payment you can trace |
-| 1:29.5 | What changed |
-| 1:42.2 | Follow the full trail |
-| 1:52.0 | Agentic commerce that learns |
+| 0:27.3 | The right data for the question |
+| 0:40.2 | From understanding to action |
+| 0:52.9 | Test before sending |
+| 1:03.1 | The recommendation becomes a purchase |
+| 1:15.1 | A payment you can trace |
+| 1:26.3 | What changed |
+| 1:42.7 | Follow the full trail |
+| 1:52.5 | Agentic commerce that learns |
 
-## Production and evidence
+## Delivery and payoff
 
-- The aerial and storefront are recorded app footage, reframed with an editorial push-in and dissolve. Leo is an illustrative merchant persona, not an identity in the warehouse or a real customer endorsement.
-- Expressive original characters blink, look toward clues, wave, worry, think and brighten after the purchase. Matched positions and eighteen-frame dissolves connect scenes.
-- No burned-in subtitles or footer commentary. The spoken story avoids simulation terminology. Timed WebVTT and the full transcript remain available separately.
-- Financial numbers are still described as modeled benchmark results, with the same evidence boundaries. PayPal Sandbox remains identified as test funds; no new native payment is created.
-- Ontology training examples use the historical 1,230 product recommendations and 1,532 inquiries. Primary campaign improvement is not attributed solely to ontology.
-- The controlled paired simulation reports +16 retained purchases, +$1,024.86 merchant contribution including inventory, and +$114.96 modeled PayPal net. These are not production earnings.
-- No paid provider calls, APAC changes or subagents. Final MP4 export and public upload are separate from this editable preview.
+- The question is synthesized separately at a slower pace, with a rising final word and a 0.6-second pause before the introduction. Local Praat PSOLA shapes the stock voice without changing timing. The processed ending measures approximately four semitones of upward movement.
+- DM Sans subtitles are visible in short phrases near the lower edge. Unrelated footer commentary stays removed; synchronized WebVTT remains available.
+- The impact scene explicitly compares 627 purchases for fixed rules with 643 for the agent. Sixteen highlighted payment icons correspond to the net increase.
+- It then shows +$2,345 payment volume, +$1,024.86 merchant contribution including inventory, and +$114.96 modeled PayPal net after $0.032325 estimated inference cost. These are the existing controlled benchmark results, not new measurements or production earnings.
+- The $96 Sandbox receipt is the archived native capture for an existing order. Leo is an illustrative persona, not an identity in the receipt.
+- The ontology explanation and its separate historical training cohort are preserved. The campaign's entire gain is not attributed solely to ontology.
+- Local voice, music and pitch processing only; no paid API calls, payments, APAC changes or subagents. This is an editable preview; final MP4 export and upload remain separate.

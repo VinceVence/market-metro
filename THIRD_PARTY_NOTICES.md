@@ -31,3 +31,6 @@ Original Market Metro source code and code-drawn artwork are covered by the
   [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache-2.0 weights),
   using [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx) (MIT inference code).
   Model weights and raw recording frames are not distributed in this repo.
+
+- Optional local question-intonation processing uses Praat-Parselmouth 0.4.7
+  (GPL-3.0-or-later). It is an audio-production dependency, separate from the app runtime.

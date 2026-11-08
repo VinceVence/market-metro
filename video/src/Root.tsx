@@ -25,7 +25,7 @@ export const RemotionRoot = () => (
       <Composition
         id="DemandScene"
         component={DemandScene}
-        durationInFrames={468}
+        durationInFrames={373}
         fps={30}
         width={1920}
         height={1080}
@@ -73,7 +73,7 @@ export const RemotionRoot = () => (
       <Composition
         id="ImpactScene"
         component={ImpactScene}
-        durationInFrames={400}
+        durationInFrames={511}
         fps={30}
         width={1920}
         height={1080}

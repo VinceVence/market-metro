@@ -9,59 +9,43 @@ export const DemandScene=()=>{
     <Quiet/>
     <Audio name="Heart · upbeat neural female narration" src={staticFile("narration-neural/problem.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
-      <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
+      <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "Could AI work out who to reach,",
+    "text": "Could AI do this for Leo?",
     "startMs": 250,
-    "endMs": 2375,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "what to recommend, and test the campaign",
-    "startMs": 2425,
-    "endMs": 4450,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "automatically?",
-    "startMs": 4525,
-    "endMs": 5825,
+    "endMs": 2125,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Meet Market Metro.",
-    "startMs": 5925,
-    "endMs": 7425,
+    "startMs": 2725,
+    "endMs": 4250,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Its ontology connects shoppers, products and payments",
-    "startMs": 7500,
-    "endMs": 10650,
+    "startMs": 4325,
+    "endMs": 7450,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "into one shared map, giving the agent",
-    "startMs": 10675,
-    "endMs": 13050,
+    "startMs": 7500,
+    "endMs": 9850,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "meaningful evidence to work with.",
-    "startMs": 13150,
-    "endMs": 15125,
+    "startMs": 9950,
+    "endMs": 11950,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

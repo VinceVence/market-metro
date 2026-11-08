@@ -62,9 +62,9 @@ export function Quiet() {
           opacity: 1 - reveal,
         }}
       >
-        Could this happen
+        Could AI do this
         <br />
-        automatically?
+        for Leo?
       </div>
       <div
         style={{

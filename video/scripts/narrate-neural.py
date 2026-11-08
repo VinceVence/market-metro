@@ -1,6 +1,7 @@
 """Local stock female voice; no API keys, cloud inference or payment calls."""
 import json
 import time
+from types import SimpleNamespace
 from pathlib import Path
 
 import onnxruntime as ort
@@ -60,18 +61,65 @@ def phrase_captions(text, seconds, timings):
     return result, 'model phoneme boundaries' if aligned else 'estimated phrase timing', word_times
 
 
+def question_rise(samples, rate, start, semitones):
+    """Give the final voiced word a rising contour without changing its duration."""
+    import parselmouth
+    from parselmouth.praat import call
+    sound = parselmouth.Sound(samples, sampling_frequency=rate)
+    manipulation = call(sound, 'To Manipulation', .01, 120, 450)
+    tier = call(manipulation, 'Extract pitch tier')
+    points = [(call(tier, 'Get time from index', i), call(tier, 'Get value at index', i))
+              for i in range(1, call(tier, 'Get number of points') + 1)]
+    tail = [(t, f) for t, f in points if t >= start]
+    if len(tail) < 3:
+        raise RuntimeError('Question ending has insufficient voiced material')
+    first, last = tail[0][0], tail[-1][0]
+    base = float(np.median([f for _, f in tail[:3]]))
+    target = min(340.0, base * 2 ** (semitones / 12))
+    rising = call('Create PitchTier', 'question-rise', 0, len(samples) / rate)
+    for t, f in points:
+        if t >= first:
+            p = (t - first) / (last - first)
+            f = base + (target - base) * p * p * (3 - 2 * p)
+        call(rising, 'Add point', t, f)
+    call([rising, manipulation], 'Replace pitch tier')
+    result = call(manipulation, 'Get resynthesis (overlap-add)').values[0]
+    assert len(result) == len(samples)
+    return result, dict(method='Praat PSOLA',startSeconds=first,endSeconds=last,
+                       startHz=round(base,1),endHz=round(target,1),semitones=semitones)
+
+
 previous_path = ROOT / 'public/narration-neural.json'
 previous = json.loads(previous_path.read_text()) if previous_path.exists() else {}
 records = []
 for scene in PLAN['scenes']:
     text = scene['narration'].replace('AG ', 'A G ').replace('LLM', 'L L M').replace('-', ' ')
+    delivery = scene.get('delivery', {})
     cached = next((r for r in previous.get('scenes', []) if r['id'] == scene['id']), None)
-    if cached and cached.get('words') and previous.get('voice') == VOICE and cached.get('speed') == SPEED and cached.get('text') == text and (ROOT / 'public' / cached['file']).exists():
+    if cached and cached.get('words') and cached.get('delivery', {}) == delivery and previous.get('voice') == VOICE and cached.get('speed') == SPEED and cached.get('text') == text and (ROOT / 'public' / cached['file']).exists():
         records.append(cached)
         print(scene['id'] + ': reused unchanged local voice', flush=True)
         continue
     started = time.monotonic()
-    samples, rate, timings = speaker.create_timed(text, voice=VOICE, speed=SPEED,
+    if delivery.get('questionTake'):
+        question, rest = text.split('?', 1)
+        q, rate, qt = speaker.create_timed(question+'?', voice=VOICE,
+                    speed=delivery['questionSpeed'], lang='en-us', continuous=True)
+        _, _, question_words = phrase_captions(question+'?', len(q)/rate, qt)
+        q, contour = question_rise(q, rate, question_words[-1]['startMs']/1000-.25,
+                                  delivery['riseSemitones'])
+        answer, answer_rate, at = speaker.create_timed(rest.strip(), voice=VOICE,
+                    speed=SPEED, lang='en-us', continuous=True, sentence_pause=.13, clause_pause=.06)
+        assert rate == answer_rate
+        pause = np.zeros(round(delivery['pauseAfterQuestion']*rate), dtype=q.dtype)
+        offset=(len(q)+len(pause))/rate
+        samples=np.concatenate([q,pause,answer])
+        timings=list(qt)+[SimpleNamespace(phoneme=' ',start=len(q)/rate,end=offset)]+[
+            SimpleNamespace(phoneme=t.phoneme,start=t.start+offset,end=t.end+offset) for t in at]
+        sf.write(ROOT/'public/question-take.wav', q, rate)
+        (ROOT/'public/question-delivery.json').write_text(json.dumps(contour,indent=2)+'\n')
+    else:
+        samples, rate, timings = speaker.create_timed(text, voice=VOICE, speed=SPEED,
                                                 lang='en-us', continuous=True,
                                                 sentence_pause=.13, clause_pause=.06)
     seconds = len(samples) / rate
@@ -83,7 +131,7 @@ for scene in PLAN['scenes']:
     samples *= min(.13 / max(rms, 1e-6), .88 / max(float(np.max(np.abs(samples))), 1e-6))
     sf.write(target, samples, rate)
     captions, method, words = phrase_captions(text, seconds, timings)
-    records.append(dict(id=scene['id'], voice=VOICE, speed=SPEED, seconds=seconds,
+    records.append(dict(id=scene['id'], voice=VOICE, speed=SPEED, delivery=delivery, seconds=seconds,
                         source='Local Kokoro-82M neural speech on CPU', sampleRate=rate,
                         file='narration-neural/' + target.name, text=text, captions=captions, words=words,
                         captionTiming=method, generationSeconds=round(time.monotonic() - started, 2)))

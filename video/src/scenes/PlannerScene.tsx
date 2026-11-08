@@ -9,7 +9,7 @@ export const PlannerScene=()=>{
     <Planning/>
     <Audio name="Heart · upbeat neural female narration" src={staticFile("narration-neural/planner.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
-      <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
+      <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
     "text": "Now follow one saved reactivation campaign.",
     "startMs": 250,

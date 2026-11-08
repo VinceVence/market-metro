@@ -26,11 +26,17 @@ The film opens with an aerial metro view, pushes into the storefront, and introd
 
 The ontology then connects shopper/product/payment meaning, separates recommendation and inquiry training tasks, and restricts predictors to information available before contact. Its historical cohort counts are checked against the saved study; primary campaign gain is not attributed solely to ontology.
 
-Burned-in captions and footer commentary are removed. Optional synchronized captions are in `public/captions.vtt`; the narration transcript remains in the submission docs.
+Readable DM Sans subtitles are restored. Unrelated footer commentary stays removed. Synchronized captions are also in `public/captions.vtt`; the narration transcript remains in the submission docs.
+
+## Question delivery and impact
+
+The question is a separate slower take with a 0.6-second pause and a rising final word. Local Praat PSOLA changes pitch without changing the clip duration; the before/after contour settings are in `public/question-delivery.json`. The remainder uses the same stock voice.
+
+The payoff compares fixed and agent purchase counts, then highlights incremental volume, merchant contribution and modeled PayPal net. All displayed values are read from the saved case. No new financial result is claimed.
 
 ## Sound and pacing
 
-The continuous 120 BPM score and thirteen event cues are original local synthesis (`scripts/score.py`). Music ducks under narration. `src/Soundtrack.tsx` keeps each cue editable. The story runs 120.2 seconds with eighteen-frame picture dissolves and approximately 0.12–0.15 seconds between adjacent spoken segments. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
+The continuous 120 BPM score and thirteen event cues are original local synthesis (`scripts/score.py`). Music ducks under narration. `src/Soundtrack.tsx` keeps each cue editable. The story runs 120.8 seconds with eighteen-frame picture dissolves and approximately 0.12–0.15 seconds between adjacent spoken segments. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
 
 ## Edit and verify
 
@@ -59,6 +65,7 @@ Download the official [ONNX model](https://github.com/thewh1teagle/kokoro-onnx/r
 - [Remotion](https://www.remotion.dev/) and its media/font/caption packages retain their own licenses.
 - The [Basic Captions element](https://www.remotion.dev/elements/captions/basic-captions/) source is copied unchanged; application CSS supplies the DM Sans styling.
 - [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) has Apache-2.0 weights; [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx) is MIT inference code. Weights are not distributed here.
+- Praat-Parselmouth 0.4.7 (GPL-3.0-or-later) is an optional local audio-production dependency; it is not shipped in the app runtime.
 - DM Sans retains its OFL in `public/fonts/`. Brand marks remain their owners’ property. AG Studio evaluation notices remain in the footage; see the parent repository’s third-party notices.
 
 The clean shop shots use `demo/video-capture.html`, the existing Three.js renderer and saved data. Isolating a merchant is a render-window change only. APAC was a read-only storytelling reference; no APAC code or cloud project was changed.
