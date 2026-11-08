@@ -26,7 +26,7 @@ test('reviewable video plan starts in the market, stays under three minutes and 
   for(const path of scene.evidence)await access(path);
  }
  assert.equal(end,plan.durationInFrames);assert.ok(end/plan.fps<180);
- assert.ok(words>250&&words<450);assert.equal(plan.production.paidModelCalls,0);assert.equal(plan.production.payments,0);
+ assert.ok(words>170&&words<300);assert.equal(plan.production.paidModelCalls,0);assert.equal(plan.production.payments,0);
  const narration=await readFile('docs/video-narration.txt','utf8');
  for(const scene of plan.scenes)assert.ok(narration.includes(scene.narration));
 });

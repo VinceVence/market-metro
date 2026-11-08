@@ -1,12 +1,57 @@
-import {Stage,HeroVideo,Label,Note,Sfx,ramp,useTime} from './Design';
-export function Merchant(){const t=useTime();return <Stage label="A merchant's story">
- <HeroVideo file="film-world" zoom={1+.12*ramp(t,0,3)} opacity={1-ramp(t,2,3)}/>
- <HeroVideo file="film-shop" zoom={1+.10*ramp(t,3,13)} x={80} opacity={ramp(t,2,3)}/>
- <div style={{position:'absolute',inset:0,background:'linear-gradient(90deg,#f7faff 0%,#f7faffee 24%,#f7faff00 65%)',opacity:ramp(t,2,3)}}/>
- <div style={{position:'absolute',left:115,top:205,width:650,opacity:ramp(t,.3,1)}}>
-  <Label>12 shops. 600 simulated shoppers.</Label>
-  <h1 style={{fontSize:112,lineHeight:1.02,letterSpacing:-5,margin:'28px 0'}}>{t<5?'The shop is open.':<>Meet Form<br/>& Function.</>}</h1>
-  <div style={{fontSize:38,lineHeight:1.45,color:'#507092',opacity:ramp(t,6,7)}}>Stock ready.<br/>A customer worth bringing back.</div>
- </div>
- <Sfx file="soft-sweep" at={2.4} volume={.13}/><Note>Simulated merchant · camera view of the app's saved market</Note>
- </Stage>;}
+import { Stage, HeroVideo, Note, ramp, useTime } from "./Design";
+export function Merchant() {
+  const t = useTime();
+  return (
+    <Stage label="Simulated market">
+      <HeroVideo
+        file="film-world"
+        zoom={1 + 0.18 * ramp(t, 0, 2)}
+        opacity={1 - ramp(t, 1.5, 2)}
+      />
+      <HeroVideo
+        file="film-shop"
+        zoom={1.07 + 0.16 * ramp(t, 1.5, 7)}
+        x={-45}
+        opacity={ramp(t, 1.5, 2)}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(90deg,#062b52dd,transparent 78%)",
+          opacity: ramp(t, 2, 2.4),
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          left: 110,
+          top: 380,
+          color: "#fff",
+          textShadow: "0 6px 30px #09284e44",
+          fontSize: 144,
+          fontWeight: 700,
+          lineHeight: 1,
+          letterSpacing: -7,
+          opacity: ramp(t, 2.2, 2.5),
+          translate: `${(1 - ramp(t, 2.2, 2.5)) * -45}px 0px`,
+        }}
+      >
+        {t < 4.1 ? (
+          <>
+            Gone
+            <br />
+            quiet?
+          </>
+        ) : (
+          <>
+            Bring
+            <br />
+            them back.
+          </>
+        )}
+      </div>
+      <Note dark>12 shops · 600 simulated shoppers</Note>
+    </Stage>
+  );
+}

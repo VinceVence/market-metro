@@ -5,6 +5,7 @@ from pathlib import Path
 
 import onnxruntime as ort
 import soundfile as sf
+import numpy as np
 from kokoro_onnx import Kokoro
 
 ort.disable_telemetry_events()
@@ -14,7 +15,7 @@ PLAN = json.loads((ROOT.parent / 'docs/submission-video.json').read_text())
 OUT = ROOT / 'public/narration-neural'
 OUT.mkdir(exist_ok=True)
 VOICE = 'af_heart'
-SPEED = 1.0
+SPEED = 1.06
 
 options = ort.SessionOptions()
 options.intra_op_num_threads = 2
@@ -71,11 +72,14 @@ for scene in PLAN['scenes']:
     started = time.monotonic()
     samples, rate, timings = speaker.create_timed(text, voice=VOICE, speed=SPEED,
                                                 lang='en-us', continuous=True,
-                                                sentence_pause=.18, clause_pause=.08)
+                                                sentence_pause=.11, clause_pause=.06)
     seconds = len(samples) / rate
     if seconds <= 0:
         raise RuntimeError('Empty narration: ' + scene['id'])
     target = OUT / (scene['id'] + '.wav')
+    # Consistent spoken level; music is mixed around this, not guessed per clip.
+    rms = float(np.sqrt(np.mean(samples ** 2)))
+    samples *= min(.13 / max(rms, 1e-6), .88 / max(float(np.max(np.abs(samples))), 1e-6))
     sf.write(target, samples, rate)
     captions, method = phrase_captions(text, seconds, timings)
     records.append(dict(id=scene['id'], voice=VOICE, speed=SPEED, seconds=seconds,

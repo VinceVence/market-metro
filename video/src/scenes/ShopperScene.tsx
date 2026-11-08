@@ -10,14 +10,55 @@ export const ShopperScene=()=>{
     <Audio name="Heart · upbeat neural female narration" src={staticFile("narration-neural/shopper.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
-        {"text": "On day thirty five, the recommendation meets", "startMs": 250, "endMs": 2996, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "a need in the simulation.", "startMs": 2996, "endMs": 4946, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "Our quiet shopper chooses a mobile side", "startMs": 4946, "endMs": 7330, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "table from Form and Function, pays ninety", "startMs": 7330, "endMs": 9859, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "six dollars, and receives it the next", "startMs": 9859, "endMs": 12099, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "day.", "startMs": 12099, "endMs": 12822, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "Under fixed rules, that request went unfilled.", "startMs": 12822, "endMs": 16145, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-      ]}/>
+  {
+    "text": "Day thirty five.",
+    "startMs": 250,
+    "endMs": 1350,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "A useful recommendation.",
+    "startMs": 1425,
+    "endMs": 3025,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "One mobile side table.",
+    "startMs": 3100,
+    "endMs": 4775,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Ninety six dollars.",
+    "startMs": 4850,
+    "endMs": 6125,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Delivered tomorrow.",
+    "startMs": 6200,
+    "endMs": 7500,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Fixed rules left this request unfilled.",
+    "startMs": 7600,
+    "endMs": 10175,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  }
+]}/>
     </div>
   </AbsoluteFill>;
 };

@@ -7,7 +7,8 @@ const read=p=>JSON.parse(readFileSync(resolve(root,p),'utf8'));
 const plan=read('../docs/submission-video.json'),audio=read('public/narration-neural.json');
 const clips=read('public/footage.json').clips;
 const components=['MarketScene','DemandScene','OntologyScene','PlannerScene','VerifierScene','ShopperScene','PayPalScene','ImpactScene','AGGridScene','ClosingScene'];
-const durations=plan.scenes.map(s=>Math.max(s.durationInFrames,Math.ceil((audio.scenes.find(a=>a.id===s.id).seconds+.55)*plan.fps)));
+// End on the next half-second beat; no inherited multi-second silent holds.
+const durations=plan.scenes.map(s=>Math.ceil((audio.scenes.find(a=>a.id===s.id).seconds+.65)*2)/2*plan.fps);
 if(durations.reduce((a,b)=>a+b,0)>=180*plan.fps)throw Error('Natural narration exceeds three minutes; review pacing before changing the timeline.');
 const writes=[];let cursor=0;
 for(const [index,scene] of plan.scenes.entries()){
@@ -28,12 +29,12 @@ for(const [index,scene] of plan.scenes.entries()){
   writes.push([path,src]);scene.startFrame=cursor;scene.durationInFrames=durations[index];cursor+=durations[index];
 }
 let main=readFileSync(resolve(root,'src/Composition.tsx'),'utf8'),i=0;
-main=main.replace(/(<Series.Sequence name="[^"]+" durationInFrames=)\{[^}]+\}/g,(_,prefix)=>prefix+'{'+durations[i++]+'}');
+main=main.replace(/(<Series\.Sequence\s+name=")[^"]+("\s+durationInFrames=)\{[^}]+\}/g,(_,a,b)=>{const s=plan.scenes[i];return a+s.title+b+'{'+durations[i++]+'}';});
 if(i!==plan.scenes.length)throw Error('Main timeline differs from the approved scene list.');
-main=main.replace(/(id="MarketMetroSubmission" component=\{MarketMetroSubmission\} durationInFrames=)\{\d+\}/,'$1{'+cursor+'}');
+main=main.replace(/(id="MarketMetroSubmission"\s+component=\{MarketMetroSubmission\}\s+durationInFrames=)\{\d+\}/,'$1{'+cursor+'}');
 writes.push([resolve(root,'src/Composition.tsx'),main]);
 let registrations=readFileSync(resolve(root,'src/Root.tsx'),'utf8');
-for(const [n,name] of components.entries())registrations=registrations.replace(new RegExp('(id="'+name+'" component=\\{'+name+'\\} durationInFrames=)\\{\\d+\\}'),'$1{'+durations[n]+'}');
+for(const [n,name] of components.entries())registrations=registrations.replace(new RegExp('(id="'+name+'"\\s+component=\\{'+name+'\\}\\s+durationInFrames=)\\{\\d+\\}'),'$1{'+durations[n]+'}');
 writes.push([resolve(root,'src/Root.tsx'),registrations]);
 plan.durationInFrames=cursor;plan.targetSeconds=cursor/plan.fps;plan.status='PREVIEW_READY_FOR_REVIEW';plan.audioGenerated=true;
 plan.production.stage='Editable Remotion preview assembled; final MP4 not exported';

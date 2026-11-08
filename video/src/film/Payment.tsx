@@ -1,9 +1,82 @@
-import {CanvasImage,Sequence,staticFile,useVideoConfig} from 'remotion';
-import data from '../../public/data/case.json';
-import {Stage,Label,Icon,Clip,Note,Sfx,ramp,useTime,usd,C} from './Design';
-export function Payment(){const t=useTime(),{fps}=useVideoConfig(),r=data.receipt;return <Stage dark label="PayPal Sandbox · test funds">
- <div style={{position:'absolute',left:120,top:155,display:'flex',alignItems:'center',gap:25}}><div style={{background:'#fff',borderRadius:22,padding:'16px 22px'}}><CanvasImage src={staticFile('brand/paypal.svg')} premountFor={fps} style={{width:67,height:78}}/></div><div style={{fontSize:100,fontWeight:700,letterSpacing:-4}}>Payment. Verified.</div></div>
- {t<10&&<><div style={{position:'absolute',left:120,top:340,opacity:ramp(t,.5,1.4)}}><Label style={{color:C.cyan}}>Completed capture</Label><div style={{fontSize:236,fontWeight:700,letterSpacing:-13,marginTop:18}}>{usd(r.gross_cents/100)}</div></div><div style={{position:'absolute',left:1190,top:370,width:550,opacity:ramp(t,3,4)}}><div style={{display:'flex',alignItems:'center',gap:14,color:'#72ddbf',fontSize:32}}><Icon kind="check" size={48}/>Native Sandbox receipt</div><div style={{marginTop:42,borderTop:'1px solid #527796',paddingTop:25,fontSize:34,color:'#a8c5df'}}>PayPal fee <strong style={{display:'block',fontSize:78,color:'#fff',marginTop:10}}>{usd(r.fee_cents/100)}</strong></div><div style={{marginTop:25,fontSize:32,color:'#a8c5df'}}>Test merchant receives <strong style={{display:'block',fontSize:78,color:C.cyan,marginTop:10}}>{usd(r.net_cents/100)}</strong></div></div></>}
- <Sequence from={10*fps} premountFor={fps}><Clip file="paypal-lineage" trim={3} box={[1030,285,760,650]} crop={[817,143,410,430]}/><div style={{position:'absolute',left:120,top:385,width:760}}><Label style={{color:C.cyan}}>One order. One receipt.</Label><div style={{fontSize:174,fontWeight:700,letterSpacing:-8,marginTop:25}}>{usd(r.gross_cents/100)}</div><div style={{fontSize:35,color:'#b1cde6',marginTop:35}}>Shopper 179 → Form & Function</div><div style={{fontSize:29,color:'#9fc1df',marginTop:18}}>Linked to the saved warehouse order.</div></div></Sequence>
- <Sfx file="confirmation" at={3.2} volume={.22}/><Note dark>Archived provider capture. Fictitious funds. Confirmation is not another sale.</Note>
- </Stage>;}
+import { CanvasImage, Sequence, staticFile, useVideoConfig } from "remotion";
+import data from "../../public/data/case.json";
+import { Stage, Clip, Note, ramp, useTime, usd, C } from "./Design";
+export function Payment() {
+  const t = useTime(),
+    { fps, durationInFrames } = useVideoConfig(),
+    r = data.receipt,
+    cut = (durationInFrames / fps) * 0.52;
+  return (
+    <Stage dark label="Sandbox · test funds">
+      <div
+        style={{
+          position: "absolute",
+          left: 115,
+          top: 145,
+          display: "flex",
+          alignItems: "center",
+          gap: 25,
+        }}
+      >
+        <div
+          style={{ background: "#fff", borderRadius: 24, padding: "15px 23px" }}
+        >
+          <CanvasImage
+            src={staticFile("brand/paypal.svg")}
+            premountFor={fps}
+            style={{ width: 64, height: 74 }}
+          />
+        </div>
+        <div style={{ fontSize: 84, fontWeight: 650, letterSpacing: -3 }}>
+          PayPal
+        </div>
+      </div>
+      <div style={{ position: "absolute", left: 115, top: 340 }}>
+        <div
+          style={{
+            fontSize: 240,
+            fontWeight: 700,
+            letterSpacing: -14,
+            scale: 0.96 + 0.04 * ramp(t, 0, 0.5),
+            transformOrigin: "left",
+          }}
+        >
+          {usd(r.gross_cents / 100)}
+        </div>
+        <div style={{ fontSize: 48, color: C.cyan }}>Captured.</div>
+      </div>
+      {t < cut && (
+        <div
+          style={{
+            position: "absolute",
+            left: 1160,
+            top: 430,
+            opacity: ramp(t, 1.5, 1.8),
+          }}
+        >
+          <div style={{ fontSize: 90, fontWeight: 600 }}>
+            {usd(r.fee_cents / 100)}
+          </div>
+          <div style={{ fontSize: 32, color: "#9fc5e9" }}>PayPal fee</div>
+          <div style={{ fontSize: 65, marginTop: 40 }}>
+            {usd(r.net_cents / 100)}
+          </div>
+          <div style={{ fontSize: 32, color: "#9fc5e9" }}>
+            Merchant receives
+          </div>
+        </div>
+      )}
+      <Sequence from={Math.round(cut * fps)} premountFor={fps}>
+        <Clip
+          file="paypal-lineage"
+          trim={3}
+          box={[1050, 285, 700, 620]}
+          crop={[817, 143, 410, 430]}
+        />
+      </Sequence>
+      <Note dark>
+        Archived native Sandbox receipt · existing order · no real money
+      </Note>
+    </Stage>
+  );
+}

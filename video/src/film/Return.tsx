@@ -1,11 +1,137 @@
-import {Sequence,useVideoConfig} from 'remotion';
-import data from '../../public/data/case.json';
-import {Stage,HeroVideo,Label,Icon,Clip,ProductTable,Note,ramp,useTime,usd} from './Design';
-export function Return(){const t=useTime(),{fps}=useVideoConfig();return <Stage label="The returning shopper">
- <HeroVideo file="film-return" zoom={1+.12*ramp(t,0,8)} x={90} opacity={1-.92*ramp(t,6,7)}/>
- <div style={{position:'absolute',inset:0,background:'linear-gradient(90deg,#f8fbff 0%,#f8fbffee 20%,transparent 65%)'}}/>
- <div style={{position:'absolute',left:115,top:185,width:850}}><Label>Shopper 179 · Form & Function</Label><div style={{fontSize:112,lineHeight:1.05,fontWeight:700,letterSpacing:-5,marginTop:25}}>{t<6?<>A useful<br/>match.</>:<>Mobile<br/>Side Table.</>}</div><div style={{fontSize:146,fontWeight:700,letterSpacing:-7,color:'#0877e5',marginTop:20,opacity:ramp(t,6.5,7.3)}}>{usd(data.shopper.grossCents/100)}</div><div style={{display:'flex',gap:16,alignItems:'center',fontSize:32,color:'#426b88',marginTop:24,opacity:ramp(t,9,10)}}><Icon kind="truck" size={46}/>Day 35 purchase → Day 36 delivery</div></div>
- {t>=6&&t<13&&<div style={{position:'absolute',left:1120,top:250,opacity:ramp(t,6,7),translate:`0px ${(1-ramp(t,6,7))*50}px`}}><ProductTable/><div style={{fontSize:22,color:'#6b839b',textAlign:'center'}}>Product illustration · simulated purchase</div></div>}
- <Sequence from={13*fps} premountFor={fps}><Clip file="shopper" box={[1025,265,790,570]} crop={[803,170,445,325]}/></Sequence>
- <Note>In the matched fixed-policy branch, the same request went unfilled</Note>
- </Stage>;}
+import { useVideoConfig } from "remotion";
+import {
+  Stage,
+  HeroVideo,
+  Icon,
+  ProductTable,
+  Note,
+  ramp,
+  useTime,
+  C,
+} from "./Design";
+export function Return() {
+  const t = useTime(),
+    { durationInFrames, fps } = useVideoConfig(),
+    paid = (durationInFrames / fps) * 0.46,
+    delivered = 6.2;
+  return (
+    <Stage label="Day 35 → 36">
+      <HeroVideo
+        file="film-return"
+        zoom={1.14 + 0.1 * ramp(t, 0, 10)}
+        x={-200}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(90deg,#071d3e88,transparent 66%)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          left: 110,
+          top: 340,
+          fontSize: 130,
+          fontWeight: 700,
+          lineHeight: 1,
+          letterSpacing: -5,
+          color: "#fff",
+          textShadow: "0 6px 40px #09284e66",
+        }}
+      >
+        {t < paid ? (
+          <>
+            A useful
+            <br />
+            match.
+          </>
+        ) : t < delivered ? (
+          <>
+            They
+            <br />
+            bought.
+          </>
+        ) : (
+          <>
+            And it
+            <br />
+            arrived.
+          </>
+        )}
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          left: 1150,
+          top: 150,
+          width: 590,
+          height: 750,
+          background: "#f8fbff",
+          border: "10px solid #0d2f55",
+          borderRadius: 58,
+          overflow: "hidden",
+          boxShadow: "0 30px 100px #09284e66",
+          rotate: `${2 - 2 * ramp(t, 0, 0.6)}deg`,
+          translate: `${(1 - ramp(t, 0, 0.5)) * 100}px 0px`,
+        }}
+      >
+        <div
+          style={{
+            width: 115,
+            height: 18,
+            borderRadius: 12,
+            background: "#0d2f55",
+            margin: "22px auto",
+          }}
+        />
+        <div
+          style={{
+            fontSize: 26,
+            color: C.blue,
+            padding: "12px 38px",
+            fontWeight: 600,
+          }}
+        >
+          FOR YOU
+        </div>
+        <div style={{ position: "absolute", left: -65, top: 50, scale: 0.73 }}>
+          <ProductTable />
+        </div>
+        <div style={{ position: "absolute", left: 38, right: 38, top: 470 }}>
+          <div style={{ fontSize: 38, fontWeight: 600 }}>Mobile Side Table</div>
+          <div style={{ fontSize: 76, fontWeight: 700, marginTop: 4 }}>$96</div>
+          <div
+            style={{
+              height: 76,
+              marginTop: 15,
+              background: t >= paid ? "#128e72" : C.blue,
+              color: "#fff",
+              borderRadius: 16,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 16,
+              fontSize: 32,
+              fontWeight: 600,
+            }}
+          >
+            {t >= paid && (
+              <Icon kind={t >= delivered ? "truck" : "check"} size={36} />
+            )}{" "}
+            {t < paid
+              ? "Recommended"
+              : t < delivered
+                ? "Purchased"
+                : "Delivered"}
+          </div>
+        </div>
+      </div>
+      <Note dark>
+        Illustrated recommendation · saved simulated purchase · fixed left this
+        request unfilled
+      </Note>
+    </Stage>
+  );
+}

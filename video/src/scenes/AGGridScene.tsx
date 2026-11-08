@@ -10,16 +10,47 @@ export const AGGridScene=()=>{
     <Audio name="Heart · upbeat neural female narration" src={staticFile("narration-neural/ag_grid.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
-        {"text": "A G Grid and A G Charts", "startMs": 250, "endMs": 1436, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "make every step inspectable.", "startMs": 1436, "endMs": 3598, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "Compare models.", "startMs": 3598, "endMs": 4993, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "Open the agent's evidence.", "startMs": 4993, "endMs": 7016, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "Check the native PayPal receipt in our", "startMs": 7016, "endMs": 9247, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "custom widget.", "startMs": 9247, "endMs": 10573, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "Even the dashboard layout is editable.", "startMs": 10573, "endMs": 13293, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "The story ends with a sale, and", "startMs": 13293, "endMs": 15037, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "a record you can verify.", "startMs": 15037, "endMs": 16850, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-      ]}/>
+  {
+    "text": "And the evidence?",
+    "startMs": 250,
+    "endMs": 1614,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Open it.",
+    "startMs": 1614,
+    "endMs": 2459,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "A G Grid connects model results, agent",
+    "startMs": 2459,
+    "endMs": 4537,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "decisions, and the PayPal receipt.",
+    "startMs": 4537,
+    "endMs": 6876,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Every step, inspectable.",
+    "startMs": 6876,
+    "endMs": 8695,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  }
+]}/>
     </div>
   </AbsoluteFill>;
 };

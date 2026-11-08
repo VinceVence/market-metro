@@ -10,14 +10,39 @@ export const PayPalScene=()=>{
     <Audio name="Heart · upbeat neural female narration" src={staticFile("narration-neural/paypal.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:100}} captions={[
-        {"text": "That exact order was mirrored once through", "startMs": 250, "endMs": 2375, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "PayPal Sandbox.", "startMs": 2450, "endMs": 2975, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "A completed ninety six dollar capture.", "startMs": 3025, "endMs": 5750, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "Three fifty six in fees, and ninety", "startMs": 5800, "endMs": 8710, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "two forty four for the test merchant.", "startMs": 8760, "endMs": 11485, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "One order, one receipt, linked back to", "startMs": 11585, "endMs": 14085, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-        {"text": "the warehouse.", "startMs": 14110, "endMs": 15160, "timestampMs": null, "confidence": null, "pageBreakAfter": true},
-      ]}/>
+  {
+    "text": "That order connects to PayPal Sandbox.",
+    "startMs": 250,
+    "endMs": 2724,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Ninety six dollars captured.",
+    "startMs": 2724,
+    "endMs": 4690,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "A three fifty six fee.",
+    "startMs": 4690,
+    "endMs": 6213,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "The receipt lands back in our warehouse.",
+    "startMs": 6213,
+    "endMs": 8750,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  }
+]}/>
     </div>
   </AbsoluteFill>;
 };

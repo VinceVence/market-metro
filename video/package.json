@@ -28,7 +28,8 @@
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
     "lint": "tsc --noEmit",
-    "voice": "../.local/video-voice-venv/bin/python scripts/narrate-neural.py && node scripts/sync-narration.mjs",
+    "voice": "../.local/video-voice-venv/bin/python scripts/narrate-neural.py && node scripts/sync-narration.mjs && npm run score",
+    "score": "../.local/video-voice-venv/bin/python scripts/score.py",
     "footage": "node scripts/encode-footage.mjs",
     "check": "tsc --noEmit && node scripts/validate.mjs"
   },

@@ -1,10 +1,66 @@
-import {Sequence,useVideoConfig} from 'remotion';
-import {Stage,Label,Icon,Clip,Note,Sfx,useTime,C} from './Design';
-export function Evidence(){const t=useTime(),{fps}=useVideoConfig();const active=t<4.7?0:t<7.2?1:t<10.7?2:3;return <Stage dark label="AG Studio · AG Grid · AG Charts">
- <div style={{position:'absolute',left:115,top:145}}><Label style={{color:C.cyan}}>The evidence, in your hands</Label><div style={{fontSize:91,fontWeight:700,letterSpacing:-4,marginTop:18}}>{['Compare the models.','Open the decision.','Reconcile the payment.','Make the workspace yours.'][active]}</div></div>
- <Sequence name="Native grid sorting" from={0} durationInFrames={Math.round(4.7*fps)} premountFor={fps}><Clip file="ag-models" box={[110,360,1700,425]} crop={[332,320,890,225]}/></Sequence>
- <Sequence name="Open the recorded checkpoint" from={Math.round(4.7*fps)} durationInFrames={Math.round(1.3*fps)} premountFor={fps}><Clip file="ag-decisions" box={[110,340,1700,490]} crop={[300,0,900,260]}/></Sequence><Sequence name="Inspect its recorded verdict" from={6*fps} durationInFrames={Math.round(1.2*fps)} premountFor={fps}><Clip file="ag-decisions" trim={3.2} rate={.9} box={[110,340,1700,490]} crop={[215,245,855,250]}/></Sequence>
- <Sequence name="Custom PayPal widget" from={Math.round(7.2*fps)} durationInFrames={Math.round(3.5*fps)} premountFor={fps}><Clip file="ag-paypal" box={[110,320,850,600]} crop={[778,183,450,320]}/><div style={{position:'absolute',left:1080,top:410,width:650}}><Icon kind="check" size={85} color="#7ddcc0"/><div style={{fontSize:70,fontWeight:600,marginTop:25}}>One native<br/>capture.</div><div style={{fontSize:31,lineHeight:1.45,color:'#a8c6df',marginTop:24}}>The custom widget and receipt grid agree on the same saved payment.</div></div></Sequence>
- <Sequence name="Editable dashboard" from={Math.round(10.7*fps)} premountFor={fps}><Clip file="ag-layout" rate={.82} box={[560,330,1240,580]} crop={[305,300,830,390]}/><div style={{position:'absolute',left:115,top:390,width:370,fontSize:36,lineHeight:1.8,color:'#b8d4ed'}}>Native charts.<br/>Custom widgets.<br/>Editable layouts.</div></Sequence>
- <Sfx file="soft-tap" at={2} volume={.09}/><Note dark>Recorded AG Studio interactions · authored layouts · evaluation build</Note>
- </Stage>;}
+import { Sequence, useVideoConfig } from "remotion";
+import { Stage, Clip, Note, useTime } from "./Design";
+export function Evidence() {
+  const t = useTime(),
+    { fps, durationInFrames } = useVideoConfig(),
+    q = Math.round(durationInFrames / 4),
+    step = Math.min(3, Math.floor((t * fps) / q));
+  return (
+    <Stage dark label="AG Grid + AG Charts">
+      <div
+        style={{
+          position: "absolute",
+          left: 110,
+          top: 135,
+          fontSize: 110,
+          fontWeight: 700,
+          letterSpacing: -5,
+        }}
+      >
+        {
+          [
+            "Open the evidence.",
+            "See the decision.",
+            "Trace the payment.",
+            "Make it yours.",
+          ][step]
+        }
+      </div>
+      <Sequence from={0} durationInFrames={q} premountFor={fps}>
+        <Clip
+          file="ag-models"
+          rate={1.2}
+          box={[110, 360, 1700, 425]}
+          crop={[332, 320, 890, 225]}
+        />
+      </Sequence>
+      <Sequence from={q} durationInFrames={q} premountFor={fps}>
+        <Clip
+          file="ag-decisions"
+          trim={3.2}
+          box={[110, 340, 1700, 490]}
+          crop={[215, 245, 855, 250]}
+        />
+      </Sequence>
+      <Sequence from={q * 2} durationInFrames={q} premountFor={fps}>
+        <Clip
+          file="ag-paypal"
+          box={[580, 300, 780, 590]}
+          crop={[778, 183, 450, 340]}
+        />
+      </Sequence>
+      <Sequence from={q * 3} premountFor={fps}>
+        <Clip
+          file="ag-layout"
+          rate={1.2}
+          box={[330, 315, 1260, 590]}
+          crop={[305, 300, 830, 390]}
+        />
+      </Sequence>
+      <Note dark>
+        Recorded app interactions · authored AG Studio layouts · evaluation
+        build
+      </Note>
+    </Stage>
+  );
+}

@@ -1,8 +1,87 @@
-import {Sequence,useVideoConfig} from 'remotion';
-import {Stage,Label,Icon,Clip,Note,ramp,useTime,C} from './Design';
-export function Planning(){const t=useTime(),{fps}=useVideoConfig();return <Stage dark label="One planner. Trusted tools.">
- <div style={{position:'absolute',left:115,top:155}}><Label style={{color:C.cyan}}>From signals to action</Label><div style={{fontSize:101,fontWeight:700,letterSpacing:-4,marginTop:20}}>Turn activity into a plan.</div></div>
- {t<12&&<><svg width="1920" height="1080" style={{position:'absolute',inset:0}}>{[430,590,750].map((y,i)=><g key={y}><path d={`M580 ${y} Q780 ${y} 920 585`} fill="none" stroke="#46709b" strokeWidth="3"/><circle cx={580+340*ramp(t,1.5+i*.6,3+i*.6)} cy={y+(585-y)*ramp(t,1.5+i*.6,3+i*.6)} r="8" fill={C.cyan}/></g>)}<path d="M1120 585H1310" stroke={C.cyan} strokeWidth="4"/></svg>{['Observed demand','Inventory','Earlier responses'].map((name,i)=><div key={name} style={{position:'absolute',left:115,top:365+i*160,width:445,height:120,borderBottom:'1px solid #6486a755',display:'flex',alignItems:'center',gap:23,opacity:ramp(t,.6+i*.5,1.5+i*.5)}}><Icon kind="data" size={49} color={C.cyan}/><span style={{fontSize:34}}>{name}</span></div>)}<div style={{position:'absolute',left:920,top:485,width:200,height:200,background:C.blue,borderRadius:48,display:'grid',placeItems:'center',boxShadow:'0 0 90px #0877e544'}}><Icon kind="model" size={105}/></div><div style={{position:'absolute',left:880,top:725,width:280,textAlign:'center',fontSize:34}}>LLM planner</div><div style={{position:'absolute',left:1330,top:440,width:440,padding:36,borderRadius:22,background:'#f8fbff',color:C.ink,opacity:ramp(t,3.5,4.5)}}><Label>Local training</Label><div style={{fontSize:68,fontWeight:700,marginTop:20}}>2 models</div><div style={{fontSize:32,marginTop:12}}>28-day history</div></div></>}
- <Sequence from={12*fps} premountFor={fps}><Clip file="planner-decisions" trim={9.2} box={[120,330,1680,520]} crop={[215,246,853,270]}/><div style={{position:'absolute',left:125,top:885,fontSize:28,color:'#a8c8e6'}}>Recorded decision · original evidence · local tools execute the work</div></Sequence>
- <Note dark>Workflow illustration and recorded app evidence · six original LLM decisions</Note>
- </Stage>;}
+import { Sequence, useVideoConfig } from "remotion";
+import { Stage, Icon, Clip, Note, ramp, useTime, C } from "./Design";
+export function Planning() {
+  const t = useTime(),
+    { fps, durationInFrames } = useVideoConfig(),
+    cut = durationInFrames / fps - 2.5;
+  return (
+    <Stage dark label="LLM + local tools">
+      <div
+        style={{
+          position: "absolute",
+          left: 110,
+          top: 145,
+          fontSize: 108,
+          fontWeight: 700,
+          letterSpacing: -4,
+        }}
+      >
+        {t < 2.8
+          ? "Read the market."
+          : t < 5.7
+            ? "Train the models."
+            : "Recommend."}
+      </div>
+      {t < cut && (
+        <>
+          <svg
+            width="1920"
+            height="1080"
+            style={{ position: "absolute", inset: 0 }}
+          >
+            <path d="M460 580H1450" stroke="#3e6895" strokeWidth="6" />
+            {[0, 1, 2].map((i) => (
+              <circle
+                key={i}
+                cx={460 + ((t * 195 + i * 330) % 1000)}
+                cy={580}
+                r="9"
+                fill={C.cyan}
+              />
+            ))}
+          </svg>
+          {[
+            ["data", "28 days"],
+            ["model", "LLM agent"],
+            ["model", "2 model fits"],
+            ["card", "Campaign"],
+          ].map(([kind, name], i) => (
+            <div
+              key={name}
+              style={{
+                position: "absolute",
+                left: 110 + i * 445,
+                top: 430,
+                width: 360,
+                height: 300,
+                borderRadius: 36,
+                background: i === 1 ? C.blue : "#103960",
+                border: "1px solid #6594c54d",
+                display: "grid",
+                alignContent: "center",
+                justifyItems: "center",
+                gap: 28,
+                opacity: ramp(t, i * 0.6, i * 0.6 + 0.4),
+                translate: `0px ${(1 - ramp(t, i * 0.6, i * 0.6 + 0.4)) * 45}px`,
+              }}
+            >
+              <Icon kind={kind} size={88} color={i === 1 ? "#fff" : C.cyan} />
+              <div style={{ fontSize: 36, fontWeight: 600 }}>{name}</div>
+            </div>
+          ))}
+        </>
+      )}
+      <Sequence from={Math.round(cut * fps)} premountFor={fps}>
+        <Clip
+          file="planner-decisions"
+          trim={9.2}
+          box={[150, 330, 1620, 500]}
+          crop={[215, 246, 853, 264]}
+        />
+      </Sequence>
+      <Note dark>
+        Recorded LLM choices · trusted tools execute · original run
+      </Note>
+    </Stage>
+  );
+}
