@@ -1,96 +1,94 @@
-# Market Metro submission demo
+# Market Metro video plan
 
-Record a **2 minute 50 second** walkthrough. Lead with retained purchases and merchant value, show the decisions that produced them, and finish with the three-way comparison. Use the completed fresh Gemini run for the main result. The merchant-feed benchmark and archived Sandbox receipt each have their own visible labels.
+**Draft for review · 2:45 · 1920 × 1080 · 30 fps**
 
-## Headline to put on screen
+Open with the functioning simulation. Follow the same saved 12-store campaign through evidence, planning, verification, purchase, PayPal receipt and measured impact. The short merchant-feed demonstration is explicitly a separate test. The 384-store study belongs in supporting materials, not this primary storyline.
 
-**16 more retained purchases · $1,024.86 more merchant contribution · +3.47% modeled PayPal net**
+The source timeline is [submission-video.json](submission-video.json). The clean recording script is [video-narration.txt](video-narration.txt). No video or voice audio has been rendered.
 
-The comparator is fixed campaign rules in the same frozen simulated market. The PayPal increase is **$114.95 after inference cost**. Retained payment volume increased **$2,345**. The market contains 600 shoppers and 12 merchants and settles through day 126.
+## Storyboard
 
-| Policy | Modeled PayPal net after AI | Merchant contribution | Retained purchases |
-|---|---:|---:|---:|
-| Fixed rules | $3,309.83 | $38,928.95 | 627 |
-| Fresh planner | $3,391.08 | $39,494.31 | 642 |
-| Fresh planner with ontology | **$3,424.78** | **$39,953.81** | **643** |
-
-Keep the planner comparator visible. The ontology-assisted workflow adds **$33.70 PayPal net, $459.50 merchant contribution, $662 retained sales and one purchase** over the fresh planner. These are aggregate outcomes for one scenario. Both the model and campaign choices differ between planners. [Measured results and decisions](../demo/data/ontology-live-campaign.json)
-
-## Recording sequence
-
-| Time | Screen and action | What judges should see |
+| Time | Scene | App action |
 |---|---|---|
-| 0:00–0:15 | Open [Fresh campaign comparison](http://127.0.0.1:4173/judge.html#livecampaign). Hold on the first results table. | The three policies and headline gains over fixed rules. Add a caption saying “One frozen simulated market · day 126 settlement”. |
-| 0:15–0:35 | Open [Market](http://127.0.0.1:4173/judge.html#market), then [Evidence](http://127.0.0.1:4173/judge.html#evidence). | The visual economy, 600 shoppers, 12 merchants and demand available before the day-31 decision. This is the common starting state for the comparisons. |
-| 0:35–0:58 | Open [Merchant feed verifier](http://127.0.0.1:4173/judge.html#ontology). Show a split checkout, switch to renamed fields, then the ambiguous-link example. | One checkout counted once, semantic mapping of unfamiliar headers and a hold on ambiguous evidence. Add “Separate 24-export test” and the 6/12 → 12/12 valid-feed result. |
-| 0:58–1:35 | Return to [Fresh campaign comparison](http://127.0.0.1:4173/judge.html#livecampaign). Scroll to **Planner + ontology**. Expand **Choose ontology features**, then **Select a trained model**. | The actual 28-day training choice, eight requested features, 1,230 product-contact rows, model scores and selection. Briefly show the evidence supplied to Gemini. |
-| 1:35–2:00 | Expand **Revise after the trial**, then **Verifier’s final decision**. | The initial no-response stress result, the LLM’s revision, and measured approval. Overlay “Stress-test PayPal delta −$36.63 → +$0.85” and “Contact ceiling 60 → 36 per day”. The revision also restored the existing supply settings. |
-| 2:00–2:25 | Open [PayPal receipt](http://127.0.0.1:4173/judge.html#receipt). Expand **Match the provider receipt to the warehouse**. | A completed native $96 Sandbox capture, $3.56 fee and $92.44 test merchant proceeds, bound to one warehouse order. Caption “Archived judge-order integration proof · Sandbox test funds”. |
-| 2:25–2:50 | Return to [Fresh campaign comparison](http://127.0.0.1:4173/judge.html#livecampaign), then show **Run your own simulation** in the [final walkthrough chapter](http://127.0.0.1:4173/judge.html#result). | All three results, 12 fresh model responses and $0.077443 estimated inference cost. End by showing where judges choose their seed and inspect Ontology graph and Agent workflow. |
+| 0:00–0:18 | Start inside the economy | Keep Day 1 visible. Pan across stores, shoppers and the PayPal building. Use real recorded app footage. |
+| 0:18–0:32 | Make the business decision concrete | Advance to Agent decisions, first stop. Highlight electronics and furniture interest versus funded units. |
+| 0:32–0:50 | Show the data contract | In the feed verifier, show a split checkout, then the ambiguous-link hold. Label this as a separate data-quality demonstration. |
+| 0:50–1:14 | Show the LLM choosing work | Open Day 31 Analyze, then Train, and inspect the saved proposal. Cut to Model training with both distinct model bars. |
+| 1:14–1:34 | Show why the model changed | Choose Agent decisions, then Next to the model-change stop. Highlight the two development-trial rows and selected boosted model. |
+| 1:34–1:50 | Follow one shopper | Advance to Shopper response. Focus Form & Function and the Day 35 purchase → Day 36 delivery trace. |
+| 1:50–2:10 | Connect the purchase to PayPal | Show this campaign’s native receipt, its capture ID, fee and test merchant proceeds. Briefly open the warehouse-order link. |
+| 2:10–2:28 | Show the matched gain | Choose Impact to show the settled table. Highlight fixed vs planner values, then the three gain figures. |
+| 2:28–2:45 | End with inspectable evidence | Show AG Grid model/decision rows, click one checkpoint, and briefly show the ontology graph. End on the Market → Agent decisions → Impact navigation and project title. |
 
-Show recorded checkpoints without waiting for another model call. The core comparison actually used fresh Gemini decisions, local training and full settlement. Playback reads that evidence. The ontology’s merchant definitions and the financial publication checks execute deterministically. Seeded shopper behavior and financial outcomes are simulated.
+## Narration
 
-## Voiceover
+### 0:00 — Start inside the economy
 
-### 0:00–0:15
+This is Market Metro: twelve merchants, six hundred simulated shoppers, and a market that keeps a record of what people want, what they buy, and what actually gets delivered. We built it to test agentic commerce against measurable outcomes.
 
-In the same simulated economy, Market Metro’s ontology-assisted planner produced sixteen more retained purchases, over a thousand dollars in additional merchant contribution, and three point four seven percent higher modeled PayPal net than fixed rules.
+### 0:18 — Make the business decision concrete
 
-### 0:15–0:35
+The business question is simple: who should we contact, and what should we recommend? High interest does not always mean a funded purchase. The agent needs to turn those signals into a campaign merchants can actually fulfill.
 
-This market has six hundred shoppers and twelve merchants. Thirty days of activity give the planner observed demand, stock and payment history. On day thirty-one, it investigates that evidence and decides what campaign to test.
+### 0:32 — Show the data contract
 
-### 0:35–0:58
+First, the data must mean the same thing across merchants. Our ontology verifier counts a split checkout once and holds ambiguous relationships. In a separate test of twenty-four synthetic feeds, it accepted all twelve usable exports; fixed mapping accepted six. Both held every unsafe export.
 
-First, it needs trustworthy data. A checkout can split across merchants. Our ontology identifies the purchase, maps unfamiliar fields and holds ambiguous relationships. In a separate test, it accepted all twelve usable merchant feeds. Fixed mapping accepted six. Both held all twelve unsafe feeds.
+### 0:50 — Show the LLM choosing work
 
-### 0:58–1:35
+Back in our recorded campaign, the LLM investigates demand, chooses a twenty-eight-day market-feedback window, and requests two local model fits. It proposes ranked recommendations and shopping-needs inquiries for up to thirty-six consenting shoppers a day. These are saved decisions from a real model run, with the inputs and tool results available to inspect.
 
-Here are the actual Gemini decisions. It chose twenty-eight days of history and eight features covering interest, shopping history, price, stock and earlier responses. The training tool used product recommendations as the learning cases. Its eight-feature model scored worse, so Gemini kept the broader model. We can inspect the evidence, requested features and validation behind that decision.
+### 1:14 — Show why the model changed
 
-### 1:35–2:00
+The LLM preferred the two-stage response model. The financial verifier tested both rankings with the same campaign in three development markets. Boosted trees earned more while clearing merchant and purchase checks, so the verifier selected that model. The agent proposes; typed tools and financial checks control execution.
 
-The first campaign lost money in a no-response stress test. The planner read the results, restored the existing supply settings and reduced its daily contact ceiling from sixty to thirty-six. The financial verifier retested the proposal and approved it. The campaign then ran through purchases, deliveries and settlement.
+### 1:34 — Follow one shopper
 
-### 2:00–2:25
+Now follow Shopper one-seventy-nine. Sixteen days after their last purchase, they receive a recommendation for a mobile side table, buy it for ninety-six dollars, and receive it the next day. The same request went unfilled under fixed rules.
 
-PayPal is part of both execution and evaluation. Fees, processing, refunds and settlement affect the campaign’s measured outcome. Separately, this archived ninety-six-dollar order completed through PayPal Sandbox. Its capture matches the warehouse order, and its fee plus merchant proceeds reconcile exactly.
+### 1:50 — Connect the purchase to PayPal
 
-### 2:25–2:50
+That exact warehouse order was mirrored once through PayPal Sandbox. Here is the completed ninety-six-dollar capture: a three-dollar-fifty-six fee and ninety-two dollars forty-four in test merchant proceeds. PayPal supplies the execution and receipt proof. The simulated payment economics let us compare campaigns without charging real shoppers.
 
-The finished campaign improved PayPal net, merchant contribution and retained purchases. Both planners used under eight cents in model calls. Now choose Run your own simulation. Change the seed, follow your market's associations in Ontology graph, and inspect the planning and verification in Agent workflow.
+### 2:10 — Show the matched gain
 
-## Metric cards and exact scope
+After refunds and settlement, this campaign delivered sixteen more retained purchases, one thousand twenty-four dollars eighty-six in additional merchant contribution, and one hundred fourteen dollars ninety-six in modeled PayPal net over fixed rules. The original model usage cost about three cents. These are simulated results, not production profit.
 
-| Card | Exact claim and evidence | Placement |
-|---|---|---|
-| **+16 retained purchases** | 643 versus 627 in the fresh one-market comparison. [Results](../demo/data/ontology-live-campaign.json) | Main opening and closing |
-| **+$1,024.86 merchant contribution** | Includes inventory value and obligations. [Results](../demo/data/ontology-live-campaign.json) | Main opening and closing |
-| **+3.47% modeled PayPal net** | $3,424.777125 versus $3,309.83, including the ontology planner’s $0.042875 estimated inference cost. [Results](../demo/data/ontology-live-campaign.json) | Main opening and closing |
-| **2× usable-feed coverage** | 12/12 valid synthetic exports versus 6/12. Both approaches held 12/12 unsafe exports. [Feed study](../demo/data/ontology-study.json) | Ontology segment |
-| **12 real model responses, under $0.08** | $0.077443 across both fresh planners. Local CPU training has a separate compute cost. [Usage records](../demo/data/ontology-live-campaign.json) | Closing |
-| **$96 native Sandbox capture** | Completed capture 2M324038C71499318 belongs to the archived original judge order. It contributes zero additional benchmark sales. [Receipt](../demo/data/judge-reactivation.json) | PayPal segment |
-| **ROC AUC 0.827 → 0.852** | Separate local feature study on 4,865 common held-out contacts across four markets, with real local training and scripted tool choices. One market lost money. [Feature study](ontology/training/README.md) | Supporting submission text or questions |
-| **96 merchants, 4,800 shoppers** | Separate eight-district deployment with a reused campaign. At full feed coverage, +103 retained purchases and +$624.95 modeled PayPal net over fixed. Median local scoring was 86.1 ms, with 109.0 ms p95 over 15 warm passes. [Scale study](merchant-capacity/README.md) | Optional extended demo |
-| **384 live merchants, 19,200 shoppers** | One shared live market with fresh planner + ontology reviews. Through day 126, +532 retained purchases, +$3,310.75 modeled PayPal net and +$36,042.88 merchant contribution over same-size fixed rules. The successful run used $0.059695 in model calls. Proposal checks used 600-shopper proxy trials. [Live scale validation](commerce-metropolis/README.md) | Hands-on live-market follow-up |
+### 2:28 — End with inspectable evidence
 
-The live eight-feature model was rejected. Present the live gain as the outcome of the ontology-assisted planning and verification workflow. Use the four-market feature study when discussing measured feature-selection improvement. Its 12-feature model and $71.81 aggregate gain have their own experiment boundary.
+AG Studio brings the evidence together: market trends, model validation, LLM usage, campaign decisions, and payment reconciliation. Judges can inspect the same campaign or run a new seed with the saved policy. Market Metro makes commerce decisions traceable, testable, and connected to PayPal.
 
-## Preparation and judge questions
+## Remotion production direction
 
-1. Run the local app with the bundled evidence. Use the exact links above. Keep the results table and the requested-feature/model-selection sections ready to show.
-2. Record at a readable desktop size. Expand only the active decision. Keep model inputs collapsed until the evidence moment.
-3. Overlay the three headline metrics. Keep “Modeled outcomes · simulated shoppers” readable throughout the financial comparison. Use “Merchant contribution includes inventory” on the result frame.
-4. Label the receipt segment as archived Sandbox execution. The fresh comparison’s simulated orders have their own IDs and transaction trace.
-5. Reserve the four-market feature study, six-seed earlier planner study and merchant-scale view for questions or the submission description. Their evidence is complementary and must retain its scope.
-6. Check the final exported video duration is below three minutes. The plan targets 2:50 to leave upload and title-card margin.
+- Build one composition with the scene IDs and frame counts in the JSON. Each actual app clip gets its own sequence; captions and emphasis overlays remain editable.
+- Use recorded interaction footage, not a fabricated interface or a slide-only substitute. Zoom into the active card/table so it is legible at 1080p.
+- Keep the PayPal blue sidebar, white environment and DM Sans. Use the existing application assets and vector marks with their notices; add no stock music.
+- Include the simulation boundary on financial screens. Label historical training data and the separate feed test. Keep receipt source, gross, fee and proceeds visible.
+- Use one LLM planner plus deterministic tools/verifier in labels. Do not portray distinct autonomous LLM employees, AI-generated dashboard layouts, a 2× profit result, or actual PayPal production earnings.
+- After script review: capture clips, record narration, assemble in Remotion Studio, review timing, then export and verify the final video is under 180 seconds. Upload publicly to YouTube when approved.
 
-**What does the LLM actually decide?** Investigation focus, training window, feature recipe or explicit feature list, model preference, campaign settings and a revision after the trial. Local code fits models, scores shoppers and enforces the publication checks.
+## Review decisions
 
-**What did the ontology add?** Better support for unfamiliar merchant schemas, explicit purchase grain, training-cohort definitions and admissible features. The live LLM rejected its weaker eight-feature candidate. The separate controlled feature study measured an improvement from a different selected feature set.
+Please review the opening, technical depth and closing. The narration currently uses an explanatory product-demo voice. A personal founder narration can use the same timings.
 
-**Why does PayPal matter?** The objective uses retained payment volume and modeled net after fees, costs and refunds. A completed Sandbox capture demonstrates that a selected warehouse order can execute through PayPal and reconcile to the provider receipt.
+## Evidence
 
-**Is the financial gain production proof?** It measures a frozen synthetic economy. The single fresh comparison demonstrates the workflow and its outcome on the existing judge seed. Further data would be needed to estimate production lift.
+- [Saved campaign and receipt](../demo/data/judge-reactivation.json)
+- [Matching AG Grid evidence](../demo/data/judge-intelligence.json)
+- [Separate held-out merchant-feed comparison](../demo/data/ontology-study.json)
+- [Architecture assets](presentations/ontology-paypal/README.md)
 
-**What is the agent architecture?** One real LLM planner, trusted analysis and training tools, an ontology layer, saved checkpoints and a deterministic financial verifier. The tested submission candidate uses this architecture.
+## Upload copy draft
+
+**Title:** Market Metro | Agentic Commerce That Learns | PayPal AI Hackathon
+
+Market Metro turns observed merchant activity into trained models, tested campaigns and traceable PayPal payments. This demo follows one saved 12-store, 600-shopper simulation from Day 1 to a recorded agent decision, purchase and native PayPal Sandbox receipt.
+
+Against fixed rules in that same simulation: 16 more retained purchases, $1,024.86 additional merchant contribution, and $114.96 higher modeled PayPal net after estimated model cost. Merchant contribution includes inventory value. These are simulated outcomes, not actual PayPal profit. The $96 Sandbox capture is an existing order and uses fictitious funds.
+
+Built with PayPal Sandbox, Gemini on Vertex AI, local scikit-learn models, SQLite, Three.js and AG Studio. The ontology feed comparison is a separate synthetic-data test.
+
+Source and setup: https://github.com/VinceVence/market-metro
+Original code: MIT. Third-party components retain their own licenses.
+
+Publish only after the narration/video review and public repository release. The JSON contains the same upload text for reuse.

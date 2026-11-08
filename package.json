@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/serve.mjs",
-    "test": "node --test tests/*.test.mjs",
+    "test": "npm run test:submission",
     "test:demo": "node --test tests/commerce-judge-reactivation.test.mjs tests/merchant-scale.test.mjs tests/merchant-capacity.test.mjs tests/ontology-verifier.test.mjs tests/ontology-demo.test.mjs tests/ontology-planner.test.mjs tests/ontology-training.test.mjs tests/ontology-live-campaign.test.mjs tests/ontology-inspector.test.mjs tests/metropolis-results.test.mjs",
     "benchmark": "node scripts/benchmark.mjs",
     "benchmark:freeze": "node scripts/benchmark.mjs --freeze",
@@ -18,7 +18,10 @@
     "baseline:verify": "node scripts/commerce-growth/baseline.mjs",
     "baseline:replay": "node scripts/commerce-growth/baseline.mjs --replay",
     "workflow:economic": "node scripts/commerce-growth/autonomy/run-economic-workflow.mjs",
-    "test:economic": "node --test tests/economic-harness.test.mjs"
+    "test:economic": "node --test tests/economic-harness.test.mjs",
+    "test:historical": "node --test tests/*.test.mjs",
+    "test:submission": "npm run test:demo && node --test tests/submission-package.test.mjs tests/intelligence.test.mjs tests/autonomy-navigation.test.mjs tests/paypal-sandbox.test.mjs tests/paypal-funding.test.mjs tests/paypal-market-vault.test.mjs tests/paypal-commerce.test.mjs",
+    "test:judge-simulation": "node --test tests/judge-exploration.test.mjs"
   },
   "engines": {
     "node": ">=22.16"

@@ -17,3 +17,9 @@ Original Market Metro source code and code-drawn artwork are covered by the
 
 - Architecture mockups use the STIX and DejaVu fonts distributed with Matplotlib.
   Their [license notices](docs/figures/planner-v23/mockups/README.md#reproduce) accompany the exported figures.
+
+- AG Studio 3.0.0 and its AG Grid Enterprise / AG Charts Enterprise dependencies
+  are commercially licensed; the project MIT license does not relicense them.
+  The application currently retains their evaluation notices. The hackathon
+  sponsor offers a [free 45-day trial](https://paypalaihackathon.devpost.com/details/aggrid).
+  Obtain coverage appropriate for the judging period before public release.

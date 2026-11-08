@@ -2,7 +2,7 @@
 
 Market Metro shows how one LLM planner designs a merchant campaign and a local verifier tests which ranking earns more after purchases, refunds and settlement.
 
-[Submission demo plan](docs/demo-plan.md) · [Submission description](docs/submission-draft.md)
+[Submission demo plan](docs/demo-plan.md) · [Submission description](docs/submission-draft.md) · [Release audit](docs/submission-readiness.md) · [Narration draft](docs/video-narration.txt)
 
 ## Play the judge demo
 
@@ -99,7 +99,9 @@ Fresh Gemini runs use the existing isolated `.local/gcp/config.json`, authorizat
 
 ## Validation
 
-Run `npm run test:demo` to check the bundled receipt, default routes, merchant-scale inputs and live local rankings using Node alone. The broader workflow checks below also exercise local training. The full historical suite additionally expects local fixtures from the V3 catalog, expert-stack, policy-value and team-repair studies.
+Run `npm test` for the zero-provider submission checks (demo, dashboards, receipt and wallet safeguards). Run `npm run test:judge-simulation` after Python setup to settle one new seed without model or payment calls.
+
+Run `npm run test:demo` to check the bundled receipt, default routes, merchant-scale inputs and live local rankings using Node alone. The broader workflow checks below also exercise local training. `npm run test:historical` retains the full historical suite and additionally expects local fixtures from the V3 catalog, expert-stack, policy-value and team-repair studies.
 
 ```sh
 node --test tests/commerce-harness-v2.test.mjs tests/inquiry-value.test.mjs tests/commerce-operation-recovery.test.mjs tests/commerce-autonomy-live.test.mjs tests/commerce-expanded.test.mjs

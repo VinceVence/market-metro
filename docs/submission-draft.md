@@ -1,66 +1,76 @@
 # Market Metro: Agentic Commerce That Learns
 
+**Submission copy for review.** Primary evidence is the saved 12-store reactivation campaign. Video URL and public-repository release are pending.
+
 ## Elevator pitch
 
-An autonomous commerce planner that turns verified merchant data into trained models, tested campaigns and traceable PayPal payments.
+A commerce policy lab where an AI planner learns from merchant activity, tests campaigns against financial outcomes, and connects selected purchases to verifiable PayPal payments.
+
+## Inspiration
+
+A merchant does not need another dashboard that ends with a recommendation nobody executes. They need a way to turn demand, inventory and payment signals into a tested campaign, while knowing what the AI used, what changed and whether the outcome improved.
+
+Market Metro gives merchant operations and payments teams an inspectable environment for this workflow. Its synthetic shoppers, inventory, finite budgets, deliveries and refunds let us test decisions before involving real customers.
 
 ## What it does
 
-Market Metro is a commerce simulation and experimentation environment for merchant operations. Shoppers browse, respond to recommendations, submit requests, purchase and return goods. Merchants manage inventory and fulfillment. The resulting data gives an LLM planner a concrete business question and a measurable environment in which to test its answer.
+The market produces a transaction warehouse. One LLM planner investigates observed demand, chooses training data and a history window, requests local model fits, proposes a campaign, and reviews numerical trial results. Typed tools execute the operations. A deterministic financial verifier publishes an eligible tested configuration or retains the existing policy. Checkpoints preserve the inputs, tool outputs and decision history.
 
-The planner investigates demand, chooses training data and features, fits local prediction models, proposes campaigns and revises them after financial trials. A deterministic verifier publishes only an eligible tested model and campaign. The workflow records the inputs, model choices, evidence, trial results and publication decision.
+The ontology-inspired data layer connects shoppers, checkout parents, merchant order portions, model training cases and payment evidence. It holds ambiguous merchant mappings instead of silently counting the wrong thing. A split checkout remains one purchase. Training tools separate recommendation contacts from general inquiries and exclude unavailable or immature outcomes.
 
-An ontology-inspired layer connects business meanings to the available data. It distinguishes a shopper checkout from its merchant portions, binds declared relationships in unfamiliar feeds and holds ambiguous mappings. It also defines eligible training cases and which features are observable before contacting a shopper. General inquiries and product recommendations have different training requirements.
+The judge walkthrough follows **Market → Agent decisions → Impact**. It begins at Day 1, shows the day-31 evidence and ranking-model change, follows a shopper’s purchase, and ends with the matched fixed-policy comparison and its native PayPal Sandbox receipt. AG Studio dashboards inspect that same campaign.
 
-## PayPal integration
+## Why PayPal is central
 
-PayPal is the payment execution and reconciliation layer. The project has completed a native Sandbox capture for a selected simulated warehouse order. The recorded $96 capture has a $3.56 native fee and $92.44 in test merchant proceeds. Its custom ID matches the warehouse order.
+PayPal is the payment execution and reconciliation layer. A selected $96 warehouse order was mirrored once through PayPal Sandbox. Its completed capture returns a $3.56 fee and $92.44 in test merchant proceeds, tied to the same warehouse order by its custom ID. The receipt is integration evidence, not another simulated sale.
 
-In the economy, retained payment volume, modeled processing costs, refunds, outreach costs and settlement influence the campaign comparison. This lets the planner evaluate commercial outcomes beyond clicks. The native Sandbox transaction proves the integration, while the simulated payment layer supports reproducible comparisons. Sandbox uses test funds.
+Payment economics also define the campaign objective: retained volume, modeled processing costs, refunds, settlement and outreach costs affect the comparison. This makes success about retained, fulfillable commerce rather than clicks. Modeled PayPal net is an assumption-based platform contribution measure; it is not PayPal’s actual profit.
 
-## Measured result
+## Measured outcome
 
-We ran fixed rules, a fresh Gemini planner and a fresh Gemini planner with ontology on the same frozen market of 600 shoppers and 12 merchants. Both planners received the same day-30 observations, six decisions and the same financial verifier. They made 12 fresh model calls in total. Campaigns ran through day 126 settlement.
+The primary recorded run uses 12 merchants, 600 shoppers and the same frozen exogenous inputs for both policies. Results settle through day 126 and exclude shared warmup.
 
-| Policy | Modeled PayPal net after AI | Merchant contribution | Retained purchases |
+| Outcome | Fixed rules | Planner + verifier | Difference |
 |---|---:|---:|---:|
-| Fixed rules | $3,309.83 | $38,928.95 | 627 |
-| Fresh planner | $3,391.08 | $39,494.31 | 642 |
-| Fresh planner with ontology | **$3,424.78** | **$39,953.81** | **643** |
+| Modeled PayPal net after model cost | $3,309.83 | $3,424.79 | **+$114.96 / +3.47%** |
+| Merchant contribution | $38,928.95 | $39,953.81 | **+$1,024.86** |
+| Retained purchases | 627 | 643 | **+16** |
 
-The ontology-assisted workflow improved modeled PayPal net by **3.47%**, merchant contribution by **$1,024.86**, and retained purchases by **16** over fixed rules. Compared with the fresh planner, its gains were **$33.70**, **$459.50** and **one purchase**. Combined inference usage was an estimated **$0.077443**. Merchant contribution includes inventory value. The results describe one simulated scenario.
+The review contains six recorded LLM decisions, two local model fits and $0.032325 in estimated inference usage. Merchant contribution includes inventory value. This seed was selected from the earlier six-seed study because the verifier changed models; it is a concrete demonstration, not an unbiased estimate of production lift.
 
-The live planner requested eight ontology-validated features, trained that candidate and rejected it when it performed worse. It published the broader model with a revised campaign. The result demonstrates an auditable experiment and campaign workflow. The four-market local feature study separately measured ROC AUC improving from 0.827 to 0.852 and $71.81 additional modeled PayPal net in aggregate, with one negative market.
+Separately, on 24 held-out synthetic merchant exports, the ontology verifier accepted all 12 usable feeds versus six for fixed mapping. Both held all 12 unsafe feeds. This measures data compatibility and correctness, not a 2× financial gain.
 
-## Ontology verification
+The separate live-scale study reaches 384 merchants and 19,200 shoppers. That run improved modeled PayPal net by $3,310.75 and retained purchases by 532 against its same-size fixed control. There is one seed per size, and a smaller market had a negative merchant result. Its receipts and outcomes are not combined with the primary 12-store example.
 
-On 24 held-out synthetic merchant exports, the ontology verifier correctly accepted all 12 usable feeds. Fixed mapping accepted six. Both held all 12 unsafe exports. The verifier reconciles split baskets and archived provider evidence without counting a Sandbox confirmation as another sale.
+## How we built it
 
-The ontology follows ideas from NVIDIA Auto Ontology. This project implements its own reviewed commerce definitions, relationship checks and training tools. The fresh planner chooses within those definitions.
+- **Gemini on Vertex AI:** actual recorded planning decisions, with a spend ledger and bounded tool workflow.
+- **Python, NumPy and scikit-learn:** local prediction-model fitting and validation.
+- **Node.js, SQLite and Three.js:** seeded commerce, warehouse records, checkpoints and the visual market.
+- **PayPal Sandbox:** saved-wallet payment execution, Orders/capture verification and warehouse reconciliation. Other lifecycle adapters are available with their actual success/pending states preserved.
+- **AG Studio, AG Grid and AG Charts:** themed dashboards, sortable evidence tables, model and LLM observability, editable layouts and a custom PayPal evidence widget. These dashboard layouts are authored, not generated by the LLM.
+- **Project-owned ontology and verifier:** reviewed business definitions, training-data eligibility, typed actions and financial publication checks. Inspired by ontology research; NVIDIA Auto Ontology is not an installed runtime dependency.
 
-## Tools used
+The current catalog and customer behavior are authored simulation fixtures. The current candidate makes no Channel3 calls.
 
-- **Gemini on Vertex AI** makes fresh planning decisions. Flash-Lite handles the first five decisions and Pro handles the final campaign review. A durable spend ledger enforces call reservations and limits.
-- **Python and scikit-learn** fit and validate local predictive models. The LLM receives the numerical results before selecting a candidate.
-- **Node.js, SQLite and Three.js** support the application, transaction warehouse and visual economy.
-- **PayPal Sandbox APIs** execute selected payments and return native receipts that reconcile to warehouse orders.
-- **AG Studio** powers the Intelligence workspace with native grids, charts, sortable grids, layout editing and a custom PayPal evidence widget. It displays market trends, model training, LLM usage and settled financial comparisons. Review checkpoints and the ontology graph link these views to recorded decisions. The older reports workspace also contains the analyst/designer agent harness.
-- **Project-owned ontology and verifier code** validates data meanings, feature eligibility, typed tool inputs and financial publication rules.
+## Challenges and lessons
 
-The catalog, shoppers and demand are authored simulation data. The current candidate uses the authored catalog and its local warehouse.
+More agents and better prediction scores did not consistently produce better financial results. We retained the strongest demonstrated configuration: one planner, local specialist tools and a financial verifier. The verifier can reject a campaign, change a ranking model or preserve the incumbent. We also fixed data-grain errors, unfinished-checkpoint dashboard crashes, and chart grouping that could incorrectly add model accuracy values.
 
-## How judges can try it
+## What is next
 
-The repository includes a recorded walkthrough, original model decisions, measured results, native Sandbox receipt evidence and setup instructions. After installing the documented Node dependencies, start the app with `npm run dev -- --no-recover`. Open the judge page and choose **Compare the fresh Gemini campaigns**.
+Validate the simulator against consented merchant data, measure incremental effects in real experiments, and expand compatible merchant feeds. Production lift and a multi-agent advantage remain unproven.
 
-The recorded demo replays completed decisions and needs zero new paid calls. A separate live workflow can make new planner decisions when the isolated model project is configured. The ontology feature comparison, receipt verification and experiment records are available from the demo.
+## Judge instructions
 
-## Release fields
+Use the repository’s Node setup to run the saved walkthrough and AG Studio evidence without credentials or new model/payment calls. For a new seed using the recorded policy, install the documented Python dependencies and choose **Try your own free simulation**. Fresh planning and native payment tests are separate configured modes.
 
-- Attach the final public video using the [2:50 recording plan](demo-plan.md).
-- Publish the approved repository with its MIT license and runnable instructions. GitHub is currently private by user request.
-- Use clear local setup as the runnable-demo entry, or provide a verified hosted URL.
-- Confirm appropriate AG Studio license coverage for any hosted sponsor demonstration.
-- Copy this description into the submission form and replace release fields with final repository, video and demo links.
+## Submission fields
 
-[Fresh decision evidence](../demo/data/ontology-live-campaign.json) · [Live comparison method](ontology/live/README.md) · [Ontology verification](ontology/README.md) · [Feature study](ontology/training/README.md) · [PayPal receipt](../demo/data/judge-reactivation.json)
+- Source: https://github.com/VinceVence/market-metro — release branch: `main`; currently private until publication is approved.
+- Runnable demo: local setup in README; no hosted URL is claimed.
+- Video: pending narration review, capture, rendering and public YouTube upload.
+- License: MIT for original code; commercial AG Studio dependencies retain their own terms.
+- Sponsor category: Best Use of AG Grid. General judging and honorable-mention consideration follow the official prize rules.
+
+[Primary campaign and receipt](../demo/data/judge-reactivation.json) · [Matching AG Grid evidence](../demo/data/judge-intelligence.json) · [Feed study](../demo/data/ontology-study.json) · [Separate scale evidence](../demo/data/metropolis-live-results.json) · [Video draft](demo-plan.md)
