@@ -12,49 +12,65 @@ export const ImpactScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "The same market delivers sixteen more purchases",
+    "text": "Across the same market, sixteen more purchases",
     "startMs": 250,
-    "endMs": 3303,
+    "endMs": 3077,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "kept, extra payment volume, and higher merchant",
-    "startMs": 3303,
-    "endMs": 6356,
+    "text": "were completed and kept.",
+    "startMs": 3077,
+    "endMs": 4986,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "contribution and modeled PayPal net, even after",
-    "startMs": 6356,
-    "endMs": 9409,
+    "text": "Payment volume grows by two thousand three",
+    "startMs": 4986,
+    "endMs": 7531,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "AI cost.",
-    "startMs": 9409,
-    "endMs": 10377,
+    "text": "hundred forty five dollars.",
+    "startMs": 7531,
+    "endMs": 9651,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Every gain is measured against the same",
-    "startMs": 10377,
-    "endMs": 12834,
+    "text": "Merchant contribution and modeled PayPal net both",
+    "startMs": 9651,
+    "endMs": 12691,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "fixed rules.",
-    "startMs": 12834,
-    "endMs": 14100,
+    "text": "rise, after AI cost.",
+    "startMs": 12691,
+    "endMs": 14317,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "The numbers on screen compare against the",
+    "startMs": 14317,
+    "endMs": 16791,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "same fixed rules.",
+    "startMs": 16791,
+    "endMs": 18275,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

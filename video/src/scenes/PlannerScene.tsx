@@ -12,33 +12,41 @@ export const PlannerScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "The agent spots the opportunity, chooses twenty",
+    "text": "The agent studies demand and available stock,",
     "startMs": 250,
-    "endMs": 2925,
+    "endMs": 3250,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "eight days of history, and trains two",
-    "startMs": 2950,
-    "endMs": 4775,
+    "text": "chooses twenty eight days of history, and",
+    "startMs": 3325,
+    "endMs": 5600,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "models.",
-    "startMs": 4825,
-    "endMs": 5700,
+    "text": "asks local tools to train two models.",
+    "startMs": 5675,
+    "endMs": 8575,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Every decision leaves a checkpoint.",
-    "startMs": 5775,
-    "endMs": 7850,
+    "text": "Its decision summary, tool calls and results",
+    "startMs": 8650,
+    "endMs": 11450,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "become checkpoints you can inspect.",
+    "startMs": 11500,
+    "endMs": 13675,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

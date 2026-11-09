@@ -17,7 +17,7 @@ export const RemotionRoot = () => (
       <Composition
         id="MarketScene"
         component={MarketScene}
-        durationInFrames={301}
+        durationInFrames={483}
         fps={30}
         width={1920}
         height={1080}
@@ -25,7 +25,7 @@ export const RemotionRoot = () => (
       <Composition
         id="DemandScene"
         component={DemandScene}
-        durationInFrames={360}
+        durationInFrames={609}
         fps={30}
         width={1920}
         height={1080}
@@ -33,7 +33,7 @@ export const RemotionRoot = () => (
       <Composition
         id="OntologyScene"
         component={OntologyScene}
-        durationInFrames={273}
+        durationInFrames={613}
         fps={30}
         width={1920}
         height={1080}
@@ -41,7 +41,7 @@ export const RemotionRoot = () => (
       <Composition
         id="PlannerScene"
         component={PlannerScene}
-        durationInFrames={250}
+        durationInFrames={455}
         fps={30}
         width={1920}
         height={1080}
@@ -49,7 +49,7 @@ export const RemotionRoot = () => (
       <Composition
         id="VerifierScene"
         component={VerifierScene}
-        durationInFrames={265}
+        durationInFrames={480}
         fps={30}
         width={1920}
         height={1080}
@@ -57,7 +57,7 @@ export const RemotionRoot = () => (
       <Composition
         id="ShopperScene"
         component={ShopperScene}
-        durationInFrames={293}
+        durationInFrames={411}
         fps={30}
         width={1920}
         height={1080}
@@ -65,7 +65,7 @@ export const RemotionRoot = () => (
       <Composition
         id="PayPalScene"
         component={PayPalScene}
-        durationInFrames={312}
+        durationInFrames={527}
         fps={30}
         width={1920}
         height={1080}
@@ -73,7 +73,7 @@ export const RemotionRoot = () => (
       <Composition
         id="ImpactScene"
         component={ImpactScene}
-        durationInFrames={438}
+        durationInFrames={623}
         fps={30}
         width={1920}
         height={1080}
@@ -81,7 +81,7 @@ export const RemotionRoot = () => (
       <Composition
         id="AGGridScene"
         component={AGGridScene}
-        durationInFrames={307}
+        durationInFrames={457}
         fps={30}
         width={1920}
         height={1080}
@@ -89,7 +89,7 @@ export const RemotionRoot = () => (
       <Composition
         id="ClosingScene"
         component={ClosingScene}
-        durationInFrames={143}
+        durationInFrames={206}
         fps={30}
         width={1920}
         height={1080}

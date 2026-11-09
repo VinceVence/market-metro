@@ -5,7 +5,7 @@ export function Planning() {
   const points = [
     0,
     cue("planner", "agent", 1),
-    cue("planner", "trains", 5),
+    cue("planner", "train", 7),
     cue("planner", "campaign", 9),
   ];
   return (

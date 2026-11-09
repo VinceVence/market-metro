@@ -25,16 +25,17 @@ for(const clip of Object.values(footage.clips)){
  assert.ok(existsSync(resolve(root,'public',clip.file)));
 }
 const cli=resolve(root,'node_modules/.bin/remotion');
-let previousVoiceEnd=0;
+let previousVoiceEnd=0,previousHold=0;
 for(const scene of plan.scenes){
  const clip=audio.scenes.find(a=>a.id===scene.id);assert.ok(clip);
  const actual=JSON.parse(execFileSync(cli,['ffprobe','-v','quiet','-show_entries','format=duration','-of','json',resolve(root,'public',clip.file)],{cwd:root,encoding:'utf8'}));
  assert.ok(Math.abs(Number(actual.format.duration)-clip.seconds)<.02);
  assert.ok(clip.seconds+.27<=scene.durationInFrames/plan.fps);
- assert.ok(scene.durationInFrames/plan.fps-clip.seconds-.25<1,'Avoid long silent scene tails');
+ assert.ok(scene.durationInFrames/plan.fps-clip.seconds-.25<1+(scene.holdAfterNarration||0),'Scene tail must match the intended reading hold');
  assert.ok(clip.captions.length>0);
  const voiceStart=scene.startFrame/plan.fps+.25;
- if(previousVoiceEnd)assert.ok(voiceStart-previousVoiceEnd>0&&voiceStart-previousVoiceEnd<.3,'Continuous story has a short, non-overlapping narration handoff');
+ if(previousVoiceEnd)assert.ok(voiceStart-previousVoiceEnd>previousHold&&voiceStart-previousVoiceEnd<previousHold+.3,'Narration handoff must match the explicit reading hold');
  previousVoiceEnd=voiceStart+clip.seconds;
+ previousHold=scene.holdAfterNarration||0;
 }
 console.log(JSON.stringify({durationSeconds:plan.durationInFrames/plan.fps,voice:audio.voice,recordedClips:Object.keys(footage.clips).length,capturedFrames:Object.values(footage.clips).reduce((n,c)=>n+c.capturedFrames,0),narrationTracks:audio.scenes.length,paidCalls:0,payments:0}));

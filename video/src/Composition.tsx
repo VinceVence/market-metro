@@ -18,7 +18,7 @@ export const MarketMetroSubmission = () => {
       <Series>
         <Series.Sequence
           name="A normal day for Leo"
-          durationInFrames={301}
+          durationInFrames={483}
           offset={0}
           premountFor={fps}
         >
@@ -26,7 +26,7 @@ export const MarketMetroSubmission = () => {
         </Series.Sequence>
         <Series.Sequence
           name="What Market Metro is"
-          durationInFrames={360}
+          durationInFrames={609}
           offset={-18}
           premountFor={fps}
         >
@@ -34,7 +34,7 @@ export const MarketMetroSubmission = () => {
         </Series.Sequence>
         <Series.Sequence
           name="The right data for the question"
-          durationInFrames={273}
+          durationInFrames={613}
           offset={-18}
           premountFor={fps}
         >
@@ -42,7 +42,7 @@ export const MarketMetroSubmission = () => {
         </Series.Sequence>
         <Series.Sequence
           name="From understanding to action"
-          durationInFrames={250}
+          durationInFrames={455}
           offset={-18}
           premountFor={fps}
         >
@@ -50,7 +50,7 @@ export const MarketMetroSubmission = () => {
         </Series.Sequence>
         <Series.Sequence
           name="Test before sending"
-          durationInFrames={265}
+          durationInFrames={480}
           offset={-18}
           premountFor={fps}
         >
@@ -58,7 +58,7 @@ export const MarketMetroSubmission = () => {
         </Series.Sequence>
         <Series.Sequence
           name="The recommendation becomes a purchase"
-          durationInFrames={293}
+          durationInFrames={411}
           offset={-18}
           premountFor={fps}
         >
@@ -66,7 +66,7 @@ export const MarketMetroSubmission = () => {
         </Series.Sequence>
         <Series.Sequence
           name="A payment you can trace"
-          durationInFrames={312}
+          durationInFrames={527}
           offset={-18}
           premountFor={fps}
         >
@@ -74,7 +74,7 @@ export const MarketMetroSubmission = () => {
         </Series.Sequence>
         <Series.Sequence
           name="What changed"
-          durationInFrames={438}
+          durationInFrames={623}
           offset={-18}
           premountFor={fps}
         >
@@ -82,7 +82,7 @@ export const MarketMetroSubmission = () => {
         </Series.Sequence>
         <Series.Sequence
           name="Follow the full trail"
-          durationInFrames={307}
+          durationInFrames={457}
           offset={-18}
           premountFor={fps}
         >
@@ -90,7 +90,7 @@ export const MarketMetroSubmission = () => {
         </Series.Sequence>
         <Series.Sequence
           name="Agentic commerce that learns"
-          durationInFrames={143}
+          durationInFrames={206}
           offset={-18}
           premountFor={fps}
         >
@@ -104,7 +104,7 @@ export const MarketMetroComposition = () => (
   <Composition
     id="MarketMetroSubmission"
     component={MarketMetroSubmission}
-    durationInFrames={2780}
+    durationInFrames={4702}
     fps={30}
     width={1920}
     height={1080}

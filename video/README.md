@@ -1,6 +1,6 @@
 # Market Metro video preview
 
-An editable **1:33** Remotion composition with recurring illustrated characters, connected story graphics, actual app evidence, an original upbeat music bed and event sound effects and upbeat neural female narration. A quiet shopper gets a useful recommendation, purchases, and receives the item; the film follows the agent tools, PayPal proof and AG Grid evidence behind that outcome.
+An editable **2:37** Remotion composition with recurring illustrated characters, connected story graphics, actual app evidence, an original upbeat music bed and event sound effects and upbeat neural female narration. A quiet shopper gets a useful recommendation, purchases, and receives the item; the film follows the agent tools, PayPal proof and AG Grid evidence behind that outcome.
 
 ## Preview
 
@@ -17,7 +17,7 @@ Open http://localhost:3000/MarketMetroSubmission and press Play. The main video 
 - Thirteen retained clips contain actual app recordings and clean renderer-camera shots: 1,731 frames sampled at roughly 15 fps, encoded at 30 fps. No app UI or financial rows were fabricated. Some recordings are gently retimed to fit the voiceover.
 - The app footage uses the same saved 12-store campaign. Shopper behavior and financial gains are simulated; the $96 receipt is archived native PayPal Sandbox evidence using fictitious funds.
 - Native AG Grid sorting, the decision drill-down, a custom PayPal widget and dashboard resizing were performed in the app. Its layouts are authored, not AI-generated.
-- The narrator is the local Kokoro-82M stock female preset **af_heart**, at 1.07 synthesis speed for most scenes (1.02 for impact). No hosted speech service or voice cloning was used.
+- The narrator is the local Kokoro-82M stock female preset **af_heart**, at 0.98 synthesis speed. No hosted speech service or voice cloning was used.
 - Captions use model phoneme boundaries where these match the transcript; other phrase timings are estimated. Review caption timing before publishing.
 
 ## Merchant, problem, question, introduction
@@ -40,7 +40,7 @@ The original route-M mark is shared by `public/brand/metro.svg` and `../demo/com
 
 ## Sound and pacing
 
-The continuous 120 BPM score and nineteen event cues are original local synthesis (`scripts/score.py`). Music ducks under narration. Birds, doorbell, footsteps, page turns and pop cues are synthesized locally. The measured master gain is shared by every voice and effect, and is already baked into the music bed. `src/Soundtrack.tsx` keeps each cue editable. The story runs 92.7 seconds with eighteen-frame picture dissolves and approximately 0.12–0.15 seconds between adjacent spoken segments. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
+The continuous 120 BPM score and thirteen event cues are original local synthesis (`scripts/score.py`). Music ducks under narration. Its first ten seconds are intentionally sparse, with only one quiet camera cue; the brighter groove builds in afterward. Short transition, notification and payment cues are synthesized locally. The measured master gain is shared by every voice and effect, and is already baked into the music bed. `src/Soundtrack.tsx` keeps each cue editable. The story runs 156.7 seconds with eighteen-frame picture dissolves and explicit reading holds of 0.4–2 seconds between chapters, in addition to the short speech handoff. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
 
 ## Edit and verify
 

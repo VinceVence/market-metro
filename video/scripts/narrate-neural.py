@@ -16,7 +16,7 @@ PLAN = json.loads((ROOT.parent / 'docs/submission-video.json').read_text())
 OUT = ROOT / 'public/narration-neural'
 OUT.mkdir(exist_ok=True)
 VOICE = 'af_heart'
-SPEED = 1.07
+SPEED = .98
 
 options = ort.SessionOptions()
 options.intra_op_num_threads = 2

@@ -51,20 +51,22 @@ chords=[[62,66,69,73],[59,62,66,69],[55,59,62,66],[57,61,64,67]]
 roots=[38,35,31,33]
 for bar in range(int(TOTAL/2)+1):
     at=bar*2; notes=chords[(bar//2)%4]; root=roots[(bar//2)%4]
+    # Sparse music under the opening story; the full groove enters at 10–12 s.
+    energy=float(np.clip((at-8)/4,0,1))
     # A warm offbeat piano/pluck groove, with a restrained repeating hook.
     for j in range(8):
         note=notes[[0,2,1,3,2,1,3,2][j]]+(12 if j in [3,7] else 0)
-        put(music,pluck(note),at+j*.25,.19,(-1 if j%2 else 1)*.4)
-        put(music,hat(),at+j*.25,.25 if j%2 else .15,.3)
+        put(music,pluck(note),at+j*.25,.035+.155*energy,(-1 if j%2 else 1)*.4)
+        put(music,hat(),at+j*.25,(.25 if j%2 else .15)*energy,.3)
     for beat in range(4):
-        put(music,kick(),at+beat*.5,.34)
-        if beat%2:put(music,clap(),at+beat*.5,.44,-.12)
-    for beat in [0,1.5,2,3.5]:put(music,bass(root),at+beat*.5,.25)
+        put(music,kick(),at+beat*.5,.10+.24*energy)
+        if beat%2:put(music,clap(),at+beat*.5,.44*energy,-.12)
+    for beat in [0,1.5,2,3.5]:put(music,bass(root),at+beat*.5,.14+.11*energy)
     for offset in [.5,1.5]:
         for n in notes:put(music,pluck(n,.8),at+offset,.065,-.25)
     if bar%4 in [2,3]:
         for j,n in enumerate([notes[2]+12,notes[1]+12,notes[3]+12]):
-            put(music,pluck(n,.8),at+j*.5,.10,.32)
+            put(music,pluck(n,.8),at+j*.5,.10*energy,.32)
 
 # Small stereo delays add space without a giant reverberant wash.
 for delay,gain in [(int(.125*SR),.16),(int(.25*SR),.09)]:
@@ -129,6 +131,8 @@ events=[('birds',.15,.38),('sweep',3.43,.4),
         ('verified',when('paypal',cue('paypal','capture',3)),.4),('coin',when('impact',cue('impact','sixteen',3)),.33),
         ('sweep',when('ag_grid',.1),.25),('verified',when('close',.15),.28)]
 effect_bus=np.zeros_like(music)
+events=[(name,at,(.14 if name=='sweep' and at<10 else gain))
+        for name,at,gain in events if at>=10 or name=='sweep']
 for name,at,gain in events:put(effect_bus,effects[name],at,gain,np.float32(0))
 mix=voice_bus+music+effect_bus
 master_gain=min(1.0,.94/float(np.max(np.abs(mix))))

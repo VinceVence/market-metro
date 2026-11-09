@@ -17,7 +17,16 @@ function rect(x,y,w,h,fill='#fff',stroke=C.line,rx=14,dash=''){
  svg.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}" stroke="${stroke}" stroke-width="1.6" ${dash?`stroke-dasharray="${dash}"`:''}/>`);
 }
 function arrow(points,color=C.ink,dashed=false,head=true){
- svg.push(`<path d="${points.map(([x,y],i)=>(i?'L':'M')+x+' '+y).join(' ')}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" ${dashed?'stroke-dasharray="8 7"':''} ${head?`marker-end="url(#arrow-${color.slice(1)})"`:''}/>`);
+ let d=`M${points[0][0]} ${points[0][1]}`;
+ for(let i=1;i<points.length-1;i++){
+  const [x,y]=points[i],[px,py]=points[i-1],[nx,ny]=points[i+1];
+  const before=Math.hypot(x-px,y-py),after=Math.hypot(nx-x,ny-y),r=Math.min(8,before/2,after/2);
+  d+=`L${x-(x-px)/before*r} ${y-(y-py)/before*r}Q${x} ${y} ${x+(nx-x)/after*r} ${y+(ny-y)/after*r}`;
+ }
+ const [x,y]=points.at(-1),[px,py]=points.at(-2),length=Math.hypot(x-px,y-py),ux=(x-px)/length,uy=(y-py)/length;
+ d+=`L${x} ${y}`;
+ svg.push(`<path d="${d}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" ${dashed?'stroke-dasharray="8 7"':''}/>`);
+ if(head)svg.push(`<path d="M${x-10*ux-4.5*uy} ${y-10*uy+4.5*ux}L${x} ${y}L${x-10*ux+4.5*uy} ${y-10*uy-4.5*ux}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`);
 }
 function icon(name,x,y,size=44,color=C.ink){
  const raw=fs.readFileSync(path.join(root,'docs/presentations/ontology-paypal/vectors',name+'.svg'),'utf8');
@@ -33,7 +42,6 @@ function node(x,y,label,color,dx=0,dy=35,anchor='middle'){
 }
 
 svg.push(`<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1440" viewBox="0 0 2400 1440" role="img" aria-labelledby="title desc"><title id="title">Market Metro system architecture: fixed campaign rules and ontology-guided planning</title><desc id="desc">Shared seeded commerce data feeds a fixed policy and an ontology-guided LLM workflow. Typed tools train and test candidate models. A deterministic verifier publishes a bound campaign or keeps the incumbent. Both policies are measured through paired settlement; selected saved orders separately receive native PayPal Sandbox receipts, inspected in AG Grid.</desc><defs>`);
-for(const c of Object.values(C))svg.push(`<marker id="arrow-${c.slice(1)}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="${c}"/></marker>`);
 svg.push('</defs><rect width="2400" height="1440" fill="#fff"/>');
 text('MARKET METRO',60,53,22,700,C.blue);text('From commerce data to a tested campaign',60,105,43,700);
 text('Shared inputs. Different decision paths. Comparable outcomes.',60,145,24,400,C.muted);

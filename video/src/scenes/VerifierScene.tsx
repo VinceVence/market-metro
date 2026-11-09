@@ -12,25 +12,41 @@ export const VerifierScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "Before anything launches, the verifier tests both",
+    "text": "Before a campaign launches, the verifier tests",
     "startMs": 250,
-    "endMs": 3129,
+    "endMs": 3079,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "models in matching markets and selects the",
-    "startMs": 3129,
-    "endMs": 5538,
+    "text": "the candidate models in matching development markets.",
+    "startMs": 3079,
+    "endMs": 6828,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "stronger result for merchants and PayPal.",
-    "startMs": 5538,
-    "endMs": 8350,
+    "text": "It checks PayPal and merchant outcomes, then",
+    "startMs": 6828,
+    "endMs": 9515,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "publishes an eligible tested configuration or keeps",
+    "startMs": 9515,
+    "endMs": 12698,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "the current policy.",
+    "startMs": 12698,
+    "endMs": 14325,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

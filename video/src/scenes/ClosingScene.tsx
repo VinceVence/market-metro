@@ -14,23 +14,23 @@ export const ClosingScene=()=>{
   {
     "text": "Market Metro.",
     "startMs": 250,
-    "endMs": 1325,
+    "endMs": 1450,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Agentic commerce that learns, and shows its",
-    "startMs": 1400,
-    "endMs": 3605,
+    "text": "Agentic commerce that learns, tests its ideas,",
+    "startMs": 1525,
+    "endMs": 4325,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "work.",
-    "startMs": 3655,
-    "endMs": 4280,
+    "text": "and shows its work.",
+    "startMs": 4415,
+    "endMs": 5690,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

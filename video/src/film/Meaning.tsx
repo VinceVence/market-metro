@@ -3,7 +3,7 @@ import { Stage, Icon, ramp, useTime, cue, C } from "./Design";
 export function Meaning() {
   const t = useTime(),
     split = cue("ontology", "connects", 2),
-    future = cue("ontology", "signals", 6);
+    future = cue("ontology", "later", 12);
   return (
     <Stage disclosure="Historical training example">
       <div

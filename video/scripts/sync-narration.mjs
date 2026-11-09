@@ -9,7 +9,7 @@ const clips=read('public/footage.json').clips;
 const components=['MarketScene','DemandScene','OntologyScene','PlannerScene','VerifierScene','ShopperScene','PayPalScene','ImpactScene','AGGridScene','ClosingScene'];
 // Short breathing room, with picture overlaps bridging adjacent sentences.
 const overlap=plan.overlapFrames||0;
-const durations=plan.scenes.map(s=>Math.ceil((audio.scenes.find(a=>a.id===s.id).seconds+overlap/plan.fps+.12)*plan.fps));
+const durations=plan.scenes.map(s=>Math.ceil((audio.scenes.find(a=>a.id===s.id).seconds+overlap/plan.fps+.12+(s.holdAfterNarration||0))*plan.fps));
 if(durations.reduce((a,b)=>a+b,0)>=180*plan.fps)throw Error('Natural narration exceeds three minutes; review pacing before changing the timeline.');
 const writes=[];let cursor=0;
 for(const [index,scene] of plan.scenes.entries()){
