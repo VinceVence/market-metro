@@ -12,41 +12,33 @@ export const OntologyScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "An ontology is the shared map underneath.",
+    "text": "The ontology gives data meaning.",
     "startMs": 250,
-    "endMs": 2978,
+    "endMs": 2575,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "It connects shoppers, products and payments, routes",
-    "startMs": 2978,
-    "endMs": 5971,
+    "text": "It connects shoppers, products and payments, and",
+    "startMs": 2650,
+    "endMs": 5425,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "recommendations and inquiries to the right training",
-    "startMs": 5971,
-    "endMs": 8965,
+    "text": "shows the agent which history and signals",
+    "startMs": 5500,
+    "endMs": 7550,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "data, and keeps later outcomes out of",
-    "startMs": 8965,
-    "endMs": 11028,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "model inputs.",
-    "startMs": 11028,
-    "endMs": 12225,
+    "text": "it can trust.",
+    "startMs": 7600,
+    "endMs": 8625,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

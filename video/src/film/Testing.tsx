@@ -15,7 +15,7 @@ export function Testing() {
           letterSpacing: -5,
         }}
       >
-        Test before sending.
+        Prove it. Then launch.
       </div>
       {[data.decision.original, data.decision.chosen].map((m, i) => (
         <div

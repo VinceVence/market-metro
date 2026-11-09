@@ -14,147 +14,133 @@ export const Soundtrack = () => {
         name="birds · event"
         src={staticFile("music/birds.wav")}
         from={Math.round(0.15 * fps)}
-        volume={0.43579967162745775}
+        volume={0.354521796327227}
         premountFor={fps}
       />
       <Audio
         name="sweep · event"
         src={staticFile("music/sweep.wav")}
-        from={Math.round(1.891 * fps)}
-        volume={0.45474748343734717}
+        from={Math.round(3.43 * fps)}
+        volume={0.37318083823918635}
         premountFor={fps}
       />
       <Audio
         name="door · event"
         src={staticFile("music/door.wav")}
-        from={Math.round(2.291 * fps)}
-        volume={0.45474748343734717}
+        from={Math.round(4.15 * fps)}
+        volume={0.37318083823918635}
         premountFor={fps}
       />
       <Audio
         name="steps · event"
         src={staticFile("music/steps.wav")}
-        from={Math.round(6.05 * fps)}
-        volume={0.5210648247719604}
+        from={Math.round(4.096 * fps)}
+        volume={0.37318083823918635}
         premountFor={fps}
       />
       <Audio
         name="page · event"
         src={staticFile("music/page.wav")}
-        from={Math.round(12.165 * fps)}
-        volume={0.568434354296684}
-        premountFor={fps}
-      />
-      <Audio
-        name="page · event"
-        src={staticFile("music/page.wav")}
-        from={Math.round(12.965 * fps)}
-        volume={0.4926431070571261}
-        premountFor={fps}
-      />
-      <Audio
-        name="page · event"
-        src={staticFile("music/page.wav")}
-        from={Math.round(13.765 * fps)}
-        volume={0.4168518598175682}
+        from={Math.round(5.186 * fps)}
+        volume={0.5597712573587794}
         premountFor={fps}
       />
       <Audio
         name="pop · event"
         src={staticFile("music/pop.wav")}
-        from={Math.round(16.884 * fps)}
-        volume={0.4926431070571261}
+        from={Math.round(6.274 * fps)}
+        volume={0.4851350897109422}
         premountFor={fps}
       />
       <Audio
         name="pop · event"
         src={staticFile("music/pop.wav")}
-        from={Math.round(17.64 * fps)}
-        volume={0.4926431070571261}
+        from={Math.round(7.557 * fps)}
+        volume={0.4851350897109422}
         premountFor={fps}
       />
       <Audio
         name="notify · event"
         src={staticFile("music/notify.wav")}
-        from={Math.round(19.35 * fps)}
-        volume={0.3315867066730656}
+        from={Math.round(9.683 * fps)}
+        volume={0.326533233459288}
         premountFor={fps}
       />
       <Audio
         name="verified · event"
         src={staticFile("music/verified.wav")}
-        from={Math.round(21.825 * fps)}
-        volume={0.22737374171867358}
+        from={Math.round(12.158 * fps)}
+        volume={0.22390850294351178}
         premountFor={fps}
       />
       <Audio
         name="notify · event"
         src={staticFile("music/notify.wav")}
-        from={Math.round(39.367 * fps)}
-        volume={0.2084259299087841}
+        from={Math.round(22.833 * fps)}
+        volume={0.20524946103155248}
         premountFor={fps}
       />
       <Audio
         name="sweep · event"
         src={staticFile("music/sweep.wav")}
-        from={Math.round(49.567 * fps)}
-        volume={0.284217177148342}
+        from={Math.round(29.433 * fps)}
+        volume={0.2798856286793897}
         premountFor={fps}
       />
       <Audio
         name="verified · event"
         src={staticFile("music/verified.wav")}
-        from={Math.round(69.133 * fps)}
-        volume={0.2652693653384525}
+        from={Math.round(41.936 * fps)}
+        volume={0.26122658676743044}
         premountFor={fps}
       />
       <Audio
         name="notify · event"
         src={staticFile("music/notify.wav")}
-        from={Math.round(74.658 * fps)}
-        volume={0.3315867066730656}
+        from={Math.round(47.3 * fps)}
+        volume={0.326533233459288}
         premountFor={fps}
       />
       <Audio
         name="coin · event"
         src={staticFile("music/coin.wav")}
-        from={Math.round(77.183 * fps)}
-        volume={0.42632576572251296}
+        from={Math.round(48.05 * fps)}
+        volume={0.4198284430190846}
         premountFor={fps}
       />
       <Audio
         name="verified · event"
         src={staticFile("music/verified.wav")}
-        from={Math.round(79.873 * fps)}
-        volume={0.284217177148342}
+        from={Math.round(50.1 * fps)}
+        volume={0.2798856286793897}
         premountFor={fps}
       />
       <Audio
         name="verified · event"
         src={staticFile("music/verified.wav")}
-        from={Math.round(88.768 * fps)}
-        volume={0.37895623619778934}
+        from={Math.round(57.467 * fps)}
+        volume={0.37318083823918635}
         premountFor={fps}
       />
       <Audio
         name="coin · event"
         src={staticFile("music/coin.wav")}
-        from={Math.round(97.099 * fps)}
-        volume={0.3126388948631762}
+        from={Math.round(66.081 * fps)}
+        volume={0.3078741915473287}
         premountFor={fps}
       />
       <Audio
         name="sweep · event"
         src={staticFile("music/sweep.wav")}
-        from={Math.round(112.133 * fps)}
-        volume={0.23684764762361832}
+        from={Math.round(78.367 * fps)}
+        volume={0.23323802389949144}
         premountFor={fps}
       />
       <Audio
         name="verified · event"
         src={staticFile("music/verified.wav")}
-        from={Math.round(121.95 * fps)}
-        volume={0.2652693653384525}
+        from={Math.round(88.05 * fps)}
+        volume={0.26122658676743044}
         premountFor={fps}
       />
     </>

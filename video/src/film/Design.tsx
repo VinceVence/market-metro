@@ -55,10 +55,9 @@ export function Brand({ opacity = 1 }: { opacity?: number }) {
         display: "flex",
         alignItems: "center",
         gap: 15,
-        padding: "10px 20px 10px 10px",
-        borderRadius: 24,
-        background: "#fff7e9",
-        boxShadow: "0 9px 0 #12334b10,0 15px 35px #12334b16",
+        padding: "8px 15px 8px 8px",
+        borderRadius: 18,
+        background: "#ffffffed",
         opacity,
         zIndex: 5,
       }}
@@ -66,12 +65,12 @@ export function Brand({ opacity = 1 }: { opacity?: number }) {
       <CanvasImage
         src={staticFile("brand/metro.svg")}
         premountFor={fps}
-        style={{ width: 64, height: 64 }}
+        style={{ width: 48, height: 48 }}
       />
       <div
         style={{
           fontFamily: "DM Sans",
-          fontSize: 31,
+          fontSize: 29,
           fontWeight: 750,
           letterSpacing: -1.1,
           color: "#14354e",
@@ -102,9 +101,7 @@ export function Stage({
     <AbsoluteFill
       style={{
         fontFamily: "DM Sans",
-        background: dark
-          ? "radial-gradient(ellipse at 65% 35%,#153f70,#06172e 78%)"
-          : "#ffffff",
+        background: dark ? "#081e35" : "#ffffff",
         color: dark ? "#fff" : C.ink,
         overflow: "hidden",
         opacity: enter ? ramp(t, 0, plan.overlapFrames / fps) : 1,

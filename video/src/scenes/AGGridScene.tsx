@@ -12,33 +12,33 @@ export const AGGridScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "Judges can follow the whole trail in",
+    "text": "A G Grid makes the entire journey",
     "startMs": 250,
-    "endMs": 2438,
+    "endMs": 2175,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "A G Grid, from model training and",
-    "startMs": 2438,
-    "endMs": 4406,
+    "text": "inspectable: the models, the agent's decisions, the",
+    "startMs": 2225,
+    "endMs": 5525,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "the agent's decision to the PayPal receipt,",
-    "startMs": 4406,
-    "endMs": 7104,
+    "text": "payments, and the results.",
+    "startMs": 5575,
+    "endMs": 7375,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "instead of taking the result on trust.",
-    "startMs": 7104,
-    "endMs": 9875,
+    "text": "Open any step and see the evidence.",
+    "startMs": 7450,
+    "endMs": 9750,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

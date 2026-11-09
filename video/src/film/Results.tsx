@@ -1,6 +1,6 @@
 import { CanvasImage, staticFile, useVideoConfig } from "remotion";
 import data from "../../public/data/case.json";
-import { Stage, HeroVideo, Icon, ramp, useTime, cue, usd, C } from "./Design";
+import { Stage, Icon, ramp, useTime, cue, usd, C } from "./Design";
 export function Results() {
   const t = useTime(),
     { fps } = useVideoConfig(),
@@ -9,7 +9,7 @@ export function Results() {
     {
       label: "Extra payment volume",
       value: data.vsFixed.volume,
-      at: cue("impact", "thousand", 5),
+      at: cue("impact", "volume", 4),
       color: C.cyan,
       detail: "Across the same 12-store market",
     },
@@ -30,7 +30,6 @@ export function Results() {
   ];
   return (
     <Stage dark disclosure="Controlled benchmark · same market">
-      <HeroVideo file="film-world" zoom={1.1} opacity={0.07} />
       <div
         style={{
           position: "absolute",

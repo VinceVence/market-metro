@@ -20,6 +20,12 @@ The ontology-inspired data layer connects shoppers, checkout parents, merchant o
 
 The judge walkthrough follows **Market → Agent decisions → Impact**. It begins at Day 1, shows the day-31 evidence and ranking-model change, follows a shopper’s purchase, and ends with the matched fixed-policy comparison and its native PayPal Sandbox receipt. AG Studio dashboards inspect that same campaign.
 
+## System architecture
+
+![Fixed policy and ontology-guided planning share the same market inputs, with typed tools, deterministic publication checks, PayPal receipt reconciliation and AG Grid review.](figures/submission-method/system-comparison.png)
+
+**Figure 1. From commerce data to a tested campaign.** Fixed rules provide the reference policy. The ontology-guided planner can choose the prediction target, training cohort, features and campaign. Local trials return evidence for revision; the deterministic verifier owns publication. Both paths are measured against the same market inputs. The native PayPal path handles selected saved orders separately from the modeled financial comparison. [Vector version and implementation mapping](figures/submission-method/README.md)
+
 ## Why PayPal is central
 
 PayPal is the payment execution and reconciliation layer. A selected $96 warehouse order was mirrored once through PayPal Sandbox. Its completed capture returns a $3.56 fee and $92.44 in test merchant proceeds, tied to the same warehouse order by its custom ID. The receipt is integration evidence, not another simulated sale.
@@ -69,7 +75,7 @@ Use the repository’s Node setup to run the saved walkthrough and AG Studio evi
 
 - Source: https://github.com/VinceVence/market-metro — release branch: `main`; currently private until publication is approved.
 - Runnable demo: local setup in README; no hosted URL is claimed.
-- Video: the 2:00 merchant-led Remotion preview is ready with female narration, captured app footage and sound design. Final MP4 export and public YouTube upload are pending.
+- Video: the 1:33 merchant-led Remotion preview is ready with female narration, captured app footage and sound design. Final MP4 export and public YouTube upload are pending.
 - License: MIT for original code; commercial AG Studio dependencies retain their own terms.
 - Sponsor category: Best Use of AG Grid. General judging and honorable-mention consideration follow the official prize rules.
 

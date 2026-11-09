@@ -14,95 +14,47 @@ export const MarketScene=()=>{
   {
     "text": "It was a normal day for Leo.",
     "startMs": 250,
-    "endMs": 2015,
+    "endMs": 2045,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "He opened his furniture shop, straightened the",
-    "startMs": 2015,
-    "endMs": 4537,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "display, and waited.",
-    "startMs": 4537,
-    "endMs": 6050,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "People hurried past.",
-    "startMs": 6050,
-    "endMs": 7563,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "One checked their phone.",
-    "startMs": 7563,
-    "endMs": 9265,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "Another glanced at the window and kept",
-    "startMs": 9265,
-    "endMs": 11282,
+    "text": "His shop was ready, but customers kept",
+    "startMs": 2045,
+    "endMs": 4096,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "walking.",
-    "startMs": 11282,
-    "endMs": 12165,
+    "startMs": 4096,
+    "endMs": 4994,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Days went by, but the shop stayed",
-    "startMs": 12165,
-    "endMs": 13867,
+    "text": "For days, he faced one question: who",
+    "startMs": 4994,
+    "endMs": 6917,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "quiet.",
-    "startMs": 13867,
-    "endMs": 14623,
+    "text": "should he reach, and what should he",
+    "startMs": 6917,
+    "endMs": 8776,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Leo had data everywhere, yet he still",
-    "startMs": 14623,
-    "endMs": 16577,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "couldn't tell who to reach or what",
-    "startMs": 16577,
-    "endMs": 18342,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "to offer.",
-    "startMs": 18342,
-    "endMs": 19225,
+    "text": "offer?",
+    "startMs": 8776,
+    "endMs": 9545,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

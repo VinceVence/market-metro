@@ -12,49 +12,33 @@ export const PayPalScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "We mirror that order once through PayPal",
+    "text": "PayPal Sandbox captures that exact order and",
     "startMs": 250,
-    "endMs": 2584,
+    "endMs": 2786,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Sandbox.",
-    "startMs": 2584,
-    "endMs": 3544,
+    "text": "sends the receipt back to the warehouse.",
+    "startMs": 2786,
+    "endMs": 5454,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "The completed capture records the fee and",
-    "startMs": 3544,
-    "endMs": 5947,
+    "text": "The payment, fee and merchant proceeds all",
+    "startMs": 5454,
+    "endMs": 7857,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "merchant proceeds, then returns a receipt that",
-    "startMs": 5947,
-    "endMs": 8692,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "links all the way back to the",
-    "startMs": 8692,
-    "endMs": 10270,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "purchase.",
-    "startMs": 10270,
-    "endMs": 11300,
+    "text": "connect to the same purchase.",
+    "startMs": 7857,
+    "endMs": 9925,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

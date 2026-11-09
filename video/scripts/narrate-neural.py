@@ -16,7 +16,7 @@ PLAN = json.loads((ROOT.parent / 'docs/submission-video.json').read_text())
 OUT = ROOT / 'public/narration-neural'
 OUT.mkdir(exist_ok=True)
 VOICE = 'af_heart'
-SPEED = 1.02
+SPEED = 1.07
 
 options = ort.SessionOptions()
 options.intra_op_num_threads = 2
@@ -95,8 +95,9 @@ records = []
 for scene in PLAN['scenes']:
     text = scene['narration'].replace('AG ', 'A G ').replace('LLM', 'L L M').replace('-', ' ')
     delivery = scene.get('delivery', {})
+    speed = delivery.get('speed', SPEED)
     cached = next((r for r in previous.get('scenes', []) if r['id'] == scene['id']), None)
-    if cached and cached.get('words') and cached.get('delivery', {}) == delivery and previous.get('voice') == VOICE and cached.get('speed') == SPEED and cached.get('text') == text and (ROOT / 'public' / cached['file']).exists():
+    if cached and cached.get('words') and cached.get('delivery', {}) == delivery and previous.get('voice') == VOICE and cached.get('speed') == speed and cached.get('text') == text and (ROOT / 'public' / cached['file']).exists():
         records.append(cached)
         print(scene['id'] + ': reused unchanged local voice', flush=True)
         continue
@@ -109,7 +110,7 @@ for scene in PLAN['scenes']:
         q, contour = question_rise(q, rate, question_words[-1]['startMs']/1000-.25,
                                   delivery['riseSemitones'])
         answer, answer_rate, at = speaker.create_timed(rest.strip(), voice=VOICE,
-                    speed=SPEED, lang='en-us', continuous=True, sentence_pause=.13, clause_pause=.06)
+                    speed=speed, lang='en-us', continuous=True, sentence_pause=.10, clause_pause=.05)
         assert rate == answer_rate
         pause = np.zeros(round(delivery['pauseAfterQuestion']*rate), dtype=q.dtype)
         offset=(len(q)+len(pause))/rate
@@ -125,9 +126,9 @@ for scene in PLAN['scenes']:
         sf.write(ROOT/'public/question-take.wav', q, rate)
         (ROOT/'public/question-delivery.json').write_text(json.dumps(contour,indent=2)+'\n')
     else:
-        samples, rate, timings = speaker.create_timed(text, voice=VOICE, speed=SPEED,
+        samples, rate, timings = speaker.create_timed(text, voice=VOICE, speed=speed,
                                                 lang='en-us', continuous=True,
-                                                sentence_pause=.13, clause_pause=.06)
+                                                sentence_pause=.10, clause_pause=.05)
     seconds = len(samples) / rate
     if seconds <= 0:
         raise RuntimeError('Empty narration: ' + scene['id'])
@@ -137,7 +138,7 @@ for scene in PLAN['scenes']:
     samples *= min(.13 / max(rms, 1e-6), .88 / max(float(np.max(np.abs(samples))), 1e-6))
     sf.write(target, samples, rate)
     captions, method, words = segmented if delivery.get('questionTake') else phrase_captions(text, seconds, timings)
-    records.append(dict(id=scene['id'], voice=VOICE, speed=SPEED, delivery=delivery, seconds=seconds,
+    records.append(dict(id=scene['id'], voice=VOICE, speed=speed, delivery=delivery, seconds=seconds,
                         source='Local Kokoro-82M neural speech on CPU', sampleRate=rate,
                         file='narration-neural/' + target.name, text=text, captions=captions, words=words,
                         captionTiming=method, generationSeconds=round(time.monotonic() - started, 2)))

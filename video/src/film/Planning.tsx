@@ -5,7 +5,7 @@ export function Planning() {
   const points = [
     0,
     cue("planner", "agent", 1),
-    cue("planner", "fit", 6),
+    cue("planner", "trains", 5),
     cue("planner", "campaign", 9),
   ];
   return (
@@ -22,7 +22,7 @@ export function Planning() {
           fontWeight: 650,
         }}
       >
-        The agent builds a plan.
+        From insight to action.
       </div>
       <svg
         width="1920"

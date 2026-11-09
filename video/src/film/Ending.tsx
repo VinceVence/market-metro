@@ -42,7 +42,7 @@ export function Ending() {
         <div style={{ fontSize: 54 }}>Agentic commerce that learns.</div>
         <div style={{ display: "flex", gap: 80, marginTop: 30, color: C.blue }}>
           {[
-            ["data", "activity"],
+            ["data", "learns"],
             ["model", "campaigns"],
             ["card", "payments"],
           ].map(([kind, word]) => (

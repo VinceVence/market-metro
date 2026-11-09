@@ -12,41 +12,25 @@ export const VerifierScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "The first idea doesn't get a free",
+    "text": "Before anything launches, the verifier tests both",
     "startMs": 250,
-    "endMs": 1850,
+    "endMs": 3129,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "pass.",
-    "startMs": 1900,
-    "endMs": 2825,
+    "text": "models in matching markets and selects the",
+    "startMs": 3129,
+    "endMs": 5538,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "A verifier tests both rankings in separate",
-    "startMs": 2900,
-    "endMs": 5450,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "development markets and selects the one that",
-    "startMs": 5500,
-    "endMs": 7750,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "earns more while protecting merchants.",
-    "startMs": 7800,
-    "endMs": 10325,
+    "text": "stronger result for merchants and PayPal.",
+    "startMs": 5538,
+    "endMs": 8350,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

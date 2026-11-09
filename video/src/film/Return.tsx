@@ -31,7 +31,7 @@ export function Return() {
           fontWeight: 600,
         }}
       >
-        The recommendation reaches them.
+        A customer comes back.
       </div>
       <Person
         emotion={-0.15 + 1.15 * ramp(t, paid, paid + 0.7)}

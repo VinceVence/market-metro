@@ -70,12 +70,12 @@ for bar in range(int(TOTAL/2)+1):
 for delay,gain in [(int(.125*SR),.16),(int(.25*SR),.09)]:
     music[delay:]+=music[:-delay,::-1].copy()*gain
 music*=min(.17/(np.sqrt(np.mean(music**2))+1e-8),.80/(np.max(np.abs(music))+1e-8))
-time=np.arange(N)/SR; duck=np.ones(N)*.58
+time=np.arange(N)/SR; duck=np.ones(N)*.62
 voice_bus=np.zeros_like(music)
 for scene,voice in zip(PLAN['scenes'],VOICE['scenes']):
     start=scene['startFrame']/PLAN['fps']+.25; end=start+voice['seconds']
     depth=np.minimum(np.clip((time-start+.12)/.12,0,1),np.clip((end+.3-time)/.3,0,1))
-    duck=np.minimum(duck,.58-depth*.26)
+    duck=np.minimum(duck,.62-depth*.22)
     samples,rate=sf.read(ROOT/'public'/voice['file'])
     resampled=np.interp(np.arange(round(len(samples)*SR/rate))*rate/SR,np.arange(len(samples)),samples)
     put(voice_bus,resampled,start,np.sqrt(2))
@@ -101,8 +101,8 @@ door=np.zeros(round(1.2*SR),np.float32)
 for offset,note in [(0,88),(.18,81)]:
     a=pluck(note,.8);i=round(offset*SR);door[i:i+len(a)]+=a*.7
 effects['door']=door
-steps=np.zeros(round(6.8*SR),np.float32)
-for i,at in enumerate(np.arange(0,6.5,.37)):
+steps=np.zeros(round(3.2*SR),np.float32)
+for i,at in enumerate(np.arange(0,2.9,.37)):
     t=clock(.12);step=(noise(.12,700)*np.exp(-t*45)*.12+np.sin(2*np.pi*100*t)*np.exp(-t*40)*.35)*np.minimum(t/.003,1)
     j=round(at*SR);steps[j:j+len(step)]+=step*(.8 if i%2 else 1)
 effects['steps']=steps
@@ -115,12 +115,10 @@ def when(name,offset):return byid[name]['startFrame']/PLAN['fps']+offset
 def cue(name,word,fallback):
     voice=next(s for s in VOICE['scenes'] if s['id']==name)
     return next((w['startMs']/1000 for w in voice.get('words',[]) if ''.join(c for c in w['text'].lower() if c.isalnum())==word),fallback)
-events=[('birds',.15,.46),('sweep',when('market',cue('market','opened',2.5))-.25,.48),
-        ('door',when('market',cue('market','opened',2.5))+.15,.48),
-        ('steps',when('market',cue('market','people',6)),.55),
+events=[('birds',.15,.38),('sweep',3.43,.4),
+        ('door',4.15,.4),
+        ('steps',when('market',cue('market','walking',4)),.4),
         ('page',when('market',cue('market','days',12)),.6),
-        ('page',when('market',cue('market','days',12))+.8,.52),
-        ('page',when('market',cue('market','days',12))+1.6,.44),
         ('pop',when('market',cue('market','who',17))-.45,.52),
         ('pop',when('market',cue('market','what',18))-.45,.52),
         ('notify',when('problem',.25),.35),

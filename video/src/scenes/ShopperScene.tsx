@@ -12,41 +12,41 @@ export const ShopperScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "On day thirty five, the selected recommendation",
+    "text": "Then it happens: a shopper returns.",
     "startMs": 250,
-    "endMs": 2975,
+    "endMs": 2600,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "reaches our shopper.",
-    "startMs": 3050,
+    "text": "They buy the ninety six dollar table,",
+    "startMs": 2650,
     "endMs": 4550,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "They buy a ninety six dollar side",
-    "startMs": 4625,
-    "endMs": 6450,
+    "text": "and it arrives the next day.",
+    "startMs": 4600,
+    "endMs": 6275,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "table, and it arrives the next day;",
-    "startMs": 6500,
-    "endMs": 8890,
+    "text": "The same request went unfilled under fixed",
+    "startMs": 6325,
+    "endMs": 8475,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "fixed rules left that same request unfilled.",
-    "startMs": 8965,
-    "endMs": 12090,
+    "text": "rules.",
+    "startMs": 8525,
+    "endMs": 9275,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

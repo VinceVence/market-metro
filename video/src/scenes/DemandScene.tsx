@@ -20,41 +20,25 @@ export const DemandScene=()=>{
     "pageBreakAfter": true
   },
   {
-    "text": "Meet Market Metro: a simulated commerce environment",
+    "text": "Meet Market Metro, a simulated commerce world",
     "startMs": 2725,
-    "endMs": 6047,
+    "endMs": 5625,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "where AI agents analyze shopper behavior, train",
-    "startMs": 6047,
-    "endMs": 9074,
+    "text": "where AI agents analyze behavior, train models,",
+    "startMs": 5675,
+    "endMs": 9225,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "models, and test marketing campaigns.",
-    "startMs": 9074,
-    "endMs": 11953,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "We measure how those decisions change purchases,",
-    "startMs": 11953,
-    "endMs": 15053,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "merchant contribution, and PayPal payments.",
-    "startMs": 15053,
-    "endMs": 18375,
+    "text": "test campaigns and measure what works.",
+    "startMs": 9275,
+    "endMs": 11525,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
