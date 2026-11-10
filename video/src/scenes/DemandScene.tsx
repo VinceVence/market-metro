@@ -12,49 +12,41 @@ export const DemandScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "So, could AI help Leo decide?",
+    "text": "Could AI help him figure it out,",
     "startMs": 250,
-    "endMs": 2610,
+    "endMs": 2250,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Meet Market Metro: a living, simulated city",
-    "startMs": 3210,
-    "endMs": 6013,
+    "text": "and bring those customers back?",
+    "startMs": 2300,
+    "endMs": 4275,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "where AI agents observe shoppers, train models",
-    "startMs": 6013,
-    "endMs": 9044,
+    "text": "Meet Market Metro: a simulated commerce world",
+    "startMs": 5075,
+    "endMs": 8350,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "and test marketing campaigns.",
-    "startMs": 9044,
-    "endMs": 11469,
+    "text": "where AI agents learn from shopper behavior,",
+    "startMs": 8400,
+    "endMs": 11450,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Then we measure what changed: purchases, merchant",
-    "startMs": 11469,
-    "endMs": 14727,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "contribution and PayPal payment outcomes.",
-    "startMs": 14727,
-    "endMs": 17985,
+    "text": "build campaigns, and show what happens next.",
+    "startMs": 11525,
+    "endMs": 14800,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

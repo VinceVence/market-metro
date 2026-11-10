@@ -9,10 +9,10 @@ export function Planning() {
   const studies = cue("planner", "studies", 2.9),
     demand = cue("planner", "demand", 3.4),
     stock = cue("planner", "stock", 4.6),
-    history = cue("planner", "twenty", 5.7),
+    history = cue("planner", "tools", 3.8),
     train = cue("planner", "train", 8.9),
-    every = cue("planner", "every", 11.1),
-    checkpoint = cue("planner", "checkpoint", 14.3);
+    every = cue("planner", "models", 5.2) + 0.5,
+    checkpoint = cue("planner", "models", 5.2) + 1.6;
   const steps = [
     { icon: "eye", name: "Analyze", sub: "Demand + available stock", at: studies },
     { icon: "clock", name: `${data.decision.window}-day history`, sub: "Chosen training window", at: history },

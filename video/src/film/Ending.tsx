@@ -8,7 +8,7 @@ export function Ending() {
   const t = useTime(),
     { fps } = useVideoConfig(),
     pop = usePop(),
-    questions = cue("close", "questions", 2),
+    questions = cue("close", "guess", 1.2),
     tested = cue("close", "tested", 3),
     market = cue("close", "market", 4.6),
     lockup = ramp(t, market - 0.5, market),
@@ -141,7 +141,7 @@ export function Ending() {
               ["check", "Tests its ideas", "tests"],
               ["grid", "Shows its work", "shows"],
             ].map(([kind, label, word]) => {
-              const at = cue("close", word, 7) - 0.25;
+              const at = cue("close", "learns", 7) - 0.25 + ["learns", "tests", "shows"].indexOf(word) * 0.35;
               return (
                 <div
                   key={kind}

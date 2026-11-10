@@ -4,11 +4,11 @@ import { Stage, Icon, ramp, useTime, usePop, cue, usd, C, Kicker, Headline, Burs
 export function Testing() {
   const t = useTime(),
     pop = usePop(),
-    tests = cue("verifier", "tests", 3.2),
-    checking = cue("verifier", "checking", 6.4),
-    merchant = cue("verifier", "merchant", 7.6),
-    winner = cue("verifier", "winner", 10.8),
-    otherwise = cue("verifier", "otherwise", 12.1);
+    tests = cue("verifier", "verifier", 2.4),
+    checking = cue("verifier", "candidates", 3.4),
+    merchant = cue("verifier", "merchants", 6.6),
+    winner = cue("verifier", "paypal", 7.6) + 0.4,
+    otherwise = cue("verifier", "paypal", 7.6) + 1.4;
   const models = [
     { m: data.decision.original, name: "Two-stage response", color: "#8fa6bf" },
     { m: data.decision.chosen, name: "Boosted trees", color: C.blue },

@@ -41,7 +41,14 @@ def phrase_captions(text, seconds, timings):
             end = t.end
     if start is not None:
         bounds.append((start, end))
-    aligned = len(bounds) == len(words)
+    # Some words are spoken as two phoneme groups ("PayPal" -> "pay pal"); merge them back.
+    spans = [2 if 'paypal' in w.lower() else 1 for w in words]
+    aligned = len(bounds) == sum(spans)
+    if aligned:
+        merged, k = [], 0
+        for n in spans:
+            merged.append((bounds[k][0], bounds[k + n - 1][1])); k += n
+        bounds = merged
     if not aligned:
         weights = [len(w) + (6 if w[-1:] in '.?!' else 0) for w in words]
         total, at = sum(weights), 0

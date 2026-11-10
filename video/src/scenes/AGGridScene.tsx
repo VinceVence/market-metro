@@ -12,41 +12,33 @@ export const AGGridScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "Don't take our word for it.",
+    "text": "Want to see how we got there?",
     "startMs": 250,
-    "endMs": 2320,
+    "endMs": 1850,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "AG Grid lets judges inspect the entire",
-    "startMs": 2320,
-    "endMs": 4687,
+    "text": "Open AG Grid.",
+    "startMs": 1925,
+    "endMs": 3625,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "journey: trained models, agent decisions, campaign outcomes",
-    "startMs": 4687,
-    "endMs": 8605,
+    "text": "Follow the models, the agent's decisions, the",
+    "startMs": 3725,
+    "endMs": 6150,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "and the native PayPal receipt.",
-    "startMs": 8605,
-    "endMs": 10972,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "Open any checkpoint and follow the evidence.",
-    "startMs": 10972,
-    "endMs": 14225,
+    "text": "campaign, and the PayPal receipt.",
+    "startMs": 6200,
+    "endMs": 8775,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

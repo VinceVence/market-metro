@@ -20,10 +20,9 @@ export function Quiet() {
     reveal = ramp(t, intro, intro + 0.85),
     pop = usePop();
   const steps = [
-    ["eye", "Observe", "observe"],
-    ["model", "Train", "train"],
-    ["check", "Test", "test"],
-    ["card", "Measure", "measure"],
+    ["eye", "Learn", "learn"],
+    ["model", "Build campaigns", "build"],
+    ["check", "Show what happens", "show"],
   ];
   return (
     <Stage brand={false}>
@@ -70,7 +69,7 @@ export function Quiet() {
         >
           Could AI help
           <br />
-          Leo decide?
+          Leo figure it out?
         </div>
         <svg width="380" height="22" style={{ marginTop: 18 }}>
           <path
@@ -127,8 +126,8 @@ export function Quiet() {
           label="Market Metro · simulated city"
           enterAt={intro + 0.45}
         />
-        <div style={{ opacity: ramp(t, cue("problem", "observe", 7.3) - 0.2, cue("problem", "observe", 7.3) + 0.4) }}>
-          <Sequence from={Math.round((cue("problem", "observe", 7.3) - 0.3) * fps)} premountFor={fps}>
+        <div style={{ opacity: ramp(t, cue("problem", "learn", 7.3) - 0.2, cue("problem", "learn", 7.3) + 0.4) }}>
+          <Sequence from={Math.round((cue("problem", "learn", 7.3) - 0.3) * fps)} premountFor={fps}>
             <Clip
               file="film-traffic"
               source={[1920, 1080]}
@@ -174,7 +173,7 @@ export function Quiet() {
                   0,
                 ) -
                   1) /
-                3),
+                (steps.length - 1)),
               background: `linear-gradient(90deg, ${C.blue}, ${C.mint})`,
             }}
           />

@@ -12,73 +12,73 @@ export const ImpactScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "So, what changed?",
+    "text": "And across this market, the difference adds",
     "startMs": 250,
-    "endMs": 1734,
+    "endMs": 2825,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Across the same market, sixteen more purchases",
-    "startMs": 1734,
-    "endMs": 4560,
+    "text": "up.",
+    "startMs": 2825,
+    "endMs": 3451,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "were completed and kept.",
-    "startMs": 4560,
-    "endMs": 6467,
+    "text": "Sixteen more retained purchases.",
+    "startMs": 3451,
+    "endMs": 5887,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Payment volume grows by two thousand three",
-    "startMs": 6467,
-    "endMs": 9011,
+    "text": "Over twenty three hundred dollars in additional",
+    "startMs": 5887,
+    "endMs": 8741,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "hundred forty five dollars.",
-    "startMs": 9011,
-    "endMs": 11130,
+    "text": "payment volume.",
+    "startMs": 8741,
+    "endMs": 10133,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Merchant contribution and modeled PayPal net both",
-    "startMs": 11130,
-    "endMs": 14168,
+    "text": "More than a thousand dollars in extra",
+    "startMs": 10133,
+    "endMs": 12290,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "rise, even after AI cost.",
-    "startMs": 14168,
-    "endMs": 16076,
+    "text": "merchant contribution.",
+    "startMs": 12290,
+    "endMs": 14169,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Every number is measured against the same",
-    "startMs": 16076,
-    "endMs": 18549,
+    "text": "And roughly a hundred fifteen dollars more",
+    "startMs": 14169,
+    "endMs": 16675,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "fixed rules.",
-    "startMs": 18549,
-    "endMs": 19750,
+    "text": "in modeled PayPal net, after AI cost.",
+    "startMs": 16675,
+    "endMs": 19250,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

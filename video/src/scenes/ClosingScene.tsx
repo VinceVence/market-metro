@@ -12,41 +12,41 @@ export const ClosingScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "For merchants like Leo, those two questions",
+    "text": "Leo started with a guess.",
     "startMs": 250,
-    "endMs": 2525,
+    "endMs": 2000,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "now have tested answers.",
-    "startMs": 2575,
-    "endMs": 4475,
+    "text": "Now there's a tested campaign, and a",
+    "startMs": 2100,
+    "endMs": 4125,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "trail showing what worked.",
+    "startMs": 4200,
+    "endMs": 5975,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Market Metro.",
-    "startMs": 4575,
-    "endMs": 5775,
+    "startMs": 6075,
+    "endMs": 7175,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Agentic commerce that learns, tests its ideas,",
-    "startMs": 5850,
-    "endMs": 8825,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "and shows its work.",
-    "startMs": 8885,
-    "endMs": 10210,
+    "text": "Agentic commerce that learns.",
+    "startMs": 7250,
+    "endMs": 9475,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

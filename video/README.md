@@ -1,6 +1,6 @@
 # Market Metro video preview
 
-An editable **2:49** Remotion composition with recurring illustrated characters, connected story graphics, actual app evidence, an original upbeat music bed and event sound effects and upbeat neural female narration. A quiet shopper gets a useful recommendation, purchases, and receives the item; the film follows the agent tools, PayPal proof and AG Grid evidence behind that outcome.
+An editable **2:41** Remotion composition with recurring illustrated characters, connected story graphics, actual app evidence, an original upbeat music bed and event sound effects and upbeat neural female narration. A quiet shopper gets a useful recommendation, purchases, and receives the item; the film follows the agent tools, PayPal proof and AG Grid evidence behind that outcome.
 
 ## Preview
 
@@ -28,7 +28,7 @@ The ontology chapter is a metro-style map of shoppers, contacts, products and pa
 
 ## Merchant, problem, question, introduction
 
-The earlier metro-to-shop push-in and merchant reveal are restored. Leo’s problem leads to the question, then Market Metro is introduced as an AI commerce environment. The market view and Observe → Train → Test → Measure sequence explain the product before the next chapter introduces ontology.
+The film opens on an all-vector night street (“People walk in. They look around. Then… they leave.”) and the camera pushes into Leo’s store as day breaks, so the vector art stays sharp at every zoom. Leo’s problem (who to reach, what to offer, clues in what shoppers browse, ask about and buy) leads to the question, then Market Metro is introduced as an AI commerce environment. The market view and Learn → Build campaigns → Show what happens sequence explain the product before the next chapter introduces ontology.
 
 Subtitles, logo, music, question intonation and the measured payoff remain. No new app behavior or benchmark result is claimed by the edit.
 
@@ -46,7 +46,7 @@ The original route-M mark is shared by `public/brand/metro.svg` and `../demo/com
 
 ## Sound and pacing
 
-The continuous 120 BPM score and event cues (including a station chime and train whoosh at each chapter) are original local synthesis (`scripts/score.py`). Music ducks under narration. Its first ten seconds are intentionally sparse, with only one quiet camera cue; the brighter groove builds in afterward. Short transition, notification and payment cues are synthesized locally. The measured master gain is shared by every voice and effect, and is already baked into the music bed. `src/Soundtrack.tsx` keeps each cue editable. The story runs 169.3 seconds with eighteen-frame picture dissolves and explicit reading holds of 0.4–2 seconds between chapters, in addition to the short speech handoff. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
+The continuous 86 BPM half-time score and event cues (including a station chime and soft arrive/depart train whooshes at each chapter) are original local synthesis (`scripts/score.py`). Music ducks under narration. The night-street opening uses only a low pad, three thumps on the hook lines and a riser into the push to Leo's store; the groove arrives with daylight at half energy and reaches full energy after the Market Metro introduction. Narration is played from leveled copies in `public/narration-mix/` so every scene sits at the same loudness. Short transition, notification and payment cues are synthesized locally. The measured master gain is shared by every voice and effect, and is already baked into the music bed. `src/Soundtrack.tsx` keeps each cue editable. The story runs 161.0 seconds with eighteen-frame picture dissolves and explicit reading holds of 0.3–3 seconds between chapters, in addition to the short speech handoff. Narration word timing drives key events; estimated timings remain labeled in the manifest. `npm run score` regenerates the score and a local audio-only mix for checking levels. No APAC files or cloud resources are modified.
 
 ## Edit and verify
 

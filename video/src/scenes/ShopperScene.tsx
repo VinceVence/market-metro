@@ -12,57 +12,89 @@ export const ShopperScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "Day thirty five.",
+    "text": "Then we follow the campaign into the",
     "startMs": 250,
-    "endMs": 1700,
+    "endMs": 1875,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "A recommendation reaches our quiet shopper, sixteen",
-    "startMs": 1775,
-    "endMs": 4850,
+    "text": "market.",
+    "startMs": 1925,
+    "endMs": 2875,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "days after their last purchase.",
-    "startMs": 4900,
-    "endMs": 7025,
+    "text": "Day thirty five.",
+    "startMs": 2950,
+    "endMs": 4325,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "They buy a ninety six dollar side",
-    "startMs": 7100,
-    "endMs": 8950,
+    "text": "A shopper who hasn't purchased in sixteen",
+    "startMs": 4400,
+    "endMs": 6525,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "table, and it arrives the next day.",
-    "startMs": 9000,
-    "endMs": 11530,
+    "text": "days receives a recommendation.",
+    "startMs": 6575,
+    "endMs": 8975,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "A ninety six dollar side table catches",
+    "startMs": 9050,
+    "endMs": 11400,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "their interest.",
+    "startMs": 11450,
+    "endMs": 12400,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "They buy it.",
+    "startMs": 12450,
+    "endMs": 13550,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "The next day, it arrives.",
+    "startMs": 13625,
+    "endMs": 15625,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Under fixed rules, that same request went",
-    "startMs": 11580,
-    "endMs": 14005,
+    "startMs": 15675,
+    "endMs": 18200,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "unfilled.",
-    "startMs": 14080,
-    "endMs": 15080,
+    "startMs": 18275,
+    "endMs": 19350,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

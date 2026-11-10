@@ -7,15 +7,19 @@ export function Payment() {
     { fps } = useVideoConfig(),
     pop = usePop(),
     r = data.receipt,
-    captures = cue("paypal", "captures", 3.2),
-    gross = cue("paypal", "gross", 5.8),
-    fee = cue("paypal", "fee", 7),
-    proceeds = cue("paypal", "merchants", 8.3),
-    each = cue("paypal", "each", 9.3),
-    links = cue("paypal", "links", 10),
-    warehouse = cue("paypal", "warehouse", 10.9),
-    counting = cue("paypal", "counting", 14.3);
-  const phaseB = ramp(t, each - 0.3, each + 0.3);
+    order = cue("paypal", "order", 4.5),
+    follow = cue("paypal", "follow", 8.2),
+    captures = follow - 0.2,
+    gross = cue("paypal", "payment", 7.6),
+    fee = cue("paypal", "fee", 8.6),
+    proceeds = cue("paypal", "receives", 10),
+    each = order - 0.1,
+    links = each + 0.5,
+    warehouse = each + 1.0,
+    counting = cue("paypal", "capture", 6.8) + 0.3;
+  // The trail first (order → capture → warehouse → merchant), then the printed receipt.
+  const phaseB = ramp(t, each - 0.4, each + 0.1) * (1 - ramp(t, follow - 0.5, follow - 0.1)),
+    phaseA = ramp(t, follow - 0.3, follow + 0.2);
   const rows = [
     ["Status", r.status, captures + 0.3, "#22b597"],
     ["Gross", usd(r.gross_cents / 100), gross - 0.3, "#fff"],
@@ -53,7 +57,7 @@ export function Payment() {
       </div>
 
       {/* Phase A — capture and the printed receipt */}
-      <div style={{ position: "absolute", inset: 0, opacity: 1 - phaseB }}>
+      <div style={{ position: "absolute", inset: 0, opacity: phaseA }}>
         <Burst at={captures + 0.9} x={470} y={560} spread={380} count={30} colors={[C.cyan, "#ffc35c", "#ffffff", C.mint]} />
         <div style={{ position: "absolute", left: 115, top: 400 }}>
           <div
@@ -209,7 +213,8 @@ export function Payment() {
           <Icon kind="check" size={30} color="#9ff0d6" /> Traceable · counted once
         </div>
       </div>
-      <Sequence from={Math.round((each - 0.3) * fps)} premountFor={fps}>
+      <div style={{ position: "absolute", inset: 0, opacity: phaseB }}>
+      <Sequence from={Math.round((each - 0.3) * fps)} durationInFrames={Math.max(1, Math.round((follow - each + 0.2) * fps))} premountFor={fps}>
         <Clip
           file="paypal-lineage"
           trim={3}
@@ -218,6 +223,7 @@ export function Payment() {
           label="Market Metro · PayPal receipt lineage"
         />
       </Sequence>
+      </div>
     </Stage>
   );
 }

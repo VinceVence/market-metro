@@ -12,57 +12,49 @@ export const PayPalScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "And the money leaves a trail.",
+    "text": "Here's where PayPal closes the loop.",
     "startMs": 250,
-    "endMs": 2293,
+    "endMs": 2825,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "PayPal Sandbox captures that exact order: ninety",
-    "startMs": 2293,
-    "endMs": 5153,
+    "text": "In our demo, that exact order connects",
+    "startMs": 2900,
+    "endMs": 5275,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "six dollars gross, the provider fee and",
-    "startMs": 5153,
-    "endMs": 7400,
+    "text": "to a PayPal Sandbox capture.",
+    "startMs": 5325,
+    "endMs": 7850,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "the merchant's proceeds.",
-    "startMs": 7400,
-    "endMs": 9307,
+    "text": "We can follow the purchase through the",
+    "startMs": 7900,
+    "endMs": 9475,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Each record links back to the warehouse",
-    "startMs": 9307,
-    "endMs": 11555,
+    "text": "payment, the processing fee, and what the",
+    "startMs": 9525,
+    "endMs": 12045,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "order, so the proof is traceable without",
-    "startMs": 11555,
-    "endMs": 13870,
-    "timestampMs": null,
-    "confidence": null,
-    "pageBreakAfter": true
-  },
-  {
-    "text": "double counting.",
-    "startMs": 13870,
-    "endMs": 15300,
+    "text": "merchant receives.",
+    "startMs": 12095,
+    "endMs": 13645,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

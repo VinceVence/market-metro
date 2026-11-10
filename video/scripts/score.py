@@ -52,7 +52,7 @@ def put(bus,signal,at,level=1,pan=0):
 def word_at(name,word,fallback):
     voice=next(v for v in VOICE['scenes'] if v['id']==name)
     return next((w['startMs']/1000 for w in voice.get('words',[]) if ''.join(c for c in w['text'].lower() if c.isalnum())==word),fallback)
-HELLO=word_at('market','meet',5.7)   # camera push into Leo's store
+HELLO=word_at('market','leo',4.6)   # camera push into Leo's store
 DAY=HELLO+1.3                        # push lands, daylight is up
 
 # Night hook: a low, slow pad instead of the groove, so the opening feels like a question.
@@ -160,18 +160,18 @@ def when(name,offset):return byid[name]['startFrame']/PLAN['fps']+offset
 def cue(name,word,fallback):
     voice=next(s for s in VOICE['scenes'] if s['id']==name)
     return next((w['startMs']/1000 for w in voice.get('words',[]) if ''.join(c for c in w['text'].lower() if c.isalnum())==word),fallback)
-events=[('thump',word_at('market','look',.9)-.05,.45),('thump',word_at('market','gone',2.9)-.05,.5),
-        ('thump',word_at('market','most',3.8)-.05,.55),('riser',DAY-1.6,.32),('hit',DAY-.05,.42),
-        ('steps',when('market',cue('market','walk',6)),.4),
-        ('page',when('market',cue('market','every',6)),.6),
+events=[('thump',word_at('market','walk',.5)-.05,.45),('thump',word_at('market','look',1.4)-.05,.5),
+        ('thump',word_at('market','leave',2.8)-.05,.55),('riser',DAY-1.6,.32),('hit',DAY-.05,.42),
+        ('steps',when('market',cue('market','customers',10)),.4),
+        ('page',when('market',cue('market','clues',19)),.6),
         ('pop',when('market',cue('market','who',17))-.45,.52),
         ('pop',when('market',cue('market','offer',18)-.5)-.45,.52),
         ('notify',when('problem',.25),.35),
         ('verified',when('problem',cue('problem','meet',6)),.24),
         ('notify',when('ontology',2.0),.22),
-        ('verified',when('verifier',cue('verifier','winner',9)),.28),('notify',when('shopper',cue('shopper','recommendation',2)),.35),
+        ('verified',when('verifier',cue('verifier','paypal',8)+.4),.28),('notify',when('shopper',cue('shopper','recommendation',2)),.35),
         ('coin',when('shopper',cue('shopper','buy',4)),.45),('verified',when('shopper',cue('shopper','arrives',7)),.3),
-        ('verified',when('paypal',cue('paypal','captures',3)),.4),('coin',when('impact',cue('impact','sixteen',3)),.33),
+        ('verified',when('paypal',cue('paypal','follow',8)),.4),('coin',when('impact',cue('impact','sixteen',3.5)),.33),
         ('verified',when('close',.15),.28)]
 events+=[('station',when(s['id'],-.1 if i else .05),.3) for i,s in enumerate(PLAN['scenes'][1:])]
 events+=[(n,when(s['id'],at),g) for s in PLAN['scenes'][2:-1] for n,at,g in [('arrive',-ARRIVE-.1,.2),('depart',DWELL-.1,.18)]]

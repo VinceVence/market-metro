@@ -5,8 +5,8 @@
   "width": 1920,
   "height": 1080,
   "fps": 30,
-  "durationInFrames": 5188,
-  "targetSeconds": 172.93333333333334,
+  "durationInFrames": 4831,
+  "targetSeconds": 161.03333333333333,
   "rendered": false,
   "audioGenerated": true,
   "style": {
@@ -32,7 +32,7 @@
     "payments": 0,
     "voiceId": "af_heart",
     "previewURL": "http://localhost:3000/MarketMetroSubmission",
-    "story": "Earlier metro-to-shop zoom restored. Leo’s problem and question lead to a definition of Market Metro as an AI commerce environment. Ontology is explained only after that introduction.",
+    "story": "Earlier metro-to-shop zoom restored. Leo's problem and question lead to a definition of Market Metro as an AI commerce environment. Ontology is explained only after that introduction.",
     "reference": "Original animated-infographic treatment: recurring characters, visual cause and effect, continuous narration. APAC footage remains read-only inspiration.",
     "soundDesign": "Sparse first-ten-second music lead-in with one quiet transition; fuller groove builds after ten seconds. Later action cues retained and mastered below clipping.",
     "claimBoundary": "Ontology training safeguards are shown as implemented capabilities; primary campaign gains are not attributed solely to ontology.",
@@ -46,11 +46,11 @@
     {
       "id": "market",
       "startFrame": 0,
-      "durationInFrames": 835,
+      "durationInFrames": 898,
       "title": "A normal day for Leo",
       "url": "/video-capture.html",
       "captureAction": "Open on an all-vector night street hook (They look. They leave. Nobody knows why.), then push the camera into Leo's store as day breaks.",
-      "narration": "Shoppers look around, pick things up, and then they're gone. Most shops never find out why. Meet Leo. He runs a small furniture shop in a busy city. Every day, shoppers walk by, browse a little, and leave. Leo has clues: what they looked at, what they almost bought, and how they paid. But those clues live in different places, so every campaign is a guess. Who should he reach? And what should he offer?",
+      "narration": "People walk in. They look around. Then… they leave. For Leo, it's becoming a familiar story. He runs a furniture shop in a busy neighborhood. The products are ready. The customers are out there. But after days of trying to bring them back, he's still guessing. Who should he reach? And what should he offer? The clues are already there, in what shoppers browse, what they ask about, and what they buy. Leo just needs a way to connect them.",
       "onScreen": [
         "They look. They leave. Nobody knows why.",
         "A normal day.",
@@ -61,24 +61,24 @@
       "evidence": [
         "demo/data/judge-reactivation.json"
       ],
-      "holdAfterNarration": 0.3,
+      "holdAfterNarration": 1.2,
       "delivery": {
         "speed": 0.87,
         "sentencePause": 0.3,
         "clausePause": 0.08,
         "pauseBefore": {
-          "Meet": 0.9
+          "For": 0.9
         }
       }
     },
     {
       "id": "problem",
-      "startFrame": 817,
-      "durationInFrames": 560,
+      "startFrame": 880,
+      "durationInFrames": 464,
       "title": "What Market Metro is",
       "url": "/judge.html",
       "captureAction": "Introduce Market Metro as an AI commerce environment using the actual market view and Observe, Train, Test and Measure stages. Do not show ontology as the product itself.",
-      "narration": "So, could AI help Leo decide? Meet Market Metro: a living, simulated city where AI agents observe shoppers, train models and test marketing campaigns. Then we measure what changed: purchases, merchant contribution and PayPal payment outcomes.",
+      "narration": "Could AI help him figure it out, and bring those customers back? Meet Market Metro: a simulated commerce world where AI agents learn from shopper behavior, build campaigns, and show what happens next.",
       "onScreen": [
         "Market Metro",
         "A commerce world for AI agents",
@@ -91,21 +91,22 @@
       ],
       "delivery": {
         "questionTake": true,
-        "questionSpeed": 0.92,
-        "pauseAfterQuestion": 0.6,
+        "questionSpeed": 0.9,
+        "pauseAfterQuestion": 0.8,
         "riseSemitones": 4,
-        "captionSegments": true
+        "captionSegments": true,
+        "speed": 0.92
       },
       "holdAfterNarration": 0.5
     },
     {
       "id": "ontology",
-      "startFrame": 1359,
-      "durationInFrames": 621,
+      "startFrame": 1326,
+      "durationInFrames": 722,
       "title": "The right data for the question",
       "url": "/judge.html#ontology",
       "captureAction": "The ontology routes recommendation and inquiry history separately, while distinguishing input features from later outcome labels.",
-      "narration": "First, the data needs meaning. Our ontology connects shoppers, products, contacts and payments, so every prediction learns from the right examples. Recommendations and inquiries never get mixed up. And one strict rule: earlier signals can be inputs, but later outcomes are kept for labels and evaluation.",
+      "narration": "First, we give the agent a map. That's our ontology. It connects shoppers, products, interactions, and payments into one understandable story. It keeps a product recommendation separate from a general inquiry, and makes sure one purchase isn't counted twice. Now the agent has a clearer picture of what happened, which examples to learn from, and who might be ready to return.",
       "onScreen": [
         "1,230 product contacts",
         "1,532 inquiries",
@@ -117,16 +118,21 @@
         "docs/ontology/training/README.md",
         "demo/data/ontology-training.json"
       ],
-      "holdAfterNarration": 0.5
+      "holdAfterNarration": 0.6,
+      "delivery": {
+        "speed": 0.92,
+        "sentencePause": 0.25,
+        "clausePause": 0.06
+      }
     },
     {
       "id": "planner",
-      "startFrame": 1962,
-      "durationInFrames": 497,
+      "startFrame": 2030,
+      "durationInFrames": 280,
       "title": "From understanding to action",
       "url": "/analytics.html?run=judge-demo&view=decisions",
       "captureAction": "Recurring illustrated characters and connected actions, with saved app recordings for technical and payment evidence.",
-      "narration": "Now the planner agent gets to work. It studies demand and available stock, picks twenty eight days of history, and asks local tools to train two candidate models. Every decision, tool call and result becomes a checkpoint you can open.",
+      "narration": "It studies demand, checks available stock, and uses local tools to train two models.",
       "onScreen": [
         "Analyze → Train → Test → Campaign"
       ],
@@ -134,48 +140,63 @@
         "demo/data/judge-intelligence.json",
         "demo/data/judge-reactivation.json"
       ],
-      "holdAfterNarration": 0.4
+      "holdAfterNarration": 3,
+      "delivery": {
+        "speed": 0.92,
+        "sentencePause": 0.25,
+        "clausePause": 0.06
+      }
     },
     {
       "id": "verifier",
-      "startFrame": 2441,
-      "durationInFrames": 468,
+      "startFrame": 2292,
+      "durationInFrames": 350,
       "title": "Test before sending",
       "url": "/judge.html",
       "captureAction": "Recurring illustrated characters and connected actions, with saved app recordings for technical and payment evidence.",
-      "narration": "But nothing ships on a hunch. The verifier tests both models in matching development markets, checking PayPal and merchant outcomes side by side. Only a tested winner is published; otherwise, the current policy stays.",
+      "narration": "Before a campaign goes out, the verifier checks the candidates against fixed rules. Which one produces better outcomes for merchants and PayPal?",
       "onScreen": [
         "Two-stage response vs boosted trees"
       ],
       "evidence": [
         "demo/data/judge-reactivation.json"
       ],
-      "holdAfterNarration": 0.5
+      "holdAfterNarration": 2,
+      "delivery": {
+        "speed": 0.92,
+        "sentencePause": 0.25,
+        "clausePause": 0.06
+      }
     },
     {
       "id": "shopper",
-      "startFrame": 2891,
-      "durationInFrames": 470,
+      "startFrame": 2624,
+      "durationInFrames": 602,
       "title": "The recommendation becomes a purchase",
       "url": "/judge.html",
       "captureAction": "Recurring illustrated characters and connected actions, with saved app recordings for technical and payment evidence.",
-      "narration": "Day thirty five. A recommendation reaches our quiet shopper, sixteen days after their last purchase. They buy a ninety six dollar side table, and it arrives the next day. Under fixed rules, that same request went unfilled.",
+      "narration": "Then we follow the campaign into the market. Day thirty-five. A shopper who hasn't purchased in sixteen days receives a recommendation. A ninety-six-dollar side table catches their interest. They buy it. The next day, it arrives. Under fixed rules, that same request went unfilled.",
       "onScreen": [
         "Recommended → purchased → delivered"
       ],
       "evidence": [
         "demo/data/judge-reactivation.json"
       ],
-      "holdAfterNarration": 0.4
+      "holdAfterNarration": 0.6,
+      "delivery": {
+        "speed": 0.92,
+        "sentencePause": 0.25,
+        "clausePause": 0.06
+      }
     },
     {
       "id": "paypal",
-      "startFrame": 3343,
-      "durationInFrames": 481,
+      "startFrame": 3208,
+      "durationInFrames": 462,
       "title": "A payment you can trace",
       "url": "/analytics.html?run=judge-demo&view=payments",
       "captureAction": "Recurring illustrated characters and connected actions, with saved app recordings for technical and payment evidence.",
-      "narration": "And the money leaves a trail. PayPal Sandbox captures that exact order: ninety six dollars gross, the provider fee and the merchant's proceeds. Each record links back to the warehouse order, so the proof is traceable without double counting.",
+      "narration": "Here's where PayPal closes the loop. In our demo, that exact order connects to a PayPal Sandbox capture. We can follow the purchase through the payment, the processing fee, and what the merchant receives.",
       "onScreen": [
         "$96 capture · $3.56 fee · $92.44 proceeds"
       ],
@@ -183,16 +204,21 @@
         "demo/data/judge-reactivation.json",
         "demo/data/judge-intelligence.json"
       ],
-      "holdAfterNarration": 0.6
+      "holdAfterNarration": 1.6,
+      "delivery": {
+        "speed": 0.92,
+        "sentencePause": 0.25,
+        "clausePause": 0.06
+      }
     },
     {
       "id": "impact",
-      "startFrame": 3806,
-      "durationInFrames": 622,
+      "startFrame": 3652,
+      "durationInFrames": 607,
       "title": "What changed",
       "url": "/analytics.html?run=judge-demo&view=profits",
       "captureAction": "Show fixed 627 vs agent 643, sixteen highlighted payment icons, and incremental payment volume, merchant contribution and modeled PayPal net.",
-      "narration": "So, what changed? Across the same market, sixteen more purchases were completed and kept. Payment volume grows by two thousand three hundred forty-five dollars. Merchant contribution and modeled PayPal net both rise, even after AI cost. Every number is measured against the same fixed rules.",
+      "narration": "And across this market, the difference adds up. Sixteen more retained purchases. Over twenty-three hundred dollars in additional payment volume. More than a thousand dollars in extra merchant contribution. And roughly a hundred fifteen dollars more in modeled PayPal net, after AI cost.",
       "onScreen": [
         "627 fixed → 643 agent",
         "+16 purchases kept",
@@ -205,17 +231,19 @@
         "demo/data/judge-intelligence.json"
       ],
       "delivery": {
-        "speed": 0.98
+        "speed": 0.92,
+        "sentencePause": 0.25,
+        "clausePause": 0.06
       },
       "holdAfterNarration": 0.8
     },
     {
       "id": "ag_grid",
-      "durationInFrames": 448,
+      "durationInFrames": 283,
       "title": "Follow the full trail",
       "url": "/analytics.html?run=judge-demo&view=models",
       "captureAction": "Recurring illustrated characters and connected actions, with saved app recordings for technical and payment evidence.",
-      "narration": "Don't take our word for it. AG Grid lets judges inspect the entire journey: trained models, agent decisions, campaign outcomes and the native PayPal receipt. Open any checkpoint and follow the evidence.",
+      "narration": "Want to see how we got there? Open AG Grid. Follow the models, the agent's decisions, the campaign, and the PayPal receipt.",
       "onScreen": [
         "Models → decisions → payments"
       ],
@@ -246,16 +274,21 @@
           "action": "Dashboard layout resize"
         }
       ],
-      "startFrame": 4410,
-      "holdAfterNarration": 0.5
+      "startFrame": 4241,
+      "holdAfterNarration": 0.5,
+      "delivery": {
+        "speed": 0.92,
+        "sentencePause": 0.25,
+        "clausePause": 0.06
+      }
     },
     {
       "id": "close",
-      "durationInFrames": 348,
+      "durationInFrames": 325,
       "title": "Agentic commerce that learns",
       "url": "/judge.html",
       "captureAction": "Recurring illustrated characters and connected actions, with saved app recordings for technical and payment evidence.",
-      "narration": "For merchants like Leo, those two questions now have tested answers. Market Metro. Agentic commerce that learns, tests its ideas, and shows its work.",
+      "narration": "Leo started with a guess. Now there's a tested campaign, and a trail showing what worked. Market Metro. Agentic commerce that learns.",
       "onScreen": [
         "Market Metro",
         "Agentic commerce that learns."
@@ -263,8 +296,13 @@
       "evidence": [
         "demo/data/judge-reactivation.json"
       ],
-      "startFrame": 4840,
-      "holdAfterNarration": 1.2
+      "startFrame": 4506,
+      "holdAfterNarration": 1.2,
+      "delivery": {
+        "speed": 0.92,
+        "sentencePause": 0.25,
+        "clausePause": 0.06
+      }
     }
   ],
   "uploadDraft": {
