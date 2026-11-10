@@ -1,7 +1,7 @@
 import {mountTutorial} from '../tutorial.mjs';
 import {LIGHT_THEME} from './theme.mjs';
 import {studioWidgets} from './widgets.mjs';
-import {esc} from '../garden/ui.mjs';
+import {esc,api} from '../garden/ui.mjs';
 import {createRunInspector} from '../commerce/run-inspector.mjs';
 const $=id=>document.getElementById(id),usd=(v,d=2)=>v==null?'—':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:d,minimumFractionDigits:d}).format(v),count=v=>v==null?'—':Number(v).toLocaleString();
 const colors=['#0070e0','#168470','#885ec0','#b78024'];
@@ -23,7 +23,7 @@ async function loadOntology(){
 
 let data=null,studio=null,current='overview',filter=null,selectedDay=null,loadId=0;
 const graph=createRunInspector({ontology:$('ontology-panel'),workflow:$('workflow-panel'),detail:openDetail,onNavigate:()=>navigate('decisions')});
-const get=async u=>{const r=await fetch(u);if(!r.ok){let j=await r.json();throw Error(j.error?.message||'Could not load this market.');}return r.json();};
+const get=api;
 const icon=k=>k==='payments'?'<span class="dash-icon"><img class="paypal-symbol" src="/figures/planner-v23/assets/paypal.svg" alt=""></span>':`<span class="dash-icon"><svg viewBox="0 0 24 24" aria-hidden="true">${paths[k]}</svg></span>`;
 $('dash-nav').innerHTML=Object.keys(pages).map((k,i)=>`<button class="dash-link" data-page="${k}" style="--tint:${colors[i%4]}">${icon(k)}${pages[k][0]}</button>`).join('');
 for(const b of document.querySelectorAll('[data-page]'))b.onclick=()=>navigate(b.dataset.page);

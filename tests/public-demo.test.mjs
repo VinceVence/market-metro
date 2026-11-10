@@ -3,6 +3,14 @@ import assert from 'node:assert/strict';
 import {createSupplyYardServer} from '../scripts/serve.mjs';
 import {createPayPalSandbox} from '../scripts/paypal-sandbox.mjs';
 import {publicStartAllowed} from '../scripts/public-demo.mjs';
+import {api} from '../demo/garden/ui.mjs';
+
+test('upstream busy responses are readable and mutations are never automatically retried',async t=>{
+ let attempts=0;
+ t.mock.method(globalThis,'fetch',async()=>{attempts++;return new Response('Rate exceeded.',{status:429});});
+ await assert.rejects(()=>api('/api/paypal/orders',{amount:100}),/shared demo is busy/);
+ assert.equal(attempts,1);
+});
 
 test('public demo serves evidence with security headers and rejects provider, export and secret paths',async()=>{
  const paypal=await createPayPalSandbox({clientId:'',clientSecret:'',storePath:null});

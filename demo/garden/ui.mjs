@@ -14,7 +14,9 @@ export async function api(path, input, options = {}) {
     headers: {'Content-Type': 'application/json', 'X-Supply-Yard': 'sandbox'},
     body: JSON.stringify(input)
   });
-  const result = await response.json();
+  let result;
+  try { result = await response.json(); }
+  catch { throw new Error([429,503].includes(response.status)?'The shared demo is busy. Please wait a moment and try again.':'The data service could not return this view. Please refresh.'); }
   if (!response.ok) throw new Error(result.error?.message || 'Local request failed.');
   return result;
 }

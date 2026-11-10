@@ -6,7 +6,7 @@
 
 The supported release path is the saved judge walkthrough, AG Studio intelligence, ontology verification and a new seeded market using the recorded policy. The frozen economy and benchmark values were not changed. Historical experiments remain in the repository; they are not new performance claims or publicly callable provider workflows.
 
-- **71 submission checks passed:** 27 demo/ontology/scale checks and 44 package, navigation, AG Grid, payment-boundary and public-server checks.
+- **72 submission checks passed:** 27 demo/ontology/scale checks and 45 package, navigation, AG Grid, payment-boundary and public-server checks.
 - The clean hosted-mode HTTP run completed **126 days**, held an ambiguous mapping at day 30, resumed after correction and settled with **zero model calls, zero native payments and zero unpaid liabilities**. It produced 605 retained purchases on its own seed. This checks execution; it is not a new advertised improvement result.
 - The user's latest Remotion cut is **161.03 seconds (2:41)**. TypeScript and video validation pass. Its source/media hashes match the pre-audit backup. Narration text documentation was synchronized; no voiceover or visual changes were made.
 - The obsolete 350-word heuristic was removed from the package test. Actual measured duration still enforces the competition's three-minute rule; every scene must finish its narration and bind to existing evidence.
@@ -20,6 +20,7 @@ The supported release path is the saved judge walkthrough, AG Studio intelligenc
 3. Limited public settings to the saved policy. Fresh LLM and payment controls cannot be enabled by sending a forged request.
 4. Added an unprivileged container, tracked-file deployment packaging, isolated build/runtime identities, immutable image deployment and GitHub submission CI.
 5. Preserved all user video edits and all existing financial benchmark artifacts.
+6. The first hosted run reached settlement but exposed brief Cloud Run 429s during concurrent dashboard requests. Increased request concurrency from 8 to 32 while retaining one maximum instance, added readable upstream-busy messages and made public settings fail closed. Payment requests are never automatically retried.
 
 ## Official requirements checked
 

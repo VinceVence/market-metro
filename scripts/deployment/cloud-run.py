@@ -104,7 +104,7 @@ def deploy():
     digest=b['results']['images'][0]['digest']; image=saved['image'].split(':')[0]+'@'+digest
     url=f'https://run.googleapis.com/v2/{BASE}/services/{SERVICE}'
     body={'ingress':'INGRESS_TRAFFIC_ALL','template':{'serviceAccount':RUN_SA,
-          'scaling':{'minInstanceCount':0,'maxInstanceCount':1},'maxInstanceRequestConcurrency':8,'timeout':'300s',
+          'scaling':{'minInstanceCount':0,'maxInstanceCount':1},'maxInstanceRequestConcurrency':32,'timeout':'300s',
           'containers':[{'image':image,'ports':[{'containerPort':8080}],
           'resources':{'limits':{'cpu':'1','memory':'2Gi'},'cpuIdle':True,'startupCpuBoost':False},
           'env':[{'name':'PUBLIC_DEMO','value':'true'}],

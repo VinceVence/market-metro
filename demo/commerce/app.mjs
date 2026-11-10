@@ -10,7 +10,7 @@ import {esc,money,api} from '../garden/ui.mjs';
 import {LIGHT_THEME} from '../studio/theme.mjs';
 const $=id=>document.getElementById(id),roles=[['Analyst','Observed signals','AN'],['Scientist','Local model training','DS'],['Strategist','Campaign decisions','CS'],['Reviewer','Independent approval','RV'],['PayPal','Sandbox settlement','PP']];
 const autonomyRoles=[['Market analyst','Commerce opportunities','AN'],['ML scientist','Training and validation','ML'],['Commerce manager','Campaign proposals','CM'],['PayPal','Payments and reconciliation','PP']];
-const runtime=await api('/api/runtime').catch(()=>({publicDemo:false}));
+const runtime=await api('/api/runtime').catch(()=>({publicDemo:true}));
 const judgeMode=new URL(location.href).searchParams.get('judge')==='1';
 const requestedSession=new URL(location.href).searchParams.get('session');if(requestedSession?.startsWith('AUTONOMY-'))document.querySelectorAll('[data-intelligence-link]').forEach(a=>a.href='/analytics.html?session='+encodeURIComponent(requestedSession));
 const sessionPath=id=>'/api/market/'+(id?.startsWith('AUTONOMY-')?'autonomy/':'room/')+id;
