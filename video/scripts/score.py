@@ -147,7 +147,7 @@ hit=np.zeros(round(1.6*SR),np.float32); k=kick(); hit[:len(k)]+=k*.6
 for j,n in enumerate([74,78,81,86]):
     a=pluck(n,1.3); i=round(j*.035*SR); hit[i:i+len(a)]+=a*.32
 effects['hit']=hit/(np.max(np.abs(hit))+1e-8)*.8
-ARRIVE,DWELL,DEPART=.4,.04,.29
+ARRIVE,DWELL,DEPART=1.05,.8,1.0
 t=clock(ARRIVE+.3); w=noise(ARRIVE+.3,320); effects['arrive']=w*np.minimum(t/.25,1)*np.clip(1-t/(ARRIVE+.3),0,1)**1.6
 effects['arrive']/=np.max(np.abs(effects['arrive']))/.5
 t=clock(DEPART+.2); w=noise(DEPART+.2,320); effects['depart']=w*(t/(DEPART+.2))**2*np.minimum((t[-1]-t)/.3,1)
@@ -160,12 +160,12 @@ def when(name,offset):return byid[name]['startFrame']/PLAN['fps']+offset
 def cue(name,word,fallback):
     voice=next(s for s in VOICE['scenes'] if s['id']==name)
     return next((w['startMs']/1000 for w in voice.get('words',[]) if ''.join(c for c in w['text'].lower() if c.isalnum())==word),fallback)
-events=[('thump',word_at('market','look',.9)-.05,.18),('thump',word_at('market','leave',2.9)-.05,.18),
-        ('riser',DAY-1.6,.16),('hit',DAY-.05,.22),
+events=[('thump',word_at('market','look',.9)-.05,.45),('thump',word_at('market','gone',2.9)-.05,.5),
+        ('thump',word_at('market','most',3.8)-.05,.55),('riser',DAY-1.6,.32),('hit',DAY-.05,.42),
         ('steps',when('market',cue('market','walk',6)),.4),
         ('page',when('market',cue('market','every',6)),.6),
         ('pop',when('market',cue('market','who',17))-.45,.52),
-        ('pop',when('market',cue('market','with',18))-.45,.32),
+        ('pop',when('market',cue('market','offer',18)-.5)-.45,.52),
         ('notify',when('problem',.25),.35),
         ('verified',when('problem',cue('problem','meet',6)),.24),
         ('notify',when('ontology',2.0),.22),
@@ -173,8 +173,8 @@ events=[('thump',word_at('market','look',.9)-.05,.18),('thump',word_at('market',
         ('coin',when('shopper',cue('shopper','buy',4)),.45),('verified',when('shopper',cue('shopper','arrives',7)),.3),
         ('verified',when('paypal',cue('paypal','captures',3)),.4),('coin',when('impact',cue('impact','sixteen',3)),.33),
         ('verified',when('close',.15),.28)]
-events+=[('station',when(s['id'],-.1),.12) for s in PLAN['scenes'] if s['id'] in ('ontology','shopper','impact')]
-events+=[(n,when(s['id'],at),g) for s in PLAN['scenes'][2:-1] for n,at,g in [('arrive',-ARRIVE-.1,.12),('depart',DWELL-.1,.08)]]
+events+=[('station',when(s['id'],-.1 if i else .05),.3) for i,s in enumerate(PLAN['scenes'][1:])]
+events+=[(n,when(s['id'],at),g) for s in PLAN['scenes'][2:-1] for n,at,g in [('arrive',-ARRIVE-.1,.2),('depart',DWELL-.1,.18)]]
 effect_bus=np.zeros_like(music)
 events=[(name,at,(.14 if name=='sweep' and at<10 else gain))
         for name,at,gain in events if at>=10 or name in ('sweep','thump','riser','hit','steps','page','pop')]
@@ -195,5 +195,5 @@ meta={'bpm':BPM,'seconds':TOTAL,'original':True,'providerCalls':0,'masterGain':m
 (OUT/'sound-design.json').write_text(json.dumps(meta,indent=2)+'\n')
 # Keep each cue independently editable in the Studio timeline.
 nodes='\n'.join('  <Audio name="'+name+' · event" src={staticFile("music/'+name+'.wav")} from={Math.round('+str(round(at,3))+'*fps)} volume={'+str(gain*master_gain)+'} premountFor={fps}/>' for name,at,gain in events)
-(ROOT/'src/Soundtrack.tsx').write_text('import {Audio} from "@remotion/media";\nimport {staticFile,useVideoConfig} from "remotion";\nexport const Soundtrack=()=>{const {fps}=useVideoConfig();return <>\n  <Audio name="Upbeat original score · 86 BPM · voice ducking" src={staticFile("music/upbeat-score.mp3")} volume={1} premountFor={fps}/>\n'+nodes+'\n</>;};\n')
+(ROOT/'src/Soundtrack.tsx').write_text('import {Audio} from "@remotion/media";\nimport {staticFile,useVideoConfig} from "remotion";\nexport const Soundtrack=()=>{const {fps}=useVideoConfig();return <>\n  <Audio name="Upbeat original score · 120 BPM · voice ducking" src={staticFile("music/upbeat-score.mp3")} volume={1} premountFor={fps}/>\n'+nodes+'\n</>;};\n')
 print(json.dumps(meta))

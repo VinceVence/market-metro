@@ -19,70 +19,70 @@ export const MarketMetroSubmission = () => {
       <Series>
         <Series.Sequence
           name="A normal day for Leo"
-          durationInFrames={605} offset={0}
+          durationInFrames={835} offset={0}
           premountFor={fps}
         >
           <MarketScene />
         </Series.Sequence>
         <Series.Sequence
           name="What Market Metro is"
-          durationInFrames={473} offset={-18}
+          durationInFrames={560} offset={-18}
           premountFor={fps}
         >
           <DemandScene />
         </Series.Sequence>
         <Series.Sequence
           name="The right data for the question"
-          durationInFrames={635} offset={-18}
+          durationInFrames={621} offset={-18}
           premountFor={fps}
         >
           <OntologyScene />
         </Series.Sequence>
         <Series.Sequence
           name="From understanding to action"
-          durationInFrames={369} offset={-18}
+          durationInFrames={497} offset={-18}
           premountFor={fps}
         >
           <PlannerScene />
         </Series.Sequence>
         <Series.Sequence
           name="Test before sending"
-          durationInFrames={465} offset={-18}
+          durationInFrames={468} offset={-18}
           premountFor={fps}
         >
           <VerifierScene />
         </Series.Sequence>
         <Series.Sequence
           name="The recommendation becomes a purchase"
-          durationInFrames={478} offset={-18}
+          durationInFrames={470} offset={-18}
           premountFor={fps}
         >
           <ShopperScene />
         </Series.Sequence>
         <Series.Sequence
           name="A payment you can trace"
-          durationInFrames={455} offset={-18}
+          durationInFrames={481} offset={-18}
           premountFor={fps}
         >
           <PayPalScene />
         </Series.Sequence>
         <Series.Sequence
           name="What changed"
-          durationInFrames={607} offset={-18}
+          durationInFrames={622} offset={-18}
           premountFor={fps}
         >
           <ImpactScene />
         </Series.Sequence>
         <Series.Sequence
           name="Follow the full trail"
-          durationInFrames={369} offset={-18}
+          durationInFrames={448} offset={-18}
           premountFor={fps}
         >
           <AGGridScene />
         </Series.Sequence>
         <Series.Sequence
           name="Agentic commerce that learns"
-          durationInFrames={314} offset={-18}
+          durationInFrames={348} offset={-18}
           premountFor={fps}
         >
           <ClosingScene />
@@ -96,7 +96,7 @@ export const MarketMetroComposition = () => (
   <Composition
     id="MarketMetroSubmission"
     component={MarketMetroSubmission}
-    durationInFrames={4608}
+    durationInFrames={5188}
     fps={30}
     width={1920}
     height={1080}

@@ -12,41 +12,57 @@ export const PayPalScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "That purchase connects to PayPal Sandbox.",
+    "text": "And the money leaves a trail.",
     "startMs": 250,
-    "endMs": 3259,
+    "endMs": 2293,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "It captures the same ninety six dollar",
-    "startMs": 3259,
-    "endMs": 5551,
+    "text": "PayPal Sandbox captures that exact order: ninety",
+    "startMs": 2293,
+    "endMs": 5153,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "order, showing the fee and merchant proceeds.",
-    "startMs": 5551,
-    "endMs": 8775,
+    "text": "six dollars gross, the provider fee and",
+    "startMs": 5153,
+    "endMs": 7400,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Each record links back to the warehouse,",
-    "startMs": 8775,
-    "endMs": 11211,
+    "text": "the merchant's proceeds.",
+    "startMs": 7400,
+    "endMs": 9307,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "so one purchase is counted once.",
-    "startMs": 11211,
-    "endMs": 13575,
+    "text": "Each record links back to the warehouse",
+    "startMs": 9307,
+    "endMs": 11555,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "order, so the proof is traceable without",
+    "startMs": 11555,
+    "endMs": 13870,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "double counting.",
+    "startMs": 13870,
+    "endMs": 15300,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

@@ -12,41 +12,41 @@ export const ClosingScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "For Leo, those questions now have tested",
+    "text": "For merchants like Leo, those two questions",
     "startMs": 250,
-    "endMs": 2425,
+    "endMs": 2525,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "answers.",
-    "startMs": 2475,
-    "endMs": 3475,
+    "text": "now have tested answers.",
+    "startMs": 2575,
+    "endMs": 4475,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Market Metro.",
-    "startMs": 3575,
-    "endMs": 4825,
+    "startMs": 4575,
+    "endMs": 5775,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Agentic commerce that learns, tests its ideas,",
-    "startMs": 4900,
-    "endMs": 7925,
+    "startMs": 5850,
+    "endMs": 8825,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "and shows its work.",
-    "startMs": 7975,
-    "endMs": 9275,
+    "startMs": 8885,
+    "endMs": 10210,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

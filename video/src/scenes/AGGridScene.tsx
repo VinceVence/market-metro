@@ -12,33 +12,41 @@ export const AGGridScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "Follow the evidence in AG Grid: trained",
+    "text": "Don't take our word for it.",
     "startMs": 250,
-    "endMs": 2827,
+    "endMs": 2320,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "models, agent decisions, and the PayPal receipt.",
-    "startMs": 2827,
-    "endMs": 6576,
+    "text": "AG Grid lets judges inspect the entire",
+    "startMs": 2320,
+    "endMs": 4687,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Open a checkpoint to see what the",
-    "startMs": 6576,
-    "endMs": 8685,
+    "text": "journey: trained models, agent decisions, campaign outcomes",
+    "startMs": 4687,
+    "endMs": 8605,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "agent knew, chose, and verified.",
-    "startMs": 8685,
-    "endMs": 11340,
+    "text": "and the native PayPal receipt.",
+    "startMs": 8605,
+    "endMs": 10972,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Open any checkpoint and follow the evidence.",
+    "startMs": 10972,
+    "endMs": 14225,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

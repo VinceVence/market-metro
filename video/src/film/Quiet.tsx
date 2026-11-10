@@ -68,9 +68,9 @@ export function Quiet() {
             letterSpacing: -2,
           }}
         >
-          Could AI bring
+          Could AI help
           <br />
-          customers back?
+          Leo decide?
         </div>
         <svg width="380" height="22" style={{ marginTop: 18 }}>
           <path

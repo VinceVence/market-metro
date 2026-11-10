@@ -12,81 +12,121 @@ export const MarketScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "They look.",
+    "text": "Shoppers look around, pick things up, and",
     "startMs": 250,
-    "endMs": 700,
+    "endMs": 2385,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "They leave.",
-    "startMs": 890,
-    "endMs": 1740,
+    "text": "then they're gone.",
+    "startMs": 2410,
+    "endMs": 3560,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Leo wonders why.",
-    "startMs": 1840,
-    "endMs": 3215,
+    "text": "Most shops never find out why.",
+    "startMs": 3635,
+    "endMs": 5585,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Meet Leo, a furniture shop owner.",
-    "startMs": 3665,
-    "endMs": 6090,
+    "text": "Meet Leo.",
+    "startMs": 6585,
+    "endMs": 7710,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Every day, people browse and walk away.",
-    "startMs": 6165,
-    "endMs": 8660,
+    "text": "He runs a small furniture shop in",
+    "startMs": 7760,
+    "endMs": 9385,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "He has clues: what they looked at,",
-    "startMs": 8710,
-    "endMs": 10535,
+    "text": "a busy city.",
+    "startMs": 9410,
+    "endMs": 10560,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "almost bought, and paid for.",
-    "startMs": 10585,
-    "endMs": 12535,
+    "text": "Every day, shoppers walk by, browse a",
+    "startMs": 10635,
+    "endMs": 13025,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "But those clues sit in different places.",
-    "startMs": 12610,
-    "endMs": 15085,
+    "text": "little, and leave.",
+    "startMs": 13075,
+    "endMs": 14645,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "His next offer is still a guess.",
-    "startMs": 15160,
-    "endMs": 17360,
+    "text": "Leo has clues: what they looked at,",
+    "startMs": 14770,
+    "endMs": 16895,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Who should he reach, and with what?",
-    "startMs": 17435,
-    "endMs": 19510,
+    "text": "what they almost bought, and how they",
+    "startMs": 16920,
+    "endMs": 18545,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "paid.",
+    "startMs": 18595,
+    "endMs": 19520,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "But those clues live in different places,",
+    "startMs": 19595,
+    "endMs": 22145,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "so every campaign is a guess.",
+    "startMs": 22195,
+    "endMs": 24545,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Who should he reach?",
+    "startMs": 24620,
+    "endMs": 25795,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "And what should he offer?",
+    "startMs": 25870,
+    "endMs": 27470,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

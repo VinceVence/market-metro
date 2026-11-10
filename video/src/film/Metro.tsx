@@ -19,9 +19,9 @@ const LINE = [C.blue, C.cyan, C.mint];
 const sceneAt = (id: string) => plan.scenes.find((s) => s.id === id)!;
 
 /** A metro train pulls in over each chapter cut, pauses at the station, then departs. */
-export const ARRIVE = 0.4, // keep in sync with scripts/score.py
-  DWELL = 0.04,
-  DEPART = 0.29;
+export const ARRIVE = 1.05, // keep in sync with scripts/score.py
+  DWELL = 0.8,
+  DEPART = 1.0;
 function Train({ id, start }: { id: string; start: number }) {
   const frame = useCurrentFrame(),
     { fps } = useVideoConfig();

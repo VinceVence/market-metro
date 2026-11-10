@@ -12,41 +12,49 @@ export const PlannerScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "With that map, the agent studies demand",
+    "text": "Now the planner agent gets to work.",
     "startMs": 250,
-    "endMs": 2575,
+    "endMs": 2725,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "and stock, selects twenty eight days of",
-    "startMs": 2650,
-    "endMs": 4950,
+    "text": "It studies demand and available stock, picks",
+    "startMs": 2800,
+    "endMs": 5600,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "history, and asks local tools to train",
-    "startMs": 5000,
-    "endMs": 7575,
+    "text": "twenty eight days of history, and asks",
+    "startMs": 5675,
+    "endMs": 7840,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "two models.",
-    "startMs": 7650,
-    "endMs": 8925,
+    "text": "local tools to train two candidate models.",
+    "startMs": 7915,
+    "endMs": 11065,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Every choice is saved in a checkpoint.",
-    "startMs": 9000,
-    "endMs": 11425,
+    "text": "Every decision, tool call and result becomes",
+    "startMs": 11140,
+    "endMs": 14140,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "a checkpoint you can open.",
+    "startMs": 14165,
+    "endMs": 16015,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

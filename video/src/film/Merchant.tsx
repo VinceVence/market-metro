@@ -12,9 +12,9 @@ const WHAT = ["10% off", "Free delivery", "New arrivals", "Bundle deal", "Cleara
 export function Merchant() {
   const t = useTime(),
     pop = usePop(),
-    meet = cue("market", "owner", 3.6),
+    meet = cue("market", "city", 3.6),
     every = cue("market", "every", 4.6),
-    leave = cue("market", "away", 7.4),
+    leave = cue("market", "leave", 7.4),
     clues = cue("market", "clues", 9),
     looked = cue("market", "looked", 10),
     almost = cue("market", "almost", 11.3),
@@ -22,11 +22,11 @@ export function Merchant() {
     places = cue("market", "different", 14.2),
     guess = cue("market", "guess", 16.6),
     who = cue("market", "who", 17.6),
-    what = cue("market", "with", 19.8);
+    what = cue("market", "offer", 19.8) - 0.5;
   // Night hook → camera push into Leo's store as day breaks.
   const look = cue("market", "look", 0.9),
-    gone = cue("market", "leave", 2.6),
-    most = cue("market", "leo", 3.5),
+    gone = cue("market", "gone", 2.6),
+    most = cue("market", "most", 3.5),
     why = cue("market", "why", 4.9),
     hello = cue("market", "meet", 5.2);
   const push =
@@ -93,7 +93,7 @@ export function Merchant() {
         {[
           { words: ["They", "look."], at: look - 0.15 },
           { words: ["They", "leave."], at: gone - 0.35 },
-          { words: ["Leo", "wonders", "why."], at: most - 0.1 },
+          { words: ["Nobody", "knows", "why."], at: most - 0.1 },
         ].map((line, li) => (
           <div key={li} style={{ display: "flex", gap: 26, fontSize: 112, fontWeight: 750, letterSpacing: -4, lineHeight: 1.08, color: "#fff" }}>
             {line.words.map((w, wi) => {

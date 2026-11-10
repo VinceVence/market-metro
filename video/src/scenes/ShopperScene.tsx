@@ -12,57 +12,57 @@ export const ShopperScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "Now follow one recommendation.",
+    "text": "Day thirty five.",
     "startMs": 250,
-    "endMs": 2675,
+    "endMs": 1700,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "On day thirty five, it reaches a",
-    "startMs": 2750,
-    "endMs": 4575,
+    "text": "A recommendation reaches our quiet shopper, sixteen",
+    "startMs": 1775,
+    "endMs": 4850,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "shopper who's been quiet for sixteen days.",
-    "startMs": 4700,
-    "endMs": 7525,
+    "text": "days after their last purchase.",
+    "startMs": 4900,
+    "endMs": 7025,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "They buy a ninety six dollar side",
-    "startMs": 7575,
-    "endMs": 9450,
+    "startMs": 7100,
+    "endMs": 8950,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "table.",
-    "startMs": 9500,
-    "endMs": 10250,
+    "text": "table, and it arrives the next day.",
+    "startMs": 9000,
+    "endMs": 11530,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "It arrives tomorrow.",
-    "startMs": 10325,
-    "endMs": 11825,
+    "text": "Under fixed rules, that same request went",
+    "startMs": 11580,
+    "endMs": 14005,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Under fixed rules, that request went unfilled.",
-    "startMs": 11875,
-    "endMs": 15075,
+    "text": "unfilled.",
+    "startMs": 14080,
+    "endMs": 15080,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

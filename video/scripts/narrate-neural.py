@@ -110,9 +110,7 @@ for scene in PLAN['scenes']:
         q, contour = question_rise(q, rate, question_words[-1]['startMs']/1000-.25,
                                   delivery['riseSemitones'])
         answer, answer_rate, at = speaker.create_timed(rest.strip(), voice=VOICE,
-                    speed=speed, lang='en-us', continuous=True,
-                    sentence_pause=delivery.get('sentencePause', .10),
-                    clause_pause=delivery.get('clausePause', .05))
+                    speed=speed, lang='en-us', continuous=True, sentence_pause=.10, clause_pause=.05)
         assert rate == answer_rate
         pause = np.zeros(round(delivery['pauseAfterQuestion']*rate), dtype=q.dtype)
         offset=(len(q)+len(pause))/rate

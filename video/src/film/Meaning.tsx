@@ -22,7 +22,7 @@ export function Meaning() {
     connects = cue("ontology", "connects", 3.3),
     prediction = cue("ontology", "prediction", 7),
     split = cue("ontology", "recommendations", 10),
-    never = cue("ontology", "separate", 11.9),
+    never = cue("ontology", "never", 11.9),
     rule = cue("ontology", "rule", 14.2),
     inputs = cue("ontology", "inputs", 15.9),
     later = cue("ontology", "later", 16.6),

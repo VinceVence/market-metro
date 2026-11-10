@@ -12,41 +12,49 @@ export const VerifierScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "A prediction isn't enough.",
+    "text": "But nothing ships on a hunch.",
     "startMs": 250,
-    "endMs": 2231,
+    "endMs": 2426,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "The verifier tests both candidates, checking PayPal",
-    "startMs": 2231,
-    "endMs": 5306,
+    "text": "The verifier tests both models in matching",
+    "startMs": 2426,
+    "endMs": 5037,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "and merchant outcomes under matching conditions.",
-    "startMs": 5306,
-    "endMs": 8654,
+    "text": "development markets, checking PayPal and merchant outcomes",
+    "startMs": 5037,
+    "endMs": 8808,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "The winner earns its place through measured",
-    "startMs": 8654,
-    "endMs": 11182,
+    "text": "side by side.",
+    "startMs": 8808,
+    "endMs": 10041,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "results; otherwise, the current policy stays.",
-    "startMs": 11182,
-    "endMs": 14325,
+    "text": "Only a tested winner is published; otherwise,",
+    "startMs": 10041,
+    "endMs": 12869,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "the current policy stays.",
+    "startMs": 12869,
+    "endMs": 14900,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

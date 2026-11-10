@@ -12,65 +12,65 @@ export const OntologyScene=()=>{
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "It starts by connecting the clues.",
+    "text": "First, the data needs meaning.",
     "startMs": 250,
-    "endMs": 2425,
+    "endMs": 2490,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Our ontology connects shoppers, products, contacts and",
-    "startMs": 2475,
-    "endMs": 5800,
+    "startMs": 2490,
+    "endMs": 5850,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "payments, so each prediction uses the right",
+    "text": "payments, so every prediction learns from the",
     "startMs": 5850,
-    "endMs": 8275,
+    "endMs": 8580,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "examples.",
-    "startMs": 8325,
-    "endMs": 9575,
+    "text": "right examples.",
+    "startMs": 8580,
+    "endMs": 9980,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Recommendations stay separate from inquiries.",
-    "startMs": 9675,
-    "endMs": 12325,
+    "text": "Recommendations and inquiries never get mixed up.",
+    "startMs": 9980,
+    "endMs": 13410,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "One rule: past signals become inputs; later",
-    "startMs": 12425,
-    "endMs": 15700,
+    "text": "And one strict rule: earlier signals can",
+    "startMs": 13410,
+    "endMs": 15790,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "outcomes become labels.",
-    "startMs": 15750,
-    "endMs": 17575,
+    "text": "be inputs, but later outcomes are kept",
+    "startMs": 15790,
+    "endMs": 18030,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "The model can't peek into the future.",
-    "startMs": 17650,
-    "endMs": 20000,
+    "text": "for labels and evaluation.",
+    "startMs": 18030,
+    "endMs": 20060,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

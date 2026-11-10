@@ -8,13 +8,13 @@ export function Payment() {
     pop = usePop(),
     r = data.receipt,
     captures = cue("paypal", "captures", 3.2),
-    gross = cue("paypal", "ninety", 5.8),
+    gross = cue("paypal", "gross", 5.8),
     fee = cue("paypal", "fee", 7),
-    proceeds = cue("paypal", "proceeds", 8.3),
+    proceeds = cue("paypal", "merchants", 8.3),
     each = cue("paypal", "each", 9.3),
     links = cue("paypal", "links", 10),
     warehouse = cue("paypal", "warehouse", 10.9),
-    counting = cue("paypal", "counted", 14.3);
+    counting = cue("paypal", "counting", 14.3);
   const phaseB = ramp(t, each - 0.3, each + 0.3);
   const rows = [
     ["Status", r.status, captures + 0.3, "#22b597"],
