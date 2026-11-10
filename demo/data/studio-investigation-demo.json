@@ -1,0 +1,970 @@
+{
+  "plan": {
+    "id": "INSIGHT-60d69504559ddfb4",
+    "status": "QUERY_READY",
+    "question": "Which merchants deserve a closer look because refunds are eroding sales? Show the evidence and keep PayPal payment proof separate.",
+    "choice": {
+      "merchantIds": [
+        "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+        "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+        "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0"
+      ],
+      "focus": "refund_review",
+      "rationale": "These merchants exhibit the highest refund shares in the dataset, with Circuit Corner (11.47%), The Bundle Shop (10.68%), and Paper Lane (10.32%) all showing double-digit refund rates that significantly impact their retained sales relative to gross volume."
+    },
+    "cohort": {
+      "merchantIds": [
+        "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+        "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+        "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3"
+      ],
+      "rows": [
+        {
+          "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+          "merchant": "Paper Lane",
+          "merchantOrders": 41,
+          "grossUSD": 1512,
+          "discountUSD": 0,
+          "refundUSD": 156,
+          "category": "Stationery",
+          "refundShare": 0.10317460317460317,
+          "retainedUSD": 1356
+        },
+        {
+          "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+          "merchant": "The Bundle Shop",
+          "merchantOrders": 42,
+          "grossUSD": 5920,
+          "discountUSD": 0,
+          "refundUSD": 632,
+          "category": "Office bundles",
+          "refundShare": 0.10675675675675676,
+          "retainedUSD": 5288
+        },
+        {
+          "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+          "merchant": "Circuit Corner",
+          "merchantOrders": 42,
+          "grossUSD": 5406,
+          "discountUSD": 0,
+          "refundUSD": 620,
+          "category": "Electronics",
+          "refundShare": 0.11468738438771735,
+          "retainedUSD": 4786
+        }
+      ],
+      "checkouts": 114,
+      "merchantOrders": 125,
+      "splitCheckouts": 11,
+      "grossUSD": 12838,
+      "refundUSD": 1408,
+      "retainedUSD": 11430,
+      "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095",
+      "asOfDay": 126,
+      "scope": "Observed activity including warmup. Retained sales are not merchant profit. No new campaign outcome is implied."
+    },
+    "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095",
+    "checkpoints": [
+      {
+        "name": "Cohort plan",
+        "actor": "GEMINI",
+        "input": {
+          "question": "Which merchants deserve a closer look because refunds are eroding sales? Show the evidence and keep PayPal payment proof separate.",
+          "allowedMerchants": [
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-1",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-10",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-2",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-4",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-5",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-6",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-7",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-8",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-9"
+          ]
+        },
+        "output": {
+          "merchantIds": [
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0"
+          ],
+          "focus": "refund_review",
+          "rationale": "These merchants exhibit the highest refund shares in the dataset, with Circuit Corner (11.47%), The Bundle Shop (10.68%), and Paper Lane (10.32%) all showing double-digit refund rates that significantly impact their retained sales relative to gross volume.",
+          "usage": {
+            "inputTokens": 2159,
+            "outputTokens": 177,
+            "thinkingTokens": 120,
+            "model": "gemini-3.1-flash-lite",
+            "latencyMs": 2476
+          }
+        },
+        "at": "2026-11-10T14:54:54.253Z",
+        "status": "COMPLETE"
+      }
+    ],
+    "modelCalls": 1,
+    "costUSD": 0.000986
+  },
+  "result": {
+    "id": "INSIGHT-60d69504559ddfb4",
+    "status": "VERIFIED",
+    "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095",
+    "cohort": {
+      "merchantIds": [
+        "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+        "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+        "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3"
+      ],
+      "rows": [
+        {
+          "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+          "merchant": "Paper Lane",
+          "merchantOrders": 41,
+          "grossUSD": 1512,
+          "discountUSD": 0,
+          "refundUSD": 156,
+          "category": "Stationery",
+          "refundShare": 0.10317460317460317,
+          "retainedUSD": 1356
+        },
+        {
+          "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+          "merchant": "The Bundle Shop",
+          "merchantOrders": 42,
+          "grossUSD": 5920,
+          "discountUSD": 0,
+          "refundUSD": 632,
+          "category": "Office bundles",
+          "refundShare": 0.10675675675675676,
+          "retainedUSD": 5288
+        },
+        {
+          "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+          "merchant": "Circuit Corner",
+          "merchantOrders": 42,
+          "grossUSD": 5406,
+          "discountUSD": 0,
+          "refundUSD": 620,
+          "category": "Electronics",
+          "refundShare": 0.11468738438771735,
+          "retainedUSD": 4786
+        }
+      ],
+      "checkouts": 114,
+      "merchantOrders": 125,
+      "splitCheckouts": 11,
+      "grossUSD": 12838,
+      "refundUSD": 1408,
+      "retainedUSD": 11430,
+      "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095",
+      "asOfDay": 126,
+      "scope": "Observed activity including warmup. Retained sales are not merchant profit. No new campaign outcome is implied."
+    },
+    "proposal": {
+      "title": "Merchants with High Refund Erosion",
+      "rationale": "Circuit Corner is highlighted due to its significant refund-to-sales ratio, indicating potential revenue erosion. The selected widgets provide a granular view of sales performance and refund activity, while excluding irrelevant market-wide data or archived payment receipts to maintain focus on the specific merchant cohort.",
+      "factIds": [
+        "refund-review",
+        "retained"
+      ],
+      "widgets": [
+        "cohort_sales",
+        "cohort_refunds",
+        "cohort_ledger",
+        "checkout_grain",
+        "payment_evidence"
+      ]
+    },
+    "insights": [
+      {
+        "id": "refund-review",
+        "title": "Review Circuit Corner",
+        "text": "11.5% of Circuit Corner's gross sales was refunded. This is a sales-value share, not a customer return rate.",
+        "kind": "risk",
+        "value": 0.11468738438771735
+      },
+      {
+        "id": "retained",
+        "title": "Sales kept by this cohort",
+        "text": "$11,430.00 remains after $1,408.00 in observed refunds.",
+        "kind": "sales",
+        "value": 11430
+      }
+    ],
+    "modelCalls": 2,
+    "costUSD": 0.00153,
+    "checkpoints": [
+      {
+        "name": "Cohort plan",
+        "actor": "GEMINI",
+        "input": {
+          "question": "Which merchants deserve a closer look because refunds are eroding sales? Show the evidence and keep PayPal payment proof separate.",
+          "allowedMerchants": [
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-1",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-10",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-2",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-4",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-5",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-6",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-7",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-8",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-9"
+          ]
+        },
+        "output": {
+          "merchantIds": [
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0"
+          ],
+          "focus": "refund_review",
+          "rationale": "These merchants exhibit the highest refund shares in the dataset, with Circuit Corner (11.47%), The Bundle Shop (10.68%), and Paper Lane (10.32%) all showing double-digit refund rates that significantly impact their retained sales relative to gross volume.",
+          "usage": {
+            "inputTokens": 2159,
+            "outputTokens": 177,
+            "thinkingTokens": 120,
+            "model": "gemini-3.1-flash-lite",
+            "latencyMs": 2476
+          }
+        },
+        "at": "2026-11-10T14:54:54.253Z",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "AG Studio query",
+        "actor": "AG_STUDIO_EXECUTE_QUERY",
+        "input": {
+          "merchantIds": [
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+            "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3"
+          ]
+        },
+        "output": {
+          "rows": [
+            {
+              "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+              "merchant": "The Bundle Shop",
+              "category": "Office bundles",
+              "grossUSD": 5920,
+              "refundUSD": 632,
+              "merchantOrders": 42,
+              "retainedUSD": 5288,
+              "refundShare": 0.10675675675675676
+            },
+            {
+              "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+              "merchant": "Circuit Corner",
+              "category": "Electronics",
+              "grossUSD": 5406,
+              "refundUSD": 620,
+              "merchantOrders": 42,
+              "retainedUSD": 4786,
+              "refundShare": 0.11468738438771735
+            },
+            {
+              "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+              "merchant": "Paper Lane",
+              "category": "Stationery",
+              "grossUSD": 1512,
+              "refundUSD": 156,
+              "merchantOrders": 41,
+              "retainedUSD": 1356,
+              "refundShare": 0.10317460317460317
+            }
+          ]
+        },
+        "at": "2026-11-10T14:54:58.067Z",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "Ontology verification",
+        "actor": "DETERMINISTIC_VERIFIER",
+        "input": {
+          "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095"
+        },
+        "output": {
+          "decision": "PASS",
+          "checkouts": 114,
+          "merchantOrders": 125,
+          "checks": [
+            "Merchant scope matches",
+            "Query values match warehouse",
+            "Split checkouts counted once",
+            "Receipt adds no new sale",
+            "Retained sales kept separate from profit"
+          ]
+        },
+        "at": "2026-11-10T14:54:58.067Z",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "Insight design",
+        "actor": "GEMINI",
+        "input": {
+          "factIds": [
+            "grain",
+            "retained",
+            "sales-leader",
+            "refund-review",
+            "reference-impact",
+            "receipt"
+          ]
+        },
+        "output": {
+          "title": "Merchants with High Refund Erosion",
+          "rationale": "Circuit Corner is highlighted due to its significant refund-to-sales ratio, indicating potential revenue erosion. The selected widgets provide a granular view of sales performance and refund activity, while excluding irrelevant market-wide data or archived payment receipts to maintain focus on the specific merchant cohort.",
+          "factIds": [
+            "refund-review",
+            "retained"
+          ],
+          "widgets": [
+            "cohort_sales",
+            "cohort_refunds"
+          ],
+          "usage": {
+            "inputTokens": 776,
+            "outputTokens": 124,
+            "thinkingTokens": 109,
+            "model": "gemini-3.1-flash-lite",
+            "latencyMs": 1705
+          }
+        },
+        "at": "2026-11-10T14:54:58.067Z",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "Publication gate",
+        "actor": "DETERMINISTIC_VERIFIER",
+        "input": {
+          "factIds": [
+            "refund-review",
+            "retained"
+          ],
+          "widgets": [
+            "cohort_sales",
+            "cohort_refunds",
+            "cohort_ledger",
+            "checkout_grain",
+            "payment_evidence"
+          ]
+        },
+        "output": {
+          "decision": "PASS",
+          "addedCoverage": [
+            "cohort_ledger",
+            "checkout_grain",
+            "payment_evidence"
+          ]
+        },
+        "at": "2026-11-10T14:54:58.067Z",
+        "status": "COMPLETE"
+      }
+    ]
+  },
+  "nativeTools": [
+    {
+      "name": "plan_merchant_investigation",
+      "status": "complete",
+      "args": {
+        "question": "Which merchants deserve a closer look because refunds are eroding sales? Show the evidence and keep PayPal payment proof separate."
+      },
+      "result": {
+        "success": true,
+        "response": "Cohort chosen with a saved planning checkpoint.",
+        "data": {
+          "id": "INSIGHT-60d69504559ddfb4",
+          "status": "QUERY_READY",
+          "question": "Which merchants deserve a closer look because refunds are eroding sales? Show the evidence and keep PayPal payment proof separate.",
+          "choice": {
+            "merchantIds": [
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0"
+            ],
+            "focus": "refund_review",
+            "rationale": "These merchants exhibit the highest refund shares in the dataset, with Circuit Corner (11.47%), The Bundle Shop (10.68%), and Paper Lane (10.32%) all showing double-digit refund rates that significantly impact their retained sales relative to gross volume."
+          },
+          "cohort": {
+            "merchantIds": [
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3"
+            ],
+            "rows": [
+              {
+                "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+                "merchant": "Paper Lane",
+                "merchantOrders": 41,
+                "grossUSD": 1512,
+                "discountUSD": 0,
+                "refundUSD": 156,
+                "category": "Stationery",
+                "refundShare": 0.10317460317460317,
+                "retainedUSD": 1356
+              },
+              {
+                "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+                "merchant": "The Bundle Shop",
+                "merchantOrders": 42,
+                "grossUSD": 5920,
+                "discountUSD": 0,
+                "refundUSD": 632,
+                "category": "Office bundles",
+                "refundShare": 0.10675675675675676,
+                "retainedUSD": 5288
+              },
+              {
+                "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+                "merchant": "Circuit Corner",
+                "merchantOrders": 42,
+                "grossUSD": 5406,
+                "discountUSD": 0,
+                "refundUSD": 620,
+                "category": "Electronics",
+                "refundShare": 0.11468738438771735,
+                "retainedUSD": 4786
+              }
+            ],
+            "checkouts": 114,
+            "merchantOrders": 125,
+            "splitCheckouts": 11,
+            "grossUSD": 12838,
+            "refundUSD": 1408,
+            "retainedUSD": 11430,
+            "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095",
+            "asOfDay": 126,
+            "scope": "Observed activity including warmup. Retained sales are not merchant profit. No new campaign outcome is implied."
+          },
+          "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095",
+          "checkpoints": [
+            {
+              "name": "Cohort plan",
+              "actor": "GEMINI",
+              "input": {
+                "question": "Which merchants deserve a closer look because refunds are eroding sales? Show the evidence and keep PayPal payment proof separate.",
+                "allowedMerchants": [
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-1",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-10",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-2",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-4",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-5",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-6",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-7",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-8",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-9"
+                ]
+              },
+              "output": {
+                "merchantIds": [
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0"
+                ],
+                "focus": "refund_review",
+                "rationale": "These merchants exhibit the highest refund shares in the dataset, with Circuit Corner (11.47%), The Bundle Shop (10.68%), and Paper Lane (10.32%) all showing double-digit refund rates that significantly impact their retained sales relative to gross volume.",
+                "usage": {
+                  "inputTokens": 2159,
+                  "outputTokens": 177,
+                  "thinkingTokens": 120,
+                  "model": "gemini-3.1-flash-lite",
+                  "latencyMs": 2476
+                }
+              },
+              "at": "2026-11-10T14:54:54.253Z",
+              "status": "COMPLETE"
+            }
+          ],
+          "modelCalls": 1,
+          "costUSD": 0.000986,
+          "studioRows": [
+            {
+              "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+              "merchant": "The Bundle Shop",
+              "category": "Office bundles",
+              "grossUSD": 5920,
+              "refundUSD": 632,
+              "merchantOrders": 42,
+              "retainedUSD": 5288,
+              "refundShare": 0.10675675675675676
+            },
+            {
+              "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+              "merchant": "Circuit Corner",
+              "category": "Electronics",
+              "grossUSD": 5406,
+              "refundUSD": 620,
+              "merchantOrders": 42,
+              "retainedUSD": 4786,
+              "refundShare": 0.11468738438771735
+            },
+            {
+              "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+              "merchant": "Paper Lane",
+              "category": "Stationery",
+              "grossUSD": 1512,
+              "refundUSD": 156,
+              "merchantOrders": 41,
+              "retainedUSD": 1356,
+              "refundShare": 0.10317460317460317
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "execute_query",
+      "status": "complete",
+      "args": {
+        "query": {
+          "kind": "apiQuery",
+          "variant": "projection",
+          "projection": [
+            {
+              "field": {
+                "id": "merchants.id"
+              },
+              "as": "id"
+            },
+            {
+              "field": {
+                "id": "merchants.merchant"
+              },
+              "as": "merchant"
+            },
+            {
+              "field": {
+                "id": "merchants.category"
+              },
+              "as": "category"
+            },
+            {
+              "field": {
+                "id": "merchants.grossUSD"
+              },
+              "as": "grossUSD"
+            },
+            {
+              "field": {
+                "id": "merchants.refundUSD"
+              },
+              "as": "refundUSD"
+            },
+            {
+              "field": {
+                "id": "merchants.merchantOrders"
+              },
+              "as": "merchantOrders"
+            },
+            {
+              "field": {
+                "id": "merchants.retainedUSD"
+              },
+              "as": "retainedUSD"
+            },
+            {
+              "field": {
+                "id": "merchants.refundShare"
+              },
+              "as": "refundShare"
+            }
+          ],
+          "filter": {
+            "field": {
+              "id": "merchants.id"
+            },
+            "operator": "isIn",
+            "value": [
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0"
+            ]
+          }
+        }
+      },
+      "result": {
+        "success": true,
+        "response": "Query executed successfully. Returned 3 rows.\n\n| id | merchant | category | grossUSD | refundUSD | merchantOrders | retainedUSD | refundShare |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11 | The Bundle Shop | Office bundles | 5920 | 632 | 42 | 5288 | 0.10675675675675676 |\n| GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3 | Circuit Corner | Electronics | 5406 | 620 | 42 | 4786 | 0.11468738438771735 |\n| GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0 | Paper Lane | Stationery | 1512 | 156 | 41 | 1356 | 0.10317460317460317 |",
+        "data": {
+          "result": [
+            {
+              "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+              "merchant": "The Bundle Shop",
+              "category": "Office bundles",
+              "grossUSD": 5920,
+              "refundUSD": 632,
+              "merchantOrders": 42,
+              "retainedUSD": 5288,
+              "refundShare": 0.10675675675675676
+            },
+            {
+              "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+              "merchant": "Circuit Corner",
+              "category": "Electronics",
+              "grossUSD": 5406,
+              "refundUSD": 620,
+              "merchantOrders": 42,
+              "retainedUSD": 4786,
+              "refundShare": 0.11468738438771735
+            },
+            {
+              "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+              "merchant": "Paper Lane",
+              "category": "Stationery",
+              "grossUSD": 1512,
+              "refundUSD": 156,
+              "merchantOrders": 41,
+              "retainedUSD": 1356,
+              "refundShare": 0.10317460317460317
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "delegate_to",
+      "status": "complete",
+      "args": {
+        "type": {
+          "id": "insight_editor",
+          "investigationId": "INSIGHT-60d69504559ddfb4"
+        },
+        "instructions": "Verify this cohort before publishing an evidence-backed dashboard. Keep whole-market benchmark and native receipt scopes separate."
+      },
+      "result": {
+        "success": true,
+        "response": "Verified cohort insights published. The frozen economy and payment records were not modified."
+      }
+    },
+    {
+      "name": "verify_cohort_insights",
+      "status": "complete",
+      "args": {
+        "investigationId": "INSIGHT-60d69504559ddfb4"
+      },
+      "result": {
+        "success": true,
+        "response": "Cohort, facts, data grain and widget mappings verified.",
+        "data": {
+          "id": "INSIGHT-60d69504559ddfb4",
+          "status": "VERIFIED",
+          "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095",
+          "cohort": {
+            "merchantIds": [
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+              "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3"
+            ],
+            "rows": [
+              {
+                "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+                "merchant": "Paper Lane",
+                "merchantOrders": 41,
+                "grossUSD": 1512,
+                "discountUSD": 0,
+                "refundUSD": 156,
+                "category": "Stationery",
+                "refundShare": 0.10317460317460317,
+                "retainedUSD": 1356
+              },
+              {
+                "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+                "merchant": "The Bundle Shop",
+                "merchantOrders": 42,
+                "grossUSD": 5920,
+                "discountUSD": 0,
+                "refundUSD": 632,
+                "category": "Office bundles",
+                "refundShare": 0.10675675675675676,
+                "retainedUSD": 5288
+              },
+              {
+                "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+                "merchant": "Circuit Corner",
+                "merchantOrders": 42,
+                "grossUSD": 5406,
+                "discountUSD": 0,
+                "refundUSD": 620,
+                "category": "Electronics",
+                "refundShare": 0.11468738438771735,
+                "retainedUSD": 4786
+              }
+            ],
+            "checkouts": 114,
+            "merchantOrders": 125,
+            "splitCheckouts": 11,
+            "grossUSD": 12838,
+            "refundUSD": 1408,
+            "retainedUSD": 11430,
+            "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095",
+            "asOfDay": 126,
+            "scope": "Observed activity including warmup. Retained sales are not merchant profit. No new campaign outcome is implied."
+          },
+          "proposal": {
+            "title": "Merchants with High Refund Erosion",
+            "rationale": "Circuit Corner is highlighted due to its significant refund-to-sales ratio, indicating potential revenue erosion. The selected widgets provide a granular view of sales performance and refund activity, while excluding irrelevant market-wide data or archived payment receipts to maintain focus on the specific merchant cohort.",
+            "factIds": [
+              "refund-review",
+              "retained"
+            ],
+            "widgets": [
+              "cohort_sales",
+              "cohort_refunds",
+              "cohort_ledger",
+              "checkout_grain",
+              "payment_evidence"
+            ]
+          },
+          "insights": [
+            {
+              "id": "refund-review",
+              "title": "Review Circuit Corner",
+              "text": "11.5% of Circuit Corner's gross sales was refunded. This is a sales-value share, not a customer return rate.",
+              "kind": "risk",
+              "value": 0.11468738438771735
+            },
+            {
+              "id": "retained",
+              "title": "Sales kept by this cohort",
+              "text": "$11,430.00 remains after $1,408.00 in observed refunds.",
+              "kind": "sales",
+              "value": 11430
+            }
+          ],
+          "modelCalls": 2,
+          "costUSD": 0.00153,
+          "checkpoints": [
+            {
+              "name": "Cohort plan",
+              "actor": "GEMINI",
+              "input": {
+                "question": "Which merchants deserve a closer look because refunds are eroding sales? Show the evidence and keep PayPal payment proof separate.",
+                "allowedMerchants": [
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-1",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-10",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-2",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-4",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-5",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-6",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-7",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-8",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-9"
+                ]
+              },
+              "output": {
+                "merchantIds": [
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0"
+                ],
+                "focus": "refund_review",
+                "rationale": "These merchants exhibit the highest refund shares in the dataset, with Circuit Corner (11.47%), The Bundle Shop (10.68%), and Paper Lane (10.32%) all showing double-digit refund rates that significantly impact their retained sales relative to gross volume.",
+                "usage": {
+                  "inputTokens": 2159,
+                  "outputTokens": 177,
+                  "thinkingTokens": 120,
+                  "model": "gemini-3.1-flash-lite",
+                  "latencyMs": 2476
+                }
+              },
+              "at": "2026-11-10T14:54:54.253Z",
+              "status": "COMPLETE"
+            },
+            {
+              "name": "AG Studio query",
+              "actor": "AG_STUDIO_EXECUTE_QUERY",
+              "input": {
+                "merchantIds": [
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+                  "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3"
+                ]
+              },
+              "output": {
+                "rows": [
+                  {
+                    "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-11",
+                    "merchant": "The Bundle Shop",
+                    "category": "Office bundles",
+                    "grossUSD": 5920,
+                    "refundUSD": 632,
+                    "merchantOrders": 42,
+                    "retainedUSD": 5288,
+                    "refundShare": 0.10675675675675676
+                  },
+                  {
+                    "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-3",
+                    "merchant": "Circuit Corner",
+                    "category": "Electronics",
+                    "grossUSD": 5406,
+                    "refundUSD": 620,
+                    "merchantOrders": 42,
+                    "retainedUSD": 4786,
+                    "refundShare": 0.11468738438771735
+                  },
+                  {
+                    "id": "GARDEN-AUTO-e26323c97cbcb456-MERCHANT-0",
+                    "merchant": "Paper Lane",
+                    "category": "Stationery",
+                    "grossUSD": 1512,
+                    "refundUSD": 156,
+                    "merchantOrders": 41,
+                    "retainedUSD": 1356,
+                    "refundShare": 0.10317460317460317
+                  }
+                ]
+              },
+              "at": "2026-11-10T14:54:58.067Z",
+              "status": "COMPLETE"
+            },
+            {
+              "name": "Ontology verification",
+              "actor": "DETERMINISTIC_VERIFIER",
+              "input": {
+                "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095"
+              },
+              "output": {
+                "decision": "PASS",
+                "checkouts": 114,
+                "merchantOrders": 125,
+                "checks": [
+                  "Merchant scope matches",
+                  "Query values match warehouse",
+                  "Split checkouts counted once",
+                  "Receipt adds no new sale",
+                  "Retained sales kept separate from profit"
+                ]
+              },
+              "at": "2026-11-10T14:54:58.067Z",
+              "status": "COMPLETE"
+            },
+            {
+              "name": "Insight design",
+              "actor": "GEMINI",
+              "input": {
+                "factIds": [
+                  "grain",
+                  "retained",
+                  "sales-leader",
+                  "refund-review",
+                  "reference-impact",
+                  "receipt"
+                ]
+              },
+              "output": {
+                "title": "Merchants with High Refund Erosion",
+                "rationale": "Circuit Corner is highlighted due to its significant refund-to-sales ratio, indicating potential revenue erosion. The selected widgets provide a granular view of sales performance and refund activity, while excluding irrelevant market-wide data or archived payment receipts to maintain focus on the specific merchant cohort.",
+                "factIds": [
+                  "refund-review",
+                  "retained"
+                ],
+                "widgets": [
+                  "cohort_sales",
+                  "cohort_refunds"
+                ],
+                "usage": {
+                  "inputTokens": 776,
+                  "outputTokens": 124,
+                  "thinkingTokens": 109,
+                  "model": "gemini-3.1-flash-lite",
+                  "latencyMs": 1705
+                }
+              },
+              "at": "2026-11-10T14:54:58.067Z",
+              "status": "COMPLETE"
+            },
+            {
+              "name": "Publication gate",
+              "actor": "DETERMINISTIC_VERIFIER",
+              "input": {
+                "factIds": [
+                  "refund-review",
+                  "retained"
+                ],
+                "widgets": [
+                  "cohort_sales",
+                  "cohort_refunds",
+                  "cohort_ledger",
+                  "checkout_grain",
+                  "payment_evidence"
+                ]
+              },
+              "output": {
+                "decision": "PASS",
+                "addedCoverage": [
+                  "cohort_ledger",
+                  "checkout_grain",
+                  "payment_evidence"
+                ]
+              },
+              "at": "2026-11-10T14:54:58.067Z",
+              "status": "COMPLETE"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "publish_verified_views",
+      "status": "complete",
+      "args": {
+        "investigationId": "INSIGHT-60d69504559ddfb4"
+      },
+      "result": {
+        "success": true,
+        "response": "Verified dashboard applied through AG Studio.",
+        "data": {
+          "id": "INSIGHT-60d69504559ddfb4",
+          "widgets": [
+            "cohort_sales",
+            "cohort_refunds",
+            "cohort_ledger",
+            "checkout_grain",
+            "payment_evidence"
+          ],
+          "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095"
+        }
+      }
+    },
+    {
+      "name": "complete_task",
+      "status": "complete",
+      "args": {
+        "summary": "Verified cohort insights published. The frozen economy and payment records were not modified.",
+        "artifacts": [
+          {
+            "id": "INSIGHT-60d69504559ddfb4",
+            "type": "verified-dashboard",
+            "description": "Merchants with High Refund Erosion"
+          }
+        ]
+      },
+      "result": {
+        "success": true,
+        "response": "Verified cohort insights published. The frozen economy and payment records were not modified.",
+        "data": {
+          "summary": "Verified cohort insights published. The frozen economy and payment records were not modified.",
+          "artifacts": [
+            {
+              "id": "INSIGHT-60d69504559ddfb4",
+              "type": "verified-dashboard",
+              "description": "Merchants with High Refund Erosion"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

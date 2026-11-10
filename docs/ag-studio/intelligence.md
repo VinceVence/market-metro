@@ -49,7 +49,9 @@ The largest run's native receipt count is zero. The separate 12-merchant judge r
 - [Interactive ontology and evidence inspector](../../demo/commerce/run-inspector.mjs)
 - [Focused accounting/cohort regression](../../tests/intelligence.test.mjs)
 
-The older analyst → designer → checked publication harness remains in [agents.mjs](../../demo/studio/agents.mjs) and `/reports.html`, with its original authored-run contract. The new Intelligence dashboard reads saved commerce decisions; it does not claim a new LLM chose its default dashboard layout. Connecting that AG Studio agent harness to the new run schema is a remaining sponsor-demo opportunity.
+**The current sponsor path is [Agent Studio](agent-workspace.md)**: native cohort queries, ontology verification, two Gemini decisions and checked dashboard publication. The Intelligence header and sidebar now link directly to it.
+
+The older analyst → designer → checked publication harness remains in [agents.mjs](../../demo/studio/agents.mjs) and `/reports.html`, with its original authored-run contract. The new Intelligence dashboard reads saved commerce decisions; it does not claim a new LLM chose its default dashboard layout. The new Agent Studio workspace supplies that connection for the recorded 12-merchant judge run.
 
 ## Verification
 

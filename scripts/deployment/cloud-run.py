@@ -13,6 +13,7 @@ BASE = f'projects/{PROJECT}/locations/{REGION}'
 BUCKET = PROJECT + '-market-metro-source'
 BUILD_SA = f'market-metro-build@{PROJECT}.iam.gserviceaccount.com'
 RUN_SA = f'market-metro-demo@{PROJECT}.iam.gserviceaccount.com'
+AGENT_BUCKET = PROJECT + '-studio-agent'
 STATE = Path('.local/release-audit')
 config = json.loads(Path('.local/gcp/config.json').read_text())
 assert config['projectId'] == PROJECT, 'Refusing to touch another project'
@@ -100,6 +101,30 @@ def status():
     print(json.dumps({k:b.get(k) for k in ['id','status','statusDetail','logUrl','failureInfo']}),flush=True)
     (STATE/'build-status.json').write_text(json.dumps(b,indent=2)+'\n')
 
+def configure_agent():
+    """One small durable allowance, never reset on deploy or restart."""
+    ensure(f'https://storage.googleapis.com/storage/v1/b/{AGENT_BUCKET}',
+           f'https://storage.googleapis.com/storage/v1/b?project={PROJECT}',
+           {'name':AGENT_BUCKET,'location':REGION,'iamConfiguration':{'uniformBucketLevelAccess':{'enabled':True},'publicAccessPrevention':'enforced'}})
+    role_id='marketMetroStudioPredictor'
+    role_name=f'projects/{PROJECT}/roles/{role_id}'
+    permissions=['aiplatform.endpoints.predict','serviceusage.services.use']
+    role=ensure('https://iam.googleapis.com/v1/'+role_name,f'https://iam.googleapis.com/v1/projects/{PROJECT}/roles',
+           {'roleId':role_id,'role':{'title':'Market Metro Studio prediction','description':'Model inference only; no model deployment or payment authority.','includedPermissions':permissions,'stage':'GA'}})
+    if set(role.get('includedPermissions',[]))!=set(permissions):request('PATCH','https://iam.googleapis.com/v1/'+role_name+'?updateMask=includedPermissions',json={'includedPermissions':permissions})
+    crm=f'https://cloudresourcemanager.googleapis.com/v1/projects/{PROJECT}'
+    policy=request('POST',crm+':getIamPolicy',json={});bindings=policy.setdefault('bindings',[])
+    if not any(b['role']==role_name and 'serviceAccount:'+RUN_SA in b['members'] for b in bindings):
+        bindings.append({'role':role_name,'members':['serviceAccount:'+RUN_SA]})
+        request('POST',crm+':setIamPolicy',json={'policy':policy})
+    binding(f'https://storage.googleapis.com/storage/v1/b/{AGENT_BUCKET}/iam','serviceAccount:'+RUN_SA,'roles/storage.objectUser',storage=True)
+    state={'version':1,'capMicros':250000,'entries':[]}
+    r=client.post(f'https://storage.googleapis.com/upload/storage/v1/b/{AGENT_BUCKET}/o?uploadType=media&name=budget.json&ifGenerationMatch=0',
+                  data=json.dumps(state),headers={'Content-Type':'application/json'},timeout=30)
+    if r.status_code not in (200,201,412):r.raise_for_status()
+    (STATE/'studio-agent-config.json').write_text(json.dumps({'bucket':AGENT_BUCKET,'project':PROJECT,'capUSD':.25,'role':role_name},indent=2)+'\n')
+    print(json.dumps({'configured':True,'bucket':AGENT_BUCKET,'capUSD':.25,'budgetReset':False,'permissions':permissions+['dedicated bucket object access']}),flush=True)
+
 def deploy():
     saved=json.loads((STATE/'build.json').read_text())
     b=request('GET',f'https://cloudbuild.googleapis.com/v1/projects/{PROJECT}/builds/{saved["id"]}')
@@ -110,7 +135,7 @@ def deploy():
           'scaling':{'minInstanceCount':0,'maxInstanceCount':1},'maxInstanceRequestConcurrency':32,'timeout':'300s',
           'containers':[{'image':image,'ports':[{'containerPort':8080}],
           'resources':{'limits':{'cpu':'1','memory':'2Gi'},'cpuIdle':True,'startupCpuBoost':False},
-          'env':[{'name':'PUBLIC_DEMO','value':'true'}],
+          'env':[{'name':'PUBLIC_DEMO','value':'true'},*([{'name':'STUDIO_AGENT_ENABLED','value':'true'},{'name':'STUDIO_AGENT_BUCKET','value':AGENT_BUCKET}] if (STATE/'studio-agent-config.json').exists() else [])],
           'startupProbe':{'httpGet':{'path':'/healthz','port':8080},'periodSeconds':5,'failureThreshold':24,'timeoutSeconds':2}}]}}
     existing=client.get(url,timeout=30)
     if existing.status_code==404:op=request('POST',f'https://run.googleapis.com/v2/{BASE}/services?serviceId={SERVICE}',json=body)
@@ -127,5 +152,5 @@ def publish():
     (STATE/'service.json').write_text(json.dumps(service,indent=2)+'\n')
     print(json.dumps({'url':service['uri'],'revision':service.get('latestReadyRevision'),'project':PROJECT}),flush=True)
 
-parser=argparse.ArgumentParser();parser.add_argument('action',choices=['prepare','build','status','deploy','publish']);args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('action',choices=['prepare','build','status','deploy','publish','configure_agent']);args=parser.parse_args()
 globals()[args.action]()

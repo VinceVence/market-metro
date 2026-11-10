@@ -31,6 +31,7 @@ import { createBenchmarkService, BenchmarkError } from '../benchmark/service.mjs
 import { createMarketStore, SCHEMA, csv } from './market-store.mjs';
 import { createMarketService } from './market-service.mjs';
 import {PUBLIC_RUNTIME,publicRouteAllowed,publicStartAllowed,publicHeaders} from './public-demo.mjs';
+import {createInvestigationService} from './studio/investigation.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const types = { '.html': 'text/html; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.pdf': 'application/pdf', '.ttf': 'font/ttf', '.txt': 'text/plain; charset=utf-8', '.json':'application/json; charset=utf-8', '.csv':'text/csv; charset=utf-8' };
@@ -50,6 +51,7 @@ async function body(req,limit=4096) {
 
 export function createSupplyYardServer(paypal, benchmark=createBenchmarkService({storePath:resolve(root,'.local/benchmarks/latest.json')}), market=null, funding=null, workflow=market?createCampaignWorkflow({store:market.store,market}):null, {publicDemo=false}={}) {
   const publicRequests=new Set();let rateWindow=Date.now(), rateCount=0;
+  const investigation=createInvestigationService();
   const campaignDemo=workflow&&market?createCampaignDemo({workflow,market}):null;
   const planner=workflow&&market?createAutonomousPlanner({store:market.store,workflow}):null;
   const judgeDemo=workflow&&market?createJudgeDemo({store:market.store,workflow,market}):null;
@@ -75,6 +77,8 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
       const url = new URL(req.url, origin), path = decodeURIComponent(url.pathname);
       if(path==='/healthz'&&req.method==='GET')return json(res,200,{status:'ok',mode:publicDemo?'public-demo':'local'});
       if(path==='/api/runtime'&&req.method==='GET')return json(res,200,publicDemo?PUBLIC_RUNTIME:{publicDemo:false});
+      if(req.method==='GET'&&path==='/api/market/studio-investigation/catalog')return json(res,200,await investigation.catalog());
+      if(req.method==='GET'&&path==='/api/market/studio-investigation/example')return json(res,200,{example:await investigation.example()});
       if(publicDemo&&path==='/api/market/policy-lab/budget'&&req.method==='GET')return json(res,200,{available:false,recordedModelUSD:0,localModelCapUSD:0,circuit:'PUBLIC_DEMO_NO_PROVIDER_CALLS'});
       if (path.startsWith('/api/')) {
         if(publicDemo&&!publicRouteAllowed(req.method,path))return json(res,403,{error:{code:'PUBLIC_DEMO_READ_ONLY',message:'Use the saved walkthrough or the free simulation. Provider actions are disabled on this public demo.'}});
@@ -178,6 +182,10 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
         }
         const input = await body(req,path.startsWith('/api/market/studio/')?131072:path.startsWith('/api/workflows')?32768:4096);
         if (!input || Array.isArray(input) || typeof input !== 'object') throw new SandboxError(400, 'INVALID_JSON', 'Expected a JSON object.');
+        if(['/api/market/studio-investigation/plan','/api/market/studio-investigation/verify'].includes(path)){
+          try{return json(res,200,await investigation[path.endsWith('/plan')?'plan':'verify'](input));}
+          catch(e){if(e instanceof SandboxError)throw e;console.error('[studio-investigation]',e.message);return json(res,503,{error:{code:'INVESTIGATION_UNAVAILABLE',message:e.message==='STUDIO_BUDGET_EXHAUSTED'?'The shared agent budget is used. Open the recorded investigation.':'The investigation paused without publishing changes. You can open the recorded example.'}});}
+        }
         if(path==='/api/market/autonomy/start'&&autonomy){
           if(publicDemo&&!publicStartAllowed(input))return json(res,403,{error:{code:'FREE_SIMULATION_ONLY',message:'The hosted demo runs the saved policy with 12 merchants, 600 shoppers and no payments.'}});
           if(publicDemo&&!publicRequests.has(input.requestId)&&publicRequests.size>=PUBLIC_RUNTIME.maxRunsPerInstance)return json(res,429,{error:{code:'DEMO_RUN_LIMIT',message:'This shared instance has reached its free-run limit. Saved evidence remains available; use the repository for unlimited local runs.'}});

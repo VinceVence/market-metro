@@ -8,7 +8,7 @@ Market Metro shows how one LLM planner designs a merchant campaign and a local v
 
 **[Open Market Metro](https://market-metro-fifm2aalgq-uc.a.run.app/)** · [PayPal and AG Grid evidence](https://market-metro-fifm2aalgq-uc.a.run.app/analytics.html?run=judge-demo&view=payments)
 
-The Cloud Run release uses a credential-free public mode. Saved evidence is available without setup; free new-seed runs use the recorded policy and temporary shared sessions. Fresh model calls and Sandbox payment creation remain local configured modes. [Deployment and security boundary](docs/cloud-run.md).
+The Cloud Run release uses a credential-free public mode. Saved evidence is available without setup; free new-seed runs use the recorded policy and temporary shared sessions. Fresh campaign execution and Sandbox payment creation remain local configured modes. The separate Agent Studio investigation has its own capped model allowance. [Deployment and security boundary](docs/cloud-run.md).
 
 ## Play the judge demo
 
@@ -34,6 +34,10 @@ In **More evidence → Mapping hold example**, two declared checkout keys stop t
 In **More evidence → Training comparison**, choose a business question and see which rows and features can answer it. The revised product ranking changed four outreach choices on day 31. Across four fresh simulated markets it added $71.81 in PayPal net, $597.89 in merchant contribution and 16 retained purchases over the original ranking. [Try the training review](http://127.0.0.1:4173/judge.html#training) · [Controls and results by market](docs/ontology/training/README.md)
 
 In **More evidence → Training comparison**, choose **Compare fixed rules, Gemini and Gemini with ontology** to see fixed rules, a fresh planner and a fresh planner using ontology on the original judge market. Inspect the LLM's actual training window, requested feature list, campaign revisions and the verifier's publication decision. [Open the three-way comparison](http://127.0.0.1:4173/judge.html#livecampaign) · [Method and cost limits](docs/ontology/live/README.md)
+
+## Agent Studio
+
+**[Investigate the market with AG Studio agents](https://market-metro-fifm2aalgq-uc.a.run.app/agent-studio.html).** The planner selects a merchant cohort, Studio’s native query tool retrieves it, the ontology verifies it, and the insight editor publishes checked dashboard views. A fresh two-call demo selected three merchants and reconciled 114 checkouts with 125 merchant orders for $0.001530 estimated inference cost. Live investigations share a durable $0.25 allowance; the saved example can be replayed without new model calls. [Architecture, proof and limits](docs/ag-studio/agent-workspace.md).
 
 ## Intelligence workspace
 

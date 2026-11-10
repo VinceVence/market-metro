@@ -7,9 +7,9 @@ The hosted service runs the guided campaign, AG Studio dashboards, ontology tool
 ## Runtime boundary
 
 - Project: `supply-yard-pilot-261021`; region: `us-central1`; service: `market-metro`. Deployment code rejects another project. APAC configuration is not changed.
-- Dedicated runtime identity: `market-metro-demo`, with no project roles granted and no downloaded service-account key.
+- Dedicated runtime identity: `market-metro-demo`, with no downloaded service-account key. Agent Studio adds a custom role containing only model prediction and quota-use permissions, plus object access to its dedicated private bucket.
 - No PayPal credentials, saved buyer tokens, ADC, `.env`, research cache, private database, video directory or Git history enters the build context.
-- Provider mutations and arbitrary workflow endpoints are denied at the HTTP boundary. `PUBLIC_DEMO=true` also rejects startup with provider configuration.
+- Payment mutations and arbitrary campaign-workflow endpoints are denied at the HTTP boundary. The only hosted model route is the separately capped Agent Studio investigation. `PUBLIC_DEMO=true` also rejects startup with provider configuration.
 - New simulations use the recorded model and campaign: 12 merchants, 600 shoppers, no new LLM calls or native payments. The reference Gemini review remains inspectable and labeled.
 - Explicit same-origin tick requests advance the economy while the page is open. There is no background simulation timer to depend on idle Cloud Run CPU allocation.
 - One active simulation, four successful runs per instance, 600 requests/minute per instance, one maximum Cloud Run instance with 32 concurrent HTTP requests, zero minimum instances, request-based CPU billing. These limits reduce cost; they are not a guaranteed dollar billing cap. A $40 project-wide all-services budget sends 25%, 50%, 75%, 90% and 100% alerts through December 16, alongside the existing $10 Vertex-only budget.
@@ -38,7 +38,7 @@ python3 scripts/deployment/cloud-run.py publish
 
 `package.py` packages only tracked runtime paths. Inspect `.local/release-audit/source-manifest.json` and scan the archive before uploading. `publish` makes only this service invokable by judges; the source bucket retains public-access prevention. The image is deployed by immutable digest.
 
-The build identity can read its private source bucket, write its dedicated image repository and write build logs. The runtime identity receives none of those privileges. Build source objects expire after seven days. Do not grant the runtime Vertex AI, Secret Manager or PayPal credentials to enable an unbounded public planner.
+The build identity can read its private source bucket, write its dedicated image repository and write build logs. The runtime identity receives no build or source-bucket privileges. Its separate Studio investigator permissions are documented in [Agent Studio](ag-studio/agent-workspace.md). Build source objects expire after seven days. Do not grant broad model-management, Secret Manager or PayPal access to enable an unbounded public planner. The Studio allowance survives restarts and is never reset on deployment.
 
 To keep a deployment private instead, omit `publish` and use authenticated Cloud Run access. To remove the demo, delete only the `market-metro` Cloud Run service in the isolated project; leave APAC resources alone.
 

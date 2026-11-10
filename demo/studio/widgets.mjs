@@ -31,7 +31,7 @@ export function styleReport(state,{compact=false}={}){
  }
  return result;
 }
-export function studioWidgets(defaults){
+export function studioWidgets(defaults,{receipt=null}={}){
  const base=defaults.widgets.find(w=>w.id==='value');
  class PaymentEvidence {
   constructor(){this.el=document.createElement('div');this.el.className='payment-evidence-card';}
@@ -41,6 +41,12 @@ export function studioWidgets(defaults){
    p.widgetApi.setDisplayState('loading');const r=await p.widgetApi.getData({fields:[f]}),n=Number(r.results.rows[0]?.[f.key]||0);this.el.replaceChildren();
    const brand=document.createElement('b');brand.className='payment-brand';brand.textContent='PayPal Sandbox';const value=document.createElement('strong');value.textContent=String(n);const note=document.createElement('p');note.textContent=n?'Verified native captures linked to this run. Sandbox test funds only.':'No native captures in this run. Modeled fees and simulated orders are not provider receipts.';
    const source=document.createElement('small');source.textContent='Read-only evidence · no payment authority';this.el.append(brand,value,note,source);p.widgetApi.setDisplayState('displayed');
+   if(n>0&&receipt?.status==='COMPLETED'&&[receipt.grossUSD,receipt.feeUSD,receipt.netUSD].every(Number.isFinite)){
+    const usd=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n);
+    value.textContent=usd(receipt.grossUSD);note.textContent=`${usd(receipt.feeUSD)} fee · ${usd(receipt.netUSD)} to the test merchant`;
+    source.textContent='Archived Sandbox capture · '+receipt.capture;
+    const proof=document.createElement('span');proof.className='payment-proof-badge';proof.textContent='✓ Existing purchase matched · no new sale';this.el.append(proof);
+   }
   }
  }
  return agStudio.createWidgets({additionalTypes:[{...base,id:'payment-evidence',label:'PayPal evidence card',comp:PaymentEvidence,defaultSize:{width:350,height:200},minSize:{width:230,height:150},ai:{description:'Run-level number of native PayPal Sandbox captures. Distinguishes verified provider receipts from simulated payments.'}}],menu:[{label:'Market Metro',widgetIds:['payment-evidence']},...defaults.menu]});
