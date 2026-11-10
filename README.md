@@ -4,6 +4,12 @@ Market Metro shows how one LLM planner designs a merchant campaign and a local v
 
 [Submission demo plan](docs/demo-plan.md) · [Submission description](docs/submission-draft.md) · [Release audit](docs/submission-readiness.md) · [Narration](docs/video-narration.txt) · [Remotion preview setup](video/README.md)
 
+## Hosted judge demo
+
+**[Open Market Metro](https://market-metro-fifm2aalgq-uc.a.run.app/)** · [PayPal and AG Grid evidence](https://market-metro-fifm2aalgq-uc.a.run.app/analytics.html?run=judge-demo&view=payments)
+
+The Cloud Run release uses a credential-free public mode. Saved evidence is available without setup; free new-seed runs use the recorded policy and temporary shared sessions. Fresh model calls and Sandbox payment creation remain local configured modes. [Deployment and security boundary](docs/cloud-run.md).
+
 ## Play the judge demo
 
 With Node.js 22.16 or newer, run these commands from the project root.

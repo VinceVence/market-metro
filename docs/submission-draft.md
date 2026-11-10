@@ -74,8 +74,8 @@ Use the repository’s Node setup to run the saved walkthrough and AG Studio evi
 ## Submission fields
 
 - Source: https://github.com/VinceVence/market-metro — release branch: `main`; currently private until publication is approved.
-- Runnable demo: local setup in README; no hosted URL is claimed.
-- Video: the 2:37 merchant-led Remotion preview is ready with female narration, captured app footage and sound design. Final MP4 export and public YouTube upload are pending.
+- Runnable demo: https://market-metro-fifm2aalgq-uc.a.run.app — hosted walkthrough, AG Studio evidence and bounded free new-seed simulations. Local setup remains in README.
+- Video: the current 2:41 merchant-led Remotion preview is ready with female narration, captured app footage and sound design. Final MP4 export and public YouTube upload are pending.
 - License: MIT for original code; commercial AG Studio dependencies retain their own terms.
 - Sponsor category: Best Use of AG Grid. General judging and honorable-mention consideration follow the official prize rules.
 

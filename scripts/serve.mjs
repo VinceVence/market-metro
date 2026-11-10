@@ -30,6 +30,7 @@ import {createPayPalCommerce} from './paypal-commerce.mjs';
 import { createBenchmarkService, BenchmarkError } from '../benchmark/service.mjs';
 import { createMarketStore, SCHEMA, csv } from './market-store.mjs';
 import { createMarketService } from './market-service.mjs';
+import {PUBLIC_RUNTIME,publicRouteAllowed,publicStartAllowed,publicHeaders} from './public-demo.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const types = { '.html': 'text/html; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.pdf': 'application/pdf', '.ttf': 'font/ttf', '.txt': 'text/plain; charset=utf-8', '.json':'application/json; charset=utf-8', '.csv':'text/csv; charset=utf-8' };
@@ -47,7 +48,8 @@ async function body(req,limit=4096) {
   catch { throw new SandboxError(400, 'INVALID_JSON', 'Request body must be JSON.'); }
 }
 
-export function createSupplyYardServer(paypal, benchmark=createBenchmarkService({storePath:resolve(root,'.local/benchmarks/latest.json')}), market=null, funding=null, workflow=market?createCampaignWorkflow({store:market.store,market}):null) {
+export function createSupplyYardServer(paypal, benchmark=createBenchmarkService({storePath:resolve(root,'.local/benchmarks/latest.json')}), market=null, funding=null, workflow=market?createCampaignWorkflow({store:market.store,market}):null, {publicDemo=false}={}) {
+  const publicRequests=new Set();let rateWindow=Date.now(), rateCount=0;
   const campaignDemo=workflow&&market?createCampaignDemo({workflow,market}):null;
   const planner=workflow&&market?createAutonomousPlanner({store:market.store,workflow}):null;
   const judgeDemo=workflow&&market?createJudgeDemo({store:market.store,workflow,market}):null;
@@ -57,16 +59,26 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
   const behavior=market?createOwnMarketService({store:market.store}):null;
   const studio=market?createStudioService({store:market.store}):null;
   const room=market?createCommerceRoom({store:market.store,market}):null;
-  const autonomy=market?createAutonomyRoom({store:market.store,market}):null;
+  const autonomy=market?createAutonomyRoom({store:market.store,market,autoPump:!publicDemo}):null;
   const trustedWorkflow=market?createTrustedWorkflowService():null;
   const server = http.createServer(async (req, res) => {
     try {
       const port = server.address().port;
       const hosts = [`127.0.0.1:${port}`, `localhost:${port}`];
-      if (!hosts.includes(req.headers.host)) return json(res, 403, { error: { code: 'LOCAL_ONLY', message: 'Use the local Supply Yard address.' } });
-      const origin = `http://${req.headers.host}`;
+      if (!publicDemo&&!hosts.includes(req.headers.host)) return json(res, 403, { error: { code: 'LOCAL_ONLY', message: 'Use the local Supply Yard address.' } });
+      if(publicDemo){
+        publicHeaders(res);
+        if(Date.now()-rateWindow>60000){rateWindow=Date.now();rateCount=0;}
+        if(++rateCount>600){res.setHeader('Retry-After','60');return json(res,429,{error:{code:'DEMO_BUSY',message:'The shared demo is busy. Please retry in a minute.'}});}
+      }
+      const origin = `${publicDemo&&req.headers['x-forwarded-proto']==='https'?'https':'http'}://${req.headers.host}`;
       const url = new URL(req.url, origin), path = decodeURIComponent(url.pathname);
+      if(path==='/healthz'&&req.method==='GET')return json(res,200,{status:'ok',mode:publicDemo?'public-demo':'local'});
+      if(path==='/api/runtime'&&req.method==='GET')return json(res,200,publicDemo?PUBLIC_RUNTIME:{publicDemo:false});
+      if(publicDemo&&path==='/api/market/policy-lab/budget'&&req.method==='GET')return json(res,200,{available:false,recordedModelUSD:0,localModelCapUSD:0,circuit:'PUBLIC_DEMO_NO_PROVIDER_CALLS'});
       if (path.startsWith('/api/')) {
+        if(publicDemo&&!publicRouteAllowed(req.method,path))return json(res,403,{error:{code:'PUBLIC_DEMO_READ_ONLY',message:'Use the saved walkthrough or the free simulation. Provider actions are disabled on this public demo.'}});
+        if(publicDemo&&req.method==='POST'&&(req.headers.origin!==origin||req.headers['x-supply-yard']!=='sandbox'||req.headers['content-type']?.split(';')[0]!=='application/json'))return json(res,403,{error:{code:'SAME_ORIGIN_REQUIRED',message:'Use the controls in this demo.'}});
         if(req.method==='GET'&&path==='/api/market/ontology/reference')return json(res,200,await savedPlanningEvidence());
         if(req.method==='GET'&&path==='/api/market/ontology/training'){
           const task=url.searchParams.get('task')??'retained_recommendation';
@@ -166,7 +178,19 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
         }
         const input = await body(req,path.startsWith('/api/market/studio/')?131072:path.startsWith('/api/workflows')?32768:4096);
         if (!input || Array.isArray(input) || typeof input !== 'object') throw new SandboxError(400, 'INVALID_JSON', 'Expected a JSON object.');
-        if(path==='/api/market/autonomy/start'&&autonomy)return json(res,202,await autonomy.start(input));
+        if(path==='/api/market/autonomy/start'&&autonomy){
+          if(publicDemo&&!publicStartAllowed(input))return json(res,403,{error:{code:'FREE_SIMULATION_ONLY',message:'The hosted demo runs the saved policy with 12 merchants, 600 shoppers and no payments.'}});
+          if(publicDemo&&!publicRequests.has(input.requestId)&&publicRequests.size>=PUBLIC_RUNTIME.maxRunsPerInstance)return json(res,429,{error:{code:'DEMO_RUN_LIMIT',message:'This shared instance has reached its free-run limit. Saved evidence remains available; use the repository for unlimited local runs.'}});
+          const result=await autonomy.start(input);if(publicDemo)publicRequests.add(input.requestId);
+          return json(res,202,result);
+        }
+        const tick=path.match(/^\/api\/market\/autonomy\/(AUTONOMY-[a-f0-9]{16})\/tick$/);
+        if(publicDemo&&tick&&autonomy){
+          if(Object.keys(input).length!==1||!Number.isInteger(input.day)||input.day<0||input.day>126)throw new SandboxError(400,'INVALID_TICK','Supply the last observed simulation day.');
+          const current=autonomy.snapshot(tick[1],undefined,{details:false});
+          if(current.status==='RUNNING'&&current.day===input.day)await autonomy.step(tick[1]);
+          return json(res,200,autonomy.snapshot(tick[1],undefined,{details:false}));
+        }
         const fixMapping=path.match(/^\/api\/market\/autonomy\/(AUTONOMY-[a-f0-9]{16})\/mapping$/);
         if(fixMapping&&autonomy)return json(res,200,autonomy.correctMapping(fixMapping[1],input));
         if(path==='/api/market/room/start'&&room)return json(res,202,room.start(input));
@@ -229,6 +253,7 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
         return json(res, 404, { error: { code: 'NOT_FOUND', message: 'Unknown API route.' } });
       }
       if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405); res.end(); return; }
+      if(publicDemo&&(path.split('/').some(p=>p.startsWith('.'))||!['/','/vendor/ag-studio-3.0.0.js','/vendor/phaser.js'].includes(path)&&!['.html','.mjs','.js','.css','.json','.svg','.png','.jpg','.jpeg','.pdf','.ttf','.woff','.woff2','.csv'].includes(extname(path)))){res.writeHead(404);res.end('Not found');return;}
       if(path==='/vendor/ag-studio-3.0.0.js'){const content=await readFile(resolve(root,'node_modules/ag-studio/dist/umd/ag-studio.min.js'));res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public,max-age=3600'});res.end(content);return;}
       if(path.startsWith('/vendor/three/')||path.startsWith('/vendor/three-addons/')){
         const addon=path.startsWith('/vendor/three-addons/');
@@ -265,16 +290,20 @@ export function createSupplyYardServer(paypal, benchmark=createBenchmarkService(
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  if (existsSync(resolve(root, '.env'))) process.loadEnvFile(resolve(root, '.env'));
+  const publicDemo=process.env.PUBLIC_DEMO==='true';
+  if(publicDemo&&(process.env.PAYPAL_CLIENT_SECRET||process.env.GOOGLE_APPLICATION_CREDENTIALS||existsSync(resolve(root,'.local/gcp/config.json'))))throw Error('Public demo must not have provider credentials.');
+  if (!publicDemo&&existsSync(resolve(root, '.env'))) process.loadEnvFile(resolve(root, '.env'));
   const paypal = await createPayPalSandbox({ storePath: resolve(root, '.local/paypal-sandbox.json') });
   const catalog=createAuthoredCatalogService();
   const store=createMarketStore(resolve(root,'.local/market-metro.sqlite'));
   const funding=await createSandboxFunding({paypal,path:resolve(root,'.local/paypal-vault-setup.json')});
   const market=createMarketService({paypal,catalog,store,funding});
-  const server = createSupplyYardServer(paypal,undefined,market,funding);
-  server.listen(Number(process.env.PORT || 4173), '127.0.0.1', () => {
+  const server = createSupplyYardServer(paypal,undefined,market,funding,undefined,{publicDemo});
+  server.requestTimeout=30000;server.headersTimeout=15000;
+  server.listen(Number(process.env.PORT || 4173), publicDemo?'0.0.0.0':'127.0.0.1', () => {
     console.log(`Market Metro: http://127.0.0.1:${server.address().port}`);
-    if(!process.argv.includes('--no-recover')){server.planner?.recover();server.policyLab?.recover();server.room?.recover();server.autonomy?.recover();}
+    if(!publicDemo&&!process.argv.includes('--no-recover')){server.planner?.recover();server.policyLab?.recover();server.room?.recover();server.autonomy?.recover();}
   });
-  process.once('SIGINT',async()=>{await server.autonomy?.close();await server.room?.close();await server.liveMarket?.close();await server.planner?.close();await server.commerce?.close();await server.policyLab?.close();server.close(()=>process.exit(0));});
+  const shutdown=async()=>{await server.autonomy?.close();await server.room?.close();await server.liveMarket?.close();await server.planner?.close();await server.commerce?.close();await server.policyLab?.close();server.close(()=>process.exit(0));};
+  process.once('SIGINT',shutdown);process.once('SIGTERM',shutdown);
 }

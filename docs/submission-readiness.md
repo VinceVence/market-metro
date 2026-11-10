@@ -1,4 +1,14 @@
-# Submission readiness — 8 November 2026
+# Submission readiness — 10 November 2026
+
+**Latest:** [Current release audit](release-audit-2026-11-10.md) · [Cloud Run deployment](cloud-run.md).
+
+The release checks pass, the user’s 2:41 video is preserved, and the public server disables provider spending and payments. The remaining submission actions are repository publication approval, a final public YouTube URL and AG Studio license coverage through judging.
+
+The November 8 audit below is retained as historical evidence; use the linked November 10 audit for current status.
+
+---
+
+## Earlier audit — 8 November 2026
 
 **Code candidate: ready for the main-branch release gate. Public submission: not yet complete.** This audit prepares the source, judge instructions, submission copy and reviewable video script. It does not publish the repository, upload a video or submit Devpost forms.
 
