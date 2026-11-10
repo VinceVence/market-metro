@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-10",
+  "url": "https://market-metro-fifm2aalgq-uc.a.run.app/agent-studio.html",
+  "backendVerifiedRevision": "market-metro-00004-pjh",
+  "scenarios": [
+    {
+      "id": "INSIGHT-60d69504559ddfb4",
+      "execution": "Fresh Gemini + local native Studio runtime",
+      "question": "Which merchants deserve a closer look because refunds are eroding sales? Show the evidence and keep PayPal payment proof separate.",
+      "merchants": [
+        "Paper Lane",
+        "The Bundle Shop",
+        "Circuit Corner"
+      ],
+      "checkouts": 114,
+      "merchantOrders": 125,
+      "retainedSalesUSD": 11430,
+      "refundsUSD": 1408,
+      "widgets": [
+        "cohort_sales",
+        "cohort_refunds",
+        "cohort_ledger",
+        "checkout_grain",
+        "payment_evidence"
+      ],
+      "facts": [
+        "refund-review",
+        "retained"
+      ],
+      "modelCalls": 2,
+      "estimatedModelCostUSD": 0.00153,
+      "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095"
+    },
+    {
+      "id": "INSIGHT-fe023c8ad9b702f6",
+      "execution": "Fresh Gemini + Cloud Run managed identity + native Studio runtime",
+      "question": "Which merchants lead retained sales? Build a focused review and explain which totals are observed versus matched campaign results.",
+      "merchants": [
+        "Oak & Ink",
+        "Team Supply",
+        "Bright Desk",
+        "Metro Devices",
+        "Workshop West",
+        "Form & Function"
+      ],
+      "checkouts": 1280,
+      "merchantOrders": 1666,
+      "retainedSalesUSD": 133072,
+      "refundsUSD": 4778,
+      "widgets": [
+        "cohort_sales",
+        "cohort_ledger",
+        "checkout_grain",
+        "reference_impact",
+        "payment_evidence"
+      ],
+      "facts": [
+        "sales-leader",
+        "retained",
+        "grain",
+        "reference-impact"
+      ],
+      "modelCalls": 2,
+      "estimatedModelCostUSD": 0.00265,
+      "sourceHash": "a8130c3c3dcea82b5b82cc2e0ac03a9ac445ddf807893559e5b4b7fdbd3ec095"
+    }
+  ],
+  "totalFreshModelCalls": 4,
+  "totalEstimatedModelCostUSD": 0.00418,
+  "sharedCapUSD": 0.25,
+  "remainingModelBudgetUSD": 0.24581999999999998,
+  "checks": {
+    "releaseTests": 77,
+    "frozenEconomyFingerprint": "PASS",
+    "ambiguousMapping": "HOLD before a model call",
+    "nativeQuery": "actual AG Studio execute_query",
+    "nativeHandoff": [
+      "delegate_to",
+      "complete_task"
+    ],
+    "replay": "native queries and checks rerun without another model call",
+    "paymentCreation": "disabled"
+  },
+  "scope": "Retrospective analysis of the recorded 12-merchant day-126 market. No economic outcomes or campaign policies were changed. Inference figures are token-based estimates, not a billing invoice."
+}

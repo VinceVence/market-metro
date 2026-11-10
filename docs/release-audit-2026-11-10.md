@@ -1,5 +1,7 @@
 # Release audit — 10 November 2026
 
+**Agent Studio update:** [Current agent integration and verification](ag-studio/agent-workspace.md). The newer release adds a separate managed-identity model route with a durable $0.25 allowance. The earlier zero-provider public-mode audit below describes the preceding release; payment and campaign execution remain disabled.
+
 **Hosted release:** [https://market-metro-fifm2aalgq-uc.a.run.app](https://market-metro-fifm2aalgq-uc.a.run.app). Revision `market-metro-00003-5l5`, deployed by immutable image digest.
 
 [Deployment verification record](cloud-run-verification.json) · [Passing GitHub CI](https://github.com/VinceVence/market-metro/actions/runs/42825598177).

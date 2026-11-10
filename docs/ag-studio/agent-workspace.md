@@ -19,6 +19,10 @@ The two Gemini calls cost **$0.001530** by metered-token estimation. The native 
 
 The PayPal card shows the existing **$96 Sandbox capture**, **$3.56 fee** and **$92.44 merchant proceeds**. It is whole-market integration evidence and adds no purchase to the selected cohort. The reference +$114.96 modeled PayPal gain at the top of the workspace belongs to the original matched campaign, not this new investigation.
 
+## Hosted fresh check
+
+A second question, **Which merchants lead retained sales?**, ran through Cloud Run’s managed identity. Gemini chose six different merchants and published a different five-view dashboard. The ontology reconciled **1,280 checkouts with 1,666 merchant orders**, **$133,072 retained sales** and **$4,778 refunds**. It included an explicitly scoped whole-market reference view. Estimated model cost was **$0.002650**, for **$0.004180 across both fresh investigations**. [Verification record](agent-workspace-verification.json).
+
 ## What is actually agentic
 
 | Component | Real responsibility |
