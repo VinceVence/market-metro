@@ -1,8 +1,8 @@
 # Release audit — 10 November 2026
 
-**Hosted release:** [https://market-metro-fifm2aalgq-uc.a.run.app](https://market-metro-fifm2aalgq-uc.a.run.app). Revision `market-metro-00002-4cm`, deployed by immutable image digest.
+**Hosted release:** [https://market-metro-fifm2aalgq-uc.a.run.app](https://market-metro-fifm2aalgq-uc.a.run.app). Revision `market-metro-00003-5l5`, deployed by immutable image digest.
 
-[Deployment verification record](cloud-run-verification.json) · [Passing GitHub CI](https://github.com/VinceVence/market-metro/actions/runs/42823743315).
+[Deployment verification record](cloud-run-verification.json) · [Passing GitHub CI](https://github.com/VinceVence/market-metro/actions/runs/42825598177).
 
 ## Scope and current result
 
@@ -13,7 +13,7 @@ The supported release path is the saved judge walkthrough, AG Studio intelligenc
 - The user's latest Remotion cut is **161.03 seconds (2:41)**. TypeScript and video validation pass. Its source/media hashes match the pre-audit backup. Narration text documentation was synchronized; no voiceover or visual changes were made.
 - The obsolete 350-word heuristic was removed from the package test. Actual measured duration still enforces the competition's three-minute rule; every scene must finish its narration and bind to existing evidence.
 - Production npm audit reported **0 known vulnerabilities** on November 10. This is a dependency advisory check, not a security certification.
-- Common credential/private-key patterns found **0 matches** in tracked text. The final deployment archive was checked against known local credential values across **3,447 files**, including compressed JSON: **0 matches**. Git history contains no tracked `.env`, PEM/key files or ADC filename in the targeted path check. This is not an exhaustive forensic audit of every historical blob.
+- Common credential/private-key patterns found **0 matches** in tracked text. The final deployment archive was checked against known local credential values across **3,448 files**, including compressed JSON: **0 matches**. Git history contains no tracked `.env`, PEM/key files or ADC filename in the targeted path check. This is not an exhaustive forensic audit of every historical blob.
 
 ## Changes made
 
