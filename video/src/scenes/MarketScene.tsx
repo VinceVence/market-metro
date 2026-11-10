@@ -8,69 +8,85 @@ export const MarketScene=()=>{
   const {fps}=useVideoConfig();
   return <AbsoluteFill>
     <Merchant/>
-    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-neural/market.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
+    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-mix/market.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "It was a normal day for Leo.",
+    "text": "They look.",
     "startMs": 250,
-    "endMs": 2066,
+    "endMs": 700,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "His shop was ready, but customers kept",
-    "startMs": 2066,
-    "endMs": 4141,
+    "text": "They leave.",
+    "startMs": 890,
+    "endMs": 1740,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "walking.",
-    "startMs": 4141,
-    "endMs": 5049,
+    "text": "Leo wonders why.",
+    "startMs": 1840,
+    "endMs": 3215,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "For days, he faced the same question:",
-    "startMs": 5049,
-    "endMs": 7059,
+    "text": "Meet Leo, a furniture shop owner.",
+    "startMs": 3665,
+    "endMs": 6090,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "who should he reach, and what should",
-    "startMs": 7059,
-    "endMs": 9005,
+    "text": "Every day, people browse and walk away.",
+    "startMs": 6165,
+    "endMs": 8660,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "he offer?",
-    "startMs": 9005,
-    "endMs": 9912,
+    "text": "He has clues: what they looked at,",
+    "startMs": 8710,
+    "endMs": 10535,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "The clues were there, scattered across shopper",
-    "startMs": 9912,
-    "endMs": 12506,
+    "text": "almost bought, and paid for.",
+    "startMs": 10585,
+    "endMs": 12535,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "activity, product interest and payments.",
-    "startMs": 12506,
-    "endMs": 15230,
+    "text": "But those clues sit in different places.",
+    "startMs": 12610,
+    "endMs": 15085,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "His next offer is still a guess.",
+    "startMs": 15160,
+    "endMs": 17360,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Who should he reach, and with what?",
+    "startMs": 17435,
+    "endMs": 19510,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

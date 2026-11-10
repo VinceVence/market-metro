@@ -8,53 +8,53 @@ export const DemandScene=()=>{
   const {fps}=useVideoConfig();
   return <AbsoluteFill>
     <Quiet/>
-    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-neural/problem.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
+    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-mix/problem.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "Could AI do this for Leo?",
+    "text": "Could AI help bring those customers back?",
     "startMs": 250,
-    "endMs": 2125,
+    "endMs": 2875,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Meet Market Metro: a simulated commerce environment",
-    "startMs": 2725,
-    "endMs": 6105,
+    "startMs": 3275,
+    "endMs": 7025,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "where AI agents analyze shopper behavior, train",
-    "startMs": 6105,
-    "endMs": 9185,
+    "text": "where agents observe shoppers, train models, and",
+    "startMs": 7100,
+    "endMs": 10175,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "models and test marketing campaigns.",
-    "startMs": 9185,
-    "endMs": 12039,
+    "text": "test campaigns.",
+    "startMs": 10225,
+    "endMs": 11650,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "We measure how their decisions change purchases,",
-    "startMs": 12039,
-    "endMs": 15194,
+    "text": "Then we measure whether those decisions actually",
+    "startMs": 11725,
+    "endMs": 14100,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "merchant contribution and PayPal payment outcomes.",
-    "startMs": 15194,
-    "endMs": 19025,
+    "text": "help.",
+    "startMs": 14150,
+    "endMs": 14900,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

@@ -8,29 +8,45 @@ export const ClosingScene=()=>{
   const {fps}=useVideoConfig();
   return <AbsoluteFill>
     <Ending/>
-    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-neural/close.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
+    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-mix/close.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "Market Metro.",
+    "text": "For Leo, those questions now have tested",
     "startMs": 250,
-    "endMs": 1450,
+    "endMs": 2425,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "answers.",
+    "startMs": 2475,
+    "endMs": 3475,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Market Metro.",
+    "startMs": 3575,
+    "endMs": 4825,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "Agentic commerce that learns, tests its ideas,",
-    "startMs": 1525,
-    "endMs": 4325,
+    "startMs": 4900,
+    "endMs": 7925,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "and shows its work.",
-    "startMs": 4415,
-    "endMs": 5690,
+    "startMs": 7975,
+    "endMs": 9275,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

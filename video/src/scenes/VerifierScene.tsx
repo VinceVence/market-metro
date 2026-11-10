@@ -8,44 +8,44 @@ export const VerifierScene=()=>{
   const {fps}=useVideoConfig();
   return <AbsoluteFill>
     <Testing/>
-    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-neural/verifier.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
+    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-mix/verifier.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "Before a campaign launches, the verifier tests",
+    "text": "A prediction isn't enough.",
     "startMs": 250,
-    "endMs": 3079,
+    "endMs": 2231,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "the candidate models in matching development markets.",
-    "startMs": 3079,
-    "endMs": 6828,
+    "text": "The verifier tests both candidates, checking PayPal",
+    "startMs": 2231,
+    "endMs": 5306,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "It checks PayPal and merchant outcomes, then",
-    "startMs": 6828,
-    "endMs": 9515,
+    "text": "and merchant outcomes under matching conditions.",
+    "startMs": 5306,
+    "endMs": 8654,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "publishes an eligible tested configuration or keeps",
-    "startMs": 9515,
-    "endMs": 12698,
+    "text": "The winner earns its place through measured",
+    "startMs": 8654,
+    "endMs": 11182,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "the current policy.",
-    "startMs": 12698,
+    "text": "results; otherwise, the current policy stays.",
+    "startMs": 11182,
     "endMs": 14325,
     "timestampMs": null,
     "confidence": null,

@@ -8,45 +8,61 @@ export const ShopperScene=()=>{
   const {fps}=useVideoConfig();
   return <AbsoluteFill>
     <Return/>
-    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-neural/shopper.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
+    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-mix/shopper.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "On day thirty five, a recommendation reaches",
+    "text": "Now follow one recommendation.",
     "startMs": 250,
-    "endMs": 2875,
+    "endMs": 2675,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "our quiet shopper.",
-    "startMs": 2900,
-    "endMs": 4500,
+    "text": "On day thirty five, it reaches a",
+    "startMs": 2750,
+    "endMs": 4575,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "shopper who's been quiet for sixteen days.",
+    "startMs": 4700,
+    "endMs": 7525,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
     "text": "They buy a ninety six dollar side",
-    "startMs": 4575,
-    "endMs": 6450,
+    "startMs": 7575,
+    "endMs": 9450,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "table, and it arrives the next day.",
-    "startMs": 6500,
-    "endMs": 9105,
+    "text": "table.",
+    "startMs": 9500,
+    "endMs": 10250,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Fixed rules left that same request unfilled.",
-    "startMs": 9205,
-    "endMs": 12405,
+    "text": "It arrives tomorrow.",
+    "startMs": 10325,
+    "endMs": 11825,
+    "timestampMs": null,
+    "confidence": null,
+    "pageBreakAfter": true
+  },
+  {
+    "text": "Under fixed rules, that request went unfilled.",
+    "startMs": 11875,
+    "endMs": 15075,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

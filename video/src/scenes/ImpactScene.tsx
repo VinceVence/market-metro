@@ -8,69 +8,69 @@ export const ImpactScene=()=>{
   const {fps}=useVideoConfig();
   return <AbsoluteFill>
     <Results/>
-    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-neural/impact.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
+    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-mix/impact.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "Across the same market, sixteen more purchases",
+    "text": "Across the same market: sixteen more purchases",
     "startMs": 250,
-    "endMs": 3077,
+    "endMs": 2953,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "were completed and kept.",
-    "startMs": 3077,
-    "endMs": 4986,
+    "text": "kept.",
+    "startMs": 2953,
+    "endMs": 3696,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Payment volume grows by two thousand three",
-    "startMs": 4986,
-    "endMs": 7531,
+    "text": "Two thousand three hundred forty five dollars",
+    "startMs": 3696,
+    "endMs": 6332,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "hundred forty five dollars.",
-    "startMs": 7531,
-    "endMs": 9651,
+    "text": "more payment volume.",
+    "startMs": 6332,
+    "endMs": 7954,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Merchant contribution and modeled PayPal net both",
-    "startMs": 9651,
-    "endMs": 12691,
+    "text": "Over a thousand dollars more merchant contribution.",
+    "startMs": 7954,
+    "endMs": 11400,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "rise, after AI cost.",
-    "startMs": 12691,
-    "endMs": 14317,
+    "text": "And about a hundred fifteen dollars more",
+    "startMs": 11400,
+    "endMs": 13697,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "The numbers on screen compare against the",
-    "startMs": 14317,
-    "endMs": 16791,
+    "text": "modeled PayPal net, after AI cost.",
+    "startMs": 13697,
+    "endMs": 16063,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "same fixed rules.",
-    "startMs": 16791,
-    "endMs": 18275,
+    "text": "All compared with fixed rules.",
+    "startMs": 16063,
+    "endMs": 18225,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true

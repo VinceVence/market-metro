@@ -1,23 +1,26 @@
-import { CanvasImage, staticFile, useVideoConfig } from "remotion";
+import { CanvasImage, Sequence, staticFile, useVideoConfig } from "remotion";
 import {
   Stage,
-  HeroVideo,
   Clip,
   Icon,
   ramp,
   useTime,
+  usePop,
+  Burst,
   cue,
   Brand,
   C,
 } from "./Design";
-import { Person, Store } from "./StoryArt";
+import { Person } from "./StoryArt";
+import { CityStreet } from "./City";
 export function Quiet() {
   const t = useTime(),
     { fps } = useVideoConfig(),
     intro = cue("problem", "meet", 3),
-    reveal = ramp(t, intro, intro + 0.85);
+    reveal = ramp(t, intro, intro + 0.85),
+    pop = usePop();
   const steps = [
-    ["data", "Observe", "analyze"],
+    ["eye", "Observe", "observe"],
     ["model", "Train", "train"],
     ["check", "Test", "test"],
     ["card", "Measure", "measure"],
@@ -25,18 +28,7 @@ export function Quiet() {
   return (
     <Stage brand={false}>
       <div style={{ position: "absolute", inset: 0, opacity: 1 - reveal }}>
-        <HeroVideo file="film-world" zoom={1.04} opacity={0.08} />
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 884,
-            height: 200,
-            background: "#dce8f3",
-          }}
-        />
-        <Store style={{ left: 40, top: 220, width: 1050, height: 758 }} />
+        <CityStreet />
       </div>
       <Person
         role="merchant"
@@ -62,7 +54,9 @@ export function Quiet() {
           background: "#fff4da",
           border: "3px solid #214a65",
           boxShadow: "9px 12px 0 #24465716",
-          rotate: "-2deg",
+          rotate: `${-2 + (1 - pop(0.15, 9)) * -10}deg`,
+          scale: pop(0.15, 9) * (1 - 0.15 * reveal),
+          transformOrigin: "left bottom",
           opacity: 1 - reveal,
         }}
       >
@@ -74,9 +68,9 @@ export function Quiet() {
             letterSpacing: -2,
           }}
         >
-          Could AI do
+          Could AI bring
           <br />
-          this for Leo?
+          customers back?
         </div>
         <svg width="380" height="22" style={{ marginTop: 18 }}>
           <path
@@ -102,7 +96,12 @@ export function Quiet() {
           <CanvasImage
             src={staticFile("brand/metro.svg")}
             premountFor={fps}
-            style={{ width: 96, height: 96 }}
+            style={{
+              width: 96,
+              height: 96,
+              scale: pop(intro + 0.1, 8),
+              rotate: `${(1 - pop(intro + 0.1, 8)) * -180}deg`,
+            }}
           />
           <div>
             <div
@@ -125,37 +124,89 @@ export function Quiet() {
           source={[1920, 1080]}
           box={[680, 320, 1110, 495]}
           crop={[100, 80, 1710, 900]}
+          label="Market Metro · simulated city"
+          enterAt={intro + 0.45}
         />
+        <div style={{ opacity: ramp(t, cue("problem", "observe", 7.3) - 0.2, cue("problem", "observe", 7.3) + 0.4) }}>
+          <Sequence from={Math.round((cue("problem", "observe", 7.3) - 0.3) * fps)} premountFor={fps}>
+            <Clip
+              file="film-traffic"
+              source={[1920, 1080]}
+              box={[680, 320, 1110, 495]}
+              crop={[160, 120, 1600, 760]}
+              label="Market Metro · live shoppers"
+            />
+          </Sequence>
+        </div>
+        <Burst at={intro + 0.15} x={728} y={198} count={18} spread={170} />
         <div
           style={{
             position: "absolute",
             left: 680,
-            top: 835,
+            top: 850,
             width: 1110,
-            display: "flex",
-            justifyContent: "space-between",
+            height: 76,
           }}
         >
-          {steps.map(([kind, label, word], i) => {
-            const at = cue("problem", word, intro + 2 + i);
-            return (
-              <div
-                key={label}
-                style={{
-                  display: "flex",
-                  gap: 13,
-                  alignItems: "center",
-                  fontSize: 30,
-                  fontWeight: 600,
-                  color: C.ink,
-                  opacity: 0.3 + 0.7 * ramp(t, at - 0.3, at + 0.3),
-                }}
-              >
-                <Icon kind={kind} size={42} color={C.blue} />
-                {label}
-              </div>
-            );
-          })}
+          <div
+            style={{
+              position: "absolute",
+              left: 40,
+              right: 40,
+              top: 36,
+              height: 4,
+              borderRadius: 2,
+              background: "#dbe7f3",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              left: 40,
+              top: 36,
+              height: 4,
+              borderRadius: 2,
+              width:
+                1030 * Math.max(0,
+                (steps.reduce(
+                  (n, [, , word], i) =>
+                    n + ramp(t, cue("problem", word, intro + 2 + i) - 0.3, cue("problem", word, intro + 2 + i) + 0.3),
+                  0,
+                ) -
+                  1) /
+                3),
+              background: `linear-gradient(90deg, ${C.blue}, ${C.mint})`,
+            }}
+          />
+          <div style={{ position: "relative", display: "flex", justifyContent: "space-between" }}>
+            {steps.map(([kind, label, word], i) => {
+              const at = cue("problem", word, intro + 2 + i),
+                on = ramp(t, at - 0.3, at + 0.3),
+                p = pop(at - 0.3, 9);
+              return (
+                <div
+                  key={label}
+                  style={{
+                    display: "flex",
+                    gap: 13,
+                    alignItems: "center",
+                    padding: "14px 26px 14px 18px",
+                    borderRadius: 40,
+                    fontSize: 30,
+                    fontWeight: 650,
+                    background: on > 0.5 ? C.blue : "#fff",
+                    color: on > 0.5 ? "#fff" : "#8aa0b6",
+                    border: "2px solid " + (on > 0.5 ? C.blue : "#dbe7f3"),
+                    boxShadow: on > 0.5 ? "0 12px 30px #0877e540" : "none",
+                    scale: 0.9 + 0.1 * (t < at - 0.3 ? 0 : p),
+                  }}
+                >
+                  <Icon kind={kind} size={38} color={on > 0.5 ? "#fff" : "#9db3c8"} />
+                  {label}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
       <Brand />

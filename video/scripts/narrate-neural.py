@@ -93,7 +93,7 @@ previous_path = ROOT / 'public/narration-neural.json'
 previous = json.loads(previous_path.read_text()) if previous_path.exists() else {}
 records = []
 for scene in PLAN['scenes']:
-    text = scene['narration'].replace('AG ', 'A G ').replace('LLM', 'L L M').replace('-', ' ')
+    text = scene['narration'].replace('-', ' ')
     delivery = scene.get('delivery', {})
     speed = delivery.get('speed', SPEED)
     cached = next((r for r in previous.get('scenes', []) if r['id'] == scene['id']), None)
@@ -110,7 +110,9 @@ for scene in PLAN['scenes']:
         q, contour = question_rise(q, rate, question_words[-1]['startMs']/1000-.25,
                                   delivery['riseSemitones'])
         answer, answer_rate, at = speaker.create_timed(rest.strip(), voice=VOICE,
-                    speed=speed, lang='en-us', continuous=True, sentence_pause=.10, clause_pause=.05)
+                    speed=speed, lang='en-us', continuous=True,
+                    sentence_pause=delivery.get('sentencePause', .10),
+                    clause_pause=delivery.get('clausePause', .05))
         assert rate == answer_rate
         pause = np.zeros(round(delivery['pauseAfterQuestion']*rate), dtype=q.dtype)
         offset=(len(q)+len(pause))/rate
@@ -128,22 +130,46 @@ for scene in PLAN['scenes']:
     else:
         samples, rate, timings = speaker.create_timed(text, voice=VOICE, speed=speed,
                                                 lang='en-us', continuous=True,
-                                                sentence_pause=.10, clause_pause=.05)
+                                                sentence_pause=delivery.get('sentencePause', .10),
+                                                clause_pause=delivery.get('clausePause', .05))
     seconds = len(samples) / rate
     if seconds <= 0:
         raise RuntimeError('Empty narration: ' + scene['id'])
     target = OUT / (scene['id'] + '.wav')
+    captions, method, words = segmented if delivery.get('questionTake') else phrase_captions(text, seconds, timings)
+    # Optional extra breath before a word (e.g. let the hook land before "Meet Leo.").
+    for word, extra in delivery.get('pauseBefore', {}).items():
+        hit = next(w for w in words if w['text'].strip('.,?!') == word)
+        prev = words[words.index(hit) - 1]
+        cut_ms = (prev['endMs'] + hit['startMs']) / 2
+        at = round((cut_ms - 250) / 1000 * rate)
+        samples = np.concatenate([samples[:at], np.zeros(round(extra * rate), samples.dtype), samples[at:]])
+        shift = lambda ms: ms + round(extra * 1000) if ms >= cut_ms else ms
+        words = [{**w, 'startMs': shift(w['startMs']), 'endMs': shift(w['endMs'])} for w in words]
+        captions = [{**c, 'startMs': shift(c['startMs']), 'endMs': shift(c['endMs'])} for c in captions]
+        seconds = len(samples) / rate
     # Consistent spoken level; music is mixed around this, not guessed per clip.
     rms = float(np.sqrt(np.mean(samples ** 2)))
     samples *= min(.13 / max(rms, 1e-6), .88 / max(float(np.max(np.abs(samples))), 1e-6))
     sf.write(target, samples, rate)
-    captions, method, words = segmented if delivery.get('questionTake') else phrase_captions(text, seconds, timings)
     records.append(dict(id=scene['id'], voice=VOICE, speed=speed, delivery=delivery, seconds=seconds,
                         source='Local Kokoro-82M neural speech on CPU', sampleRate=rate,
                         file='narration-neural/' + target.name, text=text, captions=captions, words=words,
                         captionTiming=method, generationSeconds=round(time.monotonic() - started, 2)))
     print(scene['id'] + ': ' + str(round(seconds, 2)) + ' s; ' + method, flush=True)
 
+# Trim dead air at the end of each take to 0.15 s; scene holds control the breathing room.
+for record in records:
+    path = ROOT / 'public' / record['file']
+    audio, sr = sf.read(path, dtype='float32')
+    loud = np.where(np.abs(audio) > .01)[0]
+    keep = min(len(audio), int(loud[-1] + .15 * sr)) if len(loud) else len(audio)
+    if keep < len(audio) - int(.02 * sr):
+        fade = min(int(.05 * sr), keep)
+        audio = audio[:keep].copy()
+        audio[keep - fade:] *= np.linspace(1, 0, fade, dtype=np.float32)
+        sf.write(path, audio, sr)
+        record['seconds'] = keep / sr
 (ROOT / 'public/narration-neural.json').write_text(json.dumps(dict(
     voice=VOICE, model='Kokoro-82M v1.0', engine='kokoro-onnx 0.6.1',
     providerCalls=0, sourceURL='https://github.com/thewh1teagle/kokoro-onnx', scenes=records

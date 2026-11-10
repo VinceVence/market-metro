@@ -1,34 +1,41 @@
 import { Sequence, useVideoConfig } from "remotion";
-import { Stage, Clip, useTime, cue, ramp, C } from "./Design";
+import { Stage, Clip, useTime, cue, ramp, C, Kicker, Headline } from "./Design";
 export function Evidence() {
   const t = useTime(),
     { fps, durationInFrames } = useVideoConfig(),
-    a = cue("ag_grid", "decision", 4),
+    a = cue("ag_grid", "decisions", 6.6),
     b = cue("ag_grid", "receipt", 6),
     c = durationInFrames / fps - 1.9;
   return (
     <Stage dark>
-      <div
-        style={{
-          position: "absolute",
-          left: 110,
-          top: 135,
-          fontSize: 85,
-          fontWeight: 650,
-        }}
-      >
-        Follow the full trail.
-      </div>
+      <Kicker n="08" label="Evidence" top={110} dark />
+      <Headline text="Follow the full trail." accent={["trail"]} top={150} size={82} dark />
       <div
         style={{
           position: "absolute",
           left: 115,
           top: 270,
           display: "flex",
-          gap: 55,
+          gap: 14,
           fontSize: 30,
+          padding: 8,
+          borderRadius: 40,
+          background: "#ffffff0f",
+          border: "1px solid #ffffff1a",
         }}
       >
+        <div
+          style={{
+            position: "absolute",
+            top: 8,
+            height: 58,
+            borderRadius: 30,
+            background: C.blue,
+            boxShadow: "0 8px 24px #0877e566",
+            width: [172, 200, 192][t < a ? 0 : t < b ? 1 : 2],
+            left: 8 + 186 * ramp(t, a - 0.1, a + 0.3) + 214 * ramp(t, b - 0.1, b + 0.3),
+          }}
+        />
         {[
           ["Models", 0],
           ["Decisions", a],
@@ -37,9 +44,12 @@ export function Evidence() {
           <div
             key={String(name)}
             style={{
-              color: C.cyan,
+              position: "relative",
+              padding: "10px 32px",
+              fontWeight: 650,
+              color: "#fff",
               opacity:
-                0.35 + 0.65 * ramp(t, Number(start), Number(start) + 0.3),
+                0.45 + 0.55 * ramp(t, Number(start), Number(start) + 0.3),
             }}
           >
             {name}
@@ -57,6 +67,7 @@ export function Evidence() {
             rate={1.1}
             box={[110, 420, 1700, 425]}
             crop={[332, 320, 890, 225]}
+            label="AG Grid · model runs"
           />
         </div>
       </Sequence>
@@ -73,6 +84,7 @@ export function Evidence() {
             trim={3.2}
             box={[110, 375, 1700, 490]}
             crop={[215, 245, 855, 250]}
+            label="AG Grid · agent decisions"
           />
         </div>
       </Sequence>
@@ -88,6 +100,7 @@ export function Evidence() {
             file="ag-paypal"
             box={[580, 335, 780, 570]}
             crop={[778, 183, 450, 330]}
+            label="PayPal widget · verified"
           />
         </div>
       </Sequence>
@@ -98,6 +111,7 @@ export function Evidence() {
             rate={1.2}
             box={[330, 355, 1260, 590]}
             crop={[305, 300, 830, 390]}
+            label="Dashboard layout"
           />
         </div>
       </Sequence>

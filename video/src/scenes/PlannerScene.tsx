@@ -8,45 +8,45 @@ export const PlannerScene=()=>{
   const {fps}=useVideoConfig();
   return <AbsoluteFill>
     <Planning/>
-    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-neural/planner.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
+    <Audio volume={soundMix.masterGain} name="Heart · upbeat neural female narration" src={staticFile("narration-mix/planner.wav")} from={Math.round(.25*fps)} premountFor={fps}/>
     <div className="caption-layer">
       <BasicCaptions name="Narration captions" premountFor={fps} width={1440} combineTokensWithinMilliseconds={0} style={{position:"absolute",left:240,bottom:48}} captions={[
   {
-    "text": "The agent studies demand and available stock,",
+    "text": "With that map, the agent studies demand",
     "startMs": 250,
-    "endMs": 3250,
+    "endMs": 2575,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "chooses twenty eight days of history, and",
-    "startMs": 3325,
-    "endMs": 5600,
+    "text": "and stock, selects twenty eight days of",
+    "startMs": 2650,
+    "endMs": 4950,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "asks local tools to train two models.",
-    "startMs": 5675,
-    "endMs": 8575,
+    "text": "history, and asks local tools to train",
+    "startMs": 5000,
+    "endMs": 7575,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "Its decision summary, tool calls and results",
-    "startMs": 8650,
-    "endMs": 11450,
+    "text": "two models.",
+    "startMs": 7650,
+    "endMs": 8925,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
   },
   {
-    "text": "become checkpoints you can inspect.",
-    "startMs": 11500,
-    "endMs": 13675,
+    "text": "Every choice is saved in a checkpoint.",
+    "startMs": 9000,
+    "endMs": 11425,
     "timestampMs": null,
     "confidence": null,
     "pageBreakAfter": true
