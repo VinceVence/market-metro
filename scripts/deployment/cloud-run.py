@@ -82,9 +82,12 @@ def build():
         request('POST',f'https://storage.googleapis.com/upload/storage/v1/b/{BUCKET}/o?uploadType=media&name={name}',
                 data=body,headers={'Content-Type':'application/gzip'})
     image=f'{REGION}-docker.pkg.dev/{PROJECT}/market-metro/demo:release-{manifest["sha256"][:16]}'
+    previous=json.loads((STATE/'build.json').read_text()).get('image') if (STATE/'build.json').exists() else None
+    steps=([{'name':'gcr.io/cloud-builders/docker','args':['pull',previous],'allowFailure':True}] if previous else [])
+    steps.append({'name':'gcr.io/cloud-builders/docker','args':['build',*(['--cache-from',previous] if previous else []),'-t',image,'.']})
     result=request('POST',f'https://cloudbuild.googleapis.com/v1/projects/{PROJECT}/builds',json={
         'source':{'storageSource':{'bucket':BUCKET,'object':name}},
-        'steps':[{'name':'gcr.io/cloud-builders/docker','args':['build','-t',image,'.']}],
+        'steps':steps,
         'images':[image],'timeout':'1200s','serviceAccount':f'projects/{PROJECT}/serviceAccounts/{BUILD_SA}',
         'options':{'logging':'CLOUD_LOGGING_ONLY','machineType':'E2_MEDIUM'}})
     build=result.get('metadata',{}).get('build',{})

@@ -42,8 +42,8 @@ The build identity can read its private source bucket, write its dedicated image
 
 To keep a deployment private instead, omit `publish` and use authenticated Cloud Run access. To remove the demo, delete only the `market-metro` Cloud Run service in the isolated project; leave APAC resources alone.
 
-## Before claiming commercial production readiness
+## Licensing and production scope
 
-Obtain AG Studio licensing that covers the intended audience and duration. The current app retains evaluation notices. A commercial production service would also need authentication, durable per-user storage, abuse controls tied to identity and explicit payment authorization. None is implied by this sandbox demonstration.
+AG Studio states that every deployment requires a licence. Its free 45-day trial explicitly covers production evaluation. Obtain that trial or equivalent sponsor coverage for this hosted demo; a visible watermark does not establish permission. The user currently chose to retain evaluation notices, and no trial key is configured. A commercial production service would also need authentication, durable per-user storage, abuse controls tied to identity and explicit payment authorization. None is implied by this sandbox demonstration.
 
-Sources: [Cloud Run container contract](https://docs.cloud.google.com/run/docs/container-contract) and [AG Grid hackathon brief](https://paypalaihackathon.devpost.com/details/aggrid), checked November 10, 2026.
+Sources: [Cloud Run container contract](https://docs.cloud.google.com/run/docs/container-contract) and [AG Grid hackathon brief](https://paypalaihackathon.devpost.com/details/aggrid) and [AG Studio licensing](https://www.ag-grid.com/studio/react/enterprise-licence/), checked November 10, 2026.

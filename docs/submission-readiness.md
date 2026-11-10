@@ -2,7 +2,7 @@
 
 **Latest:** [Current release audit](release-audit-2026-11-10.md) · [Cloud Run deployment](cloud-run.md).
 
-The release checks pass, the user’s 2:41 video is preserved, and the public server disables provider spending and payments. The remaining submission actions are repository publication approval, a final public YouTube URL and AG Studio license coverage through judging.
+The release checks pass, the user’s 2:41 video is preserved, and the public server disables provider spending and payments. The user chose to keep the repo private and retain AG Studio evaluation notices on November 10. Repository publication and a final public YouTube URL remain submission prerequisites. No separate trial-key eligibility condition appears in the sponsor brief, but AG Studio itself requires a licence for every deployment. Its free 45-day trial covers production evaluation; hosted licensing coverage remains pending.
 
 The November 8 audit below is retained as historical evidence; use the linked November 10 audit for current status.
 
