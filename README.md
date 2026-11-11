@@ -10,7 +10,8 @@
   <a href="https://market-metro-fifm2aalgq-uc.a.run.app/landing.html"><strong>Live site</strong></a> ·
   <a href="https://market-metro-fifm2aalgq-uc.a.run.app/judge.html"><strong>Judge walkthrough</strong></a> ·
   <a href="https://market-metro-fifm2aalgq-uc.a.run.app/agent-studio.html"><strong>Agent Studio</strong></a> ·
-  <a href="docs/judging.md">Testing guide</a>
+  <a href="docs/judging.md">Testing guide</a> ·
+  <a href="output/pdf/market-metro-technical-guide.pdf"><strong>Technical guide (PDF)</strong></a>
 </p>
 
 <p align="center">
@@ -124,6 +125,7 @@ The current catalog and customer behavior are authored simulation fixtures. NVID
 
 ## Explore the repository
 
+- [Technical submission guide (PDF)](output/pdf/market-metro-technical-guide.pdf): 28 illustrated pages covering the judge path, architecture, ontology, PayPal, AG Studio, benchmark results and deployment. [Editable source and rebuild instructions](docs/submission-guide/README.md).
 - [Developer guide and experiment index](docs/development.md): optional live modes, larger markets, benchmarks and project layout.
 - [Ontology implementation](docs/ontology/README.md): feed validation, checkout lineage and training eligibility.
 - [Typed execution contracts](docs/commerce-expanded/harness-v2/typed-execution.md): proposal validation and publication boundaries.
