@@ -16,7 +16,7 @@ const fonts=[400,600,700].map(w=>path.join(root,`demo/assets/fonts/dm-sans-${w}.
 const assets=path.join(root,'docs/figures/planner-v23/assets');
 const vectors=path.join(root,'docs/presentations/ontology-paypal/vectors');
 const saved=JSON.parse(fs.readFileSync(path.join(root,'demo/data/judge-reactivation.json')));
-let s=[];
+let s=[],cropIndex=0;
 const e=x=>String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 function text(v,x,y,size=29,weight=400,color=C.ink,anchor='start') {s.push(`<text x="${x}" y="${y}" font-family="DM Sans" font-size="${size}" font-weight="${weight}" fill="${color}" text-anchor="${anchor}">${e(v)}</text>`);}
 function lines(a,x,y,size=28,color=C.muted,anchor='start',gap=39){a.forEach((v,i)=>text(v,x,y+i*gap,size,400,color,anchor));}
@@ -25,6 +25,12 @@ function rule(x,y,w,color=C.line){s.push(`<path d="M${x} ${y}h${w}" stroke="${co
 function image(file,x,y,w,h,fit='meet'){
  const mime=file.endsWith('.svg')?'image/svg+xml':file.endsWith('.jpg')?'image/jpeg':'image/png';
  s.push(`<image x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid ${fit}" href="data:${mime};base64,${fs.readFileSync(file).toString('base64')}"/>`);
+}
+function photoCrop(name,[cx,cy,cw,ch],x,y,w,h){
+ const id='photo-crop-'+(++cropIndex);
+ s.push(`<svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="${cx} ${cy} ${cw} ${ch}" preserveAspectRatio="xMidYMid meet"><defs><clipPath id="${id}"><rect x="${cx}" y="${cy}" width="${cw}" height="${ch}"/></clipPath></defs><g clip-path="url(#${id})">`);
+ image(path.join(out,'assets/hires',name+'.jpg'),0,0,3000,2000);
+ s.push('</g></svg>');
 }
 function icon(name,x,y,size=50,color=C.blue){
  const body=fs.readFileSync(path.join(vectors,name+'.svg'),'utf8').replace(/^<svg[^>]*>/,'').replace(/<\/svg>\s*$/,'').replaceAll('currentColor',color);
@@ -60,30 +66,29 @@ function legend(y=1420){
 }
 function write(name){s.push('</svg>');const svg=s.join('\n');fs.writeFileSync(path.join(out,'masters',name+'.svg'),svg);fs.writeFileSync(path.join(out,'upload',name+'.png'),new Resvg(svg,{font:{fontFiles:fonts,loadSystemFonts:false,defaultFontFamily:'DM Sans'}}).render().asPng());}
 
-// 01 — actual environment, compact workflow and scoped headline outcomes.
-header('01','Market Metro: Agentic Commerce That Learns','Observed behavior → ontology-guided learning → verified campaigns');
-rect(60,275,1530,1045,'#fff','#a0a0a0',18);
-image(path.join(out,'assets/market-day1.jpg'),74,287,1502,1002);
-tag('The judge campaign',1660,310,C.teal);
-text('12 merchants',1660,371,43,700);text('600 shoppers',1660,424,43,700);
-rule(1660,463,650);
-[['Observe','Demand, behavior and stock','Search',C.blue],['Learn','Ontology + local model training','BrainCircuit',C.purple],['Verify','Test campaigns, then publish','ShieldCheck',C.teal]].forEach(([t,sub,ic,c],i)=>{
- const y=510+i*150;icon(ic,1660,y,48,c);text(t,1734,y+35,32,700,c);text(sub,1660,y+86,26,400,C.muted);
- if(i<2)arrow([[1684,y+100],[1684,y+135]],C.line);
+// 01 — image-led cover; actual environment, large type and scoped outcomes.
+header('01','Market Metro','Agentic commerce that learns');
+image(path.join(out,'assets/hires/environment.jpg'),-40,350,1770,1040);
+text('A market to explore.',60,310,64,700);
+text('Decisions you can trace.',60,386,64,700);
+tag('ONE RECORDED CAMPAIGN',1790,310);
+text('12',1790,405,80,700);text('merchants',1920,405,32);
+text('600',1790,485,68,700);text('shoppers',1955,485,32);
+rule(1790,535,550);
+[['Search','Observe',['Shopper behavior','and merchant stock.']],['BrainCircuit','Learn',['Local model training','and campaign trials.']],['ShieldCheck','Verify',['Check the economics.','Link payment evidence.']]].forEach(([ic,title,body],i)=>{
+ const y=590+i*205;icon(ic,1790,y,48);text(title,1862,y+37,34,700);lines(body,1790,y+96,28,C.muted,'start',40);
 });
-rule(1660,974,650);tag('Vs fixed · modeled outcome',1660,1018,C.navy);
-text('+$114.96',1660,1092,66,700,C.navy);text('PayPal net after estimated AI cost',1660,1134,27,400,C.muted);
-text('+$1,024.86',1660,1212,49,700,C.teal);text('Merchant contribution',1660,1255,27,400,C.muted);
-rule(60,1367,2280);
-icon('Network',70,1395,44,C.teal);text('Ontology',132,1428,28,600);icon('BrainCircuit',485,1395,44,C.purple);text('LLM + verifier',547,1428,28,600);
-image(path.join(assets,'paypal.svg'),1050,1390,45,50);text('PayPal Sandbox',1112,1428,28,600,C.navy);icon('Network',1685,1395,44,C.blue);text('AG Studio intelligence',1747,1428,28,600);
-footer('Saved controlled simulation · seed 92111706 · 100 market days + settlement · Sandbox uses test funds');
+rule(60,1320,2280);
+[['+$114.96','Modeled PayPal net'],['+$1,024.86','Merchant contribution'],['+16','Retained purchases']].forEach(([value,label],i)=>{
+ const x=60+i*785;text(value,x,1404,58,700);text(label,x,1450,27,400,C.muted);
+});
+footer('Matched fixed rules · seed 92111706 · gains are simulated; native PayPal evidence uses Sandbox test funds.');
 write('01-market-metro');
 
 // 02 — four planes; native receipt branch is distinct from modeled financial outcomes.
 header('02','System architecture','Environment, agent, data and payment planes');
 rect(60,275,1010,555,'#fff','#a0a0a0',22);tag('(a) Environment plane',90,321,C.blue);
-image(path.join(out,'assets/environment.jpg'),88,352,634,398);
+image(path.join(out,'assets/hires/environment.jpg'),88,352,634,398);
 text('Market Metro',750,407,32,700);lines(['Seeded shoppers','Finite budgets','Merchant inventory','Delivery outcomes'],750,462,27,C.muted,'start',47);
 text('Purchases continue; review checkpoints bound decisions.',90,790,26,400,C.blue);
 rect(1250,275,1090,555,'#fff','#a0a0a0',22);tag('(b) Agent + execution plane',1280,321,C.purple);
@@ -187,9 +192,8 @@ rule(94,1296,882);text('Same seed · same starting economy · AI cost included',
 rect(1080,525,1260,865,'#fff','#a0a0a0',22);tag('(b) Native payment proof',1114,574,C.navy);
 // Native receipt-card crop; the complete untouched capture is retained in assets/.
 tag('Actual app receipt',1114,807,C.muted);
-s.push('<svg x="1114" y="835" width="1192" height="367" viewBox="306 314 1104 340">');
-image(path.join(out,'assets/paypal.jpg'),0,0,1440,960);
-s.push('</svg>');
+const receiptRegion=JSON.parse(fs.readFileSync(path.join(out,'assets/hires/regions.json'))).paypal;
+photoCrop('paypal',[receiptRegion.x,receiptRegion.y,receiptRegion.width,receiptRegion.height],1114,835,1192,367);
 rect(1114,611,1192,140,'#fff','#a0a0a0',13);image(path.join(assets,'paypal.svg'),1144,650,46,49);
 text('$96.00',1210,667,39,700,C.navy);text('=',1403,667,35,400,C.muted);text('$3.56',1466,667,39,700,C.navy);text('+',1650,667,35,400,C.muted);text('$92.44',1712,667,39,700,C.teal);
 text('test purchase',1210,713,25,400,C.muted);text('native fee',1466,713,25,400,C.muted);text('test merchant proceeds',1712,713,25,400,C.muted);
@@ -199,12 +203,61 @@ text('Capture 2M324038C71499318 · linked once to the warehouse order',1114,1442
 footer('Modeled gains; merchant contribution includes inventory value. The native Sandbox receipt uses test funds and adds no sale.');
 write('05-paypal-architecture');
 
-for(const [src,dst] of [['agent-studio','06-agent-studio'],['models','07-model-training'],['impact','08-campaign-impact'],['ontology','09-ontology-explorer']])fs.copyFileSync(path.join(out,'assets',src+'.jpg'),path.join(out,'upload',dst+'.jpg'));
-const manifest={created:'2026-11-11',aspectRatio:'3:2',style:'Black-and-white diagram linework with original-color logos and app imagery',evidence:{source:'demo/data/judge-reactivation.json',seed:saved.seed,vsFixed:saved.vsFixed,nativeCapture:saved.receipt.capture_id},images:fs.readdirSync(path.join(out,'upload')).sort().map(name=>({name,bytes:fs.statSync(path.join(out,'upload',name)).size,kind:name.endsWith('.png')?'research figure with original-color imagery':'unmodified app capture'}))};
+// 06–09 — focused native app crops, with large vector annotations.
+function sideMetric(value,label,body,y){
+ text(value,1868,y,60,700);text(label,1868,y+47,28,600);lines(body,1868,y+91,25,C.muted,'start',35);
+}
+function appImage(name,crop,x=60,y=270,w=1740,h=1170){
+ rect(x,y,w,h,'#fff','#d4dae1',0);photoCrop(name,crop,x+8,y+8,w-16,h-16);
+}
+header('06','Agents query. The ontology verifies. Studio publishes.','Actual Agent Studio · a saved investigation, replayed through native tools');
+appImage('agents',[540,0,2410,1700]);
+sideMetric('2','LLM roles',['Commerce planner','and insight editor.'],355);
+rule(1868,550,470);
+sideMetric('6','Native tool calls',['Query → verify → publish','with saved checkpoints.'],655);
+rule(1868,850,470);
+sideMetric('114','Unique checkouts',['Reconciled from','125 merchant orders.'],955);
+text('5 verified views',1868,1275,33,700);text('Published into AG Studio.',1868,1320,25,400,C.muted);
+footer('Saved cohort investigation · AG Studio evaluation build · no new model calls or payments for this capture.');
+write('06-agent-studio');
+
+header('07','Local training. Inspectable experiments.','Actual AG Charts validation plots and AG Grid model registry');
+tag('(a) Recommendation validation',60,265);
+appImage('models',[850,1220,2080,780],60,300,1740,653);
+sideMetric('2','Model families',['Response hurdle','and boosted models.'],390);
+sideMetric('2,762','Training observations',['20 selected features','4.43 seconds of local fitting.'],680);
+tag('(b) Recorded model artifacts',60,1030);
+appImage('models-registry',[850,850,2050,400],60,1060,2280,400);
+footer('Saved day-31 experiments · validation quality alone does not establish profit · AG Studio evaluation build.');
+write('07-model-training');
+
+header('08','Every gain has a baseline.','Actual campaign dashboard · the same seed, market and starting conditions');
+appImage('impact',[740,410,2220,1580]);
+sideMetric('+$114.96','Modeled PayPal net',['After estimated model cost.','Fixed: $3,309.83','Planner: $3,424.79'],365);
+rule(1868,615,470);
+sideMetric('+$1,024.86','Merchant contribution',['Includes inventory value.','Fixed: $38,928.95','Planner: $39,953.81'],725);
+rule(1868,980,470);
+sideMetric('+16','Retained purchases',['643 vs 627 under fixed rules.','Estimated AI cost: $0.032325'],1090);
+footer('One saved controlled simulation · not production ROI · AG Studio evaluation build.');
+write('08-campaign-impact');
+
+header('09','Follow the checkout lineage.','Actual ontology explorer · parent checkouts, merchant portions and their evidence');
+appImage('ontology',[740,390,2220,1580]);
+sideMetric('1,384','Unique checkouts',['One shopper purchase','is counted once.'],355);
+rule(1868,555,470);
+sideMetric('1,922','Merchant orders',['Several merchants can','fulfill one checkout.'],660);
+rule(1868,860,470);
+sideMetric('538','Split checkouts',['The graph exposes the','parent–child relationship.'],965);
+text('1 native receipt',1868,1275,33,700);text('Linked without another sale.',1868,1320,25,400,C.muted);
+footer('Whole-market history through day 126, including warmup · AG Studio evaluation build.');
+write('09-ontology-explorer');
+
+for(const name of ['06-agent-studio','07-model-training','08-campaign-impact','09-ontology-explorer'])fs.rmSync(path.join(out,'upload',name+'.jpg'),{force:true});
+const manifest={created:'2026-11-11',aspectRatio:'3:2',style:'Research figures and focused app evidence, with original-color logos and images',capture:{sourcePixels:[3000,2000],layoutPixels:[1200,800],scale:2.5,format:'JPEG from browser; exported as PNG without another JPEG encode'},evidence:{source:'demo/data/judge-reactivation.json',seed:saved.seed,vsFixed:saved.vsFixed,nativeCapture:saved.receipt.capture_id},images:fs.readdirSync(path.join(out,'upload')).sort().map(name=>({name,bytes:fs.statSync(path.join(out,'upload',name)).size,kind:Number(name.slice(0,2))<6?'research figure':'focused actual-app capture with vector annotations'}))};
 fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');
 s=['<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1390" viewBox="0 0 1800 1390"><rect width="1800" height="1390" fill="#fff"/>'];
 text('MARKET METRO · SUBMISSION GALLERY',30,49,27,700,C.navy);
-const previewTitles=['Product overview','System architecture','Ontology & data integrity','AG Studio agent handoff','PayPal & campaign value','Agent Studio · actual app','Model training · actual app','Campaign impact · actual app','Ontology explorer · actual app'];
+const previewTitles=['Product overview','System architecture','Ontology & data integrity','AG Studio agent handoff','PayPal & campaign value','Verified agent investigation','Training + model registry','Matched campaign impact','Checkout lineage'];
 manifest.images.forEach((entry,i)=>{
  const x=30+(i%3)*590,y=82+Math.floor(i/3)*430;
  rect(x,y,560,373,'#fff','#a0a0a0');image(path.join(out,'upload',entry.name),x+1,y+1,558,371);
