@@ -10,7 +10,7 @@ const root=path.resolve(out,'../..');
 const require=createRequire(path.join(root,'.local/diagram-tools/package.json'));
 const {Resvg}=require('@resvg/resvg-js');
 for(const name of ['upload','masters']) fs.mkdirSync(path.join(out,name),{recursive:true});
-// Strict monochrome. Roles are expressed in labels and line treatments, never hue.
+// Monochrome diagram linework; logos and app imagery retain their original colors.
 const C={ink:'#151515',muted:'#4b4b4b',line:'#a0a0a0',blue:'#202020',navy:'#202020',teal:'#202020',purple:'#202020',amber:'#202020',red:'#202020',pale:'#fff'};
 const fonts=[400,600,700].map(w=>path.join(root,`demo/assets/fonts/dm-sans-${w}.ttf`));
 const assets=path.join(root,'docs/figures/planner-v23/assets');
@@ -22,9 +22,9 @@ function text(v,x,y,size=29,weight=400,color=C.ink,anchor='start') {s.push(`<tex
 function lines(a,x,y,size=28,color=C.muted,anchor='start',gap=39){a.forEach((v,i)=>text(v,x,y+i*gap,size,400,color,anchor));}
 function rect(x,y,w,h,fill='#fff',stroke=C.line,r=0,dash=''){s.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" stroke="${stroke}" stroke-width="1.5" ${dash?`stroke-dasharray="${dash}"`:''}/>`);}
 function rule(x,y,w,color=C.line){s.push(`<path d="M${x} ${y}h${w}" stroke="${color}" stroke-width="1.8"/>`);}
-function image(file,x,y,w,h,fit='meet',monochrome=true){
+function image(file,x,y,w,h,fit='meet'){
  const mime=file.endsWith('.svg')?'image/svg+xml':file.endsWith('.jpg')?'image/jpeg':'image/png';
- s.push(`<image x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid ${fit}" ${monochrome?'filter="url(#monochrome)"':''} href="data:${mime};base64,${fs.readFileSync(file).toString('base64')}"/>`);
+ s.push(`<image x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid ${fit}" href="data:${mime};base64,${fs.readFileSync(file).toString('base64')}"/>`);
 }
 function icon(name,x,y,size=50,color=C.blue){
  const body=fs.readFileSync(path.join(vectors,name+'.svg'),'utf8').replace(/^<svg[^>]*>/,'').replace(/<\/svg>\s*$/,'').replaceAll('currentColor',color);
@@ -48,8 +48,8 @@ function node(x,y,w,h,label,sub,name,color=C.blue,fill='#fff'){
  if(sub)lines(Array.isArray(sub)?sub:[sub],x+25,y+108,26,C.muted,'start',35);
 }
 function header(n,title,subtitle){
- s=[`<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1600" viewBox="0 0 2400 1600"><title>${e(title)}</title><defs><filter id="monochrome" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0"/></filter><pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M-2 2L2 -2M0 10L10 0M8 12L12 8" stroke="#777" stroke-width="1"/></pattern></defs><rect width="2400" height="1600" fill="#fff"/>`];
- tag('Market Metro',60,75,C.ink);text(`Figure ${Number(n)}`,2338,75,24,400,C.muted,'end');
+ s=[`<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1600" viewBox="0 0 2400 1600"><title>${e(title)}</title><defs><pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M-2 2L2 -2M0 10L10 0M8 12L12 8" stroke="#777" stroke-width="1"/></pattern></defs><rect width="2400" height="1600" fill="#fff"/>`];
+ image(path.join(root,'demo/commerce/mark.svg'),62,42,45,45);tag('Market Metro',124,75,C.ink);text(`Figure ${Number(n)}`,2338,75,24,400,C.muted,'end');
  text(title,60,154,46,600);text(subtitle,62,204,27,400,C.muted);
 }
 function footer(caption){rule(60,1490,2280);text(caption,60,1533,23,400,C.muted);text('Market Metro · PayPal AI Hackathon',2340,1570,20,400,C.muted,'end');}
@@ -200,14 +200,14 @@ footer('Modeled gains; merchant contribution includes inventory value. The nativ
 write('05-paypal-architecture');
 
 for(const [src,dst] of [['agent-studio','06-agent-studio'],['models','07-model-training'],['impact','08-campaign-impact'],['ontology','09-ontology-explorer']])fs.copyFileSync(path.join(out,'assets',src+'.jpg'),path.join(out,'upload',dst+'.jpg'));
-const manifest={created:'2026-11-11',aspectRatio:'3:2',style:'Black-and-white research figures; original app captures',evidence:{source:'demo/data/judge-reactivation.json',seed:saved.seed,vsFixed:saved.vsFixed,nativeCapture:saved.receipt.capture_id},images:fs.readdirSync(path.join(out,'upload')).sort().map(name=>({name,bytes:fs.statSync(path.join(out,'upload',name)).size,kind:name.endsWith('.png')?'monochrome vector figure':'unmodified app capture'}))};
+const manifest={created:'2026-11-11',aspectRatio:'3:2',style:'Black-and-white diagram linework with original-color logos and app imagery',evidence:{source:'demo/data/judge-reactivation.json',seed:saved.seed,vsFixed:saved.vsFixed,nativeCapture:saved.receipt.capture_id},images:fs.readdirSync(path.join(out,'upload')).sort().map(name=>({name,bytes:fs.statSync(path.join(out,'upload',name)).size,kind:name.endsWith('.png')?'research figure with original-color imagery':'unmodified app capture'}))};
 fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');
 s=['<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1390" viewBox="0 0 1800 1390"><rect width="1800" height="1390" fill="#fff"/>'];
 text('MARKET METRO · SUBMISSION GALLERY',30,49,27,700,C.navy);
 const previewTitles=['Product overview','System architecture','Ontology & data integrity','AG Studio agent handoff','PayPal & campaign value','Agent Studio · actual app','Model training · actual app','Campaign impact · actual app','Ontology explorer · actual app'];
 manifest.images.forEach((entry,i)=>{
  const x=30+(i%3)*590,y=82+Math.floor(i/3)*430;
- rect(x,y,560,373,'#fff','#a0a0a0');image(path.join(out,'upload',entry.name),x+1,y+1,558,371,'meet',false);
+ rect(x,y,560,373,'#fff','#a0a0a0');image(path.join(out,'upload',entry.name),x+1,y+1,558,371);
  text(`${String(i+1).padStart(2,'0')}  ${previewTitles[i]}`,x,y+405,21,600,C.ink);
 });
 s.push('</svg>');
