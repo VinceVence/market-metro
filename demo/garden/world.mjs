@@ -6,7 +6,7 @@ import {createLayout,createWalker,requestDestination,updateWalker,homePoint,shop
 const shirtColors=[0xc67f5b,0x648ca5,0xc6a855,0x8679a8,0x6e9572,0xb17b91];
 const skins=[0xe0b38e,0xc59068,0x9b6a4d,0xedc19b,0xb8835c,0xd1a47d];
 
-export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,autoFit=false,night=false,paymentLabel,parkland=false}={}){
+export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,autoFit=false,night=false,paymentLabel,parkland=false,transparent=false}={}){
   let frame=null,layout=createLayout(8),lastRun=null,lastTick=-1,scene,renderer,camera,controls,world,raf=0;
   let hovered=null,selected=null,pointerInside=false,dragging=false,down=null,lastTime=0,statsTime=0,rotationTarget=null;
   const pointer=new THREE.Vector2(),ray=new THREE.Raycaster(),actors=new Map(),pickables=[],labels=[],materials=new Map();
@@ -207,8 +207,8 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     lastTick=visualTick;parent.dataset.actorCount=String(actors.size);
   }
   try{
-    const sky=0xffffff;scene=new THREE.Scene();scene.background=new THREE.Color(sky);scene.fog=new THREE.Fog(sky,160,255);
-    renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));
+    const sky=0xffffff;scene=new THREE.Scene();scene.background=transparent?null:new THREE.Color(sky);scene.fog=transparent?null:new THREE.Fog(sky,160,255);
+    renderer=new THREE.WebGLRenderer({antialias:true,alpha:transparent,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));
     renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.93;
     renderer.domElement.tabIndex=0;renderer.domElement.setAttribute('aria-label','3D market. Drag to pan, right-drag to orbit, scroll to zoom. Arrow keys pan; R rotates; Home resets.');
     parent.prepend(renderer.domElement);camera=new THREE.OrthographicCamera(-50,50,30,-30,.1,240);
@@ -219,7 +219,7 @@ export function createGarden(parent,{onCustomer,onMerchant,onTeam,onPayments,aut
     scene.add(new THREE.HemisphereLight(0xe5f1ff,0xb5a58b,2.0));
     const sun=new THREE.DirectionalLight(0xffedd0,2.6);sun.position.set(-35,65,35);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
     Object.assign(sun.shadow.camera,{left:-65,right:65,top:55,bottom:-55,near:1,far:160});sun.shadow.bias=-.0003;sun.shadow.normalBias=.025;sun.shadow.radius=4;scene.add(sun);
-    const floor=mesh(scene,new THREE.PlaneGeometry(600,600),new THREE.MeshBasicMaterial({color:0xffffff,toneMapped:false}),0,-1.2,0);floor.rotation.x=-Math.PI/2;floor.castShadow=false;
+    const floor=mesh(scene,new THREE.PlaneGeometry(600,600),new THREE.MeshBasicMaterial({color:0xffffff,toneMapped:false}),0,-1.2,0);floor.rotation.x=-Math.PI/2;floor.castShadow=false;floor.visible=!transparent;
     hoverRing=ring(0x83bb9b);selectRing=ring(0xe2b765);environment();cameraHome();
     const observer=new ResizeObserver(()=>resize(false));observer.observe(parent);
     const visibility=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;needsRender=true;});visibility.observe(parent);

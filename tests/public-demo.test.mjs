@@ -18,11 +18,13 @@ test('public demo serves evidence with security headers and rejects provider, ex
  await new Promise(r=>server.listen(0,'127.0.0.1',r));
  const base='http://127.0.0.1:'+server.address().port;
  try{
-  for(const path of ['/healthz','/','/analytics.html','/data/judge-reactivation.json','/vendor/ag-studio-3.0.0.js']){
+  for(const path of ['/healthz','/','/landing.html','/analytics.html','/data/judge-reactivation.json','/vendor/ag-studio-3.0.0.js']){
    const response=await fetch(base+path,{headers:{host:'judge.example'}});
    assert.equal(response.status,200,path);assert.equal(response.headers.get('x-frame-options'),'DENY');
    assert.ok(response.headers.get('content-security-policy').includes("frame-ancestors 'none'"));await response.arrayBuffer();
   }
+  const landingImage=await fetch(base+'/landing/assets/market.jpg');
+  assert.equal(landingImage.status,200);assert.equal(landingImage.headers.get('content-type'),'image/jpeg');await landingImage.arrayBuffer();
   const runtime=await(await fetch(base+'/api/runtime')).json();assert.equal(runtime.payments,false);assert.equal(runtime.freshPlanning,false);
   for(const path of ['/api/paypal/orders','/api/paypal/funding/start','/api/market/planner/start','/api/market/catalog/sync','/api/market/compare']){
    const response=await fetch(base+path,{method:'POST',headers:{origin:base,'content-type':'application/json','x-supply-yard':'sandbox'},body:'{}'});
