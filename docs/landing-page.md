@@ -2,7 +2,7 @@
 
 Route: `/landing.html`. The existing root judge walkthrough and deep links are preserved.
 
-The design adapts the user's reference with the requested stronger contrast: deep PayPal navy, white typography, and yellow for the main headline emphasis and demo buttons. The actual three-dimensional market fills the foreground; DM Sans remains consistent with the app. No new frontend dependencies were added.
+The design adapts the user's blue / white / red reference: oversized DM Sans typography, the actual three-dimensional market in the foreground, and red reserved for calls to action and active navigation. No new frontend dependencies were added.
 
 The hero uses `createGarden` with an opt-in transparent canvas and the saved day-35 frame from `demo/data/judge-reactivation.json`. The default renderer remains opaque for the existing app. Shopper animation is presentation only: the landing page makes no simulation mutations, model requests or payments. Reduced motion pauses the scene; failed graphics or data loading leaves the saved environment image visible.
 
