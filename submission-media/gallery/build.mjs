@@ -252,12 +252,125 @@ text('1 native receipt',1868,1275,33,700);text('Linked without another sale.',18
 footer('Whole-market history through day 126, including warmup · AG Studio evaluation build.');
 write('09-ontology-explorer');
 
+// Six campaign-led product ads precede the research/evidence figures in filename order.
+const A={ink:'#112746',blue:'#006bdc',muted:'#526782',paper:'#f6f8fb',line:'#dce5ee'};
+function adStart(title){
+ s=[`<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1600" viewBox="0 0 2400 1600"><title>${e(title)}</title><defs><filter id="ad-soft" x="-25%" y="-25%" width="150%" height="170%"><feGaussianBlur stdDeviation="20"/></filter></defs><rect width="2400" height="1600" fill="#fff"/>`];
+ image(path.join(root,'demo/commerce/mark.svg'),90,65,64,64);text('Market Metro',178,111,32,700,A.ink);
+ text('Agentic Commerce That Learns',2310,107,26,400,A.muted,'end');
+}
+function adType(value,x,y,size=144,color=A.ink,weight=700){s.push(`<text x="${x}" y="${y}" font-family="DM Sans" font-size="${size}" font-weight="${weight}" letter-spacing="${-size*.045}" fill="${color}">${e(value)}</text>`);}
+function adBox(x,y,w,h,{fill='#fff',stroke=A.line,shadow=true,r=24}={}){
+ if(shadow)s.push(`<rect x="${x}" y="${y+20}" width="${w}" height="${h}" rx="${r}" fill="${A.ink}" fill-opacity=".12" filter="url(#ad-soft)"/>`);
+ s.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2"/>`);
+}
+function adFoot(scope){rule(90,1500,2220,A.line);text(scope,90,1545,25,400,A.muted);}
+function ticket(x,y,w,h,title,subtitle){
+ adBox(x,y,w,h,{r:12});
+ for(let px=x+14;px<x+w-12;px+=28)s.push(`<path d="M${px-14} ${y+h-1}l14 13 14-13" fill="#fff" stroke="${A.line}" stroke-width="1"/>`);
+ text(title,x+44,y+65,30,700,A.ink);text(subtitle,x+44,y+106,24,400,A.muted);
+ rule(x+42,y+143,w-84,A.line);
+}
+
+// Ad 1: the product promise, with the native environment as the hero asset.
+adStart('Let AI do your marketing.');
+image(path.join(out,'assets/hires/environment.jpg'),650,400,1790,1110);
+adType('Let AI do',90,322,168);
+adType('your marketing.',90,505,168,A.blue);
+text('A market where agents learn, test campaigns, and show their work.',96,583,37,400,A.muted);
+[['Search','Observe','Shopper signals.'],['BrainCircuit','Train','Local models.'],['ShieldCheck','Verify','A campaign with evidence.']].forEach(([ic,title,body],i)=>{
+ const y=770+i*168;icon(ic,96,y,52,A.blue);text(title,174,y+42,42,700,A.ink);text(body,174,y+88,29,400,A.muted);
+});
+text('Follow one complete campaign.',96,1420,36,700,A.ink);
+image(path.join(assets,'paypal.svg'),1980,1390,55,60);text('PayPal Sandbox',2052,1434,28,600,A.ink);
+adFoot('A commerce simulation with recorded AI decisions and native PayPal Sandbox payment evidence.');
+write('00-01-let-ai-do-your-marketing');
+
+// Ad 2: the concrete reactivation story, grounded in Shopper 179's saved trace.
+adStart('Give quiet shoppers a reason to return.');
+adType('Give quiet shoppers',90,292,136);
+adType('a reason to return.',90,450,136,A.blue);
+adType('16',75,1010,490);
+text('days since their last purchase.',106,1090,42,600,A.ink);
+lines(['A recommendation for a mobile side table.', 'Shopper 179 returned and bought it.'],106,1195,36,A.muted,'start',54);
+s.push('<g transform="rotate(2 1810 930)">');
+ticket(1370,545,890,830,'SHOPPER 179','Recorded customer journey');
+icon('Megaphone',1418,735,54,A.blue);text('Day 35 · recommended',1500,771,32,600,A.ink);
+text('Mobile Side Table',1418,872,53,700,A.ink);
+text('Form & Function',1418,922,31,400,A.muted);
+adType('$96.00',1410,1130,160,A.blue);
+text('Simulated purchase · day 35',1418,1192,31,400,A.muted);
+rule(1412,1230,806,A.line);icon('ShieldCheck',1418,1270,42,A.ink);text('Delivered on day 36',1485,1304,32,600,A.ink);
+s.push('</g>');
+adFoot('Recorded shopper case · seed 92111706 · the existing $96 purchase is also linked to a native Sandbox receipt.');
+write('00-02-a-reason-to-return');
+
+// Ad 3: a visual explanation of checkout grain, not an invented financial result.
+adStart('One checkout. Counted once.');
+adType('One checkout.',90,305,164);
+adType('Counted once.',90,491,164,A.blue);
+adType('1,384',85,850,160);text('unique shopper checkouts',97,911,37,600,A.ink);
+adType('1,922',85,1170,160);text('merchant-order portions',97,1231,37,600,A.ink);
+adBox(1390,600,620,210,{stroke:A.blue,r:24});icon('ReceiptText',1434,647,64,A.blue);text('Parent checkout',1530,687,45,700,A.ink);text('Count this purchase once.',1434,759,30,400,A.muted);
+arrow([[1700,810],[1700,900],[1310,900],[1310,1000]],A.ink);
+arrow([[1700,900],[2110,900],[2110,1000]],A.ink);
+ticket(1080,1000,470,330,'Merchant order','Portion 1');
+ticket(1870,1000,440,330,'Merchant order','Portion 2');
+text('Same parent ID',1124,1242,31,600,A.blue);text('Same parent ID',1914,1242,31,600,A.blue);
+text('Verified links guide counts, joins and training data.',910,1425,31,600,A.ink);
+adFoot('Whole-market history through day 126, including warmup · 538 split checkouts · relationship illustration.');
+write('00-03-counted-once');
+
+// Ad 4: the verifier actually revised the initial LLM model choice.
+adStart('Make every model earn its place.');
+adType('Make every model',90,292,146);
+adType('earn its place.',90,465,146,A.blue);
+adBox(90,635,990,718,{shadow:false,r:22});icon('BrainCircuit',138,682,60,A.ink);
+text('LLM proposal',226,727,31,600,A.muted);text('Response hurdle',138,827,55,700,A.ink);
+adType(saved.decision.original.auc.toFixed(3),132,1010,132);text('Recommendation AUROC',140,1061,29,400,A.muted);
+adType('+$'+saved.decision.original.paypal.toFixed(2),132,1240,103);text('Mean trial PayPal net gain vs fixed',140,1297,28,400,A.muted);
+arrow([[1115,1020],[1230,1020]],A.blue);
+adBox(1270,600,1040,788,{stroke:A.blue,r:22});icon('ShieldCheck',1320,652,66,A.blue);
+text('Verifier choice',1412,701,32,600,A.blue);text('Boosted model',1320,815,61,700,A.ink);
+adType(saved.decision.chosen.auc.toFixed(3),1315,999,132);text('Recommendation AUROC',1325,1050,29,400,A.muted);
+adType('+$'+saved.decision.chosen.paypal.toFixed(2),1315,1240,121,A.blue);text('Mean trial PayPal net gain vs fixed',1325,1302,30,400,A.muted);
+text('The financial gate changed which model ranked shoppers.',96,1440,35,600,A.ink);
+adFoot('Recorded local model review · development-trial means, USD vs fixed rules · not production ROI.');
+write('00-04-make-models-earn-their-place');
+
+// Ad 5: showcase the two real Studio roles and native verified UI.
+adStart('Ask. Verify. Publish.');
+adType('Ask.',90,380,198);
+adType('Verify.',90,625,198);
+adType('Publish.',90,870,198,A.blue);
+lines(['Your business question.', 'A source-backed answer.', 'A dashboard that changes.'],99,1035,40,A.muted,'start',62);
+image(path.join(assets,'gemini.svg'),99,1320,48,48);text('2 LLM roles',170,1359,32,600,A.ink);
+icon('Network',99,1405,43,A.ink);text('5 verified Studio views',170,1439,32,600,A.ink);
+adBox(1080,230,1225,1210,{r:24});photoCrop('agents',[1330,0,1620,1690],1105,256,1175,1160);
+adFoot('Recorded AG Studio investigation · native query, ontology check, delegation and publication · evaluation build.');
+write('00-05-ask-verify-publish');
+
+// Ad 6: the outcome hook, explicitly scoped to the matched recorded simulation.
+adStart('More purchases. Proof attached.');
+adType('More purchases.',90,292,155);
+adType('Proof attached.',90,475,155,A.blue);
+adType('+16',50,1090,480);
+text('retained purchases',105,1180,58,700,A.ink);
+text('643 vs 627 under fixed rules',107,1250,32,400,A.muted);
+text('SAME-SEED COMPARISON',1400,638,25,600,A.muted);
+adType('+$114.96',1385,815,118,A.blue);text('Modeled PayPal net gain',1400,874,34,600,A.ink);text('After estimated model cost',1400,923,28,400,A.muted);
+rule(1400,980,910,A.line);
+adType('+$1,024.86',1385,1135,112);text('Merchant contribution gain',1400,1195,34,600,A.ink);text('Includes inventory value',1400,1244,28,400,A.muted);
+image(path.join(assets,'paypal.svg'),100,1380,66,72);text('Native payment evidence: $96 Sandbox capture',200,1430,35,600,A.ink);
+adFoot('Recorded simulation vs fixed rules · 12 merchants, 600 shoppers · same seed and starting conditions.');
+write('00-06-more-purchases-proof-attached');
+
 for(const name of ['06-agent-studio','07-model-training','08-campaign-impact','09-ontology-explorer'])fs.rmSync(path.join(out,'upload',name+'.jpg'),{force:true});
-const manifest={created:'2026-11-11',aspectRatio:'3:2',style:'Research figures and focused app evidence, with original-color logos and images',capture:{sourcePixels:[3000,2000],layoutPixels:[1200,800],scale:2.5,format:'JPEG from browser; exported as PNG without another JPEG encode'},evidence:{source:'demo/data/judge-reactivation.json',seed:saved.seed,vsFixed:saved.vsFixed,nativeCapture:saved.receipt.capture_id},images:fs.readdirSync(path.join(out,'upload')).sort().map(name=>({name,bytes:fs.statSync(path.join(out,'upload',name)).size,kind:Number(name.slice(0,2))<6?'research figure':'focused actual-app capture with vector annotations'}))};
+const manifest={created:'2026-11-11',aspectRatio:'3:2',style:'Six ad-style showcases followed by nine research and actual-app evidence images',capture:{sourcePixels:[3000,2000],layoutPixels:[1200,800],scale:2.5,format:'JPEG from browser; exported as PNG without another JPEG encode'},evidence:{source:'demo/data/judge-reactivation.json',seed:saved.seed,vsFixed:saved.vsFixed,nativeCapture:saved.receipt.capture_id},images:fs.readdirSync(path.join(out,'upload')).sort().map(name=>({name,bytes:fs.statSync(path.join(out,'upload',name)).size,kind:name.startsWith('00-')?'ad-style product showcase':Number(name.slice(0,2))<6?'research figure':'focused actual-app capture with vector annotations'}))};
 fs.writeFileSync(path.join(out,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');
-s=['<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1390" viewBox="0 0 1800 1390"><rect width="1800" height="1390" fill="#fff"/>'];
+s=['<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2250" viewBox="0 0 1800 2250"><rect width="1800" height="2250" fill="#fff"/>'];
 text('MARKET METRO · SUBMISSION GALLERY',30,49,27,700,C.navy);
-const previewTitles=['Product overview','System architecture','Ontology & data integrity','AG Studio agent handoff','PayPal & campaign value','Verified agent investigation','Training + model registry','Matched campaign impact','Checkout lineage'];
+const previewTitles=['Let AI do your marketing','Give shoppers a reason to return','One checkout. Counted once.','Make models earn their place','Ask. Verify. Publish.','More purchases. Proof attached.','Product overview','System architecture','Ontology & data integrity','AG Studio agent handoff','PayPal & campaign value','Verified agent investigation','Training + model registry','Matched campaign impact','Checkout lineage'];
 manifest.images.forEach((entry,i)=>{
  const x=30+(i%3)*590,y=82+Math.floor(i/3)*430;
  rect(x,y,560,373,'#fff','#a0a0a0');image(path.join(out,'upload',entry.name),x+1,y+1,558,371);
@@ -265,4 +378,8 @@ manifest.images.forEach((entry,i)=>{
 });
 s.push('</svg>');
 fs.writeFileSync(path.join(out,'preview.png'),new Resvg(s.join('\n'),{font:{fontFiles:fonts,loadSystemFonts:false,defaultFontFamily:'DM Sans'}}).render().asPng());
+s=['<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="960" viewBox="0 0 1800 960"><rect width="1800" height="960" fill="#fff"/>'];
+text('MARKET METRO · SIX PRODUCT STORIES',30,49,27,700,A.ink);
+manifest.images.slice(0,6).forEach((entry,i)=>{const x=30+(i%3)*590,y=82+Math.floor(i/3)*430;image(path.join(out,'upload',entry.name),x,y,560,373);text(`${i+1}  ${previewTitles[i]}`,x,y+405,21,600,A.ink);});
+s.push('</svg>');fs.writeFileSync(path.join(out,'ad-preview.png'),new Resvg(s.join('\n'),{font:{fontFiles:fonts,loadSystemFonts:false,defaultFontFamily:'DM Sans'}}).render().asPng());
 console.log(manifest.images);

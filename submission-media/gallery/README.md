@@ -1,6 +1,17 @@
 # Market Metro — submission image gallery
 
-Upload the **nine PNG files in `upload/`**, in filename order. Every image is **2400 × 1600 (3:2)** and individually below 5 MB. `preview.png` is a contact sheet for review, not an additional gallery item. The four former JPEG upload files have been replaced by framed PNG evidence panels.
+Upload the **15 PNG files in `upload/`**, in filename order. The six `00-…` files lead with ad-style product stories; the existing nine research and evidence images follow. Every image is **2400 × 1600 (3:2)** and individually below 5 MB. `preview.png` is the complete contact sheet; `ad-preview.png` previews the six ads. Neither contact sheet is an additional upload item.
+
+## The six opening hooks
+
+1. **Let AI do your marketing.** The product promise, with the actual market as the main visual.
+2. **Give quiet shoppers a reason to return.** Shopper 179's recorded 16-day gap, recommendation, purchase and delivery.
+3. **One checkout. Counted once.** The ontology connects checkout parents with merchant-order portions before they become metrics.
+4. **Make every model earn its place.** The financial verifier changes the initial model choice using measured local trials.
+5. **Ask. Verify. Publish.** Two recorded LLM roles produce source-backed AG Studio views through native tools.
+6. **More purchases. Proof attached.** The matched campaign's retained purchases, modeled PayPal net and merchant contribution.
+
+The ads use Market Metro's white, navy and blue palette, larger typography and a single main idea per image. The technical diagrams retain their black-and-white research treatment. All monetary and performance claims retain their simulation, development-trial or Sandbox scope.
 
 ## Sharper media revision
 
@@ -11,12 +22,18 @@ The clean environment is captured with the app's existing presentation camera. I
 The five figures use the requested **black-and-white research-paper treatment** for typography, panels, arrows and charts: square panels, thin outlines, solid/dashed flows, double-bordered verification gates, hatched baseline bars and restrained DM Sans typography. **Logos and environment/app images retain their original colors.** Original full app screenshots remain unchanged. The reference's SpectRAG algorithm is not part of Market Metro.
 
 - `market-metro-diagrams-bw.zip`: the five research figures, with black-and-white linework and original-color logos and imagery.
-- `market-metro-gallery.zip`: all nine revised upload PNGs.
+- `market-metro-gallery.zip`: all 15 upload PNGs in recommended order.
 
 ## Recommended order and captions
 
 | Image | Submission caption / alt text |
 | --- | --- |
+| `00-01-let-ai-do-your-marketing.png` | Let AI do your marketing. A commerce simulation where agents observe behavior, train local models, test campaigns and connect decisions to PayPal Sandbox evidence. |
+| `00-02-a-reason-to-return.png` | Give quiet shoppers a reason to return. In the recorded campaign, Shopper 179 purchased a $96 Mobile Side Table after 16 days without a purchase; delivery followed on day 36. |
+| `00-03-counted-once.png` | One checkout. Counted once. Across recorded whole-market history, the ontology reconciles 1,922 merchant-order portions with 1,384 unique checkouts, including 538 split checkouts. The ticket graphic illustrates the relationship. |
+| `00-04-make-models-earn-their-place.png` | Make every model earn its place. The verifier revised the initial response-hurdle model choice to a boosted candidate. Their recorded development-trial mean PayPal gains versus fixed rules were $26.65 and $30.97, despite AUROC values of 0.794 and 0.773. |
+| `00-05-ask-verify-publish.png` | Ask. Verify. Publish. The saved AG Studio investigation connects two LLM roles to native queries, ontology checks, delegation and five published views. |
+| `00-06-more-purchases-proof-attached.png` | More purchases. Proof attached. The same-seed campaign produced 16 additional retained purchases, $114.96 more modeled PayPal net after estimated model cost, and $1,024.86 more merchant contribution than fixed rules. |
 | `01-market-metro.png` | Market Metro — Agentic Commerce That Learns. A 12-merchant, 600-shopper market connects observed behavior, ontology-guided learning, verified campaigns and payment evidence. |
 | `02-system-architecture.png` | Four planes connect the market, LLM planner and trusted tools, ontology-backed warehouse, and PayPal payment evidence. The verifier controls publication; checkpoints preserve the decision trail. |
 | `03-ontology.png` | The ontology distinguishes shopper checkouts from merchant-order portions, checks units and timing, and holds ambiguous mappings. The demonstrated cohort reconciles 125 merchant orders to 114 unique checkouts. |
@@ -32,6 +49,7 @@ The five figures use the requested **black-and-white research-paper treatment** 
 - Campaign figures come from [`demo/data/judge-reactivation.json`](../../demo/data/judge-reactivation.json): seed **92111706**, 100 market days plus settlement through day 126. PayPal net: **$3,309.83 fixed → $3,424.787675 planner**. Merchant contribution: **$38,928.95 → $39,953.81**. Retained purchases: **627 → 643**. Estimated original inference cost: **$0.032325**.
 - These are controlled simulation results, not production ROI. Merchant contribution includes inventory valuation. This featured seed was selected to explain the verifier's model revision; it is not a standalone generalization claim.
 - The campaign outcome belongs to **one planner plus verifier**. The separate two-role Studio investigation publishes dashboards; it does not create new campaign gains or execute payments.
+- The model-comparison ad uses `decision.original` and `decision.chosen` in the saved campaign JSON. Its $26.65 and $30.97 values are **development-trial mean deltas against fixed rules**, not whole-campaign gains or production revenue. The AUC values are rounded to three decimal places.
 - Studio counts and its **$0.001530 estimated inference cost** refer to saved investigation `INSIGHT-60d69504559ddfb4`. Source: [`demo/data/studio-investigation-demo.json`](../../demo/data/studio-investigation-demo.json) and [`docs/ag-studio/agent-workspace.md`](../../docs/ag-studio/agent-workspace.md).
 - PayPal capture **2M324038C71499318** is a completed native **Sandbox** receipt for the existing selected $96 order. It uses test funds and never adds another simulated sale.
 - The refreshed website captures use a local copy of the same app code and saved data as the deployed application. `assets/hires/` retains the unmodified 3000 × 2000 browser captures; earlier source captures remain in `assets/`. Figures 05–09 use labeled crops. Evaluation status is disclosed in the gallery captions; no vendor watermark or licence mechanism was disabled.
