@@ -2,7 +2,10 @@
 
 Upload the **nine files in `upload/`**, in filename order. All are 3:2 JPG or PNG and individually below 5 MB. Figures are 2400 × 1600; original website captures are 1440 × 960. `preview.png` is a contact sheet for review, not an additional gallery item.
 
-The style follows the user's research-paper reference: paired panels, clear directional flows, restrained semantic colors, vector icons, shared visual vocabulary and DM Sans. The reference's SpectRAG algorithm is not part of Market Metro.
+The five figures use the requested **black-and-white research-paper treatment**: square panels, thin outlines, solid/dashed flows, double-bordered verification gates, hatched baseline bars and restrained DM Sans typography. Embedded app crops and logos are grayscale in the figures. Original full app screenshots remain unchanged. The reference's SpectRAG algorithm is not part of Market Metro.
+
+- `market-metro-diagrams-bw.zip`: the five monochrome figures only.
+- `market-metro-gallery.zip`: all nine upload images, including the four original app captures.
 
 ## Recommended order and captions
 
